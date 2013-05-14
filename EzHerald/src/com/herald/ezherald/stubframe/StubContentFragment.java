@@ -9,6 +9,14 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 
+/*
+ * @author 何博伟
+ * @since 20130514
+ * 
+ * 测试用的一个Framgment，测试菜单中点击后Fragment切换
+ * 没啥功能，空白一片
+ */
+
 public class StubContentFragment extends SherlockFragment {
 	String text = null;
 	
