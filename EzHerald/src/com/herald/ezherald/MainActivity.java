@@ -3,6 +3,7 @@ package com.herald.ezherald;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.mainframe.MainContentFragment;
 import com.herald.ezherald.mainframe.MainMenuFragment;
+import com.herald.ezherald.mainframe.SecondMenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -24,7 +25,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	SlidingMenu menu;
 	private CanvasTransformer mTrans;
 	private Fragment mContentFrag;
-	private MainMenuFragment mMenuFrag;
+	private Fragment mMenuFrag;
+	private Fragment mSecondaryMenuFrag;
 	
 	void initTransformer ()
 	{
@@ -53,10 +55,12 @@ public class MainActivity extends SlidingFragmentActivity {
 		
 		mContentFrag = new MainContentFragment();
 		mMenuFrag = new MainMenuFragment();
+		mSecondaryMenuFrag = new SecondMenuFragment();
 		
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
 		t.replace(R.id.main_frame_menu, mMenuFrag); //ÇÐ»»menuµÄFragement
 		t.replace(R.id.empty_frame_content, mContentFrag); //ÇÐ»»ÄÚÈÝµÄFragement
+		t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);//ÇÐ»»2ndmenuµÄFragement
 		t.commit();
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,16 +78,17 @@ public class MainActivity extends SlidingFragmentActivity {
 		
 		//menu = new SlidingMenu(this);
 		menu = getSlidingMenu();
-		menu.setMode(SlidingMenu.LEFT);
+		menu.setMode(SlidingMenu.LEFT_RIGHT);
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		menu.setFadeDegree(0.35f);
+		
 		//menu.setShadowWidth(shadowWidth);
 		//menu.setShadowDrawable(R.drawable.shadow);
 		menu.setBehindOffset(behindOffset);
 		//menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu.setBehindScrollScale(0.0f);
 		menu.setBehindCanvasTransformer(mTrans);
-		
+		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
 	}
 
 	/* (non-Javadoc)

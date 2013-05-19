@@ -10,6 +10,7 @@ package com.herald.ezherald;
 public final class R {
     public static final class array {
         public static final int main_menu_items=0x7f0b0000;
+        public static final int second_menu_items=0x7f0b0001;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1069,16 +1070,17 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040018;
         public static final int abs__title=0x7f040020;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f04003c;
+        public static final int action_settings=0x7f04003e;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f04002b;
-        public static final int empty_frame_content=0x7f040037;
+        public static final int empty_frame_content=0x7f040038;
         public static final int fullscreen=0x7f040013;
         public static final int homeAsUp=0x7f040006;
         public static final int left=0x7f040010;
         public static final int listMode=0x7f040002;
-        public static final int main_frame_content=0x7f040038;
-        public static final int main_frame_menu=0x7f04003a;
+        public static final int main_frame_content=0x7f040039;
+        public static final int main_frame_menu=0x7f04003b;
+        public static final int main_frame_second_menu=0x7f04003c;
         public static final int margin=0x7f040012;
         public static final int normal=0x7f040001;
         public static final int right=0x7f040011;
@@ -1086,9 +1088,10 @@ containing a value of this type.
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
-        public static final int slidingmenumain=0x7f04003b;
+        public static final int slidingmenumain=0x7f04003d;
         public static final int tabMode=0x7f040003;
-        public static final int textView_main_frame_content=0x7f040039;
+        public static final int textView1=0x7f040037;
+        public static final int textView_main_frame_content=0x7f04003a;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
@@ -1117,15 +1120,26 @@ containing a value of this type.
         public static final int abs__search_dropdown_item_icons_2line=0x7f030012;
         public static final int abs__search_view=0x7f030013;
         public static final int abs__simple_dropdown_hint=0x7f030014;
-        public static final int activity_main=0x7f030015;
-        public static final int empty_frame_content=0x7f030016;
-        public static final int list=0x7f030017;
-        public static final int main_frame_content=0x7f030018;
-        public static final int main_frame_menu=0x7f030019;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001a;
-        public static final int sherlock_spinner_item=0x7f03001b;
-        public static final int slidingmenumain=0x7f03001c;
-        public static final int stub_frame_content=0x7f03001d;
+        public static final int academic_activity_main=0x7f030015;
+        public static final int account_activity_main=0x7f030016;
+        public static final int acti_activity_main=0x7f030017;
+        public static final int activity_main=0x7f030018;
+        public static final int agenda_activity_main=0x7f030019;
+        public static final int curriculum_activity_main=0x7f03001a;
+        public static final int empty_frame_content=0x7f03001b;
+        public static final int exercise_activity_main=0x7f03001c;
+        public static final int freshman_activity_main=0x7f03001d;
+        public static final int gpa_activity_main=0x7f03001e;
+        public static final int library_activity_main=0x7f03001f;
+        public static final int list=0x7f030020;
+        public static final int main_frame_content=0x7f030021;
+        public static final int main_frame_menu=0x7f030022;
+        public static final int main_frame_second_menu=0x7f030023;
+        public static final int second_list=0x7f030024;
+        public static final int sherlock_spinner_dropdown_item=0x7f030025;
+        public static final int sherlock_spinner_item=0x7f030026;
+        public static final int slidingmenumain=0x7f030027;
+        public static final int stub_frame_content=0x7f030028;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -2315,7 +2329,7 @@ containing a value of this type.
          */
         public static final int[] SherlockSpinner = {
             0x010100af, 0x01010175, 0x01010176, 0x0101017b,
-            0x01010262, 0x010102ac, 0x010102ad, 0x01010411
+            0x01010262, 0x010102ac, 0x010102ad, 0x010103ef
         };
         /**
           <p>

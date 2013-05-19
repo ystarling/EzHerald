@@ -1,5 +1,7 @@
 package com.herald.ezherald.mainframe;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -12,6 +14,15 @@ import android.widget.ListView;
 
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
+import com.herald.ezherald.academic.AcademicActivity;
+import com.herald.ezherald.account.AccountActivity;
+import com.herald.ezherald.activity.ActiActivity;
+import com.herald.ezherald.agenda.AgendaActivity;
+import com.herald.ezherald.curriculum.CurriculumActivity;
+import com.herald.ezherald.exercise.ExerciseActivity;
+import com.herald.ezherald.freshman.FreshmanActivity;
+import com.herald.ezherald.gpa.GPAActivity;
+import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.stubframe.StubContentFragment;
 
 public class MainMenuFragment extends ListFragment {
@@ -47,6 +58,7 @@ public class MainMenuFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		/*
 		Fragment newContent = null;
 		switch (position)
 		{
@@ -59,6 +71,37 @@ public class MainMenuFragment extends ListFragment {
 		}
 		if (newContent != null){
 			switchFragment(newContent);
+		}
+		*/
+		Intent i = new Intent();
+		switch (position){
+		case 0:
+			i.setClass(getActivity(), CurriculumActivity.class);
+			break;
+		case 1:
+			i.setClass(getActivity(), ActiActivity.class);
+			break;
+		case 2:
+			i.setClass(getActivity(), AgendaActivity.class);
+			break;
+		case 3:
+			i.setClass(getActivity(), LibraryActivity.class);
+			break;
+		case 4:
+			i.setClass(getActivity(), GPAActivity.class);
+			break;
+		case 5:
+			i.setClass(getActivity(), ExerciseActivity.class);
+			break;
+		case 6:
+			i.setClass(getActivity(), AcademicActivity.class);
+			break;
+		case 7:
+			i.setClass(getActivity(), FreshmanActivity.class);
+			break;
+		}
+		if (i != null){
+			startActivity(i);			
 		}
 	}
 

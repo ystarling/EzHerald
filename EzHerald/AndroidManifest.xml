@@ -25,6 +25,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".academic.AcademicActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".account.AccountActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".agenda.AgendaActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".curriculum.CurriculumActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".exercise.ExerciseActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".freshman.FreshmanActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".gpa.GPAActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".library.LibraryActivity"></activity>
     </application>
 
 </manifest>
