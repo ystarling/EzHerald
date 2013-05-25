@@ -16,7 +16,7 @@ public class GPAActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.academic_activity_main);
-		Log.w("test","test");
+		Log.w("test","t");
 	}
 	
 }
