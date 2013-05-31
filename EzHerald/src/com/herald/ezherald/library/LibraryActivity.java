@@ -14,7 +14,7 @@ public class LibraryActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.account_activity_main);
+		setContentView(R.layout.library_activity_main);
 	}
 	
 }

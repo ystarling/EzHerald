@@ -2,8 +2,13 @@ package com.herald.ezherald.gpa;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+<<<<<<< .mine
 import android.view.Display;
 import android.view.WindowManager;
+=======
+
+
+>>>>>>> .theirs
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.herald.ezherald.R;
@@ -21,9 +26,15 @@ public class GPAActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+<<<<<<< .mine
 		setContentView(R.layout.gpa_activity_main);
 		
 		
+=======
+		setContentView(R.layout.gpa_activity_main);
+
+
+>>>>>>> .theirs
 	}
 	
 	/* (non-Javadoc)
