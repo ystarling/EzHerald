@@ -1,7 +1,6 @@
 package com.herald.ezherald.gpa;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.herald.ezherald.R;
@@ -15,8 +14,7 @@ public class GPAActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.academic_activity_main);
-		Log.w("test","ttt");
+		setContentView(R.layout.gpa_activity_main);
 	}
 	
 }
