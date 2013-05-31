@@ -1,20 +1,17 @@
 package com.herald.ezherald.gpa;
 
-import android.graphics.Canvas;
 import android.os.Bundle;
-import android.view.Display;
-import android.view.WindowManager;
+import android.support.v4.app.FragmentTransaction;
 
-
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.herald.ezherald.R;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 
-public class GPAActivity extends SherlockActivity {
 
-	SlidingMenu menu;
-	private CanvasTransformer mTrans;
+
+public class GPAActivity extends SherlockFragmentActivity {
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -22,61 +19,53 @@ public class GPAActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.gpa_activity_main);
+		ActionBar bar = getSupportActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        ActionBar.Tab tab1 = bar.newTab();
+        ActionBar.Tab tab2 = bar.newTab();
+        ActionBar.Tab tab3 = bar.newTab();
+        tab1.setText("Fragment A");
+        tab2.setText("Fragment B");
+        tab3.setText("Fragment C");
+        tab1.setTabListener(new MyTabListener());
+        tab2.setTabListener(new MyTabListener());
+        tab3.setTabListener(new MyTabListener());
+        bar.addTab(tab1);
+        bar.addTab(tab2); 
+        bar.addTab(tab3); 
+	    }
+	    
+	    private class MyTabListener implements ActionBar.TabListener
+	    {
 
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.actionbarsherlock.app.SherlockActivity#onCreateOptionsMenu(com.actionbarsherlock.view.Menu)
-	 */
-	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		
-		getSupportMenuInflater().inflate(R.menu.main, menu); 
-
-		return super.onCreateOptionsMenu(menu);
-	}
-	
-	void initTransformer ()
-	{
-		/*
-		 * 初始化Transformer实现Slidingmenu的切换效果
-		 */
-		mTrans = new CanvasTransformer() {
-			
 			@Override
-			public void transformCanvas(Canvas canvas, float percentOpen) {
-				// TODO Auto-generated method stub
-				float scale = (float) (percentOpen*0.25 + 0.75);
-				canvas.scale(scale, scale, canvas.getWidth()/2, canvas.getHeight()/2);
+			public void onTabSelected(Tab tab, FragmentTransaction ft) {
+				if(tab.getPosition()==0)
+				{
+					FragmentA frag = new FragmentA();
+					ft.replace(android.R.id.content, frag);
+					
+				}
+				else
+				{
+					FragmentB frag = new FragmentB();
+					ft.replace(android.R.id.content, frag);
+				}
 			}
-		};
-	}
-	
-	private void initSlidingMenu() {
-		/*
-		 * 初始化SlidingMenu
-		 */
-		WindowManager wMng = getWindowManager();
-		Display disp = wMng.getDefaultDisplay();
-		int screenWidth = disp.getWidth();
-		int shadowWidth = (int) (0.05 * screenWidth); //菜单阴影遮罩宽度
-		int behindOffset= (int) (0.4 * screenWidth); //菜单之外内容的显示宽度
-		
-		menu = new SlidingMenu(this);
-		//menu = getSlidingMenu();
-		menu.setMode(SlidingMenu.LEFT_RIGHT);
-		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		menu.setFadeDegree(0.35f);
-		
-		//menu.setShadowWidth(shadowWidth);
-		//menu.setShadowDrawable(R.drawable.shadow);
-		menu.setBehindOffset(behindOffset);
-		//menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		menu.setBehindScrollScale(0.0f);
-		menu.setBehindCanvasTransformer(mTrans);
-		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
-	}
+
+			@Override
+			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTabReselected(Tab tab, FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    }
 
 }
