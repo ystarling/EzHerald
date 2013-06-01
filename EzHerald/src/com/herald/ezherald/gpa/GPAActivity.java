@@ -1,6 +1,7 @@
 package com.herald.ezherald.gpa;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -15,6 +16,7 @@ public class GPAActivity extends SherlockFragmentActivity {
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -25,7 +27,7 @@ public class GPAActivity extends SherlockFragmentActivity {
         ActionBar.Tab tab1 = bar.newTab();
         ActionBar.Tab tab2 = bar.newTab();
         ActionBar.Tab tab3 = bar.newTab();
-        tab1.setText("Fragment A");
+        tab1.setText("¼¨µãÕþ²ß");
         tab2.setText("Fragment B");
         tab3.setText("Fragment C");
         tab1.setTabListener(new MyTabListener());
@@ -45,12 +47,11 @@ public class GPAActivity extends SherlockFragmentActivity {
 				{
 					FragmentA frag = new FragmentA();
 					ft.replace(android.R.id.content, frag);
-					
 				}
 				else
 				{
-					FragmentB frag = new FragmentB();
-					ft.replace(android.R.id.content, frag);
+					//FragmentB frag = new FragmentB();
+					//ft.replace(android.R.id.content, frag);
 				}
 			}
 
