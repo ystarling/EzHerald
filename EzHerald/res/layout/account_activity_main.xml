@@ -8,7 +8,12 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Account"
+        android:text="account"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        android:onClick="sendMessage" />
 
 </LinearLayout>

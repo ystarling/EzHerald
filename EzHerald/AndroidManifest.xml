@@ -3,7 +3,7 @@
     package="com.herald.ezherald"
     android:versionCode="1"
     android:versionName="1.0" >
-
+ <uses-permission android:name="android.permission.INTERNET"/>
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="15" 
@@ -28,6 +28,7 @@
         
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".academic.AcademicActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".account.AccountActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".account.IDCardAccountActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".agenda.AgendaActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".curriculum.CurriculumActivity"></activity>
