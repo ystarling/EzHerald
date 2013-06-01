@@ -6,19 +6,18 @@ package com.herald.ezherald.gpa;
 public class GpaPoliticsModel {
 	private static double userGpa = -1;//用户的gpa，未登陆时为-1
 	public class politic{
-		public String title;
-		public String content;
-		public String relation;
-		public double requiredGpa;
-		
 		public politic(String title, String content, String relation,
 				double requiredGpa) {
+			super();
 			this.title = title;
 			this.content = content;
 			this.relation = relation;
 			this.requiredGpa = requiredGpa;
 		}
-		
+		public String title;
+		public String content;
+		public String relation;
+		public double requiredGpa;
 	}
 	public politic[] politics = new politic[]{
 			new politic("title1","cccc",">",3.0),
