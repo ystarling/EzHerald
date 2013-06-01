@@ -1,14 +1,14 @@
 package com.herald.ezherald.gpa;
 
-import com.herald.ezherald.R;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ExpandableListView;
+
+import com.herald.ezherald.R;
 
 public class FragmentA extends Fragment {
 	Button button;
@@ -30,5 +30,7 @@ public class FragmentA extends Fragment {
 				Toast.makeText(getActivity(), "You clicked button on Fragment A", Toast.LENGTH_LONG).show();
 			}
 		});*/
+		ExpandableListView eLV = (ExpandableListView) getActivity().findViewById(R.id.eListView);
+		eLV.setAdapter(new GpaPolitcsAdapter(getActivity()));
 	}
 }

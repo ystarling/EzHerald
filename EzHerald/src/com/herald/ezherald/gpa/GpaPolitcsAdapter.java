@@ -1,8 +1,12 @@
 package com.herald.ezherald.gpa;
 
+import android.R.color;
 import android.content.Context;
+import android.graphics.Color;
+import android.hardware.Camera.Size;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings.TextSize;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
@@ -12,8 +16,10 @@ import android.widget.TextView;
  */
 public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 	private Context context;
-	
+	private final float titleTextSize = 28;
+	private final float contentTextSize = 25;
 	private GpaPoliticsModel gpaPoliticsModel = new GpaPoliticsModel();
+	
 	GpaPolitcsAdapter(Context context){
 		this.context = context;
 	}
@@ -21,34 +27,36 @@ public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
-		return gpaPoliticsModel.content[groupPosition];
+		return gpaPoliticsModel.content[groupPosition][childPosition];
 	}
 
 	@Override
 	public long getChildId(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
-		return 0;
+		return childPosition;
 	}
 
 	@Override
-	public View getChildView(int groupPosition	, int childPosition, boolean isLastChild, View contentView,
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View contentView,
 			ViewGroup parent) {
 		// TODO Auto-generated method stub
 		TextView tv = new TextView(context);
-		tv.setText(gpaPoliticsModel.content[groupPosition]);
+		tv.setBackgroundColor(color.black);
+		tv.setText(gpaPoliticsModel.content[groupPosition][childPosition]);
+		tv.setTextSize(titleTextSize);
 		return tv;
 	}
 
 	@Override
-	public int getChildrenCount(int arg0) {
+	public int getChildrenCount(int groupPosition) {
 		// TODO Auto-generated method stub
-		return 1;
+		return gpaPoliticsModel.content[groupPosition].length;
 	}
 
 	@Override
-	public Object getGroup(int arg0) {
+	public Object getGroup(int groupPosition) {
 		// TODO Auto-generated method stub
-		return gpaPoliticsModel.title;
+		return gpaPoliticsModel.title[groupPosition];
 	}
 
 	@Override
@@ -66,7 +74,17 @@ public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded, View coverView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		return new GpaPoliticsView(context,gpaPoliticsModel.title[groupPosition],gpaPoliticsModel.judge(groupPosition));
+
+		TextView tv =new TextView(context);
+		tv.setText(gpaPoliticsModel.title[groupPosition]);
+		tv.setPadding(60, 0, 0, 0);
+		tv.setTextSize(titleTextSize);
+		if(gpaPoliticsModel.judge(groupPosition)){//TODO Î´µÇÂ½²»±äÉ«
+			tv.setBackgroundColor(Color.GREEN);
+		}else{
+			tv.setBackgroundColor(Color.RED);
+		}
+		return tv;
 	}
 
 	@Override
@@ -76,9 +94,9 @@ public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public boolean isChildSelectable(int arg0, int arg1) {
+	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

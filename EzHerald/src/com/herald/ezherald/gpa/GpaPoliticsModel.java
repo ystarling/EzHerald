@@ -11,16 +11,14 @@ public class GpaPoliticsModel {
 	public static void setUserGpa(double userGpa) {
 		GpaPoliticsModel.userGpa = userGpa;
 	}
-	public String[] title = new String[] {"Title"};
-	public String[] content = new String[]{"content"};
-	private double[] requiredGpa = new double[]{3.0};//政策所需的gpa
-	private String[] relation = new String[]{">="};//政策所需的关系
-	public String[] getRelation() {
-		return relation;
-	}
-	public double[] getRequiredGpa() {
-		return requiredGpa;
-	}
+	public final String[] title = new String[] {"Title1","Title2"};
+	public final String[][] content = 
+			new String[][]{
+				{"content1"},
+				{"Content2Content2Content2Content2Content2Content2Content2Content2Content2Content2Content2Content2"},
+			};
+	private final double[] requiredGpa = new double[]{3.0,3.0};//政策所需的gpa
+	private final String[] relation = new String[]{">=",">="};//政策所需的关系
 	/**
 	 * @param n ，判断的项数
 	 * @return Boolean
