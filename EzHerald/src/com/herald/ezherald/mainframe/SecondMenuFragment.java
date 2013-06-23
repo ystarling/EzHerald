@@ -10,12 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.AccountActivity;
-import com.herald.ezherald.appsetting.AppSettingActivity;
 
 public class SecondMenuFragment extends ListFragment {
 	/*
@@ -48,35 +46,37 @@ public class SecondMenuFragment extends ListFragment {
 	 */
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO :(需要自定义ListFragment)增加一个更美观的用户登录状态显示
-		//参考：
-		// http://www.doc88.com/p-70581205513.html
-		// http://www.imobilebbs.com/wordpress/archives/918
-		// http://androiddada.iteye.com/blog/1340228
-		// http://blog.csdn.net/xyz_lmn/article/details/6906396
+		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		
+		/*
+		Fragment newContent = null;
+		switch (position)
+		{
+		case 0:
+			newContent = new StubContentFragment();
+			break;
+		case 1:
+			newContent = new MainContentFragment();
+			break;
+		}
+		if (newContent != null){
+			switchFragment(newContent);
+		}
+		*/
 		Intent i = new Intent();
 		switch (position){
 		case 0:
-			Toast.makeText(getActivity(), "完善中。", Toast.LENGTH_SHORT).show();
-			i = null;
+			i.setClass(getActivity(), AccountActivity.class);
 			break;
 		case 1:
-			i.setClass(getActivity(), AppSettingActivity.class); //账户设置
+			i.setClass(getActivity(), AccountActivity.class);
 			break;
-		case 2:
-			i.setClass(getActivity(), AccountActivity.class); //主程序设置
-			break;
-		default:
-			i = null;	
 		}
 		if (i != null){
 			startActivity(i);			
 		}
 	}
 
-	/*
 	private void switchFragment(Fragment newContent) {
 		if (getActivity() == null)
 			return;
@@ -86,7 +86,7 @@ public class SecondMenuFragment extends ListFragment {
 			mainActivity.switchContent(newContent);
 		}
 	}
-	*/
+	
 	
 
 }

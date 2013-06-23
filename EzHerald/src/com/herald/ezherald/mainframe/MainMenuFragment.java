@@ -1,5 +1,6 @@
 package com.herald.ezherald.mainframe;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,11 +23,11 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
+import com.herald.ezherald.stubframe.StubContentFragment;
 
 public class MainMenuFragment extends ListFragment {
 	/*
 	 * 标准左侧侧滑菜单用的ListFragment
-	 * TODO: 今后可能需要自行定制ListFragment以实现左侧带图标等效果
 	 * (non-Javadoc)
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
@@ -104,7 +105,6 @@ public class MainMenuFragment extends ListFragment {
 		}
 	}
 
-	/*
 	private void switchFragment(Fragment newContent) {
 		if (getActivity() == null)
 			return;
@@ -114,7 +114,7 @@ public class MainMenuFragment extends ListFragment {
 			mainActivity.switchContent(newContent);
 		}
 	}
-	*/
+	
 	
 
 }

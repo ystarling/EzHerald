@@ -36,7 +36,6 @@
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".freshman.FreshmanActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".gpa.GPAActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".library.LibraryActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".appsetting.AppSettingActivity"></activity>
     </application>
 
 </manifest>
