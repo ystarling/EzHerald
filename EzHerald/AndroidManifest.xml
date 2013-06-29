@@ -48,6 +48,8 @@
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ClubListActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiInfoDetailActivity"></activity>
         <!-- acti  end -->
+        <activity android:name=".settingframe.SettingActivity" android:theme="@style/Theme.Sherlock.Light"></activity>
+        <activity android:name=".settingframe.AboutThisApp" android:theme="@style/Theme.Sherlock.Light"></activity>
         
         
         

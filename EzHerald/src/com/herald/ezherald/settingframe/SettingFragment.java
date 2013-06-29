@@ -1,22 +1,18 @@
-package com.herald.ezherald.mainframe;
+package com.herald.ezherald.settingframe;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
-import com.herald.ezherald.account.AccountActivity;
-import com.herald.ezherald.settingframe.SettingActivity;
 
-public class SecondMenuFragment extends ListFragment {
+public class SettingFragment extends ListFragment {
 	/*
 	 * 标准左侧侧滑菜单用的ListFragment (non-Javadoc)
 	 * 
@@ -40,7 +36,7 @@ public class SecondMenuFragment extends ListFragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		String menuItemsStr[] = getResources().getStringArray(
-				R.array.second_menu_items);
+				R.array.setting_menu_titles);
 		ArrayAdapter<String> menuItemAdapter = new ArrayAdapter<String>(
 				getActivity(), android.R.layout.simple_list_item_1,
 				android.R.id.text1, menuItemsStr);
@@ -67,13 +63,10 @@ public class SecondMenuFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
-			i.setClass(getActivity(), AccountActivity.class);
+			i.setClass(getActivity(), AboutThisApp.class);
 			break;
-		case 1:
-			i.setClass(getActivity(), SettingActivity.class);
-			break;
-		case 2:
-			i.setClass(getActivity(), AccountActivity.class);
+		default:
+			Toast.makeText(getActivity(), "Default", Toast.LENGTH_SHORT).show();
 			break;
 		}
 		if (i != null) {
@@ -81,14 +74,5 @@ public class SecondMenuFragment extends ListFragment {
 		}
 	}
 
-	private void switchFragment(Fragment newContent) {
-		if (getActivity() == null)
-			return;
-		if (getActivity() instanceof MainActivity) {
-			Log.d("MainMenuFrag", "I am in MainActivity.");
-			MainActivity mainActivity = (MainActivity) getActivity();
-			mainActivity.switchContent(newContent);
-		}
-	}
 
 }

@@ -28,7 +28,6 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
-import com.herald.ezherald.stubframe.StubContentFragment;
 
 /*
  * 标准左侧侧滑菜单用的ListFragment

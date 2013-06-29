@@ -17,7 +17,7 @@
     
     <string-array name="second_menu_items">
         <item >我的账户</item>
-        <item >主界面设置</item>
+        <item >程序设置</item>
         <item >账户设置</item>
     </string-array>
     
@@ -42,5 +42,10 @@
         <item>我关注的社团</item>
     </string-array>
     <!-- acti  校园活动  end  -->
+    
+    <!-- setting items -->
+    <string-array name="setting_menu_titles">
+        <item >关于...</item>
+    </string-array>
 
 </resources>
