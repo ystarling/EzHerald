@@ -1,25 +1,18 @@
 package com.herald.ezherald.exercise;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.herald.ezherald.R;
-import com.herald.ezherald.gpa.FragmentA;
 
-public class ExerciseActivity extends SherlockActivity {
+public class ExerciseActivity extends SherlockFragmentActivity {
 
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
-	
-	
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -45,41 +38,34 @@ public class ExerciseActivity extends SherlockActivity {
 		} 
 	}
 	    
-	    private class MyTabListener implements ActionBar.TabListener
-	    {
-			@Override
-			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				Fragment frag;
-				switch(tab.getPosition()){
-					case 0:
-						frag = new FragmentA();
-						break;
-					case 1:
-						frag = new FragmentB();
-						break;
-					case 2:
-						frag = new FragmentC();
-						break;
-					default:
-						Log.w("error","no such a tag in evercise");
-						return;
-				}
+	private class MyTabListener implements ActionBar.TabListener
+    {
+
+		@Override
+		public void onTabSelected(Tab tab, FragmentTransaction ft) {
+			if(tab.getPosition()==0)
+			{
+				FragmentA frag = new FragmentA();
 				ft.replace(android.R.id.content, frag);
-				
 			}
+			else
+			{
+				//FragmentB frag = new FragmentB();
+				//ft.replace(android.R.id.content, frag);
+			}
+		}
 
-			@Override
-			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}
+		@Override
+		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+			// TODO Auto-generated method stub
+			
+		}
 
-			@Override
-			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}
-	    	
-	    }
+		@Override
+		public void onTabReselected(Tab tab, FragmentTransaction ft) {
+			// TODO Auto-generated method stub
+			
+		}
+    }
 	
 }
