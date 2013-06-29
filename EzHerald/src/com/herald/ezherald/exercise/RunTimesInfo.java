@@ -25,7 +25,9 @@ public class RunTimesInfo {
 		return adjustTimes;
 	}
 	public void setAdjustTimes(int adjustTimes) {
-		this.adjustTimes = adjustTimes;
+		if (adjustTimes<100) {
+			this.adjustTimes = adjustTimes;
+		}
 	}
 	/**
 	 * @param activity 调用者的Activity
