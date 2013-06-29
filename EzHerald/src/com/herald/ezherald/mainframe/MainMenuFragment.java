@@ -1,6 +1,5 @@
 package com.herald.ezherald.mainframe;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
@@ -31,6 +31,8 @@ public class MainMenuFragment extends ListFragment {
 	 * (non-Javadoc)
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
+	private final boolean DEBUG_DONOT_KILL_ACTIVITY = false;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -76,32 +78,50 @@ public class MainMenuFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position){
 		case 0:
-			i.setClass(getActivity(), CurriculumActivity.class);
+			i.setClass(getActivity(), MainActivity.class);
 			break;
 		case 1:
-			i.setClass(getActivity(), ActiActivity.class);
+			i.setClass(getActivity(), CurriculumActivity.class);
 			break;
 		case 2:
-			i.setClass(getActivity(), AgendaActivity.class);
+			i.setClass(getActivity(), ActiActivity.class);
 			break;
 		case 3:
-			i.setClass(getActivity(), LibraryActivity.class);
+			i.setClass(getActivity(), AgendaActivity.class);
 			break;
 		case 4:
-			i.setClass(getActivity(), GPAActivity.class);
+			i.setClass(getActivity(), LibraryActivity.class);
 			break;
 		case 5:
-			i.setClass(getActivity(), ExerciseActivity.class);
+			i.setClass(getActivity(), GPAActivity.class);
 			break;
 		case 6:
-			i.setClass(getActivity(), AcademicActivity.class);
+			i.setClass(getActivity(), ExerciseActivity.class);
 			break;
 		case 7:
+			i.setClass(getActivity(), AcademicActivity.class);
+			break;
+		case 8:
 			i.setClass(getActivity(), FreshmanActivity.class);
 			break;
 		}
 		if (i != null){
-			startActivity(i);			
+			startActivity(i);
+			TryKillMyself();
+		}
+	}
+	
+	
+	
+	private void TryKillMyself() {
+		/**
+		 * 调用新的Activity后杀死自己..
+		 */
+		if(!DEBUG_DONOT_KILL_ACTIVITY){
+			if(getActivity() instanceof BaseFrameActivity){
+				BaseFrameActivity baseActivity = (BaseFrameActivity)getActivity();
+				baseActivity.KillMyself();
+			}
 		}
 	}
 
@@ -114,7 +134,6 @@ public class MainMenuFragment extends ListFragment {
 			mainActivity.switchContent(newContent);
 		}
 	}
-	
 	
 
 }
