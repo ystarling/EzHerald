@@ -47,6 +47,7 @@
         <!-- acti  begin -->
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ClubListActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiInfoDetailActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ClubDetailActivity"></activity>
         <!-- acti  end -->
         
         
