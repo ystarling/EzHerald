@@ -17,5 +17,27 @@
         <item >主界面设置</item>
         <item >账户设置</item>
     </string-array>
+    
+        
+    <!-- academic 教务信息   begin -->
+    <string-array name="academic_list_action_spinner">
+        <item>全部教务</item>
+        <item>教务管理</item>
+        <item>学籍管理</item>
+        <item>实践教学</item>
+        <item>合作办学</item>
+        <item>教学研究</item>
+        <item>教学评估</item>
+    </string-array>
+    <!-- academic 教务信息  end -->
+    
+    <!-- acti  校园活动  begin -->
+    <string-array name="acti_list_action_spinner">
+        <item>全部活动</item>
+        <item>我关注的活动</item>
+        <item>所有社团</item>
+        <item>我关注的社团</item>
+    </string-array>
+    <!-- acti  校园活动  end  -->
 
 </resources>
