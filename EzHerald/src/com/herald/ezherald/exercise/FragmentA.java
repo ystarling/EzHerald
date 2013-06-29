@@ -1,6 +1,7 @@
 package com.herald.ezherald.exercise;
 
 import android.os.Bundle;
+import android.renderscript.Font;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,8 @@ public class FragmentA extends Fragment {
 		renren = new RenrenInfo(getActivity());
 		txt_info = (TextView)getActivity().findViewById(R.id.txt_info);
 		txt_date = (TextView)getActivity().findViewById(R.id.txt_date);
+		txt_info.setTextSize(42);
+		txt_date.setTextSize(24);
 		if(renren.isSet()){
 			show();
 		}else{
@@ -60,7 +63,9 @@ public class FragmentA extends Fragment {
 	 */
 	private void show(){
 		txt_info.setText(renren.getInfo());
-		txt_date.setText("更新于"+renren.getDate());
+		if (renren.getDate() != null) {
+			txt_date.setText("更新于" + renren.getDate());
+		}
 	}
 }
 

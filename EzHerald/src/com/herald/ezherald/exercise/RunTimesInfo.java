@@ -63,8 +63,8 @@ public class RunTimesInfo {
 	 */
 	public void save(){
 		editor = pref.edit();
-		editor.putInt("RunTimes", getAdjustTimes());
-		editor.putInt("AdjustTimes", getTimes());
+		editor.putInt("RunTimes", getTimes());
+		editor.putInt("AdjustTimes", getAdjustTimes());
 		editor.commit();
 	}
 }

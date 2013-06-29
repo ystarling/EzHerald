@@ -2,6 +2,7 @@ package com.herald.ezherald.exercise;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,6 +53,7 @@ public class FragmentB extends Fragment {
 							.toString());
 					runTimesInfo.setAdjustTimes(adjust);
 					runTimesInfo.save();
+					show();
 				} catch (Exception e) {
 					Toast.makeText(getActivity(), "数据无效", Toast.LENGTH_SHORT).show();
 				}
@@ -84,6 +86,8 @@ public class FragmentB extends Fragment {
 		
 		if (runTimesInfo.getAdjustTimes() != 0) {
 			txtTimes.setText(runTimesInfo.getTimes() + " + "
+					+ runTimesInfo.getAdjustTimes());
+			Log.w("msg", runTimesInfo.getTimes() + " + "
 					+ runTimesInfo.getAdjustTimes());
 		}else{
 			txtTimes.setText( runTimesInfo.getTimes()+"");
