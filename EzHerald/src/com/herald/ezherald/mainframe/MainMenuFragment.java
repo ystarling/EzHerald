@@ -1,5 +1,10 @@
 package com.herald.ezherald.mainframe;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,14 +29,28 @@ import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.stubframe.StubContentFragment;
-
+/*
+ * 标准左侧侧滑菜单用的ListFragment
+ * (non-Javadoc)
+ * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+ */
 public class MainMenuFragment extends ListFragment {
-	/*
-	 * 标准左侧侧滑菜单用的ListFragment
-	 * (non-Javadoc)
-	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
-	 */
+	
 	private final boolean DEBUG_DONOT_KILL_ACTIVITY = false;
+	private List<Map<String, Object>> mListItems;
+	private MainMenuListItemAdapter mListViewAdapter;
+	private String mMenuItemsStr[];  //文字(title)
+	private Integer mMenuItemsIconResId[] = {
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_ab_back_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_ab_back_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_ab_back_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_ab_back_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+	}; //图标(icon)
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,11 +65,19 @@ public class MainMenuFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		String menuItemsStr[] = getResources().getStringArray(R.array.main_menu_items);
-		ArrayAdapter<String> menuItemAdapter = 
+		mMenuItemsStr = getResources().getStringArray(R.array.main_menu_items);
+		//Reserved for further usage
+		
+		
+		//No longer use this type of view
+		/*ArrayAdapter<String> menuItemAdapter = 
 				new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
 						android.R.id.text1, menuItemsStr);
-		setListAdapter(menuItemAdapter);
+			setListAdapter...blabla
+						*/
+		mListItems = getListItems();
+		mListViewAdapter = new MainMenuListItemAdapter(getActivity(), mListItems);
+		setListAdapter(mListViewAdapter);
 	}
 
 	/* (non-Javadoc)
@@ -111,12 +138,26 @@ public class MainMenuFragment extends ListFragment {
 		}
 	}
 	
+	/**
+	 * 初始化菜单项信息
+	 */
+	private List<Map<String, Object>> getListItems(){
+		List<Map<String, Object>> listItems = new ArrayList<Map<String,Object>>();
+		
+		for(int i=0; i<mMenuItemsStr.length; i++ ){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("icon", mMenuItemsIconResId[i]);
+			map.put("title", mMenuItemsStr[i]);
+			listItems.add(map);
+		}
+		return listItems;
+	}
 	
-	
+	/**
+	 * 调用新的Activity后杀死自己..
+	 */
 	private void TryKillMyself() {
-		/**
-		 * 调用新的Activity后杀死自己..
-		 */
+		
 		if(!DEBUG_DONOT_KILL_ACTIVITY){
 			if(getActivity() instanceof BaseFrameActivity){
 				BaseFrameActivity baseActivity = (BaseFrameActivity)getActivity();
