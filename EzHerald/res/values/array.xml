@@ -16,7 +16,7 @@
     </integer-array>
     
     <string-array name="second_menu_items">
-        <item >我的账户</item>
+        <item >[帐户名]</item>
         <item >程序设置</item>
         <item >账户设置</item>
     </string-array>

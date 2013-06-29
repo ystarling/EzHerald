@@ -1,5 +1,10 @@
 package com.herald.ezherald.mainframe;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,40 +21,52 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.settingframe.SettingActivity;
 
+/**
+ * 右侧侧滑菜单的Fragment
+ * @author BorisHe
+ *	@updated 20130629
+ */
 public class SecondMenuFragment extends ListFragment {
-	/*
-	 * 标准左侧侧滑菜单用的ListFragment (non-Javadoc)
-	 * 
-	 * @see
-	 * android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater
-	 * , android.view.ViewGroup, android.os.Bundle)
-	 */
+	
+	private List<Map<String, Object>> mListItems;
+	private MainMenuListItemAdapter mListViewAdapter;
+	private String mMenuItemsStr[]; // 文字(title)
+	private Integer mMenuItemsIconResId[] = {
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+	}; // 图标(icon)
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.second_list, null);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onActivityCreated(android.os.Bundle)
-	 */
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		String menuItemsStr[] = getResources().getStringArray(
+		mMenuItemsStr = getResources().getStringArray(
 				R.array.second_menu_items);
+		/**
+		 * TODO:替换row0为当前登录的用户名
+		 */
+		/*
 		ArrayAdapter<String> menuItemAdapter = new ArrayAdapter<String>(
 				getActivity(), android.R.layout.simple_list_item_1,
 				android.R.id.text1, menuItemsStr);
 		setListAdapter(menuItemAdapter);
+		*/
+		mListItems = getListItems();
+		mListViewAdapter = new MainMenuListItemAdapter(getActivity(), mListItems);
+		setListAdapter(mListViewAdapter);
 	}
 
 	/*
-	 * (non-Javadoc)
-	 * 
+	 * 	 * 
 	 * @see
 	 * android.support.v4.app.ListFragment#onListItemClick(android.widget.ListView
 	 * , android.view.View, int, long)
@@ -80,15 +97,19 @@ public class SecondMenuFragment extends ListFragment {
 			startActivity(i);
 		}
 	}
+	
+	/**
+	 * 初始化菜单项信息
+	 */
+	private List<Map<String, Object>> getListItems() {
+		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
 
-	private void switchFragment(Fragment newContent) {
-		if (getActivity() == null)
-			return;
-		if (getActivity() instanceof MainActivity) {
-			Log.d("MainMenuFrag", "I am in MainActivity.");
-			MainActivity mainActivity = (MainActivity) getActivity();
-			mainActivity.switchContent(newContent);
+		for (int i = 0; i < mMenuItemsStr.length; i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("icon", mMenuItemsIconResId[i]);
+			map.put("title", mMenuItemsStr[i]);
+			listItems.add(map);
 		}
+		return listItems;
 	}
-
 }

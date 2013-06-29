@@ -42,14 +42,14 @@ public class MainMenuFragment extends ListFragment {
 	private String mMenuItemsStr[]; // ÎÄ×Ö(title)
 	private Integer mMenuItemsIconResId[] = {
 			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_ab_back_holo_light,
 			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_ab_back_holo_light,
 			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_ab_back_holo_light,
 			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_ab_back_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light, }; // Í¼±ê(icon)
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light }; // Í¼±ê(icon)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
