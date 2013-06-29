@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.herald.ezherald.R;
 
 
 
+/**
+ * @author xie
+ * 显示体育系人人早操播报的信息
+ *
+ */
 public class FragmentA extends Fragment {
 	private RenrenInfo renren; 
 	private TextView txt_info ;
@@ -31,7 +35,7 @@ public class FragmentA extends Fragment {
 		if(renren.isSet()){
 			show();
 		}else{
-			txt_info.setText("正在更新");
+			txt_info.setText("首次使用，正在更新数据");
 			txt_date.setText("");
 			update();
 		}
@@ -41,13 +45,19 @@ public class FragmentA extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				update();
+				show();
 			}
 		});
 	}
+	/**
+	 * 更新信息
+	 */
 	private void update(){
 		renren.update();
-		show();
 	}
+	/**
+	 * 将信息显示
+	 */
 	private void show(){
 		txt_info.setText(renren.getInfo());
 		txt_date.setText("更新于"+renren.getDate());

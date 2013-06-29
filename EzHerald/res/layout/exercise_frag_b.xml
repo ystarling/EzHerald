@@ -15,7 +15,7 @@
         android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="phone" >
+        android:inputType="number" >
 
         <requestFocus />
     </EditText>
@@ -28,7 +28,7 @@
         android:text="修改" />
 
     <Button
-        android:id="@+id/更新"
+        android:id="@+id/btn_update"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

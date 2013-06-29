@@ -1,7 +1,9 @@
 package com.herald.ezherald.exercise;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -43,16 +45,22 @@ public class ExerciseActivity extends SherlockFragmentActivity {
 
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			if(tab.getPosition()==0)
-			{
-				FragmentA frag = new FragmentA();
-				ft.replace(android.R.id.content, frag);
+			Fragment frag;
+			switch(tab.getPosition()){
+				case 0:
+					frag = new FragmentA();
+					break;
+				case 1:
+					frag = new FragmentB();
+					break;
+				case 2:
+					frag = new FragmentC();
+					break;
+				default:
+					Log.w("error","no such a tag in evercise");
+					return;
 			}
-			else
-			{
-				//FragmentB frag = new FragmentB();
-				//ft.replace(android.R.id.content, frag);
-			}
+			ft.replace(android.R.id.content, frag);
 		}
 
 		@Override
