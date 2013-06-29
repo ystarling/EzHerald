@@ -11,32 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
-import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.account.AccountActivity;
-import com.herald.ezherald.activity.ActiActivity;
-import com.herald.ezherald.agenda.AgendaActivity;
-import com.herald.ezherald.curriculum.CurriculumActivity;
-import com.herald.ezherald.exercise.ExerciseActivity;
-import com.herald.ezherald.freshman.FreshmanActivity;
-import com.herald.ezherald.gpa.GPAActivity;
-import com.herald.ezherald.library.LibraryActivity;
-import com.herald.ezherald.stubframe.StubContentFragment;
 
-public class MainMenuFragment extends ListFragment {
+public class SecondMenuFragment extends ListFragment {
 	/*
 	 * 标准左侧侧滑菜单用的ListFragment
 	 * (non-Javadoc)
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 	 */
-	private final boolean DEBUG_DONOT_KILL_ACTIVITY = false;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.list, null);
+		return inflater.inflate(R.layout.second_list, null);
 	}
 
 	/* (non-Javadoc)
@@ -46,7 +34,7 @@ public class MainMenuFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		String menuItemsStr[] = getResources().getStringArray(R.array.main_menu_items);
+		String menuItemsStr[] = getResources().getStringArray(R.array.second_menu_items);
 		ArrayAdapter<String> menuItemAdapter = 
 				new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
 						android.R.id.text1, menuItemsStr);
@@ -78,50 +66,14 @@ public class MainMenuFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position){
 		case 0:
-			i.setClass(getActivity(), MainActivity.class);
+			i.setClass(getActivity(), AccountActivity.class);
 			break;
 		case 1:
-			i.setClass(getActivity(), CurriculumActivity.class);
-			break;
-		case 2:
-			i.setClass(getActivity(), ActiActivity.class);
-			break;
-		case 3:
-			i.setClass(getActivity(), AgendaActivity.class);
-			break;
-		case 4:
-			i.setClass(getActivity(), LibraryActivity.class);
-			break;
-		case 5:
-			i.setClass(getActivity(), GPAActivity.class);
-			break;
-		case 6:
-			i.setClass(getActivity(), ExerciseActivity.class);
-			break;
-		case 7:
-			i.setClass(getActivity(), AcademicActivity.class);
-			break;
-		case 8:
-			i.setClass(getActivity(), FreshmanActivity.class);
+			i.setClass(getActivity(), AccountActivity.class);
 			break;
 		}
 		if (i != null){
-			startActivity(i);
-			TryKillMyself();
-		}
-	}
-	
-	
-	
-	private void TryKillMyself() {
-		/**
-		 * 调用新的Activity后杀死自己..
-		 */
-		if(!DEBUG_DONOT_KILL_ACTIVITY){
-			if(getActivity() instanceof BaseFrameActivity){
-				BaseFrameActivity baseActivity = (BaseFrameActivity)getActivity();
-				baseActivity.KillMyself();
-			}
+			startActivity(i);			
 		}
 	}
 
@@ -134,6 +86,7 @@ public class MainMenuFragment extends ListFragment {
 			mainActivity.switchContent(newContent);
 		}
 	}
+	
 	
 
 }

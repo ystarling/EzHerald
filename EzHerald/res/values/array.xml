@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="main_menu_items">
-        <item >Dummy 1</item>
-        <item >Dummy 2</item>
+        <item > 主界面</item>
+        <item >课表自习</item>
+        <item >校园活动</item>
+        <item >我的日程</item>
+        <item >图书查询</item>
+        <item >绩点查询</item>
+        <item >跑操查询</item>
+        <item >教务信息</item>
+        <item >新生指南</item>
+    </string-array>
+    
+    <string-array name="second_menu_items">
+        <item >我的账户</item>
+        <item >主界面设置</item>
+        <item >账户设置</item>
     </string-array>
 
 </resources>
