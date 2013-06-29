@@ -12,6 +12,9 @@
         <item >新生指南</item>
     </string-array>
     
+    <integer-array name="main_menu_item_icons">
+    </integer-array>
+    
     <string-array name="second_menu_items">
         <item >我的账户</item>
         <item >主界面设置</item>
