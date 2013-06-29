@@ -39,6 +39,16 @@
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".gpa.GPAActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".library.LibraryActivity"></activity>
         <activity android:name="BaseFrameActivity" android:theme="@style/Theme.Sherlock.Light"></activity>
+        
+        <!-- academic Begin -->
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".academic.AcademicDetailActivity"></activity>
+        <!-- academic End -->
+        
+        <!-- acti  begin -->
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ClubListActivity"></activity>
+        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiInfoDetailActivity"></activity>
+        <!-- acti  end -->
+        
     </application>
 
 </manifest>
