@@ -5,32 +5,27 @@ public class JwcInfo {
 	private String title;
 	private String date;
 	private String intro;
-	
-	public JwcInfo(String tp, String t, String d, String i)
-	{
+
+	public JwcInfo(String tp, String t, String d, String i) {
 		type = tp;
 		title = t;
 		date = d;
 		intro = i;
 	}
-	
-	public String GetType()
-	{
+
+	public String GetType() {
 		return type;
 	}
-	
-	public String GetTitle()
-	{
+
+	public String GetTitle() {
 		return title;
 	}
-	
-	public String GetDate()
-	{
+
+	public String GetDate() {
 		return date;
 	}
-	
-	public String GetIntro()
-	{
+
+	public String GetIntro() {
 		return intro;
 	}
 

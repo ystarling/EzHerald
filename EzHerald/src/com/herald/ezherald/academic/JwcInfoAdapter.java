@@ -23,52 +23,43 @@ import android.widget.Toast;
 public class JwcInfoAdapter extends BaseAdapter {
 	Activity context;
 	List<JwcInfo> jwcInfoList;
-	JwcInfoAdapter(Activity c)
-	{
+
+	JwcInfoAdapter(Activity c) {
 		context = c;
 		jwcInfoList = new LinkedList();
 	}
-	
-	public void setJwcInfoList(JwcInfo [] jwcArr)
-	{
+
+	public void setJwcInfoList(JwcInfo[] jwcArr) {
 		jwcInfoList.clear();
-		for(int loop = 0; loop < jwcArr.length; ++loop)
-		{
+		for (int loop = 0; loop < jwcArr.length; ++loop) {
 			jwcInfoList.add(jwcArr[loop]);
 		}
 	}
-	 
-	public void setJwcInfoList(List<JwcInfo> jwcList)
-	{
+
+	public void setJwcInfoList(List<JwcInfo> jwcList) {
 		jwcInfoList.clear();
 		jwcInfoList.addAll(jwcList);
 	}
-	
-	public void addJwcInfoList(JwcInfo [] jwcArr)
-	{
-		for(int loop=0; loop < jwcArr.length; ++loop)
-		{
+
+	public void addJwcInfoList(JwcInfo[] jwcArr) {
+		for (int loop = 0; loop < jwcArr.length; ++loop) {
 			jwcInfoList.add(jwcArr[loop]);
 		}
 	}
-	
-	public void addJwcInfoList(List<JwcInfo> jwcList)
-	{
+
+	public void addJwcInfoList(List<JwcInfo> jwcList) {
 		jwcInfoList.addAll(jwcList);
 	}
-	
-	public void foreAddJwcInfoList(JwcInfo [] jwcArr)
-	{
-		for(int loop = jwcArr.length; loop >= 0; --loop)
-		{
+
+	public void foreAddJwcInfoList(JwcInfo[] jwcArr) {
+		for (int loop = jwcArr.length; loop >= 0; --loop) {
 			jwcInfoList.add(0, jwcArr[loop]);
 		}
 	}
-	
-	public void foreAddJwcInfoList(List<JwcInfo> jwcList)
-	{
+
+	public void foreAddJwcInfoList(List<JwcInfo> jwcList) {
 		jwcList.addAll(jwcInfoList);
-		jwcInfoList = jwcList ;
+		jwcInfoList = jwcList;
 	}
 
 	@Override
@@ -76,7 +67,6 @@ public class JwcInfoAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return jwcInfoList.size();
 	}
-	
 
 	@Override
 	public Object getItem(int position) {
@@ -94,71 +84,82 @@ public class JwcInfoAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		final JwcInfoHolder holder = new JwcInfoHolder();
-		convertView =  LayoutInflater.from(context).inflate(R.layout.academic_info_item, null);
-		holder.type = (TextView) convertView.findViewById(R.id.academic_info_item_type);
-		holder.title = (TextView) convertView.findViewById(R.id.academic_info_item_title);
-		holder.btn_share = (ImageView) convertView.findViewById(R.id.academic_list_btn_share);
-		holder.date = (TextView) convertView.findViewById(R.id.academic_info_item_date);
-		holder.intro = (TextView) convertView.findViewById(R.id.academic_info_item_intro);
-		
+		convertView = LayoutInflater.from(context).inflate(
+				R.layout.academic_info_item, null);
+		holder.type = (TextView) convertView
+				.findViewById(R.id.academic_info_item_type);
+		holder.title = (TextView) convertView
+				.findViewById(R.id.academic_info_item_title);
+		holder.btn_share = (ImageView) convertView
+				.findViewById(R.id.academic_list_btn_share);
+		holder.date = (TextView) convertView
+				.findViewById(R.id.academic_info_item_date);
+		holder.intro = (TextView) convertView
+				.findViewById(R.id.academic_info_item_intro);
+
 		JwcInfo jwcInfo = jwcInfoList.get(position);
-		if(jwcInfo != null)
-		{
+		if (jwcInfo != null) {
 			holder.type.setText(jwcInfo.GetType());
 			holder.title.setText(jwcInfo.GetTitle());
 			holder.date.setText(jwcInfo.GetDate());
 			holder.intro.setText(jwcInfo.GetIntro());
-			holder.btn_share.setOnClickListener(new OnClickListener(){
+			holder.btn_share.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
-					//Toast.makeText(context, "share clicked", Toast.LENGTH_SHORT).show();
-//					PopupWindow popWin;
-//					View pwView = LayoutInflater.from(context).inflate(R.layout.academic_popwin_share, null);
-//					popWin = new PopupWindow(pwView, 235, 100, true);
-//					popWin.setBackgroundDrawable(context.getResources().getDrawable(android.R.drawable.spinner_background));
-//					popWin.showAsDropDown(holder.btn_share,0,0);
-//					
-//					ImageButton btn_to_weibo = (ImageButton) pwView.findViewById(R.id.academic_share_weibo);
-//					ImageButton btn_to_renren = (ImageButton) pwView.findViewById(R.id.academic_share_renren);
-//					btn_to_weibo.setOnClickListener(new OnClickListener(){
-//
-//						@Override
-//						public void onClick(View v) {
-//							// TODO Auto-generated method stub
-//							Toast.makeText(context, "share to weibo", Toast.LENGTH_SHORT).show();
-//						}
-//						
-//					});
-//					btn_to_renren.setOnClickListener(new OnClickListener(){
-//
-//						@Override
-//						public void onClick(View v) {
-//							// TODO Auto-generated method stub
-//							Toast.makeText(context, "share to renren", Toast.LENGTH_SHORT).show();
-//						}
-//						
-//					});
-				      Intent intent=new Intent(Intent.ACTION_SEND);
-				      
-				      intent.setType("text/plain");
-				      intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-				      intent.putExtra(Intent.EXTRA_TEXT, "I would like to ‘herald campus’ this with you...");
-				      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
-				      context.startActivity(Intent.createChooser(intent,"分享到"));
-					
-					
+					// Toast.makeText(context, "share clicked",
+					// Toast.LENGTH_SHORT).show();
+					// PopupWindow popWin;
+					// View pwView =
+					// LayoutInflater.from(context).inflate(R.layout.academic_popwin_share,
+					// null);
+					// popWin = new PopupWindow(pwView, 235, 100, true);
+					// popWin.setBackgroundDrawable(context.getResources().getDrawable(android.R.drawable.spinner_background));
+					// popWin.showAsDropDown(holder.btn_share,0,0);
+					//
+					// ImageButton btn_to_weibo = (ImageButton)
+					// pwView.findViewById(R.id.academic_share_weibo);
+					// ImageButton btn_to_renren = (ImageButton)
+					// pwView.findViewById(R.id.academic_share_renren);
+					// btn_to_weibo.setOnClickListener(new OnClickListener(){
+					//
+					// @Override
+					// public void onClick(View v) {
+					// // TODO Auto-generated method stub
+					// Toast.makeText(context, "share to weibo",
+					// Toast.LENGTH_SHORT).show();
+					// }
+					//
+					// });
+					// btn_to_renren.setOnClickListener(new OnClickListener(){
+					//
+					// @Override
+					// public void onClick(View v) {
+					// // TODO Auto-generated method stub
+					// Toast.makeText(context, "share to renren",
+					// Toast.LENGTH_SHORT).show();
+					// }
+					//
+					// });
+					Intent intent = new Intent(Intent.ACTION_SEND);
+
+					intent.setType("text/plain");
+					intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+					intent.putExtra(Intent.EXTRA_TEXT,
+							"I would like to ‘herald campus’ this with you...");
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					context.startActivity(Intent.createChooser(intent, "分享到"));
+
 				}
-				
+
 			});
 		}
-		
+
 		return convertView;
 	}
-	
-	private class JwcInfoHolder
-	{
+
+	private class JwcInfoHolder {
 		public TextView type;
 		public TextView title;
 		public ImageView btn_share;

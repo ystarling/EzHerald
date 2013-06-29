@@ -7,7 +7,9 @@ import com.herald.ezherald.R;
 
 public class LibraryActivity extends SherlockActivity {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -16,5 +18,5 @@ public class LibraryActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.library_activity_main);
 	}
-	
+
 }

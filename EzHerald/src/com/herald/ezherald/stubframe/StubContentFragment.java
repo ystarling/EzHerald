@@ -19,14 +19,14 @@ import com.herald.ezherald.R;
 
 public class StubContentFragment extends SherlockFragment {
 	String text = null;
-	
-	public StubContentFragment()
-	{
+
+	public StubContentFragment() {
 		text = "Default";
 	}
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.Fragment#setArguments(android.os.Bundle)
 	 */
 	@Override
@@ -36,8 +36,9 @@ public class StubContentFragment extends SherlockFragment {
 		text = args.getString("text");
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -45,11 +46,15 @@ public class StubContentFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +62,5 @@ public class StubContentFragment extends SherlockFragment {
 		View v = inflater.inflate(R.layout.stub_frame_content, null);
 		return v;
 	}
-	
-	
+
 }

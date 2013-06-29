@@ -19,28 +19,27 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 	 * 主菜单列表项的Adapter
 	 */
 	private final String TAG = "Ez:MainMenuListItemAdapter";
-	
-	private Context mContext; //运行上下文
-	private List<Map<String,Object>> mListItems; //菜单项信息
-	private LayoutInflater mListContainer;	//视图容器
-	
-	
-	public final class ListItemView{
-		//自定义控件集
+
+	private Context mContext; // 运行上下文
+	private List<Map<String, Object>> mListItems; // 菜单项信息
+	private LayoutInflater mListContainer; // 视图容器
+
+	public final class ListItemView {
+		// 自定义控件集
 		public ImageView icon;
 		public TextView title;
 	}
-	
-	public MainMenuListItemAdapter(Context context, List<Map<String,Object>> listItems){
+
+	public MainMenuListItemAdapter(Context context,
+			List<Map<String, Object>> listItems) {
 		/**
 		 * 构造函数
 		 */
 		mContext = context;
-		mListContainer = LayoutInflater.from(mContext);  //创建视图
+		mListContainer = LayoutInflater.from(mContext); // 创建视图
 		mListItems = listItems;
 	}
-	
-	
+
 	@Override
 	public int getCount() {
 		// 项目数量
@@ -65,29 +64,29 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 		Log.d(TAG, "getView");
 		// 自定义视图
 		ListItemView listItemView = null;
-		if(convertView == null){
+		if (convertView == null) {
 			listItemView = new ListItemView();
-			//获取菜单项布局文件的视图
-			convertView = mListContainer.inflate(R.layout.main_frame_menu_item, null);
-			//获取控件对象
-			listItemView.icon = 
-					(ImageView)convertView.findViewById(R.id.main_frame_menuitem_icon);
-			listItemView.title = 
-					(TextView)convertView.findViewById(R.id.main_frame_menuitem_title);
-			//设置控件集到convertView
+			// 获取菜单项布局文件的视图
+			convertView = mListContainer.inflate(R.layout.main_frame_menu_item,
+					null);
+			// 获取控件对象
+			listItemView.icon = (ImageView) convertView
+					.findViewById(R.id.main_frame_menuitem_icon);
+			listItemView.title = (TextView) convertView
+					.findViewById(R.id.main_frame_menuitem_title);
+			// 设置控件集到convertView
 			convertView.setTag(listItemView);
 		} else {
-			listItemView = (ListItemView)convertView.getTag();
+			listItemView = (ListItemView) convertView.getTag();
 		}
-		
-		//设置文字和图标
 
-		listItemView.icon.setImageResource(
-				(Integer)mListItems.get(position).get("icon"));
-		listItemView.title.setText(
-				(String)mListItems.get(position).get("title"));
-		
-		
+		// 设置文字和图标
+
+		listItemView.icon.setImageResource((Integer) mListItems.get(position)
+				.get("icon"));
+		listItemView.title.setText((String) mListItems.get(position).get(
+				"title"));
+
 		return convertView;
 	}
 

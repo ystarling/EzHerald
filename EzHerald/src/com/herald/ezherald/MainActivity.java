@@ -19,14 +19,14 @@ import com.herald.ezherald.R;
 public class MainActivity extends BaseFrameActivity {
 
 	Fragment mContentFrag;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
+
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
 	}
-
 
 	public void switchContent(Fragment fragment) {
 		/*
@@ -35,13 +35,10 @@ public class MainActivity extends BaseFrameActivity {
 		 * @param fragment 传入的要替换的碎片
 		 */
 		mContentFrag = fragment;
-		getSupportFragmentManager()
-		.beginTransaction()
-		.replace(R.id.empty_frame_content, fragment)
-		.commit();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.empty_frame_content, fragment).commit();
 		getSlidingMenu().showContent();
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,12 +46,10 @@ public class MainActivity extends BaseFrameActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
+
 }

@@ -27,7 +27,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	protected Fragment mContentFrag; // 中间呈现的内容
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
 	protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
-	//protected int mContentResId;
+
+	// protected int mContentResId;
 
 	protected void initTransformer() {
 		/*
@@ -44,14 +45,12 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 			}
 		};
 	}
-	
-	public void SetBaseFrameActivity(Fragment contentFragment)
-	{
+
+	public void SetBaseFrameActivity(Fragment contentFragment) {
 		/*
-		 * @prarm contentFragment
-		 * 			  : 内容的Fragment
-		 * */
-		//mContentResId = contentResourceId;
+		 * @prarm contentFragment : 内容的Fragment
+		 */
+		// mContentResId = contentResourceId;
 		mContentFrag = contentFragment;
 	}
 
@@ -62,32 +61,30 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		InitBaseFrame();
 	}
 
-
-
 	public void InitBaseFrame() {
 		/**
 		 * 初始化这个框架Actovity 在super.OnCreate之后再使用
 		 * 
 		 * @param contentResourceId
 		 *            : 内容layout的资源Id
-		 * @prarm contentFragment
-		 * 			  : 内容的Fragment
+		 * @prarm contentFragment : 内容的Fragment
 		 */
-		
+
 		setBehindContentView(R.layout.main_frame_menu);
 		setContentView(R.layout.empty_frame_content);
 		initTransformer(); // 初始化动画
 		initSlidingMenu(); // 初始化菜单
-		
+
 		mMenuFrag = new MainMenuFragment();
 		mSecondaryMenuFrag = new SecondMenuFragment();
-		
-		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-		t.replace(R.id.main_frame_menu, mMenuFrag); //切换menu的Fragement
-		t.replace(R.id.empty_frame_content, mContentFrag); //切换内容的Fragement
-		t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);//切换2ndmenu的Fragement
+
+		FragmentTransaction t = this.getSupportFragmentManager()
+				.beginTransaction();
+		t.replace(R.id.main_frame_menu, mMenuFrag); // 切换menu的Fragement
+		t.replace(R.id.empty_frame_content, mContentFrag); // 切换内容的Fragement
+		t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// 切换2ndmenu的Fragement
 		t.commit();
-		
+
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
@@ -114,34 +111,33 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		menu.setBehindCanvasTransformer(mTrans);
 		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		
-		getSupportMenuInflater().inflate(R.menu.main, menu); 
+
+		getSupportMenuInflater().inflate(R.menu.main, menu);
 
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
 		 * 上侧Title位置的按钮点击相应
 		 */
-		switch(item.getItemId()){
+		switch (item.getItemId()) {
 		case R.id.action_settings:
-			//Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
 			menu.showSecondaryMenu();
 			break;
 		case android.R.id.home:
-			menu.toggle(true); //点击了程序图标后，会弹出/收回侧面菜单
+			menu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
 			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void KillMyself()
-	{
+
+	public void KillMyself() {
 		finish();
 	}
 }

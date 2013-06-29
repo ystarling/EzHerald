@@ -10,16 +10,18 @@ import com.herald.ezherald.R;
 
 public class ExerciseActivity extends SherlockFragmentActivity {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		if(false){
-			//TODO Î´µÇÂ½ÏÔÊ¾µÇÂ½½çÃæ
-		}else{
+		if (false) {
+			// TODO Î´µÇÂ½ÏÔÊ¾µÇÂ½½çÃæ
+		} else {
 			setContentView(R.layout.exercise_activity_main);
 			ActionBar bar = getSupportActionBar();
 			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -35,37 +37,33 @@ public class ExerciseActivity extends SherlockFragmentActivity {
 			bar.addTab(tab1);
 			bar.addTab(tab2);
 			bar.addTab(tab3);
-		} 
+		}
 	}
-	    
-	private class MyTabListener implements ActionBar.TabListener
-    {
+
+	private class MyTabListener implements ActionBar.TabListener {
 
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			if(tab.getPosition()==0)
-			{
+			if (tab.getPosition() == 0) {
 				FragmentA frag = new FragmentA();
 				ft.replace(android.R.id.content, frag);
-			}
-			else
-			{
-				//FragmentB frag = new FragmentB();
-				//ft.replace(android.R.id.content, frag);
+			} else {
+				// FragmentB frag = new FragmentB();
+				// ft.replace(android.R.id.content, frag);
 			}
 		}
 
 		@Override
 		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
-			
+
 		}
-    }
-	
+	}
+
 }

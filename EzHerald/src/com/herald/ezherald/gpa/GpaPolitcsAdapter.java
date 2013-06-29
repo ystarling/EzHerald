@@ -12,18 +12,18 @@ import android.widget.TextView;
 
 /**
  * @author xie
- *
+ * 
  */
 public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private final float titleTextSize = 28;
 	private final float contentTextSize = 25;
 	private GpaPoliticsModel gpaPoliticsModel = new GpaPoliticsModel();
-	
-	GpaPolitcsAdapter(Context context){
+
+	GpaPolitcsAdapter(Context context) {
 		this.context = context;
 	}
-	
+
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
@@ -37,8 +37,8 @@ public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View contentView,
-			ViewGroup parent) {
+	public View getChildView(int groupPosition, int childPosition,
+			boolean isLastChild, View contentView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		TextView tv = new TextView(context);
 		tv.setBackgroundColor(color.black);
@@ -72,16 +72,17 @@ public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded, View coverView, ViewGroup parent) {
+	public View getGroupView(int groupPosition, boolean isExpanded,
+			View coverView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 
-		TextView tv =new TextView(context);
+		TextView tv = new TextView(context);
 		tv.setText(gpaPoliticsModel.politics[groupPosition].title);
 		tv.setPadding(60, 0, 0, 0);
 		tv.setTextSize(titleTextSize);
-		if(gpaPoliticsModel.judge(groupPosition)){//TODO 未登陆不变色
+		if (gpaPoliticsModel.judge(groupPosition)) {// TODO 未登陆不变色
 			tv.setBackgroundColor(Color.GREEN);
-		}else{
+		} else {
 			tv.setBackgroundColor(Color.RED);
 		}
 		return tv;

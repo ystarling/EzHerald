@@ -10,7 +10,9 @@ import com.herald.ezherald.R;
 
 public class AccountActivity extends SherlockActivity {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -18,15 +20,16 @@ public class AccountActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.account_activity_main);
-		
+
 	}
-	 public void sendMessage(View view) {
-	        // Do something in response to button
-	    	Intent intent = new Intent(this,IDCardAccountActivity.class);
-	    	//EditText editText = (EditText) findViewById(R.id.edit_message);
-	    	//String message = editText.getText().toString();
-	    	//intent.putExtra(EXTRA_MESSAGE, message);
-	    	startActivity(intent);
-	    }
-	
+
+	public void sendMessage(View view) {
+		// Do something in response to button
+		Intent intent = new Intent(this, IDCardAccountActivity.class);
+		// EditText editText = (EditText) findViewById(R.id.edit_message);
+		// String message = editText.getText().toString();
+		// intent.putExtra(EXTRA_MESSAGE, message);
+		startActivity(intent);
+	}
+
 }
