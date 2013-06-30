@@ -41,3 +41,7 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+# Libs
+libABS/
+libSlidingMenu/
