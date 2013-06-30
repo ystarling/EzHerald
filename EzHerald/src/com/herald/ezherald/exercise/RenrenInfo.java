@@ -3,7 +3,10 @@ package com.herald.ezherald.exercise;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.widget.Toast;
+import cn.edu.seu.herald.ws.api.exercise.Broadcast;
+import cn.edu.seu.herald.ws.api.exercise.ObjectFactory;
 /**
  * @author xie
  * 体育系人人的早操播报消息
@@ -35,12 +38,13 @@ public class RenrenInfo{
 	public void update(){
 		
 		try {
+			Log.w("update","updateing renren");
 			//TODO
-			//ObjectFactory factory = new ObjectFactory();
-			//Broadcast broadcast = factory.createBroadcast();
-			//setInfo(broadcast.getInfo());
-			//setDate(broadcast.getDate().toString());
-			throw new Exception();
+			ObjectFactory factory = new ObjectFactory();
+			Broadcast broadcast = factory.createBroadcast();
+			setInfo(broadcast.getInfo());
+			setDate(broadcast.getDate().toString());
+//			throw new Exception();
 		} catch (Exception e) {
 			// TODO: handle exception
 			Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
