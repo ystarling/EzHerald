@@ -83,14 +83,17 @@ public class FragmentB extends Fragment {
 	public void show(){
 		txtTimes = (TextView)getActivity().findViewById(R.id.txt_Times);
 		edtAdjust = (EditText)getActivity().findViewById(R.id.edtTxt_adjust);
-		
-		if (runTimesInfo.getAdjustTimes() != 0) {
-			txtTimes.setText(runTimesInfo.getTimes() + " + "
-					+ runTimesInfo.getAdjustTimes());
-			Log.w("msg", runTimesInfo.getTimes() + " + "
-					+ runTimesInfo.getAdjustTimes());
+		if(runTimesInfo.getTimes() == RunTimes.DEFAULT_TIMES ){
+			txtTimes.setText("还没有数据");
 		}else{
-			txtTimes.setText( runTimesInfo.getTimes()+"");
+			if (runTimesInfo.getAdjustTimes() != RunTimes.DEFAULT_ADJUST_TIMES) {
+				txtTimes.setText(runTimesInfo.getTimes() + " + "
+						+ runTimesInfo.getAdjustTimes());
+				Log.w("msg", runTimesInfo.getTimes() + " + "
+						+ runTimesInfo.getAdjustTimes());
+			}else{
+				txtTimes.setText( runTimesInfo.getTimes()+"");
+			}
 		}
 	}
 }
