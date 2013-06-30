@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.widget.Toast;
-import cn.edu.seu.herald.ws.api.exercise.Broadcast;
-import cn.edu.seu.herald.ws.api.exercise.ObjectFactory;
 /**
  * @author xie
- * 体育系人人的消息
+ * 体育系人人的早操播报消息
  */
 public class RenrenInfo{
 	private String info;
@@ -16,6 +14,10 @@ public class RenrenInfo{
 	private SharedPreferences pref;
 	public Activity activity;
 	
+	/**
+	 * @param activity 调用者的activity
+	 * 构造时会从sharedPreference尝试读数据
+	 */
 	public RenrenInfo(Activity activity){
 		this.activity = activity;
 		try {
@@ -55,8 +57,7 @@ public class RenrenInfo{
 	}
 	
 	/**
-	 * @return boolean
-	 * 数据是否为空
+	 * @return boolean 数据是否为空
 	 */
 	public boolean isSet(){
 		if(info == null || date == null)
