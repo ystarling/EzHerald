@@ -33,8 +33,6 @@ public class FragmentA extends Fragment {
 		renren = new RenrenInfo(getActivity());
 		txt_info = (TextView)getActivity().findViewById(R.id.txt_info);
 		txt_date = (TextView)getActivity().findViewById(R.id.txt_date);
-		txt_info.setTextSize(42);
-		txt_date.setTextSize(24);
 		if(renren.isSet()){
 			show();
 		}else{
