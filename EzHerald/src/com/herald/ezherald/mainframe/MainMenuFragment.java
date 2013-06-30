@@ -20,7 +20,6 @@ import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
-import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.activity.ActiActivity;
 import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
