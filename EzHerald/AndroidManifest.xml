@@ -26,7 +26,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>4
+        </activity>
         
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".academic.AcademicActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".account.AccountActivity"></activity>
@@ -49,6 +49,8 @@
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiInfoDetailActivity"></activity>
         <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ClubDetailActivity"></activity>
         <!-- acti  end -->
+        <activity android:name=".settingframe.SettingActivity" android:theme="@style/Theme.Sherlock.Light"></activity>
+        <activity android:name=".settingframe.AboutThisApp" android:theme="@style/Theme.Sherlock.Light"></activity>
         
         
         

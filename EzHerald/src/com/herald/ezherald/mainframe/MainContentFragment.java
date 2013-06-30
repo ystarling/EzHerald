@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
+
 /*
  * @author ºÎ²©Î°
  * @since 20130514
@@ -18,14 +19,14 @@ import com.herald.ezherald.R;
  */
 public class MainContentFragment extends SherlockFragment {
 	String text = null;
-	
-	public MainContentFragment()
-	{
+
+	public MainContentFragment() {
 		text = "Default";
 	}
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.Fragment#setArguments(android.os.Bundle)
 	 */
 	@Override
@@ -35,8 +36,9 @@ public class MainContentFragment extends SherlockFragment {
 		text = args.getString("text");
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -44,11 +46,15 @@ public class MainContentFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +62,5 @@ public class MainContentFragment extends SherlockFragment {
 		View v = inflater.inflate(R.layout.main_frame_content, null);
 		return v;
 	}
-	
-	
+
 }
