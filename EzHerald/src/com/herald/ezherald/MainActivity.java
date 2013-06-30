@@ -11,7 +11,7 @@ import com.herald.ezherald.R;
 /*
  * @author 何博伟
  * @since 2013.05.14
- * @updated 2013.6.29
+ * @updated 2013.6.30
  * 程序的主Activity
  * 
  * 
@@ -28,6 +28,11 @@ public class MainActivity extends BaseFrameActivity {
 		super.onCreate(savedInstanceState);
 	}
 
+	
+	/**
+	 * @deprecated
+	 * @param fragment
+	 */
 	public void switchContent(Fragment fragment) {
 		/*
 		 * 切换content碎片内容

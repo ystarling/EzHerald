@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,16 +118,20 @@ public class MainContentFragment extends SherlockFragment {
 	}
 	
 
-	
+	/**
+	 * 获得偏好设置
+	 */
 	private void getPrefItems() {
-		// 获得偏好设置
+		// 删除旧的东西
+		mContentTitles.clear();
 		
+		// 获得偏好设置
 		SharedPreferences appPrefs =
 				getActivity().getSharedPreferences(
 						PREF_NAME
 						, Context.MODE_PRIVATE);
 		Set<String> result_set = appPrefs.getStringSet(KEY_NAME, null);
-		if(null != result_set){
+		if(null != result_set && result_set.size()>0){
 			for(String result : result_set){
 				//Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
 				mContentTitles.add(result);
@@ -202,7 +207,16 @@ public class MainContentFragment extends SherlockFragment {
 		}
 		return gridItems;
 	}
+
+	@Override
+	public void onResume() {
+		Log.d("MainContentFrag", "OnResume");
+		//更新内容
+		getPrefItems();
+		mGridItems = getGridItems();
+		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
+		super.onResume();
+	}
 	
-	//TODO:Use broadcast receiver when user preferences updated
 	
 }
