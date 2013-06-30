@@ -17,7 +17,6 @@ public class ExerciseActivity extends SherlockFragmentActivity {
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		if(false){
 			//TODO Î´µÇÂ½ÏÔÊ¾µÇÂ½½çÃæ

@@ -40,3 +40,7 @@ tmp/**/*
 
 # PDT-specific
 .buildpath
+
+# Libs
+libABS/
+libSlidingMenu/
