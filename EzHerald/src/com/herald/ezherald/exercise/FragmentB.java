@@ -21,7 +21,7 @@ import com.herald.ezherald.R;
  * 显示跑操次数的信息
  */
 public class FragmentB extends Fragment {
-	private RunTimesInfo runTimesInfo; 
+	private RunTimes runTimesInfo; 
 	private TextView txtTimes;
 	private EditText edtAdjust;
 	private Button btnAdjust;
@@ -33,7 +33,7 @@ public class FragmentB extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
-		runTimesInfo= new RunTimesInfo(getActivity());
+		runTimesInfo= new RunTimes(getActivity());
 		if(runTimesInfo.isSet()){
 			show();
 		}else{
