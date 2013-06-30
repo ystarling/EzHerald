@@ -63,6 +63,9 @@ public class SettingFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
+			i.setClass(getActivity(), MainContentModulePref.class);
+			break;
+		case 1:
 			i.setClass(getActivity(), AboutThisApp.class);
 			break;
 		default:

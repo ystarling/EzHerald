@@ -2,6 +2,7 @@ package com.herald.ezherald.settingframe;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -27,5 +28,15 @@ public class SettingActivity extends BaseFrameActivity {
 		// TODO Auto-generated method stub
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			finish();
+		}
+		return false;
+	}
+	
+	
 
 }

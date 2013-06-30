@@ -22,6 +22,8 @@
     <string name="cus_lv_updating">Updating：</string>
     <!-- academic END -->
     <string name="mainmenu_exit_app">退出</string>
+    <string name="menu_main_content_pref_title">偏好设置</string>
+    <string name="main_frame_module_choice_title">模块选择</string>
     
     
 </resources>
