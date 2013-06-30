@@ -21,6 +21,7 @@
     <string name="cus_lv_refreshing">Refreshing...</string>
     <string name="cus_lv_updating">Updating：</string>
     <!-- academic END -->
+    <string name="mainmenu_exit_app">退出</string>
     
     
 </resources>

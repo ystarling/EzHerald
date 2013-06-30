@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.mainframe.MainMenuFragment;
@@ -19,6 +21,7 @@ import com.herald.ezherald.R;
  * 基本的框架，主要包含了左右侧的侧滑菜单，还有点击菜单项的操作
  * 
  * @author BorisHe
+ * @updated 20130630
  * 
  */
 public class BaseFrameActivity extends SlidingFragmentActivity {
@@ -27,7 +30,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	protected Fragment mContentFrag; // 中间呈现的内容
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
 	protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
-
+	private long mExitTime;
+	
 	// protected int mContentResId;
 
 	protected void initTransformer() {
@@ -130,6 +134,9 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 			// Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
 			menu.showSecondaryMenu();
 			break;
+		case R.id.mainframe_menu_item_exit:
+			finish();
+			break;
 		case android.R.id.home:
 			menu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
 			break;
@@ -140,4 +147,22 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	public void KillMyself() {
 		finish();
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// 两次返回键退出
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			if((System.currentTimeMillis() - mExitTime) > 2000){
+				//Object mHelperUtils;
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				mExitTime = System.currentTimeMillis();
+			} else {
+				finish();
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	
 }
