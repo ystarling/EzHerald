@@ -6,9 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.taptwo.android.widget.CircleFlowIndicator;
+import org.taptwo.android.widget.ViewFlow;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +49,11 @@ import com.herald.ezherald.settingframe.MainContentModulePref;
 public class MainContentFragment extends SherlockFragment {
 	private String text = null;
 	private GridView mGridView;  //GridView
+	private ViewFlow mViewFlow;  //ViewFlow
+	private CircleFlowIndicator mCircIndic;
+	
 	private List<Map<String, Object>> mGridItems;
+	private List<Map<String, Object>> mImageItems;
 	
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "module_choice";
@@ -56,6 +65,13 @@ public class MainContentFragment extends SherlockFragment {
 	//////////////Temporarily used local variables///////////////////
 	String mContentCont1 [] = {"AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH"};
 	String mContentCont2 [] = {"SSS", "TTT", "UUU", "VVV", "WWW" ,"XXX", "YYY", "ZZZ"};
+	///////Should be removed after we have a SharedPreference////////
+	private static final int[] image_ids =
+		{R.drawable.main_frame_pic0, R.drawable.main_frame_pic1,
+		R.drawable.main_frame_pic2, R.drawable.main_frame_pic3,
+		R.drawable.main_frame_pic4
+		};
+	//TODO:使用时应当先用本地存储内容，然后Async通过网络更新本地存储内容，再更新视图
 	///////Should be removed after we have a SharedPreference////////
 
 	public MainContentFragment() {
@@ -98,7 +114,7 @@ public class MainContentFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		//视图
 		View v = inflater.inflate(R.layout.main_frame_content, null);
-				
+		
 		return v;
 	}
 	
@@ -109,12 +125,25 @@ public class MainContentFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		
+		
 		getPrefItems();
 		
 		mGridView = (GridView)getActivity().findViewById(R.id.main_frame_content_gridView);
 		mGridItems = getGridItems();
 		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
 		mGridView.setOnItemClickListener(new MyOnItemClickListener());
+		
+		mViewFlow = (ViewFlow)getActivity().findViewById(R.id.main_frame_viewflow);
+		mImageItems = getImageItems();
+		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(), mImageItems));
+		
+		mCircIndic = (CircleFlowIndicator)getActivity().findViewById(R.id.main_frame_viewflowindic);
+		mCircIndic.setFillColor(Color.RED);
+		mCircIndic.setStrokeColor(Color.GREEN);
+		
+		mViewFlow.setFlowIndicator(mCircIndic);
+		
+		mViewFlow.bringToFront();
 	}
 	
 
@@ -207,6 +236,20 @@ public class MainContentFragment extends SherlockFragment {
 		}
 		return gridItems;
 	}
+	
+	/**
+	 * 初始化图片信息
+	 */
+	private List<Map<String, Object>> getImageItems(){
+		List<Map<String, Object>> imgItems = new ArrayList<Map<String, Object>>();
+		for(int i=0; i<image_ids.length; i++){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("image", image_ids[i]);
+			imgItems.add(map);
+		}
+		Toast.makeText(getActivity(), ""+ imgItems.size(), Toast.LENGTH_SHORT).show();
+		return imgItems;
+	}
 
 	@Override
 	public void onResume() {
@@ -216,6 +259,13 @@ public class MainContentFragment extends SherlockFragment {
 		mGridItems = getGridItems();
 		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
 		super.onResume();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+
+		super.onConfigurationChanged(newConfig);
+		mViewFlow.onConfigurationChanged(newConfig);
 	}
 	
 	

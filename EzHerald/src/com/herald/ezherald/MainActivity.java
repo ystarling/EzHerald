@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.herald.ezherald.R;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 /*
  * @author ºÎ²©Î°
@@ -26,6 +27,7 @@ public class MainActivity extends BaseFrameActivity {
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
+		super.menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 	}
 
 	
