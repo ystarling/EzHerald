@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 主界面模块的item (GridView的Item) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 模块名称 -->
+    <TextView
+        android:id="@+id/main_frame_content_griditem_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+         />
+	
+    <!-- 显示的内容 -->
+
+    <TextView
+        android:id="@+id/main_frame_content_griditem_content1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content1" 
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+    <TextView
+        android:id="@+id/main_frame_content_griditem_content2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content2" 
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+</LinearLayout>

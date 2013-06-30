@@ -64,18 +64,10 @@ public class MainMenuFragment extends ListFragment {
 	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onActivityCreated(savedInstanceState);
 		mMenuItemsStr = getResources().getStringArray(R.array.main_menu_items);
-		// Reserved for further usage
 
-		// No longer use this type of view
-		/*
-		 * ArrayAdapter<String> menuItemAdapter = new
-		 * ArrayAdapter<String>(getActivity(),
-		 * android.R.layout.simple_list_item_1, android.R.id.text1,
-		 * menuItemsStr); setListAdapter...blabla
-		 */
 		mListItems = getListItems();
 		mListViewAdapter = new MainMenuListItemAdapter(getActivity(),
 				mListItems);
@@ -163,6 +155,10 @@ public class MainMenuFragment extends ListFragment {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 * @param newContent
+	 */
 	private void switchFragment(Fragment newContent) {
 		if (getActivity() == null)
 			return;

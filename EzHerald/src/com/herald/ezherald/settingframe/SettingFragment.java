@@ -14,7 +14,7 @@ import com.herald.ezherald.R;
 
 public class SettingFragment extends ListFragment {
 	/*
-	 * 标准左侧侧滑菜单用的ListFragment (non-Javadoc)
+	 * 软件设置的ListFragment (non-Javadoc)
 	 * 
 	 * @see
 	 * android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater
