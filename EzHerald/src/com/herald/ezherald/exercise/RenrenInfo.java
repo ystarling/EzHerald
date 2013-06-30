@@ -43,7 +43,7 @@ public class RenrenInfo{
 	 */
 	public void update(){
 		if(DEBUG){//一些测试数据
-			setInfo("今天正常跑操。19~30℃。多云转晴。没起床的各位亲们赶紧起来跑操吧。");
+			setInfo("今天正常跑操。20 ~ 30℃。多云转晴。没起床的各位亲们赶紧起来跑操吧。");
 			DateFormat fmt = SimpleDateFormat.getDateTimeInstance(); 
 			setDate(fmt.format(new Date()));
 			save();

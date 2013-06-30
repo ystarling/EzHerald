@@ -15,9 +15,12 @@ public class GPAActivity extends BaseFrameActivity {
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate( Bundle savedInstanceState ) {
 		// TODO Auto-generated method stub
-		
+		if(false) {//TODO¡¡Î´µÇÂ½
+			//intent
+			KillMyself();
+		}
 		mContentFrag = new GpaFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);

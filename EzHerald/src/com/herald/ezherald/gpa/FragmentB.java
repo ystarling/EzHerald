@@ -23,20 +23,5 @@ public class FragmentB extends Fragment {
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-		
-		/*
-		button = (Button) getActivity().findViewById(R.id.button2);
-		button.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setTitle("Fragment B");
-				builder.setMessage("What would you like to do?");
-				builder.setPositiveButton("Nothing", null);
-				builder.setNegativeButton("Leave me alone!", null);
-				builder.show();
-			}
-		});*/
 	}
 }
