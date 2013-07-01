@@ -25,5 +25,7 @@
     <string name="menu_main_content_pref_title">偏好设置</string>
     <string name="main_frame_module_choice_title">模块选择</string>
     <string name="title_activity_app_update">软件更新</string>
+    <string name="main_frame_content_refresh">刷新</string>
+    <string name="main_frame_menu_refreshing">正在刷新...</string>
 
 </resources>

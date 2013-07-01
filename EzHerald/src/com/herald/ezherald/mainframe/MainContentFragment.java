@@ -13,16 +13,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -51,6 +50,9 @@ public class MainContentFragment extends SherlockFragment {
 	private GridView mGridView;  //GridView
 	private ViewFlow mViewFlow;  //ViewFlow
 	private CircleFlowIndicator mCircIndic;
+	
+	private boolean mIsRefreshing = false;
+	
 	
 	private List<Map<String, Object>> mGridItems;
 	private List<Map<String, Object>> mImageItems;
@@ -125,6 +127,7 @@ public class MainContentFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		
+		//mActionBar = getSherlockActivity().getSupportActionBar();
 		
 		getPrefItems();
 		
@@ -145,7 +148,6 @@ public class MainContentFragment extends SherlockFragment {
 		mViewFlow.startAutoFlowTimer();
 	}
 	
-
 	/**
 	 * 获得偏好设置
 	 */
@@ -246,7 +248,7 @@ public class MainContentFragment extends SherlockFragment {
 			map.put("image", image_ids[i]);
 			imgItems.add(map);
 		}
-		Toast.makeText(getActivity(), ""+ imgItems.size(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), ""+ imgItems.size(), Toast.LENGTH_SHORT).show();
 		return imgItems;
 	}
 
@@ -254,10 +256,19 @@ public class MainContentFragment extends SherlockFragment {
 	public void onResume() {
 		Log.d("MainContentFrag", "OnResume");
 		//更新内容
+		super.onResume();
+		refreshInfo();
+	}
+
+	/*
+	 * 更新内容
+	 */
+	public void refreshInfo() {
+		//Toast.makeText(getActivity(), "Refreshing...", Toast.LENGTH_SHORT).show();
 		getPrefItems();
+		//同步获取各模块的更新项目
 		mGridItems = getGridItems();
 		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
-		super.onResume();
 	}
 
 	@Override
@@ -267,5 +278,5 @@ public class MainContentFragment extends SherlockFragment {
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
 	
-	
+
 }
