@@ -141,7 +141,8 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setFlowIndicator(mCircIndic);
 		
-	
+		mViewFlow.setTimeSpan(5000); 
+		mViewFlow.startAutoFlowTimer();
 	}
 	
 

@@ -19,12 +19,13 @@
 		    android:background="#ffffff"
 		    >
 		    
-		    <org.taptwo.android.widget.ViewFlow
+		   <org.taptwo.android.widget.ViewFlow
                 android:id="@+id/main_frame_viewflow"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 app:sidebuffer="5" >
             </org.taptwo.android.widget.ViewFlow>
+
             
 		    <LinearLayout 
 		        android:layout_width="fill_parent"

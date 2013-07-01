@@ -43,6 +43,8 @@ public class MainContentFlowItemAdapter extends BaseAdapter {
 	public int getCount() {
 		// 项目数量
 		return mListItems.size();
+		//return Integer.MAX_VALUE; 
+		//返回很大的值使得getView中的position不断增大来实现循环
 	}
 
 	@Override
@@ -79,7 +81,7 @@ public class MainContentFlowItemAdapter extends BaseAdapter {
 
 		// 设置文字和图标
 
-		listItemView.image.setImageResource((Integer) mListItems.get(position)
+		listItemView.image.setImageResource((Integer) mListItems.get(position % mListItems.size())
 				.get("image"));
 
 		return convertView;
