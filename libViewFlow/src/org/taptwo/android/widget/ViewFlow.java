@@ -91,6 +91,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 	private Handler handler;
 	private long timeSpan = 3000;
 	private boolean mAutoPlayDirectionFw = true; //自动播放的方向（true:前进，false:后退）
+	public boolean isTouching = false; //是否正在触摸
 
 	/**
 	 * Receives call backs when a new {@link View} has been scrolled to.
@@ -318,6 +319,8 @@ public class ViewFlow extends AdapterView<Adapter> {
 		if (getChildCount() == 0)
 			return false;
 
+		isTouching = true;
+		
 		if (mVelocityTracker == null) {
 			mVelocityTracker = VelocityTracker.obtain();
 		}
@@ -420,6 +423,9 @@ public class ViewFlow extends AdapterView<Adapter> {
 			snapToDestination();
 			mTouchState = TOUCH_STATE_REST;
 		}
+		
+		isTouching = false;
+		
 		return true;
 	}
 
@@ -786,13 +792,13 @@ public class ViewFlow extends AdapterView<Adapter> {
 		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				Log.d("ViewFlow", "mCurrScreen = " + mCurrentScreen);
+				//Log.d("ViewFlow", "mCurrScreen = " + mCurrentScreen);
 				if(mCurrentScreen == 0)
 					mAutoPlayDirectionFw = true;
 				else if(mCurrentScreen == getChildCount()-1)
 					mAutoPlayDirectionFw = false;
 				int nextScreen = (mAutoPlayDirectionFw)?(mCurrentScreen + 1):(mCurrentScreen - 1);
-				Log.d("ViewFlow", "nextScreen = " + nextScreen);
+				//Log.d("ViewFlow", "nextScreen = " + nextScreen);
 				snapToScreen(nextScreen);
 				Message message = handler.obtainMessage(0);
 				sendMessageDelayed(message, timeSpan);

@@ -8,7 +8,11 @@ import com.herald.ezherald.mainframe.MainContentFragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
@@ -17,7 +21,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 /*
  * @author 何博伟
  * @since 2013.05.14
- * @updated 2013.6.30
+ * @updated 2013.7.1
  * 程序的主Activity
  * 
  * 
@@ -26,16 +30,27 @@ public class MainActivity extends BaseFrameActivity {
 
 	Fragment mContentFrag;
 	Menu mActionMenu;
+	Handler mMoveHandler;
+	SlidingMenu mSlidingMenu;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
-		super.menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		
+		mSlidingMenu = super.menu;
+		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		
+		/*mMoveHandler = new Handler(){
+			@Override
+			public void handleMessage(android.os.Message msg) {
+				Log.d("mMoveHandler", "received");
+				mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+			};
+		};*/
 	}
-
+	
 	
 	/**
 	 * @deprecated
@@ -123,4 +138,22 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		
 	}
+
+	/*@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+		MainContentFragment mainFrag = (MainContentFragment)mContentFrag;
+		boolean isViewFlowOnTouch = mainFrag.isViewFlowOnTouch();
+		
+		if(ev.getAction() == MotionEvent.ACTION_MOVE){
+			Log.d("MainActivity", "" + isViewFlowOnTouch);
+			super.menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+			if(!isViewFlowOnTouch){
+				Message message = mMoveHandler.obtainMessage(0);
+				mMoveHandler.sendMessageDelayed(message, 1000);  //TODO:临时解决方案
+			}
+		}
+		return super.dispatchTouchEvent(ev);
+	}*/
+	
 }
