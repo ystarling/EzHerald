@@ -49,7 +49,7 @@ public class FragmentC extends Fragment {
 		final String noData = "还没有数据";
 		
 		if (runTimes.getRate() != RunTimes.DEFAULT_RATE) {
-			txt_rate.setText(String.format("你的次数超过了%d的同学",
+			txt_rate.setText(String.format("你的次数击败了%d%%的同学",
 					(int) (runTimes.getRate() * 100)));
 		}else{
 			txt_rate.setText(noData);
@@ -69,7 +69,7 @@ public class FragmentC extends Fragment {
 		if (runTimes.getUpdateTime() != RunTimes.DEFAULT_UPDATE_TIME) {
 			txt_updateTime.setText("更新于" + runTimes.getUpdateTime());
 		}else{
-			txt_updateTime.setText(noData);
+			txt_updateTime.setText("");
 		}
 		
 	}
