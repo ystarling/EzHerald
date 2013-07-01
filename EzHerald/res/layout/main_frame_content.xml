@@ -13,30 +13,26 @@
 
         <!-- 放置横向滑动的广告栏之类的.. -->
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="vertical" >
-			
-            <org.taptwo.android.widget.ViewFlow
-                android:id="@+id/main_frame_viewflow"
-                android:layout_width="fill_parent"
-                android:layout_height="150dp"
-                app:sidebuffer="5"
-                 >
-            </org.taptwo.android.widget.ViewFlow>
-            
+
             <org.taptwo.android.widget.CircleFlowIndicator
                 android:id="@+id/main_frame_viewflowindic"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="140dp"
                 app:fadeOut="0"
                 />
 
-            
-        </FrameLayout>
+            <org.taptwo.android.widget.ViewFlow
+                android:id="@+id/main_frame_viewflow"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                app:sidebuffer="5" >
+            </org.taptwo.android.widget.ViewFlow>
+        </LinearLayout>
 
         <!-- 从各个模块更新过来的信息，每个模块一个Grid放置 -->
 
