@@ -16,7 +16,14 @@ public class FragmentB extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved)
 	{
-		ExpandableListView elv = (ExpandableListView)getActivity().findViewById(R.id.eListView);
+		return inflater.inflate(R.layout.gpa_frag_b, group, false);
+	}
+	
+	@Override
+	public void onActivityCreated (Bundle savedInstanceState)
+	{
+		super.onActivityCreated(savedInstanceState);
+		ExpandableListView elv = (ExpandableListView)getActivity().findViewById(R.id.eList);
 		final GpaAdapter adapter = new GpaAdapter(getActivity());
 		elv.setAdapter(adapter);
 		Button update = (Button)getActivity().findViewById(R.id.btn_update);
@@ -28,12 +35,5 @@ public class FragmentB extends Fragment {
 				adapter.update();
 			}
 		});
-		return inflater.inflate(R.layout.gpa_frag_b, group, false);
-	}
-	
-	@Override
-	public void onActivityCreated (Bundle savedInstanceState)
-	{
-		super.onActivityCreated(savedInstanceState);
 	}
 }

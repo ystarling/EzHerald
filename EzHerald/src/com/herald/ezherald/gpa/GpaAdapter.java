@@ -20,7 +20,6 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	private Context context;
  	public GpaAdapter(Context context) {
 		this.context = context;
-		
  		update();
 	}
 
@@ -104,7 +103,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 				List<Record> list = sem.get(r.getSemester());
 				list.add(r);
 			} else {
-				List<Record> list = sem.get(r.getSemester());
+				List<Record> list = new ArrayList<Record>();
 				list.add(r);
 				sems.add(r.getSemester());//更新学期信息
 				sem.put(r.getSemester(),list);
