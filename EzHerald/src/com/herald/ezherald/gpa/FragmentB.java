@@ -27,7 +27,6 @@ public class FragmentB extends Fragment {
 				// TODO Auto-generated method stub
 				adapter.update();
 			}
-			
 		});
 		return inflater.inflate(R.layout.gpa_frag_b, group, false);
 	}

@@ -21,6 +21,7 @@ public class FragmentA extends Fragment {
 	@Override
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
+		super.onActivityCreated(savedInstanceState);
 		ExpandableListView eLV = (ExpandableListView) getActivity().findViewById(R.id.eListView);
 		eLV.setAdapter(new GpaPolitcsAdapter(getActivity()));
 	}
