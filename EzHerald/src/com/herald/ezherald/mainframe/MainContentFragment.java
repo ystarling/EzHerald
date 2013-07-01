@@ -137,13 +137,11 @@ public class MainContentFragment extends SherlockFragment {
 		mImageItems = getImageItems();
 		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(), mImageItems));
 		
-		mCircIndic = (CircleFlowIndicator)getActivity().findViewById(R.id.main_frame_viewflowindic);
-		mCircIndic.setFillColor(Color.RED);
-		mCircIndic.setStrokeColor(Color.GREEN);
+		mCircIndic = (CircleFlowIndicator)getActivity().findViewById(R.id.main_frame_viewflow_indic);
 		
 		mViewFlow.setFlowIndicator(mCircIndic);
 		
-		mViewFlow.bringToFront();
+	
 	}
 	
 

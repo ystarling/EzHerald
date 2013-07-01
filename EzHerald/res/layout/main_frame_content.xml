@@ -13,26 +13,44 @@
 
         <!-- 放置横向滑动的广告栏之类的.. -->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="vertical" >
-
-            <org.taptwo.android.widget.CircleFlowIndicator
-                android:id="@+id/main_frame_viewflowindic"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                app:fadeOut="0"
-                />
-
-            <org.taptwo.android.widget.ViewFlow
+		<FrameLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="150dp"
+		    android:background="#ffffff"
+		    >
+		    
+		    <org.taptwo.android.widget.ViewFlow
                 android:id="@+id/main_frame_viewflow"
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="fill_parent"
                 app:sidebuffer="5" >
             </org.taptwo.android.widget.ViewFlow>
-        </LinearLayout>
+            
+		    <LinearLayout 
+		        android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+		        android:layout_gravity="bottom"
+		        android:gravity="center"
+		        android:padding="3dp"
+		        android:background="#88252525"
+		        >
+		        
+		        <org.taptwo.android.widget.CircleFlowIndicator
+                	android:id="@+id/main_frame_viewflow_indic"
+                	android:layout_width="wrap_content"
+                	android:layout_height="wrap_content"
+                	android:layout_gravity="center_horizontal|bottom"
+                	android:padding="2dp"
+                	app:fadeOut="0"
+                	app:activeColor="#ffffff"
+                	app:activeType="fill"
+                	app:inactiveColor="#ffffff"
+                	app:radius="4dp"
+                />
+		    </LinearLayout>
+		    
+		</FrameLayout>
+		
 
         <!-- 从各个模块更新过来的信息，每个模块一个Grid放置 -->
 
