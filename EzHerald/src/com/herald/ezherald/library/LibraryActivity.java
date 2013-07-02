@@ -35,6 +35,8 @@ import android.widget.Toast;
 public class LibraryActivity extends SherlockActivity {
 	EditText libr_search_text;
 	String libr_search_value=null;
+	ListView libr_listView;
+	SimpleAdapter libr_adapter;
 	List libr_list=new ArrayList<Map<String, Object>>();
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -57,27 +59,32 @@ public class LibraryActivity extends SherlockActivity {
 				else
 				{	
 				System.out.print(libr_search_value);
-				ListView libr_listView = (ListView) findViewById(R.id.libr_search_listView);
-				SimpleAdapter libr_adapter=new SimpleAdapter(LibraryActivity.this,libr_get_list_value(), 
-						R.layout.library_book_list_item, new String[]{"img","name","author","press"},
-						new int[]{R.id.lib_listitem_book_img,R.id.lib_listitem_book_name,R.id.lib_listitem_book_author,R.id.lib_listitem_book_press});
+				libr_listView = (ListView) findViewById(R.id.libr_search_listView);
+				libr_adapter=new SimpleAdapter(LibraryActivity.this,libr_get_list_value(), 
+						R.layout.library_book_list_item, new String[]{"img","name","author","press","date"},
+						new int[]{R.id.libr_listitem_book_img,R.id.libr_listitem_book_name,R.id.libr_listitem_book_author,R.id.libr_listitem_book_press,R.id.libr_listitem_book_date});
 			
 				libr_listView.setAdapter(libr_adapter);
 				}
 			}
 		});
+		//public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+			
+		//}
+		
 	}
 	protected List< Map<String, Object> > libr_get_list_value(){
 		Map<String, Object> map=new HashMap<String ,Object>();
 		map.put("img",R.drawable.seu);
-		map.put("name","书名："+"第一本书");
-		map.put("author","作者："+"李文正");
+		map.put("name","好书名");
+		map.put("author","责任者："+"李文正");
 		map.put("press","出版社："+"东南大学");
+		map.put("date","日期："+"东南大学出版社");
 		libr_list.add(map);
-		map.put("img",R.drawable.seu);
-		map.put("name","书名："+"第二本书");
-		map.put("author","作者："+"李文正");
-		map.put("press", "出版社："+"东南大学");
+		map.put("name","书名好");
+		map.put("author","责任者："+"李文正");
+		map.put("press","出版社："+"东南大学");
+		map.put("date","日期："+"东南大学出版社");
 		libr_list.add(map);
 		return libr_list;
 	}	
