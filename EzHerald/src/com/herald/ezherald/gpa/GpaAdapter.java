@@ -45,7 +45,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		final Record rc = (Record)getChild(groupPosition,childPosition);
 		cb.setText(rc.toString());
 		cb.setChecked(rc.isSelected());
-		cb.setFocusable(false);
+//		cb.setFocusable(false);
 		cb.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 			@Override
