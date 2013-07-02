@@ -73,6 +73,11 @@ public class CircleChat extends View {
 		}
 		
 	}
+	/**
+	 * @param x 横坐标
+	 * @param y 纵坐标
+	 * @return 点对应的课程
+	 */
 	public ArrayList<Record> onTouch(float x,float y){
 		x -= radius;
 		y -= radius;
