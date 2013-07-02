@@ -28,5 +28,10 @@ public class ClubItem {
 		return haveFocus;
 	}
 	
+	public void setFocus(boolean focus)
+	{
+		haveFocus = focus;
+	}
+	
 
 }

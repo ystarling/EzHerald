@@ -109,7 +109,6 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			return null;
 		}
 

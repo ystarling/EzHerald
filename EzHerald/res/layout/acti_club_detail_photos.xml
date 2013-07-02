@@ -2,17 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
     android:orientation="vertical" >
     
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="club photos"/>
     
-    <FrameLayout 
-        android:id="@+id/acti_club_detail_frag_container"
+    <Gallery 
+        android:id="@+id/acti_club_detail_photo_gallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-        
-    </FrameLayout>
+        />
     
 
 </LinearLayout>
