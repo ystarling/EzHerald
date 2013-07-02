@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.mainframe.MainContentFragment;
+import com.herald.ezherald.mainframe.MainGuideActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +35,10 @@ public class MainActivity extends BaseFrameActivity {
 	Menu mActionMenu;
 	Handler mMoveHandler;
 	SlidingMenu mSlidingMenu;
+	
+	private final String PREF_NAME = "com.herald.ezherald_preferences";
+	private final String KEY_NAME = "first_start";
+	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +56,45 @@ public class MainActivity extends BaseFrameActivity {
 				mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 			};
 		};*/
+		
+		boolean isOldUser = checkGuideState();
+		Log.d("MainActivity", "GuideViewed ?:" + isOldUser);
+		if((!isOldUser) || DEBUG_ALWAYS_SHOW_GUIDE)
+		{
+			Intent i = new Intent();
+			i.setClass(this, MainGuideActivity.class);
+			startActivity(i);
+			setGuideViewed();
+		}
 	}
 	
 	
+	/**
+	 * 从SharedPreference中读取是否已经运行过程序
+	 * pref: true:已经运行过
+	 * 		false:没有运行过（需要运行一次Guide）
+	 * @return
+	 */
+	private boolean checkGuideState() {
+		
+		//@ref Pg251 <Android4 编程入门经典>
+		SharedPreferences appPreferences = 
+				getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+		return appPreferences.getBoolean(KEY_NAME, false);
+	}
+	
+	/**
+	 * 设置Guide已经阅读过
+	 */
+	private void setGuideViewed(){
+		SharedPreferences appPreferences = 
+				getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+		SharedPreferences.Editor prefEditor = appPreferences.edit();
+		prefEditor.putBoolean(KEY_NAME, true);
+		prefEditor.commit();
+	}
+
+
 	/**
 	 * @deprecated
 	 * @param fragment
