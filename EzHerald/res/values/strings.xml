@@ -13,7 +13,7 @@
     <string name="MENU_ABOUT">MENU_ABOUT</string>
     <string name="aboutInfo">aboutInfo</string>
     <string name="ok_label">ok_label</string>
-    
+
     <!-- academic BEGIN -->
     <string name="cus_lv_get_more">More</string>
     <string name="cus_lv_release_to_refresh">Release to refresh</string>
@@ -21,6 +21,12 @@
     <string name="cus_lv_refreshing">Refreshing...</string>
     <string name="cus_lv_updating">Updating：</string>
     <!-- academic END -->
-    
-    
+    <string name="mainmenu_exit_app">退出</string>
+    <string name="menu_main_content_pref_title">偏好设置</string>
+    <string name="main_frame_module_choice_title">模块选择</string>
+    <string name="title_activity_app_update">软件更新</string>
+    <string name="main_frame_content_refresh">刷新</string>
+    <string name="main_frame_menu_refreshing">正在刷新...</string>
+    <string name="main_frame_menu_more">More...</string>
+
 </resources>

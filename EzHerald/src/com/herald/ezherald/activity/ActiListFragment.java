@@ -184,20 +184,27 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
+		
+		Log.v("ClubList", "come in");
+		
 		switch(itemPosition)
 		{
 		case 0:
 			ACTITYPE = ALLACTI;
-			break;
+			return true;
 		case 1:
 			ACTITYPE = CONCERNEDACTI;
-			break;
+			return true;
 		case 2:
+			Log.v("ClubList", "is here");
 			startActivity(new Intent(getActivity(),ClubListActivity.class));
-			break;
+			
+			return true;
 		case 3:
+			Log.v("ClubList", "is here");
 			startActivity(new Intent(getActivity(),ClubListActivity.class));
-			break;
+			
+			return true;
 		
 		}
 		return false;
@@ -250,10 +257,14 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		@Override
 		protected void onPostExecute(List<ActiInfo> result)
 		{
-			adapter.setActiInfoList(result);
-			adapter.notifyDataSetChanged();
-			listView.onRefreshComplete();
-			onRefreshActionComplete();
+			if (result != null)
+			{
+				adapter.setActiInfoList(result);
+				adapter.notifyDataSetChanged();
+				listView.onRefreshComplete();
+				onRefreshActionComplete();
+			}
+			
 		}
 		
 	}

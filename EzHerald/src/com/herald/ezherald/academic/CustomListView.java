@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.herald.ezherald.R;
 
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -23,8 +22,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
-
-
 
 public class CustomListView extends ListView implements OnScrollListener {
 
@@ -50,10 +47,9 @@ public class CustomListView extends ListView implements OnScrollListener {
 	private RotateAnimation animation;
 	private RotateAnimation reverseAnimation;
 
-	
 	private boolean isRecored;
 
-//	private int headContentWidth;
+	// private int headContentWidth;
 	private int headContentHeight;
 
 	private int startY;
@@ -77,20 +73,24 @@ public class CustomListView extends ListView implements OnScrollListener {
 		super(context, attrs);
 		init(context);
 	}
-	
+
 	private void init(Context context) {
 		inflater = LayoutInflater.from(context);
-		headView = (LinearLayout) inflater.inflate(R.layout.academic_headview_custom_listview, null);
-		arrowImageView = (ImageView) headView.findViewById(R.id.head_arrowImageView);
-//		arrowImageView.setMinimumWidth(70);
-//		arrowImageView.setMinimumHeight(50);
-		progressBar = (ProgressBar) headView.findViewById(R.id.head_progressBar);
+		headView = (LinearLayout) inflater.inflate(
+				R.layout.academic_headview_custom_listview, null);
+		arrowImageView = (ImageView) headView
+				.findViewById(R.id.head_arrowImageView);
+		// arrowImageView.setMinimumWidth(70);
+		// arrowImageView.setMinimumHeight(50);
+		progressBar = (ProgressBar) headView
+				.findViewById(R.id.head_progressBar);
 		tipsTextview = (TextView) headView.findViewById(R.id.head_tipsTextView);
-		lastUpdatedTextView = (TextView) headView.findViewById(R.id.head_lastUpdatedTextView);
+		lastUpdatedTextView = (TextView) headView
+				.findViewById(R.id.head_lastUpdatedTextView);
 
 		measureView(headView);
 		headContentHeight = headView.getMeasuredHeight();
-//		headContentWidth = headView.getMeasuredWidth();
+		// headContentWidth = headView.getMeasuredWidth();
 
 		headView.setPadding(0, -1 * headContentHeight, 0, 0);
 		headView.invalidate();
@@ -116,24 +116,25 @@ public class CustomListView extends ListView implements OnScrollListener {
 		isRefreshable = false;
 		isPush = true;
 	}
-	
+
 	public void onScroll(AbsListView arg0, int firstVisiableItem, int arg2,
 			int arg3) {
 		firstItemIndex = firstVisiableItem;
-		visibleLastIndex = firstVisiableItem + arg2 - 1; 
+		visibleLastIndex = firstVisiableItem + arg2 - 1;
 		visibleItemCount = arg2;
-		if(firstItemIndex == 1 && !isPush){
+		if (firstItemIndex == 1 && !isPush) {
 			setSelection(0);
 		}
 	}
-	
-	public void setSelectionfoot(){
+
+	public void setSelectionfoot() {
 		this.setSelection(visibleLastIndex - visibleItemCount + 1);
 	}
 
 	public void onScrollStateChanged(AbsListView arg0, int arg1) {
-		
+
 	}
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 
@@ -150,7 +151,7 @@ public class CustomListView extends ListView implements OnScrollListener {
 			case MotionEvent.ACTION_UP:
 				if (state != REFRESHING && state != LOADING) {
 					if (state == DONE) {
-					
+
 					}
 					if (state == PULL_To_REFRESH) {
 						state = DONE;
@@ -183,12 +184,10 @@ public class CustomListView extends ListView implements OnScrollListener {
 
 				if (state != REFRESHING && isRecored && state != LOADING) {
 
-					
 					if (state == RELEASE_To_REFRESH) {
 
 						setSelection(0);
 
-						
 						if (((tempY - startY) / RATIO < headContentHeight)
 								&& (tempY - startY) > 0) {
 							state = PULL_To_REFRESH;
@@ -196,31 +195,30 @@ public class CustomListView extends ListView implements OnScrollListener {
 
 							Log.v(TAG, "");
 						}
-						
+
 						else if (tempY - startY <= 0) {
 							state = DONE;
 							changeHeaderViewByState();
 
 							Log.v(TAG, "");
 						}
-						
+
 						else {
-						
+
 						}
 					}
-					
+
 					if (state == PULL_To_REFRESH) {
 
 						setSelection(0);
 
-						
 						if ((tempY - startY) / RATIO >= headContentHeight) {
 							state = RELEASE_To_REFRESH;
 							isBack = true;
 							changeHeaderViewByState();
 							Log.v(TAG, "");
 						}
-						
+
 						else if (tempY - startY <= 0) {
 							state = DONE;
 							changeHeaderViewByState();
@@ -229,7 +227,6 @@ public class CustomListView extends ListView implements OnScrollListener {
 						}
 					}
 
-					
 					if (state == DONE) {
 						if (tempY - startY > 0) {
 							state = PULL_To_REFRESH;
@@ -237,16 +234,14 @@ public class CustomListView extends ListView implements OnScrollListener {
 						}
 					}
 
-					
 					if (state == PULL_To_REFRESH) {
 						headView.setPadding(0, -1 * headContentHeight
-								+ (int)((tempY - startY) / RATIO), 0, 0);
+								+ (int) ((tempY - startY) / RATIO), 0, 0);
 
 					}
 
-					
 					if (state == RELEASE_To_REFRESH) {
-						headView.setPadding(0, (int)((tempY - startY) / RATIO)
+						headView.setPadding(0, (int) ((tempY - startY) / RATIO)
 								- headContentHeight, 0, 0);
 					}
 
@@ -259,7 +254,6 @@ public class CustomListView extends ListView implements OnScrollListener {
 		return super.onTouchEvent(event);
 	}
 
-	
 	private void changeHeaderViewByState() {
 		switch (state) {
 		case RELEASE_To_REFRESH:
@@ -271,7 +265,8 @@ public class CustomListView extends ListView implements OnScrollListener {
 			arrowImageView.clearAnimation();
 			arrowImageView.startAnimation(animation);
 
-			tipsTextview.setText(getResources().getString(R.string.cus_lv_release_to_refresh));
+			tipsTextview.setText(getResources().getString(
+					R.string.cus_lv_release_to_refresh));
 
 			Log.v(TAG, "");
 			break;
@@ -281,15 +276,17 @@ public class CustomListView extends ListView implements OnScrollListener {
 			lastUpdatedTextView.setVisibility(View.VISIBLE);
 			arrowImageView.clearAnimation();
 			arrowImageView.setVisibility(View.VISIBLE);
-			
+
 			if (isBack) {
 				isBack = false;
 				arrowImageView.clearAnimation();
 				arrowImageView.startAnimation(reverseAnimation);
 
-				tipsTextview.setText(getResources().getString(R.string.cus_lv_pull_to_refresh));
+				tipsTextview.setText(getResources().getString(
+						R.string.cus_lv_pull_to_refresh));
 			} else {
-				tipsTextview.setText(getResources().getString(R.string.cus_lv_pull_to_refresh));
+				tipsTextview.setText(getResources().getString(
+						R.string.cus_lv_pull_to_refresh));
 			}
 			Log.v(TAG, "");
 			break;
@@ -301,7 +298,8 @@ public class CustomListView extends ListView implements OnScrollListener {
 			progressBar.setVisibility(View.VISIBLE);
 			arrowImageView.clearAnimation();
 			arrowImageView.setVisibility(View.GONE);
-			tipsTextview.setText(getResources().getString(R.string.cus_lv_refreshing));
+			tipsTextview.setText(getResources().getString(
+					R.string.cus_lv_refreshing));
 			lastUpdatedTextView.setVisibility(View.VISIBLE);
 
 			Log.v(TAG, "");
@@ -312,7 +310,8 @@ public class CustomListView extends ListView implements OnScrollListener {
 			progressBar.setVisibility(View.GONE);
 			arrowImageView.clearAnimation();
 			arrowImageView.setImageResource(R.drawable.pulltorefresh);
-			tipsTextview.setText(getResources().getString(R.string.cus_lv_pull_to_refresh));
+			tipsTextview.setText(getResources().getString(
+					R.string.cus_lv_pull_to_refresh));
 			lastUpdatedTextView.setVisibility(View.VISIBLE);
 
 			Log.v(TAG, "");
@@ -331,7 +330,9 @@ public class CustomListView extends ListView implements OnScrollListener {
 
 	public void onRefreshComplete() {
 		state = DONE;
-		lastUpdatedTextView.setText(getResources().getString(R.string.cus_lv_updating) + new Date().toLocaleString());
+		lastUpdatedTextView.setText(getResources().getString(
+				R.string.cus_lv_updating)
+				+ new Date().toLocaleString());
 		changeHeaderViewByState();
 		invalidateViews();
 		setSelection(0);
@@ -342,19 +343,16 @@ public class CustomListView extends ListView implements OnScrollListener {
 			refreshListener.onRefresh();
 		}
 	}
-	
-	
-	public void clickToRefresh(){
+
+	public void clickToRefresh() {
 		state = REFRESHING;
 		changeHeaderViewByState();
 	}
-	
-	public void onRequestComplete()
-	{
+
+	public void onRequestComplete() {
 		setSelection(visibleLastIndex - visibleItemCount + 1);
 	}
-	
-	
+
 	private void measureView(View child) {
 		ViewGroup.LayoutParams p = child.getLayoutParams();
 		if (p == null) {
@@ -375,7 +373,9 @@ public class CustomListView extends ListView implements OnScrollListener {
 	}
 
 	public void setAdapter(BaseAdapter adapter) {
-		lastUpdatedTextView.setText(getResources().getString(R.string.cus_lv_updating) + new Date().toLocaleString());
+		lastUpdatedTextView.setText(getResources().getString(
+				R.string.cus_lv_updating)
+				+ new Date().toLocaleString());
 		super.setAdapter(adapter);
 	}
 

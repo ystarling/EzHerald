@@ -19,44 +19,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActiInfoAdapter extends BaseAdapter {
-	
+
 	Activity context;
 	List<ActiInfo> actiInfoList;
-	
-	public ActiInfoAdapter(Activity c)
-	{
+
+	public ActiInfoAdapter(Activity c) {
 		context = c;
 		actiInfoList = new LinkedList<ActiInfo>();
 	}
-	
-	public void setActiInfoList(ActiInfo [] actiArr)
-	{
+
+	public void setActiInfoList(ActiInfo[] actiArr) {
 		actiInfoList.clear();
-		for (int loop=0; loop < actiArr.length; ++loop)
-		{
+		for (int loop = 0; loop < actiArr.length; ++loop) {
 			actiInfoList.add(actiArr[loop]);
 		}
 	}
-	
-	public void setActiInfoList(List<ActiInfo> actiList)
-	{
+
+	public void setActiInfoList(List<ActiInfo> actiList) {
 		actiInfoList.clear();
 		actiInfoList.addAll(actiList);
 	}
-	
-	public void addActiInfoList(ActiInfo [] actiArr)
-	{
-		for(int loop=0;loop < actiArr.length; ++loop)
-		{
+
+	public void addActiInfoList(ActiInfo[] actiArr) {
+		for (int loop = 0; loop < actiArr.length; ++loop) {
 			actiInfoList.add(actiArr[loop]);
 		}
 	}
-	
-	public void addActiInfoList(List<ActiInfo> actiList)
-	{
+
+	public void addActiInfoList(List<ActiInfo> actiList) {
 		actiInfoList.addAll(actiList);
 	}
-	
 
 	@Override
 	public int getCount() {
@@ -79,16 +71,24 @@ public class ActiInfoAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		convertView = LayoutInflater.from(context).inflate(R.layout.acti_list_item, null);
+		convertView = LayoutInflater.from(context).inflate(
+				R.layout.acti_list_item, null);
 		ActiInfoHolder actiInfoHolder = new ActiInfoHolder();
-		actiInfoHolder.clubName = (TextView) convertView.findViewById(R.id.acti_listitem_club_name);
-		actiInfoHolder.actiTitle = (TextView) convertView.findViewById(R.id.acti_listitem_acti_title);
-		actiInfoHolder.actiPubTime = (TextView) convertView.findViewById(R.id.acti_listitem_acti_pubtime);
-		actiInfoHolder.actiIntro = (TextView) convertView.findViewById(R.id.acti_listitem_acti_intro);
-		actiInfoHolder.clubIcon = (ImageView) convertView.findViewById(R.id.acti_listitem_club_icon);
-		actiInfoHolder.actiPic = (ImageView) convertView.findViewById(R.id.acti_listitem_acti_pic);
-		actiInfoHolder.actiShareBtn = (ImageButton) convertView.findViewById(R.id.acti_listitem_share);
-		
+		actiInfoHolder.clubName = (TextView) convertView
+				.findViewById(R.id.acti_listitem_club_name);
+		actiInfoHolder.actiTitle = (TextView) convertView
+				.findViewById(R.id.acti_listitem_acti_title);
+		actiInfoHolder.actiPubTime = (TextView) convertView
+				.findViewById(R.id.acti_listitem_acti_pubtime);
+		actiInfoHolder.actiIntro = (TextView) convertView
+				.findViewById(R.id.acti_listitem_acti_intro);
+		actiInfoHolder.clubIcon = (ImageView) convertView
+				.findViewById(R.id.acti_listitem_club_icon);
+		actiInfoHolder.actiPic = (ImageView) convertView
+				.findViewById(R.id.acti_listitem_acti_pic);
+		actiInfoHolder.actiShareBtn = (ImageButton) convertView
+				.findViewById(R.id.acti_listitem_share);
+
 		ActiInfo actiInfo = actiInfoList.get(position);
 		actiInfoHolder.clubName.setText(actiInfo.getClubName());
 		actiInfoHolder.actiTitle.setText(actiInfo.getActiTitle());
@@ -96,42 +96,40 @@ public class ActiInfoAdapter extends BaseAdapter {
 		actiInfoHolder.actiIntro.setText(actiInfo.getActiIntro());
 		actiInfoHolder.clubIcon.setImageResource(R.drawable.ic_launcher);
 		actiInfoHolder.actiPic.setImageResource(R.drawable.ic_launcher);
-		
-		actiInfoHolder.actiShareBtn.setOnClickListener(new OnClickListener(){
+
+		actiInfoHolder.actiShareBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			      Intent intent=new Intent(Intent.ACTION_SEND);
-			      
-			      intent.setType("text/plain");
-			      intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-			      intent.putExtra(Intent.EXTRA_TEXT, "I would like to ‘herald campus’ this with you...");
-			      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
-			      context.startActivity(Intent.createChooser(intent,"分享到"));
-				
+				Intent intent = new Intent(Intent.ACTION_SEND);
+
+				intent.setType("text/plain");
+				intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+				intent.putExtra(Intent.EXTRA_TEXT,
+						"I would like to ‘herald campus’ this with you...");
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(Intent.createChooser(intent, "分享到"));
+
 			}
-			
+
 		});
-		
-		actiInfoHolder.clubIcon.setOnClickListener(new OnClickListener(){
+
+		actiInfoHolder.clubIcon.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(context, "club icon clicked", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "club icon clicked", Toast.LENGTH_SHORT)
+						.show();
 			}
-			
+
 		});
-		
-		
-		
-		
+
 		return convertView;
 	}
-	
-	private class ActiInfoHolder
-	{
+
+	private class ActiInfoHolder {
 		public ImageView clubIcon;
 		public TextView clubName;
 		public TextView actiTitle;
@@ -139,14 +137,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 		public TextView actiIntro;
 		public ImageView actiPic;
 		public ImageButton actiShareBtn;
-		
+
 	}
 
 }
-
-
-
-
-
-
-

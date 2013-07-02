@@ -17,7 +17,7 @@ gen/
 local.properties
 
 *.pydevproject
-.project
+#.project
 .metadata
 tmp/**
 tmp/**/*
@@ -25,8 +25,7 @@ tmp/**/*
 *.bak
 *.swp
 *~.nib
-local.properties
-.classpath
+#.classpath
 .settings/
 .loadpath
 
@@ -41,3 +40,7 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+# Libs
+libABS/
+libSlidingMenu/

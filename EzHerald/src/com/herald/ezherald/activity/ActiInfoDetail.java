@@ -6,17 +6,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ActiInfoDetail {
-	
+
 	private String clubIconURL;
 	private String clubName;
 	private String actiTitle;
 	private String actiPubTime;
 	private String actiDetail;
 	private String actiPicURL;
-	
-	public ActiInfoDetail(String clname, String title, String pubtime, String detail,
-			String iconurl, String picurl)
-	{
+
+	public ActiInfoDetail(String clname, String title, String pubtime,
+			String detail, String iconurl, String picurl) {
 		clubName = clname;
 		actiTitle = title;
 		actiPubTime = pubtime;
@@ -24,35 +23,29 @@ public class ActiInfoDetail {
 		clubIconURL = iconurl;
 		actiPicURL = picurl;
 	}
-	
-	public String getClubName()
-	{
+
+	public String getClubName() {
 		return clubName;
 	}
-	
-	public String getActiTitle()
-	{
+
+	public String getActiTitle() {
 		return actiTitle;
 	}
-	
-	public String getActiPubTime()
-	{
+
+	public String getActiPubTime() {
 		return actiPubTime;
 	}
-	
-	public String getActiDetail()
-	{
+
+	public String getActiDetail() {
 		return actiDetail;
 	}
-	
-	public String getClubIconUrl()
-	{
+
+	public String getClubIconUrl() {
 		return clubIconURL;
 	}
-	public String getActiPicUrl()
-	{
+
+	public String getActiPicUrl() {
 		return actiPicURL;
 	}
-	
 
 }

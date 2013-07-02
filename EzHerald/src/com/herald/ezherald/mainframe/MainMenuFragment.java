@@ -1,5 +1,10 @@
 package com.herald.ezherald.mainframe;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,58 +28,70 @@ import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 
+/*
+ * 标准左侧侧滑菜单用的ListFragment
+ * (non-Javadoc)
+ * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+ */
 public class MainMenuFragment extends ListFragment {
-	/*
-	 * 标准左侧侧滑菜单用的ListFragment
-	 * (non-Javadoc)
-	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
-	 */
+
 	private final boolean DEBUG_DONOT_KILL_ACTIVITY = false;
-	
+	private List<Map<String, Object>> mListItems;
+	private MainMenuListItemAdapter mListViewAdapter;
+	private String mMenuItemsStr[]; // 文字(title)
+	private Integer mMenuItemsIconResId[] = {
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.abs__ic_voice_search_api_holo_light }; // 图标(icon)
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.list, null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.Fragment#onActivityCreated(android.os.Bundle)
 	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onActivityCreated(savedInstanceState);
-		String menuItemsStr[] = getResources().getStringArray(R.array.main_menu_items);
-		ArrayAdapter<String> menuItemAdapter = 
-				new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
-						android.R.id.text1, menuItemsStr);
-		setListAdapter(menuItemAdapter);
+		mMenuItemsStr = getResources().getStringArray(R.array.main_menu_items);
+
+		mListItems = getListItems();
+		mListViewAdapter = new MainMenuListItemAdapter(getActivity(),
+				mListItems);
+		setListAdapter(mListViewAdapter);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.ListFragment#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.support.v4.app.ListFragment#onListItemClick(android.widget.ListView
+	 * , android.view.View, int, long)
 	 */
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 		/*
-		Fragment newContent = null;
-		switch (position)
-		{
-		case 0:
-			newContent = new StubContentFragment();
-			break;
-		case 1:
-			newContent = new MainContentFragment();
-			break;
-		}
-		if (newContent != null){
-			switchFragment(newContent);
-		}
-		*/
+		 * Fragment newContent = null; switch (position) { case 0: newContent =
+		 * new StubContentFragment(); break; case 1: newContent = new
+		 * MainContentFragment(); break; } if (newContent != null){
+		 * switchFragment(newContent); }
+		 */
 		Intent i = new Intent();
-		switch (position){
+		switch (position) {
 		case 0:
 			i.setClass(getActivity(), MainActivity.class);
 			break;
@@ -103,35 +120,52 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), FreshmanActivity.class);
 			break;
 		}
-		if (i != null){
+		if (i != null) {
 			startActivity(i);
 			TryKillMyself();
 		}
 	}
-	
-	
-	
+
+	/**
+	 * 初始化菜单项信息
+	 */
+	private List<Map<String, Object>> getListItems() {
+		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
+
+		for (int i = 0; i < mMenuItemsStr.length; i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("icon", mMenuItemsIconResId[i]);
+			map.put("title", mMenuItemsStr[i]);
+			listItems.add(map);
+		}
+		return listItems;
+	}
+
+	/**
+	 * 调用新的Activity后杀死自己..
+	 */
 	private void TryKillMyself() {
-		/**
-		 * 调用新的Activity后杀死自己..
-		 */
-		if(!DEBUG_DONOT_KILL_ACTIVITY){
-			if(getActivity() instanceof BaseFrameActivity){
-				BaseFrameActivity baseActivity = (BaseFrameActivity)getActivity();
+
+		if (!DEBUG_DONOT_KILL_ACTIVITY) {
+			if (getActivity() instanceof BaseFrameActivity) {
+				BaseFrameActivity baseActivity = (BaseFrameActivity) getActivity();
 				baseActivity.KillMyself();
 			}
 		}
 	}
 
+	/**
+	 * @deprecated
+	 * @param newContent
+	 */
 	private void switchFragment(Fragment newContent) {
 		if (getActivity() == null)
 			return;
-		if (getActivity() instanceof MainActivity){
+		if (getActivity() instanceof MainActivity) {
 			Log.d("MainMenuFrag", "I am in MainActivity.");
-			MainActivity mainActivity = (MainActivity)getActivity();
+			MainActivity mainActivity = (MainActivity) getActivity();
 			mainActivity.switchContent(newContent);
 		}
 	}
-	
 
 }

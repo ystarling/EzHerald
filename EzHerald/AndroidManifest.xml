@@ -3,13 +3,13 @@
     package="com.herald.ezherald"
     android:versionCode="1"
     android:versionName="1.0" >
+
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="15" 
-    />
- <uses-permission android:name="android.permission.INTERNET"/>
+        android:targetSdkVersion="15" />
 
- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,37 +18,99 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.herald.ezherald.MainActivity"
-            android:label="@string/app_name" 
+            android:label="@string/app_name"
             android:theme="@style/Theme.Sherlock.Light" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>4
-        
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".academic.AcademicActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".account.AccountActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".account.IDCardAccountActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".agenda.AgendaActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".curriculum.CurriculumActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".exercise.ExerciseActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".freshman.FreshmanActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".gpa.GPAActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".library.LibraryActivity"></activity>
-        <activity android:name="BaseFrameActivity" android:theme="@style/Theme.Sherlock.Light"></activity>
-        
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.academic.AcademicActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.account.AccountActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.account.IDCardAccountActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.activity.ActiActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.agenda.AgendaActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.curriculum.CurriculumActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.exercise.ExerciseActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.freshman.FreshmanActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.gpa.GPAActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.library.LibraryActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.BaseFrameActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+
         <!-- academic Begin -->
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".academic.AcademicDetailActivity"></activity>
+        <activity
+            android:name="com.herald.ezherald.academic.AcademicDetailActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
         <!-- academic End -->
-        
+
+
         <!-- acti  begin -->
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ClubListActivity"></activity>
-        <activity android:theme="@style/Theme.Sherlock.Light" android:name=".activity.ActiInfoDetailActivity"></activity>
+        <activity
+            android:name="com.herald.ezherald.activity.ClubListActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.activity.ActiInfoDetailActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.activity.ClubDetailActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
         <!-- acti  end -->
-        
+        <activity
+            android:name="com.herald.ezherald.settingframe.SettingActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.settingframe.AboutThisApp"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.settingframe.MainContentModulePref"
+            android:label="@string/title_activity_main_content_module_pref"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
+            android:label="@string/title_activity_app_update" android:theme="@style/Theme.Sherlock.Light">
+        </activity>
+        <activity android:name=".mainframe.MainGuideActivity" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
     </application>
 
 </manifest>

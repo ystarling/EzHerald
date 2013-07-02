@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 侧滑菜单的菜单项 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="25dp"
+    android:id="@+id/main_frame_menuitem"
+    android:orientation="horizontal" >
+    
+	<!-- 图标 -->
+	<ImageView android:id="@+id/main_frame_menuitem_icon"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="10dp"
+	    android:contentDescription="Icon"
+	    />
+	
+	<!-- 标题信息 -->
+	<TextView android:id="@+id/main_frame_menuitem_title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="5dp"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginBottom="10dp"
+	    android:textSize="22sp"
+	    android:text="Item"
+	    />"
+	
+	
+</LinearLayout>

@@ -10,7 +10,9 @@ import com.herald.ezherald.R;
 
 public class CurriculumActivity extends SherlockActivity {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -19,5 +21,5 @@ public class CurriculumActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.curriculum_activity_main);
 	}
-	
+
 }

@@ -7,7 +7,9 @@ import com.herald.ezherald.R;
 
 public class AgendaActivity extends SherlockActivity {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -16,5 +18,5 @@ public class AgendaActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.agenda_activity_main);
 	}
-	
+
 }

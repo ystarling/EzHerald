@@ -13,8 +13,8 @@
     </string-array>
     
     <string-array name="second_menu_items">
-        <item >我的账户</item>
-        <item >主界面设置</item>
+        <item >[帐户名]</item>
+        <item >程序设置</item>
         <item >账户设置</item>
     </string-array>
     
@@ -38,6 +38,20 @@
         <item>所有社团</item>
         <item>我关注的社团</item>
     </string-array>
+    
+    <string-array name = "acti_club_detail_action_spinner">
+        <item >社团资料</item>
+        <item >社团活动</item>
+        <item >社团相册</item>
+    </string-array>
+    
     <!-- acti  校园活动  end  -->
+    
+    <!-- mainframe_setting items -->
+    <string-array name="setting_menu_titles">
+        <item>主界面模块 </item>
+        <item>软件更新 </item>
+        <item>关于...</item>
+    </string-array>
 
 </resources>
