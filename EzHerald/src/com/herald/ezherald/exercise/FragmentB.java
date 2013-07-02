@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,11 +22,12 @@ import com.herald.ezherald.R;
  * 显示跑操次数的信息
  */
 public class FragmentB extends Fragment {
-	private RunTimesInfo runTimesInfo; 
+	private RunTimes runTimesInfo; 
 	private TextView txtTimes;
 	private EditText edtAdjust;
 	private Button btnAdjust;
 	private Button btnUpdate;
+	private TextView txtUpdateTime;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){
 		return inflater.inflate(R.layout.exercise_frag_b, group,false);
@@ -33,16 +35,31 @@ public class FragmentB extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
-		runTimesInfo= new RunTimesInfo(getActivity());
+		edtAdjust = (EditText)getActivity().findViewById(R.id.edtTxt_adjust);
+		btnAdjust = (Button)getActivity().findViewById(R.id.btn_adjust);
+		btnUpdate = (Button)getActivity().findViewById(R.id.btn_update);
+		txtTimes = (TextView)getActivity().findViewById(R.id.txt_Times);
+		txtUpdateTime = (TextView)getActivity().findViewById(R.id.txt_update_time);
+		runTimesInfo= new RunTimes(getActivity());
+		edtAdjust.setVisibility(View.INVISIBLE);
+		btnAdjust.setVisibility(View.INVISIBLE);
+		txtTimes.setOnLongClickListener(new OnLongClickListener(){
+
+			@Override
+			public boolean onLongClick(View arg0) {
+			edtAdjust.setVisibility(View.VISIBLE);
+			btnAdjust.setVisibility(View.VISIBLE);
+				return false;
+			}
+			
+		});
+		
 		if(runTimesInfo.isSet()){
 			show();
 		}else{
 			update();
 			show();
 		}
-		edtAdjust = (EditText)getActivity().findViewById(R.id.edtTxt_adjust);
-		btnAdjust = (Button)getActivity().findViewById(R.id.btn_adjust);
-		btnUpdate = (Button)getActivity().findViewById(R.id.btn_update);
 		
 		btnAdjust.setOnClickListener(new OnClickListener(){
 
@@ -81,16 +98,22 @@ public class FragmentB extends Fragment {
 	 * 显示信息
 	 */
 	public void show(){
-		txtTimes = (TextView)getActivity().findViewById(R.id.txt_Times);
-		edtAdjust = (EditText)getActivity().findViewById(R.id.edtTxt_adjust);
-		
-		if (runTimesInfo.getAdjustTimes() != 0) {
-			txtTimes.setText(runTimesInfo.getTimes() + " + "
-					+ runTimesInfo.getAdjustTimes());
-			Log.w("msg", runTimesInfo.getTimes() + " + "
-					+ runTimesInfo.getAdjustTimes());
+		if(runTimesInfo.getTimes() == RunTimes.DEFAULT_TIMES ){
+			txtTimes.setText("还没有数据");
 		}else{
-			txtTimes.setText( runTimesInfo.getTimes()+"");
+			if (runTimesInfo.getAdjustTimes() != RunTimes.DEFAULT_ADJUST_TIMES) {
+				txtTimes.setText(""+(runTimesInfo.getTimes() + 
+						+ runTimesInfo.getAdjustTimes()));
+				Log.w("msg", runTimesInfo.getTimes() + " + "
+						+ runTimesInfo.getAdjustTimes());
+			}else{
+				txtTimes.setText( runTimesInfo.getTimes()+"");
+			}
+		}
+		if(runTimesInfo.getUpdateTime()!=RunTimes.DEFAULT_UPDATE_TIME){
+			txtUpdateTime.setText(String.format("更新于%s", runTimesInfo.getUpdateTime()));
+		}else{
+			txtUpdateTime.setText("");
 		}
 	}
 }

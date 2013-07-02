@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+    <item android:id="@+id/mainframe_menu_item_exit" 
+        android:orderInCategory="101" 
+        android:title="@string/mainmenu_exit_app">
+    </item>
+    <item android:id="@+id/main_content_refresh" 
+        android:title="@string/main_frame_content_refresh"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_rotate" 
+        >        
+    </item><item android:id="@+id/mainframe_menu_item_doing" android:visible="false" android:enabled="false" android:showAsAction="always|withText" android:title="@string/main_frame_menu_refreshing"></item>
+    
+    
+    
+
+</menu>

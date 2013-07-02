@@ -103,7 +103,7 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 
-		getSupportMenuInflater().inflate(R.menu.main, menu);
+		getSupportMenuInflater().inflate(R.menu.menu_main_frame, menu);
 
 		return super.onCreateOptionsMenu(menu);
 	}

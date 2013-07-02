@@ -8,14 +8,16 @@
         android:id="@+id/txt_info"
         android:layout_width="match_parent"
         android:layout_height="151dp"
-        android:text="跑操播报" />
+        android:text="跑操播报"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/txt_date"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:gravity="right"
+        android:layout_height="0dp"
         android:layout_marginTop="30dp"
+        android:layout_weight="0.54"
+        android:gravity="right"
         android:text="更新日期" />
 
     <Button

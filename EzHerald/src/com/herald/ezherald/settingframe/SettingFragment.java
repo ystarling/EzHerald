@@ -14,7 +14,7 @@ import com.herald.ezherald.R;
 
 public class SettingFragment extends ListFragment {
 	/*
-	 * 标准左侧侧滑菜单用的ListFragment (non-Javadoc)
+	 * 软件设置的ListFragment (non-Javadoc)
 	 * 
 	 * @see
 	 * android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater
@@ -63,6 +63,12 @@ public class SettingFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
+			i.setClass(getActivity(), MainContentModulePref.class);
+			break;
+		case 1:
+			i.setClass(getActivity(), AppUpdateActivity.class);
+			break;
+		case 2:
 			i.setClass(getActivity(), AboutThisApp.class);
 			break;
 		default:

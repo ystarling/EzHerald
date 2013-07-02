@@ -1,14 +1,23 @@
 package com.herald.ezherald.exercise;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.widget.Toast;
+import cn.edu.seu.herald.ws.api.exercise.Broadcast;
+import cn.edu.seu.herald.ws.api.exercise.ObjectFactory;
 /**
  * @author xie
  * 体育系人人的早操播报消息
  */
 public class RenrenInfo{
+	public static final boolean DEBUG = true;//TODO　just for debug,must be removed before release 
+	
 	private String info;
 	private String date;
 	private SharedPreferences pref;
@@ -33,14 +42,21 @@ public class RenrenInfo{
 	 * 更新数据
 	 */
 	public void update(){
-		
+		if(DEBUG){//一些测试数据
+			setInfo("今天正常跑操。20 ~ 30℃。多云转晴。没起床的各位亲们赶紧起来跑操吧。");
+			DateFormat fmt = SimpleDateFormat.getDateTimeInstance(); 
+			setDate(fmt.format(new Date()));
+			save();
+			return ;
+		}
 		try {
+			Log.w("update","updating renren");
 			//TODO
-			//ObjectFactory factory = new ObjectFactory();
-			//Broadcast broadcast = factory.createBroadcast();
-			//setInfo(broadcast.getInfo());
-			//setDate(broadcast.getDate().toString());
-			throw new Exception();
+			ObjectFactory factory = new ObjectFactory();
+			Broadcast broadcast = factory.createBroadcast();
+			setInfo(broadcast.getInfo());
+			setDate(broadcast.getDate().toString());
+			save();
 		} catch (Exception e) {
 			// TODO: handle exception
 			Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
