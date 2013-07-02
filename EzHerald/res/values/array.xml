@@ -38,6 +38,13 @@
         <item>所有社团</item>
         <item>我关注的社团</item>
     </string-array>
+    
+    <string-array name = "acti_club_detail_action_spinner">
+        <item >社团资料</item>
+        <item >社团活动</item>
+        <item >社团相册</item>
+    </string-array>
+    
     <!-- acti  校园活动  end  -->
     
     <!-- mainframe_setting items -->

@@ -2,6 +2,7 @@ package com.herald.ezherald.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ public class ClubListActivity extends SherlockActivity {
 	private ListView listView;
 	private Context context;
 	
+	
+	
 	@SuppressLint("NewApi")
 	@Override 
 	public void onCreate(Bundle savedInstanceState)
@@ -30,7 +33,7 @@ public class ClubListActivity extends SherlockActivity {
 		setContentView(R.layout.acti_club_list);
 		
 		context = this;
-		
+
 		listView = (ListView) findViewById(R.id.acti_club_list);
 		
 		ClubListAdapter adapter = new ClubListAdapter(this);
@@ -46,6 +49,10 @@ public class ClubListActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				Toast.makeText(context, ""+position+"   "+id, Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(context,ClubDetailActivity.class);
+				ClubItem item = (ClubItem) listView.getItemAtPosition(position);
+				//Bundle bundle = new Bundle();
+				intent.putExtra("clubName", item.getClubName());
+				intent.putExtra("focus", item.checkFocus());
 				startActivity(intent);
 			}
 			
@@ -54,7 +61,7 @@ public class ClubListActivity extends SherlockActivity {
 		
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayShowTitleEnabled(true);
+		actionBar.setDisplayShowTitleEnabled(false);
 		
 		
 	}

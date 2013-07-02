@@ -15,7 +15,7 @@ public class FragmentC extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved)
 	{
-		return inflater.inflate(R.layout.frag_c, group, false);
+		return inflater.inflate(R.layout.gpa_frag_c, group, false);
 	}
 	
 	@Override

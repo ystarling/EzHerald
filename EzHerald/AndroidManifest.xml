@@ -110,6 +110,7 @@
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
             android:label="@string/title_activity_app_update" android:theme="@style/Theme.Sherlock.Light">
         </activity>
+        <activity android:name=".mainframe.MainGuideActivity" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
     </application>
 
 </manifest>
