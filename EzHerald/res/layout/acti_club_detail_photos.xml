@@ -9,11 +9,6 @@
         android:layout_height="wrap_content"
         android:text="club photos"/>
     
-    <Gallery 
-        android:id="@+id/acti_club_detail_photo_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
     
 
 </LinearLayout>
