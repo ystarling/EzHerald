@@ -27,5 +27,6 @@
     <string name="title_activity_app_update">软件更新</string>
     <string name="main_frame_content_refresh">刷新</string>
     <string name="main_frame_menu_refreshing">正在刷新...</string>
+    <string name="main_frame_menu_more">More...</string>
 
 </resources>
