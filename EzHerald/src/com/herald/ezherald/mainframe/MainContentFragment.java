@@ -111,7 +111,6 @@ public class MainContentFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		//йсм╪
 		View v = inflater.inflate(R.layout.main_frame_content, null);
-		
 		return v;
 	}
 	
@@ -278,4 +277,6 @@ public class MainContentFragment extends SherlockFragment {
 	public boolean isViewFlowOnTouch(){
 		return mViewFlow.isTouching;
 	}
+	
+	
 }

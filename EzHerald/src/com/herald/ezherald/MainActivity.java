@@ -16,6 +16,8 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
@@ -38,7 +40,7 @@ public class MainActivity extends BaseFrameActivity {
 	
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "first_start";
-	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = true;
+	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class MainActivity extends BaseFrameActivity {
 		super.onCreate(savedInstanceState);
 		
 		mSlidingMenu = super.menu;
-		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		//mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		
 		/*mMoveHandler = new Handler(){
 			@Override
@@ -124,23 +126,24 @@ public class MainActivity extends BaseFrameActivity {
 		 * 上侧Title位置的按钮点击相应
 		 */
 		switch (item.getItemId()) {
-		case R.id.action_settings:
+		/*case R.id.action_settings:
 			// Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
-			menu.showSecondaryMenu();
+			menu.showSecondaryMenu(true);
 			break;
 		case R.id.mainframe_menu_item_exit:
 			finish();
 			break;
 		case android.R.id.home:
 			menu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
-			break;
+			break;*/
 		case R.id.main_content_refresh:
 			MainContentFragment mainFrag = (MainContentFragment)mContentFrag;
 			mainFrag.refreshInfo(); //各模块的内容(GridView中)同步更新就行，向各个模块索取
 			requestInfoUpdate("blabla", item);
-			break;
+			return true;
 		}
-		return super.onOptionsItemSelected(item);
+		
+		return super.onOptionsItemSelected(item); //这就是奇怪bug的来由，消息被处理了两次了!
 	}
 	
 	
@@ -198,5 +201,14 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		return super.dispatchTouchEvent(ev);
 	}*/
-	
+	private class SlidingMenuOnTouchListener implements OnTouchListener{
+
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Auto-generated method stub
+			Log.d("MainActivity", "menu on touch");
+			return false;
+		}
+		
+	}
 }

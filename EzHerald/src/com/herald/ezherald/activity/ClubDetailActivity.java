@@ -2,9 +2,11 @@ package com.herald.ezherald.activity;
 
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +20,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ClubDetailActivity extends SlidingFragmentActivity implements ActionBar.OnNavigationListener {
 	
 	FragmentManager fragmentManager;

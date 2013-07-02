@@ -817,4 +817,15 @@ public class ViewFlow extends AdapterView<Adapter> {
 			handler.removeMessages(0);
 		handler = null;
 	}
+
+	/**
+	 * 与SlidingMenu的手势识别冲突解决
+	 */
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		getParent().requestDisallowInterceptTouchEvent(true);
+		
+		return super.dispatchTouchEvent(ev);
+	}
+	
 }
