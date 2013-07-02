@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * @author xie
@@ -48,5 +49,11 @@ public class GpaDbModel {
 			String sSql = String.format(sql, GpaDbHelper.DATABASE_NAME,r.getName(),r.getScore(),r.getCredit(),r.getSemester(),r.getScoreType(),r.getExtra(),r.isSelected()?1:0);
 			db.execSQL(sSql);
 		}
+	}
+	public void changeSelection(String name, boolean newState) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE %s SET isSelected = %d WHERE name = \"%s\";";
+		sql = String.format(sql, GpaDbHelper.DATABASE_NAME,newState?1:0,name);
+		db.execSQL(sql);
 	}
 }

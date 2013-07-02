@@ -1,5 +1,6 @@
 package com.herald.ezherald.gpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -37,6 +38,7 @@ public class GpaInfo {
 	}
 	public void update() {
 		if( DEBUG ) {
+			records = new ArrayList<Record>();
 			records.add(new Record("高数","78",5.0f,"12-13-2","首修",null,false));
 			records.add(new Record("大物","良",4.0f,"12-13-1","首修",null,false));
 			records.add(new Record("物理实验","通过",2.0f,"12-13-1","首修",null,true));
@@ -51,5 +53,11 @@ public class GpaInfo {
 		gpaDbModel.open();
 		gpaDbModel.update(records);
 		gpaDbModel.close();
+	}
+	public void selectionChanged(Record r,boolean newState){
+		gpaDbModel.open();
+		gpaDbModel.changeSelection(r.getName(),newState);
+		gpaDbModel.close();
+		//TODO 
 	}
 }
