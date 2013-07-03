@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -44,7 +43,6 @@ import com.herald.ezherald.settingframe.MainContentModulePref;
  * 其他各模块可参照本Fragement的定义呈现内容
  */
 public class MainContentFragment extends SherlockFragment {
-	private String text = null;
 	private GridView mGridView;  //GridView
 	private ViewFlow mViewFlow;  //ViewFlow
 	private CircleFlowIndicator mCircIndic;
@@ -73,19 +71,17 @@ public class MainContentFragment extends SherlockFragment {
 	///////Should be removed after we have a SharedPreference////////
 
 	public MainContentFragment() {
-		text = "Default";
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#setArguments(android.os.Bundle)
-	 */
+	
+	public ViewFlow getViewFlow(){
+		return mViewFlow;
+	}
+	
 	@Override
 	public void setArguments(Bundle args) {
 		// TODO Auto-generated method stub
 		super.setArguments(args);
-		text = args.getString("text");
+		args.getString("text");
 	}
 
 	/*
@@ -142,17 +138,6 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
-		/*mViewFlow.setClickable(true);
-		mViewFlow.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				Log.d("XXX", "XXX");
-				Toast.makeText(getActivity(), "Click!", Toast.LENGTH_SHORT).show();
-			}
-		});*/
 	}
 	
 	/**
@@ -284,10 +269,5 @@ public class MainContentFragment extends SherlockFragment {
 		super.onConfigurationChanged(newConfig);
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
-	
-	public boolean isViewFlowOnTouch(){
-		return mViewFlow.isTouching;
-	}
-	
-	
+
 }
