@@ -1,7 +1,6 @@
 package com.herald.ezherald.exercise;
 
 import android.os.Bundle;
-import android.renderscript.Font;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +59,7 @@ public class FragmentA extends Fragment {
 	 * 将信息显示
 	 */
 	private void show(){
-		txt_info.setText(renren.getInfo());
+		txt_info.setText("  "+renren.getInfo());
 		if (renren.getDate() != null) {
 			txt_date.setText("更新于" + renren.getDate());
 		}

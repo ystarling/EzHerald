@@ -12,12 +12,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
@@ -185,30 +182,14 @@ public class MainActivity extends BaseFrameActivity {
 		
 	}
 
-	/*@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		MainContentFragment mainFrag = (MainContentFragment)mContentFrag;
-		boolean isViewFlowOnTouch = mainFrag.isViewFlowOnTouch();
-		
-		if(ev.getAction() == MotionEvent.ACTION_MOVE){
-			Log.d("MainActivity", "" + isViewFlowOnTouch);
-			super.menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-			if(!isViewFlowOnTouch){
-				Message message = mMoveHandler.obtainMessage(0);
-				mMoveHandler.sendMessageDelayed(message, 1000);  //TODO:临时解决方案
-			}
-		}
-		return super.dispatchTouchEvent(ev);
-	}*/
-	private class SlidingMenuOnTouchListener implements OnTouchListener{
-
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
-			// TODO Auto-generated method stub
-			Log.d("MainActivity", "menu on touch");
-			return false;
-		}
+	
+	/**
+	 * ViewFlow中点击事件的响应
+	 * @param v
+	 */
+	public void onImageClick(View v){
+		Log.d("Image", "Clicked!");
 		
 	}
+
 }

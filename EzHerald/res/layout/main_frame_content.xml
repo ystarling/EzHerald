@@ -15,7 +15,7 @@
 
 		<FrameLayout 
 		    android:layout_width="fill_parent"
-		    android:layout_height="150dp"
+		    android:layout_height="175dp"
 		    android:background="#ffffff"
 		    >
 		    
@@ -59,7 +59,10 @@
             android:id="@+id/main_frame_content_gridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:numColumns="2"
+            android:numColumns="auto_fit"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="5dp"
+            android:stretchMode="columnWidth"
           >
         </GridView>
     </LinearLayout>

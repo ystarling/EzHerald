@@ -1,5 +1,6 @@
 package com.herald.ezherald.exercise;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -49,15 +50,21 @@ public class FragmentC extends Fragment {
 		final String noData = "还没有数据";
 		
 		if (runTimes.getRate() != RunTimes.DEFAULT_RATE) {
-			txt_rate.setText(String.format("你的次数击败了%d%%的同学",
-					(int) (runTimes.getRate() * 100)));
+			txt_rate.setText(String.format("你的次数击败了\n%d%%的同学",
+					(int) (runTimes.getRate() * 100)));//TODO 1-runTimes.getRate()?
 		}else{
 			txt_rate.setText(noData);
 		}
 		
 		if (runTimes.getRemainDays() != RunTimes.DEFAULT_REMAIN_DAYS && runTimes.getAdviceTime()!=RunTimes.DEFAULT_ADVICE_TIME) {
-			txt_remainDays.setText(String.format("本学期还剩%d天,建议你每周至少跑%d次",
+			txt_remainDays.setText(String.format("本学期还剩%d天\n建议你每周至少跑%d次",
 					runTimes.getRemainDays(), runTimes.getAdviceTime()));
+			if(runTimes.getAdviceTime()<3)
+				txt_remainDays.setTextColor(Color.GREEN);
+			else if(runTimes.getAdviceTime()<=4)
+				txt_remainDays.setTextColor(Color.BLUE);
+			else
+				txt_remainDays.setTextColor(Color.RED);
 		}else{
 			txt_remainDays.setText(noData);
 		}

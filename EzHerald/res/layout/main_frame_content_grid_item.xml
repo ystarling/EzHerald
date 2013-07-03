@@ -29,6 +29,7 @@
         android:layout_marginBottom="5dp"
         android:textSize="22sp"
         android:gravity="left"
+        android:textColor="#575757"
         />
 
     <TextView
@@ -42,6 +43,8 @@
         android:layout_marginRight="5dp"
         android:textSize="16sp"
         android:gravity="left"
+        android:layout_gravity="bottom"
+        android:textColor="#ababab"
         />
 
 </LinearLayout>

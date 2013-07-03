@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 public class GpaAdapter extends BaseExpandableListAdapter {
 	private GpaInfo gpaInfo;
-	private Map<String,List<Record>> sem;
+	private Map<String,ArrayList<Record>> sem;
 	private List<String> sems;
 	private Context context;
  	public GpaAdapter(Context context) {
@@ -40,9 +42,22 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 			ViewGroup parent) {
 		// TODO Auto-generated method stub
 		CheckBox cb = new CheckBox(context);
-		Record rc = (Record)getChild(groupPosition,childPosition);
+		final Record rc = (Record)getChild(groupPosition,childPosition);
 		cb.setText(rc.toString());
-		cb.setSelected(rc.isSelected());
+		cb.setChecked(rc.isSelected());
+//		cb.setFocusable(false);
+		cb.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				gpaInfo.selectionChanged(rc, isChecked);
+				ArrayList<Record> li = sem.get(rc.getSemester());
+				li.get(li.indexOf(rc)).setSelected(isChecked);
+				notifyDataSetChanged();//更新显示
+			}
+			
+		});
 		return cb;
 	}
 
@@ -72,8 +87,12 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded, View coverView, ViewGroup parent) {
 		// TODO Auto-generated method stub
+		final int PADDING_LEFT = 62;
+		final int TEXT_SIZE=28;
 		TextView txt = new TextView(context);
+		txt.setTextSize(TEXT_SIZE);
 		txt.setText(sems.get(groupPosition)+"学期");
+		txt.setPadding(PADDING_LEFT, 0, 0, 0);
 		return txt;
 	}
 
@@ -96,14 +115,14 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 			gpaInfo.save();
 		}
 		
-		sem  = new HashMap<String,List<Record>>();//学期和对应成绩list的映射表
+		sem  = new HashMap<String,ArrayList<Record>>();//学期和对应成绩list的映射表
 		sems = new ArrayList<String>(); //所有的学期信息
 		for(Record r: gpaInfo.getRecords()){//将每一项根据学期加入到map之中
 			if(sem.containsKey(r.getSemester())) {
-				List<Record> list = sem.get(r.getSemester());
+				ArrayList<Record> list = sem.get(r.getSemester());
 				list.add(r);
 			} else {
-				List<Record> list = new ArrayList<Record>();
+				ArrayList<Record> list = new ArrayList<Record>();
 				list.add(r);
 				sems.add(r.getSemester());//更新学期信息
 				sem.put(r.getSemester(),list);
@@ -113,4 +132,9 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		
 		notifyDataSetChanged();
 	}
+
+	public GpaInfo getGpaInfo() {
+		return gpaInfo;
+	}
+
 }

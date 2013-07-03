@@ -107,13 +107,14 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		menu.setFadeDegree(0.35f);
 
-		//menu.setShadowWidth(shadowWidth);
-		//menu.setShadowDrawable(R.drawable.shadow);
+		menu.setShadowWidth(shadowWidth);
+		menu.setShadowDrawable(R.drawable.shadow);
 		menu.setBehindOffset(behindOffset);
 		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu.setBehindScrollScale(1.0f);
 		menu.setBehindCanvasTransformer(mTrans);
 		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
+		menu.setSecondaryShadowDrawable(R.drawable.shadowright);
 		
 		menu.setActivated(true);
 		menu.setFadeEnabled(true);
