@@ -1,6 +1,8 @@
 package com.herald.ezherald.activity;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActiInfo {
 
@@ -16,6 +18,7 @@ public class ActiInfo {
 	private boolean haveActiPic;
 	private String actiPicUrl;
 	private String actiDetailUrl;
+	
 
 	public ActiInfo(int tp, String clName, String title, String pubTime,
 			String intro, String iconurl, boolean havPic) {
@@ -26,7 +29,11 @@ public class ActiInfo {
 		actiIntro = intro;
 		clubIconUrl = iconurl;
 		haveActiPic = havPic;
+		
 	}
+	
+	
+	
 
 	public void setDetailUrl(String url) {
 		actiDetailUrl = url;

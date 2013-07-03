@@ -9,10 +9,12 @@ import java.util.Set;
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,6 +145,7 @@ public class MainContentFragment extends SherlockFragment {
 	/**
 	 * 获得偏好设置
 	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void getPrefItems() {
 		// 删除旧的东西
 		mContentTitles.clear();

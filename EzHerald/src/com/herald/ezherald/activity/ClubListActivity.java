@@ -23,8 +23,7 @@ public class ClubListActivity extends SherlockActivity {
 	private ListView listView;
 	private Context context;
 	
-	
-	
+
 	@SuppressLint("NewApi")
 	@Override 
 	public void onCreate(Bundle savedInstanceState)
@@ -72,6 +71,7 @@ public class ClubListActivity extends SherlockActivity {
 		switch(muItem.getItemId())
 		{
 		case android.R.id.home:
+			startActivity(new Intent(context,ActiActivity.class));
 			finish();
 			return true;
 		}
