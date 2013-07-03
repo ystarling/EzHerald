@@ -1,5 +1,10 @@
 package com.herald.ezherald;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import org.taptwo.android.widget.ViewFlow;
@@ -7,6 +12,7 @@ import org.taptwo.android.widget.ViewFlow;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.mainframe.MainContentFragment;
+import com.herald.ezherald.mainframe.MainFrameDbAdapter;
 import com.herald.ezherald.mainframe.MainGuideActivity;
 
 import android.app.AlertDialog;
@@ -14,6 +20,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,7 +53,9 @@ public class MainActivity extends BaseFrameActivity {
 	
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "first_start";
-	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = true;
+	private final int MAX_BANNER_SIZE = 5;
+	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false;	//始终显示引导界面
+	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; 		//始终从网站更新数据，不论新旧
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -151,30 +162,136 @@ public class MainActivity extends BaseFrameActivity {
 	}
 	
 	/**
+	 * 测试用，从某网站下载一个图
+	 * @return
+	 */
+	@Deprecated
+	private Bitmap testGetBitmap(String URL){
+		Bitmap bitmap = null;
+		InputStream in = null;
+		try{
+			in = OpenHttpConnection(URL);
+			bitmap = BitmapFactory.decodeStream(in);
+			in.close();
+		} catch (IOException e1){
+			Log.d("MainActivity:test", e1.getLocalizedMessage());
+		}
+		return bitmap;
+	}
+	
+	
+	
+	
+	/**
+	 * 开Http连接
+	 * @param uRL
+	 * @return
+	 * @throws IOException
+	 */
+	private InputStream OpenHttpConnection(String urlStr) throws IOException{
+		InputStream in = null;
+		int response = -1;
+		
+		URL url = new URL(urlStr);
+		URLConnection conn = url.openConnection();
+		
+		if(!(conn instanceof HttpURLConnection)){
+			throw new IOException("Not an HTTP connection");
+		}
+		try{
+			HttpURLConnection httpConn = (HttpURLConnection)conn;
+			httpConn.setAllowUserInteraction(false);
+			httpConn.setInstanceFollowRedirects(true);
+			httpConn.setRequestMethod("GET");
+			httpConn.connect();
+			response = httpConn.getResponseCode();
+			if(response == HttpURLConnection.HTTP_OK){
+				in = httpConn.getInputStream();
+			}
+		} catch (Exception ex){
+			Log.d("Notwoking", ex.getLocalizedMessage());
+			throw new IOException("Error connecting");
+		}
+		return in;
+	}
+	
+
+	/**
 	 * 联网更新图片
 	 */
-	private class UpdateBannerImageTask extends AsyncTask<String, Void, ArrayList<String>>{
+	private class UpdateBannerImageTask extends AsyncTask<String, Void, ArrayList<Bitmap>>{
 
 		@Override
-		protected ArrayList<String> doInBackground(String... url) {
+		protected ArrayList<Bitmap> doInBackground(String... url) {
 			// TODO Auto-generated method stub
-			try {
+			/*try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;
+			
+			*/
+			ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
+			//////////////从数据库载入信息（如果有的话）
+			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getBaseContext());
+			dbAdapter.open();
+			Cursor cs = dbAdapter.getAllImages();
+			if(cs != null && cs.moveToFirst()){
+				int count = 0;
+				do{
+					byte[] inBytes = cs.getBlob(1); //图片信息是blob信息
+					retList.add(BitmapFactory.decodeByteArray(inBytes, 0, inBytes.length));
+					count ++;
+				}while(count < MAX_BANNER_SIZE && cs.moveToNext());		
+			} else {
+				Log.w("MainActivity", "db record does not exist");
+			}
+			
+			/////////////////////////////////////////
+			ArrayList<Bitmap> updList = new ArrayList<Bitmap>();
+			boolean haveUpdate = false; //TODO:从服务器先GET是否有update，然后决定是否下载
+
+			
+			//////////////////////////////////////////////////////////////////////////////
+			if(haveUpdate || DEBUG_ALWAYS_UPDATE_ONLINE){
+				Bitmap bmp = testGetBitmap("http://static.dayandcarrot.net/temp/pic0.png");
+				updList.add(bmp);
+				//更新数据库
+				while(retList.size() < MAX_BANNER_SIZE && updList.size()>0){
+					Bitmap tmpBmp = updList.get(updList.size()-1);
+					retList.add(tmpBmp);
+					dbAdapter.insertImage(retList.size()-1, tmpBmp);
+					updList.remove(updList.size()-1);
+				}
+				int cnt = 0;
+				while(updList.size()>0 && cnt < 5){
+					//需要替换了！
+					retList.remove(cnt++);
+					Bitmap tmpBmp = updList.get(updList.size()-1);
+					retList.add(tmpBmp);
+					dbAdapter.updateImage(cnt, tmpBmp);
+				}
+			}
+			//////////////////////////////////////////////////////////////////////////////
+			
+			return retList;
 		}
 
 		@Override
-		protected void onPostExecute(ArrayList<String> result) {
-			// TODO Auto-generated method stub
+		protected void onPostExecute(ArrayList<Bitmap> result) {
+			// 修改相应的视图
+			for(int i=0; i<result.size(); i++){
+				((MainContentFragment)mContentFrag).updateImageItem(i, result.get(i));
+			}
+			
+			((MainContentFragment)mContentFrag).refreshViewFlowImage();
+			
+			//改回ActionBar图标
 			MenuItem item = mActionMenu.findItem(R.id.main_content_refresh);
 			item.setVisible(true);
 			MenuItem doingItem = mActionMenu.findItem(R.id.mainframe_menu_item_doing);
 			doingItem.setVisible(false);
-			Toast.makeText(getBaseContext(), "Done", Toast.LENGTH_SHORT).show();
 			super.onPostExecute(result);
 		}
 		

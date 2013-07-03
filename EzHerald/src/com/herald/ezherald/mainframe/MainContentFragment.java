@@ -14,6 +14,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,6 +58,7 @@ public class MainContentFragment extends SherlockFragment {
 	
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "module_choice";
+	private final int MAX_BANNER_SIZE = 5;
 	
 	
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
@@ -86,11 +90,6 @@ public class MainContentFragment extends SherlockFragment {
 		args.getString("text");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -99,12 +98,6 @@ public class MainContentFragment extends SherlockFragment {
 
 	}
 
-	/*
-	 * 	 * 
-	 * @see
-	 * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
-	 * android.view.ViewGroup, android.os.Bundle)
-	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -140,6 +133,20 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
+	}
+	
+	/**
+	 * 刷新ViewFlow
+	 */
+	public void refreshViewFlowImage(){
+		if(mViewFlow == null){
+			Log.e("MainContentFrag", "Fail to refresh. mViewFlow = null");
+		}
+		
+		//是否这样使用?
+		mViewFlow.refreshDrawableState();
+		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(), mImageItems));
+		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
 	
 	/**
@@ -235,16 +242,34 @@ public class MainContentFragment extends SherlockFragment {
 	
 	/**
 	 * 初始化图片信息
+	 * key: image 图片的ID或者直接的Bitmap对象
+	 * key: type  0-图片资源ID, 1-Bitmap对象
 	 */
 	private List<Map<String, Object>> getImageItems(){
 		List<Map<String, Object>> imgItems = new ArrayList<Map<String, Object>>();
 		for(int i=0; i<image_ids.length; i++){
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("image", image_ids[i]);
+			map.put("type", 0);
 			imgItems.add(map);
 		}
 		//Toast.makeText(getActivity(), ""+ imgItems.size(), Toast.LENGTH_SHORT).show();
 		return imgItems;
+	}
+	
+	/**
+	 * 更新某一项的图片对象
+	 * @param index
+	 * @param bitmap
+	 */
+	public void updateImageItem(int index, Bitmap bitmap){
+		if(mImageItems == null || mImageItems.size() < index-1){
+			Log.e("MainContentFrag.", "Invalid image item position");
+			return;
+		}
+		mImageItems.get(index).put("type", 1);
+		mImageItems.get(index).put("image", bitmap);
+		Log.d("MainContentFrag", "Image updated :\n" + mImageItems.get(index).toString());
 	}
 
 	@Override
@@ -264,7 +289,35 @@ public class MainContentFragment extends SherlockFragment {
 		//同步获取各模块的更新项目
 		mGridItems = getGridItems();
 		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
+		
+		refreshImageFromDb();
 	}
+	
+	/**
+	 * 从数据库先获得banner数据
+	 * 如果有的话，替换掉静态的
+	 */
+	public void refreshImageFromDb(){
+		ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
+		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getSherlockActivity());
+		dbAdapter.open();
+		Cursor cs = dbAdapter.getAllImages();
+		if(cs != null && cs.moveToFirst()){
+			int count = 0;
+			do{
+				byte[] inBytes = cs.getBlob(1); 
+				retList.add(BitmapFactory.decodeByteArray(inBytes, 0, inBytes.length));
+				count ++;
+			}while(count < MAX_BANNER_SIZE && cs.moveToNext());		
+		} else {
+			Log.w("MainActivity", "db record does not exist");
+		}
+		for(int i=0; i<retList.size(); i++){
+			updateImageItem(i, retList.get(i));
+		}
+		refreshViewFlowImage();
+	}
+	
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
