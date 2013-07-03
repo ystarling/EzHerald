@@ -12,7 +12,7 @@ import android.util.Log;
 public class GpaDbHelper extends SQLiteOpenHelper {
 	public  final static String DATABASE_NAME    = "GPA";
 	private final static String COLUM_ID        = "id integer primary key autoincrement";
-	private final static String COLUM_NAME      = "name text not null";
+	private final static String COLUM_NAME      = "name text  not nulL";
 	private final static String COLUM_SCORE     = "score text not null";
 	private final static String COLUM_CREDIT    = "credit real not null";
 	private final static String COLUM_SEMESETER = "semester txt not null";

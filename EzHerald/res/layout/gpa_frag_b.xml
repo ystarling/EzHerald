@@ -13,20 +13,19 @@
     <ExpandableListView
         android:id="@+id/eList"
         android:layout_width="match_parent"
-        android:layout_height="291dp" >
+        android:layout_height="215dp" >
     </ExpandableListView>
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="104dp"
-        android:layout_height="34dp"
-        android:text="Button" />
+        android:id="@+id/btn_calc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="计算" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.14"
+        android:id="@+id/txt_gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="所得的绩点为：" />
 
     <Button

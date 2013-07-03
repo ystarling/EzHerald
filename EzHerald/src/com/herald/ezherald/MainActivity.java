@@ -2,22 +2,26 @@ package com.herald.ezherald;
 
 import java.util.ArrayList;
 
+import org.taptwo.android.widget.ViewFlow;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.mainframe.MainContentFragment;
 import com.herald.ezherald.mainframe.MainGuideActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnTouchListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
@@ -49,15 +53,6 @@ public class MainActivity extends BaseFrameActivity {
 		super.onCreate(savedInstanceState);
 		
 		mSlidingMenu = super.menu;
-		//mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-		
-		/*mMoveHandler = new Handler(){
-			@Override
-			public void handleMessage(android.os.Message msg) {
-				Log.d("mMoveHandler", "received");
-				mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-			};
-		};*/
 		
 		boolean isOldUser = checkGuideState();
 		Log.d("MainActivity", "GuideViewed ?:" + isOldUser);
@@ -185,30 +180,45 @@ public class MainActivity extends BaseFrameActivity {
 		
 	}
 
-	/*@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		MainContentFragment mainFrag = (MainContentFragment)mContentFrag;
-		boolean isViewFlowOnTouch = mainFrag.isViewFlowOnTouch();
+	
+	/**
+	 * ViewFlow中点击事件的响应
+	 * @param v
+	 */
+	public void onImageClick(View v){
 		
-		if(ev.getAction() == MotionEvent.ACTION_MOVE){
-			Log.d("MainActivity", "" + isViewFlowOnTouch);
-			super.menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-			if(!isViewFlowOnTouch){
-				Message message = mMoveHandler.obtainMessage(0);
-				mMoveHandler.sendMessageDelayed(message, 1000);  //TODO:临时解决方案
-			}
-		}
-		return super.dispatchTouchEvent(ev);
-	}*/
-	private class SlidingMenuOnTouchListener implements OnTouchListener{
+		ViewFlow vf = ((MainContentFragment)mContentFrag).getViewFlow();
+		int currScr = vf.getCurrentScreen();
+		Log.d("Image", "Clicked! currScreen = " + currScr);
+		showInfoDialog(this, "Title", "" + currScr);
+	}
 
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
-			// TODO Auto-generated method stub
-			Log.d("MainActivity", "menu on touch");
-			return false;
-		}
+	/**
+	 * 主界面点击banner弹出的对话框
+	 * @param context 上下文
+	 * @param content 文本内容
+	 */
+	public void showInfoDialog(Context context, String title,  String content){
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View dialogView = inflater.inflate(R.layout.main_frame_alert_dialog, null);
+		TextView dialogTextView = 
+				(TextView)dialogView.findViewById(R.id.main_frame_alert_dialog_textview);
+		dialogTextView.setText(content);
 		
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setCancelable(true);
+		builder.setIcon(R.drawable.ic_launcher);
+		builder.setTitle(title);
+		builder.setView(dialogView);
+		
+		builder.setPositiveButton("好的", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//暂时没啥用
+			}
+		});
+		
+		builder.show();
 	}
 }

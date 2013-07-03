@@ -2,6 +2,7 @@ package com.herald.ezherald.mainframe;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.herald.ezherald.R;
 
@@ -25,6 +26,10 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	private Context mContext;
 	private List< Map<String, Object> > mGridItemList; // Grid项信息
 	private LayoutInflater mGridContainer; //视图容器
+	private Random mRandom;
+	
+	private final String STR_UNDEF_ITEM_CONT1 = "点击这里";
+	private final String STR_UNDEF_ITEM_CONT2 = "定义需要显示的模块";
 	
 	/**
 	 * Grid项目的自定义控件集
@@ -41,6 +46,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		mContext = c;
 		mGridContainer = LayoutInflater.from(mContext);
 		mGridItemList = gridItems;
+		mRandom = new Random();
 	}
 	
 	@Override
@@ -66,7 +72,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	 * 8 - freshman;
 	 */
 	private final String[] ModuleNames = {
-			"未定义",
+			"纳尼?第一次么?",
 			"课表自习", "校园活动", "我的日程", 
 			"图书查询", "绩点查询", "跑操查询",
 			"教务信息", "新生指南"
@@ -119,10 +125,14 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		// 设置title与contents
 		String titleText = ModuleNames[(int) getItemId(position)];
 		gridItemView.title.setText(titleText);
-		gridItemView.title.setBackgroundColor(Color.parseColor("#100000ff"));
+		gridItemView.title.setBackgroundColor(getRandomLightColor());
 		
 		
 		String cont1txt = (String) mGridItemList.get(position).get("content1");
+		if(getItemId(position)==0){
+			//未定义，替换文本内容
+			cont1txt = STR_UNDEF_ITEM_CONT1;
+		}
 		if(cont1txt.length() > 20)
 		{
 			cont1txt = cont1txt.substring(0, 17);
@@ -135,6 +145,10 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		
 		
 		String cont2txt = (String) mGridItemList.get(position).get("content2");
+		if(getItemId(position)==0){
+			//未定义，替换文本内容
+			cont2txt = STR_UNDEF_ITEM_CONT2;
+		}
 		if(cont2txt.length() > 15)
 		{
 			cont2txt = cont2txt.substring(0, 12);
@@ -142,10 +156,10 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		}
 		int cont2size = cont2txt.length();
 		gridItemView.content2.setText(cont2txt);
-		float cont2txtsize = (float) (getFittedTextSize(cont2size) / 1.5);
+		/*float cont2txtsize = (float) (getFittedTextSize(cont2size) / 1.5);
 		if(cont2txtsize > 20)
 			cont2txtsize /= 1.2;
-		gridItemView.content2.setTextSize(cont2txtsize);
+		gridItemView.content2.setTextSize(cont2txtsize);*/
 		
 		return convertView;
 	}
@@ -166,5 +180,14 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 			return 22;
 		else
 			return 20;
+	}
+	
+	private int getRandomLightColor(){
+		//使用HSV获得随机的淡色
+		int h = mRandom.nextInt(360);
+		float s = 0.17f;
+		float v = 0.95f;
+		float hsv[] = {h,s,v};
+		return Color.HSVToColor(hsv);
 	}
 }

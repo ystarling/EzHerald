@@ -62,7 +62,7 @@ public class Record {
 	
 	@Override
 	public String toString() {
-		return String.format("%s-%s-%s-%s", name, credit,score,scoreType);
+		return String.format("%s  Ñ§·Ö:%s   ³É¼¨:%s   %s", name, credit,score,scoreType);
 	}
 	public String getName() {
 		return name;

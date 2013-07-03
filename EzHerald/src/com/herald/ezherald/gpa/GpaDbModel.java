@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * @author xie
@@ -40,13 +41,18 @@ public class GpaDbModel {
 		//TODO
 	}
 	public void update(List<Record> records){
-		String sql = "DELETE  FROM "+ GpaDbHelper.DATABASE_NAME;
-		db.execSQL(sql);
-		sql = "INSERT INTO %s (name, score, credit, semester, scoreType, extra, isSelected ) VALUES" +
-				             "(\"%s\", \"%s\", %f, \"%s\", \"%s\", \"%s\", %d);";
+		String sql = "INSERT OR IGNORE INTO %s (name, score, credit, semester, scoreType, extra, isSelected ) VALUES" +
+				             "(\"%s\", \"%s\", %f, \"%s\", \"%s\", \"%s\", %d)  ";
 		for(Record r:records) { 
 			String sSql = String.format(sql, GpaDbHelper.DATABASE_NAME,r.getName(),r.getScore(),r.getCredit(),r.getSemester(),r.getScoreType(),r.getExtra(),r.isSelected()?1:0);
+			Log.w("sSQl",sSql);
 			db.execSQL(sSql);
 		}
+	}
+	public void changeSelection(String name, boolean newState) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE %s SET isSelected = %d WHERE name = \"%s\";";
+		sql = String.format(sql, GpaDbHelper.DATABASE_NAME,newState?1:0,name);
+		db.execSQL(sql);
 	}
 }

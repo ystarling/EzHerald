@@ -43,7 +43,6 @@ import com.herald.ezherald.settingframe.MainContentModulePref;
  * 其他各模块可参照本Fragement的定义呈现内容
  */
 public class MainContentFragment extends SherlockFragment {
-	private String text = null;
 	private GridView mGridView;  //GridView
 	private ViewFlow mViewFlow;  //ViewFlow
 	private CircleFlowIndicator mCircIndic;
@@ -72,19 +71,17 @@ public class MainContentFragment extends SherlockFragment {
 	///////Should be removed after we have a SharedPreference////////
 
 	public MainContentFragment() {
-		text = "Default";
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#setArguments(android.os.Bundle)
-	 */
+	
+	public ViewFlow getViewFlow(){
+		return mViewFlow;
+	}
+	
 	@Override
 	public void setArguments(Bundle args) {
 		// TODO Auto-generated method stub
 		super.setArguments(args);
-		text = args.getString("text");
+		args.getString("text");
 	}
 
 	/*
@@ -141,7 +138,6 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
-		
 	}
 	
 	/**
@@ -273,10 +269,5 @@ public class MainContentFragment extends SherlockFragment {
 		super.onConfigurationChanged(newConfig);
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
-	
-	public boolean isViewFlowOnTouch(){
-		return mViewFlow.isTouching;
-	}
-	
-	
+
 }

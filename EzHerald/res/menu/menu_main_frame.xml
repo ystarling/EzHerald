@@ -1,15 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
-    <item android:id="@+id/mainframe_menu_item_exit" 
-        android:orderInCategory="101" 
-        android:title="@string/mainmenu_exit_app">
+        android:id="@+id/main_frame_content_menu_main"
+        android:icon="@drawable/abs__ic_menu_moreoverflow_holo_light"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/main_frame_menu_more" >
+        <menu>
+            <item
+                android:id="@+id/action_settings"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:title="@string/action_settings"/>
+            <item
+                android:id="@+id/mainframe_menu_item_exit"
+                android:orderInCategory="101"
+                android:title="@string/mainmenu_exit_app">
+            </item>
+        </menu>
     </item>
-    
-    
 
 </menu>

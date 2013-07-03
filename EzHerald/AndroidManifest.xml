@@ -62,10 +62,18 @@
             android:name="com.herald.ezherald.gpa.GPAActivity"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
+        
+        <!--libr  begin-->
         <activity
             android:name="com.herald.ezherald.library.LibraryActivity"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
+        <activity
+            android:name="com.herald.ezherald.library.LibraryActivityData"
+            android:theme="@style/Theme.Sherlock.Light">
+        </activity>"
+		<!-- libr end -->
+		
         <activity
             android:name="com.herald.ezherald.BaseFrameActivity"
             android:theme="@style/Theme.Sherlock.Light" >

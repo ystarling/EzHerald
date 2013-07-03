@@ -1,22 +1,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+	
+    <!-- “刷新”的图标 -->
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
-    <item android:id="@+id/mainframe_menu_item_exit" 
-        android:orderInCategory="101" 
-        android:title="@string/mainmenu_exit_app">
-    </item>
-    <item android:id="@+id/main_content_refresh" 
-        android:title="@string/main_frame_content_refresh"
+        android:id="@+id/main_content_refresh"
+        android:icon="@android:drawable/stat_notify_sync"
         android:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_rotate" 
-        >        
-    </item><item android:id="@+id/mainframe_menu_item_doing" android:visible="false" android:enabled="false" android:showAsAction="always|withText" android:title="@string/main_frame_menu_refreshing"></item>
+        android:title="@string/main_frame_content_refresh">
+    </item>
+    <!-- “正在刷新”的文字 -->
+    <item
+        android:id="@+id/mainframe_menu_item_doing" 
+        android:enabled="false"
+        android:showAsAction="always|withText"
+        android:title="@string/main_frame_menu_refreshing"
+        android:visible="false">
+    </item>
     
-    
-    
+    <item
+        android:id="@+id/main_frame_content_menu_main"
+        android:icon="@drawable/abs__ic_menu_moreoverflow_holo_light"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/main_frame_menu_more">
+        <menu>
+            <item
+                android:id="@+id/action_settings"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:title="@string/action_settings"/>
+            <item
+                android:id="@+id/mainframe_menu_item_exit"
+                android:orderInCategory="101"
+                android:title="@string/mainmenu_exit_app">
+            </item>
+        </menu>
+    </item>
 
 </menu>
