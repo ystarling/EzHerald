@@ -90,6 +90,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		t.commit();
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayShowTitleEnabled(false);
 	}
 
 	private void initSlidingMenu() {

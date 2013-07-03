@@ -32,7 +32,7 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
-import com.herald.ezherald.settingframe.MainContentModulePref;
+import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
 /*
  * @author ºÎ²©Î°
@@ -179,7 +179,7 @@ public class MainContentFragment extends SherlockFragment {
 			Intent i = new Intent();
 			switch ((int)id) {
 			case 0:
-				i.setClass(getActivity(), MainContentModulePref.class);
+				i.setClass(getActivity(), MainContentModulePrefActivity.class);
 				break;
 			case 1:
 				i.setClass(getActivity(), CurriculumActivity.class);

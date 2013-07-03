@@ -26,7 +26,7 @@ import com.herald.ezherald.R.xml;
 /**
  * 主界面需要显示模块的偏好设置
  */
-public class MainContentModulePref extends PreferenceActivity {
+public class MainContentModulePrefActivity extends PreferenceActivity {
 	/**
 	 * Determines whether to always show the simplified settings UI, where
 	 * settings are presented in a single list. When false, settings are shown
@@ -40,6 +40,7 @@ public class MainContentModulePref extends PreferenceActivity {
 		super.onPostCreate(savedInstanceState);
 
 		setupSimplePreferencesScreen();
+	
 	}
 
 	/**
@@ -211,6 +212,7 @@ public class MainContentModulePref extends PreferenceActivity {
 			// guidelines.
 			//bindPreferenceSummaryToValue(findPreference("example_text"));
 			//bindPreferenceSummaryToValue(findPreference("example_list"));
+		
 		}
 	}
 
@@ -253,5 +255,5 @@ public class MainContentModulePref extends PreferenceActivity {
 		}
 	}
 	
-
+	
 }

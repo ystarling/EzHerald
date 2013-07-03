@@ -44,7 +44,7 @@ public class MainActivity extends BaseFrameActivity {
 	
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "first_start";
-	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false;
+	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
