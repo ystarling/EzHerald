@@ -92,7 +92,12 @@
             android:name="com.herald.ezherald.activity.ClubDetailActivity"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
+        <activity
+            android:name="com.herald.ezherald.activity.ClubAlbumActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
         <!-- acti  end -->
+        
         <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
             android:theme="@style/Theme.Sherlock.Light" >

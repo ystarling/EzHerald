@@ -11,6 +11,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 	
 	private Menu mMenu;
 	
+	private Activity context;
+	
 	final private int ALLACTI=0;
 	final private int CONCERNEDACTI=1;
 	private int ACTITYPE = ALLACTI;
@@ -53,6 +56,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);	
 		setHasOptionsMenu(true);
+		
+		context = getActivity();
 	}
 	
 	@Override 
@@ -146,7 +151,12 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 					long id) {
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity(), ""+position+"   "+id, Toast.LENGTH_SHORT).show();
-				startActivity(new Intent(getActivity(), ActiInfoDetailActivity.class));
+				ActiInfo actiInfo = (ActiInfo) adapter.getItem(position-1);
+				Intent intent = new Intent(context,ActiInfoDetailActivity.class);
+				intent.putExtra("clubName", actiInfo.getClubName());
+				intent.putExtra("title", actiInfo.getActiTitle());
+				intent.putExtra("date", actiInfo.getActiPubTime());
+				startActivity(intent);
 			}
 			
 		});
