@@ -66,7 +66,7 @@ public class ViewFlow extends AdapterView<Adapter>{
 	private float mLastMotionX;
 	private int mTouchSlop;
 	private int mMaximumVelocity;
-	private int mCurrentScreen;
+	private int mCurrentScreen; //
 	private int mNextScreen = INVALID_SCREEN;
 	private boolean mFirstLayout = true;
 	private ViewSwitchListener mViewSwitchListener;
@@ -92,6 +92,7 @@ public class ViewFlow extends AdapterView<Adapter>{
 	private long timeSpan = 3000;
 	private boolean mAutoPlayDirectionFw = true; //自动播放的方向（true:前进，false:后退）
 	public boolean isTouching = false; //是否正在触摸
+	
 
 	/**
 	 * Receives call backs when a new {@link View} has been scrolled to.
@@ -830,6 +831,8 @@ public class ViewFlow extends AdapterView<Adapter>{
 		return super.dispatchTouchEvent(ev);
 	}
 
-
+	public int getCurrentScreen(){
+		return mCurrentScreen;
+	}
 	
 }
