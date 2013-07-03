@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import com.herald.ezherald.R;
 
 public class FragmentC extends Fragment {
-	private GpaInfo gpaInfo;
 	private CircleChat circleChat;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved)
@@ -28,7 +27,7 @@ public class FragmentC extends Fragment {
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-		gpaInfo = new GpaInfo(getActivity());
+		new GpaInfo(getActivity());
 		circleChat = (CircleChat) getActivity().findViewById(R.id.circleChat);
 		circleChat.setOnTouchListener(new OnTouchListener(){
 
@@ -37,7 +36,9 @@ public class FragmentC extends Fragment {
 				// TODO Auto-generated method stub
 				if(event.getAction() == MotionEvent.ACTION_UP){//弹起时触发，否则影响滑动 
 					ArrayList<Record> records = circleChat.onTouch(event.getX(),event.getY());
-				
+					if(records == null){//第一次运行可能没有数据
+						return true;
+					}
 					AlertDialog.Builder builderSingle = new AlertDialog.Builder(
 		                    getActivity());
 		            builderSingle.setIcon(R.drawable.ic_launcher);

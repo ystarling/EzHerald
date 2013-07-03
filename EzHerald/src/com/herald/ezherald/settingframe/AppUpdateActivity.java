@@ -73,6 +73,8 @@ public class AppUpdateActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_update_main);
+		
+
 		if(checkUpdate()){
 			update();
 		}else{

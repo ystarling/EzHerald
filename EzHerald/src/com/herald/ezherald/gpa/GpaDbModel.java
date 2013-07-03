@@ -43,10 +43,16 @@ public class GpaDbModel {
 	public void update(List<Record> records){
 		String sql = "INSERT OR IGNORE INTO %s (name, score, credit, semester, scoreType, extra, isSelected ) VALUES" +
 				             "(\"%s\", \"%s\", %f, \"%s\", \"%s\", \"%s\", %d)  ";
+		String sql2 = "SELECT 1 FROM %s WHERE name = \"%s\" LIMIT 1;";
 		for(Record r:records) { 
-			String sSql = String.format(sql, GpaDbHelper.DATABASE_NAME,r.getName(),r.getScore(),r.getCredit(),r.getSemester(),r.getScoreType(),r.getExtra(),r.isSelected()?1:0);
-			Log.w("sSQl",sSql);
-			db.execSQL(sSql);
+			String sSql2= String.format(sql2, GpaDbHelper.DATABASE_NAME,r.getName());
+			Cursor cursor = db.rawQuery(sSql2, null);
+			if(cursor.getCount() == 0){//不存在数据
+				String sSql = String.format(sql, GpaDbHelper.DATABASE_NAME,r.getName(),r.getScore(),r.getCredit(),r.getSemester(),r.getScoreType(),r.getExtra(),r.isSelected()?1:0);
+				db.execSQL(sSql);
+			}
+			cursor.close();
+			
 		}
 	}
 	public void changeSelection(String name, boolean newState) {
