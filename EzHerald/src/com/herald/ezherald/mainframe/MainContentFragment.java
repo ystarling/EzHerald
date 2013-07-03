@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -141,7 +142,17 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
-		
+		/*mViewFlow.setClickable(true);
+		mViewFlow.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Log.d("XXX", "XXX");
+				Toast.makeText(getActivity(), "Click!", Toast.LENGTH_SHORT).show();
+			}
+		});*/
 	}
 	
 	/**

@@ -48,7 +48,7 @@ import android.widget.Scroller;
  * buffer size can be changed using the {@code sidebuffer} xml attribute.
  * 
  */
-public class ViewFlow extends AdapterView<Adapter> {
+public class ViewFlow extends AdapterView<Adapter>{
 
 	private static final int SNAP_VELOCITY = 1000;
 	private static final int INVALID_SCREEN = -1;
@@ -823,9 +823,13 @@ public class ViewFlow extends AdapterView<Adapter> {
 	 */
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
+		int action = ev.getAction();
+		
 		getParent().requestDisallowInterceptTouchEvent(true);
 		
 		return super.dispatchTouchEvent(ev);
 	}
+
+
 	
 }
