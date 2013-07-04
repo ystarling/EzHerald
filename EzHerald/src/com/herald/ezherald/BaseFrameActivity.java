@@ -28,7 +28,7 @@ import com.herald.ezherald.R;
  * 
  */
 public class BaseFrameActivity extends SlidingFragmentActivity {
-	SlidingMenu menu;
+	protected SlidingMenu menu;
 	protected CanvasTransformer mTrans;
 	protected Fragment mContentFrag; // 中间呈现的内容
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
