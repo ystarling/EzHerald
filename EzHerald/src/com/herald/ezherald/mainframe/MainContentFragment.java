@@ -152,14 +152,13 @@ public class MainContentFragment extends SherlockFragment {
 	/**
 	 * 获得偏好设置
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void getPrefItems() {
 		// 删除旧的东西
 		mContentTitles.clear();
 		
 		// 获得偏好设置
 		SharedPreferences appPrefs =
-				getActivity().getSharedPreferences(
+				getSherlockActivity().getSharedPreferences(
 						PREF_NAME
 						, Context.MODE_PRIVATE);
 		Set<String> result_set = appPrefs.getStringSet(KEY_NAME, null);

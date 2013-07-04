@@ -73,14 +73,9 @@ public class SecondMenuFragment extends ListFragment {
 	 */
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
+		
 		super.onListItemClick(l, v, position, id);
-		/*
-		 * Fragment newContent = null; switch (position) { case 0: newContent =
-		 * new StubContentFragment(); break; case 1: newContent = new
-		 * MainContentFragment(); break; } if (newContent != null){
-		 * switchFragment(newContent); }
-		 */
+
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
@@ -95,7 +90,7 @@ public class SecondMenuFragment extends ListFragment {
 		}
 		if (i != null) {
 			startActivity(i);
-			getActivity().finish(); //20130704
+			//getActivity().finish(); //20130704
 		}
 	}
 	
