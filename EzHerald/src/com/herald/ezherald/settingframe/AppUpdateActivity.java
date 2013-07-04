@@ -31,6 +31,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.edu.seu.herald.ws.api.AndroidClientUpdateService;
+import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
+import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
+import cn.edu.seu.herald.ws.api.update.Update;
 
 import com.herald.ezherald.R;
 
@@ -40,6 +44,7 @@ import com.herald.ezherald.R;
  */
 public class AppUpdateActivity extends Activity {
 	private int newVersion = 2;
+	private boolean isForce = false;
 	private String uri = "http://herald.seu.edu.cn/index/ez.apk" ;
 	private String description = "test";
 	private ProgressDialog progress;
@@ -48,7 +53,7 @@ public class AppUpdateActivity extends Activity {
 	private final int SUCCESS = 1;
 	private final int FAILED  = 0;
 	private final int DOING   = 2;
-	
+	private final boolean DEBUG = true;
 	
 	private Handler mhandler = new Handler(){
 		@Override
@@ -75,7 +80,7 @@ public class AppUpdateActivity extends Activity {
 		setContentView(R.layout.app_update_main);
 		
 
-		if(checkUpdate()){
+		if(DEBUG || checkUpdate() ){
 			update();
 		}else{
 			this.finish();
@@ -85,11 +90,35 @@ public class AppUpdateActivity extends Activity {
 	 * @return boolean 是否有新版本
 	 */
 	public boolean checkUpdate(){
-		//TODO use API
-		return true;
+		try {
+			//TODO use API ,API还没有实现
+			final String HERALD_WS_BASE_URI = "http://herald.seu.edu.cn/ws";
+			HeraldWebServicesFactory factory = new HeraldWebServicesFactoryImpl(
+					HERALD_WS_BASE_URI);
+			AndroidClientUpdateService updateService = factory
+					.getAndroidClientUpdateService();
+			Update update = updateService.getNewVersion();
+			newVersion = Integer.valueOf(update.getVersion());
+			if (newVersion > getVersionCode()) {
+				uri = update.getUri();
+				description = update.getInfo();
+				//isForce = update.getForece(); 
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Toast.makeText(this, "检测更新失败", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 	}
 	
 	public void update(){
+		if(isForce){
+			download();
+			return ;
+		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setIcon(R.drawable.ic_launcher);
 		builder.setTitle("新的版本,是否升级");
@@ -101,11 +130,7 @@ public class AppUpdateActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				// TODO Auto-generated method stub
-				progress = new ProgressDialog(AppUpdateActivity.this);
-				progress.setTitle("正在下载...");
-				progress.setMessage("请稍后");
-				progress.setProgressStyle(ProgressDialog.STYLE_SPINNER); 
-				progress.show();
+
 				download();
 			}
 
@@ -121,13 +146,12 @@ public class AppUpdateActivity extends Activity {
 		});
 		
 		AlertDialog dialog  = builder.create();
-		dialog.setCancelable(false);//防止误关闭
 		
 		TextView txt_version = (TextView) dialogView.findViewById(R.id.txt_version);
 		txt_version.setText("版本号："+newVersion);
 		TextView txt_description = (TextView) dialogView.findViewById(R.id.txt_description);
 		txt_description.setText(description);
-		
+		dialog.setCancelable(false);
 		dialog.show();
 	}
 
@@ -150,7 +174,12 @@ public class AppUpdateActivity extends Activity {
 	 * 开一个线程执行下载
 	 */
 	private void download(){
-		
+		progress = new ProgressDialog(AppUpdateActivity.this);
+		progress.setTitle("正在下载...");
+		progress.setMessage("请稍后");
+		progress.setProgressStyle(ProgressDialog.STYLE_SPINNER); 
+		progress.setCancelable(false);
+		progress.show();
 		new Thread(){
 			@Override
 			public void run(){

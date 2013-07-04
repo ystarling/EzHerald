@@ -3,8 +3,10 @@ package com.herald.ezherald.gpa;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import android.content.Context;
 import android.view.View;
@@ -135,6 +137,25 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 
 	public GpaInfo getGpaInfo() {
 		return gpaInfo;
+	}
+
+	public void removeOptional() {
+		// TODO Auto-generated method stub
+		gpaInfo.removeOptional();
+		for(Record r:gpaInfo.getRecords()){
+			if(r.getExtra() != null )
+				r.setSelected(false);
+		}
+		Iterator<Entry<String, ArrayList<Record>>> iter = sem.entrySet().iterator();
+		while(iter.hasNext()){
+			Map.Entry<String, ArrayList<Record>> entry  = (Entry<String, ArrayList<Record>>) iter.next();
+			ArrayList<Record> rec = entry.getValue();
+			for(Record r:rec){
+				if(r.getExtra() != null)
+					r.setSelected(false);
+			}
+		}
+		notifyDataSetChanged();
 	}
 
 }

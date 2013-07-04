@@ -17,7 +17,7 @@ import com.herald.ezherald.R;
 public class FragmentB extends Fragment {
 	private ExpandableListView elv;
 	private TextView txtGpa;
-	private Button btnUpdate,btnCalc;
+	private Button btnUpdate,btnCalc,btnRemoveOptional;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved)
 	{
@@ -39,6 +39,7 @@ public class FragmentB extends Fragment {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				adapter.update();
+				//TODO 更新时的动画
 			}
 		});
 		btnCalc = (Button)getActivity().findViewById(R.id.btn_calc);
@@ -50,6 +51,16 @@ public class FragmentB extends Fragment {
 				txtGpa.setText(String.format("所选绩点为:%.2f", adapter.getGpaInfo().calcAverage()));
 			}
 			
+		});
+		
+		btnRemoveOptional = (Button)getActivity().findViewById(R.id.btn_remove_optional);
+		btnRemoveOptional.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				adapter.removeOptional();
+			}
 		});
 		
 	}
