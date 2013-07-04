@@ -274,13 +274,18 @@ public class MainActivity extends BaseFrameActivity {
 			
 			//////////////////////////////////////////////////////////////////////////////
 			if(haveUpdate || DEBUG_ALWAYS_UPDATE_ONLINE){
-				Bitmap bmp = testGetBitmap("http://static.dayandcarrot.net/temp/pic0.png");
-				if(bmp != null){
-					updList.add(bmp);
-				} else {
-					showToastInWorkingThread("网络不大给力的样子呐...");
-					//Toast.makeText(getBaseContext(), "网络不大给力的样子呐...", Toast.LENGTH_SHORT).show();
+				/*DEBUG ONLY, NEED FURTHER MODIFICATION*/
+				for(int i=0; i<3; i++){
+					Bitmap bmp = testGetBitmap("http://static.dayandcarrot.net/temp/pic" + i + ".png");
+					if(bmp != null){
+						updList.add(bmp);
+					} else {
+						showToastInWorkingThread("网络不大给力的样子呐...");
+						//Toast.makeText(getBaseContext(), "网络不大给力的样子呐...", Toast.LENGTH_SHORT).show();
+					}
 				}
+				/*DEBUG ONLY, NEED FURTHER MODIFICATION*/
+				
 				//更新数据库
 				while(retList.size() < MAX_BANNER_SIZE && updList.size()>0){
 					Bitmap tmpBmp = updList.get(updList.size()-1);
@@ -289,12 +294,12 @@ public class MainActivity extends BaseFrameActivity {
 					updList.remove(updList.size()-1);
 				}
 				int cnt = 0;
-				while(updList.size()>0 && cnt < 5){
+				while(updList.size()>0 && cnt < MAX_BANNER_SIZE){
 					//需要替换了！
-					retList.remove(cnt++);
+					retList.remove(cnt);
 					Bitmap tmpBmp = updList.get(updList.size()-1);
 					retList.add(tmpBmp);
-					dbAdapter.updateImage(cnt, tmpBmp);
+					dbAdapter.updateImage(cnt++, tmpBmp);
 				}
 			}
 			//////////////////////////////////////////////////////////////////////////////
