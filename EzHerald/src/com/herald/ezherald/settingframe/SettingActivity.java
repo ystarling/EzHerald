@@ -28,6 +28,4 @@ public class SettingActivity extends SherlockFragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
-	
 }

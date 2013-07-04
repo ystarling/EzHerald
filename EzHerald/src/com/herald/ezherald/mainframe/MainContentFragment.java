@@ -2,6 +2,7 @@ package com.herald.ezherald.mainframe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -152,7 +153,7 @@ public class MainContentFragment extends SherlockFragment {
 	/**
 	 * 获得偏好设置
 	 */
-	private void getPrefItems() {
+	private void getPrefItems(){
 		// 删除旧的东西
 		mContentTitles.clear();
 		
@@ -161,7 +162,12 @@ public class MainContentFragment extends SherlockFragment {
 				getSherlockActivity().getSharedPreferences(
 						PREF_NAME
 						, Context.MODE_PRIVATE);
-		Set<String> result_set = appPrefs.getStringSet(KEY_NAME, null);
+		Set<String> result_set;
+		try {
+			result_set = appPrefs.getStringSet(KEY_NAME, null);
+		} catch (NoSuchMethodError e) {
+			result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME, new HashSet<String>());		
+		}
 		if(null != result_set && result_set.size()>0){
 			for(String result : result_set){
 				//Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();

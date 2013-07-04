@@ -120,8 +120,9 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
 		menu.setSecondaryShadowDrawable(R.drawable.shadowright);
 		
-		menu.setActivated(true);
-		menu.setFadeEnabled(true);
+		//menu.setActivated(true);
+		
+		//menu.setFadeEnabled(true);
 	}
 
 	@Override

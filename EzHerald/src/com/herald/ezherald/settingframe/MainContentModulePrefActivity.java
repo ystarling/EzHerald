@@ -73,6 +73,7 @@ public class MainContentModulePrefActivity extends SherlockPreferenceActivity {
 		PreferenceCategory fakeHeader = new PreferenceCategory(this);
 		fakeHeader = new PreferenceCategory(this);
 		fakeHeader.setTitle(R.string.pref_header_data_sync);
+		
 		getPreferenceScreen().addPreference(fakeHeader);
 		addPreferencesFromResource(R.xml.pref_mainframe_data_sync);
 		
