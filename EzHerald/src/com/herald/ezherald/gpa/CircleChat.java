@@ -21,7 +21,7 @@ public class CircleChat extends View {
 	private float radius;
 	private float sum;
 	private final int TOTAL = 5;
-	private final String[] txt= {"<1.0","1.0~2.0","2.0~3.0","3.0~4.0",">4.0"};
+	private final String[] txt= {"ÆäËü","1.0~2.0","2.0~3.0","3.0~4.0",">4.0"};
 	public CircleChat(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub

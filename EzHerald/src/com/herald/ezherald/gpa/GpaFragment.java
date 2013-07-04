@@ -31,7 +31,7 @@ public class GpaFragment extends SherlockFragment {
         tab1.setTabListener(new MyTabListener());
         tab2.setTabListener(new MyTabListener());
         tab3.setTabListener(new MyTabListener());
-        bar.addTab(tab1);
+//        bar.addTab(tab1);
         bar.addTab(tab2); 
         bar.addTab(tab3); 
         return inflater.inflate(R.layout.gpa_activity_main,group,false);
@@ -42,17 +42,17 @@ public class GpaFragment extends SherlockFragment {
 
 			@Override
 			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				if(tab.getPosition() == 0 )
+				if(tab.getPosition() == -1 )
 				{
 					FragmentA frag = new FragmentA();
 					ft.replace(android.R.id.content, frag);
 				}
-				else if(tab.getPosition() == 1)
+				else if(tab.getPosition() == 0)
 				{
 					FragmentB frag = new FragmentB();
 					ft.replace(android.R.id.content, frag);
 				} 
-				else
+				else 
 				{
 					FragmentC frag = new FragmentC();
 					ft.replace(android.R.id.content, frag);
