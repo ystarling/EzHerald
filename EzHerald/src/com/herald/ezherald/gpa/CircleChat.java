@@ -16,12 +16,13 @@ public class CircleChat extends View {
 	private Paint paint;
 	private RectF rect;
 	private ArrayList<Record> records,sorces[];
-	private Canvas ca;
 	private float theta[];
 	private float radius;
 	private float sum;
+	private float startAngle;
 	private final int TOTAL = 5;
 	private final String[] txt= {"其它","1.0~2.0","2.0~3.0","3.0~4.0",">4.0"};
+	
 	public CircleChat(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
@@ -35,11 +36,10 @@ public class CircleChat extends View {
 	
 	@Override
 	protected void onDraw(Canvas canvas){
-		ca = canvas;
 		radius = getWidth()>getHeight()?getHeight()/2:getWidth()/2;
 		rect = new RectF(0,0,2*radius,2*radius);
 		sum = 0;
-		int colors[] = {Color.BLUE,Color.CYAN,Color.GREEN,Color.RED,Color.YELLOW};
+		int colors[] = {Color.LTGRAY,Color.parseColor("#FF9900"),Color.CYAN,Color.parseColor("#BDFF1B"),Color.parseColor("#B70094")};
 		for(Record r:records){
 			sum += r.getCredit();
 			if(r.getPoint()>0){
@@ -57,7 +57,8 @@ public class CircleChat extends View {
 			}
 			theta[i] = 360*ssum/sum;
 		}
-		float start = 0,ac = 0;
+		float start = (float) (Math.abs(Math.random()*360)),ac = 0;
+		startAngle  = start;
 		for(int i=0;i<TOTAL;i++){
 			paint.setColor(colors[i]);
 			ac = theta[i];
@@ -69,7 +70,7 @@ public class CircleChat extends View {
 				paint.setColor(Color.BLACK);
 				canvas.drawText(txt[i],radius+radius*(0.65f)*(float)Math.cos((start+ac/2)/180*Math.PI),radius+radius*(0.65f)*(float)Math.sin((start+ac/2)/180*Math.PI),paint);
 			}
-			start+=ac;
+			start=(start+ac)%360;
 		}
 		
 	}
@@ -91,6 +92,9 @@ public class CircleChat extends View {
 		else //if(x<0 && y<0 )
 			ag = Math.atan(y/x)+Math.PI;
 		ag *= 180/Math.PI;//弧度化为角度
+		ag -= startAngle;
+		if(ag<0)
+			ag+=360f;
 		float su =0; 
 		int i;
 		for(i=0;i<TOTAL;i++){
@@ -98,7 +102,6 @@ public class CircleChat extends View {
 			if(su > ag){
 				break;
 			}
-			
 		}
 		return sorces[i];
 	}
