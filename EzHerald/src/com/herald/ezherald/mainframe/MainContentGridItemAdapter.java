@@ -170,7 +170,8 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	 * @return
 	 */
 	private int getFittedTextSize(int txtLength){
-		if (txtLength <= 3)
+		
+		/*if (txtLength <= 3)
 			return 36;
 		else if(txtLength <= 5)
 			return 28;
@@ -179,7 +180,9 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		else if(txtLength < 15)
 			return 22;
 		else
-			return 20;
+			return 20;*/
+		double result = -8.328 * Math.log(txtLength) + 43.571;
+		return (int)result;
 	}
 	
 	private int getRandomLightColor(){
