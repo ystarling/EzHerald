@@ -133,11 +133,11 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 			//未定义，替换文本内容
 			cont1txt = STR_UNDEF_ITEM_CONT1;
 		}
-		if(cont1txt.length() > 20)
+		/*if(cont1txt.length() > 20)
 		{
 			cont1txt = cont1txt.substring(0, 17);
 			cont1txt += "...";
-		}
+		}*/
 		gridItemView.content1.setText(cont1txt);
 		int cont1size = cont1txt.length();
 		gridItemView.content1.setTextSize(getFittedTextSize(cont1size));
@@ -149,11 +149,11 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 			//未定义，替换文本内容
 			cont2txt = STR_UNDEF_ITEM_CONT2;
 		}
-		if(cont2txt.length() > 15)
+		/*if(cont2txt.length() > 15)
 		{
 			cont2txt = cont2txt.substring(0, 12);
 			cont2txt += "...";
-		}
+		}*/ //直接Layout里面设置android:ellipsize
 		int cont2size = cont2txt.length();
 		gridItemView.content2.setText(cont2txt);
 		/*float cont2txtsize = (float) (getFittedTextSize(cont2size) / 1.5);
@@ -172,7 +172,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	private int getFittedTextSize(int txtLength){
 		if (txtLength <= 3)
 			return 36;
-		else if(txtLength < 5)
+		else if(txtLength <= 5)
 			return 28;
 		else if(txtLength < 10)
 			return 24;
