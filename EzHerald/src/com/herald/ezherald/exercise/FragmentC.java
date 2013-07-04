@@ -56,18 +56,24 @@ public class FragmentC extends Fragment {
 			txt_rate.setText(noData);
 		}
 		
-		if (runTimes.getRemainDays() != RunTimes.DEFAULT_REMAIN_DAYS && runTimes.getAdviceTime()!=RunTimes.DEFAULT_ADVICE_TIME) {
+		if (runTimes.getRemainDays() >=0 && runTimes.getAdviceTime()!=RunTimes.DEFAULT_ADVICE_TIME) {
 			txt_remainDays.setText(String.format("本学期还剩%d天\n建议你每周至少跑%d次",
 					runTimes.getRemainDays(), runTimes.getAdviceTime()));
-			if(runTimes.getAdviceTime()<3)
+			if(runTimes.getAdviceTime()<=0){
+				txt_remainDays.setText("已经跑够了，要挑战满勤么？");
+			}else if(runTimes.getAdviceTime()<3)
 				txt_remainDays.setTextColor(Color.GREEN);
 			else if(runTimes.getAdviceTime()<=4)
 				txt_remainDays.setTextColor(Color.BLUE);
-			else
+			else 
 				txt_remainDays.setTextColor(Color.RED);
+		}else if(runTimes.getRemainDays() < 0){
+			txt_remainDays.setText("学期已经结束啦");
 		}else{
 			txt_remainDays.setText(noData);
 		}
+		
+		
 		if (runTimes.getAverageRunTime() != RunTimes.DEFAULT_AVERAGE_RUN_TIME) {
 			txt_notice.setText("平均打卡时间：" + runTimes.getAverageRunTime());
 		}else{

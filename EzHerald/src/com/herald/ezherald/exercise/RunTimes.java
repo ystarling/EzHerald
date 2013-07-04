@@ -30,7 +30,7 @@ public class RunTimes {
 	private int    adviceTime;//推荐每周跑操天数
 	private String updateTime;//更新时间
 	
-	public static final int    DEFAULT_TIMES = -1;
+	public static final int    DEFAULT_TIMES = -999;
 	public static final int    DEFAULT_ADJUST_TIMES = 0;
 	public static final float  DEFAULT_RATE = -1;
 	public static final int    DEFAULT_REMAIN_DAYS = -1;  
@@ -205,12 +205,14 @@ public class RunTimes {
 		int remainWeeks = remainDays/7;
 		int remainTimes = 45 - times;
 		int advice;
-		if (remainWeeks!=0) {
+		if (remainWeeks>0) {
 			advice = remainTimes/remainWeeks;
 			if( advice*remainWeeks <remainTimes)
 				advice++;
-		}else{
+		}else if(remainDays == 0){
 			advice = remainTimes;
+		}else{
+			advice = 0;
 		}
 		return advice;
 	}
