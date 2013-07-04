@@ -95,6 +95,7 @@ public class SecondMenuFragment extends ListFragment {
 		}
 		if (i != null) {
 			startActivity(i);
+			getActivity().finish(); //20130704
 		}
 	}
 	
