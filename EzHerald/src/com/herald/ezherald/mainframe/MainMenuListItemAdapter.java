@@ -61,7 +61,7 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// 获得视图
-		Log.d(TAG, "getView");
+		//Log.d(TAG, "getView");
 		// 自定义视图
 		ListItemView listItemView = null;
 		if (convertView == null) {
@@ -86,7 +86,7 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 				.get("icon"));
 		listItemView.title.setText((String) mListItems.get(position).get(
 				"title"));
-
+		
 		return convertView;
 	}
 

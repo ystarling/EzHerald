@@ -9,8 +9,11 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 import android.widget.Toast;
+import cn.edu.seu.herald.ws.api.CurriculumService;
+import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
 import cn.edu.seu.herald.ws.api.exercise.Broadcast;
 import cn.edu.seu.herald.ws.api.exercise.ObjectFactory;
+import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
 /**
  * @author xie
  * 体育系人人的早操播报消息
@@ -52,10 +55,7 @@ public class RenrenInfo{
 		try {
 			Log.w("update","updating renren");
 			//TODO
-			ObjectFactory factory = new ObjectFactory();
-			Broadcast broadcast = factory.createBroadcast();
-			setInfo(broadcast.getInfo());
-			setDate(broadcast.getDate().toString());
+			
 			save();
 		} catch (Exception e) {
 			// TODO: handle exception

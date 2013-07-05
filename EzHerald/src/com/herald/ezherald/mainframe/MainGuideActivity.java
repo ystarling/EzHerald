@@ -135,7 +135,9 @@ public class MainGuideActivity extends Activity
 		Log.d("MainGuideActivity", "PageScrolled arg0 = " + arg0
 				+ "; arg1 = " + arg1 + "; arg2 = " + arg2);
 		//滑到末页的时候关闭Activity
-		if(arg0 == image_res.length-2 && arg2 > 800)
+		if(arg0 == image_res.length-2 && arg1 > 0.5f)
+			finish();
+		if(arg0 == image_res.length-1)
 			finish();
 	}
 	

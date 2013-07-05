@@ -89,12 +89,12 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		btnSend = (Button) v.findViewById(R.id.acti_club_detail_send_msg);
 		
 		progressDialog = new ProgressDialog(context);
-		progressDialog.setMessage("Please waiting ... ");
+		progressDialog.setMessage("Please wait ... ");
 		
 		tvIcon.setImageResource(R.drawable.ic_launcher);
 		tvName.setText(clubDetailIntro.clubName);
 		
-		adapter = new CommentListAdapter();
+		adapter = new CommentListAdapter(context);
 		comList.setAdapter(adapter);
 		
 		if(clubDetailIntro.haveFocus)
@@ -249,97 +249,7 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 			comList = new ArrayList<Comment>();
 		}
 	}
-	
-	
-	
-	private class Comment
-	{
-		public String content;
-		public String name;
-		public String date;
-		
-		public Comment(String con, String n, String d)
-		{
-			content = con;
-			name = n;
-			date = d;
-		}
-	}
-	
-	private class CommentListAdapter extends BaseAdapter
-	{
-		List<Comment> comList;
-		
-		public CommentListAdapter()
-		{
-			comList = new ArrayList<Comment>();
-		}
-		
-		public void setCommentList(Comment [] comArr)
-		{
-			comList.clear();
-			for (int loop = 0; loop < comArr.length; ++ loop)
-			{
-				comList.add(comArr[loop]);
-			}
-		}
-		
-		public void addCommentList(Comment [] comArr)
-		{
-			for (int loop = 0; loop < comArr.length; ++ loop)
-			{
-				comList.add(comArr[loop]);
-			}
-		}
-		
-		public void setCommentList(List<Comment> cl)
-		{
-			comList.clear();
-			comList.addAll(cl);
-		}
-		
-		public void addCommentList(List<Comment> cl)
-		{
-			comList.addAll(cl);
-		}
-		
 
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return comList.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return comList.get(position);
-			
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			convertView = LayoutInflater.from(context).inflate(R.layout.acti_club_detail_comment_list_item, null);
-			Comment comment = comList.get(position);
-			TextView tvCommenter = (TextView) convertView.findViewById(R.id.acti_club_detail_comment_comenter);
-			TextView tvDate=  (TextView) convertView.findViewById(R.id.acti_club_detail_comment_date);
-			TextView tvContent = (TextView) convertView.findViewById(R.id.acti_club_detail_comment_content);
-			tvCommenter.setText(comment.name);
-			tvDate.setText(comment.date);
-			tvContent.setText(comment.content);
-			
-			return convertView;
-		}
-		
-	}
-	
 	private class RequestFocus extends AsyncTask<URL,Integer,Integer>
 	{
 

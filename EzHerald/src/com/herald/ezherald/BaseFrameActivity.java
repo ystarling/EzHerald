@@ -1,5 +1,8 @@
 package com.herald.ezherald;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,7 +28,7 @@ import com.herald.ezherald.R;
  * 
  */
 public class BaseFrameActivity extends SlidingFragmentActivity {
-	SlidingMenu menu;
+	protected SlidingMenu menu;
 	protected CanvasTransformer mTrans;
 	protected Fragment mContentFrag; // 中间呈现的内容
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
@@ -90,6 +93,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		t.commit();
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayShowTitleEnabled(false);
 	}
 
 	private void initSlidingMenu() {
@@ -115,9 +119,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		menu.setBehindCanvasTransformer(mTrans);
 		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
 		menu.setSecondaryShadowDrawable(R.drawable.shadowright);
-		
-		menu.setActivated(true);
-		menu.setFadeEnabled(true);
+
 	}
 
 	@Override
@@ -139,13 +141,37 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 			menu.showSecondaryMenu();
 			break;
 		case R.id.mainframe_menu_item_exit:
-			finish();
+			openConfirmDialog();
 			break;
 		case android.R.id.home:
 			menu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * 退出程序确认
+	 */
+	private void openConfirmDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("\n真的要退出么...\n");
+		builder.setPositiveButton("嗯..", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// 确认按钮
+				finish();
+			}
+		});
+		builder.setNegativeButton("不要嘛~", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Toast.makeText(getBaseContext(), "太好了太好了~", Toast.LENGTH_SHORT).show();
+			}
+		});
+		builder.show();
 	}
 
 	public void KillMyself() {

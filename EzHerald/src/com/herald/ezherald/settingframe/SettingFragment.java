@@ -10,9 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.herald.ezherald.R;
 
-public class SettingFragment extends ListFragment {
+public class SettingFragment extends SherlockListFragment {
 	/*
 	 * »Ìº˛…Ë÷√µƒListFragment (non-Javadoc)
 	 * 
@@ -63,7 +64,7 @@ public class SettingFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
-			i.setClass(getActivity(), MainContentModulePref.class);
+			i.setClass(getActivity(), MainContentModulePrefActivity.class);
 			break;
 		case 1:
 			i.setClass(getActivity(), AppUpdateActivity.class);

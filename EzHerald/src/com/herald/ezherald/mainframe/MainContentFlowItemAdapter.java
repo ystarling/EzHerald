@@ -6,12 +6,15 @@ import java.util.Map;
 import com.herald.ezherald.R;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,10 +85,21 @@ public class MainContentFlowItemAdapter extends BaseAdapter{
 		}
 
 		// 设置文字和图标
-
-		listItemView.image.setImageResource((Integer) mListItems.get(position % mListItems.size())
-				.get("image"));
-
+		int type = (Integer)mListItems.get(position % mListItems.size()).get("type");
+		if(type == 0){
+			listItemView.image.setImageResource((Integer) mListItems.get(position % mListItems.size())
+					.get("image"));
+		}
+		else if(type == 1){
+			listItemView.image.setImageBitmap((Bitmap)mListItems.get(position % mListItems.size())
+					.get("image"));
+			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			listItemView.image.setLayoutParams(lp);
+		}
+		else{
+			Log.e("MainContentFlowItemAdapter", "Wrong resource type: " + type);
+		}
+		
 		return convertView;
 	}
 	

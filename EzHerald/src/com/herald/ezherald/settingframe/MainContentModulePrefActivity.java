@@ -19,6 +19,9 @@ import android.text.TextUtils;
 
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.R.string;
 import com.herald.ezherald.R.xml;
@@ -26,7 +29,7 @@ import com.herald.ezherald.R.xml;
 /**
  * 主界面需要显示模块的偏好设置
  */
-public class MainContentModulePref extends PreferenceActivity {
+public class MainContentModulePrefActivity extends SherlockPreferenceActivity {
 	/**
 	 * Determines whether to always show the simplified settings UI, where
 	 * settings are presented in a single list. When false, settings are shown
@@ -40,6 +43,8 @@ public class MainContentModulePref extends PreferenceActivity {
 		super.onPostCreate(savedInstanceState);
 
 		setupSimplePreferencesScreen();
+		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	/**
@@ -68,6 +73,7 @@ public class MainContentModulePref extends PreferenceActivity {
 		PreferenceCategory fakeHeader = new PreferenceCategory(this);
 		fakeHeader = new PreferenceCategory(this);
 		fakeHeader.setTitle(R.string.pref_header_data_sync);
+		
 		getPreferenceScreen().addPreference(fakeHeader);
 		addPreferencesFromResource(R.xml.pref_mainframe_data_sync);
 		
@@ -211,6 +217,7 @@ public class MainContentModulePref extends PreferenceActivity {
 			// guidelines.
 			//bindPreferenceSummaryToValue(findPreference("example_text"));
 			//bindPreferenceSummaryToValue(findPreference("example_list"));
+		
 		}
 	}
 
@@ -250,8 +257,21 @@ public class MainContentModulePref extends PreferenceActivity {
 			// updated to reflect the new value, per the Android Design
 			// guidelines.
 			bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+			
+		
 		}
 	}
-	
 
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch(item.getItemId()){
+		case android.R.id.home:
+			finish();
+			return true;
+			
+		}
+		return super.onMenuItemSelected(featureId, item);
+	}
+	
+	
 }

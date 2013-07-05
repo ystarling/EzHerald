@@ -2,6 +2,7 @@ package com.herald.ezherald.mainframe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,13 +14,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -33,7 +36,7 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
-import com.herald.ezherald.settingframe.MainContentModulePref;
+import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
 /*
  * @author 何博伟
@@ -44,7 +47,6 @@ import com.herald.ezherald.settingframe.MainContentModulePref;
  * 其他各模块可参照本Fragement的定义呈现内容
  */
 public class MainContentFragment extends SherlockFragment {
-	private String text = null;
 	private GridView mGridView;  //GridView
 	private ViewFlow mViewFlow;  //ViewFlow
 	private CircleFlowIndicator mCircIndic;
@@ -55,6 +57,7 @@ public class MainContentFragment extends SherlockFragment {
 	
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "module_choice";
+	private final int MAX_BANNER_SIZE = 5;
 	
 	
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
@@ -63,36 +66,25 @@ public class MainContentFragment extends SherlockFragment {
 	//////////////Temporarily used local variables///////////////////
 	String mContentCont1 [] = {"关于2013年暑假放假的通知", "教学楼管理规定", "新社团活动", "DDD", "放假啦", "2013年6月全国大学英语四六级考试“多提多卷”注意事项发布会", "GGG", "HHH"};
 	String mContentCont2 [] = {"SSSSSSSSSSSSSSXXXX", "TTT", "UUU", "VVV", "尼玛真不容易啊终于放假了啊！！！" ,"东南大学教务处", "YYY", "ZZZ"};
-	///////Should be removed after we have a SharedPreference////////
+	///////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
 	private static final int[] image_ids =
 		{R.drawable.main_frame_pic0, R.drawable.main_frame_pic1,
 		R.drawable.main_frame_pic2, R.drawable.main_frame_pic3,
 		R.drawable.main_frame_pic4
 		};
-	//TODO:使用时应当先用本地存储内容，然后Async通过网络更新本地存储内容，再更新视图
-	///////Should be removed after we have a SharedPreference////////
 
-	public MainContentFragment() {
-		text = "Default";
+	
+	public ViewFlow getViewFlow(){
+		return mViewFlow;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#setArguments(android.os.Bundle)
-	 */
+	
 	@Override
 	public void setArguments(Bundle args) {
 		// TODO Auto-generated method stub
 		super.setArguments(args);
-		text = args.getString("text");
+		args.getString("text");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -101,12 +93,6 @@ public class MainContentFragment extends SherlockFragment {
 
 	}
 
-	/*
-	 * 	 * 
-	 * @see
-	 * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
-	 * android.view.ViewGroup, android.os.Bundle)
-	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -142,32 +128,40 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
-		/*mViewFlow.setClickable(true);
-		mViewFlow.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				Log.d("XXX", "XXX");
-				Toast.makeText(getActivity(), "Click!", Toast.LENGTH_SHORT).show();
-			}
-		});*/
+	}
+	
+	/**
+	 * 刷新ViewFlow
+	 */
+	public void refreshViewFlowImage(){
+		if(mViewFlow == null){
+			Log.e("MainContentFrag", "Fail to refresh. mViewFlow = null");
+		}
+		
+		//是否这样使用?
+		mViewFlow.refreshDrawableState();
+		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(), mImageItems));
+		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
 	
 	/**
 	 * 获得偏好设置
 	 */
-	private void getPrefItems() {
+	private void getPrefItems(){
 		// 删除旧的东西
 		mContentTitles.clear();
 		
 		// 获得偏好设置
 		SharedPreferences appPrefs =
-				getActivity().getSharedPreferences(
+				getSherlockActivity().getSharedPreferences(
 						PREF_NAME
 						, Context.MODE_PRIVATE);
-		Set<String> result_set = appPrefs.getStringSet(KEY_NAME, null);
+		Set<String> result_set;
+		try {
+			result_set = appPrefs.getStringSet(KEY_NAME, null);
+		} catch (NoSuchMethodError e) {
+			result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME, new HashSet<String>());		
+		}
 		if(null != result_set && result_set.size()>0){
 			for(String result : result_set){
 				//Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
@@ -194,7 +188,7 @@ public class MainContentFragment extends SherlockFragment {
 			Intent i = new Intent();
 			switch ((int)id) {
 			case 0:
-				i.setClass(getActivity(), MainContentModulePref.class);
+				i.setClass(getActivity(), MainContentModulePrefActivity.class);
 				break;
 			case 1:
 				i.setClass(getActivity(), CurriculumActivity.class);
@@ -247,16 +241,34 @@ public class MainContentFragment extends SherlockFragment {
 	
 	/**
 	 * 初始化图片信息
+	 * key: image 图片的ID或者直接的Bitmap对象
+	 * key: type  0-图片资源ID, 1-Bitmap对象
 	 */
 	private List<Map<String, Object>> getImageItems(){
 		List<Map<String, Object>> imgItems = new ArrayList<Map<String, Object>>();
 		for(int i=0; i<image_ids.length; i++){
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("image", image_ids[i]);
+			map.put("type", 0);
 			imgItems.add(map);
 		}
 		//Toast.makeText(getActivity(), ""+ imgItems.size(), Toast.LENGTH_SHORT).show();
 		return imgItems;
+	}
+	
+	/**
+	 * 更新某一项的图片对象
+	 * @param index
+	 * @param bitmap
+	 */
+	public void updateImageItem(int index, Bitmap bitmap){
+		if(mImageItems == null || mImageItems.size() < index-1){
+			Log.e("MainContentFrag.", "Invalid image item position");
+			return;
+		}
+		mImageItems.get(index).put("type", 1);
+		mImageItems.get(index).put("image", bitmap);
+		Log.d("MainContentFrag", "Image updated :\n" + mImageItems.get(index).toString());
 	}
 
 	@Override
@@ -276,7 +288,35 @@ public class MainContentFragment extends SherlockFragment {
 		//同步获取各模块的更新项目
 		mGridItems = getGridItems();
 		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
+		
+		refreshImageFromDb();
 	}
+	
+	/**
+	 * 从数据库先获得banner数据
+	 * 如果有的话，替换掉静态的
+	 */
+	public void refreshImageFromDb(){
+		ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
+		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getSherlockActivity());
+		dbAdapter.open();
+		Cursor cs = dbAdapter.getAllImages();
+		if(cs != null && cs.moveToFirst()){
+			int count = 0;
+			do{
+				byte[] inBytes = cs.getBlob(1); 
+				retList.add(BitmapFactory.decodeByteArray(inBytes, 0, inBytes.length));
+				count ++;
+			}while(count < MAX_BANNER_SIZE && cs.moveToNext());		
+		} else {
+			Log.w("MainActivity", "db record does not exist");
+		}
+		for(int i=0; i<retList.size(); i++){
+			updateImageItem(i, retList.get(i));
+		}
+		refreshViewFlowImage();
+	}
+	
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -284,10 +324,5 @@ public class MainContentFragment extends SherlockFragment {
 		super.onConfigurationChanged(newConfig);
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
-	
-	public boolean isViewFlowOnTouch(){
-		return mViewFlow.isTouching;
-	}
-	
-	
+
 }
