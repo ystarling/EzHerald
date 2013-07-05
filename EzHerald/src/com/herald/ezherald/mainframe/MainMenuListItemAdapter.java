@@ -86,7 +86,7 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 				.get("icon"));
 		listItemView.title.setText((String) mListItems.get(position).get(
 				"title"));
-
+		
 		return convertView;
 	}
 
