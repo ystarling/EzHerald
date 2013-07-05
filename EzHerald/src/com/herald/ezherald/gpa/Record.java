@@ -25,6 +25,9 @@ public class Record {
 		this.extra = extra;
 		this.isSelected = isSelected;
 	}
+	public Record() {
+		// TODO Auto-generated constructor stub
+	}
 	public float getPoint(){//由成绩计算绩点
 		float point=0;
 		try{
