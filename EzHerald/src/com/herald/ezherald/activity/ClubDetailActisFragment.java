@@ -9,6 +9,10 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +29,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
+import com.herald.ezherald.academic.DataTypeTransition;
 import com.herald.ezherald.academic.ListFootView;
 
 public class ClubDetailActisFragment extends SherlockFragment {
@@ -49,12 +54,6 @@ public class ClubDetailActisFragment extends SherlockFragment {
 		
 		listView  = (ListView) v.findViewById(R.id.acti_club_detail_acti_list);
 		
-		ActiInfo [] actiArr = {new ActiInfo(0,"herald","招新","2013-6-27","先声网招新了,欢迎热爱技术的同学踊跃报名","",false),
-				new ActiInfo(0,"空手道社","南京内部赛","2013-6-27","南京极真空手道将在全民健身中心举办南京内部赛","",false)};
-		
-		
-		
-		
 		foot = new ListFootView(context);
 		foot.setOnClickListener(new OnClickListener(){
 		
@@ -74,7 +73,13 @@ public class ClubDetailActisFragment extends SherlockFragment {
 		listView.addFooterView(foot.getFootView());
 		
 		adapter = new ActiInfoAdapter(context);
-		adapter.setActiInfoList(actiArr);
+		try {
+			new RequestActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
+					"/index.php/command/select/selectoperate/refresh"));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener(){
 
@@ -122,15 +127,40 @@ public class ClubDetailActisFragment extends SherlockFragment {
 					if( response == HttpURLConnection.HTTP_OK)
 					{
 						in = httpConn.getInputStream();
-						//String str = DataTypeTransition.InputStreamToString(in);
-						actiList.add(new ActiInfo(0,"学生会","招新","2013-6-30",
-								"东南大学学生会招新了，学生会致力于服务学生日常生活...","",true) );
-						actiList.add(new ActiInfo(0,"篮协","东大全明星赛","2013-6-30",
-								"东大篮协将举办一场梅园vs桃园的全明星赛，明星由选举产生...","",true) );
+						String str = DataTypeTransition.InputStreamToString(in);
+						JSONArray jsonArray = new JSONArray(str);
+						//Log.v("Net test", str);
+						for(int loop = 0;loop<jsonArray.length();++loop)
+						{
+							JSONObject jsonObject = jsonArray.getJSONObject(loop);
+							int acti_id = Integer.parseInt(jsonObject.getString("id"));
+							int league_id = Integer.parseInt(jsonObject.getString("league_id"));
+							String acti_title = jsonObject.getString("name");
+							String start_time = jsonObject.getString("start_time");
+							String end_time = jsonObject.getString("end_time");
+							String intro = jsonObject.getString("introduction");
+							String release_time = jsonObject.getString("release_time");
+							String place = jsonObject.getString("place");
+							boolean isVote = jsonObject.getBoolean("isvote");
+							JSONObject league_obj = jsonObject.getJSONObject("league_info");
+							String league_name = league_obj.getString("league_name");
+							String league_icon = league_obj.getString("avatar_address");
+							//String acti_pic = jsonObject.getString("");
+							String acti_pic = "";
+
+							ActiInfo tmpInfo = new ActiInfo(league_id, isVote, league_name,league_id, league_icon, 
+									acti_title, start_time, end_time, place, release_time, 
+									intro, acti_pic);
+							actiList.add(tmpInfo);
+						}
+						
 						return actiList;
 					}
 				}
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

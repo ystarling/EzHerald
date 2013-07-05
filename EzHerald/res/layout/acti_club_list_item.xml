@@ -5,12 +5,20 @@
     android:orientation="horizontal"
     android:descendantFocusability="blocksDescendants" >
     
-    <ImageView 
-        android:id="@+id/acti_club_list_icon"
+    <LinearLayout 
+        android:id="@+id/acti_acti_list_outer_clubicon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        />
+        >
+        <ImageView 
+	        android:id="@+id/acti_club_list_icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        />
+        
+    </LinearLayout>
+    
     
     <LinearLayout 
         android:layout_width="wrap_content"
