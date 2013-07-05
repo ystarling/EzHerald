@@ -40,15 +40,15 @@ public class MainMenuFragment extends ListFragment {
 	private MainMenuListItemAdapter mListViewAdapter;
 	private String mMenuItemsStr[]; // ÎÄ×Ö(title)
 	private Integer mMenuItemsIconResId[] = {
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light }; // Í¼±ê(icon)
+			R.drawable.main_menu_ic_mainframe,
+			R.drawable.main_menu_ic_curriculum,
+			R.drawable.main_menu_ic_activity,
+			R.drawable.main_menu_ic_agenda,
+			R.drawable.main_menu_ic_library,
+			R.drawable.main_menu_ic_gpa,
+			R.drawable.main_menu_ic_exercise,
+			R.drawable.main_menu_ic_academic,
+			R.drawable.main_menu_ic_freshman }; // Í¼±ê(icon)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

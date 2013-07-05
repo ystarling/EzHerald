@@ -10,7 +10,6 @@ import java.util.Set;
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +17,6 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,17 +66,13 @@ public class MainContentFragment extends SherlockFragment {
 	//////////////Temporarily used local variables///////////////////
 	String mContentCont1 [] = {"关于2013年暑假放假的通知", "教学楼管理规定", "新社团活动", "DDD", "放假啦", "2013年6月全国大学英语四六级考试“多提多卷”注意事项发布会", "GGG", "HHH"};
 	String mContentCont2 [] = {"SSSSSSSSSSSSSSXXXX", "TTT", "UUU", "VVV", "尼玛真不容易啊终于放假了啊！！！" ,"东南大学教务处", "YYY", "ZZZ"};
-	///////Should be removed after we have a SharedPreference////////
+	///////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
 	private static final int[] image_ids =
 		{R.drawable.main_frame_pic0, R.drawable.main_frame_pic1,
 		R.drawable.main_frame_pic2, R.drawable.main_frame_pic3,
 		R.drawable.main_frame_pic4
 		};
-	//TODO:使用时应当先用本地存储内容，然后Async通过网络更新本地存储内容，再更新视图
-	///////Should be removed after we have a SharedPreference////////
 
-	public MainContentFragment() {
-	}
 	
 	public ViewFlow getViewFlow(){
 		return mViewFlow;
