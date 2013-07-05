@@ -10,9 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.herald.ezherald.R;
 
-public class SettingFragment extends ListFragment {
+public class SettingFragment extends SherlockListFragment {
 	/*
 	 * Èí¼şÉèÖÃµÄListFragment (non-Javadoc)
 	 * 

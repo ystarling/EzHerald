@@ -43,7 +43,7 @@ public class GpaInfo {
 			records.add(new Record("大物","良",4.0f,"12-13-1","首修",null,false));
 			records.add(new Record("物理实验","通过",2.0f,"12-13-1","首修",null,true));
 			records.add(new Record("艺术鉴赏","98",5.0f,"12-13-3","首修","人文类",false));
-			records.add(new Record("高数","78",5.0f,"12-13-2","首修",null,false));
+			records.add(new Record("离散数学","68",5.0f,"12-13-2","首修",null,false));
 			records.add(new Record("c++","100",2.5f,"12-13-2","首修",null,true));
 		} else {
 			//TODO update gpa info
@@ -59,5 +59,15 @@ public class GpaInfo {
 		gpaDbModel.changeSelection(r.getName(),newState);
 		gpaDbModel.close();
 		//TODO 
+	}
+	public void removeOptional() {
+		// TODO Auto-generated method stub
+		gpaDbModel.open();
+		for(Record r:records){
+			if(r.getExtra() != null )
+				r.setSelected(false);
+				gpaDbModel.changeSelection(r.getName(), false);
+		}
+		gpaDbModel.close();
 	}
 }

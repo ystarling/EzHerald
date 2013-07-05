@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!-- 主界面模块的item (GridView的Item) -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="100dp"
     android:orientation="vertical" >
 
-    <!-- 模块名称 -->
-    <TextView
-        android:id="@+id/main_frame_content_griditem_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="0dp"
-        android:textSize="14sp"
-         />
-	
-    <!-- 显示的内容 -->
+	    <TextView
+	        android:id="@+id/main_frame_content_griditem_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:paddingLeft="5dp"
+	        android:paddingRight="5dp"
+	        android:text="Title"
+	        android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/main_frame_content_griditem_content1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Content1" 
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="5dp"
-        android:textSize="22sp"
-        android:gravity="left"
-        android:textColor="#575757"
-        />
+	    <TextView
+	        android:id="@+id/main_frame_content_griditem_content1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/main_frame_content_griditem_title"
+	        android:paddingLeft="5dp"
+	        android:ellipsize="end"
+	        android:gravity="left"
+	        android:maxLines="2"
+	        android:text="Content1"
+	        android:textColor="#575757"
+	        android:textSize="22sp" />
 
-    <TextView
-        android:id="@+id/main_frame_content_griditem_content2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Content2" 
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-        android:textSize="16sp"
-        android:gravity="left"
-        android:layout_gravity="bottom"
-        android:textColor="#ababab"
-        />
-
-</LinearLayout>
+	    <TextView
+	        android:id="@+id/main_frame_content_griditem_content2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentBottom="true"
+	        android:paddingBottom="3dp"
+	        android:ellipsize="end"
+	        android:gravity="left"
+	        android:singleLine="true"
+	        android:text="Content2"
+	        android:textColor="#ababab"
+	        android:textSize="16sp" />
+   
+</RelativeLayout>
