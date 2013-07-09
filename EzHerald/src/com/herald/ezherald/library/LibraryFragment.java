@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +35,12 @@ public class LibraryFragment extends SherlockFragment{
 	Activity context;
 	View view;
 	
-	List libr_list=new ArrayList<Map<String, Object>>();
+	ArrayList<Map<String, Object>> libr_list=new ArrayList<Map<String, Object>>();
 	
-//	public void onCreate(Bundle save){
-//		super.onCreate(save);
-//		setRetainInstance(true);
-//	}
+	public void onCreate(Bundle save){
+		super.onCreate(save);
+		setRetainInstance(true);
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

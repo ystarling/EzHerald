@@ -32,9 +32,9 @@ public class SecondMenuFragment extends ListFragment {
 	private MainMenuListItemAdapter mListViewAdapter;
 	private String mMenuItemsStr[]; // ÎÄ×Ö(title)
 	private Integer mMenuItemsIconResId[] = {
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
+			R.drawable.main_2ndmenu_ic_account,
+			R.drawable.main_2ndmenu_ic_setting,
+			R.drawable.main_2ndmenu_ic_accsetting,
 	}; // Í¼±ê(icon)
 	
 	

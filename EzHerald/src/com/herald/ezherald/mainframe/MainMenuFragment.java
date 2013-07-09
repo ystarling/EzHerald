@@ -40,15 +40,15 @@ public class MainMenuFragment extends ListFragment {
 	private MainMenuListItemAdapter mListViewAdapter;
 	private String mMenuItemsStr[]; // 文字(title)
 	private Integer mMenuItemsIconResId[] = {
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light,
-			R.drawable.abs__ic_voice_search_api_holo_light }; // 图标(icon)
+			R.drawable.main_menu_ic_mainframe,
+			R.drawable.main_menu_ic_curriculum,
+			R.drawable.main_menu_ic_activity,
+			R.drawable.main_menu_ic_agenda,
+			R.drawable.main_menu_ic_library,
+			R.drawable.main_menu_ic_gpa,
+			R.drawable.main_menu_ic_exercise,
+			R.drawable.main_menu_ic_academic,
+			R.drawable.main_menu_ic_freshman }; // 图标(icon)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,15 +130,71 @@ public class MainMenuFragment extends ListFragment {
 	 * 初始化菜单项信息
 	 */
 	private List<Map<String, Object>> getListItems() {
+		//获取parent的类信息
+		String localActivityName = getActivity().getLocalClassName();
+		Log.d("MainMenuFragment", "Parent`s class = " + localActivityName);
+		int selectedId = getActivityIdFromString(localActivityName);
+		
+		
 		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
 
 		for (int i = 0; i < mMenuItemsStr.length; i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("icon", mMenuItemsIconResId[i]);
 			map.put("title", mMenuItemsStr[i]);
+			if(selectedId == i){
+				map.put("selected", true);
+			} else {
+				map.put("selected", false);
+			}
 			listItems.add(map);
 		}
 		return listItems;
+	}
+
+	/**
+	 * 从getPackageName()得到的信息获得当前的Activity是哪个
+	 * ID排序见R.array.main_menu_items里面的顺序，从0开始
+	 * @param localActivityName getActivity().getPackageName()的返回值
+	 * @return
+	 */
+	private int getActivityIdFromString(String localActivityName) {
+		String[] splitResult = localActivityName.split("\\."); //http://www.cnblogs.com/liubiqu/archive/2008/08/14/1267867.html
+		String localModuleName = "main";
+		if(splitResult.length > 0){
+			localModuleName = splitResult[0];
+		} 
+		Log.d("MainMenuFragment", "localModuleName = " + localModuleName);
+		
+		if(localModuleName.equals("MainActivity")){
+			return 0;
+		}
+		else if(localModuleName.equals("curriculum")){
+			return 1;
+		}
+		else if(localModuleName.equals("activity")){
+			return 2;
+		}
+		else if(localModuleName.equals("agenda")){
+			return 3;
+		}
+		else if(localModuleName.equals("library")){
+			return 4;
+		}
+		else if(localModuleName.equals("gpa")){
+			return 5;
+		}
+		else if(localModuleName.equals("exercise")){
+			return 6;
+		}
+		else if(localModuleName.equals("academic")){
+			return 7;
+		}
+		else if(localModuleName.equals("freshman")){
+			return 8;
+		}
+		
+		return -1;
 	}
 
 	/**

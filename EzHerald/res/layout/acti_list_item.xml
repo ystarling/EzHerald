@@ -10,13 +10,16 @@
     
     <ImageView 
         android:id="@+id/acti_listitem_club_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:padding="5dp"
         />
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="left"
+        >
         
         <LinearLayout 
             android:layout_width="match_parent"
@@ -56,6 +59,44 @@
 	        android:textColor="#0000ff"
 	        android:textSize="17sp"/>
 	    
+	    <LinearLayout 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+            
+	        <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="时间:"/>
+	        
+	        <TextView 
+	            android:id="@+id/acti_listitem_acti_time"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:ellipsize="marquee"
+	            android:lines="1"/>
+	        
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        >
+	        
+	        <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="地点:"/>
+	        
+	        <TextView 
+	            android:id="@+id/acti_listitem_acti_place"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"/>
+	        
+	    </LinearLayout>
+	    
 	    
 	    <TextView 
 	        android:id="@+id/acti_listitem_acti_intro"
@@ -63,12 +104,21 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginRight="2sp"/>
 	    
-	    
-	    <ImageView 
-	        android:id="@+id/acti_listitem_acti_pic"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" />
-	    
+
+	    <LinearLayout 
+	        android:layout_width="100dp"
+	        android:layout_height="100dp"
+	        >
+	        <ImageView 
+				android:id="@+id/acti_listitem_acti_pic"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="left" />
+	        
+	    </LinearLayout>
+        
+        
+    
 	    <TextView 
 	        android:id="@+id/acti_listitem_acti_pubtime"
 	        android:layout_width="wrap_content"
