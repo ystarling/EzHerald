@@ -12,6 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,6 +108,11 @@ public class FragmentB extends Fragment {
 							vercode  = 0;
 						}
 						Toast.makeText(getActivity(), "正在更新", Toast.LENGTH_SHORT).show();
+						ProgressDialog progress = new ProgressDialog(getActivity());
+						progress.setTitle("正在获取数据");
+						progress.setIndeterminate(true);//圈圈而不是进度条
+						progress.setCancelable(false);
+						progress.show();
 						adapter.update(vercode,client);
 					}
 				});

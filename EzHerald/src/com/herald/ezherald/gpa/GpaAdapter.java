@@ -10,6 +10,8 @@ import java.util.Map.Entry;
 
 import org.apache.http.client.HttpClient;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +27,12 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	private Map<String,ArrayList<Record>> sem;
 	private List<String> sems;
 	private Context context;
+	private ProgressDialog progress;
  	public GpaAdapter(Context context) {
 		this.context = context;
  		update(-1,null);//TODO 
 	}
-
+ 	
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
@@ -184,5 +187,23 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		
 		notifyDataSetChanged();
 			
+	}
+	public void onLoadFinished(){
+		Toast.makeText(context, "获取数据完成", Toast.LENGTH_SHORT).show();
+	}
+
+	public void onDealing(int i, int count) {
+		// TODO Auto-generated method stub
+		if(progress == null){
+			progress = new ProgressDialog(context);
+			progress.setTitle("正在分析");
+			progress.setIndeterminate(false);//进度条而不是圈圈
+			progress.setMax(count);
+			progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			progress.setCancelable(false);
+			progress.show();
+		}
+		Activity ac = (Activity)context;
+		ac.setProgress(count);
 	}
 }

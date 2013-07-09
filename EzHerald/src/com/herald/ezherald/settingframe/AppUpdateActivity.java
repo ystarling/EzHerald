@@ -49,6 +49,7 @@ public class AppUpdateActivity extends Activity {
 	private String description = "test";
 	private ProgressDialog progress;
 	private int down = 0;
+	private long fullSize;//更新包的总大小 
 	private final String fileName ="ezHErald"+ newVersion+".apk"; 
 	private final int SUCCESS = 1;
 	private final int FAILED  = 0;
@@ -66,7 +67,7 @@ public class AppUpdateActivity extends Activity {
 					onFailed();
 					break;
 				case DOING:
-					showProgress((Integer) msg.obj);
+					showProgress((Long) msg.obj);
 					Log.w("download",""+(Integer) msg.obj);
 					break;
 				default:
@@ -190,6 +191,7 @@ public class AppUpdateActivity extends Activity {
 	                response = client.execute(get);  
 	                HttpEntity entity = response.getEntity();  
 	                InputStream is = entity.getContent();  
+	                fullSize = entity.getContentLength();
 	                FileOutputStream fileOutputStream = null;  
 	                if (is != null) {  
 	                    File file = new File(  
@@ -200,7 +202,7 @@ public class AppUpdateActivity extends Activity {
 	                    while ((ch = is.read(buf)) != -1) {  
 	                        fileOutputStream.write(buf, 0, ch);
 	                        down += ch;
-	                        mhandler.obtainMessage(DOING,Integer.valueOf(down) ).sendToTarget();
+	                        mhandler.obtainMessage(DOING,Long.valueOf(down) ).sendToTarget();
 	                    }  
 	                }  
 	                fileOutputStream.flush();  
@@ -239,7 +241,7 @@ public class AppUpdateActivity extends Activity {
 	 * @param p 进度 单位byte
 	 * 显示下载了多少
 	 */
-	private void showProgress(int p){
-		progress.setMessage(String.format("已下载 %.3f Kb", (double)p/1000));
+	private void showProgress(long p){
+		progress.setMessage(String.format("已下载 %.3f", (double)p/fullSize));//TODO need tobe tested
 	}
 }

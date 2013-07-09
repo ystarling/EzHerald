@@ -54,8 +54,10 @@ public class GpaInfo {
 	protected void onSuccess() {
 		// TODO 解析HTML，更新records
 //		Log.w("res",result);
+		adapter.onLoadFinished();
 		Document document = Jsoup.parse(result);
 		Elements trs = document.select("tr[onMouseOver=this.style.backgroundColor=\'#bbbbbb\']");
+		int count = trs.size(),i=0;
 		records = new ArrayList<Record>();
 		for(Element tr:trs){
 			Log.w("re",tr.child(4).text().trim());
@@ -68,6 +70,7 @@ public class GpaInfo {
 			temp.setScoreType(rtrim(tr.child(6).text().trim()));
 			temp.setExtra(tr.child(7).text().isEmpty()?null:rtrim(tr.child(7).text()));
 			records.add(temp);
+			adapter.onDealing(++i,count);
 		}
 		save();
 		adapter.updateFinished(true);
@@ -136,6 +139,7 @@ public class GpaInfo {
 
 				        // Execute HTTP Post Request
 				        HttpResponse response = httpclient.execute(httppost);
+				        
 				        if(response.getStatusLine().getStatusCode() == 200){
 				        	String url = "http://xk.urp.seu.edu.cn/studentService/cs/stuServe/studentExamResultQuery.action";
 				        	HttpResponse response2 = httpclient.execute(new HttpGet(url));
@@ -179,6 +183,10 @@ public class GpaInfo {
 		}
 		gpaDbModel.close();
 	}
+	/**去除最右边的一个异常字符，原生的trim不起作用
+	 * @param s
+	 * @return
+	 */
 	private String rtrim(String s){
 		return s.substring(0,s.length()-1);
 	}
