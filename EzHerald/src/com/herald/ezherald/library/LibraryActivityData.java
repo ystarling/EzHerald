@@ -54,7 +54,8 @@ public class LibraryActivityData extends SherlockActivity{
 		
 		
 		
-		//create GridView about library some information
+		/************ create GridView about library some information **********/
+		
 		GridView libr_gridview=(GridView) findViewById(R.id.libr_book_grid);
 		ArrayList<HashMap<String, Object>> libr_gridItem=new ArrayList<HashMap<String,Object>>();
 		for(int i=0;i<16;i++){
@@ -79,6 +80,7 @@ public class LibraryActivityData extends SherlockActivity{
 //			mylist.add("Äê¾íºÅ");
 //			return mylist;
 //		}
+	
 		protected String[] libr_get_string(){
 			string=new String[]{"name","press","prize"};
 			return string;

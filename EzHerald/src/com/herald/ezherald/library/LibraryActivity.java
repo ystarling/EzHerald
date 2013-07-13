@@ -17,7 +17,7 @@ public class LibraryActivity extends BaseFrameActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		
-		mContentFrag = new LibraryFragment();
+		mContentFrag = new libraryFragmentMain();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
 

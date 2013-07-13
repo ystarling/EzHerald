@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +23,23 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 
+import com.herald.ezherald.library.LibraryBooksList;
+
+
+	/*
+	 * @author BIG_SEA
+	 *	第一个fragment，搜索界面
+	 */
 public class LibraryFragment extends SherlockFragment{
 	
 	EditText libr_search_text;
 	String libr_search_value=null;
-	ListView libr_listView;
 	SimpleAdapter libr_adapter;
+	ListView libr_listView;
 	Activity context;
 	View view;
+	
+	LibraryBooksList BookList=new LibraryBooksList();//获得内容
 	
 	ArrayList<Map<String, Object>> libr_list=new ArrayList<Map<String, Object>>();
 	
@@ -97,16 +103,17 @@ public class LibraryFragment extends SherlockFragment{
 	
 	protected List< Map<String, Object> > libr_get_list_value(){
 		Map<String, Object> map=new HashMap<String ,Object>();
-		map.put("img",R.drawable.seu);
-		map.put("name","好书名");
-		map.put("author","责任者："+"李文正");
-		map.put("press","出版社："+"东南大学");
-		map.put("date","日期："+"东南大学出版社");
+		//map.put("img",R.drawable.seu);
+		map.put("name",BookList.BookName());
+		map.put("author","责任者："+BookList.BookAuthor());
+		map.put("press","出版社："+BookList.BookPress());
+		map.put("date","日期："+BookList.BookDate());
 		libr_list.add(map);
-		map.put("name","书名好");
-		map.put("author","责任者："+"李文正");
-		map.put("press","出版社："+"东南大学");
-		map.put("date","日期："+"东南大学出版社");
+		
+		map.put("name",BookList.BookName());
+		map.put("author","责任者："+BookList.BookAuthor());
+		map.put("press","出版社："+BookList.BookPress());
+		map.put("date","日期："+BookList.BookDate());
 		libr_list.add(map);
 		return libr_list;
 	}
