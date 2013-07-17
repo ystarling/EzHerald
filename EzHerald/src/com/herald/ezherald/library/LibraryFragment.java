@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,6 +39,7 @@ public class LibraryFragment extends SherlockFragment{
 	ListView libr_listView;
 	Activity context;
 	View view;
+
 	
 	LibraryBooksList BookList=new LibraryBooksList();//获得内容
 	
@@ -71,6 +73,7 @@ public class LibraryFragment extends SherlockFragment{
 				}
 				else
 				{	
+			
 				libr_listView = (ListView) view.findViewById(R.id.libr_search_listView);
 				libr_adapter=new SimpleAdapter(getActivity(),libr_get_list_value(), 
 						R.layout.library_book_list_item, new String[]{"img","name","author","press","date"},
@@ -78,8 +81,9 @@ public class LibraryFragment extends SherlockFragment{
 			
 				libr_listView.setAdapter(libr_adapter);
 				
+				
 				//设置ListView响应事件
-
+				
 				libr_listView.setOnItemClickListener(new OnItemClickListener(){
 
 					@Override
@@ -104,17 +108,16 @@ public class LibraryFragment extends SherlockFragment{
 	protected List< Map<String, Object> > libr_get_list_value(){
 		Map<String, Object> map=new HashMap<String ,Object>();
 		//map.put("img",R.drawable.seu);
+		for(int i=0;i<=3;i++){
+		
+		map.put("img",R.drawable.seu);
 		map.put("name",BookList.BookName());
 		map.put("author","责任者："+BookList.BookAuthor());
 		map.put("press","出版社："+BookList.BookPress());
 		map.put("date","日期："+BookList.BookDate());
 		libr_list.add(map);
 		
-		map.put("name",BookList.BookName());
-		map.put("author","责任者："+BookList.BookAuthor());
-		map.put("press","出版社："+BookList.BookPress());
-		map.put("date","日期："+BookList.BookDate());
-		libr_list.add(map);
+		}
 		return libr_list;
 	}
 }

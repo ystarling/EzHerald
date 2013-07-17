@@ -27,7 +27,7 @@ public class FragmentC extends Fragment {
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-		new GpaInfo(getActivity());
+//		new GpaInfo(getActivity());
 		circleChat = (CircleChat) getActivity().findViewById(R.id.circleChat);
 		circleChat.setOnTouchListener(new OnTouchListener(){
 

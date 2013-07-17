@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.http.client.HttpClient;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +20,19 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GpaAdapter extends BaseExpandableListAdapter {
 	private GpaInfo gpaInfo;
 	private Map<String,ArrayList<Record>> sem;
 	private List<String> sems;
 	private Context context;
+	private ProgressDialog progress;
  	public GpaAdapter(Context context) {
 		this.context = context;
- 		update();
+ 		update(-1,null);//TODO 
 	}
-
+ 	
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
@@ -109,11 +115,11 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public void update(){
-		if(gpaInfo == null){
-			gpaInfo = new GpaInfo(context);
+	public void update(int vercode,HttpClient client){
+		if(gpaInfo == null || vercode == -1|| client == null){
+			gpaInfo = new GpaInfo(context,this);
 		}else{
-			gpaInfo.update();
+			gpaInfo.update(vercode,client);
 			gpaInfo.save();
 		}
 		
@@ -157,5 +163,47 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		}
 		notifyDataSetChanged();
 	}
+	public void updateFinished(boolean isSuccess){
+		if(isSuccess){
+			Toast.makeText(context, "更新成功", Toast.LENGTH_SHORT).show();
+		}else{
+			Toast.makeText(context, "更新失败，检查网络", Toast.LENGTH_SHORT).show();
+		}
+		
+		sem  = new HashMap<String,ArrayList<Record>>();//学期和对应成绩list的映射表
+		sems = new ArrayList<String>(); //所有的学期信息
+		for(Record r: gpaInfo.getRecords()){//将每一项根据学期加入到map之中
+			if(sem.containsKey(r.getSemester())) {
+				ArrayList<Record> list = sem.get(r.getSemester());
+				list.add(r);
+			} else {
+				ArrayList<Record> list = new ArrayList<Record>();
+				list.add(r);
+				sems.add(r.getSemester());//更新学期信息
+				sem.put(r.getSemester(),list);
+			}
+		}
+		Collections.sort(sems);
+		
+		notifyDataSetChanged();
+			
+	}
+	public void onLoadFinished(){
+		Toast.makeText(context, "获取数据完成", Toast.LENGTH_SHORT).show();
+	}
 
+	public void onDealing(int i, int count) {
+		// TODO Auto-generated method stub
+		if(progress == null){
+			progress = new ProgressDialog(context);
+			progress.setTitle("正在分析");
+			progress.setIndeterminate(false);//进度条而不是圈圈
+			progress.setMax(count);
+			progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			progress.setCancelable(false);
+			progress.show();
+		}
+		Activity ac = (Activity)context;
+		ac.setProgress(count);
+	}
 }
