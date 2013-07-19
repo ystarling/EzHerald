@@ -21,6 +21,12 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+
+
+import cn.edu.seu.herald.ws.api.LibraryService;
+import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
+import cn.edu.seu.herald.ws.api.library.Book;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 
@@ -39,9 +45,14 @@ public class LibraryFragment extends SherlockFragment{
 	ListView libr_listView;
 	Activity context;
 	View view;
-
 	
-	LibraryBooksList BookList=new LibraryBooksList();//获得内容
+
+	LibraryService librservice=new HeraldWebServicesFactoryImpl("http://herald.seu.edu.cn/ws").getLibraryService();
+
+	Book librbook=new Book();
+	
+	
+	LibraryBooksList librBookList=new LibraryBooksList();//获得内容
 	
 	ArrayList<Map<String, Object>> libr_list=new ArrayList<Map<String, Object>>();
 	
@@ -66,14 +77,22 @@ public class LibraryFragment extends SherlockFragment{
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				libr_search_value=libr_search_text.getText().toString();
+				
 				if(libr_search_value.isEmpty())
 				{
 					Toast toast=Toast.makeText(getActivity(), "你什么东西都没写啊", Toast.LENGTH_SHORT);
 					toast.show();
 				}
 				else
-				{	
-			
+				{
+				try{
+				librservice.search(libr_search_value);//传入用户输入内容
+				librservice.getBookDetails(librbook);//获取内容
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+				
 				libr_listView = (ListView) view.findViewById(R.id.libr_search_listView);
 				libr_adapter=new SimpleAdapter(getActivity(),libr_get_list_value(), 
 						R.layout.library_book_list_item, new String[]{"img","name","author","press","date"},
@@ -111,10 +130,19 @@ public class LibraryFragment extends SherlockFragment{
 		for(int i=0;i<=3;i++){
 		
 		map.put("img",R.drawable.seu);
-		map.put("name",BookList.BookName());
-		map.put("author","责任者："+BookList.BookAuthor());
-		map.put("press","出版社："+BookList.BookPress());
-		map.put("date","日期："+BookList.BookDate());
+		
+		map.put("name",librbook.getName());
+		map.put("author","责任者："+librbook.getAuthor());
+		map.put("press","出版社："+librbook.getPress());
+		map.put("date","日期："+librbook.getIsbn());
+		
+		/*
+		map.put("name",librBookList.BookName());
+		map.put("author","责任者："+librBookList.BookAuthor());
+		map.put("press","出版社："+librBookList.BookPress());
+		map.put("date","日期："+librBookList.BookDate());
+		*/
+		
 		libr_list.add(map);
 		
 		}
