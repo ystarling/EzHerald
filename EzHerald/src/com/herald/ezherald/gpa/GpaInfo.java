@@ -55,6 +55,7 @@ public class GpaInfo {
 		// TODO 解析HTML，更新records
 //		Log.w("res",result);
 		adapter.onLoadFinished();
+		adapter.onDealing(0, 100);
 		Document document = Jsoup.parse(result);
 		Elements trs = document.select("tr[onMouseOver=this.style.backgroundColor=\'#bbbbbb\']");
 		int count = trs.size(),i=0;
@@ -133,7 +134,7 @@ public class GpaInfo {
 				        // Add your data
 				        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 				        nameValuePairs.add(new BasicNameValuePair("userName", "213123363"));
-				        nameValuePairs.add(new BasicNameValuePair("password", "213123363"));
+				        nameValuePairs.add(new BasicNameValuePair("password", "213123363"));//TODO 登陆模块
 				        nameValuePairs.add(new BasicNameValuePair("vercode", ""+vercode));
 				        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 

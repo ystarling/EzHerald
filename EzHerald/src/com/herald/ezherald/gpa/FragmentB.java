@@ -46,6 +46,7 @@ public class FragmentB extends Fragment {
 	private int vercode;
 	private View view ;
 	private HttpClient client;
+	ProgressDialog progress;
     private Handler handler = new Handler(){
 		
     	@Override
@@ -76,9 +77,13 @@ public class FragmentB extends Fragment {
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
+		progress = new ProgressDialog(getActivity());
+		progress.setTitle("正在获取数据");
+		progress.setIndeterminate(true);//圈圈而不是进度条
+		progress.setCancelable(false);
 		txtGpa = (TextView)getActivity().findViewById(R.id.txt_gpa);
 		elv = (ExpandableListView)getActivity().findViewById(R.id.eList);
-		final GpaAdapter adapter = new GpaAdapter(getActivity());
+		final GpaAdapter adapter = new GpaAdapter(getActivity(),progress);
 		elv.setAdapter(adapter);
 		btnUpdate = (Button)getActivity().findViewById(R.id.btn_update);
 		btnUpdate.setOnClickListener(new OnClickListener(){
@@ -108,10 +113,7 @@ public class FragmentB extends Fragment {
 							vercode  = 0;
 						}
 						Toast.makeText(getActivity(), "正在更新", Toast.LENGTH_SHORT).show();
-						ProgressDialog progress = new ProgressDialog(getActivity());
-						progress.setTitle("正在获取数据");
-						progress.setIndeterminate(true);//圈圈而不是进度条
-						progress.setCancelable(false);
+						
 						progress.show();
 						adapter.update(vercode,client);
 					}
