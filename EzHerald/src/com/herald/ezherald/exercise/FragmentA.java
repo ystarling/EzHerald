@@ -29,7 +29,7 @@ public class FragmentA extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
-		renren = new RenrenInfo(getActivity());
+		renren = new RenrenInfo(getActivity(),this);
 		txt_info = (TextView)getActivity().findViewById(R.id.txt_info);
 		txt_date = (TextView)getActivity().findViewById(R.id.txt_date);
 		if(renren.isSet()){
@@ -45,7 +45,7 @@ public class FragmentA extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				update();
-				show();
+
 			}
 		});
 	}
@@ -58,7 +58,7 @@ public class FragmentA extends Fragment {
 	/**
 	 * 将信息显示
 	 */
-	private void show(){
+	public void show(){
 		txt_info.setText("  "+renren.getInfo());
 		if (renren.getDate() != null) {
 			txt_date.setText("更新于" + renren.getDate());
