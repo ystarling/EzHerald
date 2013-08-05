@@ -178,9 +178,10 @@ public class GpaInfo {
 		// TODO Auto-generated method stub
 		gpaDbModel.open();
 		for(Record r:records){
-			if(r.getExtra() != null )
+			if(!r.getExtra().equals("") ){
 				r.setSelected(false);
 				gpaDbModel.changeSelection(r.getName(), false);
+			}
 		}
 		gpaDbModel.close();
 	}

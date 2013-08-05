@@ -154,21 +154,12 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 
 	public void removeOptional() {
 		// TODO Auto-generated method stub
-		gpaInfo.removeOptional();
+		gpaInfo.removeOptional();//更新数据库的记录
 		for(Record r:gpaInfo.getRecords()){
-			if(r.getExtra() != null )
+			if(!r.getExtra().equals(""))
 				r.setSelected(false);
 		}
-		Iterator<Entry<String, ArrayList<Record>>> iter = semester.entrySet().iterator();
-		while(iter.hasNext()){
-			Map.Entry<String, ArrayList<Record>> entry  = (Entry<String, ArrayList<Record>>) iter.next();
-			ArrayList<Record> rec = entry.getValue();
-			for(Record r:rec){
-				if(r.getExtra() != null)
-					r.setSelected(false);
-			}
-		}
-		notifyDataSetChanged();
+		notifyDataSetChanged();//更新显示
 	}
 	public void updateFinished(boolean isSuccess){
 		if(isSuccess){
