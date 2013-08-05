@@ -77,7 +77,10 @@ public class RenrenInfo{
 			String data = feed.text();
 			for (int j=0;j<target.length;j++){
 				if(data.indexOf(target[j])!=-1){
-					info = data;//TODO 信息进一步处理
+					int end = data.lastIndexOf("在");
+					setInfo(data.substring(0, end-1));//字符串之后的都是无用的
+					DateFormat fmt = SimpleDateFormat.getDateTimeInstance();
+					setDate(fmt.format(new Date()));//更新时间
 					save();
 					father.show();
 					return;
