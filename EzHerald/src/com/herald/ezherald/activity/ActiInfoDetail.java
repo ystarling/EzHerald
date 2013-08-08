@@ -9,26 +9,65 @@ import android.widget.TextView;
 
 public class ActiInfoDetail {
 
-	private String clubIconURL;
+	private int actiId;
+	private int clubId;
 	private String clubName;
 	private String actiTitle;
 	private String actiPubTime;
+	private String startTime;
+	private String endTime;
 	private String actiDetail;
-	private String actiPicURL;
-	private int commentNum;
 	
+	private String actiPicUrl;
+	private String actiPicName;
+	
+	private int lastCommentId;
+	private int commentNum;
+	private String commentUrl;
 	private List<Comment> commentList;
 
-	public ActiInfoDetail(String clname, String title, String pubtime,
-			String detail, String iconurl, String picurl,int cm) {
-		clubName = clname;
-		actiTitle = title;
-		actiPubTime = pubtime;
-		actiDetail = detail;
-		clubIconURL = iconurl;
-		actiPicURL = picurl;
-		commentNum = cm;
+
+	public ActiInfoDetail()
+	{
 		commentList = new ArrayList<Comment>();
+	}
+	
+	public void setActiId(int id)
+	{
+		actiId = id;
+	}
+	
+	public void setClubId(int id)
+	{
+		clubId = id;
+	}
+	
+	
+	public void setActiPicName(String name)
+	{
+		actiPicName = name;
+		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads" +
+				"/ActivityPost/m_m_"+actiPicName;
+	}
+	
+	public void setCommentUrl(String url)
+	{
+		commentUrl = url;
+	}
+	
+	public void setLastCommentId(int id)
+	{
+		lastCommentId = id;
+	}
+	
+	public void setCommentNum(int num)
+	{
+		commentNum = num;
+	}
+	
+	public void setActiIntro(String intro)
+	{
+		actiDetail = intro;
 	}
 	
 	public void setCommentList(List<Comment> cl)
@@ -57,12 +96,13 @@ public class ActiInfoDetail {
 		return actiDetail;
 	}
 
-	public String getClubIconUrl() {
-		return clubIconURL;
+	public int getActiId()
+	{
+		return actiId;
 	}
 
 	public String getActiPicUrl() {
-		return actiPicURL;
+		return actiPicUrl;
 	}
 	
 	public List<Comment> getCommentList()
@@ -74,5 +114,7 @@ public class ActiInfoDetail {
 	{
 		return commentNum;
 	}
+
+
 
 }

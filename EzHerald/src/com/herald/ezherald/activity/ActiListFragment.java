@@ -1,5 +1,6 @@
 package com.herald.ezherald.activity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -18,6 +19,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -167,11 +169,30 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity(), ""+position+"   "+id, Toast.LENGTH_SHORT).show();
 				ActiInfo actiInfo = (ActiInfo) adapter.getItem(position-1);
-				Intent intent = new Intent(context,ActiInfoDetailActivity.class);
-				intent.putExtra("clubName", actiInfo.getClubName());
-				intent.putExtra("title", actiInfo.getActiTitle());
-				intent.putExtra("date", actiInfo.getActiPubTime());
-				startActivity(intent);
+				boolean isVote = actiInfo.checkIsVote();
+				if(isVote)
+				{
+					Intent intent = new Intent(context,VoteDetailActivity.class);
+					startActivity(intent);
+				}
+				else
+				{
+					Intent intent = new Intent(context,ActiInfoDetailActivity.class);
+					intent.putExtra("clubName", actiInfo.getClubName());
+					intent.putExtra("title", actiInfo.getActiTitle());
+					intent.putExtra("date", actiInfo.getActiPubTime());
+					intent.putExtra("startTime", actiInfo.getStartTime());
+					intent.putExtra("endTime", actiInfo.getEndTime());
+					intent.putExtra("actiId", actiInfo.getId());
+					intent.putExtra("clubId", actiInfo.getClubId());
+					Bitmap bit_icon = DBAdapter.getClubIconByActi(actiInfo.getId());
+					ByteArrayOutputStream os_icon = new ByteArrayOutputStream();
+					bit_icon.compress(Bitmap.CompressFormat.PNG, 100, os_icon);
+					intent.putExtra("clubIcon",os_icon.toByteArray());
+					intent.putExtra("place", actiInfo.getPlace());
+					startActivity(intent);
+				}
+				
 			}
 			
 		});
@@ -242,12 +263,10 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			ACTITYPE = CONCERNEDACTI;
 			return true;
 		case 2:
-			Log.v("ClubList", "is here");
 			startActivity(new Intent(getActivity(),ClubListActivity.class));
 			
 			return true;
 		case 3:
-			Log.v("ClubList", "is here");
 			startActivity(new Intent(getActivity(),ClubListActivity.class));
 			
 			return true;

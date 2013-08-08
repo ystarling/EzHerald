@@ -1,5 +1,6 @@
 package com.herald.ezherald.activity;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -9,13 +10,20 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -53,9 +61,13 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 	EditText commentContent;
 	Button sendComment;
 	ScrollView scrollView;
+	TextView time;
+	TextView place;
 	
 	int currCommentNum;
 	int totalCommentNum;
+	
+	private byte [] bytes_icon;
 	
 
 	@SuppressLint("NewApi")
@@ -67,7 +79,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		commentAdapter = new CommentListAdapter(context);
 		currCommentNum = 0;
 		totalCommentNum = 0;
-		//actiInfoDetail = new ActiInfoDetail();
+		actiInfoDetail = new ActiInfoDetail();
 		
 		clubName = (TextView) findViewById(R.id.acti_detail_club_name);
 		actiTitle = (TextView) findViewById(R.id.acti_detail_acti_title);
@@ -80,6 +92,8 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		commentContent = (EditText) findViewById(R.id.acti_acti_detail_write_msg);
 		sendComment = (Button) findViewById(R.id.acti_acit_detail_send_msg);
 		scrollView = (ScrollView) findViewById(R.id.acti_acti_detail_scroll);
+		time = (TextView) findViewById(R.id.acti_detail_acti_time);
+		place = (TextView) findViewById(R.id.acti_detail_acti_place);
 		
 		
 		listView.setAdapter(commentAdapter);
@@ -94,6 +108,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 				Intent intent = new Intent(context,ClubDetailActivity.class);
 				intent.putExtra("clubName", actiInfoDetail.getClubName());
 				intent.putExtra("focus", true);
+				//intent.putExtra("icon", bytes_icon);
 				startActivity(intent);
 			}
         	
@@ -107,7 +122,9 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				startActivity(new Intent(context,ClubAlbumActivity.class));
+				Intent intent = new Intent(context,ClubAlbumActivity.class);
+				startActivity(intent);
+
 			}
         	
         });
@@ -122,7 +139,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 					if(currCommentNum < totalCommentNum)
 					{
 						progressDialog.show();
-						new RequestMoreComment().execute(new URL("http://jwc.seu.edu.cn"));
+						new RequestMoreComment().execute(new URL("http://jwc.seu.edu.cn"));  //需要点击加载更多的URL
 					}
 					
 				} catch (MalformedURLException e) {
@@ -140,6 +157,10 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				try {
 					progressDialog.show();
+					String url = "http://herald.seu.edu.cn/herald_league_api/index.php" +
+							"/command/comment" +
+							"/senderid/"+(1)+"/sendertype/1" +  // 1 replace senderid,it will be from baiyucheng
+							"/receiverid/"+actiInfoDetail.getActiId()+"/receivertype/5";
 					new SendComment().execute(new URL("http://jwc.seu.edu.cn"));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
@@ -151,10 +172,17 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		
 		
 		Bundle bundle = this.getIntent().getExtras();
+		actiInfoDetail.setActiId(bundle.getInt("actiId"));
+		actiInfoDetail.setClubId(bundle.getInt("clubId"));
 		
 		clubName.setText(bundle.getString("clubName"));
 		actiTitle.setText(bundle.getString("title"));
 		actiPubTime.setText(bundle.getString("date"));
+		time.setText(bundle.getString("startTime")+"至"+bundle.getString("endTime"));
+		place.setText(bundle.getString("place"));
+		byte [] bytes_icon = bundle.getByteArray("clubIcon");
+		Bitmap bit_icon = BitmapFactory.decodeByteArray(bytes_icon, 0, bytes_icon.length);
+		clubIcon.setImageBitmap(bit_icon);
 		
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setMessage("Please wait ... ");
@@ -165,8 +193,10 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 		try {
+			Log.v("actiInfoID", ""+actiInfoDetail.getActiId());
 			new RequestActiInfoDetail()
-					.execute(new URL("http://jwc.seu.edu.cn"));
+					.execute(new URL("http://herald.seu.edu.cn/herald_league_api/index.php" +
+							"/command/select/selectoperate/activitydetail/activityid/"+actiInfoDetail.getActiId()));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -227,35 +257,43 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
-						actiInfoDetail = new ActiInfoDetail("空手道社",
-								"南京内部赛", "2013-6-27", "南京极真空手道将在全民健身中心举办南京内部赛." +
-										"南京极真空手道将在全民健身中心举办南京内部赛." +
-										"南京极真空手道将在全民健身中心举办南京内部赛." +
-										"南京极真空手道将在全民健身中心举办南京内部赛." +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛" +
-										"南京极真空手道将在全民健身中心举办南京内部赛",
-								"", "",10);
+						JSONArray jsonArr = new JSONArray(str);
+						JSONObject jsonObj = (JSONObject) jsonArr.get(0);
+						actiInfoDetail.setActiPicName(jsonObj.getString("post_add"));
+						actiInfoDetail.setActiIntro(jsonObj.getString("introduction"));
+						//actiInfoDetail.setCommentNum(Integer.parseInt(jsonObj.getString("comment_num")));
+						actiInfoDetail.setCommentNum(10);
+						JSONArray comJsonArr = jsonObj.getJSONArray("comment");
 						List<Comment> cl = new ArrayList<Comment>();
-						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
-						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
+						for(int loop=0;loop<comJsonArr.length();++loop)
+						{
+							JSONObject comJson = (JSONObject) comJsonArr.get(loop);
+							cl.add(new Comment(Integer.parseInt(comJson.getString("comment_id")),comJson.getString("content"),
+									comJson.getString("sender"),comJson.getString("comment_time")));
+						}
+						
+//						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
+//						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
 						currCommentNum += cl.size();
 						totalCommentNum = actiInfoDetail.getCommentNum();
 						actiInfoDetail.setCommentList(cl);
+						if(cl.size()>0)
+						{
+							actiInfoDetail.setLastCommentId(cl.get(cl.size()-1).commentId);
+						}
+						else
+						{
+							actiInfoDetail.setLastCommentId(0);
+						}
+						
 						
 						return actiInfoDetail;
 					}
 				}
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -266,7 +304,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		protected void onPostExecute(ActiInfoDetail result) {
 			if (result != null) {
 				actiDetail.setText(result.getActiDetail());
-				clubIcon.setImageResource(R.drawable.ic_launcher);
+				//clubIcon.setImageResource(R.drawable.ic_launcher);
 				actiPic.setImageResource(R.drawable.ic_launcher);
 				moreComment.setText(">>>共"+result.getCommentNum()+"条评论,点击加载更多评论.");
 				List<Comment> cl = result.getCommentList();
@@ -304,8 +342,9 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
 						List<Comment> cl = new ArrayList<Comment>();
-						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
-						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
+						
+						cl.add(new Comment(12,"我叫何博学","何博伟","2013-6-30"));
+						cl.add(new Comment(13,"我叫何博学","何博伟","2013-6-30"));
 						currCommentNum += cl.size();
 						
 						return cl;

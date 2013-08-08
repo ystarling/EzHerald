@@ -16,6 +16,8 @@ import com.herald.ezherald.academic.DataTypeTransition;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -76,6 +78,7 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		Bundle bundle = getActivity().getIntent().getExtras();
 		clubDetailIntro.clubName = bundle.getString("clubName");
 		clubDetailIntro.haveFocus = bundle.getBoolean("focus");
+		//byte [] bytes_icon = bundle.getByteArray("icon");
 		tvName = (TextView) v.findViewById(R.id.acti_club_detail_name);
 		btnFocus = (Button) v.findViewById(R.id.acti_club_detail_focus);
 		tvIcon = (ImageView) v.findViewById(R.id.acti_club_detail_icon);
@@ -92,7 +95,9 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		progressDialog.setMessage("Please wait ... ");
 		
 		tvIcon.setImageResource(R.drawable.ic_launcher);
+		//tvIcon.setImageBitmap(BitmapFactory.decodeByteArray(bytes_icon, 0, bytes_icon.length));
 		tvName.setText(clubDetailIntro.clubName);
+		
 		
 		adapter = new CommentListAdapter(context);
 		comList.setAdapter(adapter);
@@ -202,8 +207,8 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 						clubDetailIntro.clubIconUrl = "";
 						clubDetailIntro.clubIntro = "这里是社团介绍，尽量详细地展示你的社团";
 						clubDetailIntro.haveFocus = true;
-						clubDetailIntro.comList.add(new Comment("dota dota dota","无名小卒","2013-6-30"));
-						clubDetailIntro.comList.add(new Comment("hahhahahha","he bo xue","2013-6-30"));
+						clubDetailIntro.comList.add(new Comment(1,"dota dota dota","无名小卒","2013-6-30"));
+						clubDetailIntro.comList.add(new Comment(2,"hahhahahha","he bo xue","2013-6-30"));
 						clubDetailIntro.comNum = 20;
 						
 						return clubDetailIntro;
@@ -340,9 +345,9 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
 						List<Comment> cl = new ArrayList<Comment>();
-						cl.add(new Comment("大家好，我是何博伟","何博伟","2013-7-2"));
-						cl.add(new Comment("大家好，我是何博伟","何博伟","2013-7-2"));
-						cl.add(new Comment("大家好，我是何博伟","何博伟","2013-7-2"));
+						cl.add(new Comment(1,"大家好，我是何博伟","何博伟","2013-7-2"));
+						cl.add(new Comment(2,"大家好，我是何博伟","何博伟","2013-7-2"));
+						cl.add(new Comment(3,"大家好，我是何博伟","何博伟","2013-7-2"));
 						return cl;
 					}
 				}
