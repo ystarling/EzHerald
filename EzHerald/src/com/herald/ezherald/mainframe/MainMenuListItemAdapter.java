@@ -6,6 +6,7 @@ import java.util.Map;
 import com.herald.ezherald.R;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,7 +87,12 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 				.get("icon"));
 		listItemView.title.setText((String) mListItems.get(position).get(
 				"title"));
-
+		Boolean selected = (Boolean)mListItems.get(position).get("selected");
+		if(selected!= null && selected.equals(true)){
+			//convertView.setBackgroundColor(Color.parseColor("#10ff0000"));
+			listItemView.title.setTextColor(Color.parseColor("#2c9bff"));
+		}
+		
 		return convertView;
 	}
 

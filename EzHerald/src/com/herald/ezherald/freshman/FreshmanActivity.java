@@ -1,22 +1,24 @@
 package com.herald.ezherald.freshman;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.herald.ezherald.R;
+import com.herald.ezherald.BaseFrameActivity;
 
-public class FreshmanActivity extends SherlockActivity {
+public class FreshmanActivity extends BaseFrameActivity {
+	Fragment mContentFrag;
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		
+		mContentFrag = new FreshmanFragment();
+		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.freshman_activity_main);
+
 	}
 
 }

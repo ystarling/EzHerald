@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/libr_name"
+        android:text="题名/责任者:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+	   android:id="@+id/libr_book_listdetail_name"
+	   android:text="狼图腾/姜戎"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingLeft="100px"
+   		/>
+    
+    <TextView
+        android:id="@+id/libr_press"
+        android:text="出版发行项:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+	   android:id="@+id/libr_book_listdetail_press"
+	   android:text="武汉:长江文艺出版社,2004"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingLeft="100px"
+   		/>
+    
+     <TextView
+        android:id="@+id/libr_prize"
+        android:text="ISBN及定价:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+	   android:id="@+id/libr_book_listdetail_prize"
+	   android:text="7-5354-2730-8/CNY32.00"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingLeft="100px"
+   		/>
+
+    
+    
+    <!--  
+     <ListView
+         android:id="@+id/libr_book_listview"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         >
+     </ListView>
+    -->
+    
+    <GridView
+        android:id="@+id/libr_book_grid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="0pt"
+        android:verticalSpacing="2pt"
+        android:numColumns="4"
+        android:gravity="center"
+        >
+   	</GridView>
+
+
+
+</LinearLayout>
