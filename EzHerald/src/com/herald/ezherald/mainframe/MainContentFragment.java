@@ -320,6 +320,7 @@ public class MainContentFragment extends SherlockFragment {
 			updateImageItem(i, retList.get(i));
 		}
 		refreshViewFlowImage();
+		dbAdapter.close();
 	}
 	
 
