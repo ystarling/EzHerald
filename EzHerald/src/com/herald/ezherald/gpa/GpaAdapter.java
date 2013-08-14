@@ -10,6 +10,8 @@ import java.util.Map.Entry;
 
 import org.apache.http.client.HttpClient;
 
+import com.herald.ezherald.account.UserAccount;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,15 +31,17 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private ProgressDialog progress;//处理数据的进度条
 	private ProgressDialog progressDialog;//更新数据的进度条
+	private UserAccount user;
 	
  	public GpaAdapter(Context context) {
 		this.context = context;
  		update(-1,null);//TODO 
 	}
- 	public GpaAdapter(Context context,ProgressDialog progressDialog) {
+ 	public GpaAdapter(Context context,ProgressDialog progressDialog, UserAccount user) {
 		this.context = context;
  		update(-1,null);//TODO 
  		this.progressDialog = progressDialog;
+ 		this.user = user;
 	} 
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
@@ -125,7 +129,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		if(gpaInfo == null || vercode == -1|| client == null){//初始化的调用
 			gpaInfo = new GpaInfo(context,this);
 		}else{
-			gpaInfo.update(vercode,client);
+			gpaInfo.update(vercode,client,user);
 			gpaInfo.save();
 		}
 		//初始化要用
