@@ -8,7 +8,6 @@ public class FreshmanContent extends BaseFrameActivity {
 	private FreshmanContentFragment mContentFrag;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
 		Bundle bundle = getIntent().getExtras();
 		int type = bundle.getInt("type");
 		mContentFrag = new FreshmanContentFragment();

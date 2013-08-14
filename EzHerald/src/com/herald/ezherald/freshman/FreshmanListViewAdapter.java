@@ -53,7 +53,6 @@ public class FreshmanListViewAdapter implements ListAdapter {
 
 	@Override
 	public Object getItem(int id) {
-		// TODO Auto-generated method stub
 		return null;
 		
 	}
