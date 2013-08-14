@@ -10,9 +10,12 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 import cn.edu.seu.herald.ws.api.exercise.ObjectFactory;
+import cn.edu.seu.herald.ws.api.exercise.RunTime;
 import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
 
 /**
@@ -20,7 +23,7 @@ import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
  * 跑操次数的信息
  */
 public class RunTimes {
-	public static final boolean DEBUG = true;//TODO Only for debugmust be removed
+	public static final boolean DEBUG = false;//TODO Only for debugmust be removed
 	private int    times; //查到的跑操次数
 	private int    adjustTimes;//修正的次数
 	private float  rate;//排名比例
@@ -38,12 +41,37 @@ public class RunTimes {
 	public static final String DEFAULT_AVERAGE_RUN_TIME=null;
 	public static final int    DEFAULT_ADVICE_TIME=-1;
 	public static final String DEFAULT_UPDATE_TIME = null;
+	private static final int SUCCESS = 1;
+	private static final int FAILED  = 0;
 	
 	private SharedPreferences pref;
 	private Editor editor;
 	private Activity activity;
+	
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg){
+			switch(msg.what){
+			case SUCCESS:
+				onSuccess((Integer)msg.obj);
+				break;
+			case FAILED:
+				onFiled();
+				break;
+			}
+		}
+	};
 	public int getTimes() {
 		return times;
+	}
+	protected void onFiled() {
+		// TODO Auto-generated method stub
+		Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
+	}
+	protected void onSuccess(int result) {
+		// TODO Auto-generated method stub
+		setTimes(result);
+		save();
 	}
 	public float getRate() {
 		return rate;
@@ -93,6 +121,12 @@ public class RunTimes {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
+ /**
+ * 空构造函数，不读取shared的数据
+ */
+public RunTimes(){
+		
+	}
 	/**
 	 * @param activity 调用者的Activity
 	 * 构造时会尝试从sharedPreference读取数据
@@ -133,7 +167,28 @@ public class RunTimes {
 			setUpdateTime(fmt.format(new Date()));
 			save();
 			return;
+		}else{
+			new Thread(){
+				@Override
+				public void run(){
+					try{
+						ObjectFactory factory = new ObjectFactory();
+						RunTimesData runTimesData = factory.createRunTimesData();
+						//RunTime runTime= factory.createRunTime();
+						//RunTimes result = new RunTimes(activity);
+						int result = runTimesData.getTimes().intValue();
+						//result.setTimes(runTimesData.getTimes().intValue());
+						Message msg = handler.obtainMessage(SUCCESS, result);
+			        	handler.sendMessage(msg);
+					}catch(Exception e){
+						handler.obtainMessage(FAILED).sendToTarget();
+					}
+					
+					//TODO useHandler setTimes(runTimesData.getTimes().intValue());
+				}
+			}.start();
 		}
+		/*
 		try {
 			setAdjustTimes(pref.getInt("AdjustTimes",DEFAULT_ADJUST_TIMES));
 			ObjectFactory factory = new ObjectFactory();
@@ -150,6 +205,7 @@ public class RunTimes {
 			// TODO: handle exception
 			Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
 		}
+		*/
 	}
 	/**
 	 * 保存数据到sharedPreference

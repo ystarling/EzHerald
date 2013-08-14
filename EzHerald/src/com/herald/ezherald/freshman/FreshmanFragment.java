@@ -18,9 +18,5 @@ public class FreshmanFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
-		WebView webview = (WebView)getActivity().findViewById(R.id.webView);
-		webview.getSettings().setJavaScriptEnabled(true);
-		webview.getSettings().setUserAgentString("Android");
-		webview.loadUrl("http://herald.seu.edu.cn/freshman_test/demo.html");
 	}
 }
