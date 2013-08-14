@@ -7,12 +7,28 @@
     <string name="main_slidebar_title">主菜单</string>
     <string name="UserName">一卡通</string>
     <string name="PassWord">密码</string>
+   
+    <string name="LoginButton">登录</string>
+   
+    
+    
     <string name="IDCardUserName">一卡通账号</string>
     <string name="IDCardPassWord">一卡通密码</string>
-    <string name="LoginButton">登录</string>
-    <string name="IDCardLoginButton">登录一卡通账户</string>
+     <string name="IDCardLoginButton">登录一卡通账户</string>
     <string name="IDCardLoginOffButton">退出一卡通账户</string>
     <string name="IDCardInfo">一卡通账号：</string>
+    
+    <string name="TyxUserName">体育系账号</string>
+    <string name="TyxPassWord">体育系密码</string>
+    <string name="TyxLoginButton">登录体育系账户</string>
+    <string name="TyxLoginOffButton">退出体育系账户</string>
+    <string name="TyxInfo">体育系账号用户名：</string>
+    
+    <string name="LibUserName">图书馆账号</string>
+    <string name="LibPassWord">图书馆密码</string>
+    <string name="LibLoginButton">登录图书馆账户</string>
+    <string name="LibLoginOffButton">退出图书馆账户</string>
+    <string name="LibInfo">图书馆账号用户名：</string>
     
     <string name="MENU_EXIT">MENU_EXIT</string>
     <string name="MENU_ABOUT">MENU_ABOUT</string>

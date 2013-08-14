@@ -158,7 +158,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 		public void run() {
 			boolean loginState = false;
 			boolean isNetError = !isNetworkAvailable(getActivity());
-			
+			boolean isServiceError = false;
 			userName = view_userName.getText().toString();
 			password = view_password.getText().toString();
 			try {
@@ -187,12 +187,8 @@ public class IDCardAccountFragment extends SherlockFragment {
 				database.insert(Authenticate.TABLE_NAME, null, values);
 				database.close();
 				Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);     
-		        startActivity(newActivity);
-				
+		        startActivity(newActivity);				
 			}
-			
-			
-			
 			}
 			Message message = new Message();
 			Bundle bundle = new Bundle();
@@ -204,11 +200,12 @@ public class IDCardAccountFragment extends SherlockFragment {
 
 		}catch (AuthenticationServiceException e) {
 			Log.v("mytestlog", e.getMessage());
-			isNetError = true;
+			isServiceError = true;
 			Message message = new Message();
 			Bundle bundle = new Bundle();
 			bundle.putBoolean("loginState", loginState);
 			bundle.putBoolean("isNetError", isNetError);
+			bundle.putBoolean("isServiceError", isServiceError);
 			message.setData(bundle);
 			loginHandler.sendMessage(message);
 		}		
@@ -226,6 +223,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			
 			boolean isNetError = msg.getData().getBoolean("isNetError");
 			boolean loginState = msg.getData().getBoolean("loginState");
+			boolean isServiceError = msg.getData().getBoolean("isServiceError");
 			if (proDialog != null) {
 				proDialog.dismiss();
 			}
@@ -233,13 +231,17 @@ public class IDCardAccountFragment extends SherlockFragment {
 				Toast.makeText(getActivity(), "当前网络不可用",
 						Toast.LENGTH_SHORT).show();
 			} else {
+				if(isServiceError){
+					Toast.makeText(getActivity(), "当前服务不可用，请稍后再试",
+							Toast.LENGTH_SHORT).show();
+				}else{
 				if (loginState) {
 					Toast.makeText(getActivity(), "登录成功！",
 							Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(getActivity(), "错误的用户名或密码",
 							Toast.LENGTH_SHORT).show();
-				
+				}
 				}
 
 			}
