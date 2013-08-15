@@ -2,6 +2,8 @@ package com.herald.ezherald.freshman;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -19,7 +21,7 @@ public class FreshmanListViewAdapter implements ListAdapter {
 			{
 				"选课一般是下午1点开放的。选课的时候所有人都在抢，所以系统会非常卡，大家一定要眼疾手快。尽量一进到选课系统就直接奔去选要修够10学分的通选课。分为人文社科类，自然科学类和经济学类。",
 				"东大的每个学年分3个学期，秋季开学先是短学期4周，大一的内容就是军训。然后第二个学期，长学期，16周上课+2周考试。",
-				"绩点是你总的成绩的体现，从大一一直积累到大四毕业。绩点对于申请各种奖学金非常重要。 GPA计算方法各院系略有不同，详情如下",
+				"绩点是你总的成绩的体现，从大一一直积累到大四毕业。绩点对于申请各种奖学金非常重要。 GPA计算方法各院系略有不同.",
 				"分为文化素质讲座，和课外研学讲座。文化素质讲座，要求刷卡，刷够8次，交篇读书报告，才可以达到要求。课外研学讲座每次挺后会发表，要求填表并写论文，论文审核通过可以获得0.3或者0.5个学分。每个学生必须拿够2个课外研学的学分，一般就是通过听课外研学讲座、做srtp项目、参加竞赛来拿够课外研学学分",
 			},
 			{
@@ -39,7 +41,8 @@ public class FreshmanListViewAdapter implements ListAdapter {
 			}, 
 	};
 	private Context context;
-	private final float LARGE = 30,SMALL=18; //字号
+	private static final float LARGE = 23,SMALL=18; //字号
+	private static final int PADDING = 10;
 	public FreshmanListViewAdapter(int type,Context context) {
 		this.type = type;
 		this.context = context;
@@ -73,12 +76,15 @@ public class FreshmanListViewAdapter implements ListAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		TextView v = new TextView(context);
-		if(position%2==0){
-			v.setText(titles[type][position]);
+		if(position%2==0){//标题
+			v.setText(titles[type][position/2]);
 			v.setTextSize(LARGE);
+			v.setTextColor(Color.BLUE);
+			v.setGravity(Gravity.CENTER);
 		}else{
-			v.setText(info[type][position]);
+			v.setText(info[type][position/2]);
 			v.setTextSize(SMALL);
+			v.setPadding(PADDING, PADDING, PADDING, 0);//left top right bottom
 		}
 		return v;
 	}

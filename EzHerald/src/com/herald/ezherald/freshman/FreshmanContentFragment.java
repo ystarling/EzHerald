@@ -25,7 +25,7 @@ public class FreshmanContentFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
 		adapter = new FreshmanListViewAdapter(type,getActivity());
-		listView = (ListView)getActivity().findViewById(R.id.list);
+		listView = (ListView)getActivity().findViewById(R.id.lv_content);
 		listView.setAdapter(adapter);
 	}
 
