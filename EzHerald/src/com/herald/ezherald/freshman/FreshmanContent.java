@@ -23,6 +23,7 @@ public class FreshmanContent extends BaseFrameActivity {
 		if(keyCode == KeyEvent.KEYCODE_BACK){
 			Intent it = new Intent(this,FreshmanActivity.class);
 			startActivity(it);
+			finish();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
