@@ -86,6 +86,10 @@ public class FragmentB extends Fragment {
 			Intent login = new Intent();
 			login.setClass(getActivity(),IDCardAccountActivity.class);
 			startActivity(login);
+			GpaDbModel model = new GpaDbModel(getActivity());
+			model.open();
+			model.clear();
+			model.close();//删除旧用户的数据
 			getActivity().finish();
 		}else{
 			progress = new ProgressDialog(getActivity());
@@ -141,8 +145,6 @@ public class FragmentB extends Fragment {
 					dialog = builder.create();
 					dialog.setCancelable(false);
 					dialog.show();
-					
-					//TODO 更新时的动画
 				}
 			});
 			btnCalc = (Button)getActivity().findViewById(R.id.btn_calc);
