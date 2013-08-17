@@ -189,8 +189,8 @@ public class GpaInfo {
 		gpaDbModel.open();
 		for (Record r : records) {
 			if (!r.getExtra().equals("")) {
-				r.setSelected(false);
-				gpaDbModel.changeSelection(r.getName(), false);
+				r.setSelected(false);//更新显示的数据
+				gpaDbModel.changeSelection(r.getName(), false);//更新数据库
 			}
 		}
 		gpaDbModel.close();
@@ -204,5 +204,15 @@ public class GpaInfo {
 	 */
 	private String rtrim(String s) {
 		return s.substring(0, s.length() - 1);
+	}
+
+	public void selectAll() {
+		// TODO Auto-generated method stub
+		gpaDbModel.open();
+		for(Record r:records){
+			r.setSelected(true);//更新显示的数据
+			gpaDbModel.changeSelection(r.getName(), true);//更新数据库
+		}
+		gpaDbModel.close();
 	}
 }

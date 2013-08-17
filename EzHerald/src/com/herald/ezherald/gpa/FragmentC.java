@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
 
@@ -32,10 +33,10 @@ public class FragmentC extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		user = Authenticate.getTyxUser(getActivity());
+		user = Authenticate.getIDcardUser(getActivity()) ;
 		if (null == user) {
 			Intent login = new Intent();
-			login.setClass(getActivity(), TyxAccountActivity.class);
+			login.setClass(getActivity(), IDCardAccountActivity.class);
 			startActivity(login);
 			getActivity().finish();
 		} else {

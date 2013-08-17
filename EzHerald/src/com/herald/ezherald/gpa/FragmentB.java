@@ -40,7 +40,7 @@ import com.herald.ezherald.account.UserAccount;
 public class FragmentB extends Fragment {
 	private ExpandableListView elv;
 	private TextView txtGpa;
-	private Button btnUpdate,btnCalc,btnRemoveOptional;
+	private Button btnUpdate,btnCalc,btnRemoveOptional,btnSelectAll;
 	private final int SUCCESS = 1,FAILED = 0;
 	private Bitmap bitmap;
 	private ImageView imageView;
@@ -166,6 +166,17 @@ public class FragmentB extends Fragment {
 					// TODO Auto-generated method stub
 					adapter.removeOptional();
 				}
+			});
+			
+			btnSelectAll = (Button)getActivity().findViewById(R.id.btn_select_all);
+			btnSelectAll.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					adapter.selectAll();
+				}
+				
 			});
 		}
 		
