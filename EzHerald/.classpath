@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="lib" path="D:/herald-web-services-api-1.1-20130719.133726-16.jar"/>
+	<classpathentry kind="lib" path="D:/jaxb-api-2.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/javax.ws.rs-api-2.0.jar"/>
+	<classpathentry kind="lib" path="D:/jersey-client-1.17.1.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

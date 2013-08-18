@@ -13,7 +13,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
  * @author BIG_SEA
  *	Tab—°‘Ò
  */
-class libraryFragmentTabSelect implements ActionBar.TabListener{
+class LibraryFragmentTabSelect implements ActionBar.TabListener{
 
 	/**
 	 * 
@@ -22,15 +22,20 @@ class libraryFragmentTabSelect implements ActionBar.TabListener{
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		Fragment libr_frg;
-		if(tab.getPosition()==0){
-			libr_frg=new LibraryFragment();
+		Fragment libr_frg = null;
+		switch(tab.getPosition()){
+			case 0:
+				libr_frg=new LibraryFragment();
+				break;
+			case 1:
+				libr_frg=new LibraryFragmentNews();
+				break;
+			case 2:
+				libr_frg=new LibraryFragmentMine();	
+				break;
 		}
-		else{
-			libr_frg=new libraryFragmentNews();
-		}
-		ft.replace(android.R.id.content, libr_frg);
 		
+		ft.replace(android.R.id.content, libr_frg);
 	}
 
 	@Override

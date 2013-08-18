@@ -6,7 +6,6 @@ public class LibraryBooksList {
 	private String BookAuthor;
 	private String BookPress;
 	private String BookDate;
-	
 	/**
 	 * @param args
 	 */
@@ -29,7 +28,6 @@ public class LibraryBooksList {
 	public String BookDate(){
 		BookDate="2004";
 		return BookDate;
-		
 	}
-
+	
 }

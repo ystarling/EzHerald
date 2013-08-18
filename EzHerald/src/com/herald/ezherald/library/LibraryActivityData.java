@@ -29,7 +29,6 @@ public class LibraryActivityData extends SherlockActivity{
 	ArrayList<Map<String, Object>> arraylist=new ArrayList<Map<String, Object>>();
 	protected String[] string;;
 	protected int[] libr_int;
-	Fragment mContentFragment;
 	
 	ListView libr_listView;
 	SimpleAdapter libr_adapter;
@@ -37,7 +36,7 @@ public class LibraryActivityData extends SherlockActivity{
 	public void onCreate(Bundle saveInstanceSate){
 		super.onCreate(saveInstanceSate);
 		setContentView(R.layout.library_activity_book);
-		setTitle("搜索结果显示");
+		setTitle("搜索结果");
 		//TextView libr_book_name=(TextView) findViewById(R.id.libr_book_name);
 //		TextView libr_text1=(TextView) findViewById(R.id.libr_name);
 //		TextView libr_book_name=(TextView) findViewById(R.id.libr_book_listdetail_name);
