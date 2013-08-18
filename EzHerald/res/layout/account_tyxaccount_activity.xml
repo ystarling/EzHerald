@@ -5,26 +5,26 @@
     android:orientation="vertical" >
 
 <EditText
-      android:id="@+id/loginUserNameEdit"
+      android:id="@+id/TyxLoginUserNameEdit"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_margin="5dp"
-      android:hint="@string/IDCardUserName" />
+      android:hint="@string/TyxUserName" />
    
 <EditText
-    android:id="@+id/loginPasswordEdit"
+    android:id="@+id/TyxLoginPasswordEdit"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:hint="@string/IDCardPassWord"
+    android:hint="@string/TyxPassWord"
     android:inputType="textPassword" />
 
 <Button
-    android:id="@+id/loginSubmit"
+    android:id="@+id/TyxLoginSubmit"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:text="@string/IDCardLoginButton"
+    android:text="@string/TyxLoginButton"
     android:textSize="23dp" />
 
 </LinearLayout>

@@ -1,35 +1,50 @@
 package com.herald.ezherald.account;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.MenuItem;
+import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.R;
 
-public class AccountActivity extends SherlockActivity {
+public class AccountActivity extends SherlockFragmentActivity 
+{
+	
+	
+	
+	Fragment mContentFrag;
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		
+		mContentFrag = new AccountFragment();
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.account_activity_main);
-
+		setContentView(R.layout.account_activity_main_pre_frag);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
-
-	public void sendMessage(View view) {
-		// Do something in response to button
-		Intent intent = new Intent(this, IDCardAccountActivity.class);
-		// EditText editText = (EditText) findViewById(R.id.edit_message);
-		// String message = editText.getText().toString();
-		// intent.putExtra(EXTRA_MESSAGE, message);
-		startActivity(intent);
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case android.R.id.home:
+			finish();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

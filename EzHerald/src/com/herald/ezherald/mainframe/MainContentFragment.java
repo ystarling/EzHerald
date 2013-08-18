@@ -6,10 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
@@ -36,6 +34,7 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
+import com.herald.ezherald.settingframe.AppUpdateActivity;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
 /*
@@ -128,6 +127,11 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
+		
+		//检查是否有固件版本更新
+		Intent i = new Intent();
+		i.setClass(getActivity(), AppUpdateActivity.class);
+		startActivity(i);
 	}
 	
 	/**
@@ -147,6 +151,7 @@ public class MainContentFragment extends SherlockFragment {
 	/**
 	 * 获得偏好设置
 	 */
+	@SuppressLint("NewApi")
 	private void getPrefItems(){
 		// 删除旧的东西
 		mContentTitles.clear();
@@ -315,6 +320,7 @@ public class MainContentFragment extends SherlockFragment {
 			updateImageItem(i, retList.get(i));
 		}
 		refreshViewFlowImage();
+		dbAdapter.close();
 	}
 	
 

@@ -25,7 +25,7 @@ public class GpaFragment extends SherlockFragment {
         ActionBar.Tab tab1 = bar.newTab();
         ActionBar.Tab tab2 = bar.newTab();
         ActionBar.Tab tab3 = bar.newTab();
-        tab1.setText("绩点政策");
+//        tab1.setText("绩点政策");
         tab2.setText("成绩查询");
         tab3.setText("成绩分析");
         tab1.setTabListener(new MyTabListener());

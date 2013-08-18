@@ -11,7 +11,7 @@ import android.util.Log;
 /**
  * @author xie
  * GPA的数据库模型类
- * 在条用后需要close()
+ * 在掉用后需要close()
  * http://www.vogella.com/articles/AndroidSQLite/article.html
  */
 public class GpaDbModel {
@@ -60,5 +60,11 @@ public class GpaDbModel {
 		String sql = "UPDATE %s SET isSelected = %d WHERE name = \"%s\";";
 		sql = String.format(sql, GpaDbHelper.DATABASE_NAME,newState?1:0,name);
 		db.execSQL(sql);
+	}
+	/**
+	 * 删除所有记录
+	 */
+	public void clear(){
+		db.delete(GpaDbHelper.DATABASE_NAME, null, null);
 	}
 }

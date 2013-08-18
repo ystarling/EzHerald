@@ -8,7 +8,6 @@ import java.net.URLEncoder;
 
 import cn.edu.seu.herald.auth.*;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
@@ -20,13 +19,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 
-public class IDCardAccountActivity extends SherlockFragmentActivity {
+public class TyxAccountActivity extends SherlockFragmentActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.account_idcardaccount_activity_prefrag);
+		setContentView(R.layout.account_tyxaccount_activity_pre_frag);
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
