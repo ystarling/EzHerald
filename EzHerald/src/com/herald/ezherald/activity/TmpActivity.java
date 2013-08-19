@@ -14,8 +14,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.app.SherlockActivity;
+
+import com.herald.ezherald.R;
+import com.herald.ezherald.academic.CustomListView;
+import com.herald.ezherald.academic.DataTypeTransition;
+import com.herald.ezherald.academic.ListFootView;
+import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
+
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -25,26 +35,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.herald.ezherald.R;
-import com.herald.ezherald.academic.CustomListView;
-import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
-import com.herald.ezherald.academic.DataTypeTransition;
-import com.herald.ezherald.academic.ListFootView;
-
-public class ActiListFragment extends SherlockFragment implements ActionBar.OnNavigationListener {
+public class TmpActivity extends SherlockFragment {
 	
 	private CustomListView listView;
 	private ActiInfoAdapter adapter;
@@ -78,62 +77,13 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		DBAdapter.open();
 	}
 	
+	
+	
+//	@SuppressLint("NewApi")
 	@Override 
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved)
 	{
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.menu_acti_list, menu);
-	}
-	
-	@Override
-	public void onPrepareOptionsMenu(Menu menu)
-	{
-		mMenu = menu;
-	}
-	
-	@Override 
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch(item.getItemId())
-		{
-		case R.id.menu_acti_list_action_refresh:
-			try {
-				onRefreshActionStart();
-				new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-					"/index.php/command/select/selectoperate/getactivity"));
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				onRefreshActionComplete();
-				e.printStackTrace();
-			}
-			break;
-			
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
-	// 刷新菜单开始旋转
-	public void onRefreshActionStart()
-	{
-		//REFRESHSTATE = REFRESHING ;
-		MenuItem muItem = mMenu.findItem(R.id.menu_acti_list_action_refresh);
-		muItem.setActionView(R.layout.academic_refresh_progress);	
-		
-	}
-	
-	// 刷新菜单停止旋转
-	public void onRefreshActionComplete()
-	{
-		//REFRESHSTATE = REFRESHDOWN;
-		MenuItem muItem = mMenu.findItem(R.id.menu_acti_list_action_refresh);
-		muItem.setActionView(null);	
-	}
-	
-	
-	@SuppressLint("NewApi")
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-	{
+		super.onCreate(saved);
 		View v;
 		v = inflater.inflate(R.layout.acti_activity_list, null);
 		listView = (CustomListView) v.findViewById(R.id.acti_acti_list);
@@ -141,7 +91,6 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		adapter = new ActiInfoAdapter(getActivity());
 		//adapter.setActiInfoList(actiArr);
 		listView.setAdapter(adapter);
-		
 		foot = new ListFootView(getActivity());
 		foot.setOnClickListener(new OnClickListener(){
 
@@ -161,7 +110,6 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			
 		});
 		listView.addFooterView(foot.getFootView());
-		
 		listView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -205,12 +153,12 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			public void onRefresh() {
 				// TODO Auto-generated method stub
 				try {
-					onRefreshActionStart();
+//					onRefreshActionStart();
 					new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
 							"/index.php/command/select/selectoperate/getactivity"));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
-					onRefreshActionComplete();
+//					onRefreshActionComplete();
 					e.printStackTrace();
 				}
 				
@@ -218,13 +166,13 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			
 		});
 		
-		ActionBar actionBar = getActivity().getActionBar();
+		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
 				R.array.acti_list_action_spinner, 
 				android.R.layout.simple_spinner_dropdown_item);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
+		actionBar.setListNavigationCallbacks(mSpinnerAdapter, new tmp() );
 		
 		if(DBAdapter.checkIfDBEmpty())
 		{
@@ -244,13 +192,43 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			adapter.notifyDataSetChanged();
 		}
 		
-		
-		
-		
 		return v;
 	}
+	
+	private class tmp implements ActionBar.OnNavigationListener
+	{
 
-	@Override
+		@Override
+		public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+			// TODO Auto-generated method stub
+			Log.v("ClubList", "come in");
+			
+			switch(itemPosition)
+			{
+			case 0:
+				ACTITYPE = ALLACTI;
+				return true;
+			case 1:
+				ACTITYPE = CONCERNEDACTI;
+				return true;
+			case 2:
+				startActivity(new Intent(getActivity(),ClubListActivity.class));
+				
+				return true;
+			case 3:
+				startActivity(new Intent(getActivity(),ClubListActivity.class));
+				
+				return true;
+			
+			}
+			
+			return false;
+		}
+		
+	}
+	
+	
+//	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
 		
@@ -351,12 +329,12 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			if (result != null)
 			{
 				DBAdapter.clearActiListTb();
-				insertActiInfoToDB(result,DBAdapter);
+//				insertActiInfoToDB(result,DBAdapter);
 				
 				adapter.setActiInfoList(result);
 				adapter.notifyDataSetChanged();
 				listView.onRefreshComplete();
-				onRefreshActionComplete();
+//				onRefreshActionComplete();
 				progressDialog.cancel();
 			}
 			
@@ -364,22 +342,6 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		
 	}
 	
-	private void insertActiInfoToDB(List<ActiInfo> l, ActiDBAdapter adapter)
-	{
-		if (l != null)
-		{
-			for (int loop = 0; loop < l.size(); ++loop)
-			{
-				ActiInfo item = l.get(loop);
-				adapter.insertActiListItem(item.getId(), item.checkIsVote()?1:0, item.getClubName(),
-						item.getClubId(),item.getClubName(), item.getActiTitle(),item.getActiIntro(),
-						item.getActiPubTime(),item.getStartTime(), item.getEndTime(), item.getPlace(),
-						item.getActiPicName(),
-						null, null);
-				
-			}
-		}
-	}
 	
 	
 	private class RequestActiList extends AsyncTask<URL,Integer,List<ActiInfo>>
@@ -448,29 +410,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			}
 			return null;
 		}
-		 
-		@Override
-		protected void onPostExecute(List<ActiInfo>result)
-		{
-			if(result == null)
-			{
-				Toast.makeText(context, "加载失败", Toast.LENGTH_LONG).show();
-			}
-			else if(result.size() == 0)
-			{
-				Toast.makeText(context, "没有更多信息", Toast.LENGTH_LONG).show();
-			}
-			else{
-				insertActiInfoToDB(result,DBAdapter);
-				
-				adapter.addActiInfoList(result);
-				adapter.notifyDataSetChanged();
-			}
-			
-			foot.endRequestData();
-			listView.onRequestComplete();
-			
-		}
 	}
+
+	
 
 }

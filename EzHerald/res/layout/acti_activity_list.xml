@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
-    <com.herald.ezherald.academic.CustomListView
+    <com.herald.ezherald.academic.CustomListView 
         android:id="@+id/acti_acti_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

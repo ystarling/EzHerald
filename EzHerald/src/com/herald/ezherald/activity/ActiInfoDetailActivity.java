@@ -262,8 +262,8 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 						actiInfoDetail.setActiPicName(jsonObj.getString("post_add"));
 						actiInfoDetail.setActiIntro(jsonObj.getString("introduction"));
 						//actiInfoDetail.setCommentNum(Integer.parseInt(jsonObj.getString("comment_num")));
-						actiInfoDetail.setCommentNum(10);
-						JSONArray comJsonArr = jsonObj.getJSONArray("comment");
+						actiInfoDetail.setCommentNum(jsonObj.getInt("comment"));
+						JSONArray comJsonArr = jsonObj.getJSONArray("comment_num");
 						List<Comment> cl = new ArrayList<Comment>();
 						for(int loop=0;loop<comJsonArr.length();++loop)
 						{
