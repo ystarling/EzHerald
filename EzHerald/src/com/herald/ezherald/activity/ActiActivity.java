@@ -24,8 +24,8 @@ public class ActiActivity extends BaseFrameActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 
-//		mContentFrag = new ActiListFragment();
-		mContentFrag = new TmpActivity();
+		mContentFrag = new ActiListFragment();
+//		mContentFrag = new TmpActivity();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
 		

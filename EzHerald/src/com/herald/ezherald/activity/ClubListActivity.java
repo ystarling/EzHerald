@@ -1,7 +1,6 @@
 package com.herald.ezherald.activity;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
@@ -58,7 +58,7 @@ public class ClubListActivity extends SherlockActivity {
 		});
 		
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = this.getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayShowTitleEnabled(false);
 		

@@ -15,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -34,6 +33,7 @@ import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -218,7 +218,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			
 		});
 		
-		ActionBar actionBar = getActivity().getActionBar();
+		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
 				R.array.acti_list_action_spinner, 
 				android.R.layout.simple_spinner_dropdown_item);
