@@ -21,12 +21,6 @@ public class ExerciseFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){
 		//super.onCreate(savedInstanceState);
-		
-		if(false){
-			//TODO Î´µÇÂ½ÏÔÊ¾µÇÂ½½çÃæ
-			return null;
-		}else{
-			//setContentView(R.layout.exercise_activity_main);
 			
 			ActionBar bar = getSherlockActivity(). getSupportActionBar();
 			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -43,7 +37,6 @@ public class ExerciseFragment extends SherlockFragment {
 			bar.addTab(tab2);
 			bar.addTab(tab3);
 			return inflater.inflate(R.layout.exercise_activity_main,group,false);
-		} 
 	}
 	    
 	private class MyTabListener implements ActionBar.TabListener

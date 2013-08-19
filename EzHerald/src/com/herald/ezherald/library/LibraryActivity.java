@@ -9,7 +9,7 @@ import com.herald.ezherald.academic.AcademicFragment;
 
 public class LibraryActivity extends BaseFrameActivity {
 	Fragment mContentFrag;
-
+	Fragment mContentFrag2;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -18,7 +18,9 @@ public class LibraryActivity extends BaseFrameActivity {
 		// TODO Auto-generated method stub
 		
 		mContentFrag = new LibraryFragment();
-		super.SetBaseFrameActivity(mContentFrag);
+		mContentFrag2 =new LibraryFragmentMain();
+		super.SetBaseFrameActivity(mContentFrag2);
+		//super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
 
 	}

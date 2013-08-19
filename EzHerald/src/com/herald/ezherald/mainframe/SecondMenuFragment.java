@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.AccountActivity;
+import com.herald.ezherald.account.UserInfoActivity;
 import com.herald.ezherald.settingframe.SettingActivity;
 
 /**
@@ -79,7 +80,7 @@ public class SecondMenuFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
-			i.setClass(getActivity(), AccountActivity.class);
+			i.setClass(getActivity(), UserInfoActivity.class);
 			break;
 		case 1:
 			i.setClass(getActivity(), SettingActivity.class);

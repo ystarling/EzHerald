@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+<EditText
+      android:id="@+id/LibLoginUserNameEdit"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:hint="@string/LibUserName" />
+   
+<EditText
+    android:id="@+id/LibLoginPasswordEdit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:hint="@string/LibPassWord"
+    android:inputType="textPassword" />
+
+<Button
+    android:id="@+id/LibLoginSubmit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:text="@string/LibLoginButton"
+    android:textSize="23dp" />
+
+</LinearLayout>

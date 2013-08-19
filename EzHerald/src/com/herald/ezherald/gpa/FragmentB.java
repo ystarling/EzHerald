@@ -3,8 +3,6 @@ package com.herald.ezherald.gpa;
 
 
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -29,16 +28,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
+import com.herald.ezherald.account.AccountActivity;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.IDCardAccountActivity;
+import com.herald.ezherald.account.UserAccount;
 
 public class FragmentB extends Fragment {
 	private ExpandableListView elv;
 	private TextView txtGpa;
-	private Button btnUpdate,btnCalc,btnRemoveOptional;
+	private Button btnUpdate,btnCalc,btnRemoveOptional,btnSelectAll;
 	private final int SUCCESS = 1,FAILED = 0;
 	private Bitmap bitmap;
 	private ImageView imageView;
@@ -46,6 +48,8 @@ public class FragmentB extends Fragment {
 	private int vercode;
 	private View view ;
 	private HttpClient client;
+	private UserAccount user;
+	
 	ProgressDialog progress;
     private Handler handler = new Handler(){
 		
@@ -77,84 +81,105 @@ public class FragmentB extends Fragment {
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-		progress = new ProgressDialog(getActivity());
-		progress.setTitle("正在获取数据");
-		progress.setIndeterminate(true);//圈圈而不是进度条
-		progress.setCancelable(false);
-		txtGpa = (TextView)getActivity().findViewById(R.id.txt_gpa);
-		elv = (ExpandableListView)getActivity().findViewById(R.id.eList);
-		final GpaAdapter adapter = new GpaAdapter(getActivity(),progress);
-		elv.setAdapter(adapter);
-		btnUpdate = (Button)getActivity().findViewById(R.id.btn_update);
-		btnUpdate.setOnClickListener(new OnClickListener(){
+		user = Authenticate.getIDcardUser(getActivity());
+		if(null == user){
+			Intent login = new Intent();
+			login.setClass(getActivity(),IDCardAccountActivity.class);
+			startActivity(login);
+			GpaDbModel model = new GpaDbModel(getActivity());
+			model.open();
+			model.clear();
+			model.close();//删除旧用户的数据
+			getActivity().finish();
+		}else{
+			progress = new ProgressDialog(getActivity());
+			progress.setTitle("正在获取数据,可能时间较长");
+			progress.setIndeterminate(true);//圈圈而不是进度条
+			progress.setCancelable(false);
+			txtGpa = (TextView)getActivity().findViewById(R.id.txt_gpa);
+			elv = (ExpandableListView)getActivity().findViewById(R.id.eList);
+			final GpaAdapter adapter = new GpaAdapter(getActivity(),progress,user);
+			elv.setAdapter(adapter);
+			btnUpdate = (Button)getActivity().findViewById(R.id.btn_update);
+			btnUpdate.setOnClickListener(new OnClickListener(){
 
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				builder.setIcon(R.drawable.ic_launcher);
-				builder.setTitle("请输入验证码");
-				LayoutInflater inflater = getActivity().getLayoutInflater();
-				view = inflater.inflate(R.layout.gpa_veryfiy_code, null);
-				imageView = (ImageView) view.findViewById(R.id.imageView);
-				getveryfyCode();
-				imageView.setImageBitmap(bitmap);
-				builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						EditText edtVercode= (EditText)view.findViewById(R.id.edt_veryfy_code);
-						try {
-							vercode = Integer.parseInt(edtVercode.getText()
-									.toString());
-						} catch (Exception e) {
-							// TODO: handle exception
-							vercode  = 0;
-						}
-						Toast.makeText(getActivity(), "正在更新", Toast.LENGTH_SHORT).show();
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+					builder.setIcon(R.drawable.ic_launcher);
+					builder.setTitle("请输入验证码");
+					LayoutInflater inflater = getActivity().getLayoutInflater();
+					view = inflater.inflate(R.layout.gpa_veryfiy_code, null);
+					imageView = (ImageView) view.findViewById(R.id.imageView);
+					getveryfyCode();
+					imageView.setImageBitmap(bitmap);
+					builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
 						
-						progress.show();
-						adapter.update(vercode,client);
-					}
-				});
-				builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							EditText edtVercode= (EditText)view.findViewById(R.id.edt_veryfy_code);
+							try {
+								vercode = Integer.parseInt(edtVercode.getText()
+										.toString());
+							} catch (Exception e) {
+								// TODO: handle exception
+								vercode  = 0;
+							}
+							Toast.makeText(getActivity(), "正在更新", Toast.LENGTH_SHORT).show();							
+							progress.show();
+							adapter.update(vercode,client);
+						}
+					});
+					builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							dialog.cancel();
+						}
+					});
+					builder.setView(view);
 					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						dialog.cancel();
-					}
-				});
-				builder.setView(view);
-				
-				dialog = builder.create();
-				dialog.setCancelable(false);
-				dialog.show();
-				
-				//TODO 更新时的动画
-			}
-		});
-		btnCalc = (Button)getActivity().findViewById(R.id.btn_calc);
-		btnCalc.setOnClickListener(new OnClickListener(){
+					dialog = builder.create();
+					dialog.setCancelable(false);
+					dialog.show();
+				}
+			});
+			btnCalc = (Button)getActivity().findViewById(R.id.btn_calc);
+			btnCalc.setOnClickListener(new OnClickListener(){
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				txtGpa.setText(String.format("所选绩点为:%.2f", adapter.getGpaInfo().calcAverage()));
-			}
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					txtGpa.setText(String.format("所选绩点为:%.2f", adapter.getGpaInfo().calcAverage()));
+				}
+				
+			});
 			
-		});
+			btnRemoveOptional = (Button)getActivity().findViewById(R.id.btn_remove_optional);
+			btnRemoveOptional.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					adapter.removeOptional();
+				}
+			});
+			
+			btnSelectAll = (Button)getActivity().findViewById(R.id.btn_select_all);
+			btnSelectAll.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					adapter.selectAll();
+				}
+				
+			});
+		}
 		
-		btnRemoveOptional = (Button)getActivity().findViewById(R.id.btn_remove_optional);
-		btnRemoveOptional.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				adapter.removeOptional();
-			}
-		});
 		
 	}
 	private void getveryfyCode(){

@@ -352,6 +352,7 @@ public class MainActivity extends BaseFrameActivity {
 					dbAdapter.updateImage(cnt++, tmpBmp);
 				}
 			}
+			dbAdapter.close();
 			// ////////////////////////////////////////////////////////////////////////////
 
 			return retList;

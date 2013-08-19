@@ -14,8 +14,9 @@
       android:id="@+id/libr_search_text"
       android:layout_width="250dp"
       android:layout_height="wrap_content"
-      android:hint="请写点神马东西"
-      android:singleLine="true"/>
+      android:hint="请输入书名"
+      android:singleLine="true"
+      android:imeOptions="actionSearch"/>
   	<Button 
   	  android:text="搜索"
       android:id="@+id/libr_search_button"
