@@ -1,5 +1,6 @@
 package com.herald.ezherald.activity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -14,10 +15,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +29,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -97,7 +100,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			try {
 				onRefreshActionStart();
 				new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-					"/index.php/command/select/selectoperate/refresh"));
+					"/index.php/command/select/selectoperate/getactivity"));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				onRefreshActionComplete();
@@ -149,7 +152,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				try {
 					foot.startRequestData();
 					new RequestActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-							"/index.php/command/select/selectoperate/refresh"));
+							"/index.php/command/select/selectoperate/getmore/lastactivityid/2"));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -167,11 +170,31 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity(), ""+position+"   "+id, Toast.LENGTH_SHORT).show();
 				ActiInfo actiInfo = (ActiInfo) adapter.getItem(position-1);
-				Intent intent = new Intent(context,ActiInfoDetailActivity.class);
-				intent.putExtra("clubName", actiInfo.getClubName());
-				intent.putExtra("title", actiInfo.getActiTitle());
-				intent.putExtra("date", actiInfo.getActiPubTime());
-				startActivity(intent);
+				boolean isVote = actiInfo.checkIsVote();
+				if(isVote)
+				{
+					Intent intent = new Intent(context,VoteDetailActivity.class);
+					startActivity(intent);
+				}
+				else
+				{
+					Intent intent = new Intent(context,ActiInfoDetailActivity.class);
+					intent.putExtra("clubName", actiInfo.getClubName());
+					intent.putExtra("title", actiInfo.getActiTitle());
+					intent.putExtra("date", actiInfo.getActiPubTime());
+					intent.putExtra("startTime", actiInfo.getStartTime());
+					intent.putExtra("endTime", actiInfo.getEndTime());
+					intent.putExtra("actiId", actiInfo.getId());
+					intent.putExtra("clubId", actiInfo.getClubId());
+					Bitmap bit_icon = DBAdapter.getClubIconByActi(actiInfo.getId());
+					ByteArrayOutputStream os_icon = new ByteArrayOutputStream();
+					bit_icon.compress(Bitmap.CompressFormat.PNG, 100, os_icon);
+					intent.putExtra("clubIcon",os_icon.toByteArray());
+					intent.putExtra("place", actiInfo.getPlace());
+					intent.putExtra("picName", actiInfo.getActiPicName());
+					startActivity(intent);
+				}
+				
 			}
 			
 		});
@@ -184,7 +207,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				try {
 					onRefreshActionStart();
 					new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-							"/index.php/command/select/selectoperate/refresh"));
+							"/index.php/command/select/selectoperate/getactivity"));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					onRefreshActionComplete();
@@ -195,7 +218,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			
 		});
 		
-		ActionBar actionBar = getActivity().getActionBar();
+		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
 				R.array.acti_list_action_spinner, 
 				android.R.layout.simple_spinner_dropdown_item);
@@ -208,7 +231,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			try {
 				progressDialog.show();
 				new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-						"/index.php/command/select/selectoperate/refresh"));
+						"/index.php/command/select/selectoperate/getactivity"));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -242,12 +265,10 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			ACTITYPE = CONCERNEDACTI;
 			return true;
 		case 2:
-			Log.v("ClubList", "is here");
 			startActivity(new Intent(getActivity(),ClubListActivity.class));
 			
 			return true;
 		case 3:
-			Log.v("ClubList", "is here");
 			startActivity(new Intent(getActivity(),ClubListActivity.class));
 			
 			return true;
@@ -302,8 +323,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 							JSONObject league_obj = jsonObject.getJSONObject("league_info");
 							String league_name = league_obj.getString("league_name");
 							String league_icon = league_obj.getString("avatar_address");
-							//String acti_pic = jsonObject.getString("");
-							String acti_pic = "p";
+							String acti_pic = jsonObject.getString("post_add");
+							
 
 							ActiInfo tmpInfo = new ActiInfo(acti_id, isVote, league_name,league_id, league_icon, 
 									acti_title, start_time, end_time,place, release_time, 
@@ -408,7 +429,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 							String league_name = league_obj.getString("league_name");
 							String league_icon = league_obj.getString("avatar_address");
 							//String acti_pic = jsonObject.getString("");
-							String acti_pic = "p";
+							String acti_pic = jsonObject.getString("post_add");
 
 							ActiInfo tmpInfo = new ActiInfo(acti_id, isVote, league_name,league_id, league_icon, 
 									acti_title, start_time, end_time,place, release_time, 
@@ -431,10 +452,21 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		@Override
 		protected void onPostExecute(List<ActiInfo>result)
 		{
-			insertActiInfoToDB(result,DBAdapter);
+			if(result == null)
+			{
+				Toast.makeText(context, "加载失败", Toast.LENGTH_LONG).show();
+			}
+			else if(result.size() == 0)
+			{
+				Toast.makeText(context, "没有更多信息", Toast.LENGTH_LONG).show();
+			}
+			else{
+				insertActiInfoToDB(result,DBAdapter);
+				
+				adapter.addActiInfoList(result);
+				adapter.notifyDataSetChanged();
+			}
 			
-			adapter.addActiInfoList(result);
-			adapter.notifyDataSetChanged();
 			foot.endRequestData();
 			listView.onRequestComplete();
 			

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
@@ -21,7 +22,6 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -206,7 +206,7 @@ public class AcademicFragment extends SherlockFragment implements
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(
 				getActivity(), R.array.academic_list_action_spinner,
 				android.R.layout.simple_spinner_dropdown_item);
-		ActionBar actionBar = getActivity().getActionBar();
+		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 

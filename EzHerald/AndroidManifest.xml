@@ -120,6 +120,10 @@
             android:name="com.herald.ezherald.activity.ClubAlbumActivity"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
+        <activity
+            android:name="com.herald.ezherald.activity.VoteDetailActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
         <!-- acti  end -->
         
         <activity
