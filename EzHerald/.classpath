@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="D:/herald-web-services-api-1.1-20130719.133726-16.jar"/>
-	<classpathentry kind="lib" path="D:/jaxb-api-2.2.3.jar"/>
-	<classpathentry kind="lib" path="D:/javax.ws.rs-api-2.0.jar"/>
-	<classpathentry kind="lib" path="D:/jersey-client-1.17.1.jar"/>
-	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-<<<<<<< HEAD
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-=======
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="D:/Github/EzHerald/herald-web-services-api-1.1-20130602.103934-8-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="D:/Github/EzHerald/jsoup-1.7.2.jar"/>
->>>>>>> 07ccc8507cb0da1d6699a48d74b35463afbff534
+	<classpathentry kind="lib" path="libs/herald-web-services-api-1.1-20130815.143624-30.jar"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
