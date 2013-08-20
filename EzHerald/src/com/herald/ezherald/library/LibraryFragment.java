@@ -50,7 +50,7 @@ public class LibraryFragment extends SherlockFragment{
 	View view;
 	
 
-	//LibraryService librservice=new HeraldWebServicesFactoryImpl("http://herald.seu.edu.cn/ws").getLibraryService();
+	LibraryService librservice=new HeraldWebServicesFactoryImpl("http://herald.seu.edu.cn/ws").getLibraryService();
 
 	Book librbook=new Book();
 	
@@ -99,8 +99,8 @@ public class LibraryFragment extends SherlockFragment{
 					else
 					{
 					try{
-					//librservice.search(libr_search_value);//传入用户输入内容
-					//librservice.getBookDetails(librbook);//获取内容
+					librservice.search(libr_search_value);//传入用户输入内容
+					librservice.getBookDetails(librbook);//获取内容
 					}
 					catch(Exception e){
 						e.printStackTrace();
@@ -161,8 +161,8 @@ public class LibraryFragment extends SherlockFragment{
 				else
 				{
 				try{
-				//librservice.search(libr_search_value);//传入用户输入内容
-				//librservice.getBookDetails(librbook);//获取内容
+				librservice.search(libr_search_value);//传入用户输入内容
+				librservice.getBookDetails(librbook);//获取内容
 				}
 				catch(Exception e){
 					e.printStackTrace();
@@ -216,19 +216,31 @@ public class LibraryFragment extends SherlockFragment{
 		
 		map.put("img",R.drawable.seu);
 		
+
+		if(librbook.getName()==null){
+			map.put("name","null");
+			map.put("author","责任者："+"null");
+			map.put("press","出版社："+"null");
+			map.put("date","日期："+"null");
+			map.put("reserve","预约");
+			Toast toast=Toast.makeText(getActivity(), "图书馆服务器未正常工作", Toast.LENGTH_LONG);
+			toast.show();
+		}else
+		{
+			map.put("name",librbook.getName());
+			map.put("author","责任者："+librbook.getAuthor());
+			map.put("press","出版社："+librbook.getPress());
+			map.put("date","日期："+librbook.getIsbn());
+			map.put("reserve","预约");
+		}
+	
 		/*
-		map.put("name",librbook.getName());
-		map.put("author","责任者："+librbook.getAuthor());
-		map.put("press","出版社："+librbook.getPress());
-		map.put("date","日期："+librbook.getIsbn());
-		*/
-		
 		map.put("name",librBookList.BookName());
 		map.put("author","责任者："+librBookList.BookAuthor());
 		map.put("press","出版社："+librBookList.BookPress());
 		map.put("date","日期："+librBookList.BookDate());
 		map.put("reserve","预约");
-		
+		*/
 		libr_list.add(map);
 		
 		//}
