@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.herald.ezherald.account.UserAccount;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -14,9 +16,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
+import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
+import cn.edu.seu.herald.ws.api.MorningExerciseService;
 import cn.edu.seu.herald.ws.api.exercise.ObjectFactory;
-import cn.edu.seu.herald.ws.api.exercise.RunTime;
 import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
+import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
 
 /**
  * @author xie
@@ -124,7 +128,7 @@ public class RunTimes {
  /**
  * 空构造函数，不读取shared的数据
  */
-public RunTimes(){
+	public RunTimes(){
 		
 	}
 	/**
@@ -155,7 +159,7 @@ public RunTimes(){
 	/**
 	 * 更新数据
 	 */
-	public void update(){
+	public void update(final UserAccount user){
 		if(DEBUG){//一些测试数据
 			setTimes(19);
 			setRate((float)0.23);
@@ -172,10 +176,14 @@ public RunTimes(){
 				@Override
 				public void run(){
 					try{
-						ObjectFactory factory = new ObjectFactory();
-						RunTimesData runTimesData = factory.createRunTimesData();
-						//RunTime runTime= factory.createRunTime();
-						//RunTimes result = new RunTimes(activity);
+						// Web服务地址
+						final String HERALD_WS_BASE_URI = "http://herald.seu.edu.cn/ws";
+						// 构造Web服务工厂
+						HeraldWebServicesFactory factory = new HeraldWebServicesFactoryImpl(HERALD_WS_BASE_URI);
+						// 获取某个特定的Web服务
+						MorningExerciseService morningExerciseService = factory.getMorningExerciseService();
+						RunTimesData runTimesData = morningExerciseService.getRunTimesData(user.getUsername(), user.getPassword());
+						
 						int result = runTimesData.getTimes().intValue();
 						//result.setTimes(runTimesData.getTimes().intValue());
 						Message msg = handler.obtainMessage(SUCCESS, result);
@@ -183,8 +191,6 @@ public RunTimes(){
 					}catch(Exception e){
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
-					
-					//TODO useHandler setTimes(runTimesData.getTimes().intValue());
 				}
 			}.start();
 		}
