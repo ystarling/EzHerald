@@ -49,8 +49,9 @@ public class ActiInfo {
 //				actiPicName;
 		actiPicUrl = "http://static.dayandcarrot.net/temp/aoi_sora.jpg";
 		actiDetailUrl = "http://herald.seu.edu.cn/herald_league_api/index.php" +
-				"/command/select/selectoperate/refresh/activityid/"+actiId;
+				"/command/select/selectoperate/activitydetail/activityid/"+actiId;
 	}
+	
 	
 	public int getId()
 	{

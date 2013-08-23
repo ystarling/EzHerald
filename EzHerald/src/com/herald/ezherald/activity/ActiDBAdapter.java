@@ -90,10 +90,6 @@ public class ActiDBAdapter {
 		return this;
 	}
 	
-	public void close()
-	{
-		DBHelper.close();
-	}
 	
 	public long insertActiListItem(int id,int isVote,String clubName,int clubId,String iconName,
 			String actiTitle,String intro,
@@ -359,7 +355,13 @@ public class ActiDBAdapter {
 		return actiList;
 	}
 	
-
+	public void close()
+	{
+		if(DBHelper != null)
+		{
+			DBHelper.close();
+		}
+	}
 	
 	
 		
