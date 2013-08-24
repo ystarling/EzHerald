@@ -28,6 +28,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.mainframe.MainContentFragment;
 import com.herald.ezherald.mainframe.MainFrameDbAdapter;
 import com.herald.ezherald.mainframe.MainGuideActivity;
+import com.herald.ezherald.settingframe.AppUpdateActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -61,6 +62,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
  */
 public class MainActivity extends BaseFrameActivity {
 
+	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; //此次运行已经显示过更新了
 	Fragment mContentFrag;
 	Menu mActionMenu;
 	Handler mMoveHandler;
@@ -76,6 +78,9 @@ public class MainActivity extends BaseFrameActivity {
 
 	private final String REMOTE_UPDATE_CHECK_URL = "http://121.248.63.105/EzHerald/picupdatetime/";
 	private final String REMOTE_UPDATE_QUERY_URL = "http://121.248.63.105/EzHerald/picturejson/";
+	
+	private boolean mShowedUpdate = false;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -92,9 +97,17 @@ public class MainActivity extends BaseFrameActivity {
 			i.setClass(this, MainGuideActivity.class);
 			startActivity(i);
 			setGuideViewed();
+		} 
+		
+		Intent intent = getIntent();
+		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
+		
+		//检查是否有固件版本更新
+		if(!mShowedUpdate){
+			intent = new Intent();
+			intent.setClass(this, AppUpdateActivity.class);
+			startActivity(intent);
 		}
-
-		// 检查是否需要在线更新 >>移动到onCreateOptionsMenu
 	}
 
 	/**
@@ -174,12 +187,14 @@ public class MainActivity extends BaseFrameActivity {
 		getSupportMenuInflater().inflate(R.menu.menu_main_content, menu);
 		mActionMenu = menu;
 
-		// 检查是否需要在线更新
+		//检查是否需要在线更新
 		boolean needOnlineRefresh = checkRefreshState();
+		
 		if (needOnlineRefresh) {
 
 			MenuItem item = mActionMenu.findItem(R.id.main_content_refresh);
 			requestInfoUpdate("blabla", item);
+			
 		}
 
 		return true;
@@ -571,16 +586,6 @@ public class MainActivity extends BaseFrameActivity {
 
 	@Override
 	protected void onResume() {
-		// 检查是否需要在线更新
-		/*boolean needOnlineRefresh = checkRefreshState();
-		if (needOnlineRefresh) {
-			if(mActionMenu != null)
-			{
-				MenuItem item = mActionMenu.findItem(R.id.main_content_refresh);
-				requestInfoUpdate("blabla", item);
-			}
-			
-		}*/
 		super.onResume();
 	}
 
