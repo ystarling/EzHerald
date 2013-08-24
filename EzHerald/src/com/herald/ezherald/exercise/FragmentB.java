@@ -41,7 +41,7 @@ public class FragmentB extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		user = Authenticate.getTyxUser(getActivity());
-		if (null == user&& false) {//TODO test
+		if (null == user && false) {//TODO test
 			Intent login = new Intent();
 			login.setClass(getActivity(), TyxAccountActivity.class);
 			startActivity(login);

@@ -7,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.herald.ezherald.account.UserAccount;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,11 +14,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
+import cn.edu.seu.herald.ws.api.AuthenticationException;
 import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
 import cn.edu.seu.herald.ws.api.MorningExerciseService;
-import cn.edu.seu.herald.ws.api.exercise.ObjectFactory;
+import cn.edu.seu.herald.ws.api.ServiceException;
 import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
 import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
+
+import com.herald.ezherald.account.UserAccount;
 
 /**
  * @author xie
@@ -188,7 +189,9 @@ public class RunTimes {
 						//result.setTimes(runTimesData.getTimes().intValue());
 						Message msg = handler.obtainMessage(SUCCESS, result);
 			        	handler.sendMessage(msg);
-					}catch(Exception e){
+					}catch(AuthenticationException e){
+						handler.obtainMessage(FAILED).sendToTarget();
+					}catch(ServiceException e){
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
 				}
