@@ -56,7 +56,7 @@
     <string-array name="pref_module_choice_titles">
         <item >课表自习</item>
         <item >校园活动</item>
-        <item >我的日程</item>
+        <!-- <item >我的日程</item> -->
         <item >图书查询</item>
         <item >绩点查询</item>
         <item >跑操查询</item>
@@ -66,7 +66,7 @@
     <string-array name="pref_module_choice_values">
         <item >curriculum</item>
         <item >activity</item>
-        <item >agenda</item>
+        <!-- <item >agenda</item> -->
         <item >library</item>
         <item >gpa</item>
         <item >exercise</item>
@@ -77,7 +77,7 @@
     
     
     <string-array name="pref_module_choice_def_vals">
-        <item >agenda</item>
+        <item >curriculum</item>
         <item >library</item>
         <item >gpa</item>
     </string-array>
