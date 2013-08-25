@@ -304,12 +304,12 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 						}
 						if(actiInfoDetail.checkIsVote())
 						{
-							JSONArray voteJsonArr = jsonObj.getJSONArray("vote");
+							JSONArray voteJsonArr = jsonObj.getJSONObject("vote_info").getJSONArray("vote_item_info");
 							Map<String,Integer> result = new HashMap<String,Integer>();
 							for(int i=0;i<voteJsonArr.length();++i)
 							{
 								JSONObject obj = voteJsonArr.getJSONObject(i);
-								result.put(obj.getString("item"), Integer.parseInt(obj.getString("count")));
+								result.put(obj.getString("name"), Integer.parseInt(obj.getString("suport_num")));
 							}
 							actiInfoDetail.setVoteResult(result);
 						}
