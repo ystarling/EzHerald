@@ -10,8 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -20,7 +19,6 @@
         <activity
             android:name="com.herald.ezherald.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,93 +28,76 @@
         </activity>
         <activity
             android:name="com.herald.ezherald.academic.AcademicActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.AccountActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.IDCardAccountActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.TyxAccountActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.LibAccountActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ActiActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.agenda.AgendaActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.curriculum.CurriculumActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.exercise.ExerciseActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.freshman.FreshmanActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
-        <activity
+         <activity
             android:name="com.herald.ezherald.freshman.FreshmanContent"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.gpa.GPAActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
-
-        <!-- libr  begin -->
+        
+        <!--libr  begin-->
         <activity
             android:name="com.herald.ezherald.library.LibraryActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityData"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Sherlock.Light" >
+            android:theme="@style/Theme.Sherlock.Light">
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityNews"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Sherlock.Light" >
+            android:theme="@style/Theme.Sherlock.Light">
         </activity>
-        <!-- libr end -->
-
+		<!-- libr end -->
+		
         <activity
             android:name="com.herald.ezherald.BaseFrameActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
 
         <!-- academic Begin -->
         <activity
             android:name="com.herald.ezherald.academic.AcademicDetailActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <!-- academic End -->
@@ -125,58 +106,51 @@
         <!-- acti  begin -->
         <activity
             android:name="com.herald.ezherald.activity.ClubListActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ActiInfoDetailActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ClubDetailActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ClubAlbumActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.VoteDetailActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <!-- acti  end -->
-
+        <activity
+            android:name="com.herald.ezherald.curriculum.CourseDetailActivity"
+            android:theme="@style/Theme.Sherlock.Light" >
+        </activity>
+        <!-- curriculum begin -->
+        
+        <!-- curriculum end -->
+        
         <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AboutThisApp"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.MainContentModulePrefActivity"
             android:label="@string/title_activity_main_content_module_pref"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
-            android:label="@string/title_activity_app_update"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Sherlock.Light" >
+            android:label="@string/title_activity_app_update" android:theme="@style/Theme.Sherlock.Light">
         </activity>
-        <activity
-            android:name=".mainframe.MainGuideActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
-        </activity>
+        <activity android:name=".mainframe.MainGuideActivity" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
     </application>
 
 </manifest>

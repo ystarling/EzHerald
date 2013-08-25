@@ -1,14 +1,20 @@
 package com.herald.ezherald.curriculum;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import cn.edu.seu.herald.ws.api.CurriculumService;
 import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
 import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.R;
+import com.herald.ezherald.academic.AcademicFragment;
 
-public class CurriculumActivity extends SherlockActivity {
+public class CurriculumActivity extends BaseFrameActivity {
+
+	Fragment mContentFrag;
 
 	/*
 	 * (non-Javadoc)
@@ -16,10 +22,40 @@ public class CurriculumActivity extends SherlockActivity {
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+
+		mContentFrag = new CurriculumFragment();
+		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.curriculum_activity_main);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.actionbarsherlock.app.SherlockActivity#onCreateOptionsMenu(com.
+	 * actionbarsherlock.view.Menu)
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.actionbarsherlock.app.SherlockActivity#onOptionsItemSelected(com.
+	 * actionbarsherlock.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		/*
+		 * 上侧Title位置的按钮点击相应
+		 */
+		return super.onOptionsItemSelected(item);
 	}
 
 }

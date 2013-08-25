@@ -1,0 +1,90 @@
+package com.herald.ezherald.curriculum;
+
+import java.util.List;
+
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.os.Bundle;
+import android.widget.ListView;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.herald.ezherald.R;
+
+public class CourseDetailActivity extends SherlockActivity {
+	
+	CourseDetailAdapter adapter;
+	ListView listView ;
+	CurriDBAdapter dbAdapter;
+	
+	@SuppressLint("NewApi")
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.curri_course_detail);
+		
+		adapter = new CourseDetailAdapter(this);
+		dbAdapter = new CurriDBAdapter(this);
+		dbAdapter.open();
+		
+		listView = (ListView) this.findViewById(R.id.curri_course_deail_list);
+		listView.setAdapter(adapter);
+		
+		Bundle bundle = this.getIntent().getExtras();
+		String courseName = bundle.getString("courseName");
+		List<Course> courses = dbAdapter.getCourse(courseName);
+		adapter.setCourses(courses);
+		
+		ActionBar actionBar = getActionBar();
+//		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setTitle("¿Î³ÌÏêÇé");
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
+	}
+	
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		dbAdapter.close();
+	}
+		
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+//		MenuInflater inflater = new MenuInflater(this);
+//		inflater.inflate(R.menu.menu_acti_detail, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{
+		case android.R.id.home:
+			finish();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
+	
+//	@Override
+//	public void onPause()
+//	{
+//		dbAdapter.close();
+//	}
+//	
+//	@Override
+//	public void onResume()
+//	{
+//		dbAdapter.open();
+//	}
+
+	
+
+}
