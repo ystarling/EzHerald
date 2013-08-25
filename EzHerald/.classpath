@@ -3,7 +3,13 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="D:/Andirod_Library/herald/achartengine-1.1.0.jar"/>
+=======
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+>>>>>>> aec7d93253cd45feacba7519b03237652756dc3f
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

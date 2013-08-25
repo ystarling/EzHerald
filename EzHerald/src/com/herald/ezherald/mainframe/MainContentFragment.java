@@ -128,10 +128,6 @@ public class MainContentFragment extends SherlockFragment {
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
 		
-		//检查是否有固件版本更新
-		Intent i = new Intent();
-		i.setClass(getActivity(), AppUpdateActivity.class);
-		startActivity(i);
 	}
 	
 	/**

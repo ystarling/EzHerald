@@ -82,6 +82,7 @@ public class FragmentB extends Fragment {
 	{
 		super.onActivityCreated(savedInstanceState);
 		user = Authenticate.getIDcardUser(getActivity());
+		/*
 		if(null == user){
 			Intent login = new Intent();
 			login.setClass(getActivity(),IDCardAccountActivity.class);
@@ -90,8 +91,7 @@ public class FragmentB extends Fragment {
 			model.open();
 			model.clear();
 			model.close();//删除旧用户的数据
-			getActivity().finish();
-		}else{
+		}else{*/
 			progress = new ProgressDialog(getActivity());
 			progress.setTitle("正在获取数据,可能时间较长");
 			progress.setIndeterminate(true);//圈圈而不是进度条
@@ -178,7 +178,7 @@ public class FragmentB extends Fragment {
 				}
 				
 			});
-		}
+		//}
 		
 		
 	}

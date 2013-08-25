@@ -2,7 +2,9 @@ package com.herald.ezherald.activity;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,15 +23,30 @@ public class ActiInfoDetail {
 	private String actiPicUrl;
 	private String actiPicName;
 	
+	private boolean isVote;
+	
 	private int lastCommentId;
 	private int commentNum;
 	private String commentUrl;
 	private List<Comment> commentList;
+	
+	private Map<String ,Integer> voteResult;
 
 
 	public ActiInfoDetail()
 	{
 		commentList = new ArrayList<Comment>();
+		voteResult = new HashMap<String,Integer>();
+	}
+	
+	public void setVoteResult(Map<String,Integer> map)
+	{
+		voteResult = map;
+	}
+	
+	public Map<String,Integer> getVoteResult()
+	{
+		return voteResult;
 	}
 	
 	public void setActiId(int id)
@@ -42,6 +59,15 @@ public class ActiInfoDetail {
 		clubId = id;
 	}
 	
+	public void setIsVote(boolean vote)
+	{
+		isVote = vote;
+	}
+	
+	public void setClubName(String name)
+	{
+		clubName = name;
+	}
 	
 	public void setActiPicName(String name)
 	{
@@ -83,6 +109,11 @@ public class ActiInfoDetail {
 	public String getClubName() {
 		return clubName;
 	}
+	
+	public int getClubId()
+	{
+		return clubId;
+	}
 
 	public String getActiTitle() {
 		return actiTitle;
@@ -105,6 +136,11 @@ public class ActiInfoDetail {
 		return actiPicUrl;
 	}
 	
+	public String getActiPicName()
+	{
+		return actiPicName;
+	}
+	
 	public List<Comment> getCommentList()
 	{
 		return commentList;
@@ -113,6 +149,17 @@ public class ActiInfoDetail {
 	public int getCommentNum()
 	{
 		return commentNum;
+	}
+	
+	public int getLastCommentId()
+	{
+//		return commentList.get(commentList.size()-1).getCommentId();
+		return lastCommentId;
+	}
+	
+	public boolean checkIsVote()
+	{
+		return isVote;
 	}
 
 

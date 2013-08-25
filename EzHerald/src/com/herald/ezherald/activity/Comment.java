@@ -13,4 +13,10 @@ public class Comment {
 		name = n;
 		date = d;
 	}
+	
+	public int getCommentId()
+	{
+		return commentId;
+	}
+	
 }

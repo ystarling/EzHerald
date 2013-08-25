@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="acti_url_activity_list">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/getactivity</string>
+    <string name="acti_url_more_activity">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/getmore/lastactivityid/</string>
+    <string name="acti_url_activity_detail">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/activitydetail/activityid/</string>
+    <string name="acti_url_club_icon">http://herald.seu.edu.cn/herald_league/Uploads/LeagueAvatar/m_s_avatar_address/</string>
+    <string name="acti_url_small_pic">http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/</string>
+    <string name="acti_url_middle_pic">http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_m_post_add/</string>
+    <string name="acti_url_large_pic">http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_l_post_add/</string>
+    <string name="acti_url_activity_comment">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/getactivitycomment/activityid/1</string>
+    <string name="acti_url_activity_more_comment">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/getmoreactivitycomment/activityid/%s/lastcommentid/</string>
+	<string name="acti_url_club_intro">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/leaguezone/leagueid/</string>
+    <!-- 下面的链接是待修正的 -->
+    <string name="acti_url_focus_activity_list">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/getactivity</string>
+	<string name="acti_url_focus_more_activity">http://herald.seu.edu.cn/herald_league_api/index.php/command/select/selectoperate/getmore/lastactivityid/</string>
+	
+</resources>

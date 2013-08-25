@@ -18,6 +18,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources.NotFoundException;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -78,6 +79,30 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		DBAdapter.open();
 	}
 	
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		if(DBAdapter != null)
+		{
+			DBAdapter.close();
+		}
+		
+	}
+	
+//	@Override
+//	public void onPause()
+//	{
+//		DBAdapter.close();
+//	}
+//	
+//	@Override
+//	public void onResume()
+//	{
+//		DBAdapter.open();
+//	}
+	
+	
 	@Override 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
@@ -99,8 +124,16 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		case R.id.menu_acti_list_action_refresh:
 			try {
 				onRefreshActionStart();
-				new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-					"/index.php/command/select/selectoperate/getactivity"));
+				if(ACTITYPE == ALLACTI)
+				{
+					new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_activity_list)));
+				}
+				else if(ACTITYPE == CONCERNEDACTI)
+				{
+					new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_activity_list)));
+				}
+				
+			
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				onRefreshActionComplete();
@@ -151,8 +184,17 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				//Toast.makeText(getActivity(), "more", Toast.LENGTH_SHORT).show();
 				try {
 					foot.startRequestData();
-					new RequestActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-							"/index.php/command/select/selectoperate/getmore/lastactivityid/2"));
+					if(ACTITYPE == ALLACTI)
+					{
+						new RequestActiList().execute(new URL(getResources().getString(R.string.acti_url_more_activity)
+								+adapter.getLastActiId()));
+					}
+					else if(ACTITYPE == CONCERNEDACTI)
+					{
+						new RequestActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_more_activity)
+								+adapter.getLastActiId()));
+					}
+					
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -169,31 +211,31 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 					long id) {
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity(), ""+position+"   "+id, Toast.LENGTH_SHORT).show();
-				ActiInfo actiInfo = (ActiInfo) adapter.getItem(position-1);
+				
+				ActiInfo actiInfo = (ActiInfo) adapter.getItem((int)id);
+				Toast.makeText(context, ""+actiInfo.getId(), Toast.LENGTH_SHORT).show();
 				boolean isVote = actiInfo.checkIsVote();
-				if(isVote)
-				{
-					Intent intent = new Intent(context,VoteDetailActivity.class);
-					startActivity(intent);
-				}
-				else
-				{
-					Intent intent = new Intent(context,ActiInfoDetailActivity.class);
-					intent.putExtra("clubName", actiInfo.getClubName());
-					intent.putExtra("title", actiInfo.getActiTitle());
-					intent.putExtra("date", actiInfo.getActiPubTime());
-					intent.putExtra("startTime", actiInfo.getStartTime());
-					intent.putExtra("endTime", actiInfo.getEndTime());
-					intent.putExtra("actiId", actiInfo.getId());
-					intent.putExtra("clubId", actiInfo.getClubId());
-					Bitmap bit_icon = DBAdapter.getClubIconByActi(actiInfo.getId());
-					ByteArrayOutputStream os_icon = new ByteArrayOutputStream();
-					bit_icon.compress(Bitmap.CompressFormat.PNG, 100, os_icon);
-					intent.putExtra("clubIcon",os_icon.toByteArray());
-					intent.putExtra("place", actiInfo.getPlace());
-					intent.putExtra("picName", actiInfo.getActiPicName());
-					startActivity(intent);
-				}
+				Intent intent = new Intent(context,ActiInfoDetailActivity.class);
+				intent.putExtra("clubName", actiInfo.getClubName());
+				intent.putExtra("title", actiInfo.getActiTitle());
+				intent.putExtra("date", actiInfo.getActiPubTime());
+				intent.putExtra("startTime", actiInfo.getStartTime());
+				intent.putExtra("endTime", actiInfo.getEndTime());
+				intent.putExtra("actiId", actiInfo.getId());
+				intent.putExtra("clubId", actiInfo.getClubId());
+				Bitmap bit_icon = DBAdapter.getClubIconByActi(actiInfo.getId());
+				ByteArrayOutputStream os_icon = new ByteArrayOutputStream();
+				bit_icon.compress(Bitmap.CompressFormat.PNG, 100, os_icon);
+				intent.putExtra("clubIcon",os_icon.toByteArray());
+				intent.putExtra("place", actiInfo.getPlace());
+				intent.putExtra("picName", actiInfo.getActiPicName());
+				Bitmap bit_pic = DBAdapter.getActiPicByActi(actiInfo.getId());
+				ByteArrayOutputStream os_pic = new ByteArrayOutputStream();
+				bit_pic.compress(Bitmap.CompressFormat.PNG, 100, os_pic);
+				intent.putExtra("actiPic",os_pic.toByteArray());
+				intent.putExtra("isVote", actiInfo.checkIsVote());
+				startActivity(intent);
+				
 				
 			}
 			
@@ -206,8 +248,15 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				// TODO Auto-generated method stub
 				try {
 					onRefreshActionStart();
-					new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-							"/index.php/command/select/selectoperate/getactivity"));
+					if(ACTITYPE == ALLACTI)
+					{
+						new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_activity_list)));
+					}
+					else if(ACTITYPE == CONCERNEDACTI )
+					{
+						new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_activity_list)));
+					}
+					
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					onRefreshActionComplete();
@@ -230,8 +279,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		{
 			try {
 				progressDialog.show();
-				new RefreshActiList().execute(new URL("http://herald.seu.edu.cn/herald_league_api" +
-						"/index.php/command/select/selectoperate/getactivity"));
+				new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_activity_list)));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -262,8 +310,20 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			ACTITYPE = ALLACTI;
 			return true;
 		case 1:
+		{
 			ACTITYPE = CONCERNEDACTI;
+			try {
+				new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_activity_list)));
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
+		}
+			
 		case 2:
 			startActivity(new Intent(getActivity(),ClubListActivity.class));
 			

@@ -31,6 +31,8 @@ import cn.edu.seu.herald.auth.AuthenticationServiceException;
 import cn.edu.seu.herald.auth.AuthenticationServiceFactory;
 import cn.edu.seu.herald.auth.AuthenticationServiceFactoryImpl;
 import cn.edu.seu.herald.auth.StudentUser;
+import cn.edu.seu.herald.ws.api.ServiceException;
+
 
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -94,6 +96,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			database.close();
 			Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);     
 	        startActivity(newActivity);
+	        getSherlockActivity().finish();
 		}
 	};
 	/*private void initView(boolean isRememberMe) {
@@ -187,7 +190,8 @@ public class IDCardAccountFragment extends SherlockFragment {
 				database.insert(Authenticate.TABLE_NAME, null, values);
 				database.close();
 				Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);     
-		        startActivity(newActivity);				
+		        startActivity(newActivity);
+		        getSherlockActivity().finish();
 			}
 			}
 			Message message = new Message();
@@ -196,8 +200,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			bundle.putBoolean("isNetError", isNetError);
 			message.setData(bundle);
 			loginHandler.sendMessage(message);
-			
-
+		
 		}catch (AuthenticationServiceException e) {
 			Log.v("mytestlog", e.getMessage());
 			isServiceError = true;
@@ -208,13 +211,14 @@ public class IDCardAccountFragment extends SherlockFragment {
 			bundle.putBoolean("isServiceError", isServiceError);
 			message.setData(bundle);
 			loginHandler.sendMessage(message);
+			
 		}		
-	
 			catch (Exception e) {
 				StringWriter sw = new StringWriter();
 				PrintWriter pw = new PrintWriter(sw);
 				e.printStackTrace(pw);
 				Log.v("errorlog", "\r\n" + sw.toString() + "\r\n");
+				
 		}
 	}
 	

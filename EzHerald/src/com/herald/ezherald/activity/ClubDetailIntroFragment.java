@@ -9,9 +9,14 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.DataTypeTransition;
+import com.herald.ezherald.account.Authenticate;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -78,7 +83,8 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		Bundle bundle = getActivity().getIntent().getExtras();
 		clubDetailIntro.clubName = bundle.getString("clubName");
 		clubDetailIntro.haveFocus = bundle.getBoolean("focus");
-		//byte [] bytes_icon = bundle.getByteArray("icon");
+		clubDetailIntro.clubId = bundle.getInt("clubid");
+		byte [] bytes_icon = bundle.getByteArray("icon");
 		tvName = (TextView) v.findViewById(R.id.acti_club_detail_name);
 		btnFocus = (Button) v.findViewById(R.id.acti_club_detail_focus);
 		tvIcon = (ImageView) v.findViewById(R.id.acti_club_detail_icon);
@@ -94,10 +100,9 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setMessage("Please wait ... ");
 		
-		tvIcon.setImageResource(R.drawable.ic_launcher);
-		//tvIcon.setImageBitmap(BitmapFactory.decodeByteArray(bytes_icon, 0, bytes_icon.length));
+//		tvIcon.setImageResource(R.drawable.ic_launcher);
+		tvIcon.setImageBitmap(BitmapFactory.decodeByteArray(bytes_icon, 0, bytes_icon.length));
 		tvName.setText(clubDetailIntro.clubName);
-		
 		
 		adapter = new CommentListAdapter(context);
 		comList.setAdapter(adapter);
@@ -154,7 +159,10 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 				// TODO Auto-generated method stub
 				try {
 					progressDialog.show();
-					new SendComment().execute(new URL("http://jwc.seu.edu.cn"));
+					String cardNum = Authenticate.getIDcardUser(context).getUsername().trim();
+					String url_str="http://herald.seu.edu.cn/herald_league_api/index.php/command/comment/senderid/" +
+							+Integer.parseInt(cardNum)+"/sendertype/1/receiveid/"+clubDetailIntro.clubId+"/receivetype/2";
+					new SendComment().execute(new URL(url_str));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -166,7 +174,8 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		
 		//Toast.makeText(getActivity(), bundle.getString("clubName","no clubName"), Toast.LENGTH_SHORT).show();
 		try {
-			new RequestClubDetailIntro().execute(new URL("http://jwc.seu.edu.cn"));
+			new RequestClubDetailIntro().execute(new URL(getResources().getString(R.string.acti_url_club_intro)
+					+clubDetailIntro.clubId ));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -202,19 +211,35 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 					{
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
+						JSONObject jsonObj = new JSONObject(str);
+						clubDetailIntro.clubIntro = jsonObj.getString("introduce");
+						clubDetailIntro.comNum = Integer.parseInt(jsonObj.getString("comment_num") );
+						JSONArray jsonArr = jsonObj.getJSONArray("comment");
+						for(int i=0;i<jsonArr.length();++i)
+						{
+							JSONObject com = jsonArr.getJSONObject(i);
+							int id = Integer.parseInt(com.getString("comment_id"));
+							String content = com.getString("content");
+							String sender = com.getString("sender");
+							String date = com.getString("comment_time");
+							clubDetailIntro.comList.add(new Comment(id,content,sender,date));
+						}
 						//Log.v("Net test", str);
-						clubDetailIntro.clubName = "电竞社";
-						clubDetailIntro.clubIconUrl = "";
-						clubDetailIntro.clubIntro = "这里是社团介绍，尽量详细地展示你的社团";
-						clubDetailIntro.haveFocus = true;
-						clubDetailIntro.comList.add(new Comment(1,"dota dota dota","无名小卒","2013-6-30"));
-						clubDetailIntro.comList.add(new Comment(2,"hahhahahha","he bo xue","2013-6-30"));
-						clubDetailIntro.comNum = 20;
+//						clubDetailIntro.clubName = "电竞社";
+//						clubDetailIntro.clubIconUrl = "";
+//						clubDetailIntro.clubIntro = "这里是社团介绍，尽量详细地展示你的社团";
+//						clubDetailIntro.haveFocus = true;
+//						clubDetailIntro.comList.add(new Comment(1,"dota dota dota","无名小卒","2013-6-30"));
+//						clubDetailIntro.comList.add(new Comment(2,"hahhahahha","he bo xue","2013-6-30"));
+//						clubDetailIntro.comNum = 20;
 						
 						return clubDetailIntro;
 					}
 				}
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -226,22 +251,31 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		@Override 
 		protected void onPostExecute(ClubDetailIntro intro)
 		{
-			introProgress.setVisibility(View.GONE);
-			msgProgress.setVisibility(View.GONE);
+			if(intro != null)
+			{
+				introProgress.setVisibility(View.GONE);
+				msgProgress.setVisibility(View.GONE);
+				
+				adapter.setCommentList(intro.comList);
+				adapter.notifyDataSetChanged();
+				comNum += intro.comList.size();
+				totalComNum = intro.comNum;
+				
+				tvIntro.setText(intro.clubIntro);	
+				tvComNum.setText(">>>共"+intro.comNum+"条留言,点击查看更多留言.");
+			}
+			else
+			{
+				Toast.makeText(context, "请求失败！", Toast.LENGTH_SHORT).show();
+			}
 			
-			adapter.setCommentList(intro.comList);
-			adapter.notifyDataSetChanged();
-			comNum += intro.comList.size();
-			totalComNum = intro.comNum;
-			
-			tvIntro.setText(intro.clubIntro);	
-			tvComNum.setText(">>>共"+intro.comNum+"条留言,点击查看更多留言.");
 		}
 		
 	}
 	
 	private class ClubDetailIntro
 	{
+		public int clubId;
 		public String clubName;
 		public String clubIconUrl;
 		public boolean haveFocus;

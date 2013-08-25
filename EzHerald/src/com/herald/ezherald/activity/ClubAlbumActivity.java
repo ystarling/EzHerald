@@ -1,5 +1,8 @@
 package com.herald.ezherald.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +21,8 @@ public class ClubAlbumActivity extends SherlockActivity {
 	private static final int ALBUM_RES[] = {  
         R.drawable.acti_pic1,R.drawable.acti_pic2,R.drawable.acti_pic3,  
     }; 
+	
+	private String[] pic_adds;
 	private static final int ALBUM_COUNT = ALBUM_RES.length ;
 	private ViewPager mViewPager; 
 	private ViewPagerAdapter mViewPagerAdapter;
@@ -30,6 +35,9 @@ public class ClubAlbumActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.acti_club_detail_photos);
 		
+		Bundle bundle = this.getIntent().getExtras();
+		pic_adds = bundle.getStringArray("pic_adds");
+		
 		setupViews();
 		
 		ActionBar actionBar = getActionBar();
@@ -41,10 +49,10 @@ public class ClubAlbumActivity extends SherlockActivity {
 	private void setupViews(){    
     	//初始化JSonArray,给ViewPageAdapter提供数据源用.
     	mJsonArray = new JSONArray();
-    	for(int i = 0;i<ALBUM_COUNT; i++){
+    	for(int i = 0;i<pic_adds.length; i++){
     		JSONObject object = new JSONObject();
     		try {
-				object.put("resid", ALBUM_RES[i % ALBUM_RES.length]);
+				object.put("pic_add", pic_adds[i % ALBUM_RES.length]);
 				object.put("name", "Album " + i);
 	    		mJsonArray.put(object);
 			} catch (JSONException e) {

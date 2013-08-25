@@ -42,7 +42,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 		context = c;
 		actiInfoList = new LinkedList<ActiInfo>();
 		DBAdapter = new ActiDBAdapter(context);
-		DBAdapter.open();
+//		DBAdapter.open();
 	}
 
 	public void setActiInfoList(ActiInfo[] actiArr) {
@@ -65,6 +65,11 @@ public class ActiInfoAdapter extends BaseAdapter {
 
 	public void addActiInfoList(List<ActiInfo> actiList) {
 		actiInfoList.addAll(actiList);
+	}
+	
+	public int getLastActiId()
+	{
+		return actiInfoList.get(actiInfoList.size()-1).getId();
 	}
 
 	@Override
@@ -122,7 +127,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 		//actiInfoHolder.actiPic.setImageResource(R.drawable.ic_launcher);
 		
 		int acti_id = actiInfo.getId();
-		
+		DBAdapter.open();
 		if(DBAdapter.checkHaveIcon(acti_id))
 		{
 			Bitmap bitmap = DBAdapter.getClubIconByActi(acti_id);
@@ -163,7 +168,9 @@ public class ActiInfoAdapter extends BaseAdapter {
 			}
 			
 		}
-		//DBAdapter.close();
+		DBAdapter.close();
+		final String name = actiInfo.getClubName();
+		final String title = actiInfo.getActiTitle();
 
 		actiInfoHolder.actiShareBtn.setOnClickListener(new OnClickListener() {
 
@@ -175,7 +182,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 				intent.setType("text/plain");
 				intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
 				intent.putExtra(Intent.EXTRA_TEXT,
-						"I would like to ‘herald campus’ this with you...");
+						name +" 发布了新活动《"+title+"》");
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				context.startActivity(Intent.createChooser(intent, "分享到"));
 
@@ -263,6 +270,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 			Log.v("REQUEST", "request completed");
 			if(result != null)
 			{
+				DBAdapter.open();
 				if(flag == 0)
 				{
 					DBAdapter.updateClubIconByActi(id, result);
@@ -274,6 +282,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 					Log.v("Save Icon", "complete save pic");
 				}
 				img.setImageBitmap(result);
+				DBAdapter.close();
 				//img.setLayoutParams(new LayoutParams(40, 40));
 				//
 				//actiInfoHolder.clubIcon.setImageResource(R.drawable.ic_launcher);
