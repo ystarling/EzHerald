@@ -1,15 +1,19 @@
 package com.herald.ezherald.gpa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.IDCardAccountActivity;
+import com.herald.ezherald.account.UserAccount;
 
 
 
 public class GPAActivity extends BaseFrameActivity {
-	Fragment mContentFrag;
+	//Fragment mContentFrag;
 
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -17,12 +21,22 @@ public class GPAActivity extends BaseFrameActivity {
 	@Override
 	public void onCreate( Bundle savedInstanceState ) {
 		// TODO Auto-generated method stub
-		if(false) {//TODO　未登陆
-			//intent
-			KillMyself();
+		UserAccount user = Authenticate.getIDcardUser(this);
+		if(null == user){
+			Intent login = new Intent();
+			login.setClass(this,IDCardAccountActivity.class);
+			startActivity(login);
+			GpaDbModel model = new GpaDbModel(this);
+			model.open();
+			model.clear();
+			model.close();//删除旧用户的数据
+			
+			mContentFrag = new FailFragment();
+			super.SetBaseFrameActivity(mContentFrag);
+		}else{
+			mContentFrag = new GpaFragment();
+			super.SetBaseFrameActivity(mContentFrag);
 		}
-		mContentFrag = new GpaFragment();
-		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
 
 	}

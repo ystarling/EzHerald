@@ -17,7 +17,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="学习"
-            android:textSize="30sp" />
+            android:textSize="30sp" 
+            android:padding="30dp"/>
 
         <TextView
             android:id="@+id/text_life"
@@ -27,7 +28,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="生活"
-            android:textSize="30sp" />
+            android:textSize="30sp" 
+            android:padding="30dp"/>
 
     </LinearLayout>
 
@@ -45,7 +47,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="玩乐"
-            android:textSize="30sp" />
+            android:textSize="30sp" 
+            android:padding="30dp"/>
 
         <TextView
             android:id="@+id/text_faq"
@@ -55,7 +58,8 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="FAQ"
-            android:textSize="30sp" />
+            android:textSize="30sp" 
+            android:padding="30dp"/>
 
     </LinearLayout>
 

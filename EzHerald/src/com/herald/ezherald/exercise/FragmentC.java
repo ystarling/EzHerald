@@ -51,7 +51,7 @@ public class FragmentC extends Fragment {
 				@Override
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
-					update();
+					update(user);
 					show();
 				}
 
@@ -59,7 +59,7 @@ public class FragmentC extends Fragment {
 			if (runTimes.isSet()) {
 				show();
 			} else {
-				update();
+				update(user);
 				show();
 			}
 		}
@@ -108,8 +108,8 @@ public class FragmentC extends Fragment {
 
 	}
 
-	private void update() {
-		runTimes.update();
+	private void update(UserAccount user) {
+		runTimes.update(user);
 	}
 
 }

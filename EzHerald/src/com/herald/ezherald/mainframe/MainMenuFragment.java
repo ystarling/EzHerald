@@ -35,6 +35,7 @@ import com.herald.ezherald.library.LibraryActivity;
  */
 public class MainMenuFragment extends ListFragment {
 
+	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; //此次运行已经显示过更新了
 	private final boolean DEBUG_DONOT_KILL_ACTIVITY = false;
 	private List<Map<String, Object>> mListItems;
 	private MainMenuListItemAdapter mListViewAdapter;
@@ -43,7 +44,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_mainframe,
 			R.drawable.main_menu_ic_curriculum,
 			R.drawable.main_menu_ic_activity,
-			R.drawable.main_menu_ic_agenda,
+			//R.drawable.main_menu_ic_agenda,
 			R.drawable.main_menu_ic_library,
 			R.drawable.main_menu_ic_gpa,
 			R.drawable.main_menu_ic_exercise,
@@ -101,26 +102,27 @@ public class MainMenuFragment extends ListFragment {
 		case 2:
 			i.setClass(getActivity(), ActiActivity.class);
 			break;
-		case 3:
+		/*case 3:
 			i.setClass(getActivity(), AgendaActivity.class);
-			break;
-		case 4:
+			break;*/
+		case 3:
 			i.setClass(getActivity(), LibraryActivity.class);
 			break;
-		case 5:
+		case 4:
 			i.setClass(getActivity(), GPAActivity.class);
 			break;
-		case 6:
+		case 5:
 			i.setClass(getActivity(), ExerciseActivity.class);
 			break;
-		case 7:
+		case 6:
 			i.setClass(getActivity(), AcademicActivity.class);
 			break;
-		case 8:
+		case 7:
 			i.setClass(getActivity(), FreshmanActivity.class);
 			break;
 		}
 		if (i != null) {
+			i.putExtra(KEY_SHOWED_UPDATE, true);
 			startActivity(i);
 			TryKillMyself();
 		}
@@ -175,23 +177,23 @@ public class MainMenuFragment extends ListFragment {
 		else if(localModuleName.equals("activity")){
 			return 2;
 		}
-		else if(localModuleName.equals("agenda")){
+		/*else if(localModuleName.equals("agenda")){
+			return 3;
+		}*/
+		else if(localModuleName.equals("library")){
 			return 3;
 		}
-		else if(localModuleName.equals("library")){
+		else if(localModuleName.equals("gpa")){
 			return 4;
 		}
-		else if(localModuleName.equals("gpa")){
+		else if(localModuleName.equals("exercise")){
 			return 5;
 		}
-		else if(localModuleName.equals("exercise")){
+		else if(localModuleName.equals("academic")){
 			return 6;
 		}
-		else if(localModuleName.equals("academic")){
-			return 7;
-		}
 		else if(localModuleName.equals("freshman")){
-			return 8;
+			return 7;
 		}
 		
 		return -1;
