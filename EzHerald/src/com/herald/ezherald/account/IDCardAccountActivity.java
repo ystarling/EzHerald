@@ -26,9 +26,9 @@ public class IDCardAccountActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.account_idcardaccount_activity_prefrag);
-		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		setContentView(R.layout.account_idcardaccount_activity_prefrag);		
+		
 	}
 
 	@Override

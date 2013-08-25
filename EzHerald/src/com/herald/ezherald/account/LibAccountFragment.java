@@ -97,6 +97,7 @@ public class LibAccountFragment extends SherlockFragment {
 			database.close();
 			Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);     
 	        startActivity(newActivity);
+	        getSherlockActivity().finish();
 		}
 	};
 	/*private void initView(boolean isRememberMe) {
@@ -161,7 +162,7 @@ public class LibAccountFragment extends SherlockFragment {
 		public void run() {
 			boolean loginState = false;
 			boolean isNetError = !isNetworkAvailable(getActivity());
-			
+			boolean isServiceError = false;
 			userName = view_userName.getText().toString();
 			password = view_password.getText().toString();
 			try {
@@ -171,8 +172,10 @@ public class LibAccountFragment extends SherlockFragment {
 					HeraldWebServicesFactory factory = new HeraldWebServicesFactoryImpl(HERALD_WS_BASE_URI);
 					
 					LibraryService libService = factory.getLibraryService();
-
-					Log.v("myname", userName);
+					if (libService == null) {
+						Log.v("temptext", "libService is null");
+					}
+					
 					User libUser = libService.logIn(userName, password);
 				
 			if(libUser == null){
@@ -192,41 +195,63 @@ public class LibAccountFragment extends SherlockFragment {
 				database.insert(Authenticate.TABLE_NAME, null, values);
 				database.close();
 				Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);     
-		        startActivity(newActivity);				
+		        startActivity(newActivity);
+		       
 			}
 			}
 			Message message = new Message();
 			Bundle bundle = new Bundle();
 			bundle.putBoolean("loginState", loginState);
 			bundle.putBoolean("isNetError", isNetError);
+			bundle.putBoolean("isServiceError", isServiceError);
 			message.setData(bundle);
 			loginHandler.sendMessage(message);
-			
+			proDialog.dismiss();
+			getSherlockActivity().finish();
 
 		}catch (ServiceException e) {
-			Log.v("mytestlog", e.getMessage());
-			isNetError = true;
+			Log.v("LibAccountServiceEx", "LibAccountServiceEx");
+			isServiceError = true;
 			Message message = new Message();
 			Bundle bundle = new Bundle();
 			bundle.putBoolean("loginState", loginState);
 			bundle.putBoolean("isNetError", isNetError);
+			bundle.putBoolean("isServiceError", isServiceError);
 			message.setData(bundle);
 			loginHandler.sendMessage(message);
+			proDialog.dismiss();
+			
 		}		
 	
 			catch (Exception e) {
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				e.printStackTrace(pw);
-				Log.v("errorlog", "\r\n" + sw.toString() + "\r\n");
+				
+				Message message = new Message();
+				Bundle bundle = new Bundle();
+				bundle.putBoolean("isUnknownError", false);
+				message.setData(bundle);
+				UnknownErrorHandler.sendMessage(message);	
+				proDialog.dismiss();
+				
 		}
 	}
+		
+		Handler UnknownErrorHandler = new Handler(){
+			public void handleMessage(Message msg) {										
+					boolean isUnknownError = msg.getData().getBoolean("isUnknownError");
+					if (proDialog != null) {
+						proDialog.dismiss();
+					}
+					Toast.makeText(getActivity(), "抱歉，服务出错，请稍后再试！",
+							Toast.LENGTH_SHORT).show();
+				}
+			};
 	
 	Handler loginHandler = new Handler(){
 	public void handleMessage(Message msg) {
 			
 			boolean isNetError = msg.getData().getBoolean("isNetError");
 			boolean loginState = msg.getData().getBoolean("loginState");
+			boolean isServiceError = msg.getData().getBoolean("isServiceError");
 			if (proDialog != null) {
 				proDialog.dismiss();
 			}
@@ -234,12 +259,17 @@ public class LibAccountFragment extends SherlockFragment {
 				Toast.makeText(getActivity(), "当前网络不可用",
 						Toast.LENGTH_SHORT).show();
 			} else {
+				if(isServiceError){
+					Toast.makeText(getActivity(), "抱歉，图书馆登录服务出错，请稍后再试！",
+							Toast.LENGTH_SHORT).show();
+				}else{
 				if (loginState) {
 					Toast.makeText(getActivity(), "登录成功！",
 							Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(getActivity(), "错误的用户名或密码",
 							Toast.LENGTH_SHORT).show();
+				}
 				}
 
 			}
