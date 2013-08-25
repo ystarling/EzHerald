@@ -32,7 +32,8 @@ public class LibraryFragmentNews extends SherlockFragment{
 	ListView libr_listView;
 	View view;
 	SimpleAdapter libr_adapter;
-	ArrayList<Map<String, Object>> libr_list=new ArrayList<Map<String, Object>>();
+	HashMap<String, Object> map=new HashMap<String ,Object>();
+	ArrayList<HashMap<String, Object>> libr_list=new ArrayList<HashMap<String, Object>>();
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group , Bundle save){
 		View view=inflater.inflate(R.layout.library_fragment_news, null);
@@ -69,10 +70,10 @@ public class LibraryFragmentNews extends SherlockFragment{
 		
 	}
 	
-	protected List< Map<String, Object> > libr_get_list_value(){
-		Map<String, Object> map=new HashMap<String ,Object>();
+	protected List< HashMap<String, Object> > libr_get_list_value(){
+		//HashMap<String, Object> map=new HashMap<String ,Object>();
 		for(int i=0;i<=3;i++){
-		map.put("name","东南大学移动图书馆正式使用");
+		map.put("name","图书馆办公室招聘勤工助学本科生");
 		libr_list.add(map);
 		}
 		return libr_list;
