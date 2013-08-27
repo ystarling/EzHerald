@@ -4,6 +4,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="D:/Andirod_Library/herald/EzHerald/libs/herald-web-services-api-1.1-20130815.143624-30.jar"/>
+	<classpathentry kind="lib" path="D:/Github/EzHerald/EzHerald/herald-web-services-api-1.1-20130825.131547-32.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
