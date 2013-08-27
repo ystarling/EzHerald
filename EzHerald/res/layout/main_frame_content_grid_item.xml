@@ -9,14 +9,17 @@
 
 	    <TextView
 	        android:id="@+id/main_frame_content_griditem_title"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
 	        android:layout_alignParentTop="true"
 	        android:paddingLeft="5dp"
 	        android:paddingRight="5dp"
 	        android:text="Title"
-	        android:textSize="14sp" />
+	        android:textSize="14sp" 
+	        android:background="#43484d"
+	        android:textColor="#c0bfbf"
+	        />
 
 	    <TextView
 	        android:id="@+id/main_frame_content_griditem_content1"
@@ -39,11 +42,26 @@
 	        android:layout_alignParentLeft="true"
 	        android:layout_alignParentBottom="true"
 	        android:paddingBottom="3dp"
+	        android:paddingLeft="5dp"
 	        android:ellipsize="end"
 	        android:gravity="left"
 	        android:singleLine="true"
 	        android:text="Content2"
-	        android:textColor="#ababab"
+	        android:textColor="#4abdcc"
 	        android:textSize="16sp" />
+
+	    <TextView
+	        android:id="@+id/main_frame_content_griditem_bigtext"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentBottom="true"
+	        android:layout_marginRight="-30dp"
+	        android:layout_marginBottom="-60dp"
+	        android:text="屌"
+	        android:textSize="80sp"
+	        android:textColor="#cecece"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	         />
    
 </RelativeLayout>
