@@ -378,7 +378,7 @@ public class MainActivity extends BaseFrameActivity {
 			// 修改相应的视图
 			for (int i = 0; i < result.size(); i++) {
 				((MainContentFragment) mContentFrag).updateImageItem(i,
-						result.get(i));
+						result.get(result.size() -i -1));
 			}
 
 			((MainContentFragment) mContentFrag).refreshViewFlowImage();
