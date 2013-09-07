@@ -18,6 +18,7 @@ public class CurriDBAdapter {
 	
 	private String tbnCourses = "curri_courses";
 	private String tbnAttendances = "curri_attendances";
+	private String tbnTerms = "curri_terms";
 	
 	private String clCourseId = "course_id";
 	private String clCourseName = "course_name";
@@ -34,6 +35,9 @@ public class CurriDBAdapter {
 	private String clAttWeekEnd = "week_end";
 	private String clAttPlace = "place";
 	private String clAttWeekday = "weekday";
+	
+	private String clTermId = "_id";
+	private String clTermTerm = "term";
 	
 	private String createTable_Courses = "create table " + tbnCourses +
 			"("+clCourseId+" integer primary key autoincrement," +
@@ -56,6 +60,12 @@ public class CurriDBAdapter {
 			");";
 	
 	
+	private String createTable_Terms = "create table " + tbnTerms +
+			"("+clTermId+" integer primary key autoincrement,"+
+			clTermTerm+" text not null" +
+					");";
+	
+	
 	private class DatabaseHelper extends SQLiteOpenHelper
 	{
 		DatabaseHelper(Context c)
@@ -74,6 +84,7 @@ public class CurriDBAdapter {
 			// TODO Auto-generated method stub
 			db.execSQL(createTable_Attendances);
 			db.execSQL(createTable_Courses);
+			db.execSQL(createTable_Terms);
 			
 		}
 
@@ -82,6 +93,7 @@ public class CurriDBAdapter {
 			// TODO Auto-generated method stub
 			db.execSQL("DROP TABLE IF EXISTS "+ tbnAttendances);
 			db.execSQL("DROP TABLE IF EXISTS "+ tbnCourses);
+			db.execSQL("DROP TABLE IF EXISTS "+ tbnTerms);
 			
 			onCreate(db);
 		}
@@ -112,6 +124,12 @@ public class CurriDBAdapter {
 		}
 	}
 	
+	public long insertTerm(String term)
+	{
+		ContentValues value = new ContentValues();
+		value.put(clTermTerm, term);
+		return db.insert(tbnTerms, null, value);
+	}
 	
 	public long insertCourse(Course course)
 	{
@@ -138,6 +156,22 @@ public class CurriDBAdapter {
 		values.put(clAttWeekday, att.getAttWeekday());
 		
 		return db.insert(tbnAttendances, null, values);
+	}
+	
+	public List<String> getTerms()
+	{
+		Cursor mCursor = db.query(true, tbnTerms, new String[]{clTermTerm}, 
+				null, null, null, null, null, null);
+		List<String> termList = new ArrayList<String>();
+		if(mCursor.moveToFirst())
+		{
+			do
+			{
+				String term = mCursor.getString(mCursor.getColumnIndex(clTermTerm));
+				termList.add(term);
+			}while(mCursor.moveToNext());
+		}
+		return termList;
 	}
 	
 	public List<Course> getCourse(String courseName)
@@ -210,17 +244,20 @@ public class CurriDBAdapter {
 	
 	public void clear()
 	{
-		String sql_1 = "delete from "+tbnAttendances+";";
-		String sql_2 = "delete from "+tbnCourses+";";
+		String del_sql_1 = "delete from "+tbnAttendances+";";
+		String del_sql_2 = "delete from "+tbnCourses+";";
+		String del_sql_3 = "delete from "+tbnTerms+";";
 		
-		db.execSQL(sql_1);
-		db.execSQL(sql_2);
+		db.execSQL(del_sql_1);
+		db.execSQL(del_sql_2);
+		db.execSQL(del_sql_3);
 		
-		String sql_3 = "update sqlite_sequence set seq=0 where name='"+tbnAttendances+"';";
-		String sql_4 = "update sqlite_sequence set seq=0 where name='"+tbnCourses+"';";
-		
-		db.execSQL(sql_3);
-		db.execSQL(sql_4);
+		String up_sql_1 = "update sqlite_sequence set seq=0 where name='"+tbnAttendances+"';";
+		String up_sql_2 = "update sqlite_sequence set seq=0 where name='"+tbnCourses+"';";
+		String up_sql_3 = "update sqlite_sequence set seq=0 where name='"+tbnTerms+"';";
+		db.execSQL(up_sql_1);
+		db.execSQL(up_sql_2);
+		db.execSQL(up_sql_3);
 		
 	}
 	

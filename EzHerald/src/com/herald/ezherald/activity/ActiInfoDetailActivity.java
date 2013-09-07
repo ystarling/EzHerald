@@ -34,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,6 +51,7 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.academic.DataTypeTransition;
 import com.herald.ezherald.academic.JwcInfo;
 import com.herald.ezherald.account.Authenticate;
+
 
 
 public class ActiInfoDetailActivity extends SherlockActivity {
@@ -197,18 +199,36 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		actiInfoDetail.setClubId(bundle.getInt("clubId"));
 		actiInfoDetail.setClubName(bundle.getString("clubName"));
 		actiInfoDetail.setIsVote(bundle.getBoolean("isVote"));
+		actiInfoDetail.setIconName(bundle.getString("iconName"));
+		actiInfoDetail.setActiPicName(bundle.getString("picName"));
 		
 		clubName.setText(bundle.getString("clubName"));
 		actiTitle.setText(bundle.getString("title"));
 		actiPubTime.setText(bundle.getString("date"));
 		time.setText(bundle.getString("startTime")+"至"+bundle.getString("endTime"));
 		place.setText(bundle.getString("place"));
-		bytes_icon = bundle.getByteArray("clubIcon");
-		Bitmap bit_icon = BitmapFactory.decodeByteArray(bytes_icon, 0, bytes_icon.length);
-		clubIcon.setImageBitmap(bit_icon);
-		byte [] bytes_pic = bundle.getByteArray("actiPic");
-		Bitmap bit_pic = BitmapFactory.decodeByteArray(bytes_pic, 0, bytes_pic.length);
-		actiPic.setImageBitmap(bit_pic);
+//		bytes_icon = bundle.getByteArray("clubIcon");
+//		Bitmap bit_icon = BitmapFactory.decodeByteArray(bytes_icon, 0, bytes_icon.length);
+//		clubIcon.setImageBitmap(bit_icon);
+//		byte [] bytes_pic = bundle.getByteArray("actiPic");
+//		Bitmap bit_pic = BitmapFactory.decodeByteArray(bytes_pic, 0, bytes_pic.length);
+//		actiPic.setImageBitmap(bit_pic);
+		
+		try {
+			new RequestImage().execute(new ViewAndUrl(clubIcon,new URL(actiInfoDetail.getClubIconUrl()),
+					0,actiInfoDetail.getActiId()));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			new RequestImage().execute(new ViewAndUrl(actiPic,new URL(actiInfoDetail.getActiPicUrl()),
+					1,actiInfoDetail.getActiId()));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		progressDialog = new ProgressDialog(context);
@@ -292,8 +312,8 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 						JSONObject jsonObj = (JSONObject) jsonArr.get(0);
 						actiInfoDetail.setActiPicName(jsonObj.getString("post_add"));
 						actiInfoDetail.setActiIntro(jsonObj.getString("introduction"));
-//						actiInfoDetail.setCommentNum(Integer.parseInt(jsonObj.getString("comment_num")));
-						actiInfoDetail.setCommentNum(10);
+						actiInfoDetail.setCommentNum(Integer.parseInt(jsonObj.getString("comment_num")));
+//						actiInfoDetail.setCommentNum(10);
 						JSONArray comJsonArr = jsonObj.getJSONArray("comment");
 						List<Comment> cl = new ArrayList<Comment>();
 						for(int loop=0;loop<comJsonArr.length();++loop)
@@ -304,6 +324,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 						}
 						if(actiInfoDetail.checkIsVote())
 						{
+							JSONObject voted = jsonObj.getJSONObject("havaVote");
 							JSONArray voteJsonArr = jsonObj.getJSONObject("vote_info").getJSONArray("vote_item_info");
 							Map<String,Integer> result = new HashMap<String,Integer>();
 							for(int i=0;i<voteJsonArr.length();++i)
@@ -327,8 +348,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 						{
 							actiInfoDetail.setLastCommentId(0);
 						}
-						
-						
+
 						return actiInfoDetail;
 					}
 				}
@@ -348,7 +368,15 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 				actiDetail.setText(result.getActiDetail());
 				//clubIcon.setImageResource(R.drawable.ic_launcher);
 //				actiPic.setImageResource(R.drawable.ic_launcher);
-				moreComment.setText(">>>共"+result.getCommentNum()+"条评论,点击加载更多评论.");
+				if(result.getCommentNum()==0)
+				{
+					moreComment.setText(">>>共"+result.getCommentNum()+"条评论,没有更多评论.");
+				}
+				else
+				{
+					moreComment.setText(">>>共"+result.getCommentNum()+"条评论,点击加载更多评论.");
+				}
+				
 				List<Comment> cl = result.getCommentList();
 				commentAdapter.setCommentList(cl);
 				commentAdapter.notifyDataSetChanged();
@@ -395,6 +423,17 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 			iv.setImageBitmap(bitmap);
 			
 			layout.addView(iv);
+			
+			CheckBox checkBox = new CheckBox(context);
+			if(actiInfoDetail.getHaveVote())
+			{
+				checkBox.setVisibility(View.GONE);
+			}
+			else
+			{
+				checkBox.setVisibility(View.VISIBLE);
+			}
+			layout.addView(checkBox);
 			
 			voteLayout.addView(layout);
 		}

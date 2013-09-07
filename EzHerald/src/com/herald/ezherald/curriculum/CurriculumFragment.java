@@ -10,9 +10,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,6 +58,9 @@ public class CurriculumFragment extends SherlockFragment {
 	Context context;
 	CurriDBAdapter dbAdapter;
 	
+	String selectedItem = null;
+	List<String> termList = null;
+	
 	private ProgressDialog progressDialog;
 	
 	ActionBar bar ;
@@ -71,7 +83,7 @@ public class CurriculumFragment extends SherlockFragment {
 		context = this.getActivity();
 		adapter = new CourseAdapter(context);
 		dbAdapter = new CurriDBAdapter(context);
-		
+		termList = new ArrayList<String>();
 		
 	}
 	
@@ -110,8 +122,9 @@ public class CurriculumFragment extends SherlockFragment {
 		dbAdapter.open();
 		if(dbAdapter.isEmpty())
 		{
-			progressDialog.show();
-			new requestCurriculum().execute("http://jwc.seu.edu.cn");
+//			progressDialog.show();
+//			new requestCurriculum().execute("http://jwc.seu.edu.cn");
+			new requestTerms().execute("");
 		}
 		dbAdapter.close();
 		
@@ -265,17 +278,137 @@ public class CurriculumFragment extends SherlockFragment {
 		{
 		case R.id.menu_curri_action_refresh:
 			progressDialog.show();
-			new requestCurriculum().execute("http://jwc.seu.edu.cn");
+//			new requestCurriculum().execute("http://jwc.seu.edu.cn");
+			new requestTerms().execute("");
+			Toast.makeText(context, "refresh", Toast.LENGTH_SHORT).show();
 			break;
-		
+		case R.id.menu_curri_action_set:
+			createItemDialog();
+			break;
 			
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
+	String tmpSelect = null;
+	String [] terms = null;
+	protected void createItemDialog()
+	{
+//		final String [] items = {"13-14-1","12-13-3"};
+//		terms = (String[]) termList.toArray();
+		termList.toArray(terms);
+		tmpSelect = terms[0];
+		AlertDialog.Builder builder = new Builder(context);
+		builder.setTitle("请选择学期")
+		.setPositiveButton("选择", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+//				selectedItem = items[which];
+				Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
+				SharedPreferences settings = getActivity().getSharedPreferences("curriculum", 0);
+				Editor editor = settings.edit();
+				editor.putString("selectedItem", tmpSelect);
+				editor.commit();
+			}
+		})
+		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		})
+		.setSingleChoiceItems(terms, 0, null)
+		.setItems(terms, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+//				Toast.makeText(context, ""+which, Toast.LENGTH_LONG).show();
+				tmpSelect = terms[which];
+			}
+			
+		})
+		.create().show();
+	}
 	
-	
-	
+	private class requestTerms extends AsyncTask<String ,Integer, List<String>>
+	{
+
+		@Override
+		protected List<String> doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			Log.v("CURRI TERM", "beginning");
+			try {
+				URL url = new URL("http://herald.seu.edu.cn/herald_web_service/curriculum/term/");
+				int response = -1;
+				InputStream in = null;
+				URLConnection conn;
+				conn = url.openConnection();
+				if (!(conn instanceof HttpURLConnection)) {
+					throw new IOException("NOT AN HTTP CONNECTION");
+				}
+				else
+				{
+					HttpURLConnection httpConn = (HttpURLConnection) conn;
+					httpConn.setAllowUserInteraction(false);
+					httpConn.setInstanceFollowRedirects(true);
+					httpConn.setRequestMethod("GET");
+					Log.w("CURRI TERM", "before connect");
+					httpConn.connect();
+					response = httpConn.getResponseCode();
+					Log.w("CURRI TERM", "after connect");
+					if (response == HttpURLConnection.HTTP_OK) {
+						in = httpConn.getInputStream();
+						String str = DataTypeTransition.InputStreamToString(in);
+						
+						List<String> terms = new ArrayList<String>();
+						JSONArray jsonArr = new JSONArray(str);
+						for(int i=0;i<jsonArr.length();++i)
+						{
+							Log.w("CURRI TERM",(String)jsonArr.get(i));
+							
+							terms.add((String) jsonArr.get(i));
+						}
+						
+						return terms;
+					}
+				}
+				
+				
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(List<String> terms)
+		{
+			Toast.makeText(context, "term completed", Toast.LENGTH_SHORT).show();
+			if(terms != null)
+			{
+				dbAdapter.open();
+				for(String term : terms)
+				{
+					dbAdapter.insertTerm(term);
+				}
+				dbAdapter.close();
+			}
+//			progressDialog.cancel();
+		}
+	}
 	
 	private class requestCurriculum extends 
 	AsyncTask<String ,Integer ,AttsAndCourses >
