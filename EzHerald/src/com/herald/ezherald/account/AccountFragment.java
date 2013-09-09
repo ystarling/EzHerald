@@ -64,14 +64,17 @@ public class AccountFragment extends SherlockFragment{
 	                  case 0:
 	                   Intent newActivity0 = new Intent(getSherlockActivity(),IDCardAccountActivity.class);     
 	                   startActivity(newActivity0);
+	                   getSherlockActivity().finish();
 	                  break;
 	                  case 1:
 	                   Intent newActivity1 = new Intent(getSherlockActivity(),TyxAccountActivity.class);     
 	                   startActivity(newActivity1);
+	                   getSherlockActivity().finish();
 	                  break;
 	                  case 2:
 		                   Intent newActivity2 = new Intent(getSherlockActivity(),LibAccountActivity.class);     
 		                   startActivity(newActivity2);
+		                   getSherlockActivity().finish();
 		                  break;
 	                  default:
 	                    // Nothing do!
@@ -79,6 +82,7 @@ public class AccountFragment extends SherlockFragment{
 
 	            }
 	          });
+	        
 			return view;
 		
 	}

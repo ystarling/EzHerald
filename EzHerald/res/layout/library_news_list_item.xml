@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:paddingTop="20px">
+    android:paddingTop="20sp">
     <TextView
         android:id="@+id/libr_listitem_news_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="20px"
-        android:textSize="50px"
+        android:paddingLeft="20sp"
+        android:textSize="20sp"
+         android:textIsSelectable="false"
         />
 
 </LinearLayout>

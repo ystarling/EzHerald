@@ -81,11 +81,15 @@
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.library.LibraryActivityData"
+            android:name="com.herald.ezherald.library.LibraryBookListDetail"
             android:theme="@style/Theme.Sherlock.Light">
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityNews"
+            android:theme="@style/Theme.Sherlock.Light">
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.library.LibraryActivityReserve"
             android:theme="@style/Theme.Sherlock.Light">
         </activity>
 		<!-- libr end -->
