@@ -357,6 +357,7 @@ public class CurriculumFragment extends SherlockFragment {
 					httpConn.setAllowUserInteraction(false);
 					httpConn.setInstanceFollowRedirects(true);
 					httpConn.setRequestMethod("GET");
+					httpConn.setConnectTimeout(5000);
 					Log.w("CURRI TERM", "before connect");
 					httpConn.connect();
 					response = httpConn.getResponseCode();
@@ -433,6 +434,7 @@ public class CurriculumFragment extends SherlockFragment {
 					httpConn.setAllowUserInteraction(false);
 					httpConn.setInstanceFollowRedirects(true);
 					httpConn.setRequestMethod("GET");
+					httpConn.setConnectTimeout(5000);
 					httpConn.connect();
 					response = httpConn.getResponseCode();
 					if (response == HttpURLConnection.HTTP_OK) {
