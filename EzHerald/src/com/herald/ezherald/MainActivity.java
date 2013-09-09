@@ -78,6 +78,7 @@ public class MainActivity extends BaseFrameActivity {
 
 	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
 	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
+	private final int CONN_TIMEOUT = 3000;
 	
 	private boolean mShowedUpdate = false;
 	
@@ -257,6 +258,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		URL url = new URL(urlStr);
 		URLConnection conn = url.openConnection();
+		conn.setConnectTimeout(CONN_TIMEOUT);
 
 		if (!(conn instanceof HttpURLConnection)) {
 			throw new IOException("Not an HTTP connection");
@@ -302,6 +304,7 @@ public class MainActivity extends BaseFrameActivity {
 	 */
 	private class UpdateBannerImageTask extends
 			AsyncTask<String, Void, ArrayList<Bitmap>> {
+		private boolean connFail = false;
 
 		@Override
 		protected ArrayList<Bitmap> doInBackground(String... url) {
@@ -330,7 +333,8 @@ public class MainActivity extends BaseFrameActivity {
 
 			// ///////////////////////////////////////
 			ArrayList<Bitmap> updList = new ArrayList<Bitmap>();
-			boolean haveUpdate = checkBannerImageUpdateState(); // TODO:从服务器先GET是否有update，然后决定是否下载
+			boolean haveUpdate = checkBannerImageUpdateState(); //从服务器先GET是否有update，然后决定是否下载
+			
 			Log.d("MainActivity: AsyncTask", "haveRemoveUpdate?" + haveUpdate);
 			// ////////////////////////////////////////////////////////////////////////////
 			ArrayList<String> remoteImgUrls = null;
@@ -346,6 +350,8 @@ public class MainActivity extends BaseFrameActivity {
 						updList.add(bmp);
 					} else {
 						showToastInWorkingThread("网络不大给力的样子呐...");
+						connFail = true;
+						break;
 					}
 				}
 				
@@ -391,7 +397,8 @@ public class MainActivity extends BaseFrameActivity {
 			doingItem.setVisible(false);
 
 			// 更新SharedPreference里面最后更新的时间
-			setLastRefreshTime(System.currentTimeMillis());
+			if(!connFail)
+				setLastRefreshTime(System.currentTimeMillis());
 
 			super.onPostExecute(result);
 		}
