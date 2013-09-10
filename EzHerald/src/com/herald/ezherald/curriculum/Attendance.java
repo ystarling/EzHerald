@@ -1,6 +1,6 @@
 package com.herald.ezherald.curriculum;
 
-public class Attendance {
+public class Attendance implements Comparable {
 	
 //	private Course course;
 	private String courseName;
@@ -65,6 +65,12 @@ public class Attendance {
 	public int getAttWeekday()
 	{
 		return this.weekDay;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return this.periodBegin - ((Attendance) arg0).periodBegin;
 	}
 
 	

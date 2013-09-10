@@ -1,6 +1,8 @@
 package com.herald.ezherald.curriculum;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
@@ -31,6 +33,7 @@ public class CourseAdapter extends BaseAdapter {
 	public void setAtts(List<Attendance> cl)
 	{
 		courseList = cl;
+		Collections.sort(cl);
 	}
 	
 	public void addAttendance(Attendance c)

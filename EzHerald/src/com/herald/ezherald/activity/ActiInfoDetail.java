@@ -20,10 +20,15 @@ public class ActiInfoDetail {
 	private String endTime;
 	private String actiDetail;
 	
+	private String iconName;
+	private String iconUrl;
+	
 	private String actiPicUrl;
 	private String actiPicName;
 	
 	private boolean isVote;
+	
+	private boolean haveVote;
 	
 	private int lastCommentId;
 	private int commentNum;
@@ -37,6 +42,23 @@ public class ActiInfoDetail {
 	{
 		commentList = new ArrayList<Comment>();
 		voteResult = new HashMap<String,Integer>();
+	}
+	
+	public void setHaveVote(boolean v)
+	{
+		haveVote = v;
+	}
+	
+	public void setIconName(String name)
+	{
+		iconName = name;
+		iconUrl = "http://herald.seu.edu.cn/herald_league/Uploads/LeagueAvatar/m_s_avatar_address/"+name;
+	}
+	
+	public void setActiPicName(String name)
+	{
+		actiPicName = name;
+		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/" + name;
 	}
 	
 	public void setVoteResult(Map<String,Integer> map)
@@ -69,12 +91,6 @@ public class ActiInfoDetail {
 		clubName = name;
 	}
 	
-	public void setActiPicName(String name)
-	{
-		actiPicName = name;
-		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads" +
-				"/ActivityPost/m_m_"+actiPicName;
-	}
 	
 	public void setCommentUrl(String url)
 	{
@@ -110,9 +126,19 @@ public class ActiInfoDetail {
 		return clubName;
 	}
 	
+	public String getClubIconUrl()
+	{
+		return iconUrl;
+	}
+	
 	public int getClubId()
 	{
 		return clubId;
+	}
+	
+	public boolean getHaveVote()
+	{
+		return this.haveVote;
 	}
 
 	public String getActiTitle() {
@@ -140,6 +166,7 @@ public class ActiInfoDetail {
 	{
 		return actiPicName;
 	}
+	
 	
 	public List<Comment> getCommentList()
 	{

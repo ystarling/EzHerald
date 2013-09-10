@@ -281,6 +281,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 					DBAdapter.updateActiPicByActi(id, result);
 					Log.v("Save Icon", "complete save pic");
 				}
+				img.setVisibility(View.VISIBLE);
 				img.setImageBitmap(result);
 				DBAdapter.close();
 				//img.setLayoutParams(new LayoutParams(40, 40));
