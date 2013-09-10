@@ -23,8 +23,7 @@ public class CurriDBAdapter {
 	private String clCourseId = "course_id";
 	private String clCourseName = "course_name";
 	private String clCourseLecturer = "course_lecturer";
-	private String clCourseBeginweek = "course_begin_week";
-	private String clCourseEndweek = "course_end_week";
+	private String clCourseWeeks = "course_weeks";
 	private String clCourseCredit = "course_credit";
 	
 	private String clAttId = "_id";
@@ -43,8 +42,7 @@ public class CurriDBAdapter {
 			"("+clCourseId+" integer primary key autoincrement," +
 				clCourseName+" text not null," +
 				clCourseLecturer+" text not null,"+
-				clCourseBeginweek+" integer ,"+
-				clCourseEndweek+" integer ,"+
+				clCourseWeeks+" text ,"+
 				clCourseCredit+" integer not null"
 				+");";
 	
@@ -137,8 +135,7 @@ public class CurriDBAdapter {
 //		value.put(clCourseId, course.getCourseId());
 		value.put(clCourseName, course.getCourseName());
 		value.put(clCourseLecturer, course.getLecturer());
-		value.put(clCourseBeginweek, course.getBeginWeek());
-		value.put(clCourseEndweek, course.getEndWeek());
+		value.put(clCourseWeeks, course.getWeeks());
 		value.put(clCourseCredit, course.getCredit());
 		
 		return db.insert(tbnCourses, null, value);
@@ -177,7 +174,7 @@ public class CurriDBAdapter {
 	public List<Course> getCourse(String courseName)
 	{
 		Cursor mCursor = db.query(true, tbnCourses, 
-				new String[]{clCourseBeginweek,clCourseCredit,clCourseEndweek,clCourseLecturer,clCourseName},
+				new String[]{clCourseWeeks,clCourseCredit,clCourseLecturer,clCourseName},
 				clCourseName+"='"+courseName+"'", null, null, null, null, null);
 		List<Course> courseList = new ArrayList<Course>();
 		if(mCursor.moveToFirst())
@@ -188,9 +185,8 @@ public class CurriDBAdapter {
 				String name = mCursor.getString(mCursor.getColumnIndex(clCourseName));
 				String teacher = mCursor.getString(mCursor.getColumnIndex(clCourseLecturer));
 				int credit = mCursor.getInt(mCursor.getColumnIndex(clCourseCredit));
-				int begin = mCursor.getInt(mCursor.getColumnIndex(clCourseBeginweek));
-				int end = mCursor.getInt(mCursor.getColumnIndex(clCourseEndweek));
-				courseList.add(new Course(name,teacher,begin,end,credit));
+				String weeks = mCursor.getString(mCursor.getColumnIndex(clCourseWeeks));
+				courseList.add(new Course(name,teacher,weeks,credit));
 				
 			}while(mCursor.moveToNext());
 			
@@ -259,8 +255,12 @@ public class CurriDBAdapter {
 		db.execSQL(up_sql_2);
 		db.execSQL(up_sql_3);
 		
+		
 	}
 	
-	
+	public boolean isOpen()
+	{
+		return db.isOpen();
+	}
 
 }

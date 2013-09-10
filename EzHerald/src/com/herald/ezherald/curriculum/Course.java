@@ -5,9 +5,8 @@ public class Course {
 //	private int courseId;
 	private String courseName;
 	private String lecturer;
-	private int beginWeek;
-	private int endWeek;
-	private int credit;
+	private String weeks;
+	private float credit;
 	
 	public Course(String name)
 	{
@@ -24,17 +23,15 @@ public class Course {
 	 * @param id
 	 * @param name
 	 * @param lec
-	 * @param begin
-	 * @param end
+	 * @param weeks
 	 * @param credit
 	 */
-	public Course(String name,String lec,int begin,int end,int credit)
+	public Course(String name,String lec,String weeks,float credit)
 	{
 //		this.courseId = id;
 		this.courseName = name;
 		this.lecturer = lec;
-		this.beginWeek = begin;
-		this.endWeek = end;
+		this.weeks = weeks;
 		this.credit = credit;
 	}
 	
@@ -55,21 +52,17 @@ public class Course {
 		return this.lecturer;
 	}
 	
-	public int getBeginWeek()
-	{
-		return this.beginWeek;
-	}
+
 	
-	public int getEndWeek()
-	{
-		return this.endWeek;
-	}
-	
-	public int getCredit()
+	public float getCredit()
 	{
 		return this.credit;
 	}
 	
+	public String getWeeks()
+	{
+		return this.weeks;
+	}
 	
 
 }
