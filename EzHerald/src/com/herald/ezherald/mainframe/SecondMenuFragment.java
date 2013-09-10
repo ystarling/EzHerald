@@ -19,6 +19,8 @@ import android.widget.ListView;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.AccountActivity;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.account.UserInfoActivity;
 import com.herald.ezherald.settingframe.SettingActivity;
 
@@ -55,6 +57,13 @@ public class SecondMenuFragment extends ListFragment {
 		/**
 		 * TODO:替换row0为当前登录的用户名
 		 */
+		
+		UserAccount account = Authenticate.getIDcardUser(getActivity());
+		if(null != account){
+			mMenuItemsStr[0] = account.getUsername();
+		} else {
+			mMenuItemsStr[0] = "尚未登陆";
+		}
 		/*
 		ArrayAdapter<String> menuItemAdapter = new ArrayAdapter<String>(
 				getActivity(), android.R.layout.simple_list_item_1,
@@ -80,7 +89,7 @@ public class SecondMenuFragment extends ListFragment {
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
-			i.setClass(getActivity(), UserInfoActivity.class);
+			i.setClass(getActivity(), AccountActivity.class);
 			break;
 		case 1:
 			i.setClass(getActivity(), SettingActivity.class);

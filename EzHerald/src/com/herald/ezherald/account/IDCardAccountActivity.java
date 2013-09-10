@@ -6,6 +6,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
+
+
 import cn.edu.seu.herald.auth.*;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -15,12 +17,17 @@ import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.R;
 
 
-import android.os.Bundle;
 
+
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 
 public class IDCardAccountActivity extends SherlockFragmentActivity {
+	public boolean isRemoteModuleCall;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,10 @@ public class IDCardAccountActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.account_idcardaccount_activity_prefrag);		
-		
+		Intent i = getIntent();
+		isRemoteModuleCall = i.getBooleanExtra("remoteCall", false);
+		//DEBUG//
+		//Toast.makeText(this, "isRemote?" + isRemoteModuleCall, Toast.LENGTH_LONG).show();
 	}
 
 	@Override

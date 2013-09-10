@@ -158,6 +158,8 @@ public class IDCardAccountFragment extends SherlockFragment {
     }
 	class LoginFailureHandler implements Runnable {
 
+		protected static final int LOGIN_REQ_RESULT_CODE = 200;  //请求结果的code
+
 		public void run() {
 			boolean loginState = false;
 			boolean isNetError = !isNetworkAvailable(getActivity());
@@ -176,7 +178,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			if(studentUser == null){
 				loginState = false;
 			}else {
-				
+				//登陆成功
 				loginState = true;
 				Log.v("mynet", "insertstart");
 				databaseHelper = new DatabaseHelper(getActivity(), Authenticate.DATABASE_NAME);
@@ -189,9 +191,17 @@ public class IDCardAccountFragment extends SherlockFragment {
 				values.put("type", Authenticate.IDCARD_TYPE);
 				database.insert(Authenticate.TABLE_NAME, null, values);
 				database.close();
-				Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);     
-		        startActivity(newActivity);
+				
+				IDCardAccountActivity currActivity = (IDCardAccountActivity)getActivity();
+				boolean isRemoteCall = currActivity.isRemoteModuleCall;
+				if(!isRemoteCall){
+					//如果是别的模块跳转到这里的，不用跳回去！
+					Log.d("IDCardAccountFragment: isRemoteCall", "" +isRemoteCall);
+					Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);
+			        startActivity(newActivity);
+				}
 		        getSherlockActivity().finish();
+		        
 			}
 			}
 			Message message = new Message();
@@ -224,7 +234,9 @@ public class IDCardAccountFragment extends SherlockFragment {
 	
 	Handler loginHandler = new Handler(){
 	public void handleMessage(Message msg) {
-			
+			Intent returnMsgIntent = new Intent();
+			returnMsgIntent.putExtra("loginSucceed", false);
+		
 			boolean isNetError = msg.getData().getBoolean("isNetError");
 			boolean loginState = msg.getData().getBoolean("loginState");
 			boolean isServiceError = msg.getData().getBoolean("isServiceError");
@@ -242,6 +254,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 				if (loginState) {
 					Toast.makeText(getActivity(), "登录成功！",
 							Toast.LENGTH_SHORT).show();
+					returnMsgIntent.putExtra("loginSucceed", true);
 				} else {
 					Toast.makeText(getActivity(), "错误的用户名或密码",
 							Toast.LENGTH_SHORT).show();
@@ -249,6 +262,8 @@ public class IDCardAccountFragment extends SherlockFragment {
 				}
 
 			}
+			getActivity().setResult(LOGIN_REQ_RESULT_CODE, returnMsgIntent);
+			
 		}
 	};
 }
