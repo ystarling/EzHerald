@@ -7,6 +7,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -14,13 +20,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
-import cn.edu.seu.herald.ws.api.AuthenticationException;
-import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
-import cn.edu.seu.herald.ws.api.MorningExerciseService;
 import cn.edu.seu.herald.ws.api.ServiceException;
-import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
-import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
 
+import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
 
 /**
@@ -48,6 +50,7 @@ public class RunTimes {
 	public static final String DEFAULT_UPDATE_TIME = null;
 	private static final int SUCCESS = 1;
 	private static final int FAILED  = 0;
+	
 	
 	private SharedPreferences pref;
 	private Editor editor;
@@ -77,6 +80,7 @@ public class RunTimes {
 		// TODO Auto-generated method stub
 		setTimes(result);
 		save();
+		
 	}
 	public float getRate() {
 		return rate;
@@ -177,6 +181,7 @@ public class RunTimes {
 				@Override
 				public void run(){
 					try{
+						/*
 						// Web服务地址
 						final String HERALD_WS_BASE_URI = "http://herald.seu.edu.cn/ws";
 						// 构造Web服务工厂
@@ -188,10 +193,25 @@ public class RunTimes {
 						int result = runTimesData.getTimes().intValue();
 						//result.setTimes(runTimesData.getTimes().intValue());
 						Message msg = handler.obtainMessage(SUCCESS, result);
+			        	handler.sendMessage(msg);*/
+						HttpClient client= new DefaultHttpClient();
+						UserAccount user = Authenticate.getTyxUser(activity);
+						//String name = user.getUsername();
+						//String password = user.getPassword();
+						String name = "213123363";
+						String password = "1";
+						//TODO tyx login failed
+						String url = String.format("http://herald.seu.edu.cn/herald_web_service/tyx/%s/%s/",name,password);
+						HttpGet get = new HttpGet(url);
+						HttpResponse response = client.execute(get);
+						if(response.getStatusLine().getStatusCode() != 200){
+							throw new Exception();
+						}
+						String message = EntityUtils.toString(response.getEntity());
+						int result = Integer.parseInt(message);
+						Message msg = handler.obtainMessage(SUCCESS, result);
 			        	handler.sendMessage(msg);
-					}catch(AuthenticationException e){
-						handler.obtainMessage(FAILED).sendToTarget();
-					}catch(ServiceException e){
+					}catch(Exception e){
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
 				}

@@ -67,22 +67,22 @@ public class RenrenInfo{
 	protected void onSuccess() {
 		// TODO Auto-generated method stub
 		//TODO 显示的bug，进度条
-		final String[] target= {"早操播报","跑操早播报"};
+		final String[] target= {"早操播报","跑操早播报","跑操信息"};
 		
 		Document document = Jsoup.parse(message);
 		Elements feeds = document.getElementsByClass("list");
 		Elements lists  = feeds.get(0).children();
-		for(int i=1;i<lists.size();i++){//跳过第一个(i=0)
+		for(int i=0;i<lists.size();i++){
 			Element feed = lists.get(i);
 			String data = feed.text();
 			for (int j=0;j<target.length;j++){
 				if(data.indexOf(target[j])!=-1){
-					int end = data.lastIndexOf("在");
+					int end = data.lastIndexOf("回复");
 					setInfo(data.substring(0, end-1));//字符串之后的都是无用的
 					DateFormat fmt = SimpleDateFormat.getDateTimeInstance();
 					setDate(fmt.format(new Date()));//更新时间
 					save();
-					father.show();
+					father.onSuccess();
 					return;
 				}
 			}
@@ -91,7 +91,8 @@ public class RenrenInfo{
 	}
 	protected void onFailed() {
 		// TODO Auto-generated method stub
-		Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(activity, "人人信息更新失败", Toast.LENGTH_SHORT).show();
+		father.onFailed();
 	}
 	/**
 	 * 更新数据
@@ -112,7 +113,7 @@ public class RenrenInfo{
 						HttpClient client = new DefaultHttpClient();
 						HttpGet get = new HttpGet(url);
 						HttpResponse response = client.execute(get);
-						if (response.getStatusLine().getStatusCode() != 200) {
+						if (response.getStatusLine().getStatusCode() !=  200) {
 							throw new Exception();
 						}
 						String message = EntityUtils.toString(response.getEntity());

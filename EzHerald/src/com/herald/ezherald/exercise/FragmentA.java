@@ -64,7 +64,15 @@ public class FragmentA extends Fragment {
 		if (renren.getDate() != null) {
 			txt_date.setText("更新于" + renren.getDate());
 		}
-		Toast.makeText(getActivity(),"更新成功", Toast.LENGTH_LONG).show();
+		
+	}
+	//信息更新成功及失败的显示
+	public void onSuccess(){
+		txt_date.setText("更新于" + renren.getDate());
+		Toast.makeText(getActivity(),"人人信息更新成功", Toast.LENGTH_LONG).show();
+	}
+	public void onFailed(){
+		Toast.makeText(getActivity(),"人人信息更新失败", Toast.LENGTH_LONG).show();
 	}
 }
 

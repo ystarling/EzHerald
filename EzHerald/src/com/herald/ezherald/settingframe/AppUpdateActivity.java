@@ -54,7 +54,7 @@ public class AppUpdateActivity extends Activity {
 	private final int SUCCESS = 1;
 	private final int FAILED  = 0;
 	private final int DOING   = 2;
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 	
 	private Handler mhandler = new Handler(){
 		@Override
@@ -110,7 +110,9 @@ public class AppUpdateActivity extends Activity {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			Toast.makeText(this, "¼ì²â¸üÐÂÊ§°Ü", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "¼ì²â¸üÐÂÊ§°Ü", Toast.LENGTH_SHORT).show();
+			Log.e("updateErr","**********");
+			e.printStackTrace();
 			return false;
 		}
 	}

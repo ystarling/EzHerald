@@ -7,6 +7,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libABS"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libSlidingMenu"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/libViewFlow"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/libViewflow"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
