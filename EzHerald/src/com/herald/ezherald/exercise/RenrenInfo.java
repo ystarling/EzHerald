@@ -2,6 +2,7 @@ package com.herald.ezherald.exercise;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.http.HttpResponse;
@@ -9,10 +10,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -20,14 +19,15 @@ import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
+
+
 /**
  * @author xie
  * 体育系人人的早操播报消息
  */
 public class RenrenInfo{
 	public static final boolean DEBUG = false;//TODO　just for debug,must be removed before release 
-	private static final String url = "http://page.renren.com/601258593/fdoing"; 
+	private static final String url = "https://api.renren.com/v2/status/list?access_token=241511%7c6.e9d163eb32a823d37609a396abe20618.2592000.1381683600-365328826&ownerId=601258593"; // ‘|’必须写成%7c
 	private final int SUCCESS = 1,FAILED = 0;
 	private String info;
 	private String date;
@@ -67,7 +67,7 @@ public class RenrenInfo{
 	protected void onSuccess() {
 		// TODO Auto-generated method stub
 		//TODO 显示的bug，进度条
-		final String[] target= {"早操播报","跑操早播报","跑操信息"};
+		/*final String[] target= {"早操播报","跑操早播报","跑操信息"};
 		
 		Document document = Jsoup.parse(message);
 		Elements feeds = document.getElementsByClass("list");
@@ -86,6 +86,36 @@ public class RenrenInfo{
 					return;
 				}
 			}
+		}
+		*/
+		try {
+			//String today = android.text.format.DateFormat.format("yyyy-m-d",new Date()).toString();
+			//Date  date = new Date();
+			Calendar calendar = Calendar.getInstance();
+			String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE));
+			JSONObject json = new JSONObject(message);
+			JSONArray array = json.getJSONArray("response");
+			for(int i=0;i<array.length();i++){
+				JSONObject object = (JSONObject) array.opt(i);
+				String date = object.getString("createTime");
+				if(date.equals(today)){
+					String info = object.getString("content");
+					setInfo(info);
+					setDate(date);
+					save();
+					father.onSuccess();
+					return;
+				}
+			}
+			//没有找到今天的，显示最新一条
+			String info = ((JSONObject) array.opt(0)).getString("content");
+			setInfo(info);
+			setDate(today);
+			save();
+			father.onSuccess();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		save();
 	}
@@ -122,6 +152,7 @@ public class RenrenInfo{
 						handler.sendMessage(msg);
 					} catch (Exception e) {
 						// TODO: handle exception
+						e.printStackTrace();
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
 				}

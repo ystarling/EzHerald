@@ -2,6 +2,7 @@ package com.herald.ezherald.exercise;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +33,7 @@ public class FragmentA extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		renren = new RenrenInfo(getActivity(),this);
 		txt_info = (TextView)getActivity().findViewById(R.id.txt_info);
+		txt_info.setMovementMethod(ScrollingMovementMethod.getInstance());//实现多行滚动
 		txt_date = (TextView)getActivity().findViewById(R.id.txt_date);
 		if(renren.isSet()){
 			show();
@@ -68,6 +70,7 @@ public class FragmentA extends Fragment {
 	}
 	//信息更新成功及失败的显示
 	public void onSuccess(){
+		txt_info.setText("  "+renren.getInfo());
 		txt_date.setText("更新于" + renren.getDate());
 		Toast.makeText(getActivity(),"人人信息更新成功", Toast.LENGTH_LONG).show();
 	}
