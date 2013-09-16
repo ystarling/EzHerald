@@ -100,18 +100,17 @@ public class RenrenInfo{
 				String date = object.getString("createTime");
 				if(date.equals(today)){
 					String info = object.getString("content");
-					setInfo(info);
+					setInfo(getInfo()+info+"\n\n\n");
 					setDate(date);
 					save();
-					father.onSuccess();
-					return;
 				}
 			}
-			//没有找到今天的，显示最新一条
-			String info = ((JSONObject) array.opt(0)).getString("content");
-			setInfo(info);
-			setDate(today);
-			save();
+			if(getInfo()==null||getInfo().equals("")){//没有找到今天的，显示最新一条
+				String info = ((JSONObject) array.opt(0)).getString("content");
+				setInfo(info);
+				setDate(today);
+				save();
+			}
 			father.onSuccess();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

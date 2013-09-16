@@ -1,6 +1,17 @@
 package com.herald.ezherald.account;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -12,32 +23,17 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
-
-import android.widget.TextView;
-
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-
-
-
-
-
 import cn.edu.seu.herald.ws.api.AuthenticationException;
-import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
-import cn.edu.seu.herald.ws.api.LibraryService;
-import cn.edu.seu.herald.ws.api.MorningExerciseService;
 import cn.edu.seu.herald.ws.api.ServiceException;
-import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
-import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
-import cn.edu.seu.herald.ws.api.library.User;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
@@ -170,6 +166,7 @@ public class TyxAccountFragment extends SherlockFragment {
 			password = view_password.getText().toString();
 			try {
 				if(!isNetError){
+					/*
 					final String HERALD_WS_BASE_URI = "http://herald.seu.edu.cn/ws";
 					
 					HeraldWebServicesFactory factory = new HeraldWebServicesFactoryImpl(HERALD_WS_BASE_URI);
@@ -178,8 +175,29 @@ public class TyxAccountFragment extends SherlockFragment {
 
 					Log.v("myname", userName);
 					RunTimesData runTimesData = exeService.getRunTimesData(userName, password);
-				
-			if(runTimesData == null){
+					*/
+					//use new python api
+					final String URL = "http://herald.seu.edu.cn/herald_web_service/tyx/checkAccount/";
+					HttpClient client = new DefaultHttpClient();
+					
+					HttpPost post = new HttpPost(URL);
+					List<NameValuePair> param = new ArrayList<NameValuePair>(2);
+					param.add(new BasicNameValuePair("card_number",userName));
+					param.add(new BasicNameValuePair("password",password));
+					post.setEntity(new UrlEncodedFormEntity(param));
+					HttpResponse response = client.execute(post);
+					boolean success = true;
+					if(response.getStatusLine().getStatusCode() != 200){
+						success = false;
+					}else{
+						String result = EntityUtils.toString(response.getEntity());
+						if(!result.equals("True")){
+							success  =false;
+							throw new AuthenticationException();
+						}
+					}
+					
+			if(!success ){
 				loginState = false;
 			}else {
 				

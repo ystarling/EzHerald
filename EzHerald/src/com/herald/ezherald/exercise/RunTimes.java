@@ -196,11 +196,8 @@ public class RunTimes {
 			        	handler.sendMessage(msg);*/
 						HttpClient client= new DefaultHttpClient();
 						UserAccount user = Authenticate.getTyxUser(activity);
-						//String name = user.getUsername();
-						//String password = user.getPassword();
-						String name = "213123363";
-						String password = "1";
-						//TODO tyx login failed
+						String name = user.getUsername();
+						String password = user.getPassword();
 						String url = String.format("http://herald.seu.edu.cn/herald_web_service/tyx/%s/%s/",name,password);
 						HttpGet get = new HttpGet(url);
 						HttpResponse response = client.execute(get);
