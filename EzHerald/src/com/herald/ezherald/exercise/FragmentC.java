@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
@@ -45,14 +46,15 @@ public class FragmentC extends Fragment {
 			txt_updateTime = (TextView) getActivity().findViewById(
 					R.id.txt_update_time);
 			btn_update = (Button) getActivity().findViewById(R.id.btn_update);
-			runTimes = new RunTimes(getActivity());
+			runTimes = new RunTimes(getActivity(),this);
 			btn_update.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
+					btn_update.setText("正在更新");
 					update(user);
-					show();
+					
 				}
 
 			});
@@ -112,4 +114,18 @@ public class FragmentC extends Fragment {
 		runTimes.update(user);
 	}
 
+	public void onFailed() {
+		// TODO Auto-generated method stub
+		btn_update.setText("更新");
+		Toast.makeText(getActivity(), "更新失败", Toast.LENGTH_LONG).show();
+		show();
+	}
+
+	public void onSuccess() {
+		// TODO Auto-generated method stub
+		btn_update.setText("更新");
+		Toast.makeText(getActivity(), "更新成功", Toast.LENGTH_LONG).show();
+		show();
+	}
+	
 }

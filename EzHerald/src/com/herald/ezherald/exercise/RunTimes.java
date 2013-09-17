@@ -14,13 +14,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
-import cn.edu.seu.herald.ws.api.ServiceException;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
@@ -39,6 +39,7 @@ public class RunTimes {
 	private String averageRunTime;//平均打卡时间
 	private int    adviceTime;//推荐每周跑操天数
 	private String updateTime;//更新时间
+	private Fragment father;//父亲
 	
 	public static final int    DEFAULT_TIMES = -999;
 	public static final int    DEFAULT_ADJUST_TIMES = 0;
@@ -74,13 +75,22 @@ public class RunTimes {
 	}
 	protected void onFiled() {
 		// TODO Auto-generated method stub
-		Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
+		if(father instanceof FragmentB){
+			((FragmentB) father).onFailed();
+		}else if(father instanceof FragmentC){
+			((FragmentC) father).onFailed();
+		}
 	}
 	protected void onSuccess(int result) {
 		// TODO Auto-generated method stub
 		setTimes(result);
 		save();
-		
+		if(father instanceof FragmentB){
+			((FragmentB) father).onSuccess();
+		}else if(father instanceof FragmentC){
+			((FragmentC) father).onSuccess();
+		}
 	}
 	public float getRate() {
 		return rate;
@@ -136,12 +146,18 @@ public class RunTimes {
 	public RunTimes(){
 		
 	}
+	public RunTimes(Activity activity,Fragment father){
+		this(activity);
+		this.father=father;
+	}
+	
 	/**
 	 * @param activity 调用者的Activity
 	 * 构造时会尝试从sharedPreference读取数据
 	 */
 	public RunTimes(Activity activity){
 		this.activity = activity; 
+		
 		pref = activity.getApplication().getSharedPreferences("RunTimes", 0);
 		
 		setTimes(pref.getInt("Times", DEFAULT_TIMES));
