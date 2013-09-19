@@ -112,6 +112,8 @@ public class RenrenInfo{
 				save();
 			}
 			father.onSuccess();
+			DateFormat fmt = SimpleDateFormat.getDateTimeInstance(); 
+			setDate(fmt.format(new Date()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
