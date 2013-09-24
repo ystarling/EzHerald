@@ -92,17 +92,21 @@ public class RenrenInfo{
 			//String today = android.text.format.DateFormat.format("yyyy-m-d",new Date()).toString();
 			//Date  date = new Date();
 			Calendar calendar = Calendar.getInstance();
-			String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE));
+			String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DATE));
 			JSONObject json = new JSONObject(message);
 			JSONArray array = json.getJSONArray("response");
+			setInfo("");
 			for(int i=0;i<array.length();i++){
 				JSONObject object = (JSONObject) array.opt(i);
 				String date = object.getString("createTime");
+				date = date.split(" ")[0];
 				if(date.equals(today)){
 					String info = object.getString("content");
 					setInfo(getInfo()+info+"\n\n\n");
 					setDate(date);
 					save();
+				}else{
+					break;
 				}
 			}
 			if(getInfo()==null||getInfo().equals("")){//没有找到今天的，显示最新一条

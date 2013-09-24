@@ -13,6 +13,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.Message;
 
 public class FreshmanInfo {
 	public static final int STUDY=0,LIFE=1,PLAY=2,FAQ=3;
@@ -23,6 +24,8 @@ public class FreshmanInfo {
 	private SharedPreferences shared;
 	private Handler handler;
 	private final String url = "http://herald.seu.edu.cn/xyzn/index/info_for_android/";
+	private final int SUCCESS = 1;
+	private final int FAILED = 0;
 	private void readShared(int type){
 		String title = shared.getString(SharedPreferenceName+"title"+STUDY, null);
 		String content = shared.getString(SharedPreferenceName+"content"+STUDY, null);
@@ -51,7 +54,31 @@ public class FreshmanInfo {
 			readShared(i);
 		}
 		handler = new Handler(){
-			
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				switch(msg.what){
+				case SUCCESS:
+					onSuccess();
+					break;
+				case FAILED:
+					onFailed();
+					break;
+				default:
+					break;
+				}
+			}
+
+			private void onFailed() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			private void onSuccess() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		
 		
@@ -74,15 +101,18 @@ public class FreshmanInfo {
 					if(response.getStatusLine().getStatusCode() != 200){
 						throw new Exception("can't link to herald");
 					}
-					String Message = response.getEntity().toString();
-					
+					String result = response.getEntity().toString();
+					Message msg = handler.obtainMessage(SUCCESS, result);
+		        	handler.sendMessage(msg);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					handler.obtainMessage(FAILED).sendToTarget();
 				}
 			}
 		}.start();
 	}
+	
 	public void save(){
 		
 	}

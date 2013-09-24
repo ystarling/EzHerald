@@ -225,6 +225,7 @@ public class RunTimes {
 						Message msg = handler.obtainMessage(SUCCESS, result);
 			        	handler.sendMessage(msg);
 					}catch(Exception e){
+						e.printStackTrace();
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
 				}
