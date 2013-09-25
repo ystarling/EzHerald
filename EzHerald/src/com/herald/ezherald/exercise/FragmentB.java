@@ -45,7 +45,6 @@ public class FragmentB extends Fragment {
 			Intent login = new Intent();
 			login.setClass(getActivity(), TyxAccountActivity.class);
 			startActivity(login);
-			getActivity().finish();
 		} else {
 			edtAdjust = (EditText) getActivity().findViewById(
 					R.id.edtTxt_adjust);
@@ -99,7 +98,6 @@ public class FragmentB extends Fragment {
 				public void onClick(View v) {
 					btnUpdate.setText("正在更新...");
 					update();
-					
 				}
 
 			});
