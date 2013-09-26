@@ -7,20 +7,24 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
@@ -39,7 +43,10 @@ public class RunTimes {
 	private String averageRunTime;//平均打卡时间
 	private int    adviceTime;//推荐每周跑操天数
 	private String updateTime;//更新时间
-	private Fragment father;//父亲
+	private Fragment father;//上一级fragment
+	
+	private String timesAndRateXml;//次数与比例的xml
+	
 	
 	public static final int    DEFAULT_TIMES = -999;
 	public static final int    DEFAULT_ADJUST_TIMES = 0;
@@ -51,7 +58,8 @@ public class RunTimes {
 	public static final String DEFAULT_UPDATE_TIME = null;
 	private static final int SUCCESS = 1;
 	private static final int FAILED  = 0;
-	
+	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/ws/exercise/remain";
+	private static final String RUNTIMES_URL = "http://herald.seu.edu.cn/ws/exercise/runtimes";
 	
 	private SharedPreferences pref;
 	private Editor editor;
@@ -62,7 +70,7 @@ public class RunTimes {
 		public void handleMessage(Message msg){
 			switch(msg.what){
 			case SUCCESS:
-				onSuccess((Integer)msg.obj);
+				onSuccess();
 				break;
 			case FAILED:
 				onFiled();
@@ -82,9 +90,8 @@ public class RunTimes {
 			((FragmentC) father).onFailed();
 		}
 	}
-	protected void onSuccess(int result) {
-		// TODO Auto-generated method stub
-		setTimes(result);
+	protected void onSuccess() {
+		
 		save();
 		if(father instanceof FragmentB){
 			((FragmentB) father).onSuccess();
@@ -197,32 +204,29 @@ public class RunTimes {
 				@Override
 				public void run(){
 					try{
-						/*
-						// Web服务地址
-						final String HERALD_WS_BASE_URI = "http://herald.seu.edu.cn/ws";
-						// 构造Web服务工厂
-						HeraldWebServicesFactory factory = new HeraldWebServicesFactoryImpl(HERALD_WS_BASE_URI);
-						// 获取某个特定的Web服务
-						MorningExerciseService morningExerciseService = factory.getMorningExerciseService();
-						RunTimesData runTimesData = morningExerciseService.getRunTimesData(user.getUsername(), user.getPassword());
-						
-						int result = runTimesData.getTimes().intValue();
-						//result.setTimes(runTimesData.getTimes().intValue());
-						Message msg = handler.obtainMessage(SUCCESS, result);
-			        	handler.sendMessage(msg);*/
 						HttpClient client= new DefaultHttpClient();
 						UserAccount user = Authenticate.getTyxUser(activity);
 						String name = user.getUsername();
 						String password = user.getPassword();
-						String url = String.format("http://herald.seu.edu.cn/herald_web_service/tyx/%s/%s/",name,password);
-						HttpGet get = new HttpGet(url);
-						HttpResponse response = client.execute(get);
+						
+						DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+						DocumentBuilder builder = factory.newDocumentBuilder();
+						Document document = builder.parse(RUNTIMES_URL+"/"+name+"/"+password);
+						Node timesNode = document.getElementsByTagName("times").item(0);
+						Node rateNode = document.getElementsByTagName("rate").item(0);
+						
+						setTimes(Integer.parseInt(timesNode.getTextContent()));
+						setRate(Integer.parseInt(rateNode.getTextContent()));
+						
+						HttpGet remainDaysGet = new HttpGet(REMAIN_DAYS_URL);
+						HttpResponse response = client.execute(remainDaysGet);
 						if(response.getStatusLine().getStatusCode() != 200){
-							throw new Exception();
+							throw new Exception("net error");
 						}
-						String message = EntityUtils.toString(response.getEntity());
-						int result = Integer.parseInt(message);
-						Message msg = handler.obtainMessage(SUCCESS, result);
+						String result = EntityUtils.toString(response.getEntity());
+						int remDays = Integer.parseInt( result);
+						setRemainDays(remDays);
+						Message msg = handler.obtainMessage(SUCCESS);
 			        	handler.sendMessage(msg);
 					}catch(Exception e){
 						e.printStackTrace();

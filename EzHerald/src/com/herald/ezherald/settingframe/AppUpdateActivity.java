@@ -6,12 +6,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.ws.rs.core.UriInfo;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,12 +40,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.edu.seu.herald.ws.api.AndroidClientUpdateService;
-import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
-import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
-import cn.edu.seu.herald.ws.api.update.Update;
 
 import com.herald.ezherald.R;
+import com.sun.jersey.core.impl.provider.xml.DocumentBuilderFactoryProvider;
 
 /**
  * @author xie
@@ -54,7 +60,9 @@ public class AppUpdateActivity extends Activity {
 	private final int SUCCESS = 1;
 	private final int FAILED  = 0;
 	private final int DOING   = 2;
-	private final boolean DEBUG = false;
+	private final String checkUrl = "http://herald.seu.edu.cn/ws/update";
+	private boolean running;
+	boolean needUpdate;
 	
 	private Handler mhandler = new Handler(){
 		@Override
@@ -79,42 +87,53 @@ public class AppUpdateActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_update_main);
-		
-
-		if(DEBUG || checkUpdate() ){
+		running = false;
+		needUpdate = false;
+		checkUpdate();
+		int x=0;
+		while(running){
+			x++;//WAITING
+		}
+		if( needUpdate ){
 			update();
 		}else{
+			Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
 			this.finish();
 		}
 	}
 	/**
 	 * @return boolean 是否有新版本
 	 */
-	public boolean checkUpdate(){
-		try {
-			//TODO use API ,API还没有实现
-			final String HERALD_WS_BASE_URI = "http://herald.seu.edu.cn/ws";
-			HeraldWebServicesFactory factory = new HeraldWebServicesFactoryImpl(
-					HERALD_WS_BASE_URI);
-			AndroidClientUpdateService updateService = factory
-					.getAndroidClientUpdateService();
-			Update update = updateService.getNewVersion();
-			newVersion = Integer.valueOf(update.getVersion());
-			if (newVersion > getVersionCode()) {
-				uri = update.getUri();
-				description = update.getInfo();
-				//isForce = update.getForece(); 
-				return true;
-			} else {
-				return false;
+	public void checkUpdate(){
+		new Thread(){
+			@Override
+			public void run() {
+				running = true;
+				try {
+					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder builder = factory.newDocumentBuilder();
+					Document document = builder.parse(checkUrl);
+					Node versionNode = document.getElementsByTagName("version").item(0);
+					Node uriNode = document.getElementsByTagName("uri").item(0);
+					Node infoNode = document.getElementsByTagName("info").item(0);
+					Node forceNode = document.getElementsByTagName("force").item(0);
+					String version = versionNode.getTextContent();
+					uri = uriNode.getTextContent();
+					isForce = forceNode.getTextContent().equals("true");
+					description = infoNode.getTextContent();
+					newVersion = Integer.parseInt(version);
+					if(newVersion > getVersionCode()){
+						needUpdate = true;
+					}
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				running = false;
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			//Toast.makeText(this, "检测更新失败", Toast.LENGTH_SHORT).show();
-			Log.e("updateErr","**********");
-			e.printStackTrace();
-			return false;
-		}
+		}.start();
+		
 	}
 	
 	public void update(){
