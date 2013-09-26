@@ -2,6 +2,7 @@ package com.herald.ezherald.exercise;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,7 @@ public class FragmentA extends Fragment {
 	private RenrenInfo renren; 
 	private TextView txt_info ;
 	private TextView txt_date ;
+	private Button btn_update;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){
 		return inflater.inflate(R.layout.exercise_frag_a, group,false);
@@ -32,6 +34,7 @@ public class FragmentA extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		renren = new RenrenInfo(getActivity(),this);
 		txt_info = (TextView)getActivity().findViewById(R.id.txt_info);
+		txt_info.setMovementMethod(ScrollingMovementMethod.getInstance());//实现多行滚动
 		txt_date = (TextView)getActivity().findViewById(R.id.txt_date);
 		if(renren.isSet()){
 			show();
@@ -40,13 +43,13 @@ public class FragmentA extends Fragment {
 			txt_date.setText("");
 			update();
 		}
-		Button btn_update = (Button)getActivity().findViewById(R.id.btn_update);
+		btn_update = (Button)getActivity().findViewById(R.id.btn_update);
 		btn_update.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
 				update();
-
+				
 			}
 		});
 	}
@@ -54,6 +57,7 @@ public class FragmentA extends Fragment {
 	 * 更新信息
 	 */
 	private void update(){
+		btn_update.setText("正在更新...");
 		renren.update();
 	}
 	/**
@@ -64,7 +68,18 @@ public class FragmentA extends Fragment {
 		if (renren.getDate() != null) {
 			txt_date.setText("更新于" + renren.getDate());
 		}
-		Toast.makeText(getActivity(),"更新成功", Toast.LENGTH_LONG).show();
+		
+	}
+	//信息更新成功及失败的显示
+	public void onSuccess(){
+		txt_info.setText("  "+renren.getInfo());
+		txt_date.setText("更新于" + renren.getDate());
+		Toast.makeText(getActivity(),"人人信息更新成功", Toast.LENGTH_LONG).show();
+		btn_update.setText("更新");
+	}
+	public void onFailed(){
+		Toast.makeText(getActivity(),"人人信息更新失败", Toast.LENGTH_LONG).show();
+		btn_update.setText("更新");
 	}
 }
 

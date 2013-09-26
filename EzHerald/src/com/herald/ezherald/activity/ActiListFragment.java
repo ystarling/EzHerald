@@ -223,16 +223,22 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				intent.putExtra("endTime", actiInfo.getEndTime());
 				intent.putExtra("actiId", actiInfo.getId());
 				intent.putExtra("clubId", actiInfo.getClubId());
-				Bitmap bit_icon = DBAdapter.getClubIconByActi(actiInfo.getId());
-				ByteArrayOutputStream os_icon = new ByteArrayOutputStream();
-				bit_icon.compress(Bitmap.CompressFormat.PNG, 100, os_icon);
-				intent.putExtra("clubIcon",os_icon.toByteArray());
+//				Bitmap bit_icon = DBAdapter.getClubIconByActi(actiInfo.getId());
+//				ByteArrayOutputStream os_icon = null;
+//				if(bit_icon != null)
+//				{
+//					os_icon = new ByteArrayOutputStream();
+//					bit_icon.compress(Bitmap.CompressFormat.PNG, 100, os_icon);
+//				}
+				
+//				intent.putExtra("clubIcon",os_icon.toByteArray());
 				intent.putExtra("place", actiInfo.getPlace());
 				intent.putExtra("picName", actiInfo.getActiPicName());
-				Bitmap bit_pic = DBAdapter.getActiPicByActi(actiInfo.getId());
-				ByteArrayOutputStream os_pic = new ByteArrayOutputStream();
-				bit_pic.compress(Bitmap.CompressFormat.PNG, 100, os_pic);
-				intent.putExtra("actiPic",os_pic.toByteArray());
+				intent.putExtra("iconName", actiInfo.getClubIconName() );
+//				Bitmap bit_pic = DBAdapter.getActiPicByActi(actiInfo.getId());
+//				ByteArrayOutputStream os_pic = new ByteArrayOutputStream();
+//				bit_pic.compress(Bitmap.CompressFormat.PNG, 100, os_pic);
+//				intent.putExtra("actiPic",os_pic.toByteArray());
 				intent.putExtra("isVote", actiInfo.checkIsVote());
 				startActivity(intent);
 				

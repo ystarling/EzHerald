@@ -68,7 +68,7 @@ public class CourseDetailAdapter extends BaseAdapter {
 		Course course = courseList.get(arg0);
 		tvCourseName.setText(course.getCourseName());
 		tvLecturer.setText(course.getLecturer());
-		tvWeeks.setText(course.getBeginWeek()+" - "+course.getEndWeek());
+		tvWeeks.setText(course.getWeeks());
 		tvCredit.setText(""+course.getCredit());
 		
 		return view;

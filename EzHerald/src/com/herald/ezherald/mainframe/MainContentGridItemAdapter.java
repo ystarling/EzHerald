@@ -40,6 +40,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		public TextView title;		//模块名字
 		public TextView content1;	//内容1
 		public TextView content2;	//内容2
+		public TextView bigText;   //巨大的字
 	}
 	
 	public MainContentGridItemAdapter(Context c, List<Map<String, Object>> gridItems){
@@ -75,7 +76,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 			"纳尼?第一次么?",
 			"课表自习", "校园活动", "我的日程", 
 			"图书查询", "绩点查询", "跑操查询",
-			"教务信息", "新生指南"
+			"教务信息", "校园指南"
 	};
 	
 	@Override
@@ -116,6 +117,8 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 					.findViewById(R.id.main_frame_content_griditem_content1);
 			gridItemView.content2 = (TextView)convertView
 					.findViewById(R.id.main_frame_content_griditem_content2);
+			gridItemView.bigText = (TextView)convertView
+					.findViewById(R.id.main_frame_content_griditem_bigtext);
 			// 设置控件集到convertView
 			convertView.setTag(gridItemView);
 		}	else{
@@ -125,7 +128,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		// 设置title与contents
 		String titleText = ModuleNames[(int) getItemId(position)];
 		gridItemView.title.setText(titleText);
-		gridItemView.title.setBackgroundColor(getRandomLightColor());
+		//gridItemView.title.setTextColor(getRandomLightColor());
 		
 		
 		String cont1txt = (String) mGridItemList.get(position).get("content1");
@@ -141,6 +144,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		gridItemView.content1.setText(cont1txt);
 		int cont1size = cont1txt.length();
 		gridItemView.content1.setTextSize(getFittedTextSize(cont1size));
+		gridItemView.content1.bringToFront();
 		
 		
 		
@@ -156,10 +160,13 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		}*/ //直接Layout里面设置android:ellipsize
 		int cont2size = cont2txt.length();
 		gridItemView.content2.setText(cont2txt);
+		gridItemView.content2.bringToFront();
 		/*float cont2txtsize = (float) (getFittedTextSize(cont2size) / 1.5);
 		if(cont2txtsize > 20)
 			cont2txtsize /= 1.2;
 		gridItemView.content2.setTextSize(cont2txtsize);*/
+		
+		gridItemView.bigText.setText(titleText.subSequence(0, 1));
 		
 		return convertView;
 	}

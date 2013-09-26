@@ -13,7 +13,7 @@ import com.herald.ezherald.R;
 
 public class FreshmanFragment extends SherlockFragment {
 	TextView tv_study,tv_life,tv_play,tv_faq;
-	public static final int STUDY=0,LIFE=1,PLAY=2,FAQ=3;
+	
 	class Listener implements OnClickListener{
 		private int type;
 		public Listener(int type){
@@ -38,10 +38,10 @@ public class FreshmanFragment extends SherlockFragment {
 		
 	}
 	void setOnclick(){
-		tv_study.setOnClickListener(new Listener(STUDY));
-		tv_life.setOnClickListener(new Listener(LIFE));
-		tv_play.setOnClickListener(new Listener(PLAY));
-		tv_faq.setOnClickListener(new Listener(FAQ));
+		tv_study.setOnClickListener(new Listener(FreshmanInfo.STUDY));
+		tv_life.setOnClickListener(new Listener(FreshmanInfo.LIFE));
+		tv_play.setOnClickListener(new Listener(FreshmanInfo.PLAY));
+		tv_faq.setOnClickListener(new Listener(FreshmanInfo.FAQ));
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){

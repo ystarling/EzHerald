@@ -214,8 +214,12 @@ public class ActiDBAdapter {
 				mCursor.moveToFirst();
 				
 				byte[] in = mCursor.getBlob(mCursor.getColumnIndex("club_icon"));
-				Bitmap bitout = BitmapFactory.decodeByteArray(in, 0, in.length);
-				return bitout;
+				if(in!=null)
+				{
+					Bitmap bitout = BitmapFactory.decodeByteArray(in, 0, in.length);
+					return bitout;
+				}
+				return null;
 			}
 			else
 			{

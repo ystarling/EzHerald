@@ -10,11 +10,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -25,6 +36,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -36,6 +48,9 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.DataTypeTransition;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.IDCardAccountActivity;
+import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.activity.ActiInfoDetail;
 import com.herald.ezherald.exercise.FragmentA;
 import com.herald.ezherald.exercise.FragmentB;
@@ -49,7 +64,17 @@ public class CurriculumFragment extends SherlockFragment {
 	Context context;
 	CurriDBAdapter dbAdapter;
 	
+	String selectedItem = null;
+	List<String> termList = null;
+	
 	private ProgressDialog progressDialog;
+	private String prefName = "curriculum";
+	private String pref_term = "selectedTerm";
+	
+	
+	private String curri_url = "http://herald.seu.edu.cn/herald_web_service/" +
+			"curriculums/%s/%s/";
+	private String term_url = "http://herald.seu.edu.cn/herald_web_service/curriculums/term/";
 	
 	ActionBar bar ;
 	
@@ -61,23 +86,111 @@ public class CurriculumFragment extends SherlockFragment {
 	ActionBar.Tab tab6 ;
 	ActionBar.Tab tab7 ;
 	
+	private LayoutInflater inflater;
+	private ViewGroup container;
+	private Bundle savedInstanceState;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setRetainInstance(true);
-		setHasOptionsMenu(true);
 		context = this.getActivity();
 		adapter = new CourseAdapter(context);
 		dbAdapter = new CurriDBAdapter(context);
+		dbAdapter.open();
+		termList = new ArrayList<String>();
+		
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+		setHasOptionsMenu(true);
 		
 		
+	}
+	
+	@Override 
+	public void onDestroy()
+	{
+		dbAdapter.close();
+		super.onDestroy();
 	}
 	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		this.inflater = inflater;
+		this.container = container;
+		this.savedInstanceState = savedInstanceState;
+		String cardNum = null;
+		bar = getSherlockActivity(). getSupportActionBar();
+//		UserAccount acount = Authenticate.getIDcardUser(context);
+//		if(null == acount)
+//		{
+//			Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
+//			return setNotLoginView(inflater, container, savedInstanceState);
+//		}
+//		else
+//		{
+//			return setLoginView(inflater, container, savedInstanceState);
+//		}
+		return null;
+		
+
+	}
+	
+	@Override
+	public void onResume()
+	{
+		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
+		UserAccount acount = Authenticate.getIDcardUser(context);
+		if(null == acount)
+		{
+			Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
+			getActivity().setContentView(setNotLoginView(inflater, container, savedInstanceState));
+		}
+		else
+		{
+			getActivity().setContentView(setLoginView(inflater, container, savedInstanceState));
+		}
+		super.onResume();
+	}
+	
+	private View setNotLoginView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		
+		View v;
+		v = inflater.inflate(R.layout.curri_not_login, null);
+		bar.removeAllTabs();
+		bar.setTitle("尚未登录");
+		Button login_btn = (Button) v.findViewById(R.id.curri_btn_to_login);
+		login_btn.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(context, IDCardAccountActivity.class);
+				startActivity(intent);
+			}
+			
+		});
+		return v;
+	}
+	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu)
+	{
+		super.onPrepareOptionsMenu(menu);
+		UserAccount acount = Authenticate.getIDcardUser(context);
+		if(null == acount)
+		{
+			menu.clear();
+		}
+	}
+	
+	private View setLoginView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
 		View v;
@@ -107,24 +220,27 @@ public class CurriculumFragment extends SherlockFragment {
 		progressDialog.setMessage("Please wait ... ");
 //		progressDialog.show();
 		
-		dbAdapter.open();
 		if(dbAdapter.isEmpty())
 		{
-			progressDialog.show();
-			new requestCurriculum().execute("http://jwc.seu.edu.cn");
+			update();
 		}
-		dbAdapter.close();
 		
-		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
-		actionBar.setTitle("课表");
-		
+//		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
+//		actionBar.setTitle("课表");
+//		bar = this.getSherlockActivity().getSupportActionBar();
+		setTitle("课表");
 		
 		return v;
 	}
 	
+	private void setTitle(String title)
+	{
+		bar.setTitle(title);
+	}
+	
 	private void createTabs()
 	{
-		bar = getSherlockActivity(). getSupportActionBar();
+		
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		tab1 = bar.newTab();
 		tab2 = bar.newTab();
@@ -205,7 +321,6 @@ public class CurriculumFragment extends SherlockFragment {
 		
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			dbAdapter.open();
 			List<Attendance> al = new ArrayList<Attendance>();
 			switch(tab.getPosition()){
 				case 0:
@@ -234,7 +349,6 @@ public class CurriculumFragment extends SherlockFragment {
 					return;
 			}
 			
-			dbAdapter.close();
 			adapter.setAtts(al);
 			adapter.notifyDataSetChanged();
 		}
@@ -264,18 +378,141 @@ public class CurriculumFragment extends SherlockFragment {
 		switch(item.getItemId())
 		{
 		case R.id.menu_curri_action_refresh:
-			progressDialog.show();
-			new requestCurriculum().execute("http://jwc.seu.edu.cn");
+			update();
 			break;
-		
+		case R.id.menu_curri_action_set:
+			createItemDialog();
+			break;
 			
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
+	String tmpSelect = null;
+	String [] terms = null;
+	protected void createItemDialog()
+	{
+		termList = dbAdapter.getTerms();
+		terms = termList.toArray(new String[termList.size()]);
+		tmpSelect = terms[0];
+		AlertDialog.Builder builder = new Builder(context);
+		builder.setTitle("请选择学期")
+		.setPositiveButton("选择", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+//				selectedItem = items[which];
+				Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
+				SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
+				Editor editor = settings.edit();
+				editor.putString(pref_term, tmpSelect);
+				editor.commit();
+				bar.setTitle("课表:"+tmpSelect);
+				update();
+			}
+		})
+		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		})
+		.setSingleChoiceItems(terms, 0, null)
+		.setItems(terms, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+//				Toast.makeText(context, ""+which, Toast.LENGTH_LONG).show();
+				tmpSelect = terms[which];
+			}
+			
+		})
+		.create().show();
+	}
 	
-	
-	
+	private class requestTerms extends AsyncTask<String ,Integer, List<String>>
+	{
+
+		@Override
+		protected List<String> doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			Log.v("CURRI TERM", "beginning");
+			try {
+				URL url = new URL(term_url);
+				int response = -1;
+				InputStream in = null;
+				URLConnection conn;
+				conn = url.openConnection();
+				if (!(conn instanceof HttpURLConnection)) {
+					throw new IOException("NOT AN HTTP CONNECTION");
+				}
+				else
+				{
+					HttpURLConnection httpConn = (HttpURLConnection) conn;
+					httpConn.setAllowUserInteraction(false);
+					httpConn.setInstanceFollowRedirects(true);
+					httpConn.setRequestMethod("GET");
+					httpConn.setConnectTimeout(5000);
+					httpConn.connect();
+					response = httpConn.getResponseCode();
+					if (response == HttpURLConnection.HTTP_OK) {
+						in = httpConn.getInputStream();
+						String str = DataTypeTransition.InputStreamToString(in);
+						
+						List<String> terms = new ArrayList<String>();
+						JSONArray jsonArr = new JSONArray(str);
+						for(int i=0;i<jsonArr.length();++i)
+						{
+							Log.w("CURRI TERM",(String)jsonArr.get(i));
+							
+							terms.add((String) jsonArr.get(i));
+						}
+						
+						return terms;
+					}
+				}
+
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(List<String> terms)
+		{
+			Toast.makeText(context, "term completed", Toast.LENGTH_SHORT).show();
+			if(terms != null)
+			{
+				dbAdapter.clear();
+				for(String term : terms)
+				{
+					dbAdapter.insertTerm(term);					
+				}
+			}
+			SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
+			String term = settings.getString(pref_term, null);
+			if(null == term)
+			{
+				createItemDialog();
+			}
+			Message msg = new Message();
+			msg.what = 1;
+			mHandler.sendMessage(msg);
+		}
+	}
 	
 	private class requestCurriculum extends 
 	AsyncTask<String ,Integer ,AttsAndCourses >
@@ -300,37 +537,58 @@ public class CurriculumFragment extends SherlockFragment {
 					httpConn.setAllowUserInteraction(false);
 					httpConn.setInstanceFollowRedirects(true);
 					httpConn.setRequestMethod("GET");
+					httpConn.setConnectTimeout(5000);
 					httpConn.connect();
 					response = httpConn.getResponseCode();
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
-						
-						List<Attendance> attendances = new ArrayList<Attendance>();
-						attendances.add(new Attendance("高数","j8-111",1,2,1,16,2));
-						attendances.add(new Attendance("物理","j6-101",1,2,1,16,1));
-						attendances.add(new Attendance("英语","j8-111",3,5,1,16,5));
-						attendances.add(new Attendance("数学分析","j8-111",1,2,1,16,4));
-						attendances.add(new Attendance("c++","j8-111",8,9,1,16,3));
-						attendances.add(new Attendance("数据库理论","j8-111",1,2,1,16,3));
+						JSONArray jsonArr = new JSONArray(str);
+						JSONArray courseArr = (JSONArray) jsonArr.get(0);
+						JSONArray dayAttArr = (JSONArray) jsonArr.get(1);
 						List<Course> courses = new ArrayList<Course>();
-						courses.add(new Course("高数","周华健",1,16,5));
-						courses.add(new Course("物理","张道宇",1,16,5));
-						courses.add(new Course("英语","金晶",1,16,5));
-						courses.add(new Course("数学分析","张福宝",1,16,5));
-						courses.add(new Course("c++","于文雪",1,16,5));
-						courses.add(new Course("数据库理论","章某",1,16,5));
+						List<Attendance> attendances = new ArrayList<Attendance>();
+						for(int i=0;i<courseArr.length();++i)
+						{
+							String courseName = courseArr.getJSONArray(i).getString(0);
+							String lecturer = courseArr.getJSONArray(i).getString(1);
+							float credit = Float.parseFloat(courseArr.getJSONArray(i).getString(2));
+							String weeks = courseArr.getJSONArray(i).getString(3);
+							courses.add(new Course(courseName, lecturer, weeks, credit));
+							Log.v("course", ""+courseArr.get(i));
+						}
+						for(int j=0;j<dayAttArr.length();++j)
+						{
+							JSONArray dayAtt = dayAttArr.getJSONArray(j);
+							Log.v("att", ""+dayAttArr.get(j));
+							for(int k = 0;k<dayAtt.length();++k)
+							{
+								JSONArray attArr = dayAtt.getJSONArray(k);
+								String courseName = attArr.getString(0);
+								int beginWeek = Integer.parseInt(attArr.getJSONArray(1).getString(0));
+								int endWeek = Integer.parseInt(attArr.getJSONArray(1).getString(1));
+								int beginPeriod = Integer.parseInt(attArr.getJSONArray(2).getString(0));
+								int endPeriod = Integer.parseInt(attArr.getJSONArray(2).getString(1));
+								String place = attArr.getString(3);
+								Attendance att = new Attendance(courseName, place,beginPeriod, endPeriod,
+										beginWeek, endWeek, j+1);
+								attendances.add(att);
+							}
+							
+						}
 						
-						
+
 						return new AttsAndCourses(attendances, courses);
 					}
 				}
-				
-				
+	
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -343,7 +601,6 @@ public class CurriculumFragment extends SherlockFragment {
 			
 			if(result!=null)
 			{
-				dbAdapter.open();
 				for(Attendance att: result.getAttendances())
 				{
 					dbAdapter.insertAttendance(att);
@@ -352,16 +609,15 @@ public class CurriculumFragment extends SherlockFragment {
 				{
 					dbAdapter.insertCourse(c);
 				}
-				dbAdapter.close();
-				selectBar(bar);
-				progressDialog.cancel();
+
 			}
 			else
 			{
 				Toast.makeText(context, "数据读取失败．．．", Toast.LENGTH_SHORT).show();
 			}
-			
-			
+			Message msg = new Message();
+			msg.what = 2;
+			mHandler.sendMessage(msg);
 		}
 		
 	}
@@ -387,6 +643,76 @@ public class CurriculumFragment extends SherlockFragment {
 			return courses;
 		}
 		
+	}
+	
+	public void update()
+	{
+		progressDialog.show();
+
+		new requestTerms().execute("");
+
+	}
+	
+	final int TERM_REQ_COMPLETED = 1;
+	final int CURRI_REQ_COMPLETED = 2;
+	
+	public Handler mHandler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			switch(msg.what)
+			{
+			case TERM_REQ_COMPLETED:
+			{
+				String cardNum = null;
+				UserAccount acount = Authenticate.getIDcardUser(context);
+				if(null == acount)
+				{
+					Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
+				}
+				else
+				{
+					cardNum = acount.getUsername();
+					SharedPreferences preferences = getActivity().getSharedPreferences(prefName, 0);
+					String term = preferences.getString(pref_term, null);
+					String url = String.format(curri_url, cardNum, term);
+					Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
+					if(null == term)
+					{
+						Toast.makeText(context, "请先设置学期", Toast.LENGTH_SHORT).show();
+					}
+					else
+					{
+						new requestCurriculum().execute(url);
+						Toast.makeText(context, "thread success", Toast.LENGTH_SHORT).show();
+					}
+				}
+
+				break;
+			}
+				
+			case CURRI_REQ_COMPLETED:
+//				progressDialog.cancel();
+				onRefreshCompleted();
+				break;
+			}
+			super.handleMessage(msg);
+		}
+	};
+	
+	public void onRefreshCompleted()
+	{
+		List<Attendance> al = new ArrayList<Attendance>();
+		al =  dbAdapter.getAttByWeekday(getWeekday());
+		adapter.setAtts(al);
+		adapter.notifyDataSetChanged();
+		if(progressDialog.isShowing())
+		{
+			progressDialog.cancel();
+		}
+		
+		selectBar(bar);
+	
 	}
 	
 

@@ -76,8 +76,9 @@ public class MainActivity extends BaseFrameActivity {
 	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false; // 始终显示引导界面
 	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // 始终从网站更新数据，不论新旧
 
-	private final String REMOTE_UPDATE_CHECK_URL = "http://121.248.63.105/EzHerald/picupdatetime/";
-	private final String REMOTE_UPDATE_QUERY_URL = "http://121.248.63.105/EzHerald/picturejson/";
+	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
+	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
+	private final int CONN_TIMEOUT = 3000;
 	
 	private boolean mShowedUpdate = false;
 	
@@ -257,6 +258,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		URL url = new URL(urlStr);
 		URLConnection conn = url.openConnection();
+		conn.setConnectTimeout(CONN_TIMEOUT);
 
 		if (!(conn instanceof HttpURLConnection)) {
 			throw new IOException("Not an HTTP connection");
@@ -302,6 +304,7 @@ public class MainActivity extends BaseFrameActivity {
 	 */
 	private class UpdateBannerImageTask extends
 			AsyncTask<String, Void, ArrayList<Bitmap>> {
+		private boolean connFail = false;
 
 		@Override
 		protected ArrayList<Bitmap> doInBackground(String... url) {
@@ -330,7 +333,8 @@ public class MainActivity extends BaseFrameActivity {
 
 			// ///////////////////////////////////////
 			ArrayList<Bitmap> updList = new ArrayList<Bitmap>();
-			boolean haveUpdate = checkBannerImageUpdateState(); // TODO:从服务器先GET是否有update，然后决定是否下载
+			boolean haveUpdate = checkBannerImageUpdateState(); //从服务器先GET是否有update，然后决定是否下载
+			
 			Log.d("MainActivity: AsyncTask", "haveRemoveUpdate?" + haveUpdate);
 			// ////////////////////////////////////////////////////////////////////////////
 			ArrayList<String> remoteImgUrls = null;
@@ -346,6 +350,8 @@ public class MainActivity extends BaseFrameActivity {
 						updList.add(bmp);
 					} else {
 						showToastInWorkingThread("网络不大给力的样子呐...");
+						connFail = true;
+						break;
 					}
 				}
 				
@@ -378,7 +384,7 @@ public class MainActivity extends BaseFrameActivity {
 			// 修改相应的视图
 			for (int i = 0; i < result.size(); i++) {
 				((MainContentFragment) mContentFrag).updateImageItem(i,
-						result.get(i));
+						result.get(result.size() -i -1));
 			}
 
 			((MainContentFragment) mContentFrag).refreshViewFlowImage();
@@ -391,7 +397,8 @@ public class MainActivity extends BaseFrameActivity {
 			doingItem.setVisible(false);
 
 			// 更新SharedPreference里面最后更新的时间
-			setLastRefreshTime(System.currentTimeMillis());
+			if(!connFail)
+				setLastRefreshTime(System.currentTimeMillis());
 
 			super.onPostExecute(result);
 		}

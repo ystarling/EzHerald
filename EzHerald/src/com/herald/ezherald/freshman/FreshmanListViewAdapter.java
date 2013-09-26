@@ -14,7 +14,8 @@ public class FreshmanListViewAdapter implements ListAdapter {
 	private int type;
 	private String[][] titles = { 
 			{ "选课", "学期", "平均成绩点数(GPA)", "讲座", },
-			{ "一卡通", "运动", "上网", "食堂", "宿舍", "社团", }, { "出行", "超市" },
+			{ "一卡通", "运动", "上网", "食堂", "宿舍", "社团", }, 
+			{ "出行", "超市" },
 			{ "说好的API呢??" }, 
 	};
 	private String[][] info = {

@@ -42,12 +42,12 @@ public class ActiInfo {
 		actiPicName = acti_pic;
 		holdPlace = p;
 
-//		iconUrl = "http://herald.seu.edu.cn/herald_league/Uploads/LeagueAvatar/m_s_avatar_address/"+
-//					clubIconName;
-		iconUrl = "http://static.dayandcarrot.net/temp/square.png";
-//		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/" +
-//				actiPicName;
-		actiPicUrl = "http://static.dayandcarrot.net/temp/aoi_sora.jpg";
+		iconUrl = "http://herald.seu.edu.cn/herald_league/Uploads/LeagueAvatar/m_s_avatar_address/"+
+					clubIconName;
+//		iconUrl = "http://static.dayandcarrot.net/temp/square.png";
+		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/" +
+				actiPicName;
+//		actiPicUrl = "http://static.dayandcarrot.net/temp/aoi_sora.jpg";
 		actiDetailUrl = "http://herald.seu.edu.cn/herald_league_api/index.php" +
 				"/command/select/selectoperate/activitydetail/activityid/"+actiId;
 	}
