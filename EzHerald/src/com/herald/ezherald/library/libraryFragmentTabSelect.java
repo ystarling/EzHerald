@@ -27,10 +27,10 @@ class LibraryFragmentTabSelect implements ActionBar.TabListener{
 			case 0:
 				libr_frg=new LibraryFragment();
 				break;
+//			case 1:
+//				libr_frg=new LibraryFragmentNews();
+//				break;
 			case 1:
-				libr_frg=new LibraryFragmentNews();
-				break;
-			case 2:
 				libr_frg=new LibraryFragmentMine();	
 				break;
 		}

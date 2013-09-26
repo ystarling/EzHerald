@@ -5,9 +5,9 @@
     android:padding="10dp"
     android:orientation="vertical">
   	<LinearLayout
-  	    android:id="@+id/hello"
   	    android:layout_width="fill_parent"
   	    android:layout_height="wrap_content"
+  	    android:paddingLeft="10sp"
   	    android:orientation="horizontal"
   	    >
    	<EditText
@@ -17,11 +17,13 @@
       android:hint="请输入书名"
       android:singleLine="true"
       android:imeOptions="actionSearch"/>
-  	<Button 
-  	  android:text="搜索"
+   	
+  	<ImageView 
       android:id="@+id/libr_search_button"
+      android:paddingTop="10sp"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_height="wrap_content"
+      android:src="@drawable/libr_search_button"/>
   	</LinearLayout>
   	
 	<ListView
