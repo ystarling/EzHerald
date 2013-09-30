@@ -5,4 +5,68 @@
     android:orientation="vertical" >
     
 
+    <TextView
+	   android:id="@+id/libr_book_Reserve_name"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingLeft="15sp"
+	   android:paddingTop="15sp"
+	   android:textSize="15sp"
+	   android:textIsSelectable="true"
+   		/>
+    
+    <TextView
+	   android:id="@+id/libr_book_Reserve_press"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingLeft="15sp"
+	   android:paddingTop="5sp"
+	   android:textSize="15sp"
+	   android:textIsSelectable="true"
+   		/>
+
+   	<TextView
+	   android:id="@+id/libr_book_Reserve_prize"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingTop="5sp"
+	   android:paddingLeft="15sp"
+	   android:textSize="15sp"
+	   android:textIsSelectable="true"
+   		/>
+   	<TextView
+	   android:id="@+id/libr_book_Reserve_vector"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingTop="5sp"
+	   android:paddingLeft="15sp"
+	   android:textSize="15sp"
+	   android:textIsSelectable="true"
+   		/>
+  	<TextView
+	   android:id="@+id/libr_book_Reserve_personal"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingTop="5sp"
+	   android:paddingLeft="15sp"
+	   android:textSize="15sp"
+	   android:textIsSelectable="true"
+   		/>
+  	 <TextView
+	   android:id="@+id/libr_book_Reserve_sort"
+	   android:layout_width="wrap_content"
+	   android:layout_height="wrap_content"
+	   android:paddingTop="5sp"
+	   android:paddingLeft="15sp"
+	   android:textSize="15sp"
+	   android:textIsSelectable="true"
+   		/>
+  	 
+  	 <ListView
+  	     android:id="@+id/libr_reserve_list"
+  	     android:layout_width="wrap_content"
+  	     android:layout_height="wrap_content"
+  	     >
+  	 </ListView>    
+
 </LinearLayout>

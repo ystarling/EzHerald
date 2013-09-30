@@ -5,49 +5,82 @@
     android:layout_marginLeft="20dp"
     android:orientation="vertical" >
     
+    <ProgressBar
+     android:id="@+id/libr_circleBookProgressBar"
+     style="?android:attr/progressBarStyleLarge"
+  	 android:layout_width="match_parent"   
+     android:layout_height="200sp"
+     android:layout_gravity="center"  
+    ></ProgressBar>
+        
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10sp"
+        android:orientation="horizontal">
+    <!--
     <TextView
 	   android:text="题名/责任者:"
 	   android:layout_width="wrap_content"
 	   android:layout_height="wrap_content"
 	   android:textIsSelectable="true"
    		/>
+   	  -->
     <TextView
 	   android:id="@+id/libr_book_listdetailA_name"
 	   android:layout_width="wrap_content"
 	   android:layout_height="wrap_content"
-	   android:paddingLeft="80sp"
 	   android:textIsSelectable="true"
+	   android:textSize="15sp"
        android:textColor="#2932E1"
    		/>
+    </LinearLayout>
     
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="10sp"
+    android:orientation="horizontal">
+    <!-- 
     <TextView
        android:text="出版发行项:"
 	   android:layout_width="wrap_content"
 	   android:layout_height="wrap_content"
 	   android:textIsSelectable="true"
    		/>
+	 -->   		
     <TextView
 	   android:id="@+id/libr_book_listdetailA_press"
 	   android:layout_width="wrap_content"
 	   android:layout_height="wrap_content"
-	   android:paddingLeft="80sp"
        android:textColor="#2932E1"
+       android:textSize="15sp"
 	   android:textIsSelectable="true"
    		/>
+    </LinearLayout>
+    
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="10sp"
+    android:orientation="horizontal">
+    <!--
     <TextView
        android:text="ISBN及定价:"
 	   android:layout_width="wrap_content"
 	   android:layout_height="wrap_content"
 	   android:textIsSelectable="true"
    		/>
+   	 -->
    	<TextView
 	   android:id="@+id/libr_book_listdetailA_prize"
 	   android:layout_width="wrap_content"
 	   android:layout_height="wrap_content"
-	   android:paddingLeft="80sp"
 	   android:textIsSelectable="true"
+	   android:textSize="15sp"
        android:textColor="#2932E1"
    		/>
+    </LinearLayout>
     
      <ListView
          android:id="@+id/libr_book_listViewB"
