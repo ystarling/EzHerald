@@ -6,8 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
@@ -229,6 +232,20 @@ public class MainContentFragment extends SherlockFragment {
 	 * 初始化菜单项信息
 	 */
 	private List<Map<String, Object>> getGridItems(){
+		
+		///替换已有实现接口的模块的相关内容
+		MainContentInfoGrabber grabber = null;
+		MainContentGridItemObj obj = null;
+		/*grabber = new ExerciseActivity();
+		obj = grabber.GrabInformationObject();
+		if(obj.hasValidInfo()){
+			mContentCont1[1] = obj.getContent1();
+			mContentCont2[1] = obj.getContent2();
+		}*/
+		
+		
+		///
+		
 		List<Map<String, Object>> gridItems = new ArrayList<Map<String, Object>>();
 		for(int i=0; i<mContentTitles.size(); i++){
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -237,6 +254,8 @@ public class MainContentFragment extends SherlockFragment {
 			map.put("content2", mContentCont2[i]);
 			gridItems.add(map);
 		}
+		
+		
 		return gridItems;
 	}
 	
