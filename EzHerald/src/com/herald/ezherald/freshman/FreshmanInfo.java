@@ -1,17 +1,16 @@
 package com.herald.ezherald.freshman;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 
@@ -26,23 +25,7 @@ public class FreshmanInfo {
 	private final String url = "http://herald.seu.edu.cn/xyzn/index/info_for_android/";
 	private final int SUCCESS = 1;
 	private final int FAILED = 0;
-	private void readShared(int type){
-		String title = shared.getString(SharedPreferenceName+"title"+STUDY, null);
-		String content = shared.getString(SharedPreferenceName+"content"+STUDY, null);
-		if(title!=null){
-			String[] temp = title.split("\\|");
-			for(int j=0;j<temp.length;j++){
-				titles.get(type).add(temp[j]);
-			}
-		}
-		if(content!=null){
-			String[] temp = title.split("\\|");
-			for(int j=0;j<temp.length;j++){
-				titles.get(type).add(temp[j]);
-			}
-		}
-		
-	}
+	private String jsonStr;
 	FreshmanInfo(Activity activity){
 		for(int i=0;i<4;i++){
 			titles.add(new ArrayList<String>());
@@ -50,9 +33,7 @@ public class FreshmanInfo {
 		}
 		this.activity = activity;
 		shared = activity.getSharedPreferences(SharedPreferenceName,0);
-		for(int i=0;i<4;i++){
-			readShared(i);
-		}
+		jsonStr = shared.getString("json", null);
 		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
@@ -60,7 +41,7 @@ public class FreshmanInfo {
 				super.handleMessage(msg);
 				switch(msg.what){
 				case SUCCESS:
-					onSuccess();
+					onSuccess(msg.obj);
 					break;
 				case FAILED:
 					onFailed();
@@ -72,15 +53,21 @@ public class FreshmanInfo {
 
 			private void onFailed() {
 				// TODO Auto-generated method stub
-				
+				save();
 			}
 
-			private void onSuccess() {
+			private void onSuccess(Object obj) {
 				// TODO Auto-generated method stub
-				
+				jsonStr = (String)obj;
+				dealJson();
+				save();
 			}
 		};
 		
+		
+	}
+	protected void dealJson() {
+		// TODO Auto-generated method stub
 		
 	}
 	public List<List<String>> getContent() {
@@ -114,6 +101,8 @@ public class FreshmanInfo {
 	}
 	
 	public void save(){
-		
+		Editor editor = shared.edit();
+		editor.putString("json", jsonStr);
+		editor.commit();
 	}
 }
