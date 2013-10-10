@@ -7,6 +7,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -26,14 +29,15 @@ public class FreshmanInfo {
 	private final int SUCCESS = 1;
 	private final int FAILED = 0;
 	private String jsonStr;
+	
 	FreshmanInfo(Activity activity){
-		for(int i=0;i<4;i++){
-			titles.add(new ArrayList<String>());
-			content.add(new ArrayList<String>());
-		}
+		
 		this.activity = activity;
 		shared = activity.getSharedPreferences(SharedPreferenceName,0);
 		jsonStr = shared.getString("json", null);
+		if(jsonStr != null){
+			dealJson();
+		}
 		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
@@ -66,8 +70,61 @@ public class FreshmanInfo {
 		
 		
 	}
-	protected void dealJson() {
-		// TODO Auto-generated method stub
+	private void addTitle(JSONArray json,int type){
+		for(int i=0;i<json.length();++i){
+			try {
+				titles.get(type).add(json.getJSONObject(i).getString("title"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void addContent(JSONArray json,int type){
+		for(int i=0;i<json.length();++i){
+			try {
+				content.get(type).add(json.getJSONObject(i).getString("title"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void dealJson() {
+		titles = new ArrayList<List<String>>();
+		content = new ArrayList<List<String>>();
+		for(int i=0;i<4;i++){
+			titles.add(new ArrayList<String>());
+			content.add(new ArrayList<String>());
+		}
+		try {
+			JSONObject root = new JSONObject(jsonStr);
+			JSONArray play = root.getJSONArray("play");
+			JSONArray study = root.getJSONArray("study");
+			JSONArray life = root.getJSONArray("life");
+			JSONArray faq = root.getJSONArray("faq");
+			
+			addTitle(play,PLAY);
+			addContent(play, PLAY);
+			
+			addTitle(study,STUDY);
+			addContent(study, STUDY);
+			
+			addTitle(life,LIFE);
+			addContent(life, LIFE);
+			
+			addTitle(faq,FAQ);
+			addContent(faq, FAQ);
+			
+			
+			
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	public List<List<String>> getContent() {
