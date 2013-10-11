@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 public class FreshmanListViewAdapter implements ListAdapter {
 
+	private FreshmanInfo data;
 	private int type;
+	/*
 	private String[][] titles = { 
 			{ "选课", "学期", "平均成绩点数(GPA)", "讲座", },
-			{ "一卡通", "运动", "上网", "食堂", "宿舍", "社团", }, { "出行", "超市" },
+			{ "一卡通", "运动", "上网", "食堂", "宿舍", "社团", }, 
+			{ "出行", "超市" },
 			{ "说好的API呢??" }, 
 	};
 	private String[][] info = {
@@ -40,18 +43,29 @@ public class FreshmanListViewAdapter implements ListAdapter {
 					"说好的API呢??" 
 			}, 
 	};
+	*/
+	private String[][] titles;
+	private String[][] info;
 	private Context context;
 	private static final float LARGE = 23,SMALL=18; //字号
 	private static final int PADDING = 10;
 	public FreshmanListViewAdapter(int type,Context context) {
 		this.type = type;
 		this.context = context;
+		titles = new String[4][];
+		info = new String[4][];
+		for(int i=0;i<4;i++){
+			titles[i] = (String[]) data.getTitles().get(i).toArray();
+			info[i] = (String[]) data.getContent().get(i).toArray();
+		}
+		
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return titles[type].length+info[type].length;
+		//return data.getContent().get(type).size()+data.getTitles().get(type).size();
 	}
 
 	@Override

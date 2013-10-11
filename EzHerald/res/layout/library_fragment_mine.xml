@@ -4,5 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-
+    <ProgressBar
+        android:id="@+id/libr_circleProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+		android:layout_width="match_parent"   
+        android:layout_height="200sp"
+        android:layout_gravity="center"  
+        ></ProgressBar>
+	
+	
+	<ListView 
+	    android:id="@+id/libr_mine_list"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+	</ListView>
 </LinearLayout>

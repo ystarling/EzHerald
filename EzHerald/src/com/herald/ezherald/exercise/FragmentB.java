@@ -41,11 +41,10 @@ public class FragmentB extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		user = Authenticate.getTyxUser(getActivity());
-		if (null == user && false) {//TODO test
+		if (null == user) {
 			Intent login = new Intent();
 			login.setClass(getActivity(), TyxAccountActivity.class);
 			startActivity(login);
-			getActivity().finish();
 		} else {
 			edtAdjust = (EditText) getActivity().findViewById(
 					R.id.edtTxt_adjust);
@@ -54,7 +53,7 @@ public class FragmentB extends Fragment {
 			txtTimes = (TextView) getActivity().findViewById(R.id.txt_Times);
 			txtUpdateTime = (TextView) getActivity().findViewById(
 					R.id.txt_update_time);
-			runTimesInfo = new RunTimes(getActivity());
+			runTimesInfo = new RunTimes(getActivity(),this);
 			edtAdjust.setVisibility(View.INVISIBLE);
 			btnAdjust.setVisibility(View.INVISIBLE);
 			txtTimes.setOnLongClickListener(new OnLongClickListener() {
@@ -97,8 +96,8 @@ public class FragmentB extends Fragment {
 
 				@Override
 				public void onClick(View v) {
+					btnUpdate.setText("正在更新...");
 					update();
-					show();
 				}
 
 			});
@@ -137,5 +136,16 @@ public class FragmentB extends Fragment {
 		} else {
 			txtUpdateTime.setText("");
 		}
+	}
+	public void onSuccess(){
+		btnUpdate.setText("更新");
+		Toast.makeText(getActivity(), "更新成功", Toast.LENGTH_LONG).show();
+		show();
+	}
+
+	public void onFailed() {
+		btnUpdate.setText("更新");
+		Toast.makeText(getActivity(), "更新失败", Toast.LENGTH_LONG).show();
+		show();
 	}
 }
