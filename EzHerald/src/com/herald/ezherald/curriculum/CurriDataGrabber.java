@@ -33,7 +33,7 @@ public class CurriDataGrabber implements MainContentInfoGrabber {
 	{
 		List<Attendance> atts = getNextAtts();
 		MainContentGridItemObj item = new MainContentGridItemObj();
-		if(atts != null)
+		if(atts != null && !atts.isEmpty())
 		{
 			Attendance nextAtt = atts.get(0);
 			item.setContent1("下节课："+nextAtt.getAttCourseName());
@@ -41,8 +41,8 @@ public class CurriDataGrabber implements MainContentInfoGrabber {
 		}
 		else
 		{
-			item.setContent1("下节课没课喽！");
-			item.setContent2("");
+			item.setContent1("恭喜恭喜");
+			item.setContent2("今天木有课了!");
 		}
 		return item;
 	}

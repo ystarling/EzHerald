@@ -104,6 +104,8 @@ public class SecondMenuFragment extends ListFragment {
 			break;
 		case 1:
 			i.setClass(getActivity(), SettingActivity.class);
+			MainActivity mainActivity = (MainActivity)getActivity();
+			mainActivity.needRefreshContent = true;
 			break;
 		case 2:
 			i.setClass(getActivity(), AccountActivity.class);
@@ -139,7 +141,7 @@ public class SecondMenuFragment extends ListFragment {
 		
 		super.onResume();
 		
-		Toast.makeText(getActivity(), "OnResume", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), "OnResume", Toast.LENGTH_SHORT).show();
 		
 		updateLoginUserNameTitles();
 		
