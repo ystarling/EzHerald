@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -28,12 +30,14 @@ public class FreshmanContentFragment extends SherlockFragment {
 		adapter = new FreshmanListViewAdapter(type,getActivity());
 		listView = (ListView)getActivity().findViewById(R.id.lv_content);
 		listView.setAdapter(adapter);
-		listView.setOnClickListener(new OnClickListener() {
-			
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
 			@Override
-			public void onClick(View arg0) {
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				adapter.data.update();
+				return false;
 			}
 		});
 	}

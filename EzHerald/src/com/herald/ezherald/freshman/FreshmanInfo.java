@@ -65,13 +65,14 @@ public class FreshmanInfo {
 
 			private void onSuccess(Object obj) {
 				// TODO Auto-generated method stub
-				jsonStr = (String)obj;
+				if(obj!=null)
+					jsonStr = (String)obj;
 				
 				dealJson();
 				save();
 			}
 		};
-		
+		update();
 		
 	}
 	private void addTitle(JSONArray json,int type){
@@ -140,6 +141,10 @@ public class FreshmanInfo {
 	public void update(){
 		if(DEBUG){
 			jsonStr = testJson;
+			//Message msg = handler.obtainMessage(SUCCESS, null);
+        	//handler.sendMessage(msg);
+			dealJson();
+			save();
 		return;
 		}
 		
