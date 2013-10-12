@@ -57,7 +57,7 @@ public class AcademicFragment extends SherlockFragment implements
 	private JwcInfoAdapter adapter;
 	private ListFootView foot;
 
-	private Menu mMenu;
+	public Menu mMenu;
 
 	private final int ALL = 0;
 	private final int JIAOWU = 1;
@@ -83,13 +83,24 @@ public class AcademicFragment extends SherlockFragment implements
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		context = getActivity();
+		
 	}
+	
+	
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
+
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.menu_academic_list, menu);
-
 	}
 
 	/*
@@ -102,7 +113,7 @@ public class AcademicFragment extends SherlockFragment implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * �ϲ�Titleλ�õİ�ť�����Ӧ
+		 * 锟较诧拷Title位锟矫的帮拷钮锟斤拷锟斤拷锟接�
 		 */
 		switch (item.getItemId()) {
 		case R.id.academic_list_action_refresh:
@@ -123,16 +134,22 @@ public class AcademicFragment extends SherlockFragment implements
 		}
 	}
 
-	// ˢ�²˵���ʼ��ת
+	// 刷锟铰菜碉拷锟斤拷始锟斤拷转
 	public void onRefreshActionStart() {
 		// REFRESHSTATE = REFRESHING ;
+		if(mMenu == null)
+			return;
+		
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(R.layout.academic_refresh_progress);
 	}
 
-	// ˢ�²˵�ֹͣ��ת
+	// 刷锟铰菜碉拷停止锟斤拷转
 	public void onRefreshActionComplete() {
 		// REFRESHSTATE = REFRESHDOWN;
+		if(mMenu == null)
+			return;
+		
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(null);
 	}
@@ -151,11 +168,11 @@ public class AcademicFragment extends SherlockFragment implements
 		View v;
 		v = inflater.inflate(R.layout.academic_activity_main, null);
 		listView = (CustomListView) v.findViewById(R.id.list);
-		// ����listView��adapter
+		// 锟斤拷锟斤拷listView锟斤拷adapter
 		adapter = new JwcInfoAdapter(getActivity());
 //		adapter.setJwcInfoList(jwcArr);
 		listView.setAdapter(adapter);
-		// ��ӵײ������ظ�ࡱ��view
+		// 锟斤拷拥撞锟斤拷锟斤拷锟斤拷馗锟洁”锟斤拷view
 		foot = new ListFootView(getActivity().getApplicationContext());
 		foot.setOnClickListener(new OnClickListener() {
 
@@ -175,7 +192,7 @@ public class AcademicFragment extends SherlockFragment implements
 
 		});
 		listView.addFooterView(foot.getFootView());
-		// ����listview��ˢ�²���
+		// 锟斤拷锟斤拷listview锟斤拷刷锟铰诧拷锟斤拷
 		listView.setonRefreshListener(new OnRefreshListener() {
 
 			@Override
@@ -192,7 +209,7 @@ public class AcademicFragment extends SherlockFragment implements
 			}
 
 		});
-		// ����listviewû��item�ĵ������
+		// 锟斤拷锟斤拷listview没锟斤拷item锟侥碉拷锟斤拷锟斤拷锟�
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -208,7 +225,7 @@ public class AcademicFragment extends SherlockFragment implements
 				startActivity(intent);
 			}
 		});
-		// actionbar �� spinner
+		// actionbar 锟斤拷 spinner
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(
 				getActivity(), R.array.academic_list_action_spinner,
 				android.R.layout.simple_spinner_dropdown_item);
@@ -230,7 +247,7 @@ public class AcademicFragment extends SherlockFragment implements
 		return v;
 	}
 
-	// actionbar �� spinner ��item�����Ӧ
+	// actionbar 锟斤拷 spinner 锟斤拷item锟斤拷锟斤拷锟接�
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
