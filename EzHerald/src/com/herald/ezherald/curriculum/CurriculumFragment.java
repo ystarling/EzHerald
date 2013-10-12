@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -89,6 +90,7 @@ public class CurriculumFragment extends SherlockFragment {
 	private LayoutInflater inflater;
 	private ViewGroup container;
 	private Bundle savedInstanceState;
+	
 	
 	
 	@Override
@@ -365,6 +367,25 @@ public class CurriculumFragment extends SherlockFragment {
 			
 		}
     }
+	
+	public String getNextAtt()
+	{
+		CurriDataGrabber provider = new CurriDataGrabber(context);
+		List<Attendance> atts = provider.getNextAtts();
+//		int weekday = Tool.getWeekday();
+//		int period = Tool.getCurrCoursePeriod();
+//		List<Attendance> atts = dbAdapter.getNextAttByPeroid(weekday, period);
+//		Collections.sort(atts);
+		String str = "";
+		if(atts != null)
+		{
+			for(Attendance att: atts)
+			{
+				str+=att.getAttCourseName();
+			}
+		}
+		return str;
+	}
 	
 	@Override 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)

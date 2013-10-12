@@ -67,6 +67,8 @@ public class MainActivity extends BaseFrameActivity {
 	Menu mActionMenu;
 	Handler mMoveHandler;
 	SlidingMenu mSlidingMenu;
+	
+	public boolean needRefreshContent = false; //是否需要刷新Content
 
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME_FIRST_START = "first_start";
@@ -268,8 +270,10 @@ public class MainActivity extends BaseFrameActivity {
 			httpConn.setAllowUserInteraction(false);
 			httpConn.setInstanceFollowRedirects(true);
 			httpConn.setRequestMethod("GET");
+			httpConn.setConnectTimeout(CONN_TIMEOUT);
 			httpConn.connect();
 			response = httpConn.getResponseCode();
+			
 			if (response == HttpURLConnection.HTTP_OK) {
 				in = httpConn.getInputStream();
 			} else
@@ -500,8 +504,12 @@ public class MainActivity extends BaseFrameActivity {
 			in = OpenHttpConnection(REMOTE_UPDATE_CHECK_URL);
 		} catch (IOException e) {
 			Log.w("MainActivity", e.getLocalizedMessage());
+			showToastInWorkingThread("远程服务器链接超时，网络不大给力？");
 			return false;
 		}
+		if (in == null)
+			return false;
+		
 		InputStreamReader isr = new InputStreamReader(in);
 		int charRead;
 		String str = "";
@@ -594,6 +602,8 @@ public class MainActivity extends BaseFrameActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		Log.d("MainActivity", "needRefreshContent?" + needRefreshContent);
 	}
 
 }
