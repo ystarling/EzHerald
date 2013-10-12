@@ -203,6 +203,7 @@ public class MainContentFragment extends SherlockFragment {
 			}
 			//else if ....
 		} catch (Exception e){
+			e.printStackTrace();
 			Log.w("MainContentFragment", "¸üÐÂ³ö´í..");
 		}
 		
@@ -224,6 +225,8 @@ public class MainContentFragment extends SherlockFragment {
 			switch ((int)id) {
 			case 0:
 				i.setClass(getActivity(), MainContentModulePrefActivity.class);
+				MainActivity mainActivity = (MainActivity)getActivity();
+				mainActivity.needRefreshContent = true;
 				break;
 			case 1:
 				i.setClass(getActivity(), CurriculumActivity.class);
