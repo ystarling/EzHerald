@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class FreshmanListViewAdapter implements ListAdapter {
 
-	private FreshmanInfo data;
+	public FreshmanInfo data;
 	private int type;
 	/*
 	private String[][] titles = { 

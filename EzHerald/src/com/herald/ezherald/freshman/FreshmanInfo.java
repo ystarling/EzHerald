@@ -20,6 +20,7 @@ import android.os.Message;
 public class FreshmanInfo {
 	public static final int STUDY=0,LIFE=1,PLAY=2,FAQ=3;
 	private static final String SharedPreferenceName = "FreshMan";
+	private static final boolean DEBUG = true;
 	private List<List<String>> titles;
 	private List<List<String>> content;
 	private Activity activity;
@@ -29,6 +30,8 @@ public class FreshmanInfo {
 	private final int SUCCESS = 1;
 	private final int FAILED = 0;
 	private String jsonStr;
+	
+	private String testJson = "{\"play\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"...\", \"title\": \"...\"}], \"study\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"..\", \"title\": \"..\"}],\"faq\": [{\"content\": \"问题内容\", \"best_reply\": \"最佳回复\", \"title\": \"问题标题\"},{\"content\": \"...\", \"best_reply\": \"...\", \"title\": \"...\"}], \"life\": [{\"content\": \"内容\", \"title\": \"标题\"}]} ";
 	
 	FreshmanInfo(Activity activity){
 		
@@ -63,6 +66,7 @@ public class FreshmanInfo {
 			private void onSuccess(Object obj) {
 				// TODO Auto-generated method stub
 				jsonStr = (String)obj;
+				
 				dealJson();
 				save();
 			}
@@ -134,7 +138,12 @@ public class FreshmanInfo {
 		this.content = content;
 	}
 	public void update(){
-
+		if(DEBUG){
+			jsonStr = testJson;
+		return;
+		}
+		
+		
 		new Thread(){
 			@Override
 			public void run(){
@@ -161,5 +170,8 @@ public class FreshmanInfo {
 		Editor editor = shared.edit();
 		editor.putString("json", jsonStr);
 		editor.commit();
+	}
+	public List<List<String>> getTitles() {
+		return titles;
 	}
 }
