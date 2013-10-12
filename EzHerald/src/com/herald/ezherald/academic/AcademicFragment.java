@@ -23,6 +23,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
+import com.herald.ezherald.mainframe.MainContentGridItemObj;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -215,27 +216,12 @@ public class AcademicFragment extends SherlockFragment implements
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-		// ����ע�������ķ���Ҳ���Ե�
-		// class OnNavigationListener implements ActionBar.OnNavigationListener{
-		//
-		// @Override
-		// public boolean onNavigationItemSelected(int itemPosition,
-		// long itemId) {
-		// // TODO Auto-generated method stub
-		// Toast.makeText(getActivity(), ""+itemPosition+"   "+itemId,
-		// Toast.LENGTH_SHORT).show();
-		// return false;
-		// }
-		//
-		// }
-		
-		
-
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 		
 		try {
 			onRefreshActionStart();
 			new RefreshJwcInfo().execute(new URL(REFRESH_URL));
+			//ew grabber().execute();
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -271,16 +257,6 @@ public class AcademicFragment extends SherlockFragment implements
 			JwcInfoMode = JIAOPING;
 			break;
 		}
-		// try {
-		// onRefreshActionStart();
-		// new RefreshJwcInfo().execute(new URL("http://jwc.seu.edu.cn") );
-		// //return true;
-		// } catch (MalformedURLException e) {
-		// // TODO Auto-generated catch block
-		// onRefreshActionComplete();
-		// e.printStackTrace();
-		// //return false;
-		// }
 		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
 				Toast.LENGTH_SHORT).show();
 		return false;
@@ -349,6 +325,7 @@ public class AcademicFragment extends SherlockFragment implements
 				listView.onRefreshComplete();
 				onRefreshActionComplete();
 				// Log.v("Watch", "onPostExecute");
+				
 			}
 
 		}
@@ -419,7 +396,27 @@ public class AcademicFragment extends SherlockFragment implements
 			}
 
 		}
-
 	}
+	
+	
+	private class grabber extends AsyncTask<Void, Integer, MainContentGridItemObj>
+	{
+
+		@Override
+		protected MainContentGridItemObj doInBackground(Void... arg0) {
+			// TODO Auto-generated method stub
+			MainContentGridItemObj obj = new AcademicDataGrabber().GrabInformationObject();
+			return obj;
+		}
+		
+		@Override
+		protected void onPostExecute(MainContentGridItemObj obj)
+		{
+			Toast.makeText(context, obj.getContent1()+ obj.getContent2(), Toast.LENGTH_LONG).show();
+		}
+		
+	}
+	
+	
 
 }

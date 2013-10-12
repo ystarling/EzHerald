@@ -162,4 +162,9 @@ public class FreshmanInfo {
 		editor.putString("json", jsonStr);
 		editor.commit();
 	}
+	
+	public List<List<String>> getTitles()
+	{
+		return this.titles;
+	}
 }
