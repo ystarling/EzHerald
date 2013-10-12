@@ -227,7 +227,7 @@ public class CurriDBAdapter {
 		Cursor mCursor = db.query(true, tbnAttendances, 
 				new String[]{clAttCourseName,clAttPeriodBegin,clAttPeriodEnd,clAttPlace,clAttWeekBegin,
 				clAttWeekday,clAttWeekEnd},
-				clAttWeekday+"="+2+" and period_begin>"+period, null, null, null, null, null);
+				clAttWeekday+"="+weekday+" and period_begin>"+period, null, null, null, null, null);
 		List<Attendance> attendances = new ArrayList<Attendance>();
 		if(mCursor.moveToFirst())
 		{
