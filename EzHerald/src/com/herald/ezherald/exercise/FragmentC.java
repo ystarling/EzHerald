@@ -58,19 +58,22 @@ public class FragmentC extends Fragment {
 				}
 
 			});
+			update(user);
+			show();
+			/*
 			if (runTimes.isSet()) {
 				show();
 			} else {
-				update(user);
-				show();
+				
 			}
+			*/
 		}
 
 	}
 
 	private void show() {
 		final String noData = "还没有数据";
-
+		/*
 		if (runTimes.getRate() != RunTimes.DEFAULT_RATE) {
 			txt_rate.setText(String.format("你的次数击败了\n%d%%的同学",
 					(int) (runTimes.getRate() * 100)));// TODO
@@ -78,7 +81,7 @@ public class FragmentC extends Fragment {
 		} else {
 			txt_rate.setText(noData);
 		}
-
+		*/
 		if (runTimes.getRemainDays() >= 0
 				&& runTimes.getAdviceTime() != RunTimes.DEFAULT_ADVICE_TIME) {
 			txt_remainDays.setText(String.format("本学期还剩%d天\n建议你每周至少跑%d次",
@@ -96,12 +99,13 @@ public class FragmentC extends Fragment {
 		} else {
 			txt_remainDays.setText(noData);
 		}
-
+		/*
 		if (runTimes.getAverageRunTime() != RunTimes.DEFAULT_AVERAGE_RUN_TIME) {
 			txt_notice.setText("平均打卡时间：" + runTimes.getAverageRunTime());
 		} else {
 			txt_notice.setText(noData);
 		}
+		*/
 		if (runTimes.getUpdateTime() != RunTimes.DEFAULT_UPDATE_TIME) {
 			txt_updateTime.setText("更新于" + runTimes.getUpdateTime());
 		} else {
