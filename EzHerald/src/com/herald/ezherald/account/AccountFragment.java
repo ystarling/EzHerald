@@ -40,7 +40,7 @@ public class AccountFragment extends SherlockFragment{
 			tyxString = "[已登录] 体育系账号";
 		}
 		if(libAccount!=null){
-			libString = "[已登录]图书馆账号";
+			libString = "[已登录] 图书馆账号";
 		}
 		
 	    String lv_arr[]={

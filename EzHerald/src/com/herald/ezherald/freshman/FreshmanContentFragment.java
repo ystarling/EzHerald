@@ -3,8 +3,11 @@ package com.herald.ezherald.freshman;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -13,7 +16,7 @@ import com.herald.ezherald.R;
 public class FreshmanContentFragment extends SherlockFragment {
 	private int type;
 	private ListView listView;
-	private ListAdapter adapter;
+	private FreshmanListViewAdapter adapter;
 	public void setType(int type){
 		this.type = type;
 	}
@@ -27,6 +30,16 @@ public class FreshmanContentFragment extends SherlockFragment {
 		adapter = new FreshmanListViewAdapter(type,getActivity());
 		listView = (ListView)getActivity().findViewById(R.id.lv_content);
 		listView.setAdapter(adapter);
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				adapter.data.update();
+				return false;
+			}
+		});
 	}
 
 

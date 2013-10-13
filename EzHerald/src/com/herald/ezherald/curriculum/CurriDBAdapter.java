@@ -222,6 +222,34 @@ public class CurriDBAdapter {
 		return attendances;
 	}
 	
+	public List<Attendance> getNextAttByPeroid(int weekday, int period)
+	{
+		Cursor mCursor = db.query(true, tbnAttendances, 
+				new String[]{clAttCourseName,clAttPeriodBegin,clAttPeriodEnd,clAttPlace,clAttWeekBegin,
+				clAttWeekday,clAttWeekEnd},
+				clAttWeekday+"="+weekday+" and period_begin>"+period, null, null, null, null, null);
+		List<Attendance> attendances = new ArrayList<Attendance>();
+		if(mCursor.moveToFirst())
+		{
+			
+			do
+			{
+				String courseName = mCursor.getString(mCursor.getColumnIndex(clAttCourseName));
+				String place = mCursor.getString(mCursor.getColumnIndex(clAttPlace));
+				int beginWeek = mCursor.getInt(mCursor.getColumnIndex(clAttWeekBegin));
+				int endWeek = mCursor.getInt(mCursor.getColumnIndex(clAttWeekEnd));
+				int beginPeriod = mCursor.getInt(mCursor.getColumnIndex(clAttPeriodBegin));
+				int endPeriod = mCursor.getInt(mCursor.getColumnIndex(clAttPeriodEnd));
+				int day = mCursor.getInt(mCursor.getColumnIndex(clAttWeekday));
+				attendances.add(new Attendance(courseName,place,beginPeriod,endPeriod,
+						beginWeek,endWeek,day));
+				
+			}while(mCursor.moveToNext());
+			
+		}
+		return attendances;
+	}
+	
 	public boolean isEmpty()
 	{
 		Cursor mCursor = db.query(true, tbnAttendances, 

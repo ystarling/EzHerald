@@ -79,6 +79,11 @@ public class JwcInfoAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return position;
 	}
+	
+	public int getLastItemId()
+	{
+		return jwcInfoList.get(jwcInfoList.size()-1).GetId();
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -94,15 +99,13 @@ public class JwcInfoAdapter extends BaseAdapter {
 				.findViewById(R.id.academic_list_btn_share);
 		holder.date = (TextView) convertView
 				.findViewById(R.id.academic_info_item_date);
-		holder.intro = (TextView) convertView
-				.findViewById(R.id.academic_info_item_intro);
 
 		JwcInfo jwcInfo = jwcInfoList.get(position);
 		if (jwcInfo != null) {
 			holder.type.setText(jwcInfo.GetType());
 			holder.title.setText(jwcInfo.GetTitle());
 			holder.date.setText(jwcInfo.GetDate());
-			holder.intro.setText(jwcInfo.GetIntro());
+//			holder.intro.setText(jwcInfo.GetIntro());
 			holder.btn_share.setOnClickListener(new OnClickListener() {
 
 				@Override

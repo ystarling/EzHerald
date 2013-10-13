@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -20,8 +23,10 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
+import com.herald.ezherald.mainframe.MainContentGridItemObj;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -52,7 +57,7 @@ public class AcademicFragment extends SherlockFragment implements
 	private JwcInfoAdapter adapter;
 	private ListFootView foot;
 
-	private Menu mMenu;
+	public Menu mMenu;
 
 	private final int ALL = 0;
 	private final int JIAOWU = 1;
@@ -63,6 +68,13 @@ public class AcademicFragment extends SherlockFragment implements
 	private final int JIAOPING = 6;
 
 	private int JwcInfoMode = ALL;
+	
+	private final String REFRESH_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/";
+	private final String MORE_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/more/%d/";
+	
+	
+	private Integer lastid = null;
+	private Context context;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,13 +82,25 @@ public class AcademicFragment extends SherlockFragment implements
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
+		context = getActivity();
+		
 	}
+	
+	
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
+
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.menu_academic_list, menu);
-
 	}
 
 	/*
@@ -89,14 +113,14 @@ public class AcademicFragment extends SherlockFragment implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * ÉÏ²àTitleÎ»ÖÃµÄ°´Å¥µã»÷ÏàÓ¦
+		 * é”Ÿè¾ƒè¯§æ‹·Titleä½é”ŸçŸ«çš„å¸®æ‹·é’®é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ¥ï¿½
 		 */
 		switch (item.getItemId()) {
 		case R.id.academic_list_action_refresh:
 			try {
 				// item.setActionView(R.layout.academic_refresh_progress);
 				onRefreshActionStart();
-				new RefreshJwcInfo().execute(new URL("http://jwc.seu.edu.cn"));
+				new RefreshJwcInfo().execute(new URL(REFRESH_URL));
 				// item.setActionView(null);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -108,20 +132,24 @@ public class AcademicFragment extends SherlockFragment implements
 			return super.onOptionsItemSelected(item);
 
 		}
-
 	}
 
-	// Ë¢ĞÂ²Ëµ¥¿ªÊ¼Ğı×ª
+	// åˆ·é”Ÿé“°èœç¢‰æ‹·é”Ÿæ–¤æ‹·å§‹é”Ÿæ–¤æ‹·è½¬
 	public void onRefreshActionStart() {
 		// REFRESHSTATE = REFRESHING ;
+		if(mMenu == null)
+			return;
+		
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(R.layout.academic_refresh_progress);
-
 	}
 
-	// Ë¢ĞÂ²Ëµ¥Í£Ö¹Ğı×ª
+	// åˆ·é”Ÿé“°èœç¢‰æ‹·åœæ­¢é”Ÿæ–¤æ‹·è½¬
 	public void onRefreshActionComplete() {
 		// REFRESHSTATE = REFRESHDOWN;
+		if(mMenu == null)
+			return;
+		
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(null);
 	}
@@ -140,17 +168,11 @@ public class AcademicFragment extends SherlockFragment implements
 		View v;
 		v = inflater.inflate(R.layout.academic_activity_main, null);
 		listView = (CustomListView) v.findViewById(R.id.list);
-		// Êı¾İ»ñÈ¡£¬ÔİÇÒÖ±½Ó¸ø³ö
-		JwcInfo[] jwcArr = {
-				new JwcInfo("[½ÌÎñ¹ÜÀí]", "ËÄÁù¼¶¿¼ÊÔ", "2013-6-15",
-						"ËÄÁù¼¶¿¼ÊÔ½«ÔÚ¾ÅÁúºşĞ£Çø½øĞĞ£¬Çë¸÷Î»Í¬Ñ§×öºÃ×¼±¸"),
-				new JwcInfo("[½ÌÎñ¹ÜÀí]", "ÆÚÄ©¿¼ÊÔ", "2013-6-17",
-						"ÆÚÄ©¿¼ÊÔ¼ÇÂ¼ËµÃ÷£ºÕâÑ§ÆÚÑ§Ğ£¼ÌĞøÑÏÀ÷´ò»÷×÷±×ĞĞÎª...") };
-		// ÉèÖÃlistViewµÄadapter
+		// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·listViewé”Ÿæ–¤æ‹·adapter
 		adapter = new JwcInfoAdapter(getActivity());
-		adapter.setJwcInfoList(jwcArr);
+//		adapter.setJwcInfoList(jwcArr);
 		listView.setAdapter(adapter);
-		// Ìí¼Óµ×²¿¡°¼ÓÔØ¸ü¶à¡±µÄview
+		// é”Ÿæ–¤æ‹·æ‹¥æ’é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é¦—é”Ÿæ´â€é”Ÿæ–¤æ‹·view
 		foot = new ListFootView(getActivity().getApplicationContext());
 		foot.setOnClickListener(new OnClickListener() {
 
@@ -159,8 +181,9 @@ public class AcademicFragment extends SherlockFragment implements
 				// TODO Auto-generated method stub
 				try {
 					foot.startRequestData();
-					new RequestJwcInfo().execute(new URL(
-							"http://jwc.seu.edu.cn"));
+					int id = adapter.getLastItemId();
+					String url = String.format(MORE_URL, id);
+					new RequestJwcInfo().execute(new URL(url));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -169,7 +192,7 @@ public class AcademicFragment extends SherlockFragment implements
 
 		});
 		listView.addFooterView(foot.getFootView());
-		// ÉèÖÃlistviewµÄË¢ĞÂ²Ù×÷
+		// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·listviewé”Ÿæ–¤æ‹·åˆ·é”Ÿé“°è¯§æ‹·é”Ÿæ–¤æ‹·
 		listView.setonRefreshListener(new OnRefreshListener() {
 
 			@Override
@@ -177,8 +200,7 @@ public class AcademicFragment extends SherlockFragment implements
 				// TODO Auto-generated method stub
 				try {
 					onRefreshActionStart();
-					new RefreshJwcInfo().execute(new URL(
-							"http://jwc.seu.edu.cn"));
+					new RefreshJwcInfo().execute(new URL(REFRESH_URL));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					onRefreshActionComplete();
@@ -187,7 +209,7 @@ public class AcademicFragment extends SherlockFragment implements
 			}
 
 		});
-		// ÉèÖÃlistviewÃ»¸öitemµÄµã»÷²Ù×÷
+		// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·listviewæ²¡é”Ÿæ–¤æ‹·itemé”Ÿä¾¥ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -196,13 +218,14 @@ public class AcademicFragment extends SherlockFragment implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),
 						AcademicDetailActivity.class);
-				intent.putExtra("url", "http://jwc.seu.edu.cn");
+				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+				JwcInfo info = (JwcInfo) adapter.getItem(position-1);
+				int i = info.GetId();
+				intent.putExtra("id", i);
 				startActivity(intent);
-
 			}
-
 		});
-		// actionbar µÄ spinner
+		// actionbar é”Ÿæ–¤æ‹· spinner
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(
 				getActivity(), R.array.academic_list_action_spinner,
 				android.R.layout.simple_spinner_dropdown_item);
@@ -210,26 +233,21 @@ public class AcademicFragment extends SherlockFragment implements
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-		// ÏÂÃæ×¢ÊÍÆğÀ´µÄ·½·¨Ò²¿ÉÒÔµÄ
-		// class OnNavigationListener implements ActionBar.OnNavigationListener{
-		//
-		// @Override
-		// public boolean onNavigationItemSelected(int itemPosition,
-		// long itemId) {
-		// // TODO Auto-generated method stub
-		// Toast.makeText(getActivity(), ""+itemPosition+"   "+itemId,
-		// Toast.LENGTH_SHORT).show();
-		// return false;
-		// }
-		//
-		// }
-
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
+		
+		try {
+			onRefreshActionStart();
+			new RefreshJwcInfo().execute(new URL(REFRESH_URL));
+			//ew grabber().execute();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return v;
 	}
 
-	// actionbar µÄ spinner µÄitemµã»÷ÏìÓ¦
+	// actionbar é”Ÿæ–¤æ‹· spinner é”Ÿæ–¤æ‹·itemé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ¥ï¿½
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
@@ -256,16 +274,6 @@ public class AcademicFragment extends SherlockFragment implements
 			JwcInfoMode = JIAOPING;
 			break;
 		}
-		// try {
-		// onRefreshActionStart();
-		// new RefreshJwcInfo().execute(new URL("http://jwc.seu.edu.cn") );
-		// //return true;
-		// } catch (MalformedURLException e) {
-		// // TODO Auto-generated catch block
-		// onRefreshActionComplete();
-		// e.printStackTrace();
-		// //return false;
-		// }
 		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
 				Toast.LENGTH_SHORT).show();
 		return false;
@@ -295,18 +303,28 @@ public class AcademicFragment extends SherlockFragment implements
 					response = httpConn.getResponseCode();
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
-						// String str =
-						// DataTypeTransition.InputStreamToString(in);
+						 String str = DataTypeTransition.InputStreamToString(in);
 						// return str;
 						List<JwcInfo> list = new ArrayList<JwcInfo>();
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "½ô¼±ÌìÆøÔ¤¾¯", "2013-6-23",
-								"ÄÏ¾©µ°ÌÛµÄÌìÆøÓÖÀ´ÓêÁË£¬¹À¼ÆÖÜÈı²ÅÄÜÍ££¬Í¯Ğ¬ÃÇÈÌÒ»ÈÌ°É¡£"));
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "ÊîÆÚ·Å¼ÙÍ¨Öª", "2013-6-25",
-								"ÓÖÒª·Å¼ÙÁË£¬Ğ¡ĞÄ±»×Ó·¢Ã¹°¡£¬¸ÃÕ¦°ìÎÊµùÂè°É¡£"));
+						JSONArray jsonArr = new JSONArray(str);
+						for (int i=0; i<jsonArr.length(); ++i)
+						{
+							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+							int id = Integer.parseInt(jsonItem.getString(0));
+							String type = jsonItem.getString(1);
+							String title = jsonItem.getString(2);
+							String date = jsonItem.getString(3);
+							list.add(new JwcInfo(type, title, date, id));
+							
+						}
+						
 						return list;
 					}
 				}
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -324,6 +342,7 @@ public class AcademicFragment extends SherlockFragment implements
 				listView.onRefreshComplete();
 				onRefreshActionComplete();
 				// Log.v("Watch", "onPostExecute");
+				
 			}
 
 		}
@@ -354,23 +373,29 @@ public class AcademicFragment extends SherlockFragment implements
 					response = httpConn.getResponseCode();
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
-						// String str =
-						// DataTypeTransition.InputStreamToString(in);
+						 String str = DataTypeTransition.InputStreamToString(in);
 						// return str;
-						try {
-							Thread.sleep(1000);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+
 						List<JwcInfo> list = new ArrayList<JwcInfo>();
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "½ô¼±ÌìÆøÔ¤¾¯", "2013-6-23",
-								"ÄÏ¾©µ°ÌÛµÄÌìÆøÓÖÀ´ÓêÁË£¬¹À¼ÆÖÜÈı²ÅÄÜÍ££¬Í¯Ğ¬ÃÇÈÌÒ»ÈÌ°É¡£"));
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "ÊîÆÚ·Å¼ÙÍ¨Öª", "2013-6-25",
-								"ÓÖÒª·Å¼ÙÁË£¬Ğ¡ĞÄ±»×Ó·¢Ã¹°¡£¬¸ÃÕ¦°ìÎÊµùÂè°É¡£"));
+						JSONArray jsonArr = new JSONArray(str);
+						for (int i=0; i<jsonArr.length(); ++i)
+						{
+							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+							int id = Integer.parseInt(jsonItem.getString(0));
+							String type = jsonItem.getString(1);
+							String title = jsonItem.getString(2);
+							String date = jsonItem.getString(3);
+							list.add(new JwcInfo(type, title, date, id));
+							
+						}
+						
 						return list;
 					}
 				}
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -388,7 +413,27 @@ public class AcademicFragment extends SherlockFragment implements
 			}
 
 		}
-
 	}
+	
+	
+	private class grabber extends AsyncTask<Void, Integer, MainContentGridItemObj>
+	{
+
+		@Override
+		protected MainContentGridItemObj doInBackground(Void... arg0) {
+			// TODO Auto-generated method stub
+			MainContentGridItemObj obj = new AcademicDataGrabber().GrabInformationObject();
+			return obj;
+		}
+		
+		@Override
+		protected void onPostExecute(MainContentGridItemObj obj)
+		{
+			Toast.makeText(context, obj.getContent1()+ obj.getContent2(), Toast.LENGTH_LONG).show();
+		}
+		
+	}
+	
+	
 
 }

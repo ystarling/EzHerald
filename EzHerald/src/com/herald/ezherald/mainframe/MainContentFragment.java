@@ -1,13 +1,18 @@
 package com.herald.ezherald.mainframe;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.net.ssl.HandshakeCompletedListener;
+
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +21,11 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +33,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockFragment;
+import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
+import com.herald.ezherald.academic.AcademicDataGrabber;
 import com.herald.ezherald.activity.ActiActivity;
 import com.herald.ezherald.agenda.AgendaActivity;
+import com.herald.ezherald.curriculum.CurriDataGrabber;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
@@ -50,26 +63,36 @@ public class MainContentFragment extends SherlockFragment {
 	private ViewFlow mViewFlow;  //ViewFlow
 	private CircleFlowIndicator mCircIndic;
 	
+	private InfoHandler mInfoHandler = new InfoHandler();
+	
 	
 	private List<Map<String, Object>> mGridItems;
 	private List<Map<String, Object>> mImageItems;
 	
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "module_choice";
+	
+	private final String MAPKEY_TITLE = "title";
+	private final String MAPKEY_CONT1 = "content1";
+	private final String MAPKEY_CONT2 = "content2";
+	
+	private final String MAPKEY_IMAGE = "image";
+	private final String MAPKEY_TYPE = "type";
+	
 	private final int MAX_BANNER_SIZE = 5;
 	
 	
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
-	
+	//private ArrayList<MainContentGridItemObj> mContentInfoObjs = new ArrayList<MainContentGridItemObj>();
 	
 	//////////////Temporarily used local variables///////////////////
-	String mContentCont1 [] = {"关于2013年暑假放假的通知", "教学楼管理规定", "新社团活动", "DDD", "放假啦", "2013年6月全国大学英语四六级考试“多提多卷”注意事项发布会", "GGG", "HHH"};
-	String mContentCont2 [] = {"SSSSSSSSSSSSSSXXXX", "TTT", "UUU", "VVV", "尼玛真不容易啊终于放假了啊！！！" ,"东南大学教务处", "YYY", "ZZZ"};
+	String mContentCont1 [] = {"尼玛", "怎么", "方法", "还没有", "写好啊", "人家都", "等不及了", "嘛"};
+	String mContentCont2 [] = {"AAA", "BBB", "CCCC", "DDD", "EEEE" ,"FFFF", "GGGGG", "HHHHH"};
 	///////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
 	private static final int[] image_ids =
 		{R.drawable.main_frame_pic0, R.drawable.main_frame_pic1,
-		R.drawable.main_frame_pic2, R.drawable.main_frame_pic3,
-		R.drawable.main_frame_pic4
+			R.drawable.main_frame_pic2, R.drawable.main_frame_pic3,
+			R.drawable.main_frame_pic4
 		};
 
 	
@@ -89,7 +112,6 @@ public class MainContentFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-
 	}
 
 	@Override
@@ -127,6 +149,8 @@ public class MainContentFragment extends SherlockFragment {
 		
 		mViewFlow.setTimeSpan(5000); 
 		mViewFlow.startAutoFlowTimer();
+		
+		//mInfoHandler = new InfoHandler();
 		
 	}
 	
@@ -177,19 +201,50 @@ public class MainContentFragment extends SherlockFragment {
 		
 	}
 
+	/**
+	 * 得到相应模块的GridItemObj，加入mContentInfoObjs
+	 * 如果目前没有实现这个接口，那么现在塞一个null的进去
+	 * @param moduleName 模块英文名称
+	 */
+	private void fetchInfoObjForName(String moduleName, int index) {
+		//MainContentGridItemObj obj = null;
+		MainContentInfoGrabber grabber = null;
+		try{
+			if(moduleName.equals("curriculum")){
+				grabber = new CurriDataGrabber(getActivity());
+				//obj = grabber.GrabInformationObject();
+			}else if (moduleName.equals("academic")){
+				grabber = new AcademicDataGrabber();
+				//obj = grabber.GrabInformationObject();
+			}
+			//else if ....
+		} catch (Exception e){
+			e.printStackTrace();
+			Log.w("MainContentFragment", "更新出错..");
+		}
+		if(grabber != null)
+		{
+			new Thread(new InfoRunnable(grabber, index)).start();
+		}
+		//mContentInfoObjs.add(obj);
+	}
 
 
+	/*
+	 * 点击Item跳转到各个模块
+	 */
 	private class MyOnItemClickListener implements AdapterView.OnItemClickListener{
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			//TODO: 项目点击的响应（进入相关模块）
-			Toast.makeText(getActivity(), "pos=" + position + "\nid=" + id, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getActivity(), "pos=" + position + "\nid=" + id, Toast.LENGTH_SHORT).show();
 			Intent i = new Intent();
 			switch ((int)id) {
 			case 0:
 				i.setClass(getActivity(), MainContentModulePrefActivity.class);
+				MainActivity mainActivity = (MainActivity)getActivity();
+				mainActivity.needRefreshContent = true;
 				break;
 			case 1:
 				i.setClass(getActivity(), CurriculumActivity.class);
@@ -229,14 +284,33 @@ public class MainContentFragment extends SherlockFragment {
 	 * 初始化菜单项信息
 	 */
 	private List<Map<String, Object>> getGridItems(){
+		//Update content info
+		int index = 0;
+		for(String title: mContentTitles){
+			fetchInfoObjForName(title, index++);
+		}
+		
+		
+		///替换已有实现接口的模块的相关内容
+		/*for(int i=0; i<mContentInfoObjs.size(); i++){
+			if(mContentInfoObjs.get(i) == null)
+				continue;
+			mContentCont1[i] = mContentInfoObjs.get(i).getContent1();
+			mContentCont2[i] = mContentInfoObjs.get(i).getContent2();
+		}*/
+		
+		///
+		
 		List<Map<String, Object>> gridItems = new ArrayList<Map<String, Object>>();
 		for(int i=0; i<mContentTitles.size(); i++){
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("title", mContentTitles.get(i));
-			map.put("content1", mContentCont1[i]);
-			map.put("content2", mContentCont2[i]);
+			map.put(MAPKEY_TITLE, mContentTitles.get(i)); //tag of a title
+			map.put(MAPKEY_CONT1, mContentCont1[i]);
+			map.put(MAPKEY_CONT2, mContentCont2[i]);
 			gridItems.add(map);
 		}
+		
+		
 		return gridItems;
 	}
 	
@@ -267,8 +341,8 @@ public class MainContentFragment extends SherlockFragment {
 			Log.e("MainContentFrag.", "Invalid image item position");
 			return;
 		}
-		mImageItems.get(index).put("type", 1);
-		mImageItems.get(index).put("image", bitmap);
+		mImageItems.get(index).put(MAPKEY_TYPE, 1);
+		mImageItems.get(index).put(MAPKEY_IMAGE, bitmap);
 		Log.d("MainContentFrag", "Image updated :\n" + mImageItems.get(index).toString());
 	}
 
@@ -277,7 +351,13 @@ public class MainContentFragment extends SherlockFragment {
 		Log.d("MainContentFrag", "OnResume");
 		//更新内容
 		super.onResume();
-		refreshInfo();
+		
+		MainActivity mainActivity = (MainActivity)getActivity();
+		if(mainActivity.needRefreshContent){
+			Log.d("MainContentFragment", "Refreshing info");
+			refreshInfo();
+			mainActivity.needRefreshContent = false;
+		}
 	}
 
 	/*
@@ -326,5 +406,54 @@ public class MainContentFragment extends SherlockFragment {
 		super.onConfigurationChanged(newConfig);
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
+	
+	private class InfoHandler extends Handler{
 
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			
+			int retVal = msg.arg1;
+			if(retVal == 200){
+				//更新界面
+				int index = msg.arg2;
+				mGridItems.get(index).put(MAPKEY_CONT1, mContentCont1[index]);
+				mGridItems.get(index).put(MAPKEY_CONT2, mContentCont2[index]);
+			}
+			
+			mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
+			
+		}
+		
+	}
+	
+	private class InfoRunnable implements Runnable{
+		private MainContentInfoGrabber g = null;
+		private int i; //index
+		
+		public InfoRunnable(MainContentInfoGrabber grabber, int index){
+			g = grabber;
+			i = index;
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			MainContentGridItemObj obj = g.GrabInformationObject();
+			if(obj == null)
+				return;
+			
+			mContentCont1[i] = obj.getContent1();
+			mContentCont2[i] = obj.getContent2();
+			
+			Message msg = new Message();
+			msg.arg1 = 200;
+			msg.arg2 = i; //index
+			Looper.prepare();
+			
+			mInfoHandler.sendMessage(msg);
+		}
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.herald.ezherald.freshman;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 
 public class FreshmanListViewAdapter implements ListAdapter {
 
+	public FreshmanInfo data;
 	private int type;
+	/*
 	private String[][] titles = { 
 			{ "选课", "学期", "平均成绩点数(GPA)", "讲座", },
 			{ "一卡通", "运动", "上网", "食堂", "宿舍", "社团", }, 
@@ -41,18 +44,38 @@ public class FreshmanListViewAdapter implements ListAdapter {
 					"说好的API呢??" 
 			}, 
 	};
-	private Context context;
+	*/
+	private String[][] titles;
+	private String[][] info;
+	private Activity activity;
 	private static final float LARGE = 23,SMALL=18; //字号
 	private static final int PADDING = 10;
-	public FreshmanListViewAdapter(int type,Context context) {
+	public FreshmanListViewAdapter(int type,Activity activity) {
+		
 		this.type = type;
-		this.context = context;
+		this.activity = activity;
+		data = new FreshmanInfo(this.activity);
+		titles = new String[4][];
+		info = new String[4][];
+		for(int i=0;i<4;i++){
+			titles[i] = new String[128];
+			info[i] = new String[128];
+			for(int j=0;j<data.getTitles().get(i).size();j++){
+				//titles[i][j] = new String();
+				titles[i][j] = data.getTitles().get(i).get(j);
+				info[i][j] = data.getContent().get(i).get(j);
+			}
+			//titles[i] = (String[]) data.getTitles().get(i).toArray();
+			//info[i] = (String[]) data.getContent().get(i).toArray();
+		}
+		
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return titles[type].length+info[type].length;
+		//return data.getContent().get(type).size()+data.getTitles().get(type).size();
 	}
 
 	@Override
@@ -76,7 +99,7 @@ public class FreshmanListViewAdapter implements ListAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		TextView v = new TextView(context);
+		TextView v = new TextView(activity);
 		if(position%2==0){//标题
 			v.setText(titles[type][position/2]);
 			v.setTextSize(LARGE);

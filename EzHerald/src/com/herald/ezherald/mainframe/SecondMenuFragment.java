@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
@@ -55,25 +56,35 @@ public class SecondMenuFragment extends ListFragment {
 		mMenuItemsStr = getResources().getStringArray(
 				R.array.second_menu_items);
 		/**
-		 * TODO:替换row0为当前登录的用户名
+		 * TODO:替换row0为当前登录的用户名（现在还是一卡通号）
 		 */
 		
+		updateLoginUserNameTitles();
+		
+		/*UserAccount account = Authenticate.getIDcardUser(getActivity());
+		if(null != account){
+			mMenuItemsStr[0] = account.getUsername();
+		} else {
+			mMenuItemsStr[0] = "尚未登陆";
+		}*/ //现通过updateLoginUserNameTitles()方法调用
+		
+		mListItems = getListItems();
+		mListViewAdapter = new MainMenuListItemAdapter(getActivity(), mListItems);
+		setListAdapter(mListViewAdapter);
+	}
+
+	/**
+	 * 更新数据集中的登陆状态
+	 */
+	private void updateLoginUserNameTitles() {
 		UserAccount account = Authenticate.getIDcardUser(getActivity());
 		if(null != account){
 			mMenuItemsStr[0] = account.getUsername();
 		} else {
 			mMenuItemsStr[0] = "尚未登陆";
 		}
-		/*
-		ArrayAdapter<String> menuItemAdapter = new ArrayAdapter<String>(
-				getActivity(), android.R.layout.simple_list_item_1,
-				android.R.id.text1, menuItemsStr);
-		setListAdapter(menuItemAdapter);
-		*/
-		mListItems = getListItems();
-		mListViewAdapter = new MainMenuListItemAdapter(getActivity(), mListItems);
-		setListAdapter(mListViewAdapter);
 	}
+
 
 	/*
 	 * 	 * 
@@ -93,6 +104,8 @@ public class SecondMenuFragment extends ListFragment {
 			break;
 		case 1:
 			i.setClass(getActivity(), SettingActivity.class);
+			MainActivity mainActivity = (MainActivity)getActivity();
+			mainActivity.needRefreshContent = true;
 			break;
 		case 2:
 			i.setClass(getActivity(), AccountActivity.class);
@@ -118,5 +131,26 @@ public class SecondMenuFragment extends ListFragment {
 		}
 		return listItems;
 	}
+
+
+	/**
+	 * 行为：更新右侧的登陆状态信息
+	 */
+	@Override
+	public void onResume() {
+		
+		super.onResume();
+		
+		//Toast.makeText(getActivity(), "OnResume", Toast.LENGTH_SHORT).show();
+		
+		updateLoginUserNameTitles();
+		
+		mListItems = getListItems();
+		mListViewAdapter.setmListItems(mListItems);
+		mListViewAdapter.notifyDataSetChanged();
+		
+	}
+	
+	
 	
 }
