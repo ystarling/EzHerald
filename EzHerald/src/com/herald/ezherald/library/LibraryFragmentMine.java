@@ -53,7 +53,7 @@ public class LibraryFragmentMine extends SherlockFragment{
 		
 		activity=getActivity();
 		context=getActivity();
-		UserAccount LibUser=Authenticate.getLibUser(ac);
+		UserAccount LibUser=Authenticate.getLibUser(context);
 		
 		if(LibUser==null){
 			Intent intent=new Intent(ac,LibAccountActivity.class);
