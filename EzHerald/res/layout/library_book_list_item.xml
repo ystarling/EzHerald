@@ -31,11 +31,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
-        android:textColor="#2932E1"/>
+        android:textColor="#003399"/>
     	<TextView 
         android:id="@+id/libr_listitem_book_author"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingTop="5sp"/>
 	    <TextView 
 	    android:id="@+id/libr_listitem_book_press"
 	    android:layout_width="wrap_content"
@@ -62,7 +63,8 @@
   	    <TextView
   	        android:id="@+id/libr_listitem_book_landable_num"
   	        android:layout_width="wrap_content"
-  	        android:layout_height="wrap_content"/>
+  	        android:layout_height="wrap_content"
+  	        android:textColor="#CC3300"/>
     </LinearLayout>
     
     <!-- 
