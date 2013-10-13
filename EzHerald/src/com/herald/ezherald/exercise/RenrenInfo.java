@@ -110,7 +110,7 @@ public class RenrenInfo{
 				}
 			}
 			if(getInfo()==null||getInfo().equals("")){//没有找到今天的，显示最新一条
-				String info = "今天没有消息";
+				String info = "\n\n今天没有跑操消息\n\n";
 				setInfo(info);
 				setDate(today);
 				save();
