@@ -68,7 +68,7 @@ public class CircleChat extends View {
 			if(ac>0){
 				paint.setTextSize(42);
 				paint.setTextAlign(Align.CENTER);
-				paint.setColor(Color.BLACK);
+				paint.setColor(Color.WHITE);
 				canvas.drawText(txt[i],radius+radius*(0.65f)*(float)Math.cos((start+ac/2)/180*Math.PI),radius+radius*(0.65f)*(float)Math.sin((start+ac/2)/180*Math.PI),paint);
 			}
 			start=(start+ac)%360;
