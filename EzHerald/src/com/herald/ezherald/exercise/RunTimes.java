@@ -208,30 +208,31 @@ public class RunTimes {
 				@Override
 				public void run(){
 					try{
-						UserAccount user = Authenticate.getTyxUser(activity);
-						String name = user.getUsername();
-						String password = user.getPassword();
-						
-						
-						DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-						DocumentBuilder builder = factory.newDocumentBuilder();
-						Document document = builder.parse(RUNTIMES_URL+"?username="+name+"&password="+password);
-						Node timesNode = document.getElementsByTagName("times").item(0);
-						//Node rateNode = document.getElementsByTagName("rate").item(0);
-						
-						setTimes(Integer.parseInt(timesNode.getTextContent()));
-						//setRate(Integer.parseInt(rateNode.getTextContent()));
-						
-						HttpClient client= new DefaultHttpClient();
-						HttpGet remainDaysGet = new HttpGet(REMAIN_DAYS_URL);
-						HttpResponse response = client.execute(remainDaysGet);
-						if(response.getStatusLine().getStatusCode() != 200){
-							throw new Exception("net error");
+						if(father instanceof FragmentB){
+							UserAccount user = Authenticate.getTyxUser(activity);
+							String name = user.getUsername();
+							String password = user.getPassword();
+							
+							
+							DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+							DocumentBuilder builder = factory.newDocumentBuilder();
+							Document document = builder.parse(RUNTIMES_URL+"?username="+name+"&password="+password);
+							Node timesNode = document.getElementsByTagName("times").item(0);
+							//Node rateNode = document.getElementsByTagName("rate").item(0);
+							
+							setTimes(Integer.parseInt(timesNode.getTextContent()));
+						}else if(father instanceof FragmentC){
+							HttpClient client= new DefaultHttpClient();
+							HttpGet remainDaysGet = new HttpGet(REMAIN_DAYS_URL);
+							HttpResponse response = client.execute(remainDaysGet);
+							if(response.getStatusLine().getStatusCode() != 200){
+								throw new Exception("net error");
+							}
+							String result = EntityUtils.toString(response.getEntity());
+							int remDays = Integer.parseInt( result);
+							setRemainDays(remDays);
+							setAdviceTime(calcAdviceTime());
 						}
-						String result = EntityUtils.toString(response.getEntity());
-						int remDays = Integer.parseInt( result);
-						setRemainDays(remDays);
-						setAdviceTime(calcAdviceTime());
 						Message msg = handler.obtainMessage(SUCCESS);
 			        	handler.sendMessage(msg);
 					}catch(Exception e){
