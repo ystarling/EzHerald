@@ -86,8 +86,8 @@ public class MainContentFragment extends SherlockFragment {
 	//private ArrayList<MainContentGridItemObj> mContentInfoObjs = new ArrayList<MainContentGridItemObj>();
 	
 	//////////////Temporarily used local variables///////////////////
-	String mContentCont1 [] = {"尼玛", "怎么", "方法", "还没有", "写好啊", "人家都", "等不及了", "嘛"};
-	String mContentCont2 [] = {"AAA", "BBB", "CCCC", "DDD", "EEEE" ,"FFFF", "GGGGG", "HHHHH"};
+	String mContentCont1 [] = {"加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中"};
+	String mContentCont2 [] = {"加载中", "加载中", "加载中", "加载中", "加载中" ,"加载中", "加载中", "加载中"};
 	///////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
 	private static final int[] image_ids =
 		{R.drawable.main_frame_pic0, R.drawable.main_frame_pic1,

@@ -36,6 +36,7 @@ public class FragmentA extends Fragment {
 		txt_info = (TextView)getActivity().findViewById(R.id.txt_info);
 		txt_info.setMovementMethod(ScrollingMovementMethod.getInstance());//实现多行滚动
 		txt_date = (TextView)getActivity().findViewById(R.id.txt_date);
+		btn_update = (Button)getActivity().findViewById(R.id.btn_update);
 		if(renren.isSet()){
 			show();
 		}else{

@@ -29,7 +29,7 @@ public class ExerciseFragment extends SherlockFragment {
 			ActionBar.Tab tab3 = bar.newTab();
 			tab1.setText("跑操通知");
 			tab2.setText("跑操次数");
-			tab3.setText("天天快跑");
+			tab3.setText("信息统计");
 			tab1.setTabListener(new MyTabListener());
 			tab2.setTabListener(new MyTabListener());
 			tab3.setTabListener(new MyTabListener());
