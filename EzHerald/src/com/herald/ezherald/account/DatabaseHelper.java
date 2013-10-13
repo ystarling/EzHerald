@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-	public static final int VERSION =1;
+	public static final int VERSION = 2;
 	
 	public DatabaseHelper(Context context, String name) {
 		super(context, name, null, VERSION);
@@ -20,6 +20,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE account (id int ,username varchar(20),password varchar(30),type varchar(10))");
+		//db.execSQL("CREATE TABLE account (id int ,username varchar(20),password varchar(30),type varchar(10),name varchar(30))");
+		//username为一卡通号，name为姓名！
 	}
 
 	@Override
