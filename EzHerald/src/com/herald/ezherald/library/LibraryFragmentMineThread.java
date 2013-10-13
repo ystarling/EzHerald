@@ -71,16 +71,16 @@ public class LibraryFragmentMineThread extends Thread{
 			DefaultHttpClient client=new DefaultHttpClient();
 			List<NameValuePair> list=new ArrayList<NameValuePair>();
 			
-			UserAccount LibrAccount = Authenticate.getIDcardUser(context);
+			UserAccount LibrAccount = Authenticate.getLibUser(context);
 			NameValuePair pair1=new BasicNameValuePair("username",LibrAccount.getUsername());
 			list.add(pair1);
 			NameValuePair pair2=new BasicNameValuePair("password",LibrAccount.getPassword());
 			list.add(pair2);	
 			
-//			NameValuePair pair1=new BasicNameValuePair("username","71111229");
-//			list.add(pair1);
-//			NameValuePair pair2=new BasicNameValuePair("password","213113709");
-//			list.add(pair2);
+			//NameValuePair pair1=new BasicNameValuePair("username","71111229");
+			//list.add(pair1);
+			//NameValuePair pair2=new BasicNameValuePair("password","213113709");
+			//list.add(pair2);
 			
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
 			
