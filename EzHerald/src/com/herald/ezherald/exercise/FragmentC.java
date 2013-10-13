@@ -86,7 +86,7 @@ public class FragmentC extends Fragment {
 		*/
 		if (runTimes.getRemainDays() >= 0
 				&& runTimes.getAdviceTime() != RunTimes.DEFAULT_ADVICE_TIME) {
-			txt_remainDays.setText(String.format("本学期还剩%d天\n建议你每周至少跑%d次",
+			txt_remainDays.setText(String.format("本学期还剩%d天上课\n\n建议你每周至少跑%d次",
 					runTimes.getRemainDays(), runTimes.getAdviceTime()));
 			if (runTimes.getAdviceTime() <= 0) {
 				txt_remainDays.setText("已经跑够了，要挑战满勤么？");
