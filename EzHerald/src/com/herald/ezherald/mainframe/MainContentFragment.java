@@ -83,7 +83,7 @@ public class MainContentFragment extends SherlockFragment {
 	
 	
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
-	private ArrayList<MainContentGridItemObj> mContentInfoObjs = new ArrayList<MainContentGridItemObj>();
+	//private ArrayList<MainContentGridItemObj> mContentInfoObjs = new ArrayList<MainContentGridItemObj>();
 	
 	//////////////Temporarily used local variables///////////////////
 	String mContentCont1 [] = {"尼玛", "怎么", "方法", "还没有", "写好啊", "人家都", "等不及了", "嘛"};
@@ -238,8 +238,7 @@ public class MainContentFragment extends SherlockFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			//TODO: 项目点击的响应（进入相关模块）
-			Toast.makeText(getActivity(), "pos=" + position + "\nid=" + id, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getActivity(), "pos=" + position + "\nid=" + id, Toast.LENGTH_SHORT).show();
 			Intent i = new Intent();
 			switch ((int)id) {
 			case 0:
@@ -293,12 +292,12 @@ public class MainContentFragment extends SherlockFragment {
 		
 		
 		///替换已有实现接口的模块的相关内容
-		for(int i=0; i<mContentInfoObjs.size(); i++){
+		/*for(int i=0; i<mContentInfoObjs.size(); i++){
 			if(mContentInfoObjs.get(i) == null)
 				continue;
 			mContentCont1[i] = mContentInfoObjs.get(i).getContent1();
 			mContentCont2[i] = mContentInfoObjs.get(i).getContent2();
-		}
+		}*/
 		
 		///
 		
