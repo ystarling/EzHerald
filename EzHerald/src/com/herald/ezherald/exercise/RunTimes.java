@@ -84,6 +84,8 @@ public class RunTimes {
 	protected void onFiled() {
 		// TODO Auto-generated method stub
 		//Toast.makeText(activity, "¸üÐÂÊ§°Ü", Toast.LENGTH_SHORT).show();
+		if(father == null)
+			return ;
 		if(father instanceof FragmentB){
 			((FragmentB) father).onFailed();
 		}else if(father instanceof FragmentC){
@@ -93,6 +95,8 @@ public class RunTimes {
 	protected void onSuccess() {
 		
 		save();
+		if(father == null)
+			return ;
 		if(father instanceof FragmentB){
 			((FragmentB) father).onSuccess();
 		}else if(father instanceof FragmentC){

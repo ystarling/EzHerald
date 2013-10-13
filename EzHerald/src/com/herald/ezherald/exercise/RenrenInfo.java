@@ -110,7 +110,7 @@ public class RenrenInfo{
 				}
 			}
 			if(getInfo()==null||getInfo().equals("")){//没有找到今天的，显示最新一条
-				String info = ((JSONObject) array.opt(0)).getString("content");
+				String info = "今天没有消息";
 				setInfo(info);
 				setDate(today);
 				save();

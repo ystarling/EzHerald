@@ -1,5 +1,6 @@
 package com.herald.ezherald.exercise;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -138,14 +139,24 @@ public class FragmentB extends Fragment {
 		}
 	}
 	public void onSuccess(){
+		Log.w("err","failed herer!!!!!!!!!!!BBS");
 		btnUpdate.setText("更新");
-		Toast.makeText(getActivity(), "更新成功", Toast.LENGTH_LONG).show();
-		show();
+		Activity act = getActivity();
+		if(act != null){
+			Toast.makeText(act, "更新成功", Toast.LENGTH_LONG).show();
+			show();
+		}
+			
 	}
 
 	public void onFailed() {
+		Log.w("err","failed herer!!!!!!!!!!!BBF");
 		btnUpdate.setText("更新");
-		Toast.makeText(getActivity(), "更新失败", Toast.LENGTH_LONG).show();
-		show();
+		Activity act = getActivity();
+		if(act != null){
+			Toast.makeText(act, "更新失败", Toast.LENGTH_LONG).show();
+			show();
+		}
+			
 	}
 }
