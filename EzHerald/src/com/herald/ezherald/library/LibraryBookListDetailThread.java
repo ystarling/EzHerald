@@ -8,18 +8,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.herald.ezherald.R;
-import com.herald.ezherald.library.LibraryActivityReserve.ViewHolder;
+import com.herald.ezherald.library.LibraryFragmentThread.MyHandle2;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +32,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LibraryBookListDetailThread extends Thread{
 
@@ -42,7 +41,8 @@ public class LibraryBookListDetailThread extends Thread{
 	JSONObject json_detail;
 	Activity activity; 
 	Context context;
-	MyHandler myHandler= new MyHandler();
+	private MyHandler myHandler= new MyHandler();
+	private MyHandle2 myHandler2=new MyHandle2();
 	
 	ProgressBar pro1;
 	public LibraryBookListDetailThread(Bundle bundle,Activity ac, Context cn) {
@@ -50,25 +50,47 @@ public class LibraryBookListDetailThread extends Thread{
 		this.bundle=bundle;
 		this.activity=ac;
 		this.context=cn;
+		pro1=(ProgressBar)activity.findViewById(R.id.libr_circleBookProgressBar);
+		pro1.setIndeterminate(false);
 	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try{
+			ShowMsg2("view");
+			HttpResponse response=null;
+			HttpGet get;
+			try{
 			DefaultHttpClient client=new DefaultHttpClient();
+			// …Ë÷√Õ¯¬Á≥¨ ±≤Œ ˝
+			HttpParams httpParams = client.getParams();		
+			HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
+			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 //			List<NameValuePair> list = new ArrayList<NameValuePair>();
 //			NameValuePair pair1=new BasicNameValuePair("book_callNumber",bundle.getString("loc_callNumber"));
 //			list.add(pair1);
 //			UrlEncodedFormEntity entity=new UrlEncodedFormEntity(list,"UTF-8");
-//			
 //			HttpPost post=new HttpPost("");
 //			post.setEntity(entity);
 			
 			LibraryUrl url=new LibraryUrl();
 			String url_vaue="?marc_no="+bundle.getString("loc_marc_no");
 			Log.d("≤È È∫≈£∫",bundle.getString("loc_marc_no"));
-			HttpGet get=new HttpGet(url.getLIBRARY_SEARCH_DETAIL()+url_vaue);
-			HttpResponse response=client.execute(get);
+			get=new HttpGet(url.getLIBRARY_SEARCH_DETAIL()+url_vaue);
+			response=client.execute(get);
+			}catch(Exception ex){
+				Log.d("NetWorking",ex.getMessage());
+				if(!ex.getMessage().isEmpty()){
+					ShowMsg2("error");
+				}
+			}
+//			if(response.getStatusLine().getStatusCode()==400){
+//				ShowMsg2("aa");
+//				Log.e("¡¨Ω”¥ÌŒÛ","¥ÌŒÛ");
+//			}
+
+
+		
 			InputStream is=response.getEntity().getContent();
 			BufferedReader br=new BufferedReader(new InputStreamReader(is,"UTF-8"));
 			
@@ -92,6 +114,31 @@ public class LibraryBookListDetailThread extends Thread{
 		msg.sendToTarget();
 	}
 	
+	public void ShowMsg2(String e){
+		Message msg=Message.obtain();
+		msg.obj=e;
+		msg.setTarget(myHandler2);
+		msg.sendToTarget();
+	}
+	public class MyHandle2 extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			String va=(String) msg.obj;
+			if(va=="view"){
+			pro1.setVisibility(View.VISIBLE);
+			}else{
+				Toast toast1=Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ...", Toast.LENGTH_LONG);
+				toast1.show();
+				pro1.setVisibility(View.GONE);
+			}
+			super.handleMessage(msg);
+		}
+
+	
+	}
+	
 	class MyHandler extends Handler{
 
 		@Override
@@ -108,9 +155,8 @@ public class LibraryBookListDetailThread extends Thread{
 				e1.printStackTrace();
 			}
 			
-			pro1=(ProgressBar)activity.findViewById(R.id.libr_circleBookProgressBar);
-			pro1.setIndeterminate(false);
-			pro1.setVisibility(View.VISIBLE); 
+
+		
 			
 			TextView textView1=(TextView)activity.findViewById(R.id.libr_book_listdetailA_name);
 			textView1.setText(author);
@@ -135,6 +181,12 @@ public class LibraryBookListDetailThread extends Thread{
 			
 			
 		}
+		
+		public void SetRemind(){
+			Toast toast1=Toast.makeText(activity, "Õ¯¬Áπ ’œ!", Toast.LENGTH_SHORT);
+			toast1.show();
+		}
+		
 		
 	}
 	
