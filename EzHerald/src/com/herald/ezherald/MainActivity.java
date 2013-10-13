@@ -80,7 +80,7 @@ public class MainActivity extends BaseFrameActivity {
 
 	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
 	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
-	private final int CONN_TIMEOUT = 3000;
+	private final int CONN_TIMEOUT = 5000;
 	
 	private boolean mShowedUpdate = false;
 	
