@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.library.LibraryFragmentThread.MyHandle2;
 
 
 import android.app.Activity;
@@ -37,6 +38,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LibraryFragmentMineThread extends Thread{
 	
@@ -44,47 +46,63 @@ public class LibraryFragmentMineThread extends Thread{
 	protected static final int STOP_NOTIFIER = 000;  
 	protected static final int THREADING_NOTIFIER = 111;  
 	 
-	Activity activity;
+	Activity activity=null;
 	Context context;
 	JSONArray jsonarray;
 	private MyHandle myHandler=new MyHandle();//初始化Handler
+	private MyHandle2 myHandler2=new MyHandle2();
 	
-	public LibraryFragmentMineThread( Activity ac, Context cn){
+
+	public LibraryFragmentMineThread(View view,Activity ac, Context cn){
 		this.activity=ac;
 		this.context=cn;
+		pro1=(ProgressBar) view.findViewById(R.id.libr_circleMineProgressBar);
+		pro1.setIndeterminate(false);
 	}
 	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try{
-
+			ShowMsg2("view");
+			
+			HttpResponse response=null;
+			try{
 			DefaultHttpClient client=new DefaultHttpClient();
 			List<NameValuePair> list=new ArrayList<NameValuePair>();
 			
-			UserAccount LibrAccount = Authenticate.getIDcardUser(context);
-			
+			UserAccount LibrAccount = Authenticate.getLibUser(context);
 			NameValuePair pair1=new BasicNameValuePair("username",LibrAccount.getUsername());
 			list.add(pair1);
-			
 			NameValuePair pair2=new BasicNameValuePair("password",LibrAccount.getPassword());
 			list.add(pair2);	
+			
+			//NameValuePair pair1=new BasicNameValuePair("username","71111229");
+			//list.add(pair1);
+			//NameValuePair pair2=new BasicNameValuePair("password","213113709");
+			//list.add(pair2);
 			
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
 			
 			
-//			// 设置网络超时参数
-//			HttpParams httpParams = client.getParams();
-//			HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
-//			HttpConnectionParams.setSoTimeout(httpParams, 5000);
+			// 设置网络超时参数
+			HttpParams httpParams = client.getParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
+			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			LibraryUrl url=new LibraryUrl();
 			
 			HttpPost post=new HttpPost(url.getLIBRARY_MINE_BOOKS());
 			post.setEntity(entity);
 			
-			HttpResponse response=client.execute(post);
-
+			response=client.execute(post);
+			
+			}catch(Exception ex){
+				Log.d("Networking",ex.getMessage());
+				if(!ex.getMessage().isEmpty()){
+					ShowMsg2("error");
+				}
+			}
 			InputStream isr=response.getEntity().getContent();
 			BufferedReader br=new BufferedReader(new InputStreamReader(isr,"UTF-8"));
 			
@@ -116,21 +134,48 @@ public class LibraryFragmentMineThread extends Thread{
 		msg.sendToTarget();
 	}
 	
+	public void ShowMsg2(String e){
+		Message msg=Message.obtain();
+		msg.obj=e;
+		msg.setTarget(myHandler2);
+		msg.sendToTarget();
+	}
+	public class MyHandle2 extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			String va=(String) msg.obj;
+			if(va=="view"){
+				pro1.setVisibility(View.VISIBLE);
+			}else{
+				Toast toast1=Toast.makeText(activity, "网络连接错误...", Toast.LENGTH_LONG);
+				toast1.show();
+				pro1.setVisibility(View.GONE);
+			}
+			super.handleMessage(msg);
+		}
+
+	
+	}
 	
 	public class MyHandle extends Handler{
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
-			pro1=(ProgressBar)activity.findViewById(R.id.libr_circleProgressBar);
-			pro1.setIndeterminate(false);
-			pro1.setVisibility(View.VISIBLE);  
 
+			
+//			pro1=(ProgressBar) activity.findViewById(R.id.libr_circleMineProgressBar);
+//			pro1.setIndeterminate(false);
+//			pro1.setVisibility(View.VISIBLE);
+			
 			JSONArray json1=(JSONArray) msg.obj;
 			ListView listview=(ListView)activity.findViewById(R.id.libr_mine_list);
 			MineBookMyAdapter myAdapter=new MineBookMyAdapter(context,json1);
 			listview.setAdapter(myAdapter);
-			pro1.setVisibility(View.GONE); 
+			pro1.setVisibility(View.GONE);
+			
 //			listview.setOnItemClickListener(new OnItemClickListener() {
 //				
 //				
@@ -288,6 +333,7 @@ public class LibraryFragmentMineThread extends Thread{
 			holder.renew_num.setText("续借次数："+data.get(position).get("libr_renew_num").toString());
 			holder.collection.setText("馆藏地："+data.get(position).get("libr_collection").toString());
 			holder.attachment.setText("附件："+data.get(position).get("libr_attachment").toString());
+			//holder.renew_btn.setText("续借");
 			
 			return convertView;
 		}

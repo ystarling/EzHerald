@@ -188,6 +188,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 				values.put("id", 1);
 				values.put("username", userName);
 				values.put("password", password);
+							
 				values.put("type", Authenticate.IDCARD_TYPE);
 				database.insert(Authenticate.TABLE_NAME, null, values);
 				database.close();

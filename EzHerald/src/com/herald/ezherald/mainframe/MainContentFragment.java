@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,8 +87,8 @@ public class MainContentFragment extends SherlockFragment {
 	//private ArrayList<MainContentGridItemObj> mContentInfoObjs = new ArrayList<MainContentGridItemObj>();
 	
 	//////////////Temporarily used local variables///////////////////
-	String mContentCont1 [] = {"尼玛", "怎么", "方法", "还没有", "写好啊", "人家都", "等不及了", "嘛"};
-	String mContentCont2 [] = {"AAA", "BBB", "CCCC", "DDD", "EEEE" ,"FFFF", "GGGGG", "HHHHH"};
+	String mContentCont1 [] = {"加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中"};
+	String mContentCont2 [] = {"加载中", "加载中", "加载中", "加载中", "加载中" ,"加载中", "加载中", "加载中"};
 	///////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
 	private static final int[] image_ids =
 		{R.drawable.main_frame_pic0, R.drawable.main_frame_pic1,
@@ -151,7 +152,7 @@ public class MainContentFragment extends SherlockFragment {
 		mViewFlow.startAutoFlowTimer();
 		
 		//mInfoHandler = new InfoHandler();
-		
+		refreshViewFlowImage();
 	}
 	
 	/**
@@ -351,11 +352,11 @@ public class MainContentFragment extends SherlockFragment {
 		Log.d("MainContentFrag", "OnResume");
 		//更新内容
 		super.onResume();
-		
+		refreshInfo();
 		MainActivity mainActivity = (MainActivity)getActivity();
 		if(mainActivity.needRefreshContent){
 			Log.d("MainContentFragment", "Refreshing info");
-			refreshInfo();
+			
 			mainActivity.needRefreshContent = false;
 		}
 	}
@@ -407,6 +408,15 @@ public class MainContentFragment extends SherlockFragment {
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
 	
+	/**
+	 * 从偏好中更新各模块信息的资料
+	 * 直接更改mContentCont
+	 */
+	public void loadGridContentsFromPref(){
+		SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+		//prefs.get
+	}
+	
 	private class InfoHandler extends Handler{
 
 		@Override
@@ -455,5 +465,7 @@ public class MainContentFragment extends SherlockFragment {
 			mInfoHandler.sendMessage(msg);
 		}
 	}
+	
+	
 	
 }

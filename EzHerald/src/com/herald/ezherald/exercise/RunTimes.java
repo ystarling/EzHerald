@@ -84,6 +84,8 @@ public class RunTimes {
 	protected void onFiled() {
 		// TODO Auto-generated method stub
 		//Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
+		if(father == null)
+			return ;
 		if(father instanceof FragmentB){
 			((FragmentB) father).onFailed();
 		}else if(father instanceof FragmentC){
@@ -93,6 +95,8 @@ public class RunTimes {
 	protected void onSuccess() {
 		
 		save();
+		if(father == null)
+			return ;
 		if(father instanceof FragmentB){
 			((FragmentB) father).onSuccess();
 		}else if(father instanceof FragmentC){
@@ -135,6 +139,7 @@ public class RunTimes {
 		this.startDate = startDate;
 	}
 	public int getAdviceTime() {
+		
 		return adviceTime;
 	}
 	public void setAdviceTime(int adviceTime) {
@@ -166,14 +171,13 @@ public class RunTimes {
 		this.activity = activity; 
 		
 		pref = activity.getApplication().getSharedPreferences("RunTimes", 0);
-		
 		setTimes(pref.getInt("Times", DEFAULT_TIMES));
 		setAdjustTimes(pref.getInt("AdjustTimes",DEFAULT_ADJUST_TIMES));
 		setRate(pref.getFloat("Rate", DEFAULT_RATE));
 		setStartDate(pref.getString("StartDate", DEFAULT_START_DATE));
 		setAverageRunTime(pref.getString("AverageRunTime", DEFAULT_AVERAGE_RUN_TIME));
 		setUpdateTime(pref.getString("UpdateTime",DEFAULT_UPDATE_TIME));
-		setRemainDays(calcRemainDays());
+		setRemainDays(pref.getInt("RemainDays", DEFAULT_REMAIN_DAYS));
 		setAdviceTime(calcAdviceTime());
 	}
 	/**
@@ -192,7 +196,7 @@ public class RunTimes {
 			setTimes(19);
 			setRate((float)0.23);
 			setStartDate("2013-06-01");
-			setRemainDays(calcRemainDays());
+			//setRemainDays(calcRemainDays());
 			setAdviceTime(calcAdviceTime());
 			setAverageRunTime("07:00");
 			DateFormat fmt = SimpleDateFormat.getDateTimeInstance();
@@ -204,33 +208,31 @@ public class RunTimes {
 				@Override
 				public void run(){
 					try{
-						HttpClient client= new DefaultHttpClient();
-						UserAccount user = Authenticate.getTyxUser(activity);
-						String name = user.getUsername();
-						String password = user.getPassword();
-						HttpGet runTimesGet = new HttpGet(RUNTIMES_URL+"?"+name+"/"+password);
-						HttpResponse response = client.execute(runTimesGet);
-						if(response.getStatusLine().getStatusCode() != 200){
-							throw new Exception();
+						if(father instanceof FragmentB){
+							UserAccount user = Authenticate.getTyxUser(activity);
+							String name = user.getUsername();
+							String password = user.getPassword();
+							
+							
+							DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+							DocumentBuilder builder = factory.newDocumentBuilder();
+							Document document = builder.parse(RUNTIMES_URL+"?username="+name+"&password="+password);
+							Node timesNode = document.getElementsByTagName("times").item(0);
+							//Node rateNode = document.getElementsByTagName("rate").item(0);
+							
+							setTimes(Integer.parseInt(timesNode.getTextContent()));
+						}else if(father instanceof FragmentC){
+							HttpClient client= new DefaultHttpClient();
+							HttpGet remainDaysGet = new HttpGet(REMAIN_DAYS_URL);
+							HttpResponse response = client.execute(remainDaysGet);
+							if(response.getStatusLine().getStatusCode() != 200){
+								throw new Exception("net error");
+							}
+							String result = EntityUtils.toString(response.getEntity());
+							int remDays = Integer.parseInt( result);
+							setRemainDays(remDays);
+							setAdviceTime(calcAdviceTime());
 						}
-						String result = EntityUtils.toString(response.getEntity());
-						DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-						DocumentBuilder builder = factory.newDocumentBuilder();
-						Document document = builder.parse(result);
-						Node timesNode = document.getElementsByTagName("times").item(0);
-						//Node rateNode = document.getElementsByTagName("rate").item(0);
-						
-						setTimes(Integer.parseInt(timesNode.getTextContent()));
-						//setRate(Integer.parseInt(rateNode.getTextContent()));
-						
-						HttpGet remainDaysGet = new HttpGet(REMAIN_DAYS_URL);
-						response = client.execute(remainDaysGet);
-						if(response.getStatusLine().getStatusCode() != 200){
-							throw new Exception("net error");
-						}
-						result = EntityUtils.toString(response.getEntity());
-						int remDays = Integer.parseInt( result);
-						setRemainDays(remDays);
 						Message msg = handler.obtainMessage(SUCCESS);
 			        	handler.sendMessage(msg);
 					}catch(Exception e){
@@ -239,25 +241,7 @@ public class RunTimes {
 					}
 				}
 			}.start();
-		}
-		/*
-		try {
-			setAdjustTimes(pref.getInt("AdjustTimes",DEFAULT_ADJUST_TIMES));
-			ObjectFactory factory = new ObjectFactory();
-			RunTimesData runTimesData = factory.createRunTimesData();
-			setTimes(runTimesData.getTimes().intValue());
-			setRate(runTimesData.getRate().floatValue());
-			setRemainDays(calcRemainDays());
-			setAdviceTime(calcAdviceTime());
-			//TODO start time,average TIme
-            //TODO 更新所有信息
-			save();
-			throw new Exception();
-		} catch (Exception e) {
-			// TODO: handle exception
-			Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
-		}
-		*/
+		}	
 	}
 	/**
 	 * 保存数据到sharedPreference
@@ -269,48 +253,17 @@ public class RunTimes {
 		editor.putFloat("Rate", getRate());
 		editor.putString("StartDate",getStartDate());
 		editor.putString("AverageRunTime", getAverageRunTime());
+		editor.putInt("RemainDays", getRemainDays());
 		editor.commit();
 	}
-	/**
-	 * @return 本学期剩余的天数
-	 * 根据本学期开始日期和当前日期返回剩余天数
-	 */
-	private int calcRemainDays(){
-		final int TOTAL_DAYS = 16*7;
-		Calendar today = Calendar.getInstance();
-		Calendar start = Calendar.getInstance();
-		SimpleDateFormat fmt = new SimpleDateFormat("yy-MM-dd");
-		Date date=null;
-		try {
-			if(startDate == null)
-				throw new ParseException("string is null",0);
-			date = fmt.parse(startDate);
-			start.setTime(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		int diffDays = 0;
-		if(today.get(Calendar.YEAR)== start.get(Calendar.YEAR)){//同一年
-			diffDays = today.get(Calendar.DAY_OF_YEAR)-start.get(Calendar.DAY_OF_YEAR);
-		}else{
-			Calendar endOfYear =  Calendar.getInstance();
-			endOfYear.set(Calendar.YEAR,start.get(Calendar.YEAR));
-			endOfYear.set(Calendar.MONTH,Calendar.DECEMBER);
-			endOfYear.set(Calendar.DATE,31);
-			diffDays = endOfYear.get(Calendar.DAY_OF_YEAR)-start.get(Calendar.DAY_OF_YEAR)+today.get(Calendar.DAY_OF_YEAR);
-			Log.w("endOfYear",""+endOfYear.get(Calendar.DAY_OF_YEAR));
-		}
-		return TOTAL_DAYS-diffDays;//总天数减去已经过去的天数
-	}
-
+	
+	
 	/**
 	 * @return 建议每周跑操时间,向上取整
 	 */
 	private int calcAdviceTime(){
 		//TODO calculate the advise time
-		int remainWeeks = remainDays/7;
+		int remainWeeks = remainDays/5;
 		int remainTimes = 45 - times;
 		int advice;
 		if (remainWeeks>0) {
@@ -324,4 +277,5 @@ public class RunTimes {
 		}
 		return advice;
 	}
+	
 }

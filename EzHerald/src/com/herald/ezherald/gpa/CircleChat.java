@@ -21,7 +21,7 @@ public class CircleChat extends View {
 	private float sum;
 	private float startAngle;
 	private final int TOTAL = 5;
-	private final String[] txt= {"其它","1.0~2.0","2.0~3.0","3.0~4.0",">4.0"};
+	private final String[] txt= {"其它","<2.0","2.0~3.0","3.0~4.0",">4.0"};
 	
 	public CircleChat(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -39,7 +39,8 @@ public class CircleChat extends View {
 		radius = getWidth()>getHeight()?getHeight()/2:getWidth()/2;
 		rect = new RectF(0,0,2*radius,2*radius);
 		sum = 0;
-		int colors[] = {Color.LTGRAY,Color.parseColor("#FF9900"),Color.CYAN,Color.parseColor("#BDFF1B"),Color.parseColor("#B70094")};
+		//int colors[] = {Color.LTGRAY,Color.parseColor("#FF9900"),Color.CYAN,Color.parseColor("#BDFF1B"),Color.parseColor("#B70094")};
+		int colors[] = {Color.rgb(79, 129, 188),Color.rgb(69, 115, 167),Color.rgb(56, 97, 143),Color.rgb(79, 129, 188),Color.rgb(69, 115, 167),};
 		for(Record r:records){
 			sum += r.getCredit();
 			if(r.getPoint()>0){
