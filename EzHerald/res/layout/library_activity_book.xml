@@ -9,8 +9,9 @@
      android:id="@+id/libr_circleBookProgressBar"
      style="?android:attr/progressBarStyleLarge"
   	 android:layout_width="match_parent"   
-     android:layout_height="200sp"
+     android:layout_height="100sp"
      android:layout_gravity="center"  
+     android:visibility="gone" 
     ></ProgressBar>
         
     <LinearLayout
@@ -32,7 +33,7 @@
 	   android:layout_height="wrap_content"
 	   android:textIsSelectable="true"
 	   android:textSize="15sp"
-       android:textColor="#2932E1"
+       android:textColor="#003399"
    		/>
     </LinearLayout>
     
@@ -53,7 +54,7 @@
 	   android:id="@+id/libr_book_listdetailA_press"
 	   android:layout_width="wrap_content"
 	   android:layout_height="wrap_content"
-       android:textColor="#2932E1"
+       android:textColor="#003399"
        android:textSize="15sp"
 	   android:textIsSelectable="true"
    		/>
@@ -78,7 +79,7 @@
 	   android:layout_height="wrap_content"
 	   android:textIsSelectable="true"
 	   android:textSize="15sp"
-       android:textColor="#2932E1"
+       android:textColor="#003399"
    		/>
     </LinearLayout>
     

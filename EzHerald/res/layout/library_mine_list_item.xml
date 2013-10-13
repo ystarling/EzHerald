@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 	
+
+       	
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -22,6 +24,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:paddingLeft="15sp"
+	    android:textColor="#003399"
 	    android:textIsSelectable="false"
 	    />
 	<TextView
@@ -42,8 +45,9 @@
 	    android:id="@+id/libr_mine_remand_date"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:paddingLeft="20sp"
+	    android:paddingLeft="15sp"
 	    android:textSize="15sp"
+	    android:textColor="#CC3300"
 	    android:textIsSelectable="false"/>
 	<TextView
 	    android:id="@+id/libr_mine_renew_num"
@@ -74,11 +78,14 @@
 	    android:layout_weight="1"
 	    android:gravity="center"
 	    >
+	<!--  
 	<Button
 	    android:id="@+id/libr_mine_renew_btn"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:textColor="#2932E1"
 	    />
+	    
+	    -->
 	</LinearLayout>
 </LinearLayout>

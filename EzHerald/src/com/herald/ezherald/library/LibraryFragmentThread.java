@@ -1,8 +1,11 @@
 package com.herald.ezherald.library;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +17,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.herald.ezherald.R;
+import com.herald.ezherald.library.LibraryBookListDetailThread.MyHandler;
 
 
 import android.app.Activity;
@@ -26,6 +32,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,27 +45,34 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class LibraryFragmentThread extends Thread{
 	
+	private ProgressBar pro1;
 	Activity activity;
 	String Book_Search_Value;
 	Context context;
 	JSONArray jsonarray;
 	
 	private MyHandle myHandler=new MyHandle();//初始化Handler
-	
+	private MyHandle2 myHandler2=new MyHandle2();
 	public LibraryFragmentThread(String search_value, Activity ac, Context cn){
 		this.Book_Search_Value=search_value;
 		this.activity=ac;
 		this.context=cn;
+		pro1=(ProgressBar)activity.findViewById(R.id.libr_circleProgressBar2);
+		pro1.setIndeterminate(false);
 	}
 	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try{
+			ShowMsg2("view");
+			HttpResponse response=null;
+			try{
 			DefaultHttpClient client=new DefaultHttpClient();
 //			List<NameValuePair> list=new ArrayList<NameValuePair>();
 //			NameValuePair pair1=new BasicNameValuePair("strText",Book_Search_Value);
@@ -67,11 +81,29 @@ public class LibraryFragmentThread extends Thread{
 //			list.add(pair2);
 			
 //			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
+			// 设置网络超时参数
+			HttpParams httpParams = client.getParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
 			String url_value="?strText="+Book_Search_Value+"&page="+"1";
 			LibraryUrl url=new LibraryUrl();
-			HttpGet get = new HttpGet(url.getLIBRARY_SEARCH_URL()+url_value);
-			HttpResponse response=client.execute(get);
-
+			HttpGet get;
+			
+			get = new HttpGet(url.getLIBRARY_SEARCH_URL()+url_value);
+			response=client.execute(get);
+			
+			}catch (Exception ex) {
+				Log.d("Notwoking", ex.getLocalizedMessage());
+				if(!ex.getLocalizedMessage().isEmpty()){
+					ShowMsg2("error");
+				}
+				throw new IOException("Error connecting");
+			}
+			
+			
+			
+			
+			//HttpConnectionParams.setSoTimeout(httpParams, 5000);
+			
 			InputStream isr=response.getEntity().getContent();
 			BufferedReader br=new BufferedReader(new InputStreamReader(isr,"UTF-8"));
 			
@@ -80,8 +112,8 @@ public class LibraryFragmentThread extends Thread{
 			while((line=br.readLine())!=null){
 				sb.append(line);
 			}
-	       
 			jsonarray=new JSONArray(sb.toString());
+
 			
 	        String[] BookName=new String[jsonarray.length()];
 	        for(int i=0;i<jsonarray.length();i++){
@@ -103,6 +135,30 @@ public class LibraryFragmentThread extends Thread{
 		msg.sendToTarget();
 	}
 	
+	public void ShowMsg2(String e){
+		Message msg=Message.obtain();
+		msg.obj=e;
+		msg.setTarget(myHandler2);
+		msg.sendToTarget();
+	}
+	public class MyHandle2 extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			String va=(String) msg.obj;
+			if(va=="view"){
+			pro1.setVisibility(View.VISIBLE);
+			}else{
+				Toast toast1=Toast.makeText(activity, "网络请求错误...", Toast.LENGTH_LONG);
+				toast1.show();
+				pro1.setVisibility(View.GONE);
+			}
+			super.handleMessage(msg);
+		}
+
+	
+	}
 	
 	public class MyHandle extends Handler{
 
@@ -110,12 +166,28 @@ public class LibraryFragmentThread extends Thread{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			
- 
+			ListView listview=(ListView)activity.findViewById(R.id.libr_search_listView);
+
+			 
 			
 			JSONArray json1=(JSONArray) msg.obj;
-			ListView listview=(ListView)activity.findViewById(R.id.libr_search_listView);
-			BookMyAdapter myAdapter=new BookMyAdapter(context,json1);
-			listview.setAdapter(myAdapter);
+			try {
+				
+				if(json1.isNull(0)){
+					SetRemind();
+					pro1.setVisibility(View.GONE);
+					Log.e("无内容","无内容");
+				}else{
+				
+				BookMyAdapter myAdapter=new BookMyAdapter(context,json1);
+				listview.setAdapter(myAdapter);
+				pro1.setVisibility(View.GONE);
+				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 			
 			listview.setOnItemClickListener(new OnItemClickListener() {
 				
@@ -162,7 +234,11 @@ public class LibraryFragmentThread extends Thread{
 				}
 			});
 		}
-		
+		public void SetRemind(){
+			Toast toast1=Toast.makeText(activity, "该图书不存在!", Toast.LENGTH_SHORT);
+			toast1.show();
+		}
+
 	}
 	
 	

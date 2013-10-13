@@ -43,10 +43,10 @@ public class LibraryFragmentMine extends SherlockFragment{
 	 ListView mlistView;
 	 Activity activity;
 	 Context context;
-	
+	 View view;
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group,Bundle save){
-		View view=inflater.inflate(R.layout.library_fragment_mine, null);
+		view=inflater.inflate(R.layout.library_fragment_mine, null);
 		Activity ac=getActivity();
 		ac.setTitle("Œ“µƒÕº Èπ›");
 
@@ -59,7 +59,7 @@ public class LibraryFragmentMine extends SherlockFragment{
 			Intent intent=new Intent(ac,LibAccountActivity.class);
 			startActivity(intent);
 		}else{
-		LibraryFragmentMineThread th=new LibraryFragmentMineThread(activity, context);
+		LibraryFragmentMineThread th=new LibraryFragmentMineThread(view,getActivity(),context);
 		th.start();
 		}
 		return view;
