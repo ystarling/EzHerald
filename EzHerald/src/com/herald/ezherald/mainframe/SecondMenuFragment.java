@@ -62,9 +62,13 @@ public class SecondMenuFragment extends ListFragment {
 	private final String PREF_KEY_USERID = "userid";
 	private final String PREF_KEY_USERNAME = "username";
 	
+	private boolean mViewDestroyed = false;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		mViewDestroyed = false;
+		
 		return inflater.inflate(R.layout.second_list, null);
 	}
 
@@ -227,6 +231,9 @@ public class SecondMenuFragment extends ListFragment {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
+			if(mViewDestroyed)
+				return;
+			
 			Bundle bundle = msg.getData();
 			String name = bundle.getString(BUNDLE_KEY_USERNAME);
 			if(name == null)
@@ -269,6 +276,9 @@ public class SecondMenuFragment extends ListFragment {
 				if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 					String username = EntityUtils.toString(httpResponse.getEntity());
 					
+					if(mViewDestroyed)
+						return;
+					
 					setSavedUserId(mIdNum);  //±£¥ÊPrefs!
 					setSavedUserName(username);
 					
@@ -290,6 +300,13 @@ public class SecondMenuFragment extends ListFragment {
 			}
 		}
 		
+	}
+
+	@Override
+	public void onDestroyView() {
+				
+		mViewDestroyed = true;
+		super.onDestroyView();
 	}
 	
 	

@@ -232,10 +232,12 @@ public class LibAccountFragment extends SherlockFragment {
 						values.put("type", Authenticate.LIBRARY_TYPE);
 						database.insert(Authenticate.TABLE_NAME, null, values);
 						database.close();
+						
 						Intent newActivity = new Intent(getSherlockActivity(),
 								AccountActivity.class);
 						startActivity(newActivity);
-
+						
+						getSherlockActivity().finish();
 					}
 				}
 				Message message = new Message();
@@ -246,7 +248,7 @@ public class LibAccountFragment extends SherlockFragment {
 				message.setData(bundle);
 				loginHandler.sendMessage(message);
 				proDialog.dismiss();
-				getSherlockActivity().finish();
+				
 
 			} catch (ServiceException e) {
 				Log.v("LibAccountServiceEx", "LibAccountServiceEx");
