@@ -15,6 +15,7 @@ import org.json.JSONException;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,22 +47,31 @@ public class AcademicDetailActivity extends SherlockActivity {
 
 	Context context;
 	private final String DETAIL_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/detaile/%d/";
-
+	private ProgressDialog progressDialog;
+	
+	private String infoTitle;
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		context = this;
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("Please wait ... ");
+		
 		super.onCreate(savedInstanceState);
 		 setContentView(R.layout.academic_detail);
 		 Intent intent = getIntent();
 		 int id = intent.getIntExtra("id", -1);
 		 String url = String.format(DETAIL_URL, id);
+		 progressDialog.show();
 		 try {
 			 new RequestJwcDetail().execute(new URL(url) );
 		
 		 } catch (MalformedURLException e) {
 		 // TODO Auto-generated catch block
 			 e.printStackTrace();
+			 progressDialog.cancel();
 		 }
 
 		ActionBar actionbar = this.getActionBar();
@@ -94,7 +104,7 @@ public class AcademicDetailActivity extends SherlockActivity {
 			intent.setType("text/plain");
 			intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
 			intent.putExtra(Intent.EXTRA_TEXT,
-					"I would like to ‘herald campus’ this with you...");
+					"教务处发布了新的通知："+ infoTitle);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(Intent.createChooser(intent, "分享到"));
 			return true;
@@ -173,6 +183,8 @@ public class AcademicDetailActivity extends SherlockActivity {
 				date.setText(info.GetDate());
 				content.setText(info.getContent());
 				
+				infoTitle = info.GetTitle();
+				
 				List<Link> links = info.getAppendixs();
 				String linkText = "<a href=\"%s\"><u>%s</u></a>";
 				for(Link link: links)
@@ -189,6 +201,7 @@ public class AcademicDetailActivity extends SherlockActivity {
 
 				// Toast.makeText(getApplicationContext(), info.GetIntro(),
 				// Toast.LENGTH_SHORT).show();
+				progressDialog.cancel();
 			}
 
 		}
