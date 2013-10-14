@@ -100,7 +100,7 @@ public class LibraryFragmentMineThread extends Thread{
 			}catch(Exception ex){
 				Log.d("Networking",ex.getMessage());
 				if(!ex.getMessage().isEmpty()){
-					ShowMsg2("error");
+					ShowMsg2("Networking");
 				}
 			}
 			InputStream isr=response.getEntity().getContent();
@@ -113,7 +113,9 @@ public class LibraryFragmentMineThread extends Thread{
 			}
 	       
 			jsonarray=new JSONArray(sb.toString());
-			
+			if(jsonarray.isNull(0)){
+				ShowMsg2("ContentNull");
+			}
 	        String[] BookName=new String[jsonarray.length()];
 	        for(int i=0;i<jsonarray.length();i++){
 			JSONObject json=jsonarray.getJSONObject(i);
@@ -146,13 +148,20 @@ public class LibraryFragmentMineThread extends Thread{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			String va=(String) msg.obj;
+
 			if(va=="view"){
 				pro1.setVisibility(View.VISIBLE);
-			}else{
+			}else
+			if(va=="Networking"){
 				Toast toast1=Toast.makeText(activity, "网络连接错误...", Toast.LENGTH_LONG);
 				toast1.show();
 				pro1.setVisibility(View.GONE);
-			}
+			}else
+				if(va=="ContentNull"){
+					Toast toast1=Toast.makeText(activity, "目前没有借书...", Toast.LENGTH_LONG);
+					toast1.show();
+					pro1.setVisibility(View.GONE);
+				}
 			super.handleMessage(msg);
 		}
 

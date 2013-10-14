@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
 
 import com.herald.ezherald.R;
 

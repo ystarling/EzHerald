@@ -14,12 +14,12 @@ public class FreshmanListViewAdapter implements ListAdapter {
 
 	public FreshmanInfo data;
 	private int type;
-	/*
+	
 	private String[][] titles = { 
 			{ "选课", "学期", "平均成绩点数(GPA)", "讲座", },
 			{ "一卡通", "运动", "上网", "食堂", "宿舍", "社团", }, 
 			{ "出行", "超市" },
-			{ "说好的API呢??" }, 
+			{ "敬请期待 "}
 	};
 	private String[][] info = {
 			{
@@ -41,12 +41,13 @@ public class FreshmanListViewAdapter implements ListAdapter {
 				"梅园食堂旁边有苏果超市，再往教学楼走有华诚超市。桃园食堂旁边也有一个小超市。其实同学们日常生活用品零食这些超市基本都可以满足。水果每个超市都有，苏果超市旁边还有一个水果超市。打印店梅园、桃园都有。桃园还有一个理发店和中行自助银行（学校卡是中行）",
 			},
 			{ 
-					"说好的API呢??" 
+					"敬请期待" 
 			}, 
 	};
-	*/
+	/*
 	private String[][] titles;
 	private String[][] info;
+	*/
 	private Activity activity;
 	private static final float LARGE = 23,SMALL=18; //字号
 	private static final int PADDING = 10;
@@ -55,6 +56,7 @@ public class FreshmanListViewAdapter implements ListAdapter {
 		this.type = type;
 		this.activity = activity;
 		data = new FreshmanInfo(this.activity);
+		/*
 		titles = new String[4][];
 		info = new String[4][];
 		for(int i=0;i<4;i++){
@@ -68,7 +70,7 @@ public class FreshmanListViewAdapter implements ListAdapter {
 			//titles[i] = (String[]) data.getTitles().get(i).toArray();
 			//info[i] = (String[]) data.getContent().get(i).toArray();
 		}
-		
+		*/
 	}
 
 	@Override

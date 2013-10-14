@@ -18,7 +18,7 @@ public class FreshmanContent extends BaseFrameActivity {
 		super.onCreate(savedInstanceState);
 	}
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// 返回上一层，因为已经被finish，需要重新intent
 		if(keyCode == KeyEvent.KEYCODE_BACK){
 			Intent it = new Intent(this,FreshmanActivity.class);
@@ -26,7 +26,7 @@ public class FreshmanContent extends BaseFrameActivity {
 			finish();
 			return true;
 		}
-		return super.onKeyDown(keyCode, event);
+		return super.onKeyUp(keyCode, event);
 	}
 	
 }

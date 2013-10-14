@@ -31,6 +31,7 @@ import com.herald.ezherald.mainframe.MainGuideActivity;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -69,6 +70,8 @@ public class MainActivity extends BaseFrameActivity {
 	SlidingMenu mSlidingMenu;
 	
 	public boolean needRefreshContent = false; //是否需要刷新Content
+	public boolean isReceivingData = false; //当前是否已经在更新Image
+	private boolean doNotUpdateUI = false;//不更新UI
 
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME_FIRST_START = "first_start";
@@ -111,6 +114,8 @@ public class MainActivity extends BaseFrameActivity {
 			intent.setClass(this, AppUpdateActivity.class);
 			startActivity(intent);
 		}
+		
+		doNotUpdateUI = false;
 	}
 
 	/**
@@ -130,7 +135,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		String strPrefTimeInterval = appPreferences.getString(
 				KEY_NAME_REFRESH_FREQ, null);
-		int prefTimeInterval = -1;
+		int prefTimeInterval = (timestamp==0)?0:720;
 		if (strPrefTimeInterval != null) {
 			prefTimeInterval = Integer.parseInt(strPrefTimeInterval);
 		}
@@ -199,6 +204,7 @@ public class MainActivity extends BaseFrameActivity {
 			requestInfoUpdate("blabla", item);
 			
 		}
+		
 
 		return true;
 	}
@@ -220,6 +226,9 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	public void requestInfoUpdate(String url, MenuItem item) {
+		if(isReceivingData)
+			return;  //Already receiving data
+		
 		item.setVisible(false);
 		MenuItem doingItem = mActionMenu
 				.findItem(R.id.mainframe_menu_item_doing);
@@ -312,11 +321,8 @@ public class MainActivity extends BaseFrameActivity {
 
 		@Override
 		protected ArrayList<Bitmap> doInBackground(String... url) {
-			// TODO Auto-generated method stub
-			/*
-			 * try { Thread.sleep(5000); } catch (InterruptedException e) { //
-			 * TODO Auto-generated catch block e.printStackTrace(); }
-			 */
+			isReceivingData = true;
+			
 			ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
 			// ////////////从数据库载入信息（如果有的话）
 			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
@@ -385,6 +391,14 @@ public class MainActivity extends BaseFrameActivity {
 
 		@Override
 		protected void onPostExecute(ArrayList<Bitmap> result) {
+			//数据库更新完毕之后修改View
+			
+			if(doNotUpdateUI){
+				Log.w("MainActivity", "Do not update UI...");
+				isReceivingData = false;
+				return;
+			}
+			
 			// 修改相应的视图
 			for (int i = 0; i < result.size(); i++) {
 				((MainContentFragment) mContentFrag).updateImageItem(i,
@@ -403,7 +417,9 @@ public class MainActivity extends BaseFrameActivity {
 			// 更新SharedPreference里面最后更新的时间
 			if(!connFail)
 				setLastRefreshTime(System.currentTimeMillis());
-
+			
+			isReceivingData = false;
+			
 			super.onPostExecute(result);
 		}
 
@@ -605,5 +621,16 @@ public class MainActivity extends BaseFrameActivity {
 		
 		Log.d("MainActivity", "needRefreshContent?" + needRefreshContent);
 	}
-
+	
+	/**
+	 * 销毁时如果还有没有搞完的异步线程，设置flag让线程取消更新UI的操作！
+	 */
+	@Override
+	protected void onDestroy() {
+		doNotUpdateUI = true;
+		Log.d("MainActivity", "onDestroy");
+		super.onDestroy();
+	}
+	
+	
 }

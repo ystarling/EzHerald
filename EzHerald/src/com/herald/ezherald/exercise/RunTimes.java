@@ -2,9 +2,7 @@ package com.herald.ezherald.exercise;
 
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,12 +17,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
@@ -63,7 +61,7 @@ public class RunTimes {
 	
 	private SharedPreferences pref;
 	private Editor editor;
-	private Activity activity;
+	//private Activity activity;
 	
 	private Handler handler = new Handler(){
 		@Override
@@ -78,6 +76,7 @@ public class RunTimes {
 			}
 		}
 	};
+	private Context context;
 	public int getTimes() {
 		return times;
 	}
@@ -155,11 +154,12 @@ public class RunTimes {
  /**
  * 空构造函数，不读取shared的数据
  */
-	public RunTimes(){
+	public RunTimes() {
 		
 	}
-	public RunTimes(Activity activity,Fragment father){
-		this(activity);
+
+	public RunTimes(Context context,Fragment father){
+		this(context);
 		this.father=father;
 	}
 	
@@ -167,10 +167,10 @@ public class RunTimes {
 	 * @param activity 调用者的Activity
 	 * 构造时会尝试从sharedPreference读取数据
 	 */
-	public RunTimes(Activity activity){
-		this.activity = activity; 
-		
-		pref = activity.getApplication().getSharedPreferences("RunTimes", 0);
+	public RunTimes(Context context){
+		this.context = context; 
+		pref = context.getSharedPreferences("RunTimes", 0);
+		//pref = activity.getApplication().getSharedPreferences("RunTimes", 0);
 		setTimes(pref.getInt("Times", DEFAULT_TIMES));
 		setAdjustTimes(pref.getInt("AdjustTimes",DEFAULT_ADJUST_TIMES));
 		setRate(pref.getFloat("Rate", DEFAULT_RATE));
@@ -209,7 +209,7 @@ public class RunTimes {
 				public void run(){
 					try{
 						if(father instanceof FragmentB){
-							UserAccount user = Authenticate.getTyxUser(activity);
+							UserAccount user = Authenticate.getTyxUser(context);
 							String name = user.getUsername();
 							String password = user.getPassword();
 							
