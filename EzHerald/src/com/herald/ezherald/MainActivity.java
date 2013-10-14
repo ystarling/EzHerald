@@ -351,6 +351,7 @@ public class MainActivity extends BaseFrameActivity {
 				// 更新数据库
 				int currImgSize = updList.size(); // 当前从网上更新到的新图片数量
 				int dbImgSize = dbAdapter.getCurrentImageCount(); // 数据库中的老图片数量
+				int nextIdToInsert = dbImgSize;
 				if (currImgSize + dbImgSize > MAX_BANNER_SIZE) {
 					// 需要删掉一些原图片然后更新
 					int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE;
@@ -362,22 +363,24 @@ public class MainActivity extends BaseFrameActivity {
 					// 增加原来的标号
 					removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE;
 					int currDbSize = dbImgSize - removeSize;
-					for (int oldId = 0; oldId < currDbSize; oldId++) {
+					for (int oldId = currDbSize-1 ; oldId >=0 ; oldId--) {
 						// 顺道把图片取出来
 						Cursor cs = dbAdapter.getImage(oldId);
 						if (cs != null && cs.moveToFirst()) {
 							byte[] inBytes = cs.getBlob(1); // 图片信息是blob信息
-							updList.add(BitmapFactory.decodeByteArray(inBytes,
+							
+							updList.add(currImgSize , BitmapFactory.decodeByteArray(inBytes,
 									0, inBytes.length));
 						}
 						// 修改信息
 						dbAdapter.alterImageId(oldId, oldId + removeSize);
 					}
+					nextIdToInsert = 0;
 				}
 
 				// 增加新图到数据库
-				for (int id = 0; id < currImgSize; id++) {
-					dbAdapter.insertImage(id, updList.get(id));
+				for (int id = nextIdToInsert; id < currImgSize + nextIdToInsert; id++) {
+					dbAdapter.insertImage(id, updList.get(id - nextIdToInsert));
 				}
 
 			}
