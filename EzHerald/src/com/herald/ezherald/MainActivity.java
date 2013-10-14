@@ -63,15 +63,15 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
  */
 public class MainActivity extends BaseFrameActivity {
 
-	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; //此次运行已经显示过更新了
+	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; // 此次运行已经显示过更新了
 	Fragment mContentFrag;
 	Menu mActionMenu;
 	Handler mMoveHandler;
 	SlidingMenu mSlidingMenu;
-	
-	public boolean needRefreshContent = false; //是否需要刷新Content
-	public boolean isReceivingData = false; //当前是否已经在更新Image
-	private boolean doNotUpdateUI = false;//不更新UI
+
+	public boolean needRefreshContent = false; // 是否需要刷新Content
+	public boolean isReceivingData = false; // 当前是否已经在更新Image
+	private boolean doNotUpdateUI = false;// 不更新UI
 
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME_FIRST_START = "first_start";
@@ -84,9 +84,8 @@ public class MainActivity extends BaseFrameActivity {
 	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
 	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
 	private final int CONN_TIMEOUT = 5000;
-	
+
 	private boolean mShowedUpdate = false;
-	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -103,18 +102,18 @@ public class MainActivity extends BaseFrameActivity {
 			i.setClass(this, MainGuideActivity.class);
 			startActivity(i);
 			setGuideViewed();
-		} 
-		
+		}
+
 		Intent intent = getIntent();
 		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
-		
-		//检查是否有固件版本更新
-		if(!mShowedUpdate){
+
+		// 检查是否有固件版本更新
+		if (!mShowedUpdate) {
 			intent = new Intent();
 			intent.setClass(this, AppUpdateActivity.class);
 			startActivity(intent);
 		}
-		
+
 		doNotUpdateUI = false;
 	}
 
@@ -135,7 +134,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		String strPrefTimeInterval = appPreferences.getString(
 				KEY_NAME_REFRESH_FREQ, null);
-		int prefTimeInterval = (timestamp==0)?0:720;
+		int prefTimeInterval = (timestamp == 0) ? 0 : 720;
 		if (strPrefTimeInterval != null) {
 			prefTimeInterval = Integer.parseInt(strPrefTimeInterval);
 		}
@@ -195,16 +194,15 @@ public class MainActivity extends BaseFrameActivity {
 		getSupportMenuInflater().inflate(R.menu.menu_main_content, menu);
 		mActionMenu = menu;
 
-		//检查是否需要在线更新
+		// 检查是否需要在线更新
 		boolean needOnlineRefresh = checkRefreshState();
-		
+
 		if (needOnlineRefresh) {
 
 			MenuItem item = mActionMenu.findItem(R.id.main_content_refresh);
 			requestInfoUpdate("blabla", item);
-			
+
 		}
-		
 
 		return true;
 	}
@@ -226,9 +224,9 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	public void requestInfoUpdate(String url, MenuItem item) {
-		if(isReceivingData)
-			return;  //Already receiving data
-		
+		if (isReceivingData)
+			return; // Already receiving data
+
 		item.setVisible(false);
 		MenuItem doingItem = mActionMenu
 				.findItem(R.id.mainframe_menu_item_doing);
@@ -282,7 +280,7 @@ public class MainActivity extends BaseFrameActivity {
 			httpConn.setConnectTimeout(CONN_TIMEOUT);
 			httpConn.connect();
 			response = httpConn.getResponseCode();
-			
+
 			if (response == HttpURLConnection.HTTP_OK) {
 				in = httpConn.getInputStream();
 			} else
@@ -313,7 +311,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * 联网更新图片
+	 * 联网更新图片 同时更新数据库内容
 	 */
 	private class UpdateBannerImageTask extends
 			AsyncTask<String, Void, ArrayList<Bitmap>> {
@@ -322,38 +320,23 @@ public class MainActivity extends BaseFrameActivity {
 		@Override
 		protected ArrayList<Bitmap> doInBackground(String... url) {
 			isReceivingData = true;
-			
-			ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
-			// ////////////从数据库载入信息（如果有的话）
 			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
 					getBaseContext());
 			dbAdapter.open();
-			Cursor cs = dbAdapter.getAllImages();
-			if (cs != null && cs.moveToFirst()) {
-				int count = 0;
-				do {
-					byte[] inBytes = cs.getBlob(1); // 图片信息是blob信息
-					retList.add(BitmapFactory.decodeByteArray(inBytes, 0,
-							inBytes.length));
-					count++;
-				} while (count < MAX_BANNER_SIZE && cs.moveToNext());
-			} else {
-				Log.w("MainActivity", "db record does not exist");
-			}
 
 			// ///////////////////////////////////////
-			ArrayList<Bitmap> updList = new ArrayList<Bitmap>();
-			boolean haveUpdate = checkBannerImageUpdateState(); //从服务器先GET是否有update，然后决定是否下载
-			
+			ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // 图片更新的列表
+			boolean haveUpdate = checkBannerImageUpdateState(); // 从服务器先GET是否有update，然后决定是否下载
+
 			Log.d("MainActivity: AsyncTask", "haveRemoveUpdate?" + haveUpdate);
 			// ////////////////////////////////////////////////////////////////////////////
 			ArrayList<String> remoteImgUrls = null;
-			if(haveUpdate){
+			if (haveUpdate) {
 				remoteImgUrls = getRemoveUpdateImgUrls(REMOTE_UPDATE_QUERY_URL); // 远程更新的图片url放在这边
 			}
 
-			if (remoteImgUrls!= null && !remoteImgUrls.isEmpty()) {
-				//有东西需要更新了..
+			if (remoteImgUrls != null && !remoteImgUrls.isEmpty()) {
+				// 有东西需要更新了..
 				for (String urlStr : remoteImgUrls) {
 					Bitmap bmp = testGetBitmap(urlStr);
 					if (bmp != null) {
@@ -364,45 +347,60 @@ public class MainActivity extends BaseFrameActivity {
 						break;
 					}
 				}
-				
 
 				// 更新数据库
-				while (retList.size() < MAX_BANNER_SIZE && updList.size() > 0) {
-					Bitmap tmpBmp = updList.get(updList.size() - 1);
-					retList.add(tmpBmp);
-					dbAdapter.insertImage(retList.size() - 1, tmpBmp);
-					updList.remove(updList.size() - 1);
+				int currImgSize = updList.size(); // 当前从网上更新到的新图片数量
+				int dbImgSize = dbAdapter.getCurrentImageCount(); // 数据库中的老图片数量
+				if (currImgSize + dbImgSize > MAX_BANNER_SIZE) {
+					// 需要删掉一些原图片然后更新
+					int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE;
+					// 删除多余图片
+					while (removeSize > 0) {
+						dbAdapter.deleteImage(dbImgSize - removeSize);
+						removeSize--;
+					}
+					// 增加原来的标号
+					removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE;
+					int currDbSize = dbImgSize - removeSize;
+					for (int oldId = 0; oldId < currDbSize; oldId++) {
+						// 顺道把图片取出来
+						Cursor cs = dbAdapter.getImage(oldId);
+						if (cs != null && cs.moveToFirst()) {
+							byte[] inBytes = cs.getBlob(1); // 图片信息是blob信息
+							updList.add(BitmapFactory.decodeByteArray(inBytes,
+									0, inBytes.length));
+						}
+						// 修改信息
+						dbAdapter.alterImageId(oldId, oldId + removeSize);
+					}
 				}
-				int cnt = 0;
-				while (updList.size() > 0 && cnt < MAX_BANNER_SIZE) {
-					// 需要替换了！
-					retList.remove(cnt);
-					Bitmap tmpBmp = updList.get(updList.size() - 1);
-					updList.remove(updList.size() - 1);
-					retList.add(tmpBmp);
-					dbAdapter.updateImage(cnt++, tmpBmp);
+
+				// 增加新图到数据库
+				for (int id = 0; id < currImgSize; id++) {
+					dbAdapter.insertImage(id, updList.get(id));
 				}
+
 			}
 			dbAdapter.close();
 			// ////////////////////////////////////////////////////////////////////////////
 
-			return retList;
+			return updList;
 		}
 
 		@Override
 		protected void onPostExecute(ArrayList<Bitmap> result) {
-			//数据库更新完毕之后修改View
-			
-			if(doNotUpdateUI){
+			// 数据库更新完毕之后修改View
+
+			if (doNotUpdateUI) {
 				Log.w("MainActivity", "Do not update UI...");
 				isReceivingData = false;
 				return;
 			}
-			
+
 			// 修改相应的视图
 			for (int i = 0; i < result.size(); i++) {
 				((MainContentFragment) mContentFrag).updateImageItem(i,
-						result.get(result.size() -i -1));
+						result.get(i));
 			}
 
 			((MainContentFragment) mContentFrag).refreshViewFlowImage();
@@ -415,11 +413,11 @@ public class MainActivity extends BaseFrameActivity {
 			doingItem.setVisible(false);
 
 			// 更新SharedPreference里面最后更新的时间
-			if(!connFail)
+			if (!connFail)
 				setLastRefreshTime(System.currentTimeMillis());
-			
+
 			isReceivingData = false;
-			
+
 			super.onPostExecute(result);
 		}
 
@@ -474,7 +472,7 @@ public class MainActivity extends BaseFrameActivity {
 		// Log.d("MainActivity:getRemoveUpdateImgUrls", "JSON src data = " +
 		// jsonStr);
 		ArrayList<String> retStr = new ArrayList<String>();
-		
+
 		try {
 			JSONArray jsonArray = new JSONArray(jsonStr);
 			Log.i("MainActivity:getRemoveUpdateImgUrls",
@@ -486,16 +484,20 @@ public class MainActivity extends BaseFrameActivity {
 			// 处理json数据
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				/*Log.d("MainActivity:getRemoveUpdateImgUrls", "jsonStr @" + i
-						+ " : " + jsonObject.toString());*/
+				/*
+				 * Log.d("MainActivity:getRemoveUpdateImgUrls", "jsonStr @" + i
+				 * + " : " + jsonObject.toString());
+				 */
 				String remoteTimeStampStr = jsonObject.getString("updatetime");
 				SimpleDateFormat format = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");
 				long remoteTimeStamp = format.parse(remoteTimeStampStr)
 						.getTime();
-				if (remoteTimeStamp > timestampHere || DEBUG_ALWAYS_UPDATE_ONLINE) {
+				if (remoteTimeStamp > timestampHere
+						|| DEBUG_ALWAYS_UPDATE_ONLINE) {
 					// 需要更新，加入列表
-					Log.d("MainActivity:getRemoveUpdateImgUrls", "need update : " + jsonObject.getString("url"));
+					Log.d("MainActivity:getRemoveUpdateImgUrls",
+							"need update : " + jsonObject.getString("url"));
 					retStr.add(jsonObject.getString("url"));
 				}
 			}
@@ -525,7 +527,7 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		if (in == null)
 			return false;
-		
+
 		InputStreamReader isr = new InputStreamReader(in);
 		int charRead;
 		String str = "";
@@ -561,8 +563,8 @@ public class MainActivity extends BaseFrameActivity {
 			Log.e("MainActivity", "Unable to parse string " + str);
 			e.printStackTrace();
 		}
-		
-		if(DEBUG_ALWAYS_UPDATE_ONLINE)
+
+		if (DEBUG_ALWAYS_UPDATE_ONLINE)
 			return true;
 
 		return false;
@@ -618,10 +620,10 @@ public class MainActivity extends BaseFrameActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		Log.d("MainActivity", "needRefreshContent?" + needRefreshContent);
 	}
-	
+
 	/**
 	 * 销毁时如果还有没有搞完的异步线程，设置flag让线程取消更新UI的操作！
 	 */
@@ -631,6 +633,5 @@ public class MainActivity extends BaseFrameActivity {
 		Log.d("MainActivity", "onDestroy");
 		super.onDestroy();
 	}
-	
-	
+
 }
