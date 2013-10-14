@@ -104,8 +104,7 @@ public class MainContentFragment extends SherlockFragment {
 			"加载中" };
 	String mContentCont2[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
 			"加载中" };
-	
-	
+
 	private boolean mContentIsDestroyed = false;
 	// /////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
 	private static final int[] image_ids = { R.drawable.main_frame_pic0,
@@ -135,7 +134,7 @@ public class MainContentFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		// 视图
 		View v = inflater.inflate(R.layout.main_frame_content, null);
-		
+
 		mContentIsDestroyed = false;
 		return v;
 	}
@@ -192,7 +191,6 @@ public class MainContentFragment extends SherlockFragment {
 	/**
 	 * 获得偏好设置
 	 */
-	@SuppressLint("NewApi")
 	private void getPrefItems() {
 		// 删除旧的东西
 		mContentTitles.clear();
@@ -201,12 +199,12 @@ public class MainContentFragment extends SherlockFragment {
 		SharedPreferences appPrefs = getSherlockActivity()
 				.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 		Set<String> result_set;
-		try {
-			result_set = appPrefs.getStringSet(KEY_NAME, null);
-		} catch (NoSuchMethodError e) {
-			result_set = SharedPreferencesHandler.getStringSet(appPrefs,
-					KEY_NAME, new HashSet<String>());
-		}
+		// try {
+		// result_set = appPrefs.getStringSet(KEY_NAME, null);
+		// } catch (NoSuchMethodError e) {
+		result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME,
+				null);
+		// }
 		if (null != result_set && result_set.size() > 0) {
 			for (String result : result_set) {
 				// Toast.makeText(getActivity(), result,
@@ -241,7 +239,7 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new FreshmanGrabber();
 			} else if (moduleName.equals("gpa")) {
 				grabber = new GpaGrabber(getActivity());
-			} else if (moduleName.equals("exercise")){
+			} else if (moduleName.equals("exercise")) {
 				grabber = new ExerciseGrabber(getActivity());
 			}
 			// else if ....f
@@ -450,8 +448,8 @@ public class MainContentFragment extends SherlockFragment {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			
-			if(mContentIsDestroyed)
+
+			if (mContentIsDestroyed)
 				return;
 
 			int retVal = msg.arg1;
@@ -500,10 +498,8 @@ public class MainContentFragment extends SherlockFragment {
 	@Override
 	public void onDestroy() {
 		mContentIsDestroyed = true;
-		
+
 		super.onDestroy();
 	}
-	
-	
-	
+
 }
