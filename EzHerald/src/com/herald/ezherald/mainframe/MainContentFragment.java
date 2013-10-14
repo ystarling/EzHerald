@@ -51,6 +51,16 @@ import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
+/**
+ * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 
+ * 上传更新: http://121.248.63.105/EzHerald/updateupload/ 
+ * 图片json显示最新五条: http://121.248.63.105/EzHerald/picturejson/ 
+ * 更新json显示最新一条: http://121.248.63.105/EzHerald/updatejson/ 
+ * @author BorisHe
+ *
+ */
+
+
 /*
  * @author 何博伟
  * @since 20130514

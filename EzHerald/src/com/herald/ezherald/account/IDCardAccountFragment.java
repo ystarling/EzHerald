@@ -31,7 +31,6 @@ import cn.edu.seu.herald.auth.AuthenticationServiceException;
 import cn.edu.seu.herald.auth.AuthenticationServiceFactory;
 import cn.edu.seu.herald.auth.AuthenticationServiceFactoryImpl;
 import cn.edu.seu.herald.auth.StudentUser;
-import cn.edu.seu.herald.ws.api.ServiceException;
 
 
 
