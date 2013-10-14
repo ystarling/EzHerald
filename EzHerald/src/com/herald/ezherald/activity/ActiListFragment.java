@@ -505,8 +505,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 						return actiList;
 					}
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException e) {				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
