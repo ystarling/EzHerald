@@ -45,6 +45,7 @@ import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriDataGrabber;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
+import com.herald.ezherald.exercise.ExerciseGrabber;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.freshman.FreshmanGrabber;
 import com.herald.ezherald.gpa.GPAActivity;
@@ -240,6 +241,8 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new FreshmanGrabber();
 			} else if (moduleName.equals("gpa")) {
 				grabber = new GpaGrabber(getActivity());
+			} else if (moduleName.equals("exercise")){
+				grabber = new ExerciseGrabber(getActivity());
 			}
 			// else if ....f
 		} catch (Exception e) {
