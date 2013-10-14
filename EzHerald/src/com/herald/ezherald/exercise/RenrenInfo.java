@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
@@ -34,7 +35,7 @@ public class RenrenInfo{
 	private String message;//联网读取到的信息
 	private SharedPreferences pref;
 	private FragmentA father;
-	public Activity activity;
+	public Context context;
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg){
@@ -52,11 +53,11 @@ public class RenrenInfo{
 	 * @param activity 调用者的activity
 	 * 构造时会从sharedPreference尝试读数据
 	 */
-	public RenrenInfo(Activity activity,FragmentA father){
-		this.activity = activity;
+	public RenrenInfo(Context context,FragmentA father){
+		this.context = context;
 		this.father = father;
 		try {
-			pref = activity.getApplication().getSharedPreferences("Renren", 0);
+			pref = context.getSharedPreferences("Renren", 0);
 			setInfo(pref.getString("info", null));
 			setDate(pref.getString("date", null));
 		} catch (Exception e) {
