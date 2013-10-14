@@ -2,7 +2,6 @@ package com.herald.ezherald.settingframe;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +66,12 @@ public class SettingFragment extends SherlockListFragment {
 			i.setClass(getActivity(), MainContentModulePrefActivity.class);
 			break;
 		case 1:
-			i.setClass(getActivity(), AppUpdateActivity.class);
+			i.setClass(getActivity(), SyncFrequencySettingActivity.class);
 			break;
 		case 2:
+			i.setClass(getActivity(), AppUpdateActivity.class);
+			break;
+		case 3:
 			i.setClass(getActivity(), AboutThisApp.class);
 			break;
 		default:

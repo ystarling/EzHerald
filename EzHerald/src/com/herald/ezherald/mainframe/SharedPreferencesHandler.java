@@ -11,7 +11,7 @@ import android.content.SharedPreferences;
  *
  */
 public class SharedPreferencesHandler {
-	final static String regularEx = "|";
+	final static String regularEx = "\\|";
 
 	public static Set<String> getStringSet(SharedPreferences prefs, String key,
 			Set<String> defValues) {
@@ -37,7 +37,7 @@ public class SharedPreferencesHandler {
 			Object[] objects = values.toArray();
 			for (Object obj : objects) {
 				str += obj.toString();
-				str += regularEx;
+				str += "|";
 			}
 			ed.putString(key, str);
 		}
