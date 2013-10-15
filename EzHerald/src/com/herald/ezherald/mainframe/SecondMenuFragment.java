@@ -48,12 +48,12 @@ import com.herald.ezherald.settingframe.SettingActivity;
  */
 public class SecondMenuFragment extends ListFragment {
 	
-	private static final String TEXT_IDCARD_NOT_LOGIN = "一卡通\n未登录";
-	private static final String TEXT_IDCARD_IS_LOGIN = "一卡通\n已登录";
-	private static final String TEXT_TYX_NOT_LOGIN = "体育系\n未登录";
-	private static final String TEXT_TYX_IS_LOGIN = "体育系\n已登录";
-	private static final String TEXT_LIB_NOT_LOGIN = "图书馆\n未登录";
-	private static final String TEXT_LIB_IS_LOGIN = "图书馆\n已登录";
+	public static final String TEXT_IDCARD_NOT_LOGIN = "一卡通\n未登录";
+	public static final String TEXT_IDCARD_IS_LOGIN = "一卡通\n已登录";
+	public static final String TEXT_TYX_NOT_LOGIN = "体育系\n未登录";
+	public static final String TEXT_TYX_IS_LOGIN = "体育系\n已登录";
+	public static final String TEXT_LIB_NOT_LOGIN = "图书馆\n未登录";
+	public static final String TEXT_LIB_IS_LOGIN = "图书馆\n已登录";
 	
 	
 	private List<Map<String, Object>> mListItems;

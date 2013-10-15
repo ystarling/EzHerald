@@ -21,6 +21,8 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 	private static final int VIEW_TYPE_ACCOUNT = 0;
 
 	private static final int VIEW_TYPE_GENERAL = 1;
+	
+	private static final String HIGHLIGHT_COLOR  = "#eb3c4b";
 
 	/**
 	 * 右侧菜单列表项的Adapter
@@ -172,13 +174,24 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 
 			String idCardState = (String) mListItems.get(position).get(
 					"idCardState");
+			String tyxState = (String) mListItems.get(position)
+					.get("tyxState");
+			String libState = (String) mListItems.get(position)
+					.get("libState");
 
 			accountItemView.idCardText.setText(idCardState);
-			accountItemView.tyxText.setText((String) mListItems.get(position)
-					.get("tyxState"));
-			accountItemView.libText.setText((String) mListItems.get(position)
-					.get("libState"));
-			// /
+			accountItemView.tyxText.setText(tyxState);
+			accountItemView.libText.setText(libState);
+			//字的颜色
+			if(idCardState.equals(SecondMenuFragment.TEXT_IDCARD_IS_LOGIN)){
+				accountItemView.idCardText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
+			}
+			if(tyxState.equals(SecondMenuFragment.TEXT_TYX_IS_LOGIN)){
+				accountItemView.tyxText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
+			}
+			if(libState.equals(SecondMenuFragment.TEXT_LIB_IS_LOGIN)){
+				accountItemView.tyxText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
+			}
 
 		}
 
