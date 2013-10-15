@@ -48,14 +48,26 @@ import com.herald.ezherald.settingframe.SettingActivity;
  */
 public class SecondMenuFragment extends ListFragment {
 	
+	private static final String TEXT_IDCARD_NOT_LOGIN = "一卡通\n未登录";
+	private static final String TEXT_IDCARD_IS_LOGIN = "一卡通\n已登录";
+	private static final String TEXT_TYX_NOT_LOGIN = "体育系\n未登录";
+	private static final String TEXT_TYX_IS_LOGIN = "体育系\n已登录";
+	private static final String TEXT_LIB_NOT_LOGIN = "图书馆\n未登录";
+	private static final String TEXT_LIB_IS_LOGIN = "图书馆\n已登录";
+	
+	
 	private List<Map<String, Object>> mListItems;
-	private MainMenuListItemAdapter mListViewAdapter;
+	private SecondMenuListItemAdapter mListViewAdapter;
 	private String mMenuItemsStr[]; // 文字(title)
 	private Integer mMenuItemsIconResId[] = {
 			R.drawable.main_2ndmenu_ic_account,
 			R.drawable.main_2ndmenu_ic_setting,
 			R.drawable.main_2ndmenu_ic_accsetting,
 	}; // 图标(icon)
+	
+	private String mIdCardState; 
+	private String mLibState;
+	private String mTyxState;
 	
 	private final String BUNDLE_KEY_USERNAME = "username";
 	private UserNameHandler mUserNameHandler = new UserNameHandler();
@@ -93,7 +105,7 @@ public class SecondMenuFragment extends ListFragment {
 		}*/ //现通过updateLoginUserNameTitles()方法调用
 		
 		mListItems = getListItems();
-		mListViewAdapter = new MainMenuListItemAdapter(getActivity(), mListItems);
+		mListViewAdapter = new SecondMenuListItemAdapter(getActivity(), mListItems);
 		setListAdapter(mListViewAdapter);
 	}
 
@@ -106,13 +118,30 @@ public class SecondMenuFragment extends ListFragment {
 			String currUserId = account.getUsername();
 			String oldUserId = getSavedUserId();
 			if(oldUserId != null && currUserId.equals(oldUserId)){
-				mMenuItemsStr[0] = currUserId + "\n" + getSavedUserName();
+				mMenuItemsStr[0] = getSavedUserName();
 			} else {
 				mMenuItemsStr[0] = account.getUsername();
 				new Thread(new UserNameRunnable(account.getUsername())).start();
 			}
+			mIdCardState = TEXT_IDCARD_IS_LOGIN;
 		} else {
 			mMenuItemsStr[0] = "尚未登陆";
+			mIdCardState = TEXT_IDCARD_NOT_LOGIN;
+		}
+		
+		//更新另外2个登陆账户的状态
+		account = Authenticate.getLibUser(getActivity());
+		if(null != account){
+			mLibState =  TEXT_LIB_IS_LOGIN;
+		} else {
+			mLibState = TEXT_LIB_NOT_LOGIN;
+		}
+		
+		account = Authenticate.getTyxUser(getActivity());
+		if(null != account){
+			mTyxState = TEXT_TYX_IS_LOGIN;
+		} else {
+			mTyxState = TEXT_TYX_NOT_LOGIN;
 		}
 	}
 
@@ -158,6 +187,17 @@ public class SecondMenuFragment extends ListFragment {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("icon", mMenuItemsIconResId[i]);
 			map.put("title", mMenuItemsStr[i]);
+			if(i == 0){
+				//账户的附加信息
+				map.put("idCardState", mIdCardState);
+				map.put("tyxState", mTyxState);
+				map.put("libState", mLibState);
+				
+				if(mIdCardState.equals(TEXT_IDCARD_IS_LOGIN)){
+					map.put("icon", R.drawable.main_2ndmenu_ic_account_login);
+				}
+			}
+			
 			listItems.add(map);
 		}
 		return listItems;
