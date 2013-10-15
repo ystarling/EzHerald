@@ -104,7 +104,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		Display disp = wMng.getDefaultDisplay();
 		int screenWidth = disp.getWidth();
 		int shadowWidth = (int) (0.05 * screenWidth); // 菜单阴影遮罩宽度
-		int behindOffset = (int) (0.5 * screenWidth); // 菜单之外内容的显示宽度
+		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
 
 		menu = getSlidingMenu();
 		menu.setMode(SlidingMenu.LEFT_RIGHT);
@@ -114,6 +114,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		menu.setShadowWidth(shadowWidth);
 		menu.setShadowDrawable(R.drawable.shadow);
 		menu.setBehindOffset(behindOffset);
+		
 		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu.setBehindScrollScale(1.0f);
 		menu.setBehindCanvasTransformer(mTrans);

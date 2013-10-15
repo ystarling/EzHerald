@@ -45,62 +45,77 @@ import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriDataGrabber;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
+import com.herald.ezherald.exercise.ExerciseGrabber;
 import com.herald.ezherald.freshman.FreshmanActivity;
+import com.herald.ezherald.freshman.FreshmanGrabber;
 import com.herald.ezherald.gpa.GPAActivity;
+import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
+import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
+/**
+ * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 上传更新:
+ * http://121.248.63.105/EzHerald/updateupload/ 图片json显示最新五条:
+ * http://121.248.63.105/EzHerald/picturejson/ 更新json显示最新一条:
+ * http://121.248.63.105/EzHerald/updatejson/
+ * 
+ * @author BorisHe
+ * 
+ */
+
 /*
  * @author 何博伟
+ * 
  * @since 20130514
+ * 
  * @updated 20130630
  * 
- * 主界面呈现内容的Fragement
- * 其他各模块可参照本Fragement的定义呈现内容
+ * 主界面呈现内容的Fragement 其他各模块可参照本Fragement的定义呈现内容
  */
 public class MainContentFragment extends SherlockFragment {
-	private GridView mGridView;  //GridView
-	private ViewFlow mViewFlow;  //ViewFlow
+	private GridView mGridView; // GridView
+	private ViewFlow mViewFlow; // ViewFlow
 	private CircleFlowIndicator mCircIndic;
-	
+
 	private InfoHandler mInfoHandler = new InfoHandler();
-	
-	
+
 	private List<Map<String, Object>> mGridItems;
 	private List<Map<String, Object>> mImageItems;
-	
+
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "module_choice";
-	
+
 	private final String MAPKEY_TITLE = "title";
 	private final String MAPKEY_CONT1 = "content1";
 	private final String MAPKEY_CONT2 = "content2";
-	
+
 	private final String MAPKEY_IMAGE = "image";
 	private final String MAPKEY_TYPE = "type";
-	
-	private final int MAX_BANNER_SIZE = 5;
-	
-	
-	private ArrayList<String> mContentTitles = new ArrayList<String>();
-	//private ArrayList<MainContentGridItemObj> mContentInfoObjs = new ArrayList<MainContentGridItemObj>();
-	
-	//////////////Temporarily used local variables///////////////////
-	String mContentCont1 [] = {"加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中"};
-	String mContentCont2 [] = {"加载中", "加载中", "加载中", "加载中", "加载中" ,"加载中", "加载中", "加载中"};
-	///////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
-	private static final int[] image_ids =
-		{R.drawable.main_frame_pic0, R.drawable.main_frame_pic1,
-			R.drawable.main_frame_pic2, R.drawable.main_frame_pic3,
-			R.drawable.main_frame_pic4
-		};
 
-	
-	public ViewFlow getViewFlow(){
+	private final int MAX_BANNER_SIZE = 5;
+
+	private ArrayList<String> mContentTitles = new ArrayList<String>();
+	// private ArrayList<MainContentGridItemObj> mContentInfoObjs = new
+	// ArrayList<MainContentGridItemObj>();
+
+	// ////////////Temporarily used local variables///////////////////
+	String mContentCont1[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
+			"加载中" };
+	String mContentCont2[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
+			"加载中" };
+
+	private boolean mContentIsDestroyed = false;
+	// /////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
+	private static final int[] image_ids = { R.drawable.main_frame_pic0,
+			R.drawable.main_frame_pic1, R.drawable.main_frame_pic2,
+			R.drawable.main_frame_pic3, R.drawable.main_frame_pic4 };
+
+	public ViewFlow getViewFlow() {
 		return mViewFlow;
 	}
-	
+
 	@Override
 	public void setArguments(Bundle args) {
 		// TODO Auto-generated method stub
@@ -118,133 +133,145 @@ public class MainContentFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		//视图
+		// 视图
 		View v = inflater.inflate(R.layout.main_frame_content, null);
+
+		mContentIsDestroyed = false;
 		return v;
 	}
-	
-	
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		
-		//mActionBar = getSherlockActivity().getSupportActionBar();
-		
+
+		// mActionBar = getSherlockActivity().getSupportActionBar();
+
 		getPrefItems();
-		
-		mGridView = (GridView)getActivity().findViewById(R.id.main_frame_content_gridView);
+
+		mGridView = (GridView) getActivity().findViewById(
+				R.id.main_frame_content_gridView);
 		mGridItems = getGridItems();
-		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
+		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+				mGridItems));
 		mGridView.setOnItemClickListener(new MyOnItemClickListener());
-		
-		
-		mViewFlow = (ViewFlow)getActivity().findViewById(R.id.main_frame_viewflow);
+
+		mViewFlow = (ViewFlow) getActivity().findViewById(
+				R.id.main_frame_viewflow);
 		mImageItems = getImageItems();
-		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(), mImageItems));
-		
-		mCircIndic = (CircleFlowIndicator)getActivity().findViewById(R.id.main_frame_viewflow_indic);
-		
+		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
+				mImageItems));
+
+		mCircIndic = (CircleFlowIndicator) getActivity().findViewById(
+				R.id.main_frame_viewflow_indic);
+
 		mViewFlow.setFlowIndicator(mCircIndic);
-		
-		mViewFlow.setTimeSpan(5000); 
+
+		mViewFlow.setTimeSpan(5000);
 		mViewFlow.startAutoFlowTimer();
-		
-		//mInfoHandler = new InfoHandler();
+
+		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
 	}
-	
+
 	/**
 	 * 刷新ViewFlow
 	 */
-	public void refreshViewFlowImage(){
-		if(mViewFlow == null){
+	public void refreshViewFlowImage() {
+		if (mViewFlow == null) {
 			Log.e("MainContentFrag", "Fail to refresh. mViewFlow = null");
 		}
-		
-		//是否这样使用?
+
+		// 是否这样使用?
 		mViewFlow.refreshDrawableState();
-		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(), mImageItems));
+		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
+				mImageItems));
 		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
-	
+
 	/**
 	 * 获得偏好设置
 	 */
-	@SuppressLint("NewApi")
-	private void getPrefItems(){
+	private void getPrefItems() {
 		// 删除旧的东西
 		mContentTitles.clear();
-		
+
 		// 获得偏好设置
-		SharedPreferences appPrefs =
-				getSherlockActivity().getSharedPreferences(
-						PREF_NAME
-						, Context.MODE_PRIVATE);
+		SharedPreferences appPrefs = getSherlockActivity()
+				.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 		Set<String> result_set;
-		try {
-			result_set = appPrefs.getStringSet(KEY_NAME, null);
-		} catch (NoSuchMethodError e) {
-			result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME, new HashSet<String>());		
-		}
-		if(null != result_set && result_set.size()>0){
-			for(String result : result_set){
-				//Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+		// try {
+		// result_set = appPrefs.getStringSet(KEY_NAME, null);
+		// } catch (NoSuchMethodError e) {
+		result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME,
+				null);
+		// }
+		if (null != result_set && result_set.size() > 0) {
+			for (String result : result_set) {
+				// Toast.makeText(getActivity(), result,
+				// Toast.LENGTH_SHORT).show();
 				mContentTitles.add(result);
 			}
-		}
-		else
-		{
+		} else {
 			mContentTitles.add("尚未设置");
-			Toast.makeText(getActivity(), "NULL， use default", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "NULL， use default",
+					Toast.LENGTH_SHORT).show();
 		}
-		
+
 	}
 
 	/**
-	 * 得到相应模块的GridItemObj，加入mContentInfoObjs
-	 * 如果目前没有实现这个接口，那么现在塞一个null的进去
-	 * @param moduleName 模块英文名称
+	 * 得到相应模块的GridItemObj，加入mContentInfoObjs 如果目前没有实现这个接口，那么现在塞一个null的进去
+	 * 
+	 * @param moduleName
+	 *            模块英文名称
 	 */
 	private void fetchInfoObjForName(String moduleName, int index) {
-		//MainContentGridItemObj obj = null;
+		// MainContentGridItemObj obj = null;
 		MainContentInfoGrabber grabber = null;
-		try{
-			if(moduleName.equals("curriculum")){
+		try {
+			if (moduleName.equals("curriculum")) {
 				grabber = new CurriDataGrabber(getActivity());
-				//obj = grabber.GrabInformationObject();
-			}else if (moduleName.equals("academic")){
+				// obj = grabber.GrabInformationObject();
+			} else if (moduleName.equals("academic")) {
 				grabber = new AcademicDataGrabber();
-				//obj = grabber.GrabInformationObject();
+				// obj = grabber.GrabInformationObject();
+			} else if (moduleName.equals("freshman")) {
+				grabber = new FreshmanGrabber();
+			} else if (moduleName.equals("gpa")) {
+				grabber = new GpaGrabber(getActivity());
+			} else if (moduleName.equals("exercise")) {
+				grabber = new ExerciseGrabber(getActivity());
+			} else if (moduleName.equals("library")){
+				grabber = new LibraryContentGrabber(getActivity());
 			}
-			//else if ....
-		} catch (Exception e){
+			// else if ....f
+		} catch (Exception e) {
 			e.printStackTrace();
 			Log.w("MainContentFragment", "更新出错..");
 		}
-		if(grabber != null)
-		{
+		if (grabber != null) {
 			new Thread(new InfoRunnable(grabber, index)).start();
 		}
-		//mContentInfoObjs.add(obj);
+		// mContentInfoObjs.add(obj);
 	}
-
 
 	/*
 	 * 点击Item跳转到各个模块
 	 */
-	private class MyOnItemClickListener implements AdapterView.OnItemClickListener{
+	private class MyOnItemClickListener implements
+			AdapterView.OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			//Toast.makeText(getActivity(), "pos=" + position + "\nid=" + id, Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getActivity(), "pos=" + position + "\nid=" + id,
+			// Toast.LENGTH_SHORT).show();
 			Intent i = new Intent();
-			switch ((int)id) {
+			switch ((int) id) {
 			case 0:
 				i.setClass(getActivity(), MainContentModulePrefActivity.class);
-				MainActivity mainActivity = (MainActivity)getActivity();
+				MainActivity mainActivity = (MainActivity) getActivity();
 				mainActivity.needRefreshContent = true;
 				break;
 			case 1:
@@ -274,89 +301,88 @@ public class MainContentFragment extends SherlockFragment {
 			}
 			if (i != null) {
 				startActivity(i);
-				if(id != 0)
+				if (id != 0)
 					getActivity().finish();
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * 初始化菜单项信息
 	 */
-	private List<Map<String, Object>> getGridItems(){
-		//Update content info
+	private List<Map<String, Object>> getGridItems() {
+		// Update content info
 		int index = 0;
-		for(String title: mContentTitles){
+		for (String title : mContentTitles) {
 			fetchInfoObjForName(title, index++);
 		}
-		
-		
-		///替换已有实现接口的模块的相关内容
-		/*for(int i=0; i<mContentInfoObjs.size(); i++){
-			if(mContentInfoObjs.get(i) == null)
-				continue;
-			mContentCont1[i] = mContentInfoObjs.get(i).getContent1();
-			mContentCont2[i] = mContentInfoObjs.get(i).getContent2();
-		}*/
-		
-		///
-		
+
+		// /替换已有实现接口的模块的相关内容
+		/*
+		 * for(int i=0; i<mContentInfoObjs.size(); i++){
+		 * if(mContentInfoObjs.get(i) == null) continue; mContentCont1[i] =
+		 * mContentInfoObjs.get(i).getContent1(); mContentCont2[i] =
+		 * mContentInfoObjs.get(i).getContent2(); }
+		 */
+
+		// /
+
 		List<Map<String, Object>> gridItems = new ArrayList<Map<String, Object>>();
-		for(int i=0; i<mContentTitles.size(); i++){
+		for (int i = 0; i < mContentTitles.size(); i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put(MAPKEY_TITLE, mContentTitles.get(i)); //tag of a title
+			map.put(MAPKEY_TITLE, mContentTitles.get(i)); // tag of a title
 			map.put(MAPKEY_CONT1, mContentCont1[i]);
 			map.put(MAPKEY_CONT2, mContentCont2[i]);
 			gridItems.add(map);
 		}
-		
-		
+
 		return gridItems;
 	}
-	
+
 	/**
-	 * 初始化图片信息
-	 * key: image 图片的ID或者直接的Bitmap对象
-	 * key: type  0-图片资源ID, 1-Bitmap对象
+	 * 初始化图片信息 key: image 图片的ID或者直接的Bitmap对象 key: type 0-图片资源ID, 1-Bitmap对象
 	 */
-	private List<Map<String, Object>> getImageItems(){
+	private List<Map<String, Object>> getImageItems() {
 		List<Map<String, Object>> imgItems = new ArrayList<Map<String, Object>>();
-		for(int i=0; i<image_ids.length; i++){
+		for (int i = 0; i < image_ids.length; i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("image", image_ids[i]);
 			map.put("type", 0);
 			imgItems.add(map);
 		}
-		//Toast.makeText(getActivity(), ""+ imgItems.size(), Toast.LENGTH_SHORT).show();
+		// Toast.makeText(getActivity(), ""+ imgItems.size(),
+		// Toast.LENGTH_SHORT).show();
 		return imgItems;
 	}
-	
+
 	/**
 	 * 更新某一项的图片对象
+	 * 
 	 * @param index
 	 * @param bitmap
 	 */
-	public void updateImageItem(int index, Bitmap bitmap){
-		if(mImageItems == null || mImageItems.size() < index-1){
+	public void updateImageItem(int index, Bitmap bitmap) {
+		if (mImageItems == null || mImageItems.size() < index - 1) {
 			Log.e("MainContentFrag.", "Invalid image item position");
 			return;
 		}
 		mImageItems.get(index).put(MAPKEY_TYPE, 1);
 		mImageItems.get(index).put(MAPKEY_IMAGE, bitmap);
-		Log.d("MainContentFrag", "Image updated :\n" + mImageItems.get(index).toString());
+		Log.d("MainContentFrag", "Image updated :\n"
+				+ mImageItems.get(index).toString());
 	}
 
 	@Override
 	public void onResume() {
 		Log.d("MainContentFrag", "OnResume");
-		//更新内容
+		// 更新内容
 		super.onResume();
 		refreshInfo();
-		MainActivity mainActivity = (MainActivity)getActivity();
-		if(mainActivity.needRefreshContent){
+		MainActivity mainActivity = (MainActivity) getActivity();
+		if (mainActivity.needRefreshContent) {
 			Log.d("MainContentFragment", "Refreshing info");
-			
+
 			mainActivity.needRefreshContent = false;
 		}
 	}
@@ -365,41 +391,43 @@ public class MainContentFragment extends SherlockFragment {
 	 * 更新内容
 	 */
 	public void refreshInfo() {
-		//Toast.makeText(getActivity(), "Refreshing...", Toast.LENGTH_SHORT).show();
+		// Toast.makeText(getActivity(), "Refreshing...",
+		// Toast.LENGTH_SHORT).show();
 		getPrefItems();
-		//同步获取各模块的更新项目
+		// 同步获取各模块的更新项目
 		mGridItems = getGridItems();
-		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
-		
+		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+				mGridItems));
+
 		refreshImageFromDb();
 	}
-	
+
 	/**
-	 * 从数据库先获得banner数据
-	 * 如果有的话，替换掉静态的
+	 * 从数据库先获得banner数据 如果有的话，替换掉静态的
 	 */
-	public void refreshImageFromDb(){
+	public void refreshImageFromDb() {
 		ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
-		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getSherlockActivity());
+		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
+				getSherlockActivity());
 		dbAdapter.open();
 		Cursor cs = dbAdapter.getAllImages();
-		if(cs != null && cs.moveToFirst()){
+		if (cs != null && cs.moveToFirst()) {
 			int count = 0;
-			do{
-				byte[] inBytes = cs.getBlob(1); 
-				retList.add(BitmapFactory.decodeByteArray(inBytes, 0, inBytes.length));
-				count ++;
-			}while(count < MAX_BANNER_SIZE && cs.moveToNext());		
+			do {
+				byte[] inBytes = cs.getBlob(1);
+				retList.add(BitmapFactory.decodeByteArray(inBytes, 0,
+						inBytes.length));
+				count++;
+			} while (count < MAX_BANNER_SIZE && cs.moveToNext());
 		} else {
 			Log.w("MainActivity", "db record does not exist");
 		}
-		for(int i=0; i<retList.size(); i++){
+		for (int i = 0; i < retList.size(); i++) {
 			updateImageItem(i, retList.get(i));
 		}
 		refreshViewFlowImage();
 		dbAdapter.close();
 	}
-	
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -407,42 +435,46 @@ public class MainContentFragment extends SherlockFragment {
 		super.onConfigurationChanged(newConfig);
 		mViewFlow.onConfigurationChanged(newConfig);
 	}
-	
+
 	/**
-	 * 从偏好中更新各模块信息的资料
-	 * 直接更改mContentCont
+	 * 从偏好中更新各模块信息的资料 直接更改mContentCont
 	 */
-	public void loadGridContentsFromPref(){
-		SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-		//prefs.get
+	public void loadGridContentsFromPref() {
+		SharedPreferences prefs = getActivity().getPreferences(
+				Context.MODE_PRIVATE);
+		// prefs.get
 	}
-	
-	private class InfoHandler extends Handler{
+
+	private class InfoHandler extends Handler {
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			
+
+			if (mContentIsDestroyed)
+				return;
+
 			int retVal = msg.arg1;
-			if(retVal == 200){
-				//更新界面
+			if (retVal == 200) {
+				// 更新界面
 				int index = msg.arg2;
 				mGridItems.get(index).put(MAPKEY_CONT1, mContentCont1[index]);
 				mGridItems.get(index).put(MAPKEY_CONT2, mContentCont2[index]);
 			}
-			
-			mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(), mGridItems));
-			
+
+			mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+					mGridItems));
+
 		}
-		
+
 	}
-	
-	private class InfoRunnable implements Runnable{
+
+	private class InfoRunnable implements Runnable {
 		private MainContentInfoGrabber g = null;
-		private int i; //index
-		
-		public InfoRunnable(MainContentInfoGrabber grabber, int index){
+		private int i; // index
+
+		public InfoRunnable(MainContentInfoGrabber grabber, int index) {
 			g = grabber;
 			i = index;
 		}
@@ -451,21 +483,29 @@ public class MainContentFragment extends SherlockFragment {
 		public void run() {
 			// TODO Auto-generated method stub
 			MainContentGridItemObj obj = g.GrabInformationObject();
-			if(obj == null)
+			if (obj == null )
+			{
+				Log.e("MainContentFrag:InfoRunnable", "Not a valid MainContentGridItemObj");
 				return;
-			
+			}
+
 			mContentCont1[i] = obj.getContent1();
 			mContentCont2[i] = obj.getContent2();
-			
+
 			Message msg = new Message();
 			msg.arg1 = 200;
-			msg.arg2 = i; //index
+			msg.arg2 = i; // index
 			Looper.prepare();
-			
+
 			mInfoHandler.sendMessage(msg);
 		}
 	}
-	
-	
-	
+
+	@Override
+	public void onDestroy() {
+		mContentIsDestroyed = true;
+
+		super.onDestroy();
+	}
+
 }

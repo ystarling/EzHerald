@@ -4,6 +4,8 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -19,6 +21,10 @@ public class CourseDetailActivity extends SherlockActivity {
 	ListView listView ;
 	CurriDBAdapter dbAdapter;
 	
+	private Context context;
+	
+	
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -26,6 +32,8 @@ public class CourseDetailActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.curri_course_detail);
 		
+		Context context = this;
+
 		adapter = new CourseDetailAdapter(this);
 		dbAdapter = new CurriDBAdapter(this);
 		dbAdapter.open();

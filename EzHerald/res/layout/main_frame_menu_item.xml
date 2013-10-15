@@ -4,24 +4,29 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:id="@+id/main_frame_menuitem"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_gravity="center_vertical|left"
+    android:background="#20272f"
+     >
     
 	<!-- 图标 -->
 	<ImageView android:id="@+id/main_frame_menuitem_icon"
 	    android:layout_width="45dp"
 	    android:layout_height="45dp"
 	    android:contentDescription="Icon"
-	    android:layout_gravity="center_vertical|left"
+	    android:gravity="center_vertical|left"
 	    />
 	
 	<!-- 标题信息 -->
 	<TextView android:id="@+id/main_frame_menuitem_title"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center_vertical|left"
-	    android:layout_marginLeft="5dp"
-	    android:textSize="22sp"
-	    android:textColor="#c0bfbf"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:gravity="center_vertical|left"
+	    android:layout_marginLeft="6dp"
+	    android:textSize="21sp"
+	    android:textColor="#a0a4a7"
 	    android:text="Item"
 	    />
 	

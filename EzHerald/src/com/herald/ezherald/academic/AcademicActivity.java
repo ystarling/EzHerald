@@ -32,14 +32,13 @@ public class AcademicActivity extends BaseFrameActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		
-		return true;//super.onCreateOptionsMenu(menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
-		return true;//super.onOptionsItemSelected(item);
+		return super.onOptionsItemSelected(item);
 	}
 
 	

@@ -98,8 +98,11 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 				"title"));
 		Boolean selected = (Boolean)mListItems.get(position).get("selected");
 		if(selected!= null && selected.equals(true)){
+			//此项选中
 			//convertView.setBackgroundColor(Color.parseColor("#10ff0000"));
-			listItemView.title.setTextColor(Color.parseColor("#2c9bff"));
+			listItemView.title.setTextColor(Color.parseColor("#eb3c4b"));
+			listItemView.icon.setImageResource((Integer) mListItems.get(position)
+					.get("icon_selected"));
 		}
 		
 		return convertView;

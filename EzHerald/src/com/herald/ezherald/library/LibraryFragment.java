@@ -27,13 +27,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
-import cn.edu.seu.herald.ws.api.CurriculumService;
-import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
-import cn.edu.seu.herald.ws.api.LibraryService;
-import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
-import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
-import cn.edu.seu.herald.ws.api.library.Book;
-import cn.edu.seu.herald.ws.api.library.Booklist;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;

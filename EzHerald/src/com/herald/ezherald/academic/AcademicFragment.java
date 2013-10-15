@@ -26,6 +26,7 @@ import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
 import com.herald.ezherald.mainframe.MainContentGridItemObj;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -56,6 +57,8 @@ public class AcademicFragment extends SherlockFragment implements
 	private CustomListView listView;
 	private JwcInfoAdapter adapter;
 	private ListFootView foot;
+	
+	private AcademicDBAdapter dbAdapter;
 
 	public Menu mMenu;
 
@@ -75,6 +78,8 @@ public class AcademicFragment extends SherlockFragment implements
 	
 	private Integer lastid = null;
 	private Context context;
+	
+	private ProgressDialog progressDialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +88,11 @@ public class AcademicFragment extends SherlockFragment implements
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		context = getActivity();
+		dbAdapter = new AcademicDBAdapter(context);
+		
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("Please wait ... ");
 		
 	}
 	
@@ -101,6 +111,7 @@ public class AcademicFragment extends SherlockFragment implements
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.menu_academic_list, menu);
+//		mMenu = menu;
 	}
 
 	/*
@@ -133,13 +144,20 @@ public class AcademicFragment extends SherlockFragment implements
 
 		}
 	}
+	
+//	@Override
+//	public boolean onMenuItemSelected(int featureId, MenuItem item)
+//	{
+//		onOptionsItemSelected(item);
+//		return true;
+//	}
 
 	// 刷锟铰菜碉拷锟斤拷始锟斤拷转
 	public void onRefreshActionStart() {
 		// REFRESHSTATE = REFRESHING ;
 		if(mMenu == null)
 			return;
-		
+		progressDialog.show();
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(R.layout.academic_refresh_progress);
 	}
@@ -150,6 +168,7 @@ public class AcademicFragment extends SherlockFragment implements
 		if(mMenu == null)
 			return;
 		
+		progressDialog.cancel();
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(null);
 	}
@@ -235,6 +254,8 @@ public class AcademicFragment extends SherlockFragment implements
 
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 		
+		initJwcInfoListView();
+		
 		try {
 			onRefreshActionStart();
 			new RefreshJwcInfo().execute(new URL(REFRESH_URL));
@@ -246,6 +267,16 @@ public class AcademicFragment extends SherlockFragment implements
 
 		return v;
 	}
+	
+	public void initJwcInfoListView()
+	{
+		dbAdapter.open();
+		List<JwcInfo> jwcInfoList = dbAdapter.getAllJwcInfo();
+		dbAdapter.close();
+		adapter.setJwcInfoList(jwcInfoList);
+		adapter.notifyDataSetChanged();
+	}
+	
 
 	// actionbar 锟斤拷 spinner 锟斤拷item锟斤拷锟斤拷锟接�
 	@Override
@@ -339,6 +370,7 @@ public class AcademicFragment extends SherlockFragment implements
 				// adapter.foreAddJwcInfoList(result);
 				adapter.setJwcInfoList(result);
 				adapter.notifyDataSetChanged();
+				refreshDB(result);
 				listView.onRefreshComplete();
 				onRefreshActionComplete();
 				// Log.v("Watch", "onPostExecute");
@@ -348,6 +380,14 @@ public class AcademicFragment extends SherlockFragment implements
 		}
 
 	}
+	
+	private void refreshDB(List<JwcInfo> infoList)
+	{
+		dbAdapter.open();
+		dbAdapter.refreshJwcInfo(infoList);
+		dbAdapter.close();
+	}
+	
 
 	private class RequestJwcInfo extends AsyncTask<URL, Integer, List<JwcInfo>> {
 
@@ -408,11 +448,19 @@ public class AcademicFragment extends SherlockFragment implements
 			if (result != null) {
 				adapter.addJwcInfoList(result);
 				adapter.notifyDataSetChanged();
+				addIntoDB(result);
 				foot.endRequestData();
 				listView.onRequestComplete();
 			}
 
 		}
+	}
+	
+	private void addIntoDB(List<JwcInfo> infoList)
+	{
+		dbAdapter.open();
+		dbAdapter.addJwcInfo(infoList);
+		dbAdapter.close();
 	}
 	
 	
