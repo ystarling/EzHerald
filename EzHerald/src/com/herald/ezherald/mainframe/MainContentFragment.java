@@ -242,9 +242,9 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new GpaGrabber(getActivity());
 			} else if (moduleName.equals("exercise")) {
 				grabber = new ExerciseGrabber(getActivity());
-			}// else if (moduleName.equals("library")){
-			//	grabber = new LibraryContentGrabber(getActivity());
-			//}
+			} else if (moduleName.equals("library")){
+				grabber = new LibraryContentGrabber(getActivity());
+			}
 			// else if ....f
 		} catch (Exception e) {
 			e.printStackTrace();
