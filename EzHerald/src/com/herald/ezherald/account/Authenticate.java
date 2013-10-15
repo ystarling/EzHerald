@@ -3,10 +3,7 @@ package com.herald.ezherald.account;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import cn.edu.seu.herald.auth.AuthenticationService;
-import cn.edu.seu.herald.auth.AuthenticationServiceFactory;
-import cn.edu.seu.herald.auth.AuthenticationServiceFactoryImpl;
-import cn.edu.seu.herald.auth.StudentUser;
+
 
 public class Authenticate {
 	public static final String DATABASE_NAME = "Info.db"; // 定义数据库名称

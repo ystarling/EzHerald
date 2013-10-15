@@ -45,3 +45,6 @@ tmp/**/*
 libABS/
 libSlidingMenu/
 *.classpath
+/libABS/gen
+
+/libSlidingMenu/gen

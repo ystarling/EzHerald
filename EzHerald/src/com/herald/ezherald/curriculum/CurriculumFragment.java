@@ -197,8 +197,12 @@ public class CurriculumFragment extends SherlockFragment {
 	{
 		View v;
 		v = inflater.inflate(R.layout.curri_main, null);
+		Log.v("TabCount", ""+bar.getTabCount());
+		if(bar.getTabCount()==0)
+		{
+			createTabs();
+		}
 		
-		createTabs();
 		
 		listView = (ListView) v.findViewById(R.id.curri_list);
 		listView.setAdapter(adapter);

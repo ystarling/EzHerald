@@ -10,7 +10,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -66,7 +67,7 @@
             android:name="com.herald.ezherald.freshman.FreshmanActivity"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
-         <activity
+        <activity
             android:name="com.herald.ezherald.freshman.FreshmanContent"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
@@ -74,26 +75,26 @@
             android:name="com.herald.ezherald.gpa.GPAActivity"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
-        
-        <!--libr  begin-->
+
+        <!-- libr  begin -->
         <activity
             android:name="com.herald.ezherald.library.LibraryActivity"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryBookListDetail"
-            android:theme="@style/Theme.Sherlock.Light">
+            android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityNews"
-            android:theme="@style/Theme.Sherlock.Light">
+            android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityReserve"
-            android:theme="@style/Theme.Sherlock.Light">
+            android:theme="@style/Theme.Sherlock.Light" >
         </activity>
-		<!-- libr end -->
-		
+        <!-- libr end -->
+
         <activity
             android:name="com.herald.ezherald.BaseFrameActivity"
             android:theme="@style/Theme.Sherlock.Light" >
@@ -134,9 +135,10 @@
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <!-- curriculum begin -->
-        
+
+
         <!-- curriculum end -->
-        
+
         <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
             android:theme="@style/Theme.Sherlock.Light" >
@@ -152,9 +154,19 @@
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
-            android:label="@string/title_activity_app_update" android:theme="@style/Theme.Sherlock.Light">
+            android:label="@string/title_activity_app_update"
+            android:theme="@style/Theme.Sherlock.Light" >
         </activity>
-        <activity android:name=".mainframe.MainGuideActivity" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
+        <activity
+            android:name="com.herald.ezherald.mainframe.MainGuideActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity android:name=".settingframe.SyncFrequencySettingActivity" 
+            android:theme="@style/Theme.Sherlock.Light"
+            android:label="@string/menu_main_content_pref_title">
+            
+        </activity>
+
     </application>
 
 </manifest>
