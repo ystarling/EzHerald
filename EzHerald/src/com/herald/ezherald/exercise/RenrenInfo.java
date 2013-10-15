@@ -13,7 +13,6 @@ import java.util.Random;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -27,6 +26,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceActivity.Header;
+import android.util.Base64;
 import android.util.Log;
 
 
@@ -36,11 +37,7 @@ import android.util.Log;
  */
 public class RenrenInfo{
 	public static final boolean DEBUG = false;//TODO¡¡just for debug,must be removed before release 
-	private static final String URI = "/v2/feed/list?feedType=UPDATE_STATUS&userId=601258593"; 
-	private static final String HOST = "api.renren.com";
-	private static final String MAC_KEY = "36dbee8f9b4845fb8e8e3046ff6cf10a";
-	private static final String MAC_TOKEN = "241511|2.eZgOrWm5Cr8XcwAIZJKYcxrY7Gp2fUGd.0.1381732793425";
-	private static final String URL = "http://api.renren.com/v2/feed/list?feedType=UPDATE_STATUS&userId=601258593";
+	private final String URL = "https://api.renren.com/v2/status/list?access_token=";
 	private final int SUCCESS = 1,FAILED = 0;
 	private String info;
 	private String date;
@@ -137,42 +134,20 @@ public class RenrenInfo{
 					try {
 						Log.w("update","updating renren");
 						HttpClient client = new DefaultHttpClient();
-						HttpGet get = new HttpGet(URL);
-						Log.v("URL",URL);
-						
-						long timesnap = System.currentTimeMillis()/1000;
-						String randStr = getRandString(8);
-						
-						StringBuffer signatureBaseStringBuffer = new StringBuffer();
-						signatureBaseStringBuffer.append( String.valueOf ( timesnap ) ).append('\n');
-						signatureBaseStringBuffer.append(randStr).append('\n');
-						signatureBaseStringBuffer.append("GET\n");
-						signatureBaseStringBuffer.append(URI).append('\n');
-						signatureBaseStringBuffer.append(HOST).append('\n');
-						signatureBaseStringBuffer.append("80\n");
-						signatureBaseStringBuffer.append("\n");
-						
-						String macString = sign(MAC_KEY, signatureBaseStringBuffer.toString());
-						Log.v("signature",signatureBaseStringBuffer.toString());
-						Log.v("macstr",macString);
-						
-						StringBuffer authenBuffer = new StringBuffer();
-						authenBuffer.append("MAC ");
-						authenBuffer.append("id=\"").append(MAC_TOKEN).append("\",");
-						authenBuffer.append("ts=\"").append(String.valueOf ( timesnap )).append("\",");
-						authenBuffer.append("nonce=\"").append(randStr).append("\",");
-						authenBuffer.append("mac=\"").append(macString).append("\"");
-						
-						Log.v("head",authenBuffer.toString());
-						
-						get.addHeader("Authorization", authenBuffer.toString());
-						
-
-						HttpResponse response = client.execute(get);
-						if (response.getStatusLine().getStatusCode() !=  200) {
-							throw new Exception("state is not 200");
-						}
+						String refreshurl = "https://graph.renren.com/oauth/token?grant"+URLEncoder.encode("_")+"type=refresh"+URLEncoder.encode("_")+"token&refresh"+URLEncoder.encode("_")+"token="+URLEncoder.encode("241511|0.NvNrQow4rEchFtbdaCUtdyA5dWLgRgDh.365328826.1379088139819")+"&client"+URLEncoder.encode("_")+"id=241511&client"+URLEncoder.encode("_")+"secret=8d970a6e9e3249e9afffd2fdba73f018";
+						HttpGet refresh = new HttpGet(refreshurl);
+						HttpResponse response = client.execute(refresh);
 						String message = EntityUtils.toString(response.getEntity());
+						JSONObject json  = new JSONObject(message);
+						String token = json.getString("access_token");
+						token = URLEncoder.encode(token);
+						HttpGet get = new HttpGet(URL+token+"&ownerId=601258593");
+						response = client.execute(get);
+						message = EntityUtils.toString(response.getEntity());
+						if (response.getStatusLine().getStatusCode() !=  200) {
+							throw new Exception(response.toString());
+						}
+						
 						Message msg = handler.obtainMessage(SUCCESS,
 								message);
 						handler.sendMessage(msg);
@@ -207,7 +182,7 @@ public class RenrenInfo{
 	}
 	
 	private String getRandString(int len){
-		String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		StringBuffer sb = new StringBuffer();
 		Random rand = new Random();
 		int id;
@@ -225,7 +200,7 @@ public class RenrenInfo{
             mac.init(signingKey);
             byte[] text = signatureBaseString.getBytes("UTF-8");
             byte[] signatureBytes = mac.doFinal(text);
-            signatureBytes = Base64.encodeBase64(signatureBytes);
+            signatureBytes = Base64.encode(signatureBytes,Base64.DEFAULT);
             String signature = new String(signatureBytes, "UTF-8");
             return signature;
         } catch (NoSuchAlgorithmException e) {
