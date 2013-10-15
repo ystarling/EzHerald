@@ -162,7 +162,10 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity android:name=".settingframe.SyncFrequencySettingActivity" 
-            android:theme="@style/Theme.Sherlock.Light"></activity>
+            android:theme="@style/Theme.Sherlock.Light"
+            android:label="@string/menu_main_content_pref_title">
+            
+        </activity>
 
     </application>
 
