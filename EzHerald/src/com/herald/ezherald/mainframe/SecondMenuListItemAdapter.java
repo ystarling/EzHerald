@@ -190,7 +190,7 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 				accountItemView.tyxText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
 			}
 			if(libState.equals(SecondMenuFragment.TEXT_LIB_IS_LOGIN)){
-				accountItemView.tyxText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
+				accountItemView.libText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
 			}
 
 		}
