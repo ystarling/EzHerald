@@ -51,6 +51,7 @@ import com.herald.ezherald.freshman.FreshmanGrabber;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
+import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
@@ -241,6 +242,8 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new GpaGrabber(getActivity());
 			} else if (moduleName.equals("exercise")) {
 				grabber = new ExerciseGrabber(getActivity());
+			} else if (moduleName.equals("library")){
+				grabber = new LibraryContentGrabber(getActivity());
 			}
 			// else if ....f
 		} catch (Exception e) {
@@ -480,8 +483,11 @@ public class MainContentFragment extends SherlockFragment {
 		public void run() {
 			// TODO Auto-generated method stub
 			MainContentGridItemObj obj = g.GrabInformationObject();
-			if (obj == null)
+			if (obj == null )
+			{
+				Log.e("MainContentFrag:InfoRunnable", "Not a valid MainContentGridItemObj");
 				return;
+			}
 
 			mContentCont1[i] = obj.getContent1();
 			mContentCont2[i] = obj.getContent2();

@@ -23,6 +23,7 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 	private static final int VIEW_TYPE_GENERAL = 1;
 	
 	private static final String HIGHLIGHT_COLOR  = "#eb3c4b";
+	private static final String NORMAL_COLOR = "#777777";
 
 	/**
 	 * 右侧菜单列表项的Adapter
@@ -185,12 +186,18 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 			//字的颜色
 			if(idCardState.equals(SecondMenuFragment.TEXT_IDCARD_IS_LOGIN)){
 				accountItemView.idCardText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
+			} else {
+				accountItemView.idCardText.setTextColor(Color.parseColor(NORMAL_COLOR));
 			}
 			if(tyxState.equals(SecondMenuFragment.TEXT_TYX_IS_LOGIN)){
 				accountItemView.tyxText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
+			} else {
+				accountItemView.tyxText.setTextColor(Color.parseColor(NORMAL_COLOR));
 			}
 			if(libState.equals(SecondMenuFragment.TEXT_LIB_IS_LOGIN)){
 				accountItemView.libText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
+			} else {
+				accountItemView.libText.setTextColor(Color.parseColor(NORMAL_COLOR));
 			}
 
 		}

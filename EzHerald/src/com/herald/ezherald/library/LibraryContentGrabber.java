@@ -27,7 +27,7 @@ import com.herald.ezherald.mainframe.MainContentInfoGrabber;
 
 public class LibraryContentGrabber implements MainContentInfoGrabber{
 	
-	public String content1;
+	public String content1="";
 	public String content2;
 	Context context=null;
 	private JSONArray jsonarray;
@@ -49,8 +49,10 @@ public class LibraryContentGrabber implements MainContentInfoGrabber{
 			List<NameValuePair> list=new ArrayList<NameValuePair>();
 			
 			UserAccount LibrAccount = Authenticate.getLibUser(context);
-			if(LibrAccount.getUsername().isEmpty()){
+			Log.d("context",context+"");
+			if(LibrAccount==null){
 				content1="用户未登录图书馆模块";
+				Log.e("Nologin","1111");
 			}else{
 			NameValuePair pair1=new BasicNameValuePair("username",LibrAccount.getUsername());
 			list.add(pair1);
@@ -71,7 +73,6 @@ public class LibraryContentGrabber implements MainContentInfoGrabber{
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
 			
 			LibraryUrl url=new LibraryUrl();
-			
 			HttpPost post=new HttpPost(url.getLIBRARY_MINE_BOOKS());
 			post.setEntity(entity);
 			
@@ -82,6 +83,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber{
 			}catch(Exception ex){
 				Log.d("Networking",ex.getMessage());
 				if(!ex.getMessage().isEmpty()){
+					
 					content1="网络异常";
 				}
 			}
@@ -98,7 +100,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber{
 			if(jsonarray.isNull(0)){
 				content1="还没有借书";
 			}else{
-				content1="最近需要归还"+jsonarray.getJSONObject(0).getString("libr_remand_date").toString();
+				content1="最近需要归还日期："+jsonarray.getJSONObject(0).getString("due_date").toString();
 			}
 			
 	        String[] BookName=new String[jsonarray.length()];
@@ -111,11 +113,11 @@ public class LibraryContentGrabber implements MainContentInfoGrabber{
 		}catch(Exception ex){
 			Log.d("LibraryMineRemandThread:",ex.getMessage());
 		}
-		
+		Log.e("content",content1);
 		MainContentGridItemObj item = new MainContentGridItemObj();
 		item.setContent1(content1);
 		
-		item.setContent2("不会有超期");
+		item.setContent2("记得还书啦。。");
 		return item;
 	}
 	
