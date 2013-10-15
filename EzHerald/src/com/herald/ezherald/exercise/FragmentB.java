@@ -71,7 +71,7 @@ public class FragmentB extends Fragment {
 			if (runTimesInfo.isSet()) {
 				show();
 			} else {
-				update();
+				//update();
 				show();
 			}
 
