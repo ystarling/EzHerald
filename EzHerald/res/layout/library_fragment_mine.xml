@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <!--  
     <ProgressBar
      android:id="@+id/libr_circleMineProgressBar"
      style="?android:attr/progressBarStyleLarge"
@@ -12,7 +13,7 @@
      android:layout_gravity="center"  
      android:visibility="gone" 
     ></ProgressBar>
-    
+    -->
     <ListView 
 	    android:id="@+id/libr_mine_list"
 	    android:layout_width="match_parent"
