@@ -25,178 +25,190 @@ import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.mainframe.MainContentGridItemObj;
 import com.herald.ezherald.mainframe.MainContentInfoGrabber;
 
-public class LibraryContentGrabber implements MainContentInfoGrabber{
-	
-	public String content1="";
+public class LibraryContentGrabber implements MainContentInfoGrabber {
+
+	public String content1 = "";
 	public String content2;
-	Context context=null;
+	Context context = null;
 	private JSONArray jsonarray;
-	public LibraryContentGrabber(Context cn){
-		this.context=cn;
+
+	public LibraryContentGrabber(Context cn) {
+		this.context = cn;
 	}
+
 	@Override
 	public MainContentGridItemObj GrabInformationObject() {
 		// TODO Auto-generated method stub
 		return provide();
 	}
 
-	public MainContentGridItemObj provide()
-	{
-		try{
-			HttpResponse response=null;
-			try{
-			DefaultHttpClient client=new DefaultHttpClient();
-			List<NameValuePair> list=new ArrayList<NameValuePair>();
-			
+	public MainContentGridItemObj provide() {
+		try {
+			HttpResponse response = null;
 			UserAccount LibrAccount = Authenticate.getLibUser(context);
-			Log.d("context",context+"");
-			if(LibrAccount==null){
-				content1="用户未登录图书馆模块";
-				Log.e("Nologin","1111");
-			}else{
-			NameValuePair pair1=new BasicNameValuePair("username",LibrAccount.getUsername());
-			list.add(pair1);
-			NameValuePair pair2=new BasicNameValuePair("password",LibrAccount.getPassword());
-			list.add(pair2);	
-			
-			//NameValuePair pair1=new BasicNameValuePair("username","71111229");
-			//list.add(pair1);
-			//NameValuePair pair2=new BasicNameValuePair("password","213113709");
-			//list.add(pair2);
-			
-			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
-			
-			
-			// 设置网络超时参数
-			HttpParams httpParams = client.getParams();
-			HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
-			HttpConnectionParams.setSoTimeout(httpParams, 5000);
-			
-			LibraryUrl url=new LibraryUrl();
-			HttpPost post=new HttpPost(url.getLIBRARY_MINE_BOOKS());
-			post.setEntity(entity);
-			
-			response=client.execute(post);
-			
-			}
-			
-			}catch(Exception ex){
-				Log.d("Networking",ex.getMessage());
-				if(!ex.getMessage().isEmpty()){
-					
-					content1="网络异常";
+			if (LibrAccount == null) {
+				content1 = "用户未登录图书馆模块";
+				Log.e("Nologin", "1111");
+			} else {
+				try {
+					DefaultHttpClient client = new DefaultHttpClient();
+					List<NameValuePair> list = new ArrayList<NameValuePair>();
+					Log.d("context", context + "");
+
+					NameValuePair pair1 = new BasicNameValuePair("username",
+							LibrAccount.getUsername());
+					list.add(pair1);
+					NameValuePair pair2 = new BasicNameValuePair("password",
+							LibrAccount.getPassword());
+					list.add(pair2);
+
+					// NameValuePair pair1=new
+					// BasicNameValuePair("username","71111229");
+					// list.add(pair1);
+					// NameValuePair pair2=new
+					// BasicNameValuePair("password","213113709");
+					// list.add(pair2);
+
+					UrlEncodedFormEntity entity = new UrlEncodedFormEntity(
+							list, "UTF-8");
+
+					// 设置网络超时参数
+					HttpParams httpParams = client.getParams();
+					HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
+					HttpConnectionParams.setSoTimeout(httpParams, 5000);
+
+					LibraryUrl url = new LibraryUrl();
+					HttpPost post = new HttpPost(url.getLIBRARY_MINE_BOOKS());
+					post.setEntity(entity);
+
+					response = client.execute(post);
+
+					InputStream isr = response.getEntity().getContent();
+					BufferedReader br = new BufferedReader(
+							new InputStreamReader(isr, "UTF-8"));
+
+					String line = null;
+					StringBuffer sb = new StringBuffer();
+					while ((line = br.readLine()) != null) {
+						sb.append(line);
+					}
+
+					jsonarray = new JSONArray(sb.toString());
+					if (jsonarray.isNull(0)) {
+						content1 = "还没有借书";
+					} else {
+						content1 = "最近需要归还日期："
+								+ jsonarray.getJSONObject(0)
+										.getString("due_date").toString();
+					}
+
+					// }
+
+				} catch (Exception ex) {
+					Log.d("Networking", ex.getMessage());
+					if (!ex.getMessage().isEmpty()) {
+
+						content1 = "网络异常";
+					}
 				}
 			}
-			InputStream isr=response.getEntity().getContent();
-			BufferedReader br=new BufferedReader(new InputStreamReader(isr,"UTF-8"));
-			
-			String line=null;
-			StringBuffer sb=new StringBuffer();
-			while((line=br.readLine())!=null){
-				sb.append(line);
-			}
-	       
-			jsonarray=new JSONArray(sb.toString());
-			if(jsonarray.isNull(0)){
-				content1="还没有借书";
-			}else{
-				content1="最近需要归还日期："+jsonarray.getJSONObject(0).getString("due_date").toString();
-			}
-			
-	        String[] BookName=new String[jsonarray.length()];
-	        for(int i=0;i<jsonarray.length();i++){
-			JSONObject json=jsonarray.getJSONObject(i);
-			BookName[i] = json.getString("title");
-		 	Log.d("书名:",""+BookName[i]);
-	        }
-	        
-		}catch(Exception ex){
-			Log.d("LibraryMineRemandThread:",ex.getMessage());
+
+			// String[] BookName = new String[jsonarray.length()];
+			// for (int i = 0; i < jsonarray.length(); i++) {
+			// JSONObject json = jsonarray.getJSONObject(i);
+			// BookName[i] = json.getString("title");
+			// Log.d("书名:", "" + BookName[i]);
+			// }
+
+		} catch (Exception ex) {
+			// Log.d("LibraryMineRemandThread:", ex.getMessage());
 		}
-		Log.e("content",content1);
+		Log.e("content", content1);
 		MainContentGridItemObj item = new MainContentGridItemObj();
 		item.setContent1(content1);
-		
+
 		item.setContent2("记得还书啦。。");
 		return item;
 	}
-	
-//	public class LibraryMineRemandThread extends Thread{
-//		private Context context;
-//		private JSONArray jsonarray;
-//		
-//		public LibraryMineRemandThread(Context cn){
-//			this.context=cn;
-//		}
-//		@Override
-//		public void run() {
-//			// TODO 
-//			try{
-//				HttpResponse response=null;
-//				try{
-//				DefaultHttpClient client=new DefaultHttpClient();
-//				List<NameValuePair> list=new ArrayList<NameValuePair>();
-//				
-//				UserAccount LibrAccount = Authenticate.getLibUser(context);
-//				NameValuePair pair1=new BasicNameValuePair("username",LibrAccount.getUsername());
-//				list.add(pair1);
-//				NameValuePair pair2=new BasicNameValuePair("password",LibrAccount.getPassword());
-//				list.add(pair2);	
-//				
-//				//NameValuePair pair1=new BasicNameValuePair("username","71111229");
-//				//list.add(pair1);
-//				//NameValuePair pair2=new BasicNameValuePair("password","213113709");
-//				//list.add(pair2);
-//				
-//				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
-//				
-//				
-//				// 设置网络超时参数
-//				HttpParams httpParams = client.getParams();
-//				HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
-//				HttpConnectionParams.setSoTimeout(httpParams, 5000);
-//				
-//				LibraryUrl url=new LibraryUrl();
-//				
-//				HttpPost post=new HttpPost(url.getLIBRARY_MINE_BOOKS());
-//				post.setEntity(entity);
-//				
-//				response=client.execute(post);
-//				
-//				}catch(Exception ex){
-//					Log.d("Networking",ex.getMessage());
-//					if(!ex.getMessage().isEmpty()){
-//						content1="网络异常";
-//					}
-//				}
-//				InputStream isr=response.getEntity().getContent();
-//				BufferedReader br=new BufferedReader(new InputStreamReader(isr,"UTF-8"));
-//				
-//				String line=null;
-//				StringBuffer sb=new StringBuffer();
-//				while((line=br.readLine())!=null){
-//					sb.append(line);
-//				}
-//		       
-//				jsonarray=new JSONArray(sb.toString());
-//				if(jsonarray.isNull(0)){
-//					content1="还没有借书";
-//				}else{
-//					content1="最近需要归还"+jsonarray.getJSONObject(0).getString("libr_remand_date").toString();
-//				}
-//				
-//		        String[] BookName=new String[jsonarray.length()];
-//		        for(int i=0;i<jsonarray.length();i++){
-//				JSONObject json=jsonarray.getJSONObject(i);
-//				BookName[i] = json.getString("title");
-//			 	Log.d("书名:",""+BookName[i]);
-//		        }
-//		        
-//			}catch(Exception ex){
-//				Log.d("LibraryMineRemandThread:",ex.getMessage());
-//			}
-//			
-//		}
-//		
-//	}
+
+	// public class LibraryMineRemandThread extends Thread{
+	// private Context context;
+	// private JSONArray jsonarray;
+	//
+	// public LibraryMineRemandThread(Context cn){
+	// this.context=cn;
+	// }
+	// @Override
+	// public void run() {
+	// // TODO
+	// try{
+	// HttpResponse response=null;
+	// try{
+	// DefaultHttpClient client=new DefaultHttpClient();
+	// List<NameValuePair> list=new ArrayList<NameValuePair>();
+	//
+	// UserAccount LibrAccount = Authenticate.getLibUser(context);
+	// NameValuePair pair1=new
+	// BasicNameValuePair("username",LibrAccount.getUsername());
+	// list.add(pair1);
+	// NameValuePair pair2=new
+	// BasicNameValuePair("password",LibrAccount.getPassword());
+	// list.add(pair2);
+	//
+	// //NameValuePair pair1=new BasicNameValuePair("username","71111229");
+	// //list.add(pair1);
+	// //NameValuePair pair2=new BasicNameValuePair("password","213113709");
+	// //list.add(pair2);
+	//
+	// UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
+	//
+	//
+	// // 设置网络超时参数
+	// HttpParams httpParams = client.getParams();
+	// HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
+	// HttpConnectionParams.setSoTimeout(httpParams, 5000);
+	//
+	// LibraryUrl url=new LibraryUrl();
+	//
+	// HttpPost post=new HttpPost(url.getLIBRARY_MINE_BOOKS());
+	// post.setEntity(entity);
+	//
+	// response=client.execute(post);
+	//
+	// }catch(Exception ex){
+	// Log.d("Networking",ex.getMessage());
+	// if(!ex.getMessage().isEmpty()){
+	// content1="网络异常";
+	// }
+	// }
+	// InputStream isr=response.getEntity().getContent();
+	// BufferedReader br=new BufferedReader(new InputStreamReader(isr,"UTF-8"));
+	//
+	// String line=null;
+	// StringBuffer sb=new StringBuffer();
+	// while((line=br.readLine())!=null){
+	// sb.append(line);
+	// }
+	//
+	// jsonarray=new JSONArray(sb.toString());
+	// if(jsonarray.isNull(0)){
+	// content1="还没有借书";
+	// }else{
+	// content1="最近需要归还"+jsonarray.getJSONObject(0).getString("libr_remand_date").toString();
+	// }
+	//
+	// String[] BookName=new String[jsonarray.length()];
+	// for(int i=0;i<jsonarray.length();i++){
+	// JSONObject json=jsonarray.getJSONObject(i);
+	// BookName[i] = json.getString("title");
+	// Log.d("书名:",""+BookName[i]);
+	// }
+	//
+	// }catch(Exception ex){
+	// Log.d("LibraryMineRemandThread:",ex.getMessage());
+	// }
+	//
+	// }
+	//
+	// }
 }
