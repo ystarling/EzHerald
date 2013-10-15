@@ -1,10 +1,19 @@
 package com.herald.ezherald.exercise;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -13,7 +22,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -28,7 +36,11 @@ import android.util.Log;
  */
 public class RenrenInfo{
 	public static final boolean DEBUG = false;//TODO　just for debug,must be removed before release 
-	private static final String url = "https://api.renren.com/v2/status/list?access_token=241511%7c6.e9d163eb32a823d37609a396abe20618.2592000.1381683600-365328826&ownerId=601258593"; // ‘|’必须写成%7c
+	private static final String URI = "/v2/feed/list?feedType=UPDATE_STATUS&userId=601258593"; 
+	private static final String HOST = "api.renren.com";
+	private static final String MAC_KEY = "36dbee8f9b4845fb8e8e3046ff6cf10a";
+	private static final String MAC_TOKEN = "241511|2.eZgOrWm5Cr8XcwAIZJKYcxrY7Gp2fUGd.0.1381732793425";
+	private static final String URL = "http://api.renren.com/v2/feed/list?feedType=UPDATE_STATUS&userId=601258593";
 	private final int SUCCESS = 1,FAILED = 0;
 	private String info;
 	private String date;
@@ -67,28 +79,6 @@ public class RenrenInfo{
 	}
 	protected void onSuccess() {
 		// TODO Auto-generated method stub
-		//TODO 显示的bug，进度条
-		/*final String[] target= {"早操播报","跑操早播报","跑操信息"};
-		
-		Document document = Jsoup.parse(message);
-		Elements feeds = document.getElementsByClass("list");
-		Elements lists  = feeds.get(0).children();
-		for(int i=0;i<lists.size();i++){
-			Element feed = lists.get(i);
-			String data = feed.text();
-			for (int j=0;j<target.length;j++){
-				if(data.indexOf(target[j])!=-1){
-					int end = data.lastIndexOf("回复");
-					setInfo(data.substring(0, end-1));//字符串之后的都是无用的
-					DateFormat fmt = SimpleDateFormat.getDateTimeInstance();
-					setDate(fmt.format(new Date()));//更新时间
-					save();
-					father.onSuccess();
-					return;
-				}
-			}
-		}
-		*/
 		try {
 			//String today = android.text.format.DateFormat.format("yyyy-m-d",new Date()).toString();
 			//Date  date = new Date();
@@ -147,17 +137,47 @@ public class RenrenInfo{
 					try {
 						Log.w("update","updating renren");
 						HttpClient client = new DefaultHttpClient();
-						HttpGet get = new HttpGet(url);
+						HttpGet get = new HttpGet(URL);
+						Log.v("URL",URL);
+						
+						long timesnap = System.currentTimeMillis()/1000;
+						String randStr = getRandString(8);
+						
+						StringBuffer signatureBaseStringBuffer = new StringBuffer();
+						signatureBaseStringBuffer.append( String.valueOf ( timesnap ) ).append('\n');
+						signatureBaseStringBuffer.append(randStr).append('\n');
+						signatureBaseStringBuffer.append("GET\n");
+						signatureBaseStringBuffer.append(URI).append('\n');
+						signatureBaseStringBuffer.append(HOST).append('\n');
+						signatureBaseStringBuffer.append("80\n");
+						signatureBaseStringBuffer.append("\n");
+						
+						String macString = sign(MAC_KEY, signatureBaseStringBuffer.toString());
+						Log.v("signature",signatureBaseStringBuffer.toString());
+						Log.v("macstr",macString);
+						
+						StringBuffer authenBuffer = new StringBuffer();
+						authenBuffer.append("MAC ");
+						authenBuffer.append("id=\"").append(MAC_TOKEN).append("\",");
+						authenBuffer.append("ts=\"").append(String.valueOf ( timesnap )).append("\",");
+						authenBuffer.append("nonce=\"").append(randStr).append("\",");
+						authenBuffer.append("mac=\"").append(macString).append("\"");
+						
+						Log.v("head",authenBuffer.toString());
+						
+						get.addHeader("Authorization", authenBuffer.toString());
+						
+
 						HttpResponse response = client.execute(get);
 						if (response.getStatusLine().getStatusCode() !=  200) {
-							throw new Exception();
+							throw new Exception("state is not 200");
 						}
 						String message = EntityUtils.toString(response.getEntity());
 						Message msg = handler.obtainMessage(SUCCESS,
 								message);
 						handler.sendMessage(msg);
 					} catch (Exception e) {
-						// TODO: handle exception
+						
 						e.printStackTrace();
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
@@ -166,6 +186,7 @@ public class RenrenInfo{
 		}
 		
 	}
+	
 	/**
 	 * 保存数据到sharedPreference;
 	 */
@@ -184,6 +205,37 @@ public class RenrenInfo{
 			return false;
 		return true;
 	}
+	
+	private String getRandString(int len){
+		String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		StringBuffer sb = new StringBuffer();
+		Random rand = new Random();
+		int id;
+		for(int i=0;i<len;i++){
+			id = rand.nextInt(base.length());
+			sb.append(base.charAt(id));
+		}
+		return sb.toString();
+	}
+	
+	private String sign(String key, String signatureBaseString) {
+        try {
+        	SecretKeySpec signingKey = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA1");
+            Mac mac = Mac.getInstance("HmacSHA1");
+            mac.init(signingKey);
+            byte[] text = signatureBaseString.getBytes("UTF-8");
+            byte[] signatureBytes = mac.doFinal(text);
+            signatureBytes = Base64.encodeBase64(signatureBytes);
+            String signature = new String(signatureBytes, "UTF-8");
+            return signature;
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        } catch (InvalidKeyException e) {
+            throw new IllegalStateException(e);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 	
 	public String getInfo() {
 		return info;
