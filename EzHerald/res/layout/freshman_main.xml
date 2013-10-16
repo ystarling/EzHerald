@@ -9,10 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:background="#91D100"
+        android:background="#199900"
         android:gravity="center"
-        android:text="学  习"
-        android:textAppearance="@style/Theme.Heraldstyle"
+        android:text="学    习"
         android:textSize="30sp" />
 
     <TextView
@@ -22,7 +21,7 @@
         android:layout_weight="0.25"
         android:background="#FF76BC"
         android:gravity="center"
-        android:text="生  活"
+        android:text="生    活"
         android:textSize="30sp" />
 
     <TextView
@@ -32,7 +31,7 @@
         android:layout_weight="0.25"
         android:background="#56C5FF"
         android:gravity="center"
-        android:text="玩  乐"
+        android:text="玩    乐"
         android:textSize="30sp" />
 
     <TextView
@@ -42,7 +41,7 @@
         android:layout_weight="0.24"
         android:background="#F3B200"
         android:gravity="center"
-        android:text="问  答"
+        android:text="问    答"
         android:textSize="30sp" />
 
 </LinearLayout>
