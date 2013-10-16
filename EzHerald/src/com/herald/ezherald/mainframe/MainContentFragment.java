@@ -259,8 +259,8 @@ public class MainContentFragment extends SherlockFragment {
 			AdapterView.OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View v, int id,
-				long position) {
+		public void onItemClick(AdapterView<?> arg0, View v, int position,
+				long id) {
 			// TODO Auto-generated method stub
 			Intent i = new Intent();
 			switch ((int) id) {

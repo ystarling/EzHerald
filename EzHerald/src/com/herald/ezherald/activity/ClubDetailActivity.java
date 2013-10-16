@@ -46,7 +46,7 @@ public class ClubDetailActivity extends SlidingFragmentActivity implements Actio
 		actionBar.setDisplayShowTitleEnabled(false);
 		
 		SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(this,
-				R.array.acti_club_detail_action_spinner, android.R.layout.simple_spinner_dropdown_item);
+				R.array.acti_club_detail_action_spinner, R.layout.academic_spinner_textitem);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setListNavigationCallbacks(spinnerAdapter, this);
 		
