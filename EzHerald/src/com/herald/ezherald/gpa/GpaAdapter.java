@@ -107,7 +107,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	public View getGroupView(int groupPosition, boolean isExpanded, View coverView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		final int PADDING_LEFT = 62;
-		final int TEXT_SIZE=28;
+		final int TEXT_SIZE = 20;
 		TextView txt = new TextView(context);
 		txt.setTextSize(TEXT_SIZE);
 		txt.setText(semesters.get(groupPosition)+"Ñ§ÆÚ");
@@ -221,7 +221,8 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		gpaInfo.selectAll();
 		for(Record r:gpaInfo.getRecords()){
-			r.setSelected(true);
+			if(r.isSelected() == false)
+				r.setSelected(true);
 		}
 		notifyDataSetChanged();
 	}

@@ -15,7 +15,7 @@ public class GpaGrabber implements MainContentInfoGrabber{
 		final float eps = (float) 1e-8;
 		MainContentGridItemObj item = new MainContentGridItemObj();
 		float gpa = gpaInfo.calcAverage();
-		if(gpa < eps || Float.isNaN(gpa)){
+		if( Float.isNaN(gpa) || gpa < eps ){
 			item.setContent1("还没有成绩");
 			item.setContent2("点击进入更新");
 		} else {

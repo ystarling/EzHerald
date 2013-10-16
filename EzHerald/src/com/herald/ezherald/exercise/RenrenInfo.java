@@ -181,37 +181,6 @@ public class RenrenInfo{
 		return true;
 	}
 	
-	private String getRandString(int len){
-		String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		StringBuffer sb = new StringBuffer();
-		Random rand = new Random();
-		int id;
-		for(int i=0;i<len;i++){
-			id = rand.nextInt(base.length());
-			sb.append(base.charAt(id));
-		}
-		return sb.toString();
-	}
-	
-	private String sign(String key, String signatureBaseString) {
-        try {
-        	SecretKeySpec signingKey = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA1");
-            Mac mac = Mac.getInstance("HmacSHA1");
-            mac.init(signingKey);
-            byte[] text = signatureBaseString.getBytes("UTF-8");
-            byte[] signatureBytes = mac.doFinal(text);
-            signatureBytes = Base64.encode(signatureBytes,Base64.DEFAULT);
-            String signature = new String(signatureBytes, "UTF-8");
-            return signature;
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException(e);
-        } catch (InvalidKeyException e) {
-            throw new IllegalStateException(e);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-	
 	public String getInfo() {
 		return info;
 	}
