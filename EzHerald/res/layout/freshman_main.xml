@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:background="#FF76BC"
+        android:background="#3c13af"
         android:gravity="center"
         android:text="生    活"
         android:textSize="30sp" />
