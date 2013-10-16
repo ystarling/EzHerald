@@ -210,8 +210,11 @@ public class GpaInfo {
 		// TODO Auto-generated method stub
 		gpaDbModel.open();
 		for(Record r:records){
-			r.setSelected(true);//更新显示的数据
-			gpaDbModel.changeSelection(r.getName(), true);//更新数据库
+			if(r.isSelected() == false){
+				r.setSelected(true);//更新显示的数据
+				gpaDbModel.changeSelection(r.getName(), true);//更新数据库
+			}
+			
 		}
 		gpaDbModel.close();
 	}

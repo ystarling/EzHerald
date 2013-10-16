@@ -19,7 +19,7 @@ public class ExerciseGrabber implements MainContentInfoGrabber {
 		int remain = runTimes.getRemainDays();
 		MainContentGridItemObj item = new MainContentGridItemObj();
 		item.setContent1(String.format("已打卡%d次", times));
-		item.setContent2(String.format("剩余%d天上课", remain));
+		item.setContent2(String.format("剩余%d天上课", remain>=0?remain:0));
 		return item;
 	}
 	

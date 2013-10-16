@@ -20,7 +20,7 @@ public class GpaGrabber implements MainContentInfoGrabber{
 			item.setContent2("点击进入更新");
 		} else {
 			item.setContent1("所选课程绩点");
-			item.setContent2(Float.toString(gpa));
+			item.setContent2(String.format("%.2f", gpa));
 		}
 		return item;
 	}
