@@ -1,19 +1,14 @@
 package com.herald.ezherald.mainframe;
 
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.net.ssl.HandshakeCompletedListener;
-
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,12 +16,10 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,9 +45,7 @@ import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
-import com.herald.ezherald.settingframe.AppUpdateActivity;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
-
 /**
  * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 上传更新:
  * http://121.248.63.105/EzHerald/updateupload/ 图片json显示最新五条:
@@ -75,7 +66,8 @@ import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
  * 主界面呈现内容的Fragement 其他各模块可参照本Fragement的定义呈现内容
  */
 public class MainContentFragment extends SherlockFragment {
-	private GridView mGridView; // GridView
+    private GridView mGridView; // GridView
+	
 	private ViewFlow mViewFlow; // ViewFlow
 	private CircleFlowIndicator mCircIndic;
 
@@ -151,10 +143,16 @@ public class MainContentFragment extends SherlockFragment {
 
 		mGridView = (GridView) getActivity().findViewById(
 				R.id.main_frame_content_gridView);
+	
 		mGridItems = getGridItems();
+		
+		int margin = 5;
+		mGridView.setPadding(margin, 0, margin, 0); // have the margin on the sides as well
+
 		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
 				mGridItems));
 		mGridView.setOnItemClickListener(new MyOnItemClickListener());
+		
 
 		mViewFlow = (ViewFlow) getActivity().findViewById(
 				R.id.main_frame_viewflow);
@@ -221,7 +219,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * 得到相应模块的GridItemObj，加入mContentInfoObjs 如果目前没有实现这个接口，那么现在塞一个null的进去
+	 * 开线程更新模块名称 如果目前没有实现这个接口，那么现在塞一个null的进去
 	 * 
 	 * @param moduleName
 	 *            模块英文名称
@@ -232,10 +230,8 @@ public class MainContentFragment extends SherlockFragment {
 		try {
 			if (moduleName.equals("curriculum")) {
 				grabber = new CurriDataGrabber(getActivity());
-				// obj = grabber.GrabInformationObject();
 			} else if (moduleName.equals("academic")) {
 				grabber = new AcademicDataGrabber();
-				// obj = grabber.GrabInformationObject();
 			} else if (moduleName.equals("freshman")) {
 				grabber = new FreshmanGrabber();
 			} else if (moduleName.equals("gpa")) {
@@ -263,10 +259,9 @@ public class MainContentFragment extends SherlockFragment {
 			AdapterView.OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View v, int position,
-				long id) {
-			// Toast.makeText(getActivity(), "pos=" + position + "\nid=" + id,
-			// Toast.LENGTH_SHORT).show();
+		public void onItemClick(AdapterView<?> arg0, View v, int id,
+				long position) {
+			// TODO Auto-generated method stub
 			Intent i = new Intent();
 			switch ((int) id) {
 			case 0:
@@ -305,6 +300,7 @@ public class MainContentFragment extends SherlockFragment {
 					getActivity().finish();
 			}
 		}
+
 
 	}
 
