@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:background="#199900"
+        android:background="#A9A9A9"
         android:gravity="center"
         android:text="学    习"
         android:textSize="30sp" />
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:background="#3c13af"
+        android:background="#35c0cd"
         android:gravity="center"
         android:text="生    活"
         android:textSize="30sp" />
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:background="#56C5FF"
+        android:background="#A9A9A9"
         android:gravity="center"
         android:text="玩    乐"
         android:textSize="30sp" />
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.24"
-        android:background="#F3B200"
+        android:background="#35c0cd"
         android:gravity="center"
         android:text="问    答"
         android:textSize="30sp" />
