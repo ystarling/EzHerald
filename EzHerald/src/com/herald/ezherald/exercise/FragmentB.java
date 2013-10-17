@@ -63,8 +63,8 @@ public class FragmentB extends Fragment {
 
 				@Override
 				public boolean onLongClick(View arg0) {
-					edtAdjust.setVisibility(View.VISIBLE);
-					btnAdjust.setVisibility(View.VISIBLE);
+					//edtAdjust.setVisibility(View.VISIBLE);
+					//btnAdjust.setVisibility(View.VISIBLE);
 					return false;
 				}
 
