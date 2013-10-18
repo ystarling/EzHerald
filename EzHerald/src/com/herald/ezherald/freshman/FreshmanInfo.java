@@ -7,6 +7,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,9 +39,10 @@ public class FreshmanInfo {
 		this.activity = activity;
 		shared = activity.getSharedPreferences(SharedPreferenceName,0);
 		jsonStr = shared.getString("json", null);
-		if(jsonStr != null){
-			dealJson();
+		if(jsonStr == null){
+			jsonStr = testJson;
 		}
+		dealJson();
 		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
@@ -73,7 +75,6 @@ public class FreshmanInfo {
 			}
 		};
 		update();
-		
 	}
 	private void addTitle(JSONArray json,int type){
 		for(int i=0;i<json.length();++i){
@@ -89,7 +90,10 @@ public class FreshmanInfo {
 	private void addContent(JSONArray json,int type){
 		for(int i=0;i<json.length();++i){
 			try {
-				content.get(type).add(json.getJSONObject(i).getString("title"));
+				if(type != FAQ)
+					content.get(type).add(json.getJSONObject(i).getString("content"));
+				else
+					content.get(type).add(json.getJSONObject(i).getString("best_reply"));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -139,14 +143,14 @@ public class FreshmanInfo {
 		this.content = content;
 	}
 	public void update(){
-		if(DEBUG){
-			jsonStr = testJson;
+		//if(DEBUG){
+			//jsonStr = testJson;
 			//Message msg = handler.obtainMessage(SUCCESS, null);
         	//handler.sendMessage(msg);
-			dealJson();
-			save();
-		return;
-		}
+			//dealJson();
+			//save();
+		//return;
+		//}
 		
 		
 		new Thread(){
@@ -159,7 +163,7 @@ public class FreshmanInfo {
 					if(response.getStatusLine().getStatusCode() != 200){
 						throw new Exception("can't link to herald");
 					}
-					String result = response.getEntity().toString();
+					String result = EntityUtils.toString( response.getEntity() );
 					Message msg = handler.obtainMessage(SUCCESS, result);
 		        	handler.sendMessage(msg);
 				} catch (Exception e) {

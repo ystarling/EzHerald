@@ -86,7 +86,7 @@ public class AppUpdateActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_update_main);
 		running = false;
-		needUpdate = false;
+	    needUpdate = false;
 		checkUpdate();
 		int x=0;
 		while(running){
