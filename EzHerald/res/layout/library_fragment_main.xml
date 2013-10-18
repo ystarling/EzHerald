@@ -18,12 +18,13 @@
   		    android:layout_height="match_parent"
   		    android:layout_weight="6"
   		    android:hint="请输入书名"
-  		    android:imeOptions="actionSearch"
+  		    
   		    android:singleLine="true" 
   		    android:background="@drawable/libr_search_frame">
 
   		</EditText>
    	
+  		<!--android:imeOptions="actionSearch"-->
   	<ImageView 
       android:id="@+id/libr_search_button"
       android:layout_width="0sp"

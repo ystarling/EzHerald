@@ -40,6 +40,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -175,6 +176,11 @@ public class LibraryFragmentMineThread extends Thread{
 					toast1.show();
 					//pro1.setVisibility(View.GONE);
 					dialog1.cancel();
+					ImageView image=(ImageView)activity.findViewById(R.id.libr_mine_NoBook2);
+					image.setImageResource(R.drawable.libr_mine_nobook);
+					TextView text=(TextView) activity.findViewById(R.id.libr_mine_NoBook);
+					text.setText("目前没有借书...");
+					
 				}
 			super.handleMessage(msg);
 		}
