@@ -6,18 +6,24 @@ package com.herald.ezherald.mainframe;
  *
  */
 public class MainContentGridItemObj {
-	private String content1; //内容1，字号较大
-	private String content2; //内容2，字号较小
+	private String content1 = null; //内容1，字号较大
+	private String content2 = null; //内容2，字号较小
 	
 	
 	public String getContent1() {
-		return content1;
+		if(content1 != null)
+			return content1;
+		else
+			return "";
 	}
 	public void setContent1(String content1) {
 		this.content1 = content1;
 	}
 	public String getContent2() {
-		return content2;
+		if(content2 != null)
+			return content2;
+		else
+			return "";
 	}
 	public void setContent2(String content2) {
 		this.content2 = content2;

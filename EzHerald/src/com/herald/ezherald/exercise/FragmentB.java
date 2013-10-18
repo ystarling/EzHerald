@@ -41,28 +41,30 @@ public class FragmentB extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		edtAdjust = (EditText) getActivity().findViewById(
+				R.id.edtTxt_adjust);
+		btnAdjust = (Button) getActivity().findViewById(R.id.btn_adjust);
+		edtAdjust.setVisibility(View.INVISIBLE);
+		btnAdjust.setVisibility(View.INVISIBLE);
 		user = Authenticate.getTyxUser(getActivity());
 		if (null == user) {
 			Intent login = new Intent();
 			login.setClass(getActivity(), TyxAccountActivity.class);
 			startActivity(login);
 		} else {
-			edtAdjust = (EditText) getActivity().findViewById(
-					R.id.edtTxt_adjust);
-			btnAdjust = (Button) getActivity().findViewById(R.id.btn_adjust);
+
 			btnUpdate = (Button) getActivity().findViewById(R.id.btn_update);
 			txtTimes = (TextView) getActivity().findViewById(R.id.txt_Times);
 			txtUpdateTime = (TextView) getActivity().findViewById(
 					R.id.txt_update_time);
 			runTimesInfo = new RunTimes(getActivity(),this);
-			edtAdjust.setVisibility(View.INVISIBLE);
-			btnAdjust.setVisibility(View.INVISIBLE);
+			
 			txtTimes.setOnLongClickListener(new OnLongClickListener() {
 
 				@Override
 				public boolean onLongClick(View arg0) {
-					edtAdjust.setVisibility(View.VISIBLE);
-					btnAdjust.setVisibility(View.VISIBLE);
+					//edtAdjust.setVisibility(View.VISIBLE);
+					//btnAdjust.setVisibility(View.VISIBLE);
 					return false;
 				}
 
@@ -71,7 +73,7 @@ public class FragmentB extends Fragment {
 			if (runTimesInfo.isSet()) {
 				show();
 			} else {
-				update();
+				//update();
 				show();
 			}
 

@@ -78,7 +78,7 @@
 	    android:layout_weight="1"
 	    android:gravity="center"
 	    >
-	<!--  
+	
 	<Button
 	    android:id="@+id/libr_mine_renew_btn"
 	    android:layout_width="wrap_content"
@@ -86,6 +86,5 @@
 	    android:textColor="#2932E1"
 	    />
 	    
-	    -->
 	</LinearLayout>
 </LinearLayout>

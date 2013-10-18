@@ -40,7 +40,7 @@ public class CircleChat extends View {
 		rect = new RectF(0,0,2*radius,2*radius);
 		sum = 0;
 		//int colors[] = {Color.LTGRAY,Color.parseColor("#FF9900"),Color.CYAN,Color.parseColor("#BDFF1B"),Color.parseColor("#B70094")};
-		int colors[] = {Color.rgb(79, 129, 188),Color.rgb(69, 115, 167),Color.rgb(56, 97, 143),Color.rgb(79, 129, 188),Color.rgb(69, 115, 167),};
+		int colors[] = {Color.rgb(188, 200, 224),Color.rgb(147, 169, 208),Color.rgb(79, 129, 188),Color.rgb(69, 115, 167),Color.rgb(56, 97, 143)};
 		for(Record r:records){
 			sum += r.getCredit();
 			if(r.getPoint()>0){

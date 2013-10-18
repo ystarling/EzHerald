@@ -1,9 +1,17 @@
 package com.herald.ezherald.exercise;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -13,12 +21,13 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceActivity.Header;
+import android.util.Base64;
 import android.util.Log;
 
 
@@ -28,7 +37,7 @@ import android.util.Log;
  */
 public class RenrenInfo{
 	public static final boolean DEBUG = false;//TODO　just for debug,must be removed before release 
-	private static final String url = "https://api.renren.com/v2/status/list?access_token=241511%7c6.e9d163eb32a823d37609a396abe20618.2592000.1381683600-365328826&ownerId=601258593"; // ‘|’必须写成%7c
+	private final String URL = "https://api.renren.com/v2/status/list?access_token=";
 	private final int SUCCESS = 1,FAILED = 0;
 	private String info;
 	private String date;
@@ -67,28 +76,6 @@ public class RenrenInfo{
 	}
 	protected void onSuccess() {
 		// TODO Auto-generated method stub
-		//TODO 显示的bug，进度条
-		/*final String[] target= {"早操播报","跑操早播报","跑操信息"};
-		
-		Document document = Jsoup.parse(message);
-		Elements feeds = document.getElementsByClass("list");
-		Elements lists  = feeds.get(0).children();
-		for(int i=0;i<lists.size();i++){
-			Element feed = lists.get(i);
-			String data = feed.text();
-			for (int j=0;j<target.length;j++){
-				if(data.indexOf(target[j])!=-1){
-					int end = data.lastIndexOf("回复");
-					setInfo(data.substring(0, end-1));//字符串之后的都是无用的
-					DateFormat fmt = SimpleDateFormat.getDateTimeInstance();
-					setDate(fmt.format(new Date()));//更新时间
-					save();
-					father.onSuccess();
-					return;
-				}
-			}
-		}
-		*/
 		try {
 			//String today = android.text.format.DateFormat.format("yyyy-m-d",new Date()).toString();
 			//Date  date = new Date();
@@ -147,17 +134,25 @@ public class RenrenInfo{
 					try {
 						Log.w("update","updating renren");
 						HttpClient client = new DefaultHttpClient();
-						HttpGet get = new HttpGet(url);
-						HttpResponse response = client.execute(get);
-						if (response.getStatusLine().getStatusCode() !=  200) {
-							throw new Exception();
-						}
+						String refreshurl = "https://graph.renren.com/oauth/token?grant"+URLEncoder.encode("_")+"type=refresh"+URLEncoder.encode("_")+"token&refresh"+URLEncoder.encode("_")+"token="+URLEncoder.encode("241511|0.NvNrQow4rEchFtbdaCUtdyA5dWLgRgDh.365328826.1379088139819")+"&client"+URLEncoder.encode("_")+"id=241511&client"+URLEncoder.encode("_")+"secret=8d970a6e9e3249e9afffd2fdba73f018";
+						HttpGet refresh = new HttpGet(refreshurl);
+						HttpResponse response = client.execute(refresh);
 						String message = EntityUtils.toString(response.getEntity());
+						JSONObject json  = new JSONObject(message);
+						String token = json.getString("access_token");
+						token = URLEncoder.encode(token);
+						HttpGet get = new HttpGet(URL+token+"&ownerId=601258593");
+						response = client.execute(get);
+						message = EntityUtils.toString(response.getEntity());
+						if (response.getStatusLine().getStatusCode() !=  200) {
+							throw new Exception(response.toString());
+						}
+						
 						Message msg = handler.obtainMessage(SUCCESS,
 								message);
 						handler.sendMessage(msg);
 					} catch (Exception e) {
-						// TODO: handle exception
+						
 						e.printStackTrace();
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
@@ -166,6 +161,7 @@ public class RenrenInfo{
 		}
 		
 	}
+	
 	/**
 	 * 保存数据到sharedPreference;
 	 */

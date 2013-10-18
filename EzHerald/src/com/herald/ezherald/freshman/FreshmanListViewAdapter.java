@@ -14,7 +14,7 @@ public class FreshmanListViewAdapter implements ListAdapter {
 
 	public FreshmanInfo data;
 	private int type;
-	
+	/*
 	private String[][] titles = { 
 			{ "选课", "学期", "平均成绩点数(GPA)", "讲座", },
 			{ "一卡通", "运动", "上网", "食堂", "宿舍", "社团", }, 
@@ -44,10 +44,11 @@ public class FreshmanListViewAdapter implements ListAdapter {
 					"敬请期待" 
 			}, 
 	};
-	/*
+	*/
+	
 	private String[][] titles;
 	private String[][] info;
-	*/
+	
 	private Activity activity;
 	private static final float LARGE = 23,SMALL=18; //字号
 	private static final int PADDING = 10;
@@ -56,12 +57,12 @@ public class FreshmanListViewAdapter implements ListAdapter {
 		this.type = type;
 		this.activity = activity;
 		data = new FreshmanInfo(this.activity);
-		/*
+		
 		titles = new String[4][];
 		info = new String[4][];
 		for(int i=0;i<4;i++){
-			titles[i] = new String[128];
-			info[i] = new String[128];
+			titles[i] = new String[data.getTitles().get(i).size()];
+			info[i] = new String[data.getTitles().get(i).size()];
 			for(int j=0;j<data.getTitles().get(i).size();j++){
 				//titles[i][j] = new String();
 				titles[i][j] = data.getTitles().get(i).get(j);
@@ -70,7 +71,7 @@ public class FreshmanListViewAdapter implements ListAdapter {
 			//titles[i] = (String[]) data.getTitles().get(i).toArray();
 			//info[i] = (String[]) data.getContent().get(i).toArray();
 		}
-		*/
+		
 	}
 
 	@Override

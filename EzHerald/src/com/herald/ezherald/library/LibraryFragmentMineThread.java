@@ -26,12 +26,17 @@ import com.herald.ezherald.library.LibraryFragmentThread.MyHandle2;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -43,12 +48,14 @@ import android.widget.Toast;
 public class LibraryFragmentMineThread extends Thread{
 	
 	private ProgressBar pro1;
+	private ProgressDialog dialog1;
 	protected static final int STOP_NOTIFIER = 000;  
 	protected static final int THREADING_NOTIFIER = 111;  
 	 
 	Activity activity=null;
 	Context context;
 	JSONArray jsonarray;
+	public String barcode;
 	private MyHandle myHandler=new MyHandle();//初始化Handler
 	private MyHandle2 myHandler2=new MyHandle2();
 	
@@ -56,15 +63,19 @@ public class LibraryFragmentMineThread extends Thread{
 	public LibraryFragmentMineThread(View view,Activity ac, Context cn){
 		this.activity=ac;
 		this.context=cn;
-		pro1=(ProgressBar) view.findViewById(R.id.libr_circleMineProgressBar);
-		pro1.setIndeterminate(false);
+//		pro1=(ProgressBar) view.findViewById(R.id.libr_circleMineProgressBar);
+//		pro1.setIndeterminate(false);
+		
+		dialog1=new ProgressDialog(context);
+		dialog1.setCanceledOnTouchOutside(false);
+		dialog1.setMessage("加载中...");
 	}
 	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try{
-			ShowMsg2("view");
+			ShowMsg2("BeginDialog");
 			
 			HttpResponse response=null;
 			try{
@@ -149,18 +160,21 @@ public class LibraryFragmentMineThread extends Thread{
 			// TODO Auto-generated method stub
 			String va=(String) msg.obj;
 
-			if(va=="view"){
-				pro1.setVisibility(View.VISIBLE);
+			if(va=="BeginDialog"){
+				//pro1.setVisibility(View.VISIBLE);
+				dialog1.show();
 			}else
 			if(va=="Networking"){
 				Toast toast1=Toast.makeText(activity, "网络连接错误...", Toast.LENGTH_LONG);
 				toast1.show();
-				pro1.setVisibility(View.GONE);
+				//pro1.setVisibility(View.GONE);
+				dialog1.cancel();
 			}else
 				if(va=="ContentNull"){
 					Toast toast1=Toast.makeText(activity, "目前没有借书...", Toast.LENGTH_LONG);
 					toast1.show();
-					pro1.setVisibility(View.GONE);
+					//pro1.setVisibility(View.GONE);
+					dialog1.cancel();
 				}
 			super.handleMessage(msg);
 		}
@@ -173,17 +187,16 @@ public class LibraryFragmentMineThread extends Thread{
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
-
-			
-//			pro1=(ProgressBar) activity.findViewById(R.id.libr_circleMineProgressBar);
-//			pro1.setIndeterminate(false);
-//			pro1.setVisibility(View.VISIBLE);
 			
 			JSONArray json1=(JSONArray) msg.obj;
 			ListView listview=(ListView)activity.findViewById(R.id.libr_mine_list);
 			MineBookMyAdapter myAdapter=new MineBookMyAdapter(context,json1);
 			listview.setAdapter(myAdapter);
-			pro1.setVisibility(View.GONE);
+			if(dialog1.isShowing()){
+			dialog1.cancel();
+			}
+//			pro1.setVisibility(View.GONE);
+			 
 			
 //			listview.setOnItemClickListener(new OnItemClickListener() {
 //				
@@ -285,17 +298,18 @@ public class LibraryFragmentMineThread extends Thread{
 				holder.renew_num=(TextView) convertView.findViewById(R.id.libr_mine_renew_num);
 				holder.collection=(TextView) convertView.findViewById(R.id.libr_mine_collection);
 				holder.attachment=(TextView)convertView.findViewById(R.id.libr_mine_attachment);
-				
+				holder.renew_btn=(Button)convertView.findViewById(R.id.libr_mine_renew_btn);
 				convertView.setTag(holder);//绑定ViewHolder对象
 			}
 			else{
 				holder=(ViewHolder)convertView.getTag();
-			}
+				}
 			
 			String libr_barcode = null,libr_title = null,libr_author = null,libr_borrow_date=null,libr_remand_date=null,libr_renew_num=null;
 			String libr_marc_no=null;//查看详情必填
 			String libr_collection=null;
 			String libr_attachment=null;
+			
 			
 			List<HashMap<String,String>> data=new ArrayList<HashMap<String,String>>();
 			
@@ -335,6 +349,7 @@ public class LibraryFragmentMineThread extends Thread{
 			}
 		}
 			holder.barCode.setText(position+1+".  条形码："+data.get(position).get("libr_barcode").toString());
+			barcode=data.get(position).get("libr_barcode").toString();
 			holder.title.setText("题名："+data.get(position).get("libr_title").toString());
 			holder.author.setText("责任者："+data.get(position).get("libr_author").toString());
 			holder.borrow_date.setText("借阅日期："+data.get(position).get("libr_borrow_date").toString());
@@ -342,7 +357,18 @@ public class LibraryFragmentMineThread extends Thread{
 			holder.renew_num.setText("续借次数："+data.get(position).get("libr_renew_num").toString());
 			holder.collection.setText("馆藏地："+data.get(position).get("libr_collection").toString());
 			holder.attachment.setText("附件："+data.get(position).get("libr_attachment").toString());
-			//holder.renew_btn.setText("续借");
+			holder.renew_btn.setText("续借");
+			
+			//ShareSaved(data.get(0).get("libr_borrow_date").toString());//存储
+			holder.renew_btn.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					LibraryFragmentMineRenewThread th=new LibraryFragmentMineRenewThread(activity, context,barcode);
+					th.start();
+				}
+			});
 			
 			return convertView;
 		}
@@ -360,6 +386,29 @@ public class LibraryFragmentMineThread extends Thread{
 		public TextView attachment;
 		public Button renew_btn;
 	}
+	
+//	/*************保存用户信息**************/
+//	public void ShareSaved(String date){
+//		
+//		LibraryUserSharedPreferences Usershare=new LibraryUserSharedPreferences();
+//		SharedPreferences shared=Usershare.getContext().getSharedPreferences("Libr_Content_Gradder", 0);
+//		UserAccount account=Authenticate.getLibUser(Usershare.getContext());
+//		Usershare.setUsername(account.getUsername());
+//		Usershare.setUserpassword(account.getPassword());
+//		
+//		Usershare.setContext(context);
+//		Usershare.setUserdate(date);
+//		Editor editor=shared.edit();
+//		
+//		editor.clear();
+//		editor.putString("libr_name", Usershare.getUsername());
+//		editor.putString("libr_password", Usershare.getUserpassword());
+//		if(!shared.getString("libr_remand_date","").isEmpty())
+//		{
+//			editor.putString("libr_remand_date", Usershare.getUserdate());
+//		}
+//		editor.commit();
+//	}
 	
 	
 

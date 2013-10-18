@@ -276,7 +276,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
 				R.array.acti_list_action_spinner, 
-				android.R.layout.simple_spinner_dropdown_item);
+				R.layout.academic_spinner_textitem);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);

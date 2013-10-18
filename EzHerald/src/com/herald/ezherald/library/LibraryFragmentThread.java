@@ -28,6 +28,7 @@ import com.herald.ezherald.library.LibraryBookListDetailThread.MyHandler;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class LibraryFragmentThread extends Thread{
 	
-	private ProgressBar pro1;
+	private ProgressDialog dialog1;
 	Activity activity;
 	String Book_Search_Value;
 	Context context;
@@ -62,15 +63,16 @@ public class LibraryFragmentThread extends Thread{
 		this.Book_Search_Value=search_value;
 		this.activity=ac;
 		this.context=cn;
-		pro1=(ProgressBar)activity.findViewById(R.id.libr_circleProgressBar2);
-		pro1.setIndeterminate(false);
+		dialog1=new ProgressDialog(context);
+		dialog1.setCanceledOnTouchOutside(false);
+		dialog1.setMessage("加载中...");
 	}
 	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try{
-			ShowMsg2("view");
+			ShowMsg2("ProgressDialog");
 			HttpResponse response=null;
 			try{
 			DefaultHttpClient client=new DefaultHttpClient();
@@ -147,12 +149,12 @@ public class LibraryFragmentThread extends Thread{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			String va=(String) msg.obj;
-			if(va=="view"){
-			pro1.setVisibility(View.VISIBLE);
+			if(va=="ProgressDialog"){
+				dialog1.show();
 			}else{
 				Toast toast1=Toast.makeText(activity, "网络请求错误...", Toast.LENGTH_LONG);
 				toast1.show();
-				pro1.setVisibility(View.GONE);
+				dialog1.cancel();
 			}
 			super.handleMessage(msg);
 		}
@@ -175,13 +177,15 @@ public class LibraryFragmentThread extends Thread{
 				
 				if(json1.isNull(0)){
 					SetRemind();
-					pro1.setVisibility(View.GONE);
+					dialog1.cancel();
 					Log.e("无内容","无内容");
 				}else{
 				
 				BookMyAdapter myAdapter=new BookMyAdapter(context,json1);
 				listview.setAdapter(myAdapter);
-				pro1.setVisibility(View.GONE);
+				if(dialog1.isShowing()){
+					dialog1.cancel();
+				}
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

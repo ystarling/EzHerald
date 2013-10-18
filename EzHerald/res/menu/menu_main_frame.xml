@@ -2,7 +2,7 @@
 
     <item
         android:id="@+id/main_frame_content_menu_main"
-        android:icon="@drawable/abs__ic_menu_moreoverflow_holo_light"
+        android:icon="@drawable/abs__ic_menu_moreoverflow_holo_dark"
         android:orderInCategory="1"
         android:showAsAction="always"
         android:title="@string/main_frame_menu_more" >

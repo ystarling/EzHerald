@@ -20,6 +20,7 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.library.LibraryFragmentThread.MyHandle2;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,14 +45,15 @@ public class LibraryBookListDetailThread extends Thread{
 	private MyHandler myHandler= new MyHandler();
 	private MyHandle2 myHandler2=new MyHandle2();
 	
-	ProgressBar pro1;
+	ProgressDialog dialog;
 	public LibraryBookListDetailThread(Bundle bundle,Activity ac, Context cn) {
 		
 		this.bundle=bundle;
 		this.activity=ac;
 		this.context=cn;
-		pro1=(ProgressBar)activity.findViewById(R.id.libr_circleBookProgressBar);
-		pro1.setIndeterminate(false);
+		dialog=new ProgressDialog(context);
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.setMessage("º”‘ÿ÷–...");
 	}
 	@Override
 	public void run() {
@@ -127,11 +129,13 @@ public class LibraryBookListDetailThread extends Thread{
 			// TODO Auto-generated method stub
 			String va=(String) msg.obj;
 			if(va=="view"){
-			pro1.setVisibility(View.VISIBLE);
+				dialog.show();
 			}else{
 				Toast toast1=Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ...", Toast.LENGTH_LONG);
 				toast1.show();
-				pro1.setVisibility(View.GONE);
+				if(dialog.isShowing()){
+					dialog.cancel();
+				}
 			}
 			super.handleMessage(msg);
 		}
@@ -176,10 +180,9 @@ public class LibraryBookListDetailThread extends Thread{
 				e.printStackTrace();
 			}
 			listview.setAdapter(adapter);
-			
-			pro1.setVisibility(View.GONE); 
-			
-			
+			if(dialog.isShowing()){
+				dialog.cancel();
+			}
 		}
 		
 		public void SetRemind(){

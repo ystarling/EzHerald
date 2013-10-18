@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- 主界面模块的item (GridView的Item) -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="100dp"
-    android:orientation="vertical" >
-
-	    <TextView
+    android:orientation="vertical" 
+    android:background="#cccccc"
+    android:paddingBottom="1dp"
+    android:paddingRight="1dp"
+    
+    >
+		<RelativeLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:background="#ffffff"
+		    android:minHeight="100dp"
+		    >
+		   <TextView
 	        android:id="@+id/main_frame_content_griditem_title"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
@@ -62,6 +71,9 @@
 	        android:textSize="80sp"
 	        android:textColor="#cecece"
 	        android:textAppearance="?android:attr/textAppearanceLarge"
-	         />
+	         /> 
+		    
+		</RelativeLayout>
+	    
    
-</RelativeLayout>
+</FrameLayout>

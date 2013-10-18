@@ -56,7 +56,7 @@ public class FragmentC extends Fragment {
 						AlertDialog.Builder builderSingle = new AlertDialog.Builder(
 								getActivity());
 						builderSingle.setIcon(R.drawable.ic_launcher);
-						builderSingle.setTitle("œÍ œ∏ ≥… º®");
+						builderSingle.setTitle(String.format("π≤%d√≈", records.size()));
 						final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
 								getActivity(),
 								android.R.layout.simple_list_item_1);
