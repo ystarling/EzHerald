@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.DataSetObservable;
 import android.os.Handler;
 import android.os.Message;
 
@@ -32,9 +33,13 @@ public class FreshmanInfo {
 	private final int FAILED = 0;
 	private String jsonStr;
 	
-	private String testJson = "{\"play\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"...\", \"title\": \"...\"}], \"study\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"..\", \"title\": \"..\"}],\"faq\": [{\"content\": \"问题内容\", \"best_reply\": \"最佳回复\", \"title\": \"问题标题\"},{\"content\": \"...\", \"best_reply\": \"...\", \"title\": \"...\"}], \"life\": [{\"content\": \"内容\", \"title\": \"标题\"}]} ";
 	
-	FreshmanInfo(Activity activity){
+	
+	private String testJson = "{\"play\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"...\", \"title\": \"...\"}], \"study\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"..\", \"title\": \"..\"}],\"faq\": [{\"content\": \"问题内容\", \"best_reply\": \"最佳回复\", \"title\": \"问题标题\"},{\"content\": \"...\", \"best_reply\": \"...\", \"title\": \"...\"}], \"life\": [{\"content\": \"内容\", \"title\": \"标题\"}]} ";
+	private FreshmanListViewAdapter adapter;
+	
+	FreshmanInfo(final Activity activity,final FreshmanListViewAdapter freshmanListViewAdapter){
+		this.adapter = freshmanListViewAdapter;
 		
 		this.activity = activity;
 		shared = activity.getSharedPreferences(SharedPreferenceName,0);
@@ -69,9 +74,11 @@ public class FreshmanInfo {
 				// TODO Auto-generated method stub
 				if(obj!=null)
 					jsonStr = (String)obj;
-				
 				dealJson();
 				save();
+				if(adapter != null) {
+					adapter.onUpdateSuccess();
+				}
 			}
 		};
 		update();
@@ -143,14 +150,6 @@ public class FreshmanInfo {
 		this.content = content;
 	}
 	public void update(){
-		//if(DEBUG){
-			//jsonStr = testJson;
-			//Message msg = handler.obtainMessage(SUCCESS, null);
-        	//handler.sendMessage(msg);
-			//dealJson();
-			//save();
-		//return;
-		//}
 		
 		
 		new Thread(){

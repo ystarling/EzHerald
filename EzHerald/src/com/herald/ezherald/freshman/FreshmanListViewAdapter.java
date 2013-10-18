@@ -1,16 +1,17 @@
 package com.herald.ezherald.freshman;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class FreshmanListViewAdapter implements ListAdapter {
+public class FreshmanListViewAdapter extends BaseAdapter {
 
 	public FreshmanInfo data;
 	private int type;
@@ -53,10 +54,10 @@ public class FreshmanListViewAdapter implements ListAdapter {
 	private static final float LARGE = 23,SMALL=18; //×ÖºÅ
 	private static final int PADDING = 10;
 	public FreshmanListViewAdapter(int type,Activity activity) {
-		
+		//super(activity);
 		this.type = type;
 		this.activity = activity;
-		data = new FreshmanInfo(this.activity);
+		data = new FreshmanInfo(this.activity,this);
 		
 		titles = new String[4][];
 		info = new String[4][];
@@ -157,5 +158,8 @@ public class FreshmanListViewAdapter implements ListAdapter {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	public void onUpdateSuccess() {
+		notifyDataSetChanged();
+	}
 }
