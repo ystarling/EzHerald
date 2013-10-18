@@ -6,7 +6,9 @@
     xmlns:staggered="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_frame_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="#20272f"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +20,7 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="175dp"
-            android:background="#ffffff" >
+             >
 
             <org.taptwo.android.widget.ViewFlow
                 android:id="@+id/main_frame_viewflow"
@@ -58,8 +60,20 @@
             android:layout_margin="1sp"
             android:horizontalSpacing="10sp"
             android:numColumns="auto_fit"
-            android:verticalSpacing="10sp" >
+            android:verticalSpacing="10sp" 
+            android:visibility="gone"
+            >
         </GridView>
+        
+        <!-- 测试的新界面 -->
+        <ListView 
+            android:id="@+id/main_frame_content_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        	android:background="@drawable/main_content_listview_round_shape"
+            >
+            
+        </ListView>
     </LinearLayout>
 
 </FrameLayout>
