@@ -29,6 +29,7 @@
         </activity>
         <activity
             android:name="com.herald.ezherald.academic.AcademicActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity

@@ -1,5 +1,6 @@
 package com.herald.ezherald.academic;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -29,6 +30,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -80,6 +82,10 @@ public class AcademicFragment extends SherlockFragment implements
 	private Context context;
 	
 	private ProgressDialog progressDialog;
+	
+	RefreshJwcInfo refreshTask;
+	RequestJwcInfo requestTask;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +95,7 @@ public class AcademicFragment extends SherlockFragment implements
 		setHasOptionsMenu(true);
 		context = getActivity();
 		dbAdapter = new AcademicDBAdapter(context);
+		
 		
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
@@ -131,7 +138,8 @@ public class AcademicFragment extends SherlockFragment implements
 			try {
 				// item.setActionView(R.layout.academic_refresh_progress);
 				onRefreshActionStart();
-				new RefreshJwcInfo().execute(new URL(REFRESH_URL));
+				refreshTask = new RefreshJwcInfo();
+				refreshTask.execute(new URL(REFRESH_URL));
 				// item.setActionView(null);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -144,6 +152,31 @@ public class AcademicFragment extends SherlockFragment implements
 
 		}
 	}
+	
+	@Override 
+	public void onDestroy()
+	{
+		
+		if (refreshTask != null && refreshTask.getStatus() == AsyncTask.Status.RUNNING)
+		{
+			refreshTask.cancel(true);
+		}
+		if (requestTask !=null && requestTask.getStatus() == AsyncTask.Status.RUNNING )
+		{
+			requestTask.cancel(true);
+		}
+//		onRefreshActionComplete();
+		progressDialog.dismiss();
+		super.onDestroy();
+	}
+	
+	@Override 
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+		progressDialog.dismiss();
+	}
+	
 	
 //	@Override
 //	public boolean onMenuItemSelected(int featureId, MenuItem item)
@@ -202,7 +235,8 @@ public class AcademicFragment extends SherlockFragment implements
 					foot.startRequestData();
 					int id = adapter.getLastItemId();
 					String url = String.format(MORE_URL, id);
-					new RequestJwcInfo().execute(new URL(url));
+					requestTask = new RequestJwcInfo();
+					requestTask.execute(new URL(url));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -219,7 +253,8 @@ public class AcademicFragment extends SherlockFragment implements
 				// TODO Auto-generated method stub
 				try {
 					onRefreshActionStart();
-					new RefreshJwcInfo().execute(new URL(REFRESH_URL));
+					refreshTask = new RefreshJwcInfo();
+					refreshTask.execute(new URL(REFRESH_URL));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					onRefreshActionComplete();
@@ -256,14 +291,15 @@ public class AcademicFragment extends SherlockFragment implements
 		
 		initJwcInfoListView();
 		
-		try {
-			onRefreshActionStart();
-			new RefreshJwcInfo().execute(new URL(REFRESH_URL));
-			//ew grabber().execute();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			onRefreshActionStart();
+//			refreshTask = new RefreshJwcInfo();
+//			refreshTask.execute(new URL(REFRESH_URL));
+//			//ew grabber().execute();
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		return v;
 	}
@@ -316,6 +352,8 @@ public class AcademicFragment extends SherlockFragment implements
 		protected List<JwcInfo> doInBackground(URL... arg0) {
 			// TODO Auto-generated method stub
 			// onRefreshActionStart();
+			if(isCancelled()) 
+				return null;
 			List<JwcInfo> jwcList = new ArrayList<JwcInfo>();
 			InputStream in = null;
 			int response = -1;
@@ -362,20 +400,35 @@ public class AcademicFragment extends SherlockFragment implements
 
 			return null;
 		}
+		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Task被取消了，不再继续执行后面的代码
+		    if(isCancelled()) 
+		      return;
+		  }
 
 		@Override
 		protected void onPostExecute(List<JwcInfo> result) {
-			if (result != null) {
-				// adapter.addJwcInfoList(result);
-				// adapter.foreAddJwcInfoList(result);
-				adapter.setJwcInfoList(result);
-				adapter.notifyDataSetChanged();
-				refreshDB(result);
-				listView.onRefreshComplete();
-				onRefreshActionComplete();
-				// Log.v("Watch", "onPostExecute");
-				
+			try{
+				if (result != null) {
+					// adapter.addJwcInfoList(result);
+					// adapter.foreAddJwcInfoList(result);
+					adapter.setJwcInfoList(result);
+					adapter.notifyDataSetChanged();
+					refreshDB(result);
+					listView.onRefreshComplete();
+					onRefreshActionComplete();
+					// Log.v("Watch", "onPostExecute");
+					
+				}
 			}
+			catch( Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 
 		}
 
@@ -394,7 +447,8 @@ public class AcademicFragment extends SherlockFragment implements
 		@Override
 		protected List<JwcInfo> doInBackground(URL... params) {
 			// TODO Auto-generated method stub
-
+			if(isCancelled()) 
+				return null;
 			List<JwcInfo> jwcList = new ArrayList<JwcInfo>();
 			InputStream in = null;
 			int response = -1;
@@ -442,16 +496,31 @@ public class AcademicFragment extends SherlockFragment implements
 
 			return null;
 		}
+		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Task被取消了，不再继续执行后面的代码
+		    if(isCancelled()) 
+		      return;
+		  }
 
 		@Override
 		protected void onPostExecute(List<JwcInfo> result) {
-			if (result != null) {
-				adapter.addJwcInfoList(result);
-				adapter.notifyDataSetChanged();
-				addIntoDB(result);
-				foot.endRequestData();
-				listView.onRequestComplete();
+			try{
+				if (result != null) {
+					adapter.addJwcInfoList(result);
+					adapter.notifyDataSetChanged();
+					addIntoDB(result);
+					foot.endRequestData();
+					listView.onRequestComplete();
+				}
 			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 
 		}
 	}
