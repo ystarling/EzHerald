@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -66,7 +67,8 @@ import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
  * 主界面呈现内容的Fragement 其他各模块可参照本Fragement的定义呈现内容
  */
 public class MainContentFragment extends SherlockFragment {
-    private GridView mGridView; // GridView
+    //private GridView mGridView; // GridView
+    private ListView mListView; // ListView（替代GridView）
 	
 	private ViewFlow mViewFlow; // ViewFlow
 	private CircleFlowIndicator mCircIndic;
@@ -82,6 +84,7 @@ public class MainContentFragment extends SherlockFragment {
 	private final String MAPKEY_TITLE = "title";
 	private final String MAPKEY_CONT1 = "content1";
 	private final String MAPKEY_CONT2 = "content2";
+	private final String MAPKEY_ICON = "icon";
 
 	private final String MAPKEY_IMAGE = "image";
 	private final String MAPKEY_TYPE = "type";
@@ -141,17 +144,24 @@ public class MainContentFragment extends SherlockFragment {
 
 		getPrefItems();
 
-		mGridView = (GridView) getActivity().findViewById(
-				R.id.main_frame_content_gridView);
+//		mGridView = (GridView) getActivity().findViewById(
+//				R.id.main_frame_content_gridView);
 	
 		mGridItems = getGridItems();
 		
 		int margin = 5;
-		mGridView.setPadding(margin, 0, margin, 0); // have the margin on the sides as well
-
-		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
-				mGridItems));
-		mGridView.setOnItemClickListener(new MyOnItemClickListener());
+//		mGridView.setPadding(margin, 0, margin, 0); // have the margin on the sides as well
+//
+//		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+//				mGridItems));
+//		mGridView.setOnItemClickListener(new MyOnItemClickListener());
+		
+		///////////
+		mListView = (ListView) getActivity().findViewById(R.id.main_frame_content_listView);
+		mListView.setAdapter(new MainContentListItemAdapter(getActivity(), mGridItems));
+		mListView.setOnItemClickListener(new MyOnItemClickListener());
+		
+		///////////
 		
 
 		mViewFlow = (ViewFlow) getActivity().findViewById(
@@ -181,9 +191,10 @@ public class MainContentFragment extends SherlockFragment {
 		}
 
 		// 是否这样使用?
-		mViewFlow.refreshDrawableState();
+		////mViewFlow.refreshDrawableState();
 		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
 				mImageItems));
+		
 		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
 
@@ -251,6 +262,32 @@ public class MainContentFragment extends SherlockFragment {
 		}
 		// mContentInfoObjs.add(obj);
 	}
+	
+	/**
+	 * 根据模块名称得到图标的资源id
+	 * @param moduleName
+	 * @return
+	 */
+	private int fetchIconForName(String moduleName){
+		int retId = R.drawable.main_2ndmenu_ic_setting;
+		if (moduleName.equals("curriculum")) {
+			retId = R.drawable.main_menu_ic_curriculum;
+		} else if (moduleName.equals("academic")) {
+			retId = R.drawable.main_menu_ic_academic;
+		} else if (moduleName.equals("freshman")) {
+			retId = R.drawable.main_menu_ic_freshman;
+		} else if (moduleName.equals("gpa")) {
+			retId = R.drawable.main_menu_ic_gpa;
+		} else if (moduleName.equals("exercise")) {
+			retId = R.drawable.main_menu_ic_exercise;
+		} else if (moduleName.equals("library")){
+			retId = R.drawable.main_menu_ic_library;
+		} else if (moduleName.equals("activity")){
+			retId = R.drawable.main_menu_ic_activity;
+		}
+		return retId;
+	}
+	
 
 	/*
 	 * 点击Item跳转到各个模块
@@ -314,22 +351,13 @@ public class MainContentFragment extends SherlockFragment {
 			fetchInfoObjForName(title, index++);
 		}
 
-		// /替换已有实现接口的模块的相关内容
-		/*
-		 * for(int i=0; i<mContentInfoObjs.size(); i++){
-		 * if(mContentInfoObjs.get(i) == null) continue; mContentCont1[i] =
-		 * mContentInfoObjs.get(i).getContent1(); mContentCont2[i] =
-		 * mContentInfoObjs.get(i).getContent2(); }
-		 */
-
-		// /
-
 		List<Map<String, Object>> gridItems = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < mContentTitles.size(); i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put(MAPKEY_TITLE, mContentTitles.get(i)); // tag of a title
 			map.put(MAPKEY_CONT1, mContentCont1[i]);
 			map.put(MAPKEY_CONT2, mContentCont2[i]);
+			map.put(MAPKEY_ICON, fetchIconForName(mContentTitles.get(i))); //for listview
 			gridItems.add(map);
 		}
 
@@ -392,9 +420,10 @@ public class MainContentFragment extends SherlockFragment {
 		getPrefItems();
 		// 同步获取各模块的更新项目
 		mGridItems = getGridItems();
-		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
-				mGridItems));
-
+//		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+//				mGridItems));
+		mListView.setAdapter(new MainContentListItemAdapter(getActivity(), mGridItems));
+		
 		refreshImageFromDb();
 	}
 
@@ -459,9 +488,9 @@ public class MainContentFragment extends SherlockFragment {
 				mGridItems.get(index).put(MAPKEY_CONT2, mContentCont2[index]);
 			}
 
-			mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
-					mGridItems));
-
+//			mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+//					mGridItems));
+			mListView.setAdapter(new MainContentListItemAdapter(getActivity(), mGridItems));
 		}
 
 	}
