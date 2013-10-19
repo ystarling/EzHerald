@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,6 +49,7 @@ import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
+
 /**
  * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 上传更新:
  * http://121.248.63.105/EzHerald/updateupload/ 图片json显示最新五条:
@@ -67,9 +70,9 @@ import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
  * 主界面呈现内容的Fragement 其他各模块可参照本Fragement的定义呈现内容
  */
 public class MainContentFragment extends SherlockFragment {
-    //private GridView mGridView; // GridView
-    private ListView mListView; // ListView（替代GridView）
-	
+	// private GridView mGridView; // GridView
+	private ListView mListView; // ListView（替代GridView）
+
 	private ViewFlow mViewFlow; // ViewFlow
 	private CircleFlowIndicator mCircIndic;
 
@@ -92,8 +95,7 @@ public class MainContentFragment extends SherlockFragment {
 	private final int MAX_BANNER_SIZE = 5;
 
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
-	// private ArrayList<MainContentGridItemObj> mContentInfoObjs = new
-	// ArrayList<MainContentGridItemObj>();
+	
 
 	// ////////////Temporarily used local variables///////////////////
 	String mContentCont1[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
@@ -106,6 +108,13 @@ public class MainContentFragment extends SherlockFragment {
 	private static final int[] image_ids = { R.drawable.main_frame_pic0,
 			R.drawable.main_frame_pic1, R.drawable.main_frame_pic2,
 			R.drawable.main_frame_pic3, R.drawable.main_frame_pic4 };
+
+	private int[] color_ids // 主界面ListView的背景色 现通过recources存储！
+	= { R.drawable.main_content_listview_round_shape_blue,
+			R.drawable.main_content_listview_round_shape_green,
+			R.drawable.main_content_listview_round_shape_red,
+			R.drawable.main_content_listview_round_shape_navy,
+			R.drawable.main_content_listview_round_shape_purple };
 
 	public ViewFlow getViewFlow() {
 		return mViewFlow;
@@ -139,30 +148,39 @@ public class MainContentFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-
-		// mActionBar = getSherlockActivity().getSupportActionBar();
+		ProgressDialog progressDialog = new ProgressDialog(getActivity());
+		progressDialog.setMessage("努力加载中...");
+		progressDialog.setCancelable(false);
+		progressDialog.show();
 
 		getPrefItems();
 
-//		mGridView = (GridView) getActivity().findViewById(
-//				R.id.main_frame_content_gridView);
-	
+		// mGridView = (GridView) getActivity().findViewById(
+		// R.id.main_frame_content_gridView);
+
 		mGridItems = getGridItems();
-		
-		int margin = 5;
-//		mGridView.setPadding(margin, 0, margin, 0); // have the margin on the sides as well
-//
-//		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
-//				mGridItems));
-//		mGridView.setOnItemClickListener(new MyOnItemClickListener());
-		
-		///////////
-		mListView = (ListView) getActivity().findViewById(R.id.main_frame_content_listView);
-		mListView.setAdapter(new MainContentListItemAdapter(getActivity(), mGridItems));
+
+		//int margin = 5;
+		// mGridView.setPadding(margin, 0, margin, 0); // have the margin on the
+		// sides as well
+		//
+		// mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+		// mGridItems));
+		// mGridView.setOnItemClickListener(new MyOnItemClickListener());
+
+		// /////////
+		mListView = (ListView) getActivity().findViewById(
+				R.id.main_frame_content_listView);
+		mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
+				mGridItems));
 		mListView.setOnItemClickListener(new MyOnItemClickListener());
-		
-		///////////
-		
+
+		List<Integer> preferredColors = getPreferredColors();
+		Random random = new Random();
+		int random_index = random.nextInt(preferredColors.size());
+		mListView.setBackgroundResource(preferredColors.get(random_index));
+
+		// /////////
 
 		mViewFlow = (ViewFlow) getActivity().findViewById(
 				R.id.main_frame_viewflow);
@@ -180,6 +198,41 @@ public class MainContentFragment extends SherlockFragment {
 
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
+		progressDialog.cancel();
+	}
+	
+	/**
+	 * 从首选项中获得可以拿来随机的颜色
+	 * 并转换成resource id
+	 * @return
+	 */
+	private List<Integer> getPreferredColors() {
+		String pref_name = getActivity().getResources().getString(R.string.main_frame_preferences);
+		String pref_key = getActivity().getResources().getString(R.string.main_frame_list_color_pref_key);
+		SharedPreferences prefs = getActivity().getSharedPreferences(pref_name, Context.MODE_PRIVATE);
+		Set<String> prefColorNames = SharedPreferencesHandler.getStringSet(prefs, pref_key, null);
+		List<Integer> result = new ArrayList<Integer>();
+		if(prefColorNames == null ||prefColorNames.isEmpty()){
+			for(int resid : color_ids){
+				result.add(resid);
+			}
+		} else {
+			for(String colorName: prefColorNames){
+				if(colorName.equals("blue")){
+					result.add(R.drawable.main_content_listview_round_shape_blue);
+				} else if (colorName.equals("green")){
+					result.add(R.drawable.main_content_listview_round_shape_green);
+				} else if (colorName.equals("red")){
+					result.add(R.drawable.main_content_listview_round_shape_red);
+				} else if (colorName.equals("navy")){
+					result.add(R.drawable.main_content_listview_round_shape_navy);
+				} else {
+					result.add(R.drawable.main_content_listview_round_shape_purple);
+				}
+			}
+		}
+		
+		return result;
 	}
 
 	/**
@@ -191,10 +244,10 @@ public class MainContentFragment extends SherlockFragment {
 		}
 
 		// 是否这样使用?
-		////mViewFlow.refreshDrawableState();
+		// //mViewFlow.refreshDrawableState();
 		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
 				mImageItems));
-		
+		mViewFlow.refreshDrawableState();
 		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
 
@@ -223,8 +276,8 @@ public class MainContentFragment extends SherlockFragment {
 			}
 		} else {
 			mContentTitles.add("尚未设置");
-			Toast.makeText(getActivity(), "NULL， use default",
-					Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getActivity(), "NULL， use default",
+			//		Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -249,7 +302,7 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new GpaGrabber(getActivity());
 			} else if (moduleName.equals("exercise")) {
 				grabber = new ExerciseGrabber(getActivity());
-			} else if (moduleName.equals("library")){
+			} else if (moduleName.equals("library")) {
 				grabber = new LibraryContentGrabber(getActivity());
 			}
 			// else if ....f
@@ -262,13 +315,14 @@ public class MainContentFragment extends SherlockFragment {
 		}
 		// mContentInfoObjs.add(obj);
 	}
-	
+
 	/**
 	 * 根据模块名称得到图标的资源id
+	 * 
 	 * @param moduleName
 	 * @return
 	 */
-	private int fetchIconForName(String moduleName){
+	private int fetchIconForName(String moduleName) {
 		int retId = R.drawable.main_2ndmenu_ic_setting;
 		if (moduleName.equals("curriculum")) {
 			retId = R.drawable.main_menu_ic_curriculum;
@@ -280,14 +334,13 @@ public class MainContentFragment extends SherlockFragment {
 			retId = R.drawable.main_menu_ic_gpa;
 		} else if (moduleName.equals("exercise")) {
 			retId = R.drawable.main_menu_ic_exercise;
-		} else if (moduleName.equals("library")){
+		} else if (moduleName.equals("library")) {
 			retId = R.drawable.main_menu_ic_library;
-		} else if (moduleName.equals("activity")){
+		} else if (moduleName.equals("activity")) {
 			retId = R.drawable.main_menu_ic_activity;
 		}
 		return retId;
 	}
-	
 
 	/*
 	 * 点击Item跳转到各个模块
@@ -338,7 +391,6 @@ public class MainContentFragment extends SherlockFragment {
 			}
 		}
 
-
 	}
 
 	/**
@@ -357,7 +409,8 @@ public class MainContentFragment extends SherlockFragment {
 			map.put(MAPKEY_TITLE, mContentTitles.get(i)); // tag of a title
 			map.put(MAPKEY_CONT1, mContentCont1[i]);
 			map.put(MAPKEY_CONT2, mContentCont2[i]);
-			map.put(MAPKEY_ICON, fetchIconForName(mContentTitles.get(i))); //for listview
+			map.put(MAPKEY_ICON, fetchIconForName(mContentTitles.get(i))); // for
+																			// listview
 			gridItems.add(map);
 		}
 
@@ -420,10 +473,11 @@ public class MainContentFragment extends SherlockFragment {
 		getPrefItems();
 		// 同步获取各模块的更新项目
 		mGridItems = getGridItems();
-//		mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
-//				mGridItems));
-		mListView.setAdapter(new MainContentListItemAdapter(getActivity(), mGridItems));
-		
+		// mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
+		// mGridItems));
+		mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
+				mGridItems));
+
 		refreshImageFromDb();
 	}
 
@@ -488,9 +542,11 @@ public class MainContentFragment extends SherlockFragment {
 				mGridItems.get(index).put(MAPKEY_CONT2, mContentCont2[index]);
 			}
 
-//			mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
-//					mGridItems));
-			mListView.setAdapter(new MainContentListItemAdapter(getActivity(), mGridItems));
+			// mGridView.setAdapter(new
+			// MainContentGridItemAdapter(getActivity(),
+			// mGridItems));
+			mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
+					mGridItems));
 		}
 
 	}
@@ -508,9 +564,9 @@ public class MainContentFragment extends SherlockFragment {
 		public void run() {
 			// TODO Auto-generated method stub
 			MainContentGridItemObj obj = g.GrabInformationObject();
-			if (obj == null )
-			{
-				Log.e("MainContentFrag:InfoRunnable", "Not a valid MainContentGridItemObj");
+			if (obj == null) {
+				Log.e("MainContentFrag:InfoRunnable",
+						"Not a valid MainContentGridItemObj");
 				return;
 			}
 
@@ -529,7 +585,7 @@ public class MainContentFragment extends SherlockFragment {
 	@Override
 	public void onDestroy() {
 		mContentIsDestroyed = true;
-
+		mInfoHandler.removeCallbacksAndMessages(null);
 		super.onDestroy();
 	}
 

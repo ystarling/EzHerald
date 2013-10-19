@@ -10,12 +10,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -54,7 +56,9 @@ public class LibraryFragment extends SherlockFragment{
 	
 	public void onCreate(Bundle save){
 		super.onCreate(save);
+		
 		setRetainInstance(true);
+		
 		//librservice=new HeraldWebServicesFactoryImpl("http://herald.seu.edu.cn/ws").getLibraryService();
 		
 	}
@@ -63,6 +67,7 @@ public class LibraryFragment extends SherlockFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.library_fragment_main);
 		activity=getActivity();
 		activity.setTitle("图书搜索");
 		context=getActivity();
@@ -96,35 +101,35 @@ public class LibraryFragment extends SherlockFragment{
 		libr_search_text=(EditText) view.findViewById(R.id.libr_search_text);
 		ImageView libr_search_button=(ImageView) view.findViewById(R.id.libr_search_button);
 		
-		/***********set a android search enter*************/
-		
-		libr_search_text.setOnEditorActionListener(new OnEditorActionListener(){
-
-			@Override
-			public boolean onEditorAction(TextView libr_view, int keyCode, KeyEvent event) {
-				if(event.getAction()==KeyEvent.ACTION_DOWN ){
-
-					libr_search_value=libr_search_text.getText().toString();
-					
-					if(libr_search_value.isEmpty())
-					{
-						Toast toast1=Toast.makeText(getActivity(), "你什么东西都没写啊", Toast.LENGTH_SHORT);
-						toast1.show();
-					}else{
-						
-						LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context);
-						Log.e("输入内容：",libr_search_value);
-						th.start();
-					}
-					
-					
-					}
-				
-//				}
-				return true;
-			}
-			
-		});
+//		/***********set a android search enter*************/
+//		libr_search_text.setOnEditorActionListener(new OnEditorActionListener(){
+//
+//			@Override
+//			public boolean onEditorAction(TextView libr_view, int keyCode, KeyEvent event) {
+//				
+//				if(event.getAction()==KeyEvent.ACTION_DOWN ){
+//
+//					libr_search_value=libr_search_text.getText().toString();
+//					
+//					if(libr_search_value.isEmpty())
+//					{
+//						Toast toast1=Toast.makeText(getActivity(), "你什么东西都没写啊", Toast.LENGTH_SHORT);
+//						toast1.show();
+//					}else{
+//						
+//						LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context);
+//						Log.e("输入内容：",libr_search_value);
+//						th.start();
+//					}
+//					
+//					
+//					}
+//				
+////				}
+//				return true;
+//			}
+//			
+//		});
 		
 		
 		/************set search button click***********/
@@ -134,6 +139,9 @@ public class LibraryFragment extends SherlockFragment{
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				libr_search_value=libr_search_text.getText().toString();
+
+				InputMethodManager m=(InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);   
+				m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
 				
 				if(libr_search_value.isEmpty())
 				{
@@ -149,6 +157,12 @@ public class LibraryFragment extends SherlockFragment{
 		});
 		
 		return view ;
+		
+	}
+
+
+	private void setContentView(int libraryFragmentMain) {
+		// TODO Auto-generated method stub
 		
 	}
 	

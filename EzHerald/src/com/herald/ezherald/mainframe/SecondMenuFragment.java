@@ -164,8 +164,11 @@ public class SecondMenuFragment extends ListFragment {
 			break;
 		case 1:
 			i.setClass(getActivity(), SettingActivity.class);
-			MainActivity mainActivity = (MainActivity)getActivity();
-			mainActivity.needRefreshContent = true;
+			String localActivityName = getActivity().getLocalClassName();
+			if(localActivityName.contains("Main")){
+				MainActivity mainActivity = (MainActivity)getActivity();
+				mainActivity.needRefreshContent = true;
+			}
 			break;
 		case 2:
 			i.setClass(getActivity(), AccountActivity.class);
@@ -324,7 +327,7 @@ public class SecondMenuFragment extends ListFragment {
 					
 					Message msg = new Message();
 					Bundle bundle = new Bundle();
-					bundle.putString(BUNDLE_KEY_USERNAME, mIdNum + "\n" + username);
+					bundle.putString(BUNDLE_KEY_USERNAME, username);
 					msg.setData(bundle);
 					
 					Looper.prepare();
