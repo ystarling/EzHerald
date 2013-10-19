@@ -39,6 +39,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -78,6 +79,7 @@ public class MainActivity extends BaseFrameActivity {
 	private final String KEY_NAME_LAST_REFRESH = "main_last_refresh_timestamp";
 	private final String KEY_NAME_REFRESH_FREQ = "sync_frequency";
 	private final int MAX_BANNER_SIZE = 5;
+	
 	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false; // 始终显示引导界面
 	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // 始终从网站更新数据，不论新旧
 
@@ -86,6 +88,8 @@ public class MainActivity extends BaseFrameActivity {
 	private final int CONN_TIMEOUT = 5000;
 
 	private boolean mShowedUpdate = false;
+	
+	private UpdateBannerImageTask mUpdateBannerImageTask = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -127,9 +131,9 @@ public class MainActivity extends BaseFrameActivity {
 				MODE_PRIVATE);
 		long timestamp = appPreferences.getLong(KEY_NAME_LAST_REFRESH, 0);
 
-		long timeInMinute = timestamp / 60000; // 1分钟 = 60 000毫秒
-		long currentTimeInMinute = System.currentTimeMillis() / 60000;
-		long timeGap = currentTimeInMinute - timeInMinute; // 时间差
+		float timeInMinute = timestamp / 60000.0f; // 1分钟 = 60 000毫秒
+		float currentTimeInMinute = System.currentTimeMillis() / 60000.0f;
+		float timeGap = currentTimeInMinute - timeInMinute; // 时间差
 		Log.d("MainActivity", "Time interval = " + timeGap + " minutes");
 
 		String strPrefTimeInterval = appPreferences.getString(
@@ -224,14 +228,15 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	public void requestInfoUpdate(String url, MenuItem item) {
-		if (isReceivingData)
+		if (isReceivingData || mUpdateBannerImageTask != null)
 			return; // Already receiving data
 
 		item.setVisible(false);
 		MenuItem doingItem = mActionMenu
 				.findItem(R.id.mainframe_menu_item_doing);
 		doingItem.setVisible(true);
-		new UpdateBannerImageTask().execute(url);
+		mUpdateBannerImageTask = new UpdateBannerImageTask();
+		mUpdateBannerImageTask.execute(url);
 	}
 
 	/**
@@ -246,7 +251,9 @@ public class MainActivity extends BaseFrameActivity {
 			in = OpenHttpConnection(URL);
 			if (in == null)
 				throw new IOException("Instream is null");
-			bitmap = BitmapFactory.decodeStream(in);
+			Options options = new Options();
+			//options.inJustDecodeBounds = true; //先检测图片大小
+			bitmap = BitmapFactory.decodeStream(in, null, options);		
 			in.close();
 		} catch (IOException e1) {
 			Log.d("MainActivity:test", e1.getLocalizedMessage());
@@ -268,6 +275,7 @@ public class MainActivity extends BaseFrameActivity {
 		URL url = new URL(urlStr);
 		URLConnection conn = url.openConnection();
 		conn.setConnectTimeout(CONN_TIMEOUT);
+		conn.setUseCaches(true);
 
 		if (!(conn instanceof HttpURLConnection)) {
 			throw new IOException("Not an HTTP connection");
@@ -303,7 +311,7 @@ public class MainActivity extends BaseFrameActivity {
 			@Override
 			public void run() {
 				Looper.prepare(); // 这是关键
-				Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT)
+				Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG)
 						.show();
 				Looper.loop();
 			}
@@ -322,7 +330,7 @@ public class MainActivity extends BaseFrameActivity {
 			isReceivingData = true;
 			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
 					getBaseContext());
-			dbAdapter.open();
+			
 
 			// ///////////////////////////////////////
 			ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // 图片更新的列表
@@ -336,11 +344,15 @@ public class MainActivity extends BaseFrameActivity {
 			}
 
 			if (remoteImgUrls != null && !remoteImgUrls.isEmpty()) {
+				dbAdapter.open();
 				// 有东西需要更新了..
+				int count = 1;
+				int size = remoteImgUrls.size();
 				for (String urlStr : remoteImgUrls) {
 					Bitmap bmp = testGetBitmap(urlStr);
 					if (bmp != null) {
 						updList.add(bmp);
+						showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
 					} else {
 						showToastInWorkingThread("网络不大给力的样子呐...");
 						connFail = true;
@@ -382,9 +394,10 @@ public class MainActivity extends BaseFrameActivity {
 				for (int id = nextIdToInsert; id < currImgSize + nextIdToInsert; id++) {
 					dbAdapter.insertImage(id, updList.get(id - nextIdToInsert));
 				}
-
+				
+				dbAdapter.close();
 			}
-			dbAdapter.close();
+			
 			// ////////////////////////////////////////////////////////////////////////////
 
 			return updList;
@@ -396,7 +409,12 @@ public class MainActivity extends BaseFrameActivity {
 
 			if (doNotUpdateUI) {
 				Log.w("MainActivity", "Do not update UI...");
+				
+				if (!connFail)
+					setLastRefreshTime(System.currentTimeMillis());
+				
 				isReceivingData = false;
+				mUpdateBannerImageTask = null;
 				return;
 			}
 
@@ -420,7 +438,7 @@ public class MainActivity extends BaseFrameActivity {
 				setLastRefreshTime(System.currentTimeMillis());
 
 			isReceivingData = false;
-
+			mUpdateBannerImageTask = null;
 			super.onPostExecute(result);
 		}
 
@@ -519,7 +537,7 @@ public class MainActivity extends BaseFrameActivity {
 
 	public boolean checkBannerImageUpdateState() {
 
-		int BUFFER_SIZE = 200;
+		int BUFFER_SIZE = 1024;
 		InputStream in = null;
 		try {
 			in = OpenHttpConnection(REMOTE_UPDATE_CHECK_URL);
@@ -618,13 +636,6 @@ public class MainActivity extends BaseFrameActivity {
 		});
 
 		builder.show();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		Log.d("MainActivity", "needRefreshContent?" + needRefreshContent);
 	}
 
 	/**

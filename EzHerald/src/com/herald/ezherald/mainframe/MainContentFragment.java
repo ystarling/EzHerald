@@ -238,8 +238,8 @@ public class MainContentFragment extends SherlockFragment {
 			}
 		} else {
 			mContentTitles.add("…–Œ¥…Ë÷√");
-			Toast.makeText(getActivity(), "NULL£¨ use default",
-					Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getActivity(), "NULL£¨ use default",
+			//		Toast.LENGTH_SHORT).show();
 		}
 
 	}
