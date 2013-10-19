@@ -261,7 +261,7 @@ public class CurriculumFragment extends SherlockFragment {
 		tab4.setText("周四");
 		tab5.setText("周五");
 		tab6.setText("周六");
-		tab7.setText("周七");
+		tab7.setText("周日");
 		tab1.setTabListener(new MyTabListener());
 		tab2.setTabListener(new MyTabListener());
 		tab3.setTabListener(new MyTabListener());

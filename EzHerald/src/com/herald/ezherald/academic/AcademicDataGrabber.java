@@ -12,7 +12,7 @@ import com.herald.ezherald.mainframe.MainContentInfoGrabber;
 public class AcademicDataGrabber implements MainContentInfoGrabber {
 	
 
-	private final static String JWC_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/";
+	private final static String JWC_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/0";
 	
 	@Override
 	public MainContentGridItemObj GrabInformationObject() {
