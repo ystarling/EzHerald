@@ -135,18 +135,9 @@ public class AcademicFragment extends SherlockFragment implements
 		 */
 		switch (item.getItemId()) {
 		case R.id.academic_list_action_refresh:
-			try {
-				// item.setActionView(R.layout.academic_refresh_progress);
-				onRefreshActionStart();
-				refreshTask = new RefreshJwcInfo();
-				String url = String.format(REFRESH_URL, JwcInfoMode);
-				refreshTask.execute(new URL(url));
-				// item.setActionView(null);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				onRefreshActionComplete();
-				e.printStackTrace();
-			}
+			// item.setActionView(R.layout.academic_refresh_progress);
+			refreshInfo();
+			// item.setActionView(null);
 			super.onOptionsItemSelected(item);
 			return true;
 		default:
@@ -234,6 +225,7 @@ public class AcademicFragment extends SherlockFragment implements
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				try {
+					onRefreshActionStart();
 					foot.startRequestData();
 					int id = adapter.getLastItemId();
 					String url = String.format(MORE_URL, id, JwcInfoMode);
@@ -253,16 +245,7 @@ public class AcademicFragment extends SherlockFragment implements
 			@Override
 			public void onRefresh() {
 				// TODO Auto-generated method stub
-				try {
-					onRefreshActionStart();
-					refreshTask = new RefreshJwcInfo();
-					String url = String.format(REFRESH_URL, JwcInfoMode);
-					refreshTask.execute(new URL(url));
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					onRefreshActionComplete();
-					e.printStackTrace();
-				}
+				refreshInfo();
 			}
 
 		});
@@ -294,6 +277,13 @@ public class AcademicFragment extends SherlockFragment implements
 		
 		initJwcInfoListView();
 		
+		refreshInfo();
+
+		return v;
+	}
+	
+	public void refreshInfo()
+	{
 		try {
 			onRefreshActionStart();
 			refreshTask = new RefreshJwcInfo();
@@ -304,8 +294,6 @@ public class AcademicFragment extends SherlockFragment implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return v;
 	}
 	
 	public void initJwcInfoListView()
@@ -347,6 +335,7 @@ public class AcademicFragment extends SherlockFragment implements
 		}
 		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
 				Toast.LENGTH_SHORT).show();
+		refreshInfo();
 		return false;
 	}
 
@@ -513,12 +502,17 @@ public class AcademicFragment extends SherlockFragment implements
 		protected void onPostExecute(List<JwcInfo> result) {
 			try{
 				if (result != null) {
+					if(result.size() == 0)
+					{
+						Toast.makeText(context, "没有更多了.", Toast.LENGTH_LONG).show();
+					}
 					adapter.addJwcInfoList(result);
 					adapter.notifyDataSetChanged();
 					addIntoDB(result);
 					foot.endRequestData();
 					listView.onRequestComplete();
 				}
+				onRefreshActionComplete();
 			}
 			catch(Exception e)
 			{

@@ -22,7 +22,7 @@
     <!-- academic 教务信息   begin -->
     <string-array name="academic_list_action_spinner">
         <item>全部教务</item>
-        <item>教务管理</item>
+        <item>教务信息</item>
         <item>学籍管理</item>
         <item>实践教学</item>
         <item>合作办学</item>
