@@ -19,7 +19,7 @@
 
         <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="175dp"
+            android:layout_height="200dp"
              >
 
             <org.taptwo.android.widget.ViewFlow
@@ -70,7 +70,7 @@
             android:id="@+id/main_frame_content_listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-        	android:background="@drawable/main_content_listview_round_shape"
+        	android:background="@drawable/main_content_listview_round_shape_green"
             >
             
         </ListView>

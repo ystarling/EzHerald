@@ -61,4 +61,13 @@
     
     
     <!--library 图书馆 end -->
+    
+    
+    <integer-array name="main_content_listview_color_resources">
+        <item>@drawable/main_content_listview_round_shape_blue</item>
+        <item>@drawable/main_content_listview_round_shape_green</item>
+        <item>@drawable/main_content_listview_round_shape_navy</item>
+        <item>@drawable/main_content_listview_round_shape_purple</item>
+        <item>@drawable/main_content_listview_round_shape_red</item>
+    </integer-array>
 </resources>
