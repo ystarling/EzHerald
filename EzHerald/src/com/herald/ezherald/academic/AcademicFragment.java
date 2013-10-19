@@ -74,8 +74,8 @@ public class AcademicFragment extends SherlockFragment implements
 
 	private int JwcInfoMode = ALL;
 	
-	private final String REFRESH_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/";
-	private final String MORE_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/more/%d/";
+	private final String REFRESH_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/%d/";
+	private final String MORE_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/more/%d/%d";
 	
 	
 	private Integer lastid = null;
@@ -139,13 +139,15 @@ public class AcademicFragment extends SherlockFragment implements
 				// item.setActionView(R.layout.academic_refresh_progress);
 				onRefreshActionStart();
 				refreshTask = new RefreshJwcInfo();
-				refreshTask.execute(new URL(REFRESH_URL));
+				String url = String.format(REFRESH_URL, JwcInfoMode);
+				refreshTask.execute(new URL(url));
 				// item.setActionView(null);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				onRefreshActionComplete();
 				e.printStackTrace();
 			}
+			super.onOptionsItemSelected(item);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -234,7 +236,7 @@ public class AcademicFragment extends SherlockFragment implements
 				try {
 					foot.startRequestData();
 					int id = adapter.getLastItemId();
-					String url = String.format(MORE_URL, id);
+					String url = String.format(MORE_URL, id, JwcInfoMode);
 					requestTask = new RequestJwcInfo();
 					requestTask.execute(new URL(url));
 				} catch (MalformedURLException e) {
@@ -254,7 +256,8 @@ public class AcademicFragment extends SherlockFragment implements
 				try {
 					onRefreshActionStart();
 					refreshTask = new RefreshJwcInfo();
-					refreshTask.execute(new URL(REFRESH_URL));
+					String url = String.format(REFRESH_URL, JwcInfoMode);
+					refreshTask.execute(new URL(url));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					onRefreshActionComplete();
@@ -291,15 +294,16 @@ public class AcademicFragment extends SherlockFragment implements
 		
 		initJwcInfoListView();
 		
-//		try {
-//			onRefreshActionStart();
-//			refreshTask = new RefreshJwcInfo();
-//			refreshTask.execute(new URL(REFRESH_URL));
-//			//ew grabber().execute();
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			onRefreshActionStart();
+			refreshTask = new RefreshJwcInfo();
+			String url = String.format(REFRESH_URL, JwcInfoMode);
+			refreshTask.execute(new URL(url));
+			//ew grabber().execute();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return v;
 	}
@@ -551,6 +555,4 @@ public class AcademicFragment extends SherlockFragment implements
 		
 	}
 	
-	
-
 }

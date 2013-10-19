@@ -137,6 +137,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 		else
 		{
 			try {
+				Log.v("ACTI_ICON", "requesting league icon, url:"+actiInfo.getClubIconURL());
 				new RequestImage().execute(new ViewAndUrl(actiInfoHolder.clubIcon,new URL(actiInfo.getClubIconURL()),
 						0,acti_id));
 			} catch (MalformedURLException e) {
@@ -158,6 +159,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 			}
 			else{
 				try {
+					Log.v("ACTI_PIC", "requesting acti pic,url"+actiInfo.getActiPicURL());
 					new RequestImage().execute(new ViewAndUrl(actiInfoHolder.actiPic,new URL(actiInfo.getActiPicURL()),
 							1,acti_id));
 				} catch (MalformedURLException e) {
