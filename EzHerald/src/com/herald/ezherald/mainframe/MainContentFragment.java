@@ -10,6 +10,7 @@ import java.util.Set;
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -94,8 +95,7 @@ public class MainContentFragment extends SherlockFragment {
 	private final int MAX_BANNER_SIZE = 5;
 
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
-	// private ArrayList<MainContentGridItemObj> mContentInfoObjs = new
-	// ArrayList<MainContentGridItemObj>();
+	
 
 	// ////////////Temporarily used local variables///////////////////
 	String mContentCont1[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
@@ -148,8 +148,10 @@ public class MainContentFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-
-		// mActionBar = getSherlockActivity().getSupportActionBar();
+		ProgressDialog progressDialog = new ProgressDialog(getActivity());
+		progressDialog.setMessage("努力加载中...");
+		progressDialog.setCancelable(false);
+		progressDialog.show();
 
 		getPrefItems();
 
@@ -173,9 +175,10 @@ public class MainContentFragment extends SherlockFragment {
 				mGridItems));
 		mListView.setOnItemClickListener(new MyOnItemClickListener());
 
+		List<Integer> preferredColors = getPreferredColors();
 		Random random = new Random();
-		int random_index = random.nextInt(color_ids.length);
-		mListView.setBackgroundResource(color_ids[random_index]);
+		int random_index = random.nextInt(preferredColors.size());
+		mListView.setBackgroundResource(preferredColors.get(random_index));
 
 		// /////////
 
@@ -195,6 +198,41 @@ public class MainContentFragment extends SherlockFragment {
 
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
+		progressDialog.cancel();
+	}
+	
+	/**
+	 * 从首选项中获得可以拿来随机的颜色
+	 * 并转换成resource id
+	 * @return
+	 */
+	private List<Integer> getPreferredColors() {
+		String pref_name = getActivity().getResources().getString(R.string.main_frame_preferences);
+		String pref_key = getActivity().getResources().getString(R.string.main_frame_list_color_pref_key);
+		SharedPreferences prefs = getActivity().getSharedPreferences(pref_name, Context.MODE_PRIVATE);
+		Set<String> prefColorNames = SharedPreferencesHandler.getStringSet(prefs, pref_key, null);
+		List<Integer> result = new ArrayList<Integer>();
+		if(prefColorNames == null ||prefColorNames.isEmpty()){
+			for(int resid : color_ids){
+				result.add(resid);
+			}
+		} else {
+			for(String colorName: prefColorNames){
+				if(colorName.equals("blue")){
+					result.add(R.drawable.main_content_listview_round_shape_blue);
+				} else if (colorName.equals("green")){
+					result.add(R.drawable.main_content_listview_round_shape_green);
+				} else if (colorName.equals("red")){
+					result.add(R.drawable.main_content_listview_round_shape_red);
+				} else if (colorName.equals("navy")){
+					result.add(R.drawable.main_content_listview_round_shape_navy);
+				} else {
+					result.add(R.drawable.main_content_listview_round_shape_purple);
+				}
+			}
+		}
+		
+		return result;
 	}
 
 	/**
@@ -209,7 +247,7 @@ public class MainContentFragment extends SherlockFragment {
 		// //mViewFlow.refreshDrawableState();
 		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
 				mImageItems));
-
+		mViewFlow.refreshDrawableState();
 		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
 

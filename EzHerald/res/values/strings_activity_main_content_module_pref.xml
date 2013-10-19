@@ -83,5 +83,21 @@
         <item >library</item>
         <item >gpa</item>
     </string-array>
+    
+    <string-array name="pref_listview_color_titles">
+        <item >蓝色</item>
+        <item >绿色</item>
+        <item >藏青</item>
+        <item >紫色</item>
+        <item >红色</item>
+    </string-array>
 
+    <string-array name="pref_listview_color_values">
+        <item >blue</item>
+        <item >green</item>
+        <item >navy</item>
+        <item >purple</item>
+        <item >red</item>
+    </string-array>
+    
 </resources>

@@ -32,6 +32,7 @@ import com.herald.ezherald.settingframe.AppUpdateActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,6 +49,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,14 +93,16 @@ public class MainActivity extends BaseFrameActivity {
 	
 	private UpdateBannerImageTask mUpdateBannerImageTask = null;
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
+		
 
 		mSlidingMenu = super.menu;
-
+		
 		boolean isOldUser = checkGuideState();
 		Log.d("MainActivity", "GuideViewed ?:" + isOldUser);
 		if ((!isOldUser) || DEBUG_ALWAYS_SHOW_GUIDE) {
@@ -107,10 +111,9 @@ public class MainActivity extends BaseFrameActivity {
 			startActivity(i);
 			setGuideViewed();
 		}
-
+		
 		Intent intent = getIntent();
 		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
-
 		// 检查是否有固件版本更新
 		if (!mShowedUpdate) {
 			intent = new Intent();
@@ -251,9 +254,7 @@ public class MainActivity extends BaseFrameActivity {
 			in = OpenHttpConnection(URL);
 			if (in == null)
 				throw new IOException("Instream is null");
-			Options options = new Options();
-			//options.inJustDecodeBounds = true; //先检测图片大小
-			bitmap = BitmapFactory.decodeStream(in, null, options);		
+			bitmap = BitmapFactory.decodeStream(in);
 			in.close();
 		} catch (IOException e1) {
 			Log.d("MainActivity:test", e1.getLocalizedMessage());
@@ -349,10 +350,10 @@ public class MainActivity extends BaseFrameActivity {
 				int count = 1;
 				int size = remoteImgUrls.size();
 				for (String urlStr : remoteImgUrls) {
+					showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
 					Bitmap bmp = testGetBitmap(urlStr);
 					if (bmp != null) {
 						updList.add(bmp);
-						showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
 					} else {
 						showToastInWorkingThread("网络不大给力的样子呐...");
 						connFail = true;

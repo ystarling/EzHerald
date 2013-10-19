@@ -161,12 +161,15 @@
             android:name="com.herald.ezherald.mainframe.MainGuideActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity android:name=".settingframe.SyncFrequencySettingActivity" 
-            android:theme="@style/Theme.Heraldstyle"
-            android:label="@string/menu_main_content_pref_title">
-            
+        <activity
+            android:name=".settingframe.SyncFrequencySettingActivity"
+            android:label="@string/menu_main_content_pref_title"
+            android:theme="@style/Theme.Heraldstyle" >
         </activity>
-
+        <activity
+            android:name=".settingframe.MainContentListColorPrefActivity"
+            android:theme="@style/Theme.Heraldstyle" >
+        </activity>
     </application>
 
 </manifest>

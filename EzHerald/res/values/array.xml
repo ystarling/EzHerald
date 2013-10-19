@@ -49,7 +49,8 @@
     
     <!-- mainframe_setting items -->
     <string-array name="setting_menu_titles">
-        <item>主界面模块 </item>
+        <item>主界面模块</item>
+        <item>主界面色调</item>
         <item>同步频率</item>
         <item>软件更新 </item>
         <item>关于…</item>
