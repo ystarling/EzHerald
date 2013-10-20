@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
-import com.herald.ezherald.library.LibraryFragmentThread.BookMyAdapter;
 
 
 	/*
@@ -38,10 +37,11 @@ public class LibraryFragment extends SherlockFragment{
 	Activity activity;
 	View view;
 	Context context;
-	BookMyAdapter adapter;
+	LibraryFragment adapter;
 	boolean isLastRow;
 	int lastItem;
 	int CountOfScroll;
+	String TestSearchValue="";
 	
 	public void onCreate(Bundle save){
 		super.onCreate(save);
@@ -101,10 +101,16 @@ public class LibraryFragment extends SherlockFragment{
 							            //加载元素
 										Toast toast1 = Toast.makeText(activity,"加载更多",Toast.LENGTH_SHORT);
 										toast1.show();
+										if(!TestSearchValue.equals(libr_search_value)){
+											CountOfScroll=0;
+										}
+										Log.e("1",TestSearchValue);
+										Log.e("1",libr_search_value);
+										Log.e("3",CountOfScroll+"");
 										CountOfScroll=CountOfScroll+1;
-										
 										listview.setSelection(lastItem - 1);
 										LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context,listview, CountOfScroll);
+										TestSearchValue=libr_search_value;
 										Log.e("输入内容：",libr_search_value);
 										th.start();
 							        }
@@ -119,7 +125,6 @@ public class LibraryFragment extends SherlockFragment{
 							if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0&&totalItemCount==20) {
 								  isLastRow = true;
 							 }
-							Log.e("isLastRow",isLastRow+"");
 							
 							lastItem = firstVisibleItem + visibleItemCount;
 							
