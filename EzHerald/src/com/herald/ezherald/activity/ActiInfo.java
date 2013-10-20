@@ -48,7 +48,7 @@ public class ActiInfo {
 		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/" +
 				actiPicName;
 //		actiPicUrl = "http://static.dayandcarrot.net/temp/aoi_sora.jpg";
-		actiDetailUrl = "http://herald.seu.edu.cn/herald_league_api/index.php" +
+		actiDetailUrl = "http://herald.seu.edu.cn/herald_league_api/index.php?" +
 				"/command/select/selectoperate/activitydetail/activityid/"+actiId;
 	}
 	

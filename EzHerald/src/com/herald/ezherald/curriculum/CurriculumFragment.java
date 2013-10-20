@@ -255,13 +255,13 @@ public class CurriculumFragment extends SherlockFragment {
 		tab5 = bar.newTab();
 		tab6 = bar.newTab();
 		tab7 = bar.newTab();
-		tab1.setText("一");
-		tab2.setText("二");
-		tab3.setText("三");
-		tab4.setText("四");
-		tab5.setText("五");
-		tab6.setText("六");
-		tab7.setText("七");
+		tab1.setText("周一");
+		tab2.setText("周二");
+		tab3.setText("周三");
+		tab4.setText("周四");
+		tab5.setText("周五");
+		tab6.setText("周六");
+		tab7.setText("周日");
 		tab1.setTabListener(new MyTabListener());
 		tab2.setTabListener(new MyTabListener());
 		tab3.setTabListener(new MyTabListener());
@@ -518,7 +518,7 @@ public class CurriculumFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(List<String> terms)
 		{
-			Toast.makeText(context, "term completed", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(context, "term completed", Toast.LENGTH_SHORT).show();
 			if(terms != null)
 			{
 				dbAdapter.clear();
@@ -584,6 +584,7 @@ public class CurriculumFragment extends SherlockFragment {
 						}
 						for(int j=0;j<dayAttArr.length();++j)
 						{
+							Log.v("Attendance", ""+dayAttArr.getJSONArray(j));
 							JSONArray dayAtt = dayAttArr.getJSONArray(j);
 							Log.v("att", ""+dayAttArr.get(j));
 							for(int k = 0;k<dayAtt.length();++k)
@@ -599,10 +600,8 @@ public class CurriculumFragment extends SherlockFragment {
 										beginWeek, endWeek, j+1);
 								attendances.add(att);
 							}
-							
 						}
 						
-
 						return new AttsAndCourses(attendances, courses);
 					}
 				}
@@ -701,7 +700,7 @@ public class CurriculumFragment extends SherlockFragment {
 					SharedPreferences preferences = getActivity().getSharedPreferences(prefName, 0);
 					String term = preferences.getString(pref_term, null);
 					String url = String.format(curri_url, cardNum, term);
-					Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
+//					Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
 					if(null == term)
 					{
 						Toast.makeText(context, "请先设置学期", Toast.LENGTH_SHORT).show();
@@ -709,7 +708,7 @@ public class CurriculumFragment extends SherlockFragment {
 					else
 					{
 						new requestCurriculum().execute(url);
-						Toast.makeText(context, "thread success", Toast.LENGTH_SHORT).show();
+//						Toast.makeText(context, "thread success", Toast.LENGTH_SHORT).show();
 					}
 				}
 

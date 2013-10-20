@@ -180,7 +180,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 //							"/senderid/"+(1)+"/sendertype/1" +  // 1 replace senderid,it will be from baiyucheng
 //							"/receiverid/"+actiInfoDetail.getActiId()+"/receivertype/5";
 					int cardNum = Integer.parseInt( Authenticate.getIDcardUser(context).getUsername().trim() );
-					String url = "http://herald.seu.edu.cn/herald_league_api/index.php/command/comment/senderid/" +
+					String url = "http://herald.seu.edu.cn/herald_league_api/index.php?/command/comment/senderid/" +
 							+cardNum+"/sendertype/1/receiveid/"+actiInfoDetail.getActiId()+"/receivetype/3";
 //					String url = String.format(getResources().getString(R.string.acti_url_activity_send_comment),
 //							1,actiInfoDetail.getActiId());

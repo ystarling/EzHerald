@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">EzHerald</string>
+    <string name="app_name">先声</string>
     <string name="action_settings">设置</string>
     <string name="hello_world">Hello world!</string>
     <string name="main_slidebar_title">主菜单</string>
@@ -18,7 +18,7 @@
     <string name="TyxLoginButton">登录体育系账户</string>
     <string name="TyxLoginOffButton">退出体育系账户</string>
     <string name="TyxInfo">体育系账号用户名：</string>
-    <string name="LibUserName">图书馆账号(学号)</string>
+    <string name="LibUserName">账号(13级为一卡通,其他为学号)</string>
     <string name="LibPassWord">图书馆密码</string>
     <string name="LibLoginButton">登录图书馆账户</string>
     <string name="LibLoginOffButton">退出图书馆账户</string>
@@ -44,7 +44,9 @@
     <string name="main_frame_menu_more">More...</string>
     <string name="setting_powered_by_herald">Powered by Herald</string>
     <string name="setting_about_2001_2013">2001-2013</string>
-    <string name="setting_about_version">版本：α-less</string>
+    <string name="setting_about_version">build 20131019</string>
     <string name="title_activity_main_content_module_pref">主界面模块</string>
+    <string name="main_frame_list_color_pref_key">list_choice</string>
+    <string name="main_frame_preferences">com.herald.ezherald_preferences</string>
 
 </resources>

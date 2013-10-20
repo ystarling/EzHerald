@@ -66,12 +66,15 @@ public class SettingFragment extends SherlockListFragment {
 			i.setClass(getActivity(), MainContentModulePrefActivity.class);
 			break;
 		case 1:
-			i.setClass(getActivity(), SyncFrequencySettingActivity.class);
+			i.setClass(getActivity(), MainContentListColorPrefActivity.class);
 			break;
 		case 2:
-			i.setClass(getActivity(), AppUpdateActivity.class);
+			i.setClass(getActivity(), SyncFrequencySettingActivity.class);
 			break;
 		case 3:
+			i.setClass(getActivity(), AppUpdateActivity.class);
+			break;
+		case 4:
 			i.setClass(getActivity(), AboutThisApp.class);
 			break;
 		default:

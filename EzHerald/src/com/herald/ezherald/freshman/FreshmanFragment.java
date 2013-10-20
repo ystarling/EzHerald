@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
@@ -21,6 +22,7 @@ public class FreshmanFragment extends SherlockFragment {
 		}
 		@Override
 		public void onClick(View v) {
+			Toast.makeText(getActivity(), "正在更新", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(getActivity(),FreshmanContent.class);
 			Bundle bundle = new Bundle();
 			bundle.putInt("type", type);
