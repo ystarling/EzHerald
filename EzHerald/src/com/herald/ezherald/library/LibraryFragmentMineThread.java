@@ -89,11 +89,6 @@ public class LibraryFragmentMineThread extends Thread{
 			NameValuePair pair2=new BasicNameValuePair("password",LibrAccount.getPassword());
 			list.add(pair2);	
 			
-			//NameValuePair pair1=new BasicNameValuePair("username","71111229");
-			//list.add(pair1);
-			//NameValuePair pair2=new BasicNameValuePair("password","213113709");
-			//list.add(pair2);
-			
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
 			
 			
@@ -137,7 +132,8 @@ public class LibraryFragmentMineThread extends Thread{
 	        ShowMsg(jsonarray);
 			
  		}catch(Exception e){
-			e.printStackTrace();
+			Log.e("ValueError",e.getMessage());
+			ShowMsg2("ValueError");
 		}
 	}
 	
@@ -165,23 +161,27 @@ public class LibraryFragmentMineThread extends Thread{
 				//pro1.setVisibility(View.VISIBLE);
 				dialog1.show();
 			}else
-			if(va=="Networking"){
-				Toast toast1=Toast.makeText(activity, "网络连接错误...", Toast.LENGTH_LONG);
+				if(va=="Networking"){
+				Toast toast1=Toast.makeText(activity, "网络连接错误", Toast.LENGTH_LONG);
 				toast1.show();
-				//pro1.setVisibility(View.GONE);
 				dialog1.cancel();
 			}else
 				if(va=="ContentNull"){
-					Toast toast1=Toast.makeText(activity, "目前没有借书...", Toast.LENGTH_LONG);
+					Toast toast1=Toast.makeText(activity, "目前没有借书", Toast.LENGTH_LONG);
 					toast1.show();
-					//pro1.setVisibility(View.GONE);
 					dialog1.cancel();
 					ImageView image=(ImageView)activity.findViewById(R.id.libr_mine_NoBook2);
 					image.setImageResource(R.drawable.libr_mine_nobook);
 					TextView text=(TextView) activity.findViewById(R.id.libr_mine_NoBook);
 					text.setText("目前没有借书...");
 					
-				}
+				}else
+					if(va=="ValueError"){
+						Toast toast1 = Toast.makeText(activity, "网络请求错误...",
+								Toast.LENGTH_LONG);
+						toast1.show();
+						dialog1.cancel();
+					}
 			super.handleMessage(msg);
 		}
 

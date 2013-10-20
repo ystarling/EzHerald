@@ -1,37 +1,26 @@
 package com.herald.ezherald.library;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
+import com.herald.ezherald.library.LibraryFragmentThread.BookMyAdapter;
 
 
 	/*
@@ -45,14 +34,14 @@ public class LibraryFragment extends SherlockFragment{
 	String libr_search_value=null;
 	SimpleAdapter libr_adapter;
 	ListView libr_listView;
+	ListView listview;
 	Activity activity;
 	View view;
 	Context context;
-	//Booklist booklist=new Booklist();
-	//LibraryService librservice=null;
-	//Book librbook=new Book();
-	//List<Book> booklist2=new ArrayList<Book>();
-	
+	BookMyAdapter adapter;
+	boolean isLastRow;
+	int lastItem;
+	int CountOfScroll;
 	
 	public void onCreate(Bundle save){
 		super.onCreate(save);
@@ -73,63 +62,11 @@ public class LibraryFragment extends SherlockFragment{
 		context=getActivity();
 		
 		
-//		try{
-//			String HERALD_WS_URI = "http://herald.seu.edu.cn/ws";
-//	        HeraldWebServicesFactory factory =new HeraldWebServicesFactoryImpl(HERALD_WS_URI
-//	        CurriculumService curriculumService = factory.getCurriculumService();
-//	        Curriculum curriculum = curriculumService.getCurriculum("213100434");
-//	        Log.e("test","curriculum.cardNumber=" +
-//	                curriculum.getCardNumber());
-//	        System.out.println("curriculum.term=" + curriculum.getTerm());
-//	        System.out.println("curriculum.courses[0].name=" +
-//	                curriculum.getCourses().getCourses().get(0).getName());
-//	        System.out.println("curriculum.courses[0].lecturer=" +
-//	                curriculum.getCourses().getCourses().get(0).getLecturer());
-//	        System.out.println("curriculum.timeTable.schedule[0].day=" +
-//	                curriculum.getTimeTable().getSchedules().get(0).getDay());
-//
-//		}catch(Exception e){
-//            StackTraceElement[] ste=e.getStackTrace();  
-//            for(int i=0;i<ste.length;i++){  
-//                Log.e("tag", ste[i].toString());  
-//		}
-//		}
-        
-		
+   	
 		view = inflater.inflate(R.layout.library_fragment_main,null);
 		
 		libr_search_text=(EditText) view.findViewById(R.id.libr_search_text);
 		ImageView libr_search_button=(ImageView) view.findViewById(R.id.libr_search_button);
-		
-//		/***********set a android search enter*************/
-//		libr_search_text.setOnEditorActionListener(new OnEditorActionListener(){
-//
-//			@Override
-//			public boolean onEditorAction(TextView libr_view, int keyCode, KeyEvent event) {
-//				
-//				if(event.getAction()==KeyEvent.ACTION_DOWN ){
-//
-//					libr_search_value=libr_search_text.getText().toString();
-//					
-//					if(libr_search_value.isEmpty())
-//					{
-//						Toast toast1=Toast.makeText(getActivity(), "你什么东西都没写啊", Toast.LENGTH_SHORT);
-//						toast1.show();
-//					}else{
-//						
-//						LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context);
-//						Log.e("输入内容：",libr_search_value);
-//						th.start();
-//					}
-//					
-//					
-//					}
-//				
-////				}
-//				return true;
-//			}
-//			
-//		});
 		
 		
 		/************set search button click***********/
@@ -139,17 +76,56 @@ public class LibraryFragment extends SherlockFragment{
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				libr_search_value=libr_search_text.getText().toString();
-
+				
+				/********隐藏软键盘*************/
 				InputMethodManager m=(InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);   
-				m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
+				m.hideSoftInputFromWindow(libr_search_text.getWindowToken(), 0);
 				
 				if(libr_search_value.isEmpty())
 				{
 					Toast toast=Toast.makeText(getActivity(), "你什么东西都没写啊", Toast.LENGTH_SHORT);
 					toast.show();
 				}else{
-				
-					LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context);
+					
+					//View loadview=(View) activity.findViewById(R.layout.library_fragment_loadmore);
+					//listview.addFooterView(loadview);
+					listview = (ListView) activity.findViewById(R.id.libr_search_listView);
+					
+					listview.setOnScrollListener(new OnScrollListener() {
+						
+						@Override
+						public void onScrollStateChanged(AbsListView view, int scrollState) {
+							// TODO Auto-generated method stub
+						        //当滚到最后一行且停止滚动时，执行加载
+							       if (isLastRow==true && scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+							            //加载元素
+										Toast toast1 = Toast.makeText(activity,"加载更多",Toast.LENGTH_SHORT);
+										toast1.show();
+										CountOfScroll=CountOfScroll+1;
+										listview.setSelection(lastItem - 1);
+										LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context,listview, CountOfScroll);
+										Log.e("输入内容：",libr_search_value);
+										th.start();
+							        }
+							       isLastRow = false;
+						}
+						
+						@Override
+						public void onScroll(AbsListView view, int firstVisibleItem,
+								int visibleItemCount, int totalItemCount) {
+							// TODO Auto-generated method stub
+							Log.e("firstVisibleItem",""+firstVisibleItem);
+							if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0&&totalItemCount==20) {
+								  isLastRow = true;
+							 }
+							Log.e("isLastRow",isLastRow+"");
+							
+							lastItem = firstVisibleItem + visibleItemCount;
+							
+						}
+					});
+					
+					LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context,listview,CountOfScroll);
 					Log.e("输入内容：",libr_search_value);
 					th.start();
 					}

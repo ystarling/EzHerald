@@ -27,11 +27,11 @@ import com.herald.ezherald.mainframe.MainContentInfoGrabber;
 
 public class LibraryContentGrabber implements MainContentInfoGrabber {
 
-	public String content1 = "";
-	public String content2;
+	public String content1="图书馆服务异常";
+	public String content2="";
 	Context context = null;
 	private JSONArray jsonarray;
-
+	public int BookCount;
 	public LibraryContentGrabber(Context cn) {
 		this.context = cn;
 	}
@@ -94,12 +94,24 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 					}
 
 					jsonarray = new JSONArray(sb.toString());
+					int count = 0;
 					if (jsonarray.isNull(0)) {
 						content1 = "还没有借书";
 					} else {
+						for(int i=0;i<jsonarray.length();i++){
+							String date1=jsonarray.getJSONObject(0).getString("due_date").toString();
+							String date2=jsonarray.getJSONObject(i).getString("due_date").toString();
+							Log.e("content1", date1);
+							Log.e("content"+i, date2);
+							if(date1.equals(date2)){
+								count++;
+								Log.e("count", count+"");
+							}
+						}
 						content1 = "最近需要归还日期："
 								+ jsonarray.getJSONObject(0)
 										.getString("due_date").toString();
+						content2=jsonarray.getJSONObject(0).getString("title").toString()+" 等"+count+"本书";
 					}
 
 					// }
@@ -121,13 +133,13 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 			// }
 
 		} catch (Exception ex) {
-			// Log.d("LibraryMineRemandThread:", ex.getMessage());
+			 Log.d("LibraryMineRemandThread:", ex.getMessage());
 		}
-		Log.e("content", content1);
+		
 		MainContentGridItemObj item = new MainContentGridItemObj();
 		item.setContent1(content1);
 
-		item.setContent2("记得还书啦。。");
+		item.setContent2(content2);
 		return item;
 	}
 
