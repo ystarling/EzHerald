@@ -102,6 +102,7 @@ public class LibraryFragment extends SherlockFragment{
 										Toast toast1 = Toast.makeText(activity,"加载更多",Toast.LENGTH_SHORT);
 										toast1.show();
 										CountOfScroll=CountOfScroll+1;
+										
 										listview.setSelection(lastItem - 1);
 										LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context,listview, CountOfScroll);
 										Log.e("输入内容：",libr_search_value);
@@ -125,7 +126,7 @@ public class LibraryFragment extends SherlockFragment{
 						}
 					});
 					
-					LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context,listview,CountOfScroll);
+					LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context,listview,0);
 					Log.e("输入内容：",libr_search_value);
 					th.start();
 					}

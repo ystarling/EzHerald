@@ -422,7 +422,9 @@ public class LibraryFragmentThread extends Thread{
 					+ data.get(position).get("libr_store_num").toString());
 			holder.libr_landable_num.setText("¿É½è¸±±¾£º"
 					+ data.get(position).get("libr_landable_num").toString());
+			
 			return convertView;
+			
 		}
 
 	}
