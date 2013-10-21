@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -106,7 +107,9 @@ public class SecondMenuFragment extends ListFragment {
 		
 		mListItems = getListItems();
 		mListViewAdapter = new SecondMenuListItemAdapter(getActivity(), mListItems);
+		
 		setListAdapter(mListViewAdapter);
+		getListView().setCacheColorHint(Color.TRANSPARENT);
 	}
 
 	/**
