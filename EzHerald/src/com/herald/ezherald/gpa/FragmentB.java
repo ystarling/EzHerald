@@ -81,24 +81,18 @@ public class FragmentB extends Fragment {
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
+		final GpaAdapter adapter = new GpaAdapter(getActivity(),progress,user);
+		if(adapter.getGroupCount() == 0) {
+			Toast.makeText(getActivity(), "请先更新数据", Toast.LENGTH_LONG).show();
+		}
 		user = Authenticate.getIDcardUser(getActivity());
-		/*
-		if(null == user){
-			Intent login = new Intent();
-			login.setClass(getActivity(),IDCardAccountActivity.class);
-			startActivity(login);
-			GpaDbModel model = new GpaDbModel(getActivity());
-			model.open();
-			model.clear();
-			model.close();//删除旧用户的数据
-		}else{*/
 			progress = new ProgressDialog(getActivity());
-			progress.setTitle("正在获取数据,可能时间较长");
+			progress.setTitle("正在获取,可能时间较长");
 			progress.setIndeterminate(true);//圈圈而不是进度条
 			progress.setCancelable(false);
 			txtGpa = (TextView)getActivity().findViewById(R.id.txt_gpa);
 			elv = (ExpandableListView)getActivity().findViewById(R.id.eList);
-			final GpaAdapter adapter = new GpaAdapter(getActivity(),progress,user);
+			
 			elv.setAdapter(adapter);
 			btnUpdate = (Button)getActivity().findViewById(R.id.btn_update);
 			btnUpdate.setOnClickListener(new OnClickListener(){
