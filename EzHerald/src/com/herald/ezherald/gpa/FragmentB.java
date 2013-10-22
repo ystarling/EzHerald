@@ -106,7 +106,7 @@ public class FragmentB extends Fragment {
 				view = inflater.inflate(R.layout.gpa_veryfiy_code, null);
 				imageView = (ImageView) view.findViewById(R.id.imageView);
 				getveryfyCode();
-				imageView.setImageBitmap(bitmap);
+				//imageView.setImageBitmap(bitmap);
 				builder.setPositiveButton("¸üÐÂ",
 						new DialogInterface.OnClickListener() {
 
@@ -185,7 +185,6 @@ public class FragmentB extends Fragment {
 
 	private void getveryfyCode() {
 		final String url = "http://xk.urp.seu.edu.cn/studentService/getCheckCode";
-		
 		new Thread() {
 			@Override
 			public void run() {
