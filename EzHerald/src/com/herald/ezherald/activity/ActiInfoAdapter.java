@@ -67,9 +67,17 @@ public class ActiInfoAdapter extends BaseAdapter {
 		actiInfoList.addAll(actiList);
 	}
 	
-	public int getLastActiId()
+	public Integer getLastActiId()
 	{
-		return actiInfoList.get(actiInfoList.size()-1).getId();
+		if(actiInfoList.size()>0)
+		{
+			return actiInfoList.get(actiInfoList.size()-1).getId();
+		}
+		else
+		{
+			return null;
+		}
+		
 	}
 
 	@Override

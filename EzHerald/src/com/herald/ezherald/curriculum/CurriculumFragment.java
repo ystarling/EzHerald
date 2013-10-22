@@ -144,7 +144,7 @@ public class CurriculumFragment extends SherlockFragment {
 	@Override
 	public void onResume()
 	{
-		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
 		UserAccount acount = Authenticate.getIDcardUser(context);
 		if(null == acount)
 		{
@@ -434,7 +434,7 @@ public class CurriculumFragment extends SherlockFragment {
 				editor.putString(pref_term, tmpSelect);
 				editor.commit();
 				bar.setTitle("¿Î±í:"+tmpSelect);
-				update();
+//				update();
 			}
 		})
 		.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
@@ -442,7 +442,9 @@ public class CurriculumFragment extends SherlockFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				
+//				Message msg = new Message();
+//				msg.what = 3;
+//				mHandler.sendMessage(msg);
 			}
 		})
 		.setSingleChoiceItems(terms, 0, null)
@@ -533,9 +535,9 @@ public class CurriculumFragment extends SherlockFragment {
 			{
 				createItemDialog();
 			}
-			Message msg = new Message();
-			msg.what = 1;
-			mHandler.sendMessage(msg);
+//			Message msg = new Message();
+//			msg.what = 1;
+//			mHandler.sendMessage(msg);
 		}
 	}
 	
@@ -679,6 +681,7 @@ public class CurriculumFragment extends SherlockFragment {
 	
 	final int TERM_REQ_COMPLETED = 1;
 	final int CURRI_REQ_COMPLETED = 2;
+	final int CURRI_REQ_CANCEL = 3;
 	
 	public Handler mHandler = new Handler()
 	{
@@ -713,6 +716,10 @@ public class CurriculumFragment extends SherlockFragment {
 				}
 
 				break;
+			}
+			case CURRI_REQ_CANCEL:
+			{
+				onRefreshCompleted();
 			}
 				
 			case CURRI_REQ_COMPLETED:
