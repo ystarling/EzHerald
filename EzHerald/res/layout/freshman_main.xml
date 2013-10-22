@@ -27,6 +27,7 @@
                 android:layout_weight="0.25"
                 android:gravity="center"
                 android:text="学    习"
+                android:textColor="#33c4a7"
                 android:textSize="30sp" />
 
         </LinearLayout>
@@ -43,6 +44,7 @@
                 android:layout_weight="0.25"
                 android:gravity="center"
                 android:text="生    活"
+                android:textColor="#61a2e6"
                 android:textSize="30sp" />
 
         </LinearLayout>
@@ -66,6 +68,7 @@
                 android:layout_weight="0.25"
                 android:gravity="center"
                 android:text="玩    乐"
+                android:textColor="#f8a74b"
                 android:textSize="30sp" />
 
         </LinearLayout>
@@ -82,6 +85,7 @@
                 android:layout_weight="0.24"
                 android:gravity="center"
                 android:text="问    答"
+                android:textColor="#fd6d6d"
                 android:textSize="30sp" />
 
         </LinearLayout>

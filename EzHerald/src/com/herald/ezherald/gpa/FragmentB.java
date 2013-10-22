@@ -81,11 +81,12 @@ public class FragmentB extends Fragment {
 	public void onActivityCreated (Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
+		user = Authenticate.getIDcardUser(getActivity());
 		final GpaAdapter adapter = new GpaAdapter(getActivity(),progress,user);
 		if(adapter.getGroupCount() == 0) {
 			Toast.makeText(getActivity(), "请先更新数据", Toast.LENGTH_LONG).show();
 		}
-		user = Authenticate.getIDcardUser(getActivity());
+		
 			progress = new ProgressDialog(getActivity());
 			progress.setTitle("正在获取,可能时间较长");
 			progress.setIndeterminate(true);//圈圈而不是进度条
