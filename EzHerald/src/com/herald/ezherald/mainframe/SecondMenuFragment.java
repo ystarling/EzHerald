@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -106,7 +107,9 @@ public class SecondMenuFragment extends ListFragment {
 		
 		mListItems = getListItems();
 		mListViewAdapter = new SecondMenuListItemAdapter(getActivity(), mListItems);
+		
 		setListAdapter(mListViewAdapter);
+		getListView().setCacheColorHint(Color.TRANSPARENT);
 	}
 
 	/**
@@ -277,17 +280,22 @@ public class SecondMenuFragment extends ListFragment {
 			if(mViewDestroyed)
 				return;
 			
-			Bundle bundle = msg.getData();
-			String name = bundle.getString(BUNDLE_KEY_USERNAME);
-			if(name == null)
-			{
-				Log.e("SecondMenuFragment", "Message contains nothing");
-				return;
+			try {
+				Bundle bundle = msg.getData();
+				String name = bundle.getString(BUNDLE_KEY_USERNAME);
+				if(name == null)
+				{
+					Log.e("SecondMenuFragment", "Message contains nothing");
+					return;
+				}
+				mMenuItemsStr[0] = name;
+				mListItems = getListItems();
+				mListViewAdapter.setmListItems(mListItems);
+				mListViewAdapter.notifyDataSetChanged();
+			} catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			mMenuItemsStr[0] = name;
-			mListItems = getListItems();
-			mListViewAdapter.setmListItems(mListItems);
-			mListViewAdapter.notifyDataSetChanged();
 		}
 		
 	}

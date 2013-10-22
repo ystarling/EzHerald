@@ -1,6 +1,7 @@
 package com.herald.ezherald.freshman;
   
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,10 +35,27 @@ public class FreshmanFragment extends SherlockFragment {
 	}
 	
 	void initView(){
+		final int SIZE = 180;
 		tv_study = (TextView) getActivity().findViewById(R.id.text_study);
 		tv_life  = (TextView) getActivity().findViewById(R.id.text_life);
 		tv_play  = (TextView) getActivity().findViewById(R.id.text_play);
 		tv_faq   = (TextView) getActivity().findViewById(R.id.text_faq);
+		Drawable dr_play = getActivity().getResources().getDrawable(R.drawable.freshman_play);
+		dr_play.setBounds(0,0,SIZE,SIZE);
+		tv_play.setCompoundDrawables(null, dr_play,null, null);
+		
+		Drawable dr_life = getActivity().getResources().getDrawable(R.drawable.freshman_life);
+		dr_life.setBounds(0,0,SIZE,SIZE);
+		tv_life.setCompoundDrawables(null, dr_life,null, null);
+		
+		Drawable dr_study = getActivity().getResources().getDrawable(R.drawable.freshman_study);
+		dr_study.setBounds(0,0,SIZE,SIZE);
+		tv_study.setCompoundDrawables(null, dr_study,null, null);
+		
+		Drawable dr_faq = getActivity().getResources().getDrawable(R.drawable.freshman_faq);
+		dr_faq.setBounds(0,0,SIZE,SIZE);
+		tv_faq.setCompoundDrawables(null, dr_faq,null, null);
+		
 		
 	}
 	void setOnclick(){

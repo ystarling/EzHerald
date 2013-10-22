@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -83,6 +84,9 @@ public class MainMenuFragment extends ListFragment {
 		mListViewAdapter = new MainMenuListItemAdapter(getActivity(),
 				mListItems);
 		setListAdapter(mListViewAdapter);
+		
+		setListAdapter(mListViewAdapter);
+		getListView().setCacheColorHint(Color.TRANSPARENT);
 	}
 
 	/*
