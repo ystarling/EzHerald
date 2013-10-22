@@ -81,7 +81,7 @@ public class MainActivity extends BaseFrameActivity {
 	private final String KEY_NAME_LAST_REFRESH = "main_last_refresh_timestamp";
 	private final String KEY_NAME_REFRESH_FREQ = "sync_frequency";
 	private final int MAX_BANNER_SIZE = 5;
-	
+
 	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false; // 始终显示引导界面
 	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // 始终从网站更新数据，不论新旧
 
@@ -90,19 +90,17 @@ public class MainActivity extends BaseFrameActivity {
 	private final int CONN_TIMEOUT = 5000;
 
 	private boolean mShowedUpdate = false;
-	
-	private UpdateBannerImageTask mUpdateBannerImageTask = null;
 
+	private UpdateBannerImageTask mUpdateBannerImageTask = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
-		
 
 		mSlidingMenu = super.menu;
-		
+
 		boolean isOldUser = checkGuideState();
 		Log.d("MainActivity", "GuideViewed ?:" + isOldUser);
 		if ((!isOldUser) || DEBUG_ALWAYS_SHOW_GUIDE) {
@@ -111,7 +109,7 @@ public class MainActivity extends BaseFrameActivity {
 			startActivity(i);
 			setGuideViewed();
 		}
-		
+
 		Intent intent = getIntent();
 		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
 		// 检查是否有固件版本更新
@@ -148,7 +146,7 @@ public class MainActivity extends BaseFrameActivity {
 		Log.d("MainActivity", "Pref. time interval = " + prefTimeInterval
 				+ " minutes");
 
-		if (timeGap > prefTimeInterval) {
+		if (prefTimeInterval > 0 && timeGap > prefTimeInterval) {
 			Log.d("MainActivity", "checkRefreshState() = true");
 			return true;
 		}
@@ -331,7 +329,6 @@ public class MainActivity extends BaseFrameActivity {
 			isReceivingData = true;
 			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
 					getBaseContext());
-			
 
 			// ///////////////////////////////////////
 			ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // 图片更新的列表
@@ -376,14 +373,15 @@ public class MainActivity extends BaseFrameActivity {
 					// 增加原来的标号
 					removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE;
 					int currDbSize = dbImgSize - removeSize;
-					for (int oldId = currDbSize-1 ; oldId >=0 ; oldId--) {
+					for (int oldId = currDbSize - 1; oldId >= 0; oldId--) {
 						// 顺道把图片取出来
 						Cursor cs = dbAdapter.getImage(oldId);
 						if (cs != null && cs.moveToFirst()) {
 							byte[] inBytes = cs.getBlob(1); // 图片信息是blob信息
-							
-							updList.add(currImgSize , BitmapFactory.decodeByteArray(inBytes,
-									0, inBytes.length));
+
+							updList.add(currImgSize,
+									BitmapFactory.decodeByteArray(inBytes, 0,
+											inBytes.length));
 						}
 						// 修改信息
 						dbAdapter.alterImageId(oldId, oldId + removeSize);
@@ -395,10 +393,10 @@ public class MainActivity extends BaseFrameActivity {
 				for (int id = nextIdToInsert; id < currImgSize + nextIdToInsert; id++) {
 					dbAdapter.insertImage(id, updList.get(id - nextIdToInsert));
 				}
-				
+
 				dbAdapter.close();
 			}
-			
+
 			// ////////////////////////////////////////////////////////////////////////////
 
 			return updList;
@@ -410,10 +408,10 @@ public class MainActivity extends BaseFrameActivity {
 
 			if (doNotUpdateUI) {
 				Log.w("MainActivity", "Do not update UI...");
-				
+
 				if (!connFail)
 					setLastRefreshTime(System.currentTimeMillis());
-				
+
 				isReceivingData = false;
 				mUpdateBannerImageTask = null;
 				return;

@@ -104,7 +104,14 @@ public class CircleChat extends View {
 				break;
 			}
 		}
-		return sorces[i];
+		if(i>=0 && i<TOTAL)
+			return sorces[i];
+		else
+			return null;
+	}
+	
+	public boolean hasData() {
+		return records !=null && !records.isEmpty();
 	}
 
 }

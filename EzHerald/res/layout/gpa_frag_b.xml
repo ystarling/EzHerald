@@ -13,7 +13,9 @@
     <ExpandableListView
         android:id="@+id/eList"
         android:layout_width="match_parent"
-        android:layout_height="218dp" >
+        android:layout_height="218dp"
+        android:layout_weight="0.77" >
+
     </ExpandableListView>
 
     <LinearLayout
