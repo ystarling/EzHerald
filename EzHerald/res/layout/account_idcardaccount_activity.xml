@@ -36,11 +36,11 @@
     android:layout_height="wrap_content"
     android:paddingTop="20sp" >
    	 <Button
-    android:id="@+id/loginSubmit"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-       android:background="#FF6600"
-       android:text="@string/IDCardLoginButton"
+    	android:id="@+id/loginSubmit"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+      	android:background="#FF6600"
+      	android:text="@string/IDCardLoginButton"
     >
    </Button>
 </LinearLayout>

@@ -61,7 +61,6 @@ public class LibraryFragmentThread extends Thread{
 	ListView listview;
 	int CountOfScroll;
 	boolean isLastRow = false;
-	
 	private MyHandle myHandler = new MyHandle();// 初始化Handler
 	private MyHandle2 myHandler2 = new MyHandle2();
 
@@ -71,6 +70,7 @@ public class LibraryFragmentThread extends Thread{
 		this.context = cn;
 		this.CountOfScroll=num;
 		this.listview=listview;
+		
 		dialog1 = new ProgressDialog(context);
 		dialog1.setCanceledOnTouchOutside(false);
 		dialog1.setMessage("加载中...");
@@ -227,8 +227,8 @@ public class LibraryFragmentThread extends Thread{
 					Log.e("无内容", "无内容");
 				} else {
 
-					BookMyAdapter myAdapter = new BookMyAdapter(context,CountOfScroll);
-					myAdapter.jsonarray=json1;
+					BookMyAdapter myAdapter = new BookMyAdapter(context,CountOfScroll,json1);
+					//myAdapter.jsonarray=json1;
 					myAdapter.mycontext=context;
 					listview.setAdapter(myAdapter);
 					if (dialog1.isShowing()) {

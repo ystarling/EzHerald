@@ -3,6 +3,10 @@
  */
 package com.herald.ezherald.library;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.actionbarsherlock.app.SherlockFragment;
 
 import com.herald.ezherald.R;
@@ -16,8 +20,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * @author BIG_SEA
@@ -29,9 +37,42 @@ public class LibraryFragmentMine extends SherlockFragment{
 	 * 个人借阅界面
 	 */
 	 ListView mlistView;
-	 Activity activity;
-	 Context context;
-	 View view;
+	 @Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+			activity=getActivity();
+			context=getActivity();
+			UserAccount LibUser = Authenticate.getLibUser(activity);
+			
+			if(LibUser==null){
+				
+				ImageView image=(ImageView) activity.findViewById(R.id.libr_mine_NoBook2);
+				image.setImageResource(R.drawable.libr_mine_nobook);
+				TextView text=(TextView) activity.findViewById(R.id.libr_mine_NoBook);
+				text.setText("点击登录");
+				text.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent=new Intent(activity,LibAccountActivity.class);
+						startActivity(intent);
+					}
+				});
+			}else{
+				LibraryFragmentMineThread th=new LibraryFragmentMineThread(view,getActivity(),context);
+				th.start();
+				ImageView image=(ImageView) activity.findViewById(R.id.libr_mine_NoBook2);
+				TextView text=(TextView) activity.findViewById(R.id.libr_mine_NoBook);
+				image.setImageResource(0);
+				text.setText("");
+			}
+		super.onResume();
+	}
+	 
+	Activity activity;
+	Context context;
+	View view;
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group,Bundle save){
 		view=inflater.inflate(R.layout.library_fragment_mine, null);
