@@ -258,7 +258,7 @@ public class AcademicFragment extends SherlockFragment implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),
 						AcademicDetailActivity.class);
-				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
 				JwcInfo info = (JwcInfo) adapter.getItem(position-1);
 				int i = info.GetId();
 				intent.putExtra("id", i);
@@ -333,8 +333,8 @@ public class AcademicFragment extends SherlockFragment implements
 			JwcInfoMode = JIAOPING;
 			break;
 		}
-		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
-				Toast.LENGTH_SHORT).show();
+//		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
+//				Toast.LENGTH_SHORT).show();
 		refreshInfo();
 		return false;
 	}

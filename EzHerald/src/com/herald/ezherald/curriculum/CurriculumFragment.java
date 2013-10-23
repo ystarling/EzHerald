@@ -8,7 +8,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -16,7 +15,6 @@ import org.json.JSONException;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,7 +25,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +33,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -52,10 +48,6 @@ import com.herald.ezherald.academic.DataTypeTransition;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.UserAccount;
-import com.herald.ezherald.activity.ActiInfoDetail;
-import com.herald.ezherald.exercise.FragmentA;
-import com.herald.ezherald.exercise.FragmentB;
-import com.herald.ezherald.exercise.FragmentC;
 
 
 public class CurriculumFragment extends SherlockFragment {
@@ -428,7 +420,7 @@ public class CurriculumFragment extends SherlockFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 //				selectedItem = items[which];
-				Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
+//				Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
 				SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
 				Editor editor = settings.edit();
 				editor.putString(pref_term, tmpSelect);
@@ -535,9 +527,9 @@ public class CurriculumFragment extends SherlockFragment {
 			{
 				createItemDialog();
 			}
-//			Message msg = new Message();
-//			msg.what = 1;
-//			mHandler.sendMessage(msg);
+			Message msg = new Message();
+			msg.what = 1;
+			mHandler.sendMessage(msg);
 		}
 	}
 	
