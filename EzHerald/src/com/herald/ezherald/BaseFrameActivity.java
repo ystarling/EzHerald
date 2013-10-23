@@ -66,6 +66,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		InitBaseFrame();
+		getSupportActionBar().setIcon(R.drawable.ic_app); //修改程序内部的图标
 	}
 
 	public void InitBaseFrame() {

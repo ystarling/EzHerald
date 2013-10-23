@@ -149,11 +149,26 @@ public class LibraryBookListDetailThread extends Thread{
 		public void handleMessage(Message msg) {
 			JSONObject json1=(JSONObject) msg.obj;
 			String author=null,press=null, price = null;
+			String subject_topic=null,vector=null,uniform_title=null,clc=null;
+			String faxingfuzhu=null,second_Responsible=null,responsible_note=null,
+					personal_responsible=null,version_note=null,other_titles=null,
+					corpus_items=null;
+			
 			try {
 					json_detail=json1.getJSONObject("detail");
-					author=json_detail.getString("题名/责任者:").toString();
+					subject_topic=json_detail.getString("学科主题:").toString();
 					press=json_detail.getString("出版发行项:").toString();
+					vector=json_detail.getString("载体形态项:").toString();
+					author=json_detail.getString("题名/责任者:").toString();
+					//uniform_title=json_detail.getString("统一题名:").toString();
+					clc=json_detail.getString("中图法分类号:").toString();
+					//faxingfuzhu=json_detail.getString("出版发行附注:").toString();
+					//second_Responsible=json_detail.getString("个人次要责任者:").toString();
+					personal_responsible=json_detail.getString("个人责任者:").toString();
+					//version_note=json_detail.getString("版本附注:").toString();
 					price=json_detail.getString("ISBN及定价:").toString();
+					other_titles=json_detail.getString("其它题名:").toString();
+					//corpus_items=json_detail.getString("丛编项:").toString();
 			} catch (JSONException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -163,13 +178,29 @@ public class LibraryBookListDetailThread extends Thread{
 		
 			
 			TextView textView1=(TextView)activity.findViewById(R.id.libr_book_listdetailA_name);
-			textView1.setText(author);
+			textView1.setText("题名/责任者: "+author);
 			
 			TextView textView2=(TextView)activity.findViewById(R.id.libr_book_listdetailA_press);
-			textView2.setText(press);
+			textView2.setText("出版发行项: "+press);
 			
 			TextView textView3=(TextView)activity.findViewById(R.id.libr_book_listdetailA_prize);
-			textView3.setText(price);
+			textView3.setText("ISBN及定价: "+price);
+			
+			TextView textView4=(TextView)activity.findViewById(R.id.libr_book_listdetailA_vector);
+			textView4.setText("载体形态项: "+vector);
+			
+			TextView textView5=(TextView)activity.findViewById(R.id.libr_book_listdetailA_other_title);
+			textView5.setText("其它题名: "+other_titles);
+			
+			TextView textView6=(TextView)activity.findViewById(R.id.libr_book_listdetailA_personal);
+			textView6.setText("个人责任者: "+personal_responsible);
+			
+			TextView textView7=(TextView)activity.findViewById(R.id.libr_book_listdetailA_subject_topic);
+			textView7.setText("学科主题: "+subject_topic);
+			
+			TextView textView8=(TextView)activity.findViewById(R.id.libr_book_listdetailA_feiliehao);
+			textView8.setText("中图法分类号: "+clc);
+			
 			
 			ListView listview=(ListView) activity.findViewById(R.id.libr_book_listViewB);
 			bookDetailAdapter adapter = null;
