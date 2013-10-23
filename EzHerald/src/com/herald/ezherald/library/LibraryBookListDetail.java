@@ -60,7 +60,7 @@ public class LibraryBookListDetail extends SherlockActivity{
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		ActionBar actionbar=getActionBar();
+		com.actionbarsherlock.app.ActionBar actionbar=getSupportActionBar();
 		actionbar.setDisplayHomeAsUpEnabled(true);
 	}
 

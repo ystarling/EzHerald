@@ -37,12 +37,13 @@ public class LibraryFragment extends SherlockFragment{
 	Activity activity;
 	View view;
 	Context context;
-	LibraryFragment adapter;
+	
 	boolean isLastRow;
 	int lastItem;
-	int CountOfScroll;
+	int CountOfScroll=0;
 	String TestSearchValue="";
-	
+	BookMyAdapter adapter;
+	BookMyAdapter adapter2;
 	public void onCreate(Bundle save){
 		super.onCreate(save);
 		
@@ -64,6 +65,7 @@ public class LibraryFragment extends SherlockFragment{
 		
    	
 		view = inflater.inflate(R.layout.library_fragment_main,null);
+		
 		
 		libr_search_text=(EditText) view.findViewById(R.id.libr_search_text);
 		ImageView libr_search_button=(ImageView) view.findViewById(R.id.libr_search_button);
@@ -101,17 +103,19 @@ public class LibraryFragment extends SherlockFragment{
 							            //加载元素
 										Toast toast1 = Toast.makeText(activity,"加载更多",Toast.LENGTH_SHORT);
 										toast1.show();
+										/*********设置编号问题*************/
 										if(!TestSearchValue.equals(libr_search_value)){
 											CountOfScroll=0;
 										}
-										Log.e("1",TestSearchValue);
-										Log.e("1",libr_search_value);
-										Log.e("3",CountOfScroll+"");
 										CountOfScroll=CountOfScroll+1;
-										listview.setSelection(lastItem - 1);
+										
+										//adapter.notifyDataSetChanged();//提醒adapter更新
+										//listview.setSelection(lastItem-1);
+										
 										LibraryFragmentThread th=new LibraryFragmentThread(libr_search_value,getActivity(), context,listview, CountOfScroll);
 										TestSearchValue=libr_search_value;
 										Log.e("输入内容：",libr_search_value);
+
 										th.start();
 							        }
 							       isLastRow = false;
