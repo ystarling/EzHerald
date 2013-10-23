@@ -20,6 +20,7 @@
         <activity
             android:name="com.herald.ezherald.MainActivity"
             android:label="@string/app_name"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,80 +31,98 @@
         <activity
             android:name="com.herald.ezherald.academic.AcademicActivity"
             android:screenOrientation="sensorPortrait"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.AccountActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.IDCardAccountActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.TyxAccountActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.account.LibAccountActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ActiActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.agenda.AgendaActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.curriculum.CurriculumActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.exercise.ExerciseActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.freshman.FreshmanActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.freshman.FreshmanContent"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.gpa.GPAActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
         <!-- libr  begin -->
         <activity
             android:name="com.herald.ezherald.library.LibraryActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryBookListDetail"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityNews"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityReserve"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- libr end -->
 
         <activity
             android:name="com.herald.ezherald.BaseFrameActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
         <!-- academic Begin -->
         <activity
             android:name="com.herald.ezherald.academic.AcademicDetailActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- academic End -->
@@ -112,27 +131,33 @@
         <!-- acti  begin -->
         <activity
             android:name="com.herald.ezherald.activity.ClubListActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ActiInfoDetailActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ClubDetailActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.ClubAlbumActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.activity.VoteDetailActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- acti  end -->
         <activity
             android:name="com.herald.ezherald.curriculum.CourseDetailActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- curriculum begin -->
@@ -142,33 +167,40 @@
 
         <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AboutThisApp"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.MainContentModulePrefActivity"
+            android:icon="@drawable/ic_app"
             android:label="@string/title_activity_main_content_module_pref"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
+            android:icon="@drawable/ic_app"
             android:label="@string/title_activity_app_update"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.mainframe.MainGuideActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
             android:name=".settingframe.SyncFrequencySettingActivity"
+            android:icon="@drawable/ic_app"
             android:label="@string/menu_main_content_pref_title"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name=".settingframe.MainContentListColorPrefActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
     </application>
