@@ -51,9 +51,13 @@ import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
 /**
- * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 上传更新:
- * http://121.248.63.105/EzHerald/updateupload/ 图片json显示最新五条:
- * http://121.248.63.105/EzHerald/picturejson/ 更新json显示最新一条:
+ * 上传图片: 
+ * http://121.248.63.105/EzHerald/pictureupload/ 
+ * 上传更新:
+ * http://121.248.63.105/EzHerald/updateupload/ 
+ * 图片json显示最新五条:
+ * http://121.248.63.105/EzHerald/picturejson/ 
+ * 更新json显示最新一条:
  * http://121.248.63.105/EzHerald/updatejson/
  * 
  * @author BorisHe

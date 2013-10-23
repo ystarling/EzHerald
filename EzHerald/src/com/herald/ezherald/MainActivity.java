@@ -634,7 +634,7 @@ public class MainActivity extends BaseFrameActivity {
 			}
 		});
 
-		builder.show();
+		//builder.show();
 	}
 
 	/**
