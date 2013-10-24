@@ -1,277 +1,156 @@
 package com.herald.ezherald.settingframe;
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
-
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
-import com.herald.ezherald.R.string;
-import com.herald.ezherald.R.xml;
+import com.herald.ezherald.R.layout;
+import com.herald.ezherald.R.menu;
+import com.herald.ezherald.mainframe.SharedPreferencesHandler;
 
-/**
- * 主界面需要显示模块的偏好设置
- */
-public class MainContentModulePrefActivity extends SherlockPreferenceActivity {
-	/**
-	 * Determines whether to always show the simplified settings UI, where
-	 * settings are presented in a single list. When false, settings are shown
-	 * as a master/detail two-pane view on tablets. When true, a single pane is
-	 * shown on tablets.
-	 */
-	private static final boolean ALWAYS_SIMPLE_PREFS = false;
+import android.os.Bundle;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
+import android.view.Menu;
+
+public class MainContentModulePrefActivity extends SherlockActivity {
+
+	private String[] mModuleNames; // 模块名(英文)
+	private String[] mModuleTitles; // 模块名（中文）
+	private Set<String> mChoosenModules; // 已选择的模块
+	private boolean[] mCheckedItems;
+	private Dialog mDialog;
+
+	private final String PREF_NAME = "com.herald.ezherald_preferences";
+	private final String KEY_NAME = "module_choice";
+	private final int DIALOG_ID = 1;
 
 	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//setContentView(R.layout.setting_main_content_module_pref);
 
-		setupSimplePreferencesScreen();
-		
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		readXMLForChoiceArray();
+		loadSharedPreferences();
+		showDialog(DIALOG_ID, savedInstanceState);
 	}
 
 	/**
-	 * Shows the simplified settings UI if the device configuration if the
-	 * device configuration dictates that a simplified, single-pane UI should be
-	 * shown.
+	 * 从XML资源文件中读取可以配置的模块
 	 */
-	private void setupSimplePreferencesScreen() {
-		if (!isSimplePreferences(this)) {
-			return;
-		}
-
-		// In the simplified UI, fragments are not used at all and we instead
-		// use the older PreferenceActivity APIs.
-
-		// Add 'general' preferences.
-		addPreferencesFromResource(R.xml.pref_mainframe_general);
-
-		/*// Add 'notifications' preferences, and a corresponding header.
-		PreferenceCategory fakeHeader = new PreferenceCategory(this);
-		fakeHeader.setTitle(R.string.pref_header_notifications);
-		getPreferenceScreen().addPreference(fakeHeader);
-		addPreferencesFromResource(R.xml.pref_mainframe_notification);*/
-
-		// Add 'data and sync' preferences, and a corresponding header.
-		PreferenceCategory fakeHeader = new PreferenceCategory(this);
-		fakeHeader = new PreferenceCategory(this);
-		fakeHeader.setTitle(R.string.pref_header_data_sync);
-		
-		getPreferenceScreen().addPreference(fakeHeader);
-		addPreferencesFromResource(R.xml.pref_mainframe_data_sync);
-		
-
-		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
-		// their values. When their values change, their summaries are updated
-		// to reflect the new value, per the Android Design guidelines.
-		//bindPreferenceSummaryToValue(findPreference("example_text"));
-		//bindPreferenceSummaryToValue(findPreference("example_list"));
-		/*bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));*/
-		bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean onIsMultiPane() {
-		return isXLargeTablet(this) && !isSimplePreferences(this);
+	private void readXMLForChoiceArray() {
+		Resources resources = getResources();
+		mModuleNames = resources
+				.getStringArray(R.array.pref_module_choice_values);
+		mModuleTitles = resources
+				.getStringArray(R.array.pref_module_choice_titles);
 	}
 
 	/**
-	 * Helper method to determine if the device has an extra-large screen. For
-	 * example, 10" tablets are extra-large.
+	 * 从SharedPreferences里面读取当前的模块配置情况
 	 */
-	private static boolean isXLargeTablet(Context context) {
-		return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-	}
 
-	/**
-	 * Determines whether the simplified settings UI should be shown. This is
-	 * true if this is forced via {@link #ALWAYS_SIMPLE_PREFS}, or the device
-	 * doesn't have newer APIs like {@link PreferenceFragment}, or the device
-	 * doesn't have an extra-large screen. In these cases, a single-pane
-	 * "simplified" settings UI should be shown.
-	 */
-	private static boolean isSimplePreferences(Context context) {
-		return ALWAYS_SIMPLE_PREFS
-				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
-				|| !isXLargeTablet(context);
-	}
+	private void loadSharedPreferences() {
+		// 获得偏好设置
+		SharedPreferences appPrefs = getSharedPreferences(PREF_NAME,
+				Context.MODE_PRIVATE);
+		Set<String> result_set = null;
+		// try {
+		// result_set = appPrefs.getStringSet(KEY_NAME, null);
+		// } catch (NoSuchMethodError e) {
+		result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME,
+				null);
+		// }
 
-	/** {@inheritDoc} */
-	@Override
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public void onBuildHeaders(List<Header> target) {
-		if (!isSimplePreferences(this)) {
-			loadHeadersFromResource(R.xml.pref_mainframe_headers, target);
-		}
-	}
-
-	/**
-	 * A preference value change listener that updates the preference's summary
-	 * to reflect its new value.
-	 */
-	private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
-		@Override
-		public boolean onPreferenceChange(Preference preference, Object value) {
-			String stringValue = value.toString();
-
-			if (preference instanceof ListPreference) {
-				// For list preferences, look up the correct display value in
-				// the preference's 'entries' list.
-				ListPreference listPreference = (ListPreference) preference;
-				int index = listPreference.findIndexOfValue(stringValue);
-
-				// Set the summary to reflect the new value.
-				preference
-						.setSummary(index >= 0 ? listPreference.getEntries()[index]
-								: null);
-
-			} else if (preference instanceof RingtonePreference) {
-				// For ringtone preferences, look up the correct display value
-				// using RingtoneManager.
-				if (TextUtils.isEmpty(stringValue)) {
-					// Empty values correspond to 'silent' (no ringtone).
-					preference.setSummary(R.string.pref_ringtone_silent);
-
-				} else {
-					Ringtone ringtone = RingtoneManager.getRingtone(
-							preference.getContext(), Uri.parse(stringValue));
-
-					if (ringtone == null) {
-						// Clear the summary if there was a lookup error.
-						preference.setSummary(null);
-					} else {
-						// Set the summary to reflect the new ringtone display
-						// name.
-						String name = ringtone
-								.getTitle(preference.getContext());
-						preference.setSummary(name);
-					}
-				}
-
-			} else {
-				// For all other preferences, set the summary to the value's
-				// simple string representation.
-				preference.setSummary(stringValue);
+		if (result_set == null) {
+			// Load default settings
+			String[] defaultModePref = getResources().getStringArray(
+					R.array.pref_module_choice_def_vals);
+			mChoosenModules = new HashSet<String>();
+			for (String str : defaultModePref) {
+				mChoosenModules.add(str);
 			}
-			return true;
+		} else {
+			mChoosenModules = result_set;
 		}
-	};
 
-	/**
-	 * Binds a preference's summary to its value. More specifically, when the
-	 * preference's value is changed, its summary (line of text below the
-	 * preference title) is updated to reflect the value. The summary is also
-	 * immediately updated upon calling this method. The exact display format is
-	 * dependent on the type of preference.
-	 * 
-	 * @see #sBindPreferenceSummaryToValueListener
-	 */
-	private static void bindPreferenceSummaryToValue(Preference preference) {
-		// Set the listener to watch for value changes.
-		preference
-				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-
-		// Trigger the listener immediately with the preference's
-		// current value.
-		
-		sBindPreferenceSummaryToValueListener.onPreferenceChange(
-				preference,
-				PreferenceManager.getDefaultSharedPreferences(
-						preference.getContext()).getString(preference.getKey(),
-						""));
-
-	}
-
-	/**
-	 * This fragment shows general preferences only. It is used when the
-	 * activity is showing a two-pane settings UI.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class GeneralPreferenceFragment extends PreferenceFragment {
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.pref_mainframe_general);
-
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			//bindPreferenceSummaryToValue(findPreference("example_text"));
-			//bindPreferenceSummaryToValue(findPreference("example_list"));
-		
-		}
-	}
-
-	/**
-	 * This fragment shows notification preferences only. It is used when the
-	 * activity is showing a two-pane settings UI.
-	 */
-/*	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class NotificationPreferenceFragment extends
-			PreferenceFragment {
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.pref_mainframe_notification);
-
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-		}
-	}*/
-
-	/**
-	 * This fragment shows data and sync preferences only. It is used when the
-	 * activity is showing a two-pane settings UI.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class DataSyncPreferenceFragment extends PreferenceFragment {
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.pref_mainframe_data_sync);
-
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-			
-		
+		mCheckedItems = new boolean[mModuleNames.length];
+		for (int i = 0; i < mModuleNames.length; i++) {
+			if (mChoosenModules.contains(mModuleNames[i])) {
+				mCheckedItems[i] = true;
+			} else {
+				mCheckedItems[i] = false;
+			}
 		}
 	}
 
 	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		switch(item.getItemId()){
-		case android.R.id.home:
-			finish();
-			return true;
-			
+	@Deprecated
+	protected Dialog onCreateDialog(int id, Bundle args) {
+		switch (id) {
+		case DIALOG_ID:
+			Builder builder = new Builder(this);
+			builder.setTitle("选择需要在主界面显示的模块");
+			builder.setMultiChoiceItems(mModuleTitles, mCheckedItems,
+					new OnMultiChoiceClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which,
+								boolean isChecked) {
+							String moduleName = mModuleNames[which];
+							if (isChecked) {
+								mChoosenModules.add(moduleName);
+							} else {
+								mChoosenModules.remove(moduleName);
+							}
+						}
+					});
+
+			builder.setPositiveButton("确定", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					saveCurrentPreferences();
+					finish();
+				}
+			});
+
+			builder.setNegativeButton("取消", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					mDialog.cancel();
+					finish();
+				}
+			});
+
+			mDialog = builder.create();
+			return mDialog;
 		}
-		return super.onMenuItemSelected(featureId, item);
+
+		return super.onCreateDialog(id, args);
 	}
-	
-	
+
+	protected void saveCurrentPreferences() {
+		SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+		Editor editor = prefs.edit();
+		SharedPreferencesHandler
+				.putStringSet(editor, KEY_NAME, mChoosenModules);
+		editor.commit();
+	}
+
 }

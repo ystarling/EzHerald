@@ -67,9 +67,17 @@ public class ActiInfoAdapter extends BaseAdapter {
 		actiInfoList.addAll(actiList);
 	}
 	
-	public int getLastActiId()
+	public Integer getLastActiId()
 	{
-		return actiInfoList.get(actiInfoList.size()-1).getId();
+		if(actiInfoList.size()>0)
+		{
+			return actiInfoList.get(actiInfoList.size()-1).getId();
+		}
+		else
+		{
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -137,6 +145,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 		else
 		{
 			try {
+				Log.v("ACTI_ICON", "requesting league icon, url:"+actiInfo.getClubIconURL());
 				new RequestImage().execute(new ViewAndUrl(actiInfoHolder.clubIcon,new URL(actiInfo.getClubIconURL()),
 						0,acti_id));
 			} catch (MalformedURLException e) {
@@ -158,6 +167,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 			}
 			else{
 				try {
+					Log.v("ACTI_PIC", "requesting acti pic,url"+actiInfo.getActiPicURL());
 					new RequestImage().execute(new ViewAndUrl(actiInfoHolder.actiPic,new URL(actiInfo.getActiPicURL()),
 							1,acti_id));
 				} catch (MalformedURLException e) {
@@ -281,6 +291,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 					DBAdapter.updateActiPicByActi(id, result);
 					Log.v("Save Icon", "complete save pic");
 				}
+				img.setVisibility(View.VISIBLE);
 				img.setImageBitmap(result);
 				DBAdapter.close();
 				//img.setLayoutParams(new LayoutParams(40, 40));

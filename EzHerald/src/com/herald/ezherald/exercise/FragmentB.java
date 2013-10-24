@@ -1,5 +1,6 @@
 package com.herald.ezherald.exercise;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,29 +41,30 @@ public class FragmentB extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		edtAdjust = (EditText) getActivity().findViewById(
+				R.id.edtTxt_adjust);
+		btnAdjust = (Button) getActivity().findViewById(R.id.btn_adjust);
+		edtAdjust.setVisibility(View.INVISIBLE);
+		btnAdjust.setVisibility(View.INVISIBLE);
 		user = Authenticate.getTyxUser(getActivity());
-		if (null == user && false) {//TODO test
+		if (null == user) {
 			Intent login = new Intent();
 			login.setClass(getActivity(), TyxAccountActivity.class);
 			startActivity(login);
-			getActivity().finish();
 		} else {
-			edtAdjust = (EditText) getActivity().findViewById(
-					R.id.edtTxt_adjust);
-			btnAdjust = (Button) getActivity().findViewById(R.id.btn_adjust);
+
 			btnUpdate = (Button) getActivity().findViewById(R.id.btn_update);
 			txtTimes = (TextView) getActivity().findViewById(R.id.txt_Times);
 			txtUpdateTime = (TextView) getActivity().findViewById(
 					R.id.txt_update_time);
-			runTimesInfo = new RunTimes(getActivity());
-			edtAdjust.setVisibility(View.INVISIBLE);
-			btnAdjust.setVisibility(View.INVISIBLE);
+			runTimesInfo = new RunTimes(getActivity(),this);
+			
 			txtTimes.setOnLongClickListener(new OnLongClickListener() {
 
 				@Override
 				public boolean onLongClick(View arg0) {
-					edtAdjust.setVisibility(View.VISIBLE);
-					btnAdjust.setVisibility(View.VISIBLE);
+					//edtAdjust.setVisibility(View.VISIBLE);
+					//btnAdjust.setVisibility(View.VISIBLE);
 					return false;
 				}
 
@@ -71,7 +73,7 @@ public class FragmentB extends Fragment {
 			if (runTimesInfo.isSet()) {
 				show();
 			} else {
-				update();
+				//update();
 				show();
 			}
 
@@ -97,8 +99,8 @@ public class FragmentB extends Fragment {
 
 				@Override
 				public void onClick(View v) {
+					btnUpdate.setText("正在更新...");
 					update();
-					show();
 				}
 
 			});
@@ -137,5 +139,26 @@ public class FragmentB extends Fragment {
 		} else {
 			txtUpdateTime.setText("");
 		}
+	}
+	public void onSuccess(){
+		Log.w("err","failed herer!!!!!!!!!!!BBS");
+		btnUpdate.setText("更新");
+		Activity act = getActivity();
+		if(act != null){
+			Toast.makeText(act, "更新成功", Toast.LENGTH_LONG).show();
+			show();
+		}
+			
+	}
+
+	public void onFailed() {
+		Log.w("err","failed herer!!!!!!!!!!!BBF");
+		btnUpdate.setText("更新");
+		Activity act = getActivity();
+		if(act != null){
+			Toast.makeText(act, "更新失败", Toast.LENGTH_LONG).show();
+			show();
+		}
+			
 	}
 }

@@ -21,7 +21,7 @@ public class CircleChat extends View {
 	private float sum;
 	private float startAngle;
 	private final int TOTAL = 5;
-	private final String[] txt= {"其它","1.0~2.0","2.0~3.0","3.0~4.0",">4.0"};
+	private final String[] txt= {"其它","<2.0","2.0~3.0","3.0~4.0",">4.0"};
 	
 	public CircleChat(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -39,7 +39,8 @@ public class CircleChat extends View {
 		radius = getWidth()>getHeight()?getHeight()/2:getWidth()/2;
 		rect = new RectF(0,0,2*radius,2*radius);
 		sum = 0;
-		int colors[] = {Color.LTGRAY,Color.parseColor("#FF9900"),Color.CYAN,Color.parseColor("#BDFF1B"),Color.parseColor("#B70094")};
+		//int colors[] = {Color.LTGRAY,Color.parseColor("#FF9900"),Color.CYAN,Color.parseColor("#BDFF1B"),Color.parseColor("#B70094")};
+		int colors[] = {Color.rgb(188, 200, 224),Color.rgb(147, 169, 208),Color.rgb(79, 129, 188),Color.rgb(69, 115, 167),Color.rgb(56, 97, 143)};
 		for(Record r:records){
 			sum += r.getCredit();
 			if(r.getPoint()>0){
@@ -67,7 +68,7 @@ public class CircleChat extends View {
 			if(ac>0){
 				paint.setTextSize(42);
 				paint.setTextAlign(Align.CENTER);
-				paint.setColor(Color.BLACK);
+				paint.setColor(Color.WHITE);
 				canvas.drawText(txt[i],radius+radius*(0.65f)*(float)Math.cos((start+ac/2)/180*Math.PI),radius+radius*(0.65f)*(float)Math.sin((start+ac/2)/180*Math.PI),paint);
 			}
 			start=(start+ac)%360;
@@ -103,7 +104,14 @@ public class CircleChat extends View {
 				break;
 			}
 		}
-		return sorces[i];
+		if(i>=0 && i<TOTAL)
+			return sorces[i];
+		else
+			return null;
+	}
+	
+	public boolean hasData() {
+		return records !=null && !records.isEmpty();
 	}
 
 }

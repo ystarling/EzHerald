@@ -1,40 +1,50 @@
 package com.herald.ezherald.exercise;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceActivity.Header;
+import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
+
+
 /**
  * @author xie
  * 体育系人人的早操播报消息
  */
 public class RenrenInfo{
 	public static final boolean DEBUG = false;//TODO　just for debug,must be removed before release 
-	private static final String url = "http://page.renren.com/601258593/fdoing"; 
+	private final String URL = "https://api.renren.com/v2/status/list?access_token=";
 	private final int SUCCESS = 1,FAILED = 0;
 	private String info;
 	private String date;
 	private String message;//联网读取到的信息
 	private SharedPreferences pref;
 	private FragmentA father;
-	public Activity activity;
+	public Context context;
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg){
@@ -52,11 +62,11 @@ public class RenrenInfo{
 	 * @param activity 调用者的activity
 	 * 构造时会从sharedPreference尝试读数据
 	 */
-	public RenrenInfo(Activity activity,FragmentA father){
-		this.activity = activity;
+	public RenrenInfo(Context context,FragmentA father){
+		this.context = context;
 		this.father = father;
 		try {
-			pref = activity.getApplication().getSharedPreferences("Renren", 0);
+			pref = context.getSharedPreferences("Renren", 0);
 			setInfo(pref.getString("info", null));
 			setDate(pref.getString("date", null));
 		} catch (Exception e) {
@@ -66,32 +76,46 @@ public class RenrenInfo{
 	}
 	protected void onSuccess() {
 		// TODO Auto-generated method stub
-		//TODO 显示的bug，进度条
-		final String[] target= {"早操播报","跑操早播报"};
-		
-		Document document = Jsoup.parse(message);
-		Elements feeds = document.getElementsByClass("list");
-		Elements lists  = feeds.get(0).children();
-		for(int i=1;i<lists.size();i++){//跳过第一个(i=0)
-			Element feed = lists.get(i);
-			String data = feed.text();
-			for (int j=0;j<target.length;j++){
-				if(data.indexOf(target[j])!=-1){
-					int end = data.lastIndexOf("在");
-					setInfo(data.substring(0, end-1));//字符串之后的都是无用的
-					DateFormat fmt = SimpleDateFormat.getDateTimeInstance();
-					setDate(fmt.format(new Date()));//更新时间
+		try {
+			//String today = android.text.format.DateFormat.format("yyyy-m-d",new Date()).toString();
+			//Date  date = new Date();
+			Calendar calendar = Calendar.getInstance();
+			String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DATE));
+			JSONObject json = new JSONObject(message);
+			JSONArray array = json.getJSONArray("response");
+			setInfo("");
+			for(int i=0;i<array.length();i++){
+				JSONObject object = (JSONObject) array.opt(i);
+				String date = object.getString("createTime");
+				date = date.split(" ")[0];
+				if(date.equals(today)){
+					String info = object.getString("content");
+					setInfo(getInfo()+info+"\n\n\n");
+					setDate(date);
 					save();
-					father.show();
-					return;
+				}else{
+					break;
 				}
 			}
+			if(getInfo()==null||getInfo().equals("")){//没有找到今天的，显示最新一条
+				String info = "\n\n今天没有跑操消息\n\n";
+				setInfo(info);
+				setDate(today);
+				save();
+			}
+			father.onSuccess();
+			DateFormat fmt = SimpleDateFormat.getDateTimeInstance(); 
+			setDate(fmt.format(new Date()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		save();
 	}
 	protected void onFailed() {
 		// TODO Auto-generated method stub
-		Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(activity, "人人信息更新失败", Toast.LENGTH_SHORT).show();
+		father.onFailed();
 	}
 	/**
 	 * 更新数据
@@ -110,17 +134,26 @@ public class RenrenInfo{
 					try {
 						Log.w("update","updating renren");
 						HttpClient client = new DefaultHttpClient();
-						HttpGet get = new HttpGet(url);
-						HttpResponse response = client.execute(get);
-						if (response.getStatusLine().getStatusCode() != 200) {
-							throw new Exception();
-						}
+						String refreshurl = "https://graph.renren.com/oauth/token?grant"+URLEncoder.encode("_")+"type=refresh"+URLEncoder.encode("_")+"token&refresh"+URLEncoder.encode("_")+"token="+URLEncoder.encode("241511|0.NvNrQow4rEchFtbdaCUtdyA5dWLgRgDh.365328826.1379088139819")+"&client"+URLEncoder.encode("_")+"id=241511&client"+URLEncoder.encode("_")+"secret=8d970a6e9e3249e9afffd2fdba73f018";
+						HttpGet refresh = new HttpGet(refreshurl);
+						HttpResponse response = client.execute(refresh);
 						String message = EntityUtils.toString(response.getEntity());
+						JSONObject json  = new JSONObject(message);
+						String token = json.getString("access_token");
+						token = URLEncoder.encode(token);
+						HttpGet get = new HttpGet(URL+token+"&ownerId=601258593");
+						response = client.execute(get);
+						message = EntityUtils.toString(response.getEntity());
+						if (response.getStatusLine().getStatusCode() !=  200) {
+							throw new Exception(response.toString());
+						}
+						
 						Message msg = handler.obtainMessage(SUCCESS,
 								message);
 						handler.sendMessage(msg);
 					} catch (Exception e) {
-						// TODO: handle exception
+						
+						e.printStackTrace();
 						handler.obtainMessage(FAILED).sendToTarget();
 					}
 				}
@@ -128,6 +161,7 @@ public class RenrenInfo{
 		}
 		
 	}
+	
 	/**
 	 * 保存数据到sharedPreference;
 	 */

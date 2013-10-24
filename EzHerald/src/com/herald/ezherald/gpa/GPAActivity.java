@@ -24,6 +24,7 @@ public class GPAActivity extends BaseFrameActivity {
 		UserAccount user = Authenticate.getIDcardUser(this);
 		if(null == user){
 			Intent login = new Intent();
+			login.putExtra("remoteCall", true);
 			login.setClass(this,IDCardAccountActivity.class);
 			startActivity(login);
 			GpaDbModel model = new GpaDbModel(this);

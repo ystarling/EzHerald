@@ -122,12 +122,15 @@
 	    <ImageView 
 	        android:id="@+id/acti_detail_acti_pic"
 	        android:layout_width="150dp"
-	        android:layout_height="150dp"/>
+	        android:layout_height="150dp"
+	        android:visibility="gone"/>
 	    
 	    <LinearLayout 
 	        android:id="@+id/acti_detail_vote"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content">
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        >
 	        
 	    </LinearLayout>
 	    

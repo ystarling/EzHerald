@@ -66,6 +66,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		InitBaseFrame();
+		getSupportActionBar().setIcon(R.drawable.ic_app); //修改程序内部的图标
 	}
 
 	public void InitBaseFrame() {
@@ -104,7 +105,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		Display disp = wMng.getDefaultDisplay();
 		int screenWidth = disp.getWidth();
 		int shadowWidth = (int) (0.05 * screenWidth); // 菜单阴影遮罩宽度
-		int behindOffset = (int) (0.5 * screenWidth); // 菜单之外内容的显示宽度
+		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
 
 		menu = getSlidingMenu();
 		menu.setMode(SlidingMenu.LEFT_RIGHT);
@@ -114,6 +115,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		menu.setShadowWidth(shadowWidth);
 		menu.setShadowDrawable(R.drawable.shadow);
 		menu.setBehindOffset(behindOffset);
+		
 		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu.setBehindScrollScale(1.0f);
 		menu.setBehindCanvasTransformer(mTrans);
@@ -179,19 +181,21 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	}
 
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// 两次返回键退出
+		
 		if(keyCode == KeyEvent.KEYCODE_BACK){
 			if((System.currentTimeMillis() - mExitTime) > 2000){
 				//Object mHelperUtils;
 				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
 				mExitTime = System.currentTimeMillis();
+				menu.showMenu();
 			} else {
 				finish();
 			}
 			return true;
 		}
-		return super.onKeyDown(keyCode, event);
+		return super.onKeyUp(keyCode, event);
 	}
 	
 	

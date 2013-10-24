@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -50,6 +51,17 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_exercise,
 			R.drawable.main_menu_ic_academic,
 			R.drawable.main_menu_ic_freshman }; // 图标(icon)
+	
+	private Integer mMenuItemsIconSelectedResId[] = {
+			R.drawable.main_menu_ic_mainframe_selected,
+			R.drawable.main_menu_ic_curriculum_selected,
+			R.drawable.main_menu_ic_activity_selected,
+			//R.drawable.main_menu_ic_agenda,
+			R.drawable.main_menu_ic_library_selected,
+			R.drawable.main_menu_ic_gpa_selected,
+			R.drawable.main_menu_ic_exercise_selected,
+			R.drawable.main_menu_ic_academic_selected,
+			R.drawable.main_menu_ic_freshman_selected }; // 选中状态的图标(icon)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,6 +84,9 @@ public class MainMenuFragment extends ListFragment {
 		mListViewAdapter = new MainMenuListItemAdapter(getActivity(),
 				mListItems);
 		setListAdapter(mListViewAdapter);
+		
+		setListAdapter(mListViewAdapter);
+		getListView().setCacheColorHint(Color.TRANSPARENT);
 	}
 
 	/*
@@ -143,6 +158,7 @@ public class MainMenuFragment extends ListFragment {
 		for (int i = 0; i < mMenuItemsStr.length; i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("icon", mMenuItemsIconResId[i]);
+			map.put("icon_selected", mMenuItemsIconSelectedResId[i]);
 			map.put("title", mMenuItemsStr[i]);
 			if(selectedId == i){
 				map.put("selected", true);

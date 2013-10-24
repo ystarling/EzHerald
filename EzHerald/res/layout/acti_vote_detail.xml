@@ -15,8 +15,10 @@
     <LinearLayout 
         android:id="@+id/acti_vote_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+       
     </LinearLayout>
     
    

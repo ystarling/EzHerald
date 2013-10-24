@@ -137,6 +137,33 @@ public class MainFrameDbAdapter {
 		args.put(KEY_IMAGE_RAW, os.toByteArray());
 		return db.update(DATABASE_TABLE, args, KEY_IMAGE_ID + "=" + img_id, null)>0;
 	}
+	
+	/**
+	 * 更改图片的ID
+	 * @param oldId
+	 * @param newId
+	 * @return
+	 */
+	public boolean alterImageId(long oldId, long newId){
+		ContentValues args = new ContentValues();
+		args.put(KEY_IMAGE_ID, newId);
+		return db.update(DATABASE_TABLE, args, KEY_IMAGE_ID + "=" + oldId, null)>0;
+	}
+	
+	/**
+	 * 获取当前已存取的图片数量
+	 * @return
+	 */
+	public int getCurrentImageCount(){
+		String sqlCommand = "select count(*) from " + DATABASE_TABLE;
+		Cursor cursor = db.rawQuery(sqlCommand, null);
+		if(cursor != null && cursor.moveToFirst()){
+			return cursor.getInt(0);			
+		}
+		return 0;
+	}
+	
+	
 
 	/**
 	 * 私用的DBHelper

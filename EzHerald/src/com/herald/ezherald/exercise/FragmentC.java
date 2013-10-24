@@ -1,15 +1,18 @@
 package com.herald.ezherald.exercise;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
@@ -45,30 +48,34 @@ public class FragmentC extends Fragment {
 			txt_updateTime = (TextView) getActivity().findViewById(
 					R.id.txt_update_time);
 			btn_update = (Button) getActivity().findViewById(R.id.btn_update);
-			runTimes = new RunTimes(getActivity());
+			runTimes = new RunTimes(getActivity(),this);
 			btn_update.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
+					btn_update.setText("正在更新");
 					update(user);
-					show();
+					
 				}
 
 			});
+			//update(user);
+			show();
+			/*
 			if (runTimes.isSet()) {
 				show();
 			} else {
-				update(user);
-				show();
+				
 			}
+			*/
 		}
 
 	}
 
 	private void show() {
 		final String noData = "还没有数据";
-
+		/*
 		if (runTimes.getRate() != RunTimes.DEFAULT_RATE) {
 			txt_rate.setText(String.format("你的次数击败了\n%d%%的同学",
 					(int) (runTimes.getRate() * 100)));// TODO
@@ -76,10 +83,10 @@ public class FragmentC extends Fragment {
 		} else {
 			txt_rate.setText(noData);
 		}
-
+		*/
 		if (runTimes.getRemainDays() >= 0
 				&& runTimes.getAdviceTime() != RunTimes.DEFAULT_ADVICE_TIME) {
-			txt_remainDays.setText(String.format("本学期还剩%d天\n建议你每周至少跑%d次",
+			txt_remainDays.setText(String.format("本学期还剩%d天上课\n\n建议你每周至少跑%d次",
 					runTimes.getRemainDays(), runTimes.getAdviceTime()));
 			if (runTimes.getAdviceTime() <= 0) {
 				txt_remainDays.setText("已经跑够了，要挑战满勤么？");
@@ -90,16 +97,17 @@ public class FragmentC extends Fragment {
 			else
 				txt_remainDays.setTextColor(Color.RED);
 		} else if (runTimes.getRemainDays() < 0) {
-			txt_remainDays.setText("学期已经结束啦");
+			txt_remainDays.setText("跑操已经结束或无信息");
 		} else {
 			txt_remainDays.setText(noData);
 		}
-
+		/*
 		if (runTimes.getAverageRunTime() != RunTimes.DEFAULT_AVERAGE_RUN_TIME) {
 			txt_notice.setText("平均打卡时间：" + runTimes.getAverageRunTime());
 		} else {
 			txt_notice.setText(noData);
 		}
+		*/
 		if (runTimes.getUpdateTime() != RunTimes.DEFAULT_UPDATE_TIME) {
 			txt_updateTime.setText("更新于" + runTimes.getUpdateTime());
 		} else {
@@ -112,4 +120,28 @@ public class FragmentC extends Fragment {
 		runTimes.update(user);
 	}
 
+	public void onFailed() {
+		// TODO Auto-generated method stub
+		Log.w("err","failed herer!!!!!!!!!!!CCF");
+		btn_update.setText("更新");
+		Activity act = getActivity();
+		if(act != null){
+			Toast.makeText(act, "更新失败", Toast.LENGTH_LONG).show();
+			show();
+		}
+		
+	}
+
+	public void onSuccess() {
+		// TODO Auto-generated method stub
+		Log.w("err","failed herer!!!!!!!!!!!CCS");
+		btn_update.setText("更新");
+		Activity act = getActivity();
+		if(act != null){
+			Toast.makeText(act, "更新成功", Toast.LENGTH_LONG).show();
+			show();
+		}
+			
+	}
+	
 }

@@ -18,12 +18,12 @@ public class CurriDBAdapter {
 	
 	private String tbnCourses = "curri_courses";
 	private String tbnAttendances = "curri_attendances";
+	private String tbnTerms = "curri_terms";
 	
 	private String clCourseId = "course_id";
 	private String clCourseName = "course_name";
 	private String clCourseLecturer = "course_lecturer";
-	private String clCourseBeginweek = "course_begin_week";
-	private String clCourseEndweek = "course_end_week";
+	private String clCourseWeeks = "course_weeks";
 	private String clCourseCredit = "course_credit";
 	
 	private String clAttId = "_id";
@@ -35,12 +35,14 @@ public class CurriDBAdapter {
 	private String clAttPlace = "place";
 	private String clAttWeekday = "weekday";
 	
+	private String clTermId = "_id";
+	private String clTermTerm = "term";
+	
 	private String createTable_Courses = "create table " + tbnCourses +
 			"("+clCourseId+" integer primary key autoincrement," +
 				clCourseName+" text not null," +
 				clCourseLecturer+" text not null,"+
-				clCourseBeginweek+" integer ,"+
-				clCourseEndweek+" integer ,"+
+				clCourseWeeks+" text ,"+
 				clCourseCredit+" integer not null"
 				+");";
 	
@@ -54,6 +56,12 @@ public class CurriDBAdapter {
 			clAttPlace+" text not null,"+
 			clAttWeekday+" integer not null"+
 			");";
+	
+	
+	private String createTable_Terms = "create table " + tbnTerms +
+			"("+clTermId+" integer primary key autoincrement,"+
+			clTermTerm+" text not null" +
+					");";
 	
 	
 	private class DatabaseHelper extends SQLiteOpenHelper
@@ -74,6 +82,7 @@ public class CurriDBAdapter {
 			// TODO Auto-generated method stub
 			db.execSQL(createTable_Attendances);
 			db.execSQL(createTable_Courses);
+			db.execSQL(createTable_Terms);
 			
 		}
 
@@ -82,6 +91,7 @@ public class CurriDBAdapter {
 			// TODO Auto-generated method stub
 			db.execSQL("DROP TABLE IF EXISTS "+ tbnAttendances);
 			db.execSQL("DROP TABLE IF EXISTS "+ tbnCourses);
+			db.execSQL("DROP TABLE IF EXISTS "+ tbnTerms);
 			
 			onCreate(db);
 		}
@@ -112,6 +122,12 @@ public class CurriDBAdapter {
 		}
 	}
 	
+	public long insertTerm(String term)
+	{
+		ContentValues value = new ContentValues();
+		value.put(clTermTerm, term);
+		return db.insert(tbnTerms, null, value);
+	}
 	
 	public long insertCourse(Course course)
 	{
@@ -119,8 +135,7 @@ public class CurriDBAdapter {
 //		value.put(clCourseId, course.getCourseId());
 		value.put(clCourseName, course.getCourseName());
 		value.put(clCourseLecturer, course.getLecturer());
-		value.put(clCourseBeginweek, course.getBeginWeek());
-		value.put(clCourseEndweek, course.getEndWeek());
+		value.put(clCourseWeeks, course.getWeeks());
 		value.put(clCourseCredit, course.getCredit());
 		
 		return db.insert(tbnCourses, null, value);
@@ -140,10 +155,26 @@ public class CurriDBAdapter {
 		return db.insert(tbnAttendances, null, values);
 	}
 	
+	public List<String> getTerms()
+	{
+		Cursor mCursor = db.query(true, tbnTerms, new String[]{clTermTerm}, 
+				null, null, null, null, null, null);
+		List<String> termList = new ArrayList<String>();
+		if(mCursor.moveToFirst())
+		{
+			do
+			{
+				String term = mCursor.getString(mCursor.getColumnIndex(clTermTerm));
+				termList.add(term);
+			}while(mCursor.moveToNext());
+		}
+		return termList;
+	}
+	
 	public List<Course> getCourse(String courseName)
 	{
 		Cursor mCursor = db.query(true, tbnCourses, 
-				new String[]{clCourseBeginweek,clCourseCredit,clCourseEndweek,clCourseLecturer,clCourseName},
+				new String[]{clCourseWeeks,clCourseCredit,clCourseLecturer,clCourseName},
 				clCourseName+"='"+courseName+"'", null, null, null, null, null);
 		List<Course> courseList = new ArrayList<Course>();
 		if(mCursor.moveToFirst())
@@ -154,9 +185,8 @@ public class CurriDBAdapter {
 				String name = mCursor.getString(mCursor.getColumnIndex(clCourseName));
 				String teacher = mCursor.getString(mCursor.getColumnIndex(clCourseLecturer));
 				int credit = mCursor.getInt(mCursor.getColumnIndex(clCourseCredit));
-				int begin = mCursor.getInt(mCursor.getColumnIndex(clCourseBeginweek));
-				int end = mCursor.getInt(mCursor.getColumnIndex(clCourseEndweek));
-				courseList.add(new Course(name,teacher,begin,end,credit));
+				String weeks = mCursor.getString(mCursor.getColumnIndex(clCourseWeeks));
+				courseList.add(new Course(name,teacher,weeks,credit));
 				
 			}while(mCursor.moveToNext());
 			
@@ -170,6 +200,34 @@ public class CurriDBAdapter {
 				new String[]{clAttCourseName,clAttPeriodBegin,clAttPeriodEnd,clAttPlace,clAttWeekBegin,
 				clAttWeekday,clAttWeekEnd},
 				clAttWeekday+"="+weekday, null, null, null, null, null);
+		List<Attendance> attendances = new ArrayList<Attendance>();
+		if(mCursor.moveToFirst())
+		{
+			
+			do
+			{
+				String courseName = mCursor.getString(mCursor.getColumnIndex(clAttCourseName));
+				String place = mCursor.getString(mCursor.getColumnIndex(clAttPlace));
+				int beginWeek = mCursor.getInt(mCursor.getColumnIndex(clAttWeekBegin));
+				int endWeek = mCursor.getInt(mCursor.getColumnIndex(clAttWeekEnd));
+				int beginPeriod = mCursor.getInt(mCursor.getColumnIndex(clAttPeriodBegin));
+				int endPeriod = mCursor.getInt(mCursor.getColumnIndex(clAttPeriodEnd));
+				int day = mCursor.getInt(mCursor.getColumnIndex(clAttWeekday));
+				attendances.add(new Attendance(courseName,place,beginPeriod,endPeriod,
+						beginWeek,endWeek,day));
+				
+			}while(mCursor.moveToNext());
+			
+		}
+		return attendances;
+	}
+	
+	public List<Attendance> getNextAttByPeroid(int weekday, int period)
+	{
+		Cursor mCursor = db.query(true, tbnAttendances, 
+				new String[]{clAttCourseName,clAttPeriodBegin,clAttPeriodEnd,clAttPlace,clAttWeekBegin,
+				clAttWeekday,clAttWeekEnd},
+				clAttWeekday+"="+weekday+" and period_begin>"+period, null, null, null, null, null);
 		List<Attendance> attendances = new ArrayList<Attendance>();
 		if(mCursor.moveToFirst())
 		{
@@ -210,20 +268,27 @@ public class CurriDBAdapter {
 	
 	public void clear()
 	{
-		String sql_1 = "delete from "+tbnAttendances+";";
-		String sql_2 = "delete from "+tbnCourses+";";
+		String del_sql_1 = "delete from "+tbnAttendances+";";
+		String del_sql_2 = "delete from "+tbnCourses+";";
+		String del_sql_3 = "delete from "+tbnTerms+";";
 		
-		db.execSQL(sql_1);
-		db.execSQL(sql_2);
+		db.execSQL(del_sql_1);
+		db.execSQL(del_sql_2);
+		db.execSQL(del_sql_3);
 		
-		String sql_3 = "update sqlite_sequence set seq=0 where name='"+tbnAttendances+"';";
-		String sql_4 = "update sqlite_sequence set seq=0 where name='"+tbnCourses+"';";
+		String up_sql_1 = "update sqlite_sequence set seq=0 where name='"+tbnAttendances+"';";
+		String up_sql_2 = "update sqlite_sequence set seq=0 where name='"+tbnCourses+"';";
+		String up_sql_3 = "update sqlite_sequence set seq=0 where name='"+tbnTerms+"';";
+		db.execSQL(up_sql_1);
+		db.execSQL(up_sql_2);
+		db.execSQL(up_sql_3);
 		
-		db.execSQL(sql_3);
-		db.execSQL(sql_4);
 		
 	}
 	
-	
+	public boolean isOpen()
+	{
+		return db.isOpen();
+	}
 
 }

@@ -3,10 +3,13 @@ package com.herald.ezherald.curriculum;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
+
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -19,6 +22,10 @@ public class CourseDetailActivity extends SherlockActivity {
 	ListView listView ;
 	CurriDBAdapter dbAdapter;
 	
+	private Context context;
+	
+	
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -26,6 +33,8 @@ public class CourseDetailActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.curri_course_detail);
 		
+		Context context = this;
+
 		adapter = new CourseDetailAdapter(this);
 		dbAdapter = new CurriDBAdapter(this);
 		dbAdapter.open();
@@ -38,7 +47,7 @@ public class CourseDetailActivity extends SherlockActivity {
 		List<Course> courses = dbAdapter.getCourse(courseName);
 		adapter.setCourses(courses);
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 //		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setTitle("¿Î³ÌÏêÇé");
 		actionBar.setDisplayHomeAsUpEnabled(true);

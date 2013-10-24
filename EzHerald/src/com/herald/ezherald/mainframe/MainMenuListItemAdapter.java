@@ -23,6 +23,15 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 
 	private Context mContext; // 运行上下文
 	private List<Map<String, Object>> mListItems; // 菜单项信息
+	
+	public List<Map<String, Object>> getmListItems() {
+		return mListItems;
+	}
+
+	public void setmListItems(List<Map<String, Object>> mListItems) {
+		this.mListItems = mListItems;
+	}
+
 	private LayoutInflater mListContainer; // 视图容器
 
 	public final class ListItemView {
@@ -89,8 +98,11 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 				"title"));
 		Boolean selected = (Boolean)mListItems.get(position).get("selected");
 		if(selected!= null && selected.equals(true)){
+			//此项选中
 			//convertView.setBackgroundColor(Color.parseColor("#10ff0000"));
-			listItemView.title.setTextColor(Color.parseColor("#2c9bff"));
+			listItemView.title.setTextColor(Color.parseColor("#eb3c4b"));
+			listItemView.icon.setImageResource((Integer) mListItems.get(position)
+					.get("icon_selected"));
 		}
 		
 		return convertView;

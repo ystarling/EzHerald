@@ -6,15 +6,25 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
+
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -22,10 +32,12 @@ import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -35,29 +47,35 @@ import com.herald.ezherald.R;
 public class AcademicDetailActivity extends SherlockActivity {
 
 	Context context;
-
+	private final String DETAIL_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/detaile/%d/";
+	private ProgressDialog progressDialog;
+	
+	private String infoTitle;
+	
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		context = this;
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("Please wait ... ");
+		
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.academic_detail);
-		// Intent intent = getIntent();
-		// String url = intent.getStringExtra("url");
-		// try {
-		// new RequestJwcDetail().execute(new URL("http://www.baidu.com/") );
-		//
-		// } catch (MalformedURLException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		setContentView(R.layout.academic_webview_test);
-		WebView wv = (WebView) findViewById(R.id.academic_webview);
-		WebSettings websetting = wv.getSettings();
-		websetting.setBuiltInZoomControls(true);
-		wv.loadUrl("http://www.baidu.com");
+		 setContentView(R.layout.academic_detail);
+		 Intent intent = getIntent();
+		 int id = intent.getIntExtra("id", -1);
+		 String url = String.format(DETAIL_URL, id);
+		 progressDialog.show();
+		 try {
+			 new RequestJwcDetail().execute(new URL(url) );
+		
+		 } catch (MalformedURLException e) {
+		 // TODO Auto-generated catch block
+			 e.printStackTrace();
+			 progressDialog.cancel();
+		 }
 
-		ActionBar actionbar = this.getActionBar();
+		ActionBar actionbar = this.getSupportActionBar();
 		actionbar.setDisplayHomeAsUpEnabled(true);
 		actionbar.setDisplayShowTitleEnabled(false);
 
@@ -82,49 +100,12 @@ public class AcademicDetailActivity extends SherlockActivity {
 			finish();
 			return true;
 		case R.id.menu_academic_detail_share:
-			// PopupWindow popWin;
-			// View pwView =
-			// getLayoutInflater().inflate(R.layout.academic_detail_popwin_share,
-			// null);
-			// popWin = new PopupWindow(pwView, 300, 210, true);
-			// popWin.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.spinner_background));
-			// //View clickView = item.getActionView();
-			// Display display = getWindowManager().getDefaultDisplay();
-			// int posX = ( display.getWidth() - popWin.getWidth() ) /2;
-			// int posY = ( display.getHeight() - popWin.getHeight() )/2 ;
-			// popWin.showAsDropDown(pwView,posX, posY);
-			//
-			// Button btn_to_weibo = (Button)
-			// pwView.findViewById(R.id.academic_detail_shareto_weibo);
-			// Button btn_to_renren = (Button)
-			// pwView.findViewById(R.id.academic_detail_shareto_renren);
-			// btn_to_weibo.setOnClickListener(new OnClickListener(){
-			//
-			// @Override
-			// public void onClick(View v) {
-			// // TODO Auto-generated method stub
-			// Toast.makeText(context, "share to weibo",
-			// Toast.LENGTH_SHORT).show();
-			// }
-			//
-			// });
-			//
-			// btn_to_renren.setOnClickListener(new OnClickListener(){
-			//
-			// @Override
-			// public void onClick(View v) {
-			// // TODO Auto-generated method stub
-			// Toast.makeText(context, "share to renren",
-			// Toast.LENGTH_SHORT).show();
-			// }
-			//
-			// });
 			Intent intent = new Intent(Intent.ACTION_SEND);
 
 			intent.setType("text/plain");
 			intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
 			intent.putExtra(Intent.EXTRA_TEXT,
-					"I would like to ‘herald campus’ this with you...");
+					"教务处发布了新的通知："+ infoTitle);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(Intent.createChooser(intent, "分享到"));
 			return true;
@@ -158,11 +139,30 @@ public class AcademicDetailActivity extends SherlockActivity {
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
-						JwcInfo info = new JwcInfo("", "", "", str);
+						JSONArray jsonArr = new JSONArray(str);
+						int id = jsonArr.getInt(0);
+						String type = jsonArr.getString(1);
+						String title = jsonArr.getString(2);
+						String date = jsonArr.getString(3);
+						String con = jsonArr.getString(4);
+						JSONArray apps = jsonArr.getJSONArray(5);
+						List<Link> links = new ArrayList<Link>();
+						for(int i=0; i<apps.length();++i)
+						{
+							JSONArray app = apps.getJSONArray(i);
+							Link link = new Link(app.getString(0), app.getString(1));
+							links.add(link);
+						}
+						JwcInfo info = new JwcInfo(type, title, date, id);
+						info.setContent(con);
+						info.setAppendix(links);
 						return info;
 					}
 				}
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -173,25 +173,36 @@ public class AcademicDetailActivity extends SherlockActivity {
 		@Override
 		protected void onPostExecute(JwcInfo info) {
 			if (info != null) {
+				LinearLayout layout = (LinearLayout) findViewById(R.id.academic_detail);
 				TextView type = (TextView) findViewById(R.id.academic_detail_type);
 				TextView title = (TextView) findViewById(R.id.academic_detail_title);
 				TextView date = (TextView) findViewById(R.id.academic_detail_date);
 				TextView content = (TextView) findViewById(R.id.academic_detail_content);
 
-				String txt = "第一条  为规范对考试违规行为的认定与处理，维护学校考试的公平、公正，"
-						+ "保证优良的学风和公平竞争的环境，根据国家有关规定，结合我校实际情况，特制定本规定。"
-						+ "第二条  本规定所称考试是指学校、院（系）、任课老师组织的与学生学业有关的各种形式的考试，"
-						+ "包括闭卷笔试（含实验、上机等考试）、半开卷笔试、开卷笔试、口试、笔试与口试相结合、撰写论文（设计）、"
-						+ "调研报告等方式。";
-				JwcInfo jwcInfo = new JwcInfo("[教务管理]", "重修通知", "2013-6-25",
-						txt);
-				type.setText(jwcInfo.GetType());
-				title.setText(jwcInfo.GetTitle());
-				date.setText(jwcInfo.GetDate());
-				content.setText(jwcInfo.GetIntro());
+				type.setText(info.GetType());
+				title.setText(info.GetTitle());
+				date.setText(info.GetDate());
+				content.setText(info.getContent());
+				
+				infoTitle = info.GetTitle();
+				
+				List<Link> links = info.getAppendixs();
+				String linkText = "<a href=\"%s\"><u>%s</u></a>";
+				for(Link link: links)
+				{
+					String realLinkText = String.format(linkText, link.getUrl(), link.getTitle());
+					TextView tv = new TextView(context);
+					tv.setTextColor(Color.BLUE);
+//					tv.setAutoLinkMask(Linkify.ALL);
+					tv.setText(Html.fromHtml(realLinkText));
+//					tv.setText(link.getTitle()+link.getUrl());
+					tv.setMovementMethod(LinkMovementMethod.getInstance());
+					layout.addView(tv);
+				}
 
 				// Toast.makeText(getApplicationContext(), info.GetIntro(),
 				// Toast.LENGTH_SHORT).show();
+				progressDialog.cancel();
 			}
 
 		}

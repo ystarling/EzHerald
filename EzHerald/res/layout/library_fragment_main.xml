@@ -2,28 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="10sp"
+    android:background="#f2f2f2"
     android:orientation="vertical">
   	<LinearLayout
-  	    android:id="@+id/hello"
   	    android:layout_width="fill_parent"
   	    android:layout_height="wrap_content"
   	    android:orientation="horizontal"
+  	   
   	    >
-   	<EditText
-      android:id="@+id/libr_search_text"
-      android:layout_width="250dp"
-      android:layout_height="wrap_content"
-      android:hint="请输入书名"
-      android:singleLine="true"
-      android:imeOptions="actionSearch"/>
-  	<Button 
-  	  android:text="搜索"
+
+  		<EditText
+  		    android:id="@+id/libr_search_text"
+  		    android:layout_width="0sp"
+  		    android:layout_height="match_parent"
+  		    android:layout_weight="6"
+  		    android:hint="请输入书名"
+  		    
+  		    android:singleLine="true" 
+  		    android:background="@drawable/libr_search_frame">
+
+  		</EditText>
+   	
+  		<!--android:imeOptions="actionSearch"-->
+  	<ImageView 
       android:id="@+id/libr_search_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_width="0sp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:src="@drawable/libr_search_button"/>
   	</LinearLayout>
   	
+  	
+	<ProgressBar
+        android:id="@+id/libr_circleProgressBar2"
+        style="?android:attr/progressBarStyleLarge"
+		android:layout_width="match_parent"   
+        android:layout_height="100sp"
+        android:layout_gravity="center"  
+        android:visibility="gone" 
+    ></ProgressBar>
+  	    
 	<ListView
     android:id="@+id/libr_search_listView"
     android:layout_width="fill_parent"

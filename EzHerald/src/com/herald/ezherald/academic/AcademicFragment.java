@@ -1,5 +1,6 @@
 package com.herald.ezherald.academic;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -11,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -20,9 +24,13 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
+import com.herald.ezherald.mainframe.MainContentGridItemObj;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,8 +59,10 @@ public class AcademicFragment extends SherlockFragment implements
 	private CustomListView listView;
 	private JwcInfoAdapter adapter;
 	private ListFootView foot;
+	
+	private AcademicDBAdapter dbAdapter;
 
-	private Menu mMenu;
+	public Menu mMenu;
 
 	private final int ALL = 0;
 	private final int JIAOWU = 1;
@@ -63,6 +73,19 @@ public class AcademicFragment extends SherlockFragment implements
 	private final int JIAOPING = 6;
 
 	private int JwcInfoMode = ALL;
+	
+	private final String REFRESH_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/%d/";
+	private final String MORE_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/more/%d/%d";
+	
+	
+	private Integer lastid = null;
+	private Context context;
+	
+	private ProgressDialog progressDialog;
+	
+	RefreshJwcInfo refreshTask;
+	RequestJwcInfo requestTask;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,13 +93,32 @@ public class AcademicFragment extends SherlockFragment implements
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
+		context = getActivity();
+		dbAdapter = new AcademicDBAdapter(context);
+		
+		
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("Please wait ... ");
+		
 	}
+	
+	
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
+
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.menu_academic_list, menu);
-
+//		mMenu = menu;
 	}
 
 	/*
@@ -89,39 +131,70 @@ public class AcademicFragment extends SherlockFragment implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * ÉÏ²àTitleÎ»ÖÃµÄ°´Å¥µã»÷ÏàÓ¦
+		 * é”Ÿè¾ƒè¯§æ‹·Titleä½é”ŸçŸ«çš„å¸®æ‹·é’®é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ¥ï¿½
 		 */
 		switch (item.getItemId()) {
 		case R.id.academic_list_action_refresh:
-			try {
-				// item.setActionView(R.layout.academic_refresh_progress);
-				onRefreshActionStart();
-				new RefreshJwcInfo().execute(new URL("http://jwc.seu.edu.cn"));
-				// item.setActionView(null);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				onRefreshActionComplete();
-				e.printStackTrace();
-			}
+			// item.setActionView(R.layout.academic_refresh_progress);
+			refreshInfo();
+			// item.setActionView(null);
+			super.onOptionsItemSelected(item);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 
 		}
-
 	}
+	
+	@Override 
+	public void onDestroy()
+	{
+		
+		if (refreshTask != null && refreshTask.getStatus() == AsyncTask.Status.RUNNING)
+		{
+			refreshTask.cancel(true);
+		}
+		if (requestTask !=null && requestTask.getStatus() == AsyncTask.Status.RUNNING )
+		{
+			requestTask.cancel(true);
+		}
+//		onRefreshActionComplete();
+		progressDialog.dismiss();
+		super.onDestroy();
+	}
+	
+	@Override 
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+		progressDialog.dismiss();
+	}
+	
+	
+//	@Override
+//	public boolean onMenuItemSelected(int featureId, MenuItem item)
+//	{
+//		onOptionsItemSelected(item);
+//		return true;
+//	}
 
-	// Ë¢ĞÂ²Ëµ¥¿ªÊ¼Ğı×ª
+	// åˆ·é”Ÿé“°èœç¢‰æ‹·é”Ÿæ–¤æ‹·å§‹é”Ÿæ–¤æ‹·è½¬
 	public void onRefreshActionStart() {
 		// REFRESHSTATE = REFRESHING ;
+		if(mMenu == null)
+			return;
+		progressDialog.show();
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(R.layout.academic_refresh_progress);
-
 	}
 
-	// Ë¢ĞÂ²Ëµ¥Í£Ö¹Ğı×ª
+	// åˆ·é”Ÿé“°èœç¢‰æ‹·åœæ­¢é”Ÿæ–¤æ‹·è½¬
 	public void onRefreshActionComplete() {
 		// REFRESHSTATE = REFRESHDOWN;
+		if(mMenu == null)
+			return;
+		
+		progressDialog.cancel();
 		MenuItem muItem = mMenu.findItem(R.id.academic_list_action_refresh);
 		muItem.setActionView(null);
 	}
@@ -140,17 +213,11 @@ public class AcademicFragment extends SherlockFragment implements
 		View v;
 		v = inflater.inflate(R.layout.academic_activity_main, null);
 		listView = (CustomListView) v.findViewById(R.id.list);
-		// Êı¾İ»ñÈ¡£¬ÔİÇÒÖ±½Ó¸ø³ö
-		JwcInfo[] jwcArr = {
-				new JwcInfo("[½ÌÎñ¹ÜÀí]", "ËÄÁù¼¶¿¼ÊÔ", "2013-6-15",
-						"ËÄÁù¼¶¿¼ÊÔ½«ÔÚ¾ÅÁúºşĞ£Çø½øĞĞ£¬Çë¸÷Î»Í¬Ñ§×öºÃ×¼±¸"),
-				new JwcInfo("[½ÌÎñ¹ÜÀí]", "ÆÚÄ©¿¼ÊÔ", "2013-6-17",
-						"ÆÚÄ©¿¼ÊÔ¼ÇÂ¼ËµÃ÷£ºÕâÑ§ÆÚÑ§Ğ£¼ÌĞøÑÏÀ÷´ò»÷×÷±×ĞĞÎª...") };
-		// ÉèÖÃlistViewµÄadapter
+		// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·listViewé”Ÿæ–¤æ‹·adapter
 		adapter = new JwcInfoAdapter(getActivity());
-		adapter.setJwcInfoList(jwcArr);
+//		adapter.setJwcInfoList(jwcArr);
 		listView.setAdapter(adapter);
-		// Ìí¼Óµ×²¿¡°¼ÓÔØ¸ü¶à¡±µÄview
+		// é”Ÿæ–¤æ‹·æ‹¥æ’é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é¦—é”Ÿæ´â€é”Ÿæ–¤æ‹·view
 		foot = new ListFootView(getActivity().getApplicationContext());
 		foot.setOnClickListener(new OnClickListener() {
 
@@ -158,9 +225,12 @@ public class AcademicFragment extends SherlockFragment implements
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				try {
+					onRefreshActionStart();
 					foot.startRequestData();
-					new RequestJwcInfo().execute(new URL(
-							"http://jwc.seu.edu.cn"));
+					int id = adapter.getLastItemId();
+					String url = String.format(MORE_URL, id, JwcInfoMode);
+					requestTask = new RequestJwcInfo();
+					requestTask.execute(new URL(url));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -169,25 +239,17 @@ public class AcademicFragment extends SherlockFragment implements
 
 		});
 		listView.addFooterView(foot.getFootView());
-		// ÉèÖÃlistviewµÄË¢ĞÂ²Ù×÷
+		// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·listviewé”Ÿæ–¤æ‹·åˆ·é”Ÿé“°è¯§æ‹·é”Ÿæ–¤æ‹·
 		listView.setonRefreshListener(new OnRefreshListener() {
 
 			@Override
 			public void onRefresh() {
 				// TODO Auto-generated method stub
-				try {
-					onRefreshActionStart();
-					new RefreshJwcInfo().execute(new URL(
-							"http://jwc.seu.edu.cn"));
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					onRefreshActionComplete();
-					e.printStackTrace();
-				}
+				refreshInfo();
 			}
 
 		});
-		// ÉèÖÃlistviewÃ»¸öitemµÄµã»÷²Ù×÷
+		// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·listviewæ²¡é”Ÿæ–¤æ‹·itemé”Ÿä¾¥ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -196,40 +258,55 @@ public class AcademicFragment extends SherlockFragment implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),
 						AcademicDetailActivity.class);
-				intent.putExtra("url", "http://jwc.seu.edu.cn");
+//				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+				JwcInfo info = (JwcInfo) adapter.getItem(position-1);
+				int i = info.GetId();
+				intent.putExtra("id", i);
 				startActivity(intent);
-
 			}
-
 		});
-		// actionbar µÄ spinner
+		// actionbar é”Ÿæ–¤æ‹· spinner
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(
 				getActivity(), R.array.academic_list_action_spinner,
-				android.R.layout.simple_spinner_dropdown_item);
+				R.layout.academic_spinner_textitem);
 		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-		// ÏÂÃæ×¢ÊÍÆğÀ´µÄ·½·¨Ò²¿ÉÒÔµÄ
-		// class OnNavigationListener implements ActionBar.OnNavigationListener{
-		//
-		// @Override
-		// public boolean onNavigationItemSelected(int itemPosition,
-		// long itemId) {
-		// // TODO Auto-generated method stub
-		// Toast.makeText(getActivity(), ""+itemPosition+"   "+itemId,
-		// Toast.LENGTH_SHORT).show();
-		// return false;
-		// }
-		//
-		// }
-
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
+		
+		initJwcInfoListView();
+		
+		refreshInfo();
 
 		return v;
 	}
+	
+	public void refreshInfo()
+	{
+		try {
+			onRefreshActionStart();
+			refreshTask = new RefreshJwcInfo();
+			String url = String.format(REFRESH_URL, JwcInfoMode);
+			refreshTask.execute(new URL(url));
+			//ew grabber().execute();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void initJwcInfoListView()
+	{
+		dbAdapter.open();
+		List<JwcInfo> jwcInfoList = dbAdapter.getAllJwcInfo();
+		dbAdapter.close();
+		adapter.setJwcInfoList(jwcInfoList);
+		adapter.notifyDataSetChanged();
+	}
+	
 
-	// actionbar µÄ spinner µÄitemµã»÷ÏìÓ¦
+	// actionbar é”Ÿæ–¤æ‹· spinner é”Ÿæ–¤æ‹·itemé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ¥ï¿½
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
@@ -256,18 +333,9 @@ public class AcademicFragment extends SherlockFragment implements
 			JwcInfoMode = JIAOPING;
 			break;
 		}
-		// try {
-		// onRefreshActionStart();
-		// new RefreshJwcInfo().execute(new URL("http://jwc.seu.edu.cn") );
-		// //return true;
-		// } catch (MalformedURLException e) {
-		// // TODO Auto-generated catch block
-		// onRefreshActionComplete();
-		// e.printStackTrace();
-		// //return false;
-		// }
-		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
-				Toast.LENGTH_SHORT).show();
+//		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
+//				Toast.LENGTH_SHORT).show();
+		refreshInfo();
 		return false;
 	}
 
@@ -277,6 +345,8 @@ public class AcademicFragment extends SherlockFragment implements
 		protected List<JwcInfo> doInBackground(URL... arg0) {
 			// TODO Auto-generated method stub
 			// onRefreshActionStart();
+			if(isCancelled()) 
+				return null;
 			List<JwcInfo> jwcList = new ArrayList<JwcInfo>();
 			InputStream in = null;
 			int response = -1;
@@ -295,47 +365,83 @@ public class AcademicFragment extends SherlockFragment implements
 					response = httpConn.getResponseCode();
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
-						// String str =
-						// DataTypeTransition.InputStreamToString(in);
+						 String str = DataTypeTransition.InputStreamToString(in);
 						// return str;
 						List<JwcInfo> list = new ArrayList<JwcInfo>();
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "½ô¼±ÌìÆøÔ¤¾¯", "2013-6-23",
-								"ÄÏ¾©µ°ÌÛµÄÌìÆøÓÖÀ´ÓêÁË£¬¹À¼ÆÖÜÈı²ÅÄÜÍ££¬Í¯Ğ¬ÃÇÈÌÒ»ÈÌ°É¡£"));
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "ÊîÆÚ·Å¼ÙÍ¨Öª", "2013-6-25",
-								"ÓÖÒª·Å¼ÙÁË£¬Ğ¡ĞÄ±»×Ó·¢Ã¹°¡£¬¸ÃÕ¦°ìÎÊµùÂè°É¡£"));
+						JSONArray jsonArr = new JSONArray(str);
+						for (int i=0; i<jsonArr.length(); ++i)
+						{
+							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+							int id = Integer.parseInt(jsonItem.getString(0));
+							String type = jsonItem.getString(1);
+							String title = jsonItem.getString(2);
+							String date = jsonItem.getString(3);
+							list.add(new JwcInfo(type, title, date, id));
+							
+						}
+						
 						return list;
 					}
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 			return null;
 		}
+		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
+		    if(isCancelled()) 
+		      return;
+		  }
 
 		@Override
 		protected void onPostExecute(List<JwcInfo> result) {
-			if (result != null) {
-				// adapter.addJwcInfoList(result);
-				// adapter.foreAddJwcInfoList(result);
-				adapter.setJwcInfoList(result);
-				adapter.notifyDataSetChanged();
-				listView.onRefreshComplete();
-				onRefreshActionComplete();
-				// Log.v("Watch", "onPostExecute");
+			try{
+				if (result != null) {
+					// adapter.addJwcInfoList(result);
+					// adapter.foreAddJwcInfoList(result);
+					adapter.setJwcInfoList(result);
+					adapter.notifyDataSetChanged();
+					refreshDB(result);
+					listView.onRefreshComplete();
+					onRefreshActionComplete();
+					// Log.v("Watch", "onPostExecute");
+					
+				}
 			}
+			catch( Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 
 		}
 
 	}
+	
+	private void refreshDB(List<JwcInfo> infoList)
+	{
+		dbAdapter.open();
+		dbAdapter.refreshJwcInfo(infoList);
+		dbAdapter.close();
+	}
+	
 
 	private class RequestJwcInfo extends AsyncTask<URL, Integer, List<JwcInfo>> {
 
 		@Override
 		protected List<JwcInfo> doInBackground(URL... params) {
 			// TODO Auto-generated method stub
-
+			if(isCancelled()) 
+				return null;
 			List<JwcInfo> jwcList = new ArrayList<JwcInfo>();
 			InputStream in = null;
 			int response = -1;
@@ -354,41 +460,93 @@ public class AcademicFragment extends SherlockFragment implements
 					response = httpConn.getResponseCode();
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
-						// String str =
-						// DataTypeTransition.InputStreamToString(in);
+						 String str = DataTypeTransition.InputStreamToString(in);
 						// return str;
-						try {
-							Thread.sleep(1000);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+
 						List<JwcInfo> list = new ArrayList<JwcInfo>();
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "½ô¼±ÌìÆøÔ¤¾¯", "2013-6-23",
-								"ÄÏ¾©µ°ÌÛµÄÌìÆøÓÖÀ´ÓêÁË£¬¹À¼ÆÖÜÈı²ÅÄÜÍ££¬Í¯Ğ¬ÃÇÈÌÒ»ÈÌ°É¡£"));
-						list.add(new JwcInfo("[Éú»îÌáĞÑ]", "ÊîÆÚ·Å¼ÙÍ¨Öª", "2013-6-25",
-								"ÓÖÒª·Å¼ÙÁË£¬Ğ¡ĞÄ±»×Ó·¢Ã¹°¡£¬¸ÃÕ¦°ìÎÊµùÂè°É¡£"));
+						JSONArray jsonArr = new JSONArray(str);
+						for (int i=0; i<jsonArr.length(); ++i)
+						{
+							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+							int id = Integer.parseInt(jsonItem.getString(0));
+							String type = jsonItem.getString(1);
+							String title = jsonItem.getString(2);
+							String date = jsonItem.getString(3);
+							list.add(new JwcInfo(type, title, date, id));
+							
+						}
+						
 						return list;
 					}
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 			return null;
 		}
+		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
+		    if(isCancelled()) 
+		      return;
+		  }
 
 		@Override
 		protected void onPostExecute(List<JwcInfo> result) {
-			if (result != null) {
-				adapter.addJwcInfoList(result);
-				adapter.notifyDataSetChanged();
-				foot.endRequestData();
-				listView.onRequestComplete();
+			try{
+				if (result != null) {
+					if(result.size() == 0)
+					{
+						Toast.makeText(context, "æ²¡æœ‰æ›´å¤šäº†.", Toast.LENGTH_LONG).show();
+					}
+					adapter.addJwcInfoList(result);
+					adapter.notifyDataSetChanged();
+					addIntoDB(result);
+					foot.endRequestData();
+					listView.onRequestComplete();
+				}
+				onRefreshActionComplete();
 			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 
 		}
-
 	}
+	
+	private void addIntoDB(List<JwcInfo> infoList)
+	{
+		dbAdapter.open();
+		dbAdapter.addJwcInfo(infoList);
+		dbAdapter.close();
+	}
+	
+	
+	private class grabber extends AsyncTask<Void, Integer, MainContentGridItemObj>
+	{
 
+		@Override
+		protected MainContentGridItemObj doInBackground(Void... arg0) {
+			// TODO Auto-generated method stub
+			MainContentGridItemObj obj = new AcademicDataGrabber().GrabInformationObject();
+			return obj;
+		}
+		
+		@Override
+		protected void onPostExecute(MainContentGridItemObj obj)
+		{
+			Toast.makeText(context, obj.getContent1()+ obj.getContent2(), Toast.LENGTH_LONG).show();
+		}
+		
+	}
+	
 }
