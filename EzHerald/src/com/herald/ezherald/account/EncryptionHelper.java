@@ -22,7 +22,7 @@ public class EncryptionHelper {
 	private static byte[] iv = { 1, 2, 3, 4, 5, 6, 7, 8 };
 	private static String ENC_METHOD = "DES";
 	private static String CIPHER_TRANSFORMATION = "DES/CBC/PKCS5Padding";
-
+	public static String KEY = "ENC1234E";
 	/**
 	 * º”√‹
 	 * 
