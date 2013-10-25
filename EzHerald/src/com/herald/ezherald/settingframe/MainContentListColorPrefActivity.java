@@ -97,6 +97,7 @@ public class MainContentListColorPrefActivity extends SherlockActivity {
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
 			builder.setTitle("选择主界面列表随机显示的颜色");
+			builder.setCancelable(false);
 			builder.setMultiChoiceItems(mColorTitles, mCheckedItems,
 					new OnMultiChoiceClickListener() {
 

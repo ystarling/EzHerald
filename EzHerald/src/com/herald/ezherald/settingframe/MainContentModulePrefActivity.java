@@ -96,6 +96,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
 			builder.setTitle("选择需要在主界面显示的模块");
+			builder.setCancelable(false);
 			builder.setMultiChoiceItems(mModuleTitles, mCheckedItems,
 					new OnMultiChoiceClickListener() {
 
