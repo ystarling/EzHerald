@@ -2,6 +2,7 @@ package com.herald.ezherald;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -66,7 +67,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		super.onCreate(savedInstanceState);
 		InitBaseFrame();
 		getSupportActionBar().setIcon(R.drawable.ic_app); //修改程序内部的图标
-		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 	}
 
 	public void InitBaseFrame() {

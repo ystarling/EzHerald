@@ -3,8 +3,8 @@
 <!-- ListView第一行上方的圆角效果 -->
     <gradient
         android:angle="270"
-        android:endColor="#a300aa"
-        android:startColor="#a300aa" />
+        android:endColor="#aa66cc"
+        android:startColor="#aa66cc" />
 
     <corners
         android:topLeftRadius="6dip"
