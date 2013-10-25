@@ -31,8 +31,6 @@ import com.herald.ezherald.mainframe.MainGuideActivity;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,7 +38,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,7 +46,6 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -108,6 +104,7 @@ public class MainActivity extends BaseFrameActivity {
 			i.setClass(this, MainGuideActivity.class);
 			startActivity(i);
 			setGuideViewed();
+			
 		}
 
 		Intent intent = getIntent();
@@ -146,7 +143,7 @@ public class MainActivity extends BaseFrameActivity {
 		Log.d("MainActivity", "Pref. time interval = " + prefTimeInterval
 				+ " minutes");
 
-		if (prefTimeInterval > 0 && timeGap > prefTimeInterval) {
+		if (prefTimeInterval >= 0 && timeGap > prefTimeInterval) {
 			Log.d("MainActivity", "checkRefreshState() = true");
 			return true;
 		}
@@ -310,7 +307,7 @@ public class MainActivity extends BaseFrameActivity {
 			@Override
 			public void run() {
 				Looper.prepare(); // ÕâÊÇ¹Ø¼ü
-				Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG)
+				Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT)
 						.show();
 				Looper.loop();
 			}

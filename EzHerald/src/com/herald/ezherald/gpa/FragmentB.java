@@ -10,7 +10,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -30,9 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
-import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.account.Authenticate;
-import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.UserAccount;
 
 public class FragmentB extends Fragment {

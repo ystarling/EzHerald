@@ -3,13 +3,8 @@ package com.herald.ezherald.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
-import com.herald.ezherald.R;
-import com.herald.ezherald.academic.AcademicFragment;
-import com.herald.ezherald.academic.CustomSlidingFragmentActivity;
-import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class ActiActivity extends BaseFrameActivity {
 

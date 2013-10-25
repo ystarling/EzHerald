@@ -1,7 +1,6 @@
 package com.herald.ezherald;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.os.Bundle;

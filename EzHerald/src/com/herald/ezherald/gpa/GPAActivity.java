@@ -2,8 +2,6 @@ package com.herald.ezherald.gpa;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.account.Authenticate;

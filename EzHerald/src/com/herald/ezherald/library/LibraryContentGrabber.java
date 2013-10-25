@@ -15,8 +15,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.util.Log;
 
