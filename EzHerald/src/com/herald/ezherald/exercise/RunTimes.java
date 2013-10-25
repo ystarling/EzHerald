@@ -45,7 +45,7 @@ public class RunTimes {
 	private String timesAndRateXml;//次数与比例的xml
 	
 	
-	public static final int    DEFAULT_TIMES = -999;
+	public static final int    DEFAULT_TIMES = -1;
 	public static final int    DEFAULT_ADJUST_TIMES = 0;
 	public static final float  DEFAULT_RATE = -1;
 	public static final int    DEFAULT_REMAIN_DAYS = -1;  
@@ -262,6 +262,8 @@ public class RunTimes {
 	 */
 	private int calcAdviceTime(){
 		//TODO calculate the advise time
+		if(times == DEFAULT_ADVICE_TIME)
+			return -1;
 		int remainWeeks = remainDays/5;
 		int remainTimes = 45 - times;
 		int advice;
