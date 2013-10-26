@@ -31,7 +31,6 @@
         android:id="@+id/btn_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="58dp"
         android:text="更新" />
 
 </LinearLayout>

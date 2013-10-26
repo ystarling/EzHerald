@@ -80,7 +80,7 @@ public class RenrenInfo{
 				date = date.split(" ")[0];
 				if(date.equals(today)){
 					String info = object.getString("content");
-					setInfo(getInfo()+info+"\n\n\n");
+					setInfo(getInfo()+info+"\n发布时间"+date+"\n\n\n");
 					setDate(date);
 					save();
 				}else{
