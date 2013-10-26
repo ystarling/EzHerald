@@ -98,6 +98,10 @@ public class CurriculumFragment extends SherlockFragment {
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("Please wait ... ");
+		
 		
 	}
 	
@@ -118,16 +122,6 @@ public class CurriculumFragment extends SherlockFragment {
 		this.savedInstanceState = savedInstanceState;
 		String cardNum = null;
 		bar = getSherlockActivity(). getSupportActionBar();
-//		UserAccount acount = Authenticate.getIDcardUser(context);
-//		if(null == acount)
-//		{
-//			Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
-//			return setNotLoginView(inflater, container, savedInstanceState);
-//		}
-//		else
-//		{
-//			return setLoginView(inflater, container, savedInstanceState);
-//		}
 		return null;
 		
 
@@ -213,9 +207,7 @@ public class CurriculumFragment extends SherlockFragment {
 			
 		});
 		
-		progressDialog = new ProgressDialog(context);
-		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("Please wait ... ");
+		
 //		progressDialog.show();
 		
 		if(dbAdapter.isEmpty())
@@ -427,6 +419,10 @@ public class CurriculumFragment extends SherlockFragment {
 				editor.commit();
 				bar.setTitle("课表:"+tmpSelect);
 //				update();
+//				new requestCurriculum().execute(curri_url);
+				Message msg = new Message();
+				msg.what = 4;
+				mHandler.sendMessage(msg);
 			}
 		})
 		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -434,9 +430,9 @@ public class CurriculumFragment extends SherlockFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-//				Message msg = new Message();
-//				msg.what = 3;
-//				mHandler.sendMessage(msg);
+				Message msg = new Message();
+				msg.what = 3;
+				mHandler.sendMessage(msg);
 			}
 		})
 		.setSingleChoiceItems(terms, 0, null)
@@ -528,7 +524,7 @@ public class CurriculumFragment extends SherlockFragment {
 				createItemDialog();
 			}
 			Message msg = new Message();
-			msg.what = 1;
+			msg.what = TERM_REQ_COMPLETED;
 			mHandler.sendMessage(msg);
 		}
 	}
@@ -634,7 +630,7 @@ public class CurriculumFragment extends SherlockFragment {
 				Toast.makeText(context, "数据读取失败．．．", Toast.LENGTH_SHORT).show();
 			}
 			Message msg = new Message();
-			msg.what = 2;
+			msg.what = CURRI_REQ_COMPLETED;
 			mHandler.sendMessage(msg);
 		}
 		
@@ -674,6 +670,7 @@ public class CurriculumFragment extends SherlockFragment {
 	final int TERM_REQ_COMPLETED = 1;
 	final int CURRI_REQ_COMPLETED = 2;
 	final int CURRI_REQ_CANCEL = 3;
+	final int CURRI_REQ_BEGIN = 4;
 	
 	public Handler mHandler = new Handler()
 	{
@@ -712,16 +709,37 @@ public class CurriculumFragment extends SherlockFragment {
 			case CURRI_REQ_CANCEL:
 			{
 				onRefreshCompleted();
+				break;
 			}
 				
-			case CURRI_REQ_COMPLETED:
+			case CURRI_REQ_COMPLETED:{
 //				progressDialog.cancel();
 				onRefreshCompleted();
 				break;
 			}
+			case CURRI_REQ_BEGIN:
+			{
+//				progressDialog.show();
+//				onRefreshStart();
+//				new requestCurriculum().execute(get_curr_url());
+				update();
+				break;
+			}
+			
+			}
 			super.handleMessage(msg);
 		}
 	};
+	
+	private String get_curr_url()
+	{
+		UserAccount acount = Authenticate.getIDcardUser(context);
+		String cardNum = acount.getUsername();
+		SharedPreferences preferences = getActivity().getSharedPreferences(prefName, 0);
+		String term = preferences.getString(pref_term, null);
+		String url = String.format(curri_url, cardNum, term);
+		return url;
+	}
 	
 	public void onRefreshCompleted()
 	{
@@ -738,8 +756,15 @@ public class CurriculumFragment extends SherlockFragment {
 	
 	}
 	
+	public void onRefreshStart()
+	{
+		progressDialog.show();
+//		dbAdapter.clear();
+	}
+	
 
 	
 
 
+	
 }

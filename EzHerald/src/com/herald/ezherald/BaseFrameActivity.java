@@ -2,6 +2,7 @@ package com.herald.ezherald;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
 	protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
 	private long mExitTime;
+	private static final String KEY_SHOWED_UPDATE = "showedUpdate";
 	
 	// protected int mContentResId;
 
@@ -66,7 +68,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		TCAgent.setReportUncaughtExceptions(true);//开启远程异常捕获
+		//TCAgent.setReportUncaughtExceptions(true);//开启远程异常捕获
 		InitBaseFrame();
 		getSupportActionBar().setIcon(R.drawable.ic_app); //修改程序内部的图标
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
@@ -97,7 +99,6 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		t.commit();
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		//getSupportActionBar().setDisplayShowTitleEnabled(false);
 	}
 
 	private void initSlidingMenu() {
