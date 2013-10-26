@@ -149,10 +149,7 @@ public class MainContentFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		ProgressDialog progressDialog = new ProgressDialog(getActivity());
-		progressDialog.setMessage("≈¨¡¶º”‘ÿ÷–...");
-		progressDialog.setCancelable(false);
-		progressDialog.show();
+		
 
 		getPrefItems();
 
@@ -199,7 +196,6 @@ public class MainContentFragment extends SherlockFragment {
 
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
-		progressDialog.cancel();
 	}
 	
 	/**
