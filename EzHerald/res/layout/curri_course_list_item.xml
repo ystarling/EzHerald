@@ -21,7 +21,7 @@
 	        android:id="@+id/curri_course_item_name"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:textColor="#0000ff"
+	        android:textColor="#000000"
 	        android:textSize="20sp"/>
         
     </LinearLayout>
@@ -34,7 +34,7 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="地点:"
+            android:text="教师:"
             android:textSize="20sp"
              />
         <TextView 
@@ -42,7 +42,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="20sp"
-	        android:textColor="#CD8500"
+	        android:textColor="#000000"
 	        />
         
     </LinearLayout>
@@ -62,7 +62,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="20sp"
-	        android:textColor="#CD8500" 
+	        android:textColor="#000000" 
 	        />
         
     </LinearLayout>
@@ -82,7 +82,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="20sp"
-	        android:textColor="#CD8500" 
+	        android:textColor="#000000" 
 	        />
         
     </LinearLayout>
