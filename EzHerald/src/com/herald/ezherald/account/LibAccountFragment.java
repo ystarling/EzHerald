@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +35,6 @@ import android.widget.TextView;
 
 import android.widget.EditText;
 import android.widget.Toast;
-
-import cn.edu.seu.herald.ws.api.ServiceException;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 
@@ -114,20 +111,6 @@ public class LibAccountFragment extends SherlockFragment {
 		}
 	};
 
-	/*
-	 * private void initView(boolean isRememberMe) {
-	 * 
-	 * String userName = share.getString(SHARE_LOGIN_USERNAME, ""); String
-	 * password = share.getString(SHARE_LOGIN_PASSWORD, "");
-	 * Log.d(this.toString(), "userName=" + userName + " password=" + password);
-	 * if (!"".equals(userName)) { view_userName.setText(userName); } if
-	 * (!"".equals(password)) { view_password.setText(password);
-	 * view_rememberMe.setChecked(true); }
-	 * 
-	 * if (view_password.getText().toString().length() > 0) { //
-	 * view_loginSubmit.requestFocus(); // view_password.requestFocus(); } share
-	 * = null; }
-	 */
 	private void setListener() {
 		view_loginSubmit.setOnClickListener(submitListener);
 
@@ -144,25 +127,21 @@ public class LibAccountFragment extends SherlockFragment {
 	};
 
 	public static boolean isNetworkAvailable(Context context) {
-		Log.v("mynet", "start");
 		ConnectivityManager connectivity = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (connectivity == null) {
-			Log.i("NetWorkState", "Unavailabel");
+		if (connectivity == null) {			
 			return false;
 		} else {
 			NetworkInfo[] info = connectivity.getAllNetworkInfo();
 			if (info != null) {
 				for (int i = 0; i < info.length; i++) {
-					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-						Log.i("NetWorkState", "Availabel");
-						Log.v("mynet", "yes");
+					if (info[i].getState() == NetworkInfo.State.CONNECTED) {					
 						return true;
 					}
 				}
 			}
 		}
-		Log.v("mynet", "no");
+	
 		return false;
 	}
 
@@ -171,96 +150,53 @@ public class LibAccountFragment extends SherlockFragment {
 		public final String POST_KEY_USERNAME = "username";
 		public final String POST_KEY_PASSWORD = "password";
 		
-		public final int VERIFY_STATE_OKAY = 200; 
-		public final int VERIFY_STATE_FAIL = 300;
-		public final int VERIFY_STATE_ERROR = 400;
+		public final int VERIFY_AUTH_OKAY = 200; 
+		public final int VERIFY_AUTH_FAIL = 300;
+		public final int VERIFY_SERVICE_ERROR = 500;
 		
 		public void run() {
-			boolean loginState = false;
-			boolean isNetError = !isNetworkAvailable(getActivity());
-			boolean isServiceError = false;
-			userName = view_userName.getText().toString();
-			password = view_password.getText().toString();
 			try {
-				if (!isNetError) {
-					//final String HERALD_WS_BASE_URI = "http://herald.seu.edu.cn/ws";
-					
-					
-					int verifyResult = verifyLibUserPswd(userName, password);
-					
-					/*HeraldWebServicesFactory factory = new HeraldWebServicesFactoryImpl(
-							HERALD_WS_BASE_URI);
-
-					LibraryService libService = factory.getLibraryService();
-					if (libService == null) {
-						Log.v("temptext", "libService is null");
-					}*/
-
-					//User libUser = libService.logIn(userName, password);
-
-					//if (libUser == null) {
-					if(verifyResult == VERIFY_STATE_FAIL){
-						loginState = false;
-					} else if(verifyResult == VERIFY_STATE_ERROR){
-						loginState = false;
-						isNetError = true;
-					} else {
-
-						loginState = true;
-						Log.v("mynet", "insertstart");
-						databaseHelper = new DatabaseHelper(getActivity(),
-								Authenticate.DATABASE_NAME);
-						SQLiteDatabase database = databaseHelper
-								.getWritableDatabase();
-						database.execSQL("DELETE FROM "
-								+ Authenticate.TABLE_NAME + " WHERE type="
-								+ "'" + Authenticate.LIBRARY_TYPE + "'");
-						ContentValues values = new ContentValues();
-						values.put("id", 1);
-						values.put("username", userName);
-						values.put("password", EncryptionHelper.encryptDES(password, EncryptionHelper.KEY));
-						values.put("type", Authenticate.LIBRARY_TYPE);
-						database.insert(Authenticate.TABLE_NAME, null, values);
-						database.close();
-						
-						Intent newActivity = new Intent(getSherlockActivity(),
-								AccountActivity.class);
-						startActivity(newActivity);
-						
-						getSherlockActivity().finish();
-					}
-				}
-				Message message = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("loginState", loginState);
-				bundle.putBoolean("isNetError", isNetError);
-				bundle.putBoolean("isServiceError", isServiceError);
-				message.setData(bundle);
-				loginHandler.sendMessage(message);
-				proDialog.dismiss();
+			Message msg = new Message();
+			if(isNetworkAvailable(getActivity())){
 				
+				userName = view_userName.getText().toString();
+				password = view_password.getText().toString();
 
-			} catch (ServiceException e) {
-				Log.v("LibAccountServiceEx", "LibAccountServiceEx");
-				isServiceError = true;
-				Message message = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("loginState", loginState);
-				bundle.putBoolean("isNetError", isNetError);
-				bundle.putBoolean("isServiceError", isServiceError);
-				message.setData(bundle);
-				loginHandler.sendMessage(message);
-				proDialog.dismiss();
-
+				int verifyResult = verifyLibUserPswd(userName, password);					
+				if(verifyResult == VERIFY_AUTH_OKAY){
+					databaseHelper = new DatabaseHelper(getActivity(),
+							Authenticate.DATABASE_NAME);
+					SQLiteDatabase database = databaseHelper
+							.getWritableDatabase();
+					database.execSQL("DELETE FROM "
+							+ Authenticate.TABLE_NAME + " WHERE type="
+							+ "'" + Authenticate.LIBRARY_TYPE + "'");
+					ContentValues values = new ContentValues();
+					values.put("id", 1);
+					values.put("username", userName);
+					values.put("password", EncryptionHelper.encryptDES(password, EncryptionHelper.KEY));
+					values.put("type", Authenticate.LIBRARY_TYPE);
+					database.insert(Authenticate.TABLE_NAME, null, values);
+					database.close();
+					
+					Intent newActivity = new Intent(getSherlockActivity(),
+							AccountActivity.class);
+					startActivity(newActivity);					
+					getSherlockActivity().finish();
+					authenTrueHandler.sendMessage(msg);
+				} else if(verifyResult == VERIFY_AUTH_FAIL){
+					authenErrorHandler.sendMessage(msg);
+				} else {
+					serviceErrorHandler.sendMessage(msg);
+				}
+				
+			}else{
+				netErrorHandler.sendMessage(msg);	
 			}
-
-			catch (Exception e) {
-
-				Message message = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("isUnknownError", false);
-				message.setData(bundle);
-				UnknownErrorHandler.sendMessage(message);
+			proDialog.dismiss();
+			}catch (Exception e) {	
+				Message msg = new Message();
+				unknownErrorHandler.sendMessage(msg);
 				proDialog.dismiss();
 
 			}
@@ -272,9 +208,8 @@ public class LibAccountFragment extends SherlockFragment {
 		 * @param password
 		 * @return
 		 */
-		private int verifyLibUserPswd(String userName, String passWord) {
-			
-			int retValue = VERIFY_STATE_ERROR;
+		private int verifyLibUserPswd(String userName, String passWord) {			
+			int retValue = VERIFY_SERVICE_ERROR;
 			HttpPost httpPost = new HttpPost(HERALD_WS_LIB_URI);  //创建HttpPost对象
 			
 			//设置Http POST请求参数
@@ -290,9 +225,16 @@ public class LibAccountFragment extends SherlockFragment {
 				if(httpResponse.getStatusLine().getStatusCode() == 200){
 					String result = EntityUtils.toString(httpResponse.getEntity());
 					if(result.equals("True"))
-						retValue = VERIFY_STATE_OKAY;
-					else
-						retValue = VERIFY_STATE_FAIL;
+						retValue = VERIFY_AUTH_OKAY;
+					else{
+						if(result.equals("False")){
+						retValue = VERIFY_AUTH_FAIL;	
+						}else {
+						retValue = VERIFY_SERVICE_ERROR;
+						}
+						
+					}
+						
 				}
 			} catch (ClientProtocolException e){
 				e.printStackTrace();
@@ -307,10 +249,9 @@ public class LibAccountFragment extends SherlockFragment {
 			return retValue;
 		}
 
-		Handler UnknownErrorHandler = new Handler() {
+		Handler unknownErrorHandler = new Handler() {
 			public void handleMessage(Message msg) {
-				boolean isUnknownError = msg.getData().getBoolean(
-						"isUnknownError");
+				
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}
@@ -318,35 +259,40 @@ public class LibAccountFragment extends SherlockFragment {
 						Toast.LENGTH_SHORT).show();
 			}
 		};
-
-		Handler loginHandler = new Handler() {
+		Handler netErrorHandler = new Handler() {
 			public void handleMessage(Message msg) {
-
-				boolean isNetError = msg.getData().getBoolean("isNetError");
-				boolean loginState = msg.getData().getBoolean("loginState");
-				boolean isServiceError = msg.getData().getBoolean(
-						"isServiceError");
 				if (proDialog != null) {
 					proDialog.dismiss();
-				}
-				if (isNetError) {
-					Toast.makeText(getActivity(), "当前网络不可用", Toast.LENGTH_SHORT)
-							.show();
-				} else {
-					if (isServiceError) {
-						Toast.makeText(getActivity(), "抱歉，图书馆登录服务出错，请稍后再试！",
-								Toast.LENGTH_SHORT).show();
-					} else {
-						if (loginState) {
-							Toast.makeText(getActivity(), "登录成功！",
-									Toast.LENGTH_SHORT).show();
-						} else {
-							Toast.makeText(getActivity(), "错误的用户名或密码",
-									Toast.LENGTH_SHORT).show();
-						}
-					}
-
-				}
+				}			
+				Toast.makeText(getActivity(), "当前网络不可用", Toast.LENGTH_SHORT).show();
+				
+			}
+		};
+		Handler serviceErrorHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (proDialog != null) {
+					proDialog.dismiss();
+				}			
+				Toast.makeText(getActivity(), "抱歉，图书馆登录服务出错，请稍后再试", Toast.LENGTH_SHORT).show();
+				
+			}
+		};
+		Handler authenErrorHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (proDialog != null) {
+					proDialog.dismiss();
+				}			
+				Toast.makeText(getActivity(), "错误的用户名或密码", Toast.LENGTH_SHORT).show();
+				
+			}
+		};
+		Handler authenTrueHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (proDialog != null) {
+					proDialog.dismiss();
+				}			
+				Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
+				
 			}
 		};
 	}
