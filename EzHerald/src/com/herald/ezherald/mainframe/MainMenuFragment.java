@@ -85,6 +85,9 @@ public class MainMenuFragment extends ListFragment {
 		
 		setListAdapter(mListViewAdapter);
 		getListView().setCacheColorHint(Color.TRANSPARENT);
+		getListView().setDivider(getResources().getDrawable(R.drawable.main_menu_divider_color));
+		getListView().setDividerHeight(1);
+		getListView().setPadding(0, 0, 0, 0);
 	}
 
 	/*

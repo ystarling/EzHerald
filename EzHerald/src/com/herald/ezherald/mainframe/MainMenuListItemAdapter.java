@@ -102,6 +102,10 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			listItemView.title.setTextColor(Color.parseColor("#eb3c4b"));
 			listItemView.icon.setImageResource((Integer) mListItems.get(position)
 					.get("icon_selected"));
+			convertView.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.main_menu_choosen_color));
+			convertView.getBackground().setAlpha(115); //Í¸Ã÷¶È
+		} else {
+			convertView.setBackgroundColor(Color.TRANSPARENT);
 		}
 		
 		return convertView;
