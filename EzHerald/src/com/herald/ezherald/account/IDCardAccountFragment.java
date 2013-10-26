@@ -1,6 +1,4 @@
 package com.herald.ezherald.account;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -13,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,26 +95,6 @@ public class IDCardAccountFragment extends SherlockFragment {
 	        getSherlockActivity().finish();
 		}
 	};
-	/*private void initView(boolean isRememberMe) {
-		
-		String userName = share.getString(SHARE_LOGIN_USERNAME, "");
-		String password = share.getString(SHARE_LOGIN_PASSWORD, "");
-		Log.d(this.toString(), "userName=" + userName + " password=" + password);
-		if (!"".equals(userName)) {
-			view_userName.setText(userName);
-		}
-		if (!"".equals(password)) {
-			view_password.setText(password);
-			view_rememberMe.setChecked(true);
-		}
-
-		if (view_password.getText().toString().length() > 0) {
-			// view_loginSubmit.requestFocus();
-			// view_password.requestFocus();
-		}
-		share = null;
-	}
-*/
 	private void setListener() {
 		view_loginSubmit.setOnClickListener(submitListener);
 		
@@ -135,24 +112,20 @@ public class IDCardAccountFragment extends SherlockFragment {
 
 
 	public static boolean isNetworkAvailable(Context context) {
-		Log.v("mynet", "start");
+		
         ConnectivityManager connectivity = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);   
-        if (connectivity == null) {   
-            Log.i("NetWorkState", "Unavailabel");   
+        if (connectivity == null) {    
             return false;   
         } else {   
             NetworkInfo[] info = connectivity.getAllNetworkInfo();   
             if (info != null) {   
                 for (int i = 0; i < info.length; i++) {   
                     if (info[i].getState() == NetworkInfo.State.CONNECTED) {   
-                        Log.i("NetWorkState", "Availabel");
-                        Log.v("mynet", "yes");
                         return true;   
                     }   
                 }   
             }   
         }
-        Log.v("mynet", "no");
         return false;   
     }
 	class LoginFailureHandler implements Runnable {
@@ -197,7 +170,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 				boolean isRemoteCall = currActivity.isRemoteModuleCall;
 				if(!isRemoteCall){
 					//如果是别的模块跳转到这里的，不用跳回去！
-					Log.d("IDCardAccountFragment: isRemoteCall", "" +isRemoteCall);
+					
 					Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);
 			        startActivity(newActivity);
 				}
@@ -213,7 +186,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			loginHandler.sendMessage(message);
 		
 		}catch (AuthenticationServiceException e) {
-			Log.v("mytestlog", e.getMessage());
+			
 			isServiceError = true;
 			Message message = new Message();
 			Bundle bundle = new Bundle();
@@ -225,14 +198,22 @@ public class IDCardAccountFragment extends SherlockFragment {
 			
 		}		
 			catch (Exception e) {
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				e.printStackTrace(pw);
-				Log.v("errorlog", "\r\n" + sw.toString() + "\r\n");
-				
+				Message message = new Message();
+				unknownErrorHandler.sendMessage(message);
+				proDialog.dismiss();	
 		}
 	}
-	
+	Handler unknownErrorHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				
+				if (proDialog != null) {
+					proDialog.dismiss();
+				}
+				Toast.makeText(getActivity(), "抱歉，服务出错，请稍后再试！",
+						Toast.LENGTH_SHORT).show();
+			}
+		};
+		
 	Handler loginHandler = new Handler(){
 	public void handleMessage(Message msg) {
 			Intent returnMsgIntent = new Intent();
