@@ -34,7 +34,7 @@ public class FragmentC extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		user = Authenticate.getTyxUser(getActivity());
-		if (null == user) {
+		if (null == user && false) {
 			Intent login = new Intent();
 			login.setClass(getActivity(), TyxAccountActivity.class);
 			startActivity(login);
