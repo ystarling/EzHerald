@@ -18,6 +18,7 @@ import com.herald.ezherald.mainframe.SecondMenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.tendcloud.tenddata.TCAgent;
 import com.herald.ezherald.R;
 
 /**
@@ -65,6 +66,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		TCAgent.setReportUncaughtExceptions(true);//开启远程异常捕获
 		InitBaseFrame();
 		getSupportActionBar().setIcon(R.drawable.ic_app); //修改程序内部的图标
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
@@ -197,6 +199,20 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		// 统计模块
+		TCAgent.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// 统计模块
+		TCAgent.onResume(this);
 	}
 	
 	
