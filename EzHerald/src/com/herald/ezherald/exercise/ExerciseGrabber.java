@@ -2,8 +2,6 @@ package com.herald.ezherald.exercise;
 
 import android.content.Context;
 
-import com.herald.ezherald.mainframe.MainContentFlowItemAdapter;
-import com.herald.ezherald.mainframe.MainContentGridItemAdapter;
 import com.herald.ezherald.mainframe.MainContentGridItemObj;
 import com.herald.ezherald.mainframe.MainContentInfoGrabber;
 

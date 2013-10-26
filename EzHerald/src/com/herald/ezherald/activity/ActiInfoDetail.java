@@ -1,13 +1,9 @@
 package com.herald.ezherald.activity;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class ActiInfoDetail {
 

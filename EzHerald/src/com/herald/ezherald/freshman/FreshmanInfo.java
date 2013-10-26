@@ -15,7 +15,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.database.DataSetObservable;
 import android.os.Handler;
 import android.os.Message;
 

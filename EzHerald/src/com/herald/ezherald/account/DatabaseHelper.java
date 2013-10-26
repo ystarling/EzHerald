@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-	public static final int VERSION = 2;
+	public static final int VERSION = 3;
 	
 	public DatabaseHelper(Context context, String name) {
 		super(context, name, null, VERSION);
@@ -25,8 +25,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	@Override
-	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
+	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
+		db.execSQL("DROP TABLE account");
+		onCreate(db);
 	}
 	   
 

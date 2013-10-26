@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
-import com.herald.ezherald.academic.AcademicFragment;
 
 public class LibraryActivity extends BaseFrameActivity {
 	Fragment mContentFrag;

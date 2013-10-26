@@ -7,6 +7,7 @@
     android:orientation="horizontal"
     android:paddingTop="7dp"
     android:paddingBottom="7dp"
+    android:paddingLeft="10dp"
     android:layout_gravity="center_vertical|left"
     
      >
@@ -26,7 +27,7 @@
 	    android:gravity="center_vertical|left"
 	    android:layout_marginLeft="6dp"
 	    android:textSize="18sp"
-	    android:textColor="#a0a4a7"
+	    android:textColor="#f1f1f1"
 	    android:text="Item"
 	    />
 	

@@ -1,19 +1,13 @@
 package com.herald.ezherald.settingframe;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.herald.ezherald.R;
-import com.herald.ezherald.R.layout;
-import com.herald.ezherald.R.menu;
 import com.herald.ezherald.mainframe.SharedPreferencesHandler;
 
 import android.os.Bundle;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
@@ -23,8 +17,6 @@ import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
-import android.view.Menu;
 
 public class MainContentModulePrefActivity extends SherlockActivity {
 
@@ -104,6 +96,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
 			builder.setTitle("选择需要在主界面显示的模块");
+			builder.setCancelable(false);
 			builder.setMultiChoiceItems(mModuleTitles, mCheckedItems,
 					new OnMultiChoiceClickListener() {
 

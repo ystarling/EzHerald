@@ -8,8 +8,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-
 public class DataRequester {
 	
 	public static String request(String u)

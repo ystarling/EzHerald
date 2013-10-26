@@ -2,12 +2,9 @@ package com.herald.ezherald.mainframe;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import com.herald.ezherald.R;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

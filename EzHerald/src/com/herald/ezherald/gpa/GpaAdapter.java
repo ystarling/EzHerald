@@ -3,17 +3,12 @@ package com.herald.ezherald.gpa;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import org.apache.http.client.HttpClient;
 
 import com.herald.ezherald.account.UserAccount;
 
-import android.app.Activity;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.View;
