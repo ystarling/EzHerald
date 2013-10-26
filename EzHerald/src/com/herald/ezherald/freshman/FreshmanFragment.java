@@ -35,7 +35,7 @@ public class FreshmanFragment extends SherlockFragment {
 	}
 	
 	void initView(){
-		final int SIZE = 180;
+		final int SIZE = 190;
 		tv_study = (TextView) getActivity().findViewById(R.id.text_study);
 		tv_life  = (TextView) getActivity().findViewById(R.id.text_life);
 		tv_play  = (TextView) getActivity().findViewById(R.id.text_play);
