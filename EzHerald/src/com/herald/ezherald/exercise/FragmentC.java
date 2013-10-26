@@ -34,11 +34,11 @@ public class FragmentC extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		user = Authenticate.getTyxUser(getActivity());
-		if (null == user) {
+		if (null == user ) {
 			Intent login = new Intent();
 			login.setClass(getActivity(), TyxAccountActivity.class);
 			startActivity(login);
-			getActivity().finish();
+			//getActivity().finish();
 		} else {
 			txt_rate = (TextView) getActivity().findViewById(R.id.txt_rate);
 			txt_remainDays = (TextView) getActivity().findViewById(
@@ -83,7 +83,7 @@ public class FragmentC extends Fragment {
 			txt_rate.setText(noData);
 		}
 		*/
-		if (runTimes.getRemainDays() >= 0
+		if (runTimes.getRemainDays() > 0
 				&& runTimes.getAdviceTime() != RunTimes.DEFAULT_ADVICE_TIME) {
 			txt_remainDays.setText(String.format("本学期还剩%d天上课\n\n建议你每周至少跑%d次",
 					runTimes.getRemainDays(), runTimes.getAdviceTime()));

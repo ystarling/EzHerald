@@ -67,8 +67,6 @@ public class RenrenInfo{
 	protected void onSuccess() {
 		// TODO Auto-generated method stub
 		try {
-			//String today = android.text.format.DateFormat.format("yyyy-m-d",new Date()).toString();
-			//Date  date = new Date();
 			Calendar calendar = Calendar.getInstance();
 			String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DATE));
 			JSONObject json = new JSONObject(message);
@@ -80,7 +78,7 @@ public class RenrenInfo{
 				date = date.split(" ")[0];
 				if(date.equals(today)){
 					String info = object.getString("content");
-					setInfo(getInfo()+info+"\n\n\n");
+					setInfo(getInfo()+info+"\n\n发布时间\n"+object.getString("createTime")+"\n\n\n");
 					setDate(date);
 					save();
 				}else{

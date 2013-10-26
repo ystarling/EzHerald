@@ -26,6 +26,7 @@ import android.support.v4.app.Fragment;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
 
+
 /**
  * @author xie
  * 跑操次数的信息
@@ -168,7 +169,7 @@ public class RunTimes {
 	 */
 	public RunTimes(Context context){
 		this.context = context; 
-		pref = context.getSharedPreferences("RunTimes", 0);
+		pref = context.getSharedPreferences("RunTimes", Context.MODE_PRIVATE);
 		//pref = activity.getApplication().getSharedPreferences("RunTimes", 0);
 		setTimes(pref.getInt("Times", DEFAULT_TIMES));
 		setAdjustTimes(pref.getInt("AdjustTimes",DEFAULT_ADJUST_TIMES));

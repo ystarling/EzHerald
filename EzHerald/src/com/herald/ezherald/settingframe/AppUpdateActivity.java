@@ -91,7 +91,7 @@ public class AppUpdateActivity extends Activity {
 		if( needUpdate ){
 			update();
 		}else{
-			Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
 			this.finish();
 		}
 	}

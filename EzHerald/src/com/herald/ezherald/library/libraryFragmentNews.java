@@ -20,7 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
-
+ 
 /**
  * @author BIG_SEA
  *	The fragment of news

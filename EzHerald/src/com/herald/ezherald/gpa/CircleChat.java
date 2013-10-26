@@ -20,7 +20,7 @@ public class CircleChat extends View {
 	private float sum;
 	private float startAngle;
 	private final int TOTAL = 5;
-	private final String[] txt= {"ÆäËü","<2.0","2.0~3.0","3.0~4.0",">4.0"};
+	private final String[] txt= {"  ","<2.0","2.0~3.0","3.0~4.0",">4.0"};
 	
 	public CircleChat(Context context, AttributeSet attrs) {
 		super(context, attrs);

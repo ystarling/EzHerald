@@ -33,7 +33,7 @@ public class MainGuideActivity extends Activity
 	//引导界面图片资源
 	private static final int[] image_res = {
 		R.drawable.main_frame_welcome_0, R.drawable.main_frame_welcome_1, 
-		R.drawable.main_frame_welcome_2, R.drawable.main_frame_welcome_end
+		R.drawable.main_frame_welcome_2, R.drawable.main_frame_welcome_3
 	};
 	
 	//底部小点的View

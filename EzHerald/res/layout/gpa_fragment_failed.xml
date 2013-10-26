@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.48"
-        android:text="刷新" />
+        android:text="请先登录" />
 
 </LinearLayout>

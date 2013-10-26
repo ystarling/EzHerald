@@ -1,6 +1,7 @@
 package com.herald.ezherald.gpa;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,18 +23,21 @@ public class GpaFragment extends SherlockFragment {
 		super.onCreate(saved);
 		ActionBar bar = getSherlockActivity().getSupportActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.Tab tab1 = bar.newTab();
-        ActionBar.Tab tab2 = bar.newTab();
-        ActionBar.Tab tab3 = bar.newTab();
-//        tab1.setText("绩点政策");
-        tab2.setText("成绩查询");
-        tab3.setText("成绩分析");
-        tab1.setTabListener(new MyTabListener());
-        tab2.setTabListener(new MyTabListener());
-        tab3.setTabListener(new MyTabListener());
-//        bar.addTab(tab1);
-        bar.addTab(tab2); 
-        bar.addTab(tab3); 
+        int x = bar.getTabCount();
+        if(bar.getTabCount()<2) {
+        	 ActionBar.Tab tab1 = bar.newTab();
+             ActionBar.Tab tab2 = bar.newTab();
+             ActionBar.Tab tab3 = bar.newTab();
+//             tab1.setText("绩点政策");
+             tab2.setText("成绩查询");
+             tab3.setText("成绩分析");
+             tab1.setTabListener(new MyTabListener());
+             tab2.setTabListener(new MyTabListener());
+             tab3.setTabListener(new MyTabListener());
+//             bar.addTab(tab1);
+             bar.addTab(tab2); 
+             bar.addTab(tab3); 
+        }
         return inflater.inflate(R.layout.gpa_activity_main,group,false);
 	    }
 	    
@@ -72,4 +76,5 @@ public class GpaFragment extends SherlockFragment {
 			}
 	    	
 	    }
+
 }

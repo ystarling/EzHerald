@@ -349,7 +349,7 @@ public class MainActivity extends BaseFrameActivity {
 				int count = 1;
 				int size = remoteImgUrls.size();
 				for (String urlStr : remoteImgUrls) {
-					showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
+					//showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
 					Bitmap bmp = testGetBitmap(urlStr);
 					if (bmp != null) {
 						updList.add(bmp);
