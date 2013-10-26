@@ -48,5 +48,7 @@
     <string name="title_activity_main_content_module_pref">主界面模块</string>
     <string name="main_frame_list_color_pref_key">list_choice</string>
     <string name="main_frame_preferences">com.herald.ezherald_preferences</string>
+    <string name="title_activity_first_screen">FirstScreenActivity</string>
+    <string name="first_screen_loading">先声客户端玩命启动中...</string>
 
 </resources>

@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
@@ -46,6 +47,7 @@ import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
+import com.tendcloud.tenddata.TCAgent;
 
 /**
  * 上传图片: 
@@ -110,12 +112,14 @@ public class MainContentFragment extends SherlockFragment {
 			R.drawable.main_frame_pic1, R.drawable.main_frame_pic2,
 			R.drawable.main_frame_pic3, R.drawable.main_frame_pic4 };
 
-	private int[] color_ids // 主界面ListView的背景色 现通过recources存储！
+	private int[] color_ids // 主界面ListView的背景色
 	= { R.drawable.main_content_listview_round_shape_blue,
 			R.drawable.main_content_listview_round_shape_green,
 			R.drawable.main_content_listview_round_shape_red,
 			R.drawable.main_content_listview_round_shape_navy,
-			R.drawable.main_content_listview_round_shape_purple };
+			R.drawable.main_content_listview_round_shape_purple,
+			R.drawable.main_content_listview_round_shape_orange,
+			R.drawable.main_content_listview_round_shape_yellow};
 
 	public ViewFlow getViewFlow() {
 		return mViewFlow;
@@ -149,10 +153,7 @@ public class MainContentFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		ProgressDialog progressDialog = new ProgressDialog(getActivity());
-		progressDialog.setMessage("努力加载中...");
-		progressDialog.setCancelable(false);
-		progressDialog.show();
+		
 
 		getPrefItems();
 
@@ -199,7 +200,6 @@ public class MainContentFragment extends SherlockFragment {
 
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
-		progressDialog.cancel();
 	}
 	
 	/**
@@ -227,8 +227,12 @@ public class MainContentFragment extends SherlockFragment {
 					result.add(R.drawable.main_content_listview_round_shape_red);
 				} else if (colorName.equals("navy")){
 					result.add(R.drawable.main_content_listview_round_shape_navy);
-				} else {
+				} else if (colorName.equals("purple")){
 					result.add(R.drawable.main_content_listview_round_shape_purple);
+				} else if (colorName.equals("orange")){
+					result.add(R.drawable.main_content_listview_round_shape_orange);
+				} else {
+					result.add(R.drawable.main_content_listview_round_shape_yellow);
 				}
 			}
 		}
@@ -354,37 +358,49 @@ public class MainContentFragment extends SherlockFragment {
 				long id) {
 			// TODO Auto-generated method stub
 			Intent i = new Intent();
+			String clickTarget = "Unknown";
 			switch ((int) id) {
 			case 0:
 				i.setClass(getActivity(), MainContentModulePrefActivity.class);
 				MainActivity mainActivity = (MainActivity) getActivity();
 				mainActivity.needRefreshContent = true;
+				clickTarget = "Main";
 				break;
 			case 1:
 				i.setClass(getActivity(), CurriculumActivity.class);
+				clickTarget = "Curr";
 				break;
 			case 2:
 				i.setClass(getActivity(), ActiActivity.class);
+				clickTarget = "Acti";
 				break;
 			case 3:
 				i.setClass(getActivity(), AgendaActivity.class);
+				clickTarget = "Agen";
 				break;
 			case 4:
 				i.setClass(getActivity(), LibraryActivity.class);
+				clickTarget = "Libr";
 				break;
 			case 5:
 				i.setClass(getActivity(), GPAActivity.class);
+				clickTarget = "GPA";
 				break;
 			case 6:
 				i.setClass(getActivity(), ExerciseActivity.class);
+				clickTarget = "Exer";
 				break;
 			case 7:
 				i.setClass(getActivity(), AcademicActivity.class);
+				clickTarget = "Acad";
 				break;
 			case 8:
 				i.setClass(getActivity(), FreshmanActivity.class);
+				clickTarget = "Fres";
 				break;
 			}
+			TCAgent.onEvent(getActivity(), "主界面ListView点击", clickTarget);
+			
 			if (i != null) {
 				startActivity(i);
 				if (id != 0)

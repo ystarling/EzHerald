@@ -18,12 +18,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.herald.ezherald.account.UserAccount;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import com.herald.ezherald.account.UserAccount;
 
 public class GpaInfo {
 	public static final boolean DEBUG = false;
@@ -111,14 +111,18 @@ public class GpaInfo {
 
 	/**
 	 * @return 算出的所有绩点
+	 * @throws Exception 
 	 */
-	public float calcAverage() {
+	public float calcAverage() throws Exception {
 		float totalGrade = 0, totalCredit = 0;
 		for (Record r : records) {
 			if (r.isSelected() && r.getPoint() > 0) {
 				totalGrade += r.getPoint() * r.getCredit();
 				totalCredit += r.getCredit();
 			}
+		}
+		if(totalCredit == 0) {
+			throw new Exception();
 		}
 		return totalGrade / totalCredit;
 	}

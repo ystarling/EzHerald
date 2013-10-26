@@ -235,10 +235,16 @@ public class SecondMenuFragment extends ListFragment {
 	}
 	
 	public boolean setSavedUserId(String id){
-		SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-		Editor editor = prefs.edit();
-		editor.putString(PREF_KEY_USERID, id);
-		return editor.commit();
+		try{
+			SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+			Editor editor = prefs.edit();
+			editor.putString(PREF_KEY_USERID, id);
+			return editor.commit();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 	
 	/**
@@ -254,10 +260,15 @@ public class SecondMenuFragment extends ListFragment {
 	}
 	
 	public boolean setSavedUserName(String name){
-		SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-		Editor editor = prefs.edit();
-		editor.putString(PREF_KEY_USERNAME, name);
-		return editor.commit();
+		try{
+			SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+			Editor editor = prefs.edit();
+			editor.putString(PREF_KEY_USERNAME, name);
+			return editor.commit();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+			return false;
+		}	
 	}
 	
 	

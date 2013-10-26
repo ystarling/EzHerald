@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.herald.ezherald.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
@@ -57,6 +59,7 @@ public class MainGuideActivity extends Activity
 			ImageView iv = new ImageView(this);
 			iv.setLayoutParams(mParams);
 			iv.setImageResource(imgid);
+			iv.setScaleType(ScaleType.CENTER_CROP);
 			mViews.add(iv);
 		}
 		

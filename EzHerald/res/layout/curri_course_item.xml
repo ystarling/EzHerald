@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:textSize="19sp"
-        android:textColor="#ff0000"
+        android:textColor="#000000"
         android:gravity="center" />
     
     <LinearLayout 
@@ -24,7 +24,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="20sp"
-	        android:textColor="#0000ff"
+	        android:textColor="#000000"
 	        android:layout_marginBottom="3sp"
 	        android:layout_marginTop="3sp"
 	        />
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:text="教师:"
+                android:text="地点:"
                 android:textSize="17sp"
                 />
             
@@ -48,7 +48,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="17sp"
-	            android:textColor="#CC6600"
+	            android:textColor="#000000"
 	            />
             
         </LinearLayout>
@@ -74,7 +74,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="17sp"
-	            android:textColor="#CC6600"
+	            android:textColor="#000000"
 	            />
             
             

@@ -3,6 +3,7 @@ package com.herald.ezherald.freshman;
 import android.app.Activity;
 import android.database.DataSetObserver;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,6 +159,7 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	}
 	
 	public void onUpdateSuccess() {
+		Log.v("frshman","updatesuccess");
 		notifyDataSetChanged();
 	}
 }
