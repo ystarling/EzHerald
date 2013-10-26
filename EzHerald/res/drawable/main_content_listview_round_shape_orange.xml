@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+<!-- ListView第一行上方的圆角效果 -->
+    <gradient
+        android:angle="270"
+        android:endColor="#ff5b0a"
+        android:startColor="#ff5b0a" />
+
+    <corners
+        android:topLeftRadius="6dip"
+        android:topRightRadius="6dip"
+         />
+	
+    
+</shape>

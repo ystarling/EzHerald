@@ -26,6 +26,7 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
+import com.tendcloud.tenddata.TCAgent;
 
 /*
  * 标准左侧侧滑菜单用的ListFragment
@@ -101,6 +102,8 @@ public class MainMenuFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		
+		String menuTarget = "Unknown";
 		/*
 		 * Fragment newContent = null; switch (position) { case 0: newContent =
 		 * new StubContentFragment(); break; case 1: newContent = new
@@ -111,32 +114,42 @@ public class MainMenuFragment extends ListFragment {
 		switch (position) {
 		case 0:
 			i.setClass(getActivity(), MainActivity.class);
+			menuTarget = "MainActivity";
 			break;
 		case 1:
 			i.setClass(getActivity(), CurriculumActivity.class);
+			menuTarget = "Curriculum";
 			break;
 		case 2:
 			i.setClass(getActivity(), ActiActivity.class);
+			menuTarget = "Activity";
 			break;
 		/*case 3:
 			i.setClass(getActivity(), AgendaActivity.class);
 			break;*/
 		case 3:
 			i.setClass(getActivity(), LibraryActivity.class);
+			menuTarget = "Library";
 			break;
 		case 4:
 			i.setClass(getActivity(), GPAActivity.class);
+			menuTarget = "GPA";
 			break;
 		case 5:
 			i.setClass(getActivity(), ExerciseActivity.class);
+			menuTarget = "Exercise";
 			break;
 		case 6:
 			i.setClass(getActivity(), AcademicActivity.class);
+			menuTarget = "Academic";
 			break;
 		case 7:
 			i.setClass(getActivity(), FreshmanActivity.class);
+			menuTarget = "CampusGuide";
 			break;
 		}
+		TCAgent.onEvent(getActivity(), "主菜单点击", menuTarget);
+		
 		if (i != null) {
 			i.putExtra(KEY_SHOWED_UPDATE, true);
 			startActivity(i);
