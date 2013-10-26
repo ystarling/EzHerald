@@ -29,7 +29,6 @@ public class GPAActivity extends BaseFrameActivity {
 			model.open();
 			model.clear();
 			model.close();//删除旧用户的数据
-			
 			mContentFrag = new FailFragment();
 			super.SetBaseFrameActivity(mContentFrag);
 		}else{
@@ -60,6 +59,19 @@ public class GPAActivity extends BaseFrameActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		UserAccount user = Authenticate.getIDcardUser(this);
+		if(null == user){
+			mContentFrag = new FailFragment();
+			super.SetBaseFrameActivity(mContentFrag);
+		}else{
+			mContentFrag = new GpaFragment();
+			super.SetBaseFrameActivity(mContentFrag);
+			InitBaseFrame();
+		}
+		super.onResume();
+	}
 
 }
