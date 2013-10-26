@@ -175,18 +175,19 @@ public class TyxAccountFragment extends SherlockFragment {
 			try {
 				if (!isNetError) {
 					/*
-					 * final String HERALD_WS_BASE_URI =
-					 * "http://herald.seu.edu.cn/ws";
-					 * 
-					 * HeraldWebServicesFactory factory = new
-					 * HeraldWebServicesFactoryImpl(HERALD_WS_BASE_URI);
-					 * 
-					 * MorningExerciseService exeService =
-					 * factory.getMorningExerciseService();
-					 * 
-					 * Log.v("myname", userName); RunTimesData runTimesData =
-					 * exeService.getRunTimesData(userName, password);
-					 */
+					  final String HERALD_WS_BASE_URI =
+					  "http://herald.seu.edu.cn/ws";
+					  
+					  HeraldWebServicesFactory factory = new
+					  HeraldWebServicesFactoryImpl(HERALD_WS_BASE_URI);
+					  
+					  MorningExerciseService exeService =
+					  factory.getMorningExerciseService();
+					  
+					  Log.v("myname", userName); 
+					  RunTimesData runTimesData =
+					 exeService.getRunTimesData(userName, password);
+					*/
 					// use new python api
 					final String URL = "http://herald.seu.edu.cn/herald_web_service/tyx/checkAccount/";
 					HttpClient client = new DefaultHttpClient();
@@ -208,7 +209,7 @@ public class TyxAccountFragment extends SherlockFragment {
 							throw new AuthenticationException();
 						}
 					}
-
+					
 					if (!success) {
 						loginState = false;
 					} else {

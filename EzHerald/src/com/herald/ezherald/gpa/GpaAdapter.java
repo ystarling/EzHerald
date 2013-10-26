@@ -143,7 +143,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 			}
 		}
 		Collections.sort(semesters);
-		
+		selectAll();
 		notifyDataSetChanged();
 		
 	}
