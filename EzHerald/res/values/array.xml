@@ -10,6 +10,7 @@
         <item >跑操查询</item>
         <item >教务信息</item>
         <item >校园指南</item>
+        <item >空闲教室</item>
     </string-array>
     
     <string-array name="second_menu_items">

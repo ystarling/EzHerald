@@ -22,6 +22,7 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.activity.ActiActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
+import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
@@ -48,7 +49,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_gpa,
 			R.drawable.main_menu_ic_exercise,
 			R.drawable.main_menu_ic_academic,
-			R.drawable.main_menu_ic_freshman }; // 图标(icon)
+			R.drawable.main_menu_ic_freshman,
+			R.drawable.main_menu_ic_emproom }; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
 			R.drawable.main_menu_ic_mainframe_selected,
@@ -59,7 +61,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_gpa_selected,
 			R.drawable.main_menu_ic_exercise_selected,
 			R.drawable.main_menu_ic_academic_selected,
-			R.drawable.main_menu_ic_freshman_selected }; // 选中状态的图标(icon)
+			R.drawable.main_menu_ic_freshman_selected,
+			R.drawable.main_menu_ic_emproom_selected }; // 选中状态的图标(icon)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -136,6 +139,9 @@ public class MainMenuFragment extends ListFragment {
 		case 7:
 			i.setClass(getActivity(), FreshmanActivity.class);
 			break;
+		case 8:
+			i.setClass(getActivity(), EmptyClassroomActivity.class);
+			break;
 		}
 		if (i != null) {
 			i.putExtra(KEY_SHOWED_UPDATE, true);
@@ -211,6 +217,9 @@ public class MainMenuFragment extends ListFragment {
 		}
 		else if(localModuleName.equals("freshman")){
 			return 7;
+		}
+		else if(localModuleName.equals("emptyclassroom")){
+			return 8;
 		}
 		
 		return -1;

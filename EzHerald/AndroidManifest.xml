@@ -146,6 +146,11 @@
 
 
         <!-- curriculum end -->
+        
+        <activity 
+            android:name="com.herald.ezherald.emptyclassroom.EmptyClassroomActivity"
+            android:theme="@style/Theme.Heraldstyle"
+            ></activity>
 
         <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
