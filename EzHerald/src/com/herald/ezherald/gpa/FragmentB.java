@@ -155,7 +155,7 @@ public class FragmentB extends Fragment {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					Toast.makeText(getActivity(), "还没有选择课程", Toast.LENGTH_SHORT).show();
-					txtGpa.setText("0.00");
+					txtGpa.setText("所选绩点为:0.00");
 					e.printStackTrace();
 				}
 			}

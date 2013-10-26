@@ -143,7 +143,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 			}
 		}
 		Collections.sort(semesters);
-		selectAll();
+		
 		notifyDataSetChanged();
 		
 	}
@@ -184,7 +184,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 			}
 		}
 		Collections.sort(semesters);
-		
+		selectAll();
 		notifyDataSetChanged();
 		
 	}
@@ -215,10 +215,6 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	public void selectAll() {
 		// TODO Auto-generated method stub
 		gpaInfo.selectAll();
-		//for(Record r:gpaInfo.getRecords()){
-		//	if(r.isSelected() == false)
-		//		r.setSelected(true);
-		//}
 		notifyDataSetChanged();
 	}
 }
