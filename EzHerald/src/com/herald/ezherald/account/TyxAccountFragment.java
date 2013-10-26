@@ -225,7 +225,9 @@ public class TyxAccountFragment extends SherlockFragment {
 						ContentValues values = new ContentValues();
 						values.put("id", 1);
 						values.put("username", userName);
-						values.put("password", password);
+	
+						values.put("password", EncryptionHelper.encryptDES(password, EncryptionHelper.KEY));
+						
 						values.put("type", Authenticate.TYX_TYPE);
 						database.insert(Authenticate.TABLE_NAME, null, values);
 						database.close();

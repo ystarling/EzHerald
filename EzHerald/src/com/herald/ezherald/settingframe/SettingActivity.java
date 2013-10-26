@@ -1,13 +1,8 @@
 package com.herald.ezherald.settingframe;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
-
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.R;
 
 public class SettingActivity extends SherlockFragmentActivity {

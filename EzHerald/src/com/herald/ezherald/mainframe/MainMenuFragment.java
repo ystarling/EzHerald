@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.herald.ezherald.BaseFrameActivity;
@@ -22,7 +21,6 @@ import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.activity.ActiActivity;
-import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
@@ -87,6 +85,9 @@ public class MainMenuFragment extends ListFragment {
 		
 		setListAdapter(mListViewAdapter);
 		getListView().setCacheColorHint(Color.TRANSPARENT);
+		getListView().setDivider(getResources().getDrawable(R.drawable.main_menu_divider_color));
+		getListView().setDividerHeight(1);
+		getListView().setPadding(0, 0, 0, 0);
 	}
 
 	/*

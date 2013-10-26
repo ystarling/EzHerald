@@ -27,10 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
@@ -51,9 +48,13 @@ import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 
 /**
- * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 上传更新:
- * http://121.248.63.105/EzHerald/updateupload/ 图片json显示最新五条:
- * http://121.248.63.105/EzHerald/picturejson/ 更新json显示最新一条:
+ * 上传图片: 
+ * http://121.248.63.105/EzHerald/pictureupload/ 
+ * 上传更新:
+ * http://121.248.63.105/EzHerald/updateupload/ 
+ * 图片json显示最新五条:
+ * http://121.248.63.105/EzHerald/picturejson/ 
+ * 更新json显示最新一条:
  * http://121.248.63.105/EzHerald/updatejson/
  * 
  * @author BorisHe
@@ -148,10 +149,7 @@ public class MainContentFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		ProgressDialog progressDialog = new ProgressDialog(getActivity());
-		progressDialog.setMessage("努力加载中...");
-		progressDialog.setCancelable(false);
-		progressDialog.show();
+		
 
 		getPrefItems();
 
@@ -198,7 +196,6 @@ public class MainContentFragment extends SherlockFragment {
 
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
-		progressDialog.cancel();
 	}
 	
 	/**

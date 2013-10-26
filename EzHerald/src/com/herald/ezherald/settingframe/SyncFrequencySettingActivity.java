@@ -59,6 +59,7 @@ public class SyncFrequencySettingActivity extends SherlockActivity {
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
 			builder.setTitle("选择主界面信息更新频率");
+			builder.setCancelable(false);
 			builder.setSingleChoiceItems(mTimeSpanTitles, mCheckedItem, new OnClickListener() {
 				
 				@Override

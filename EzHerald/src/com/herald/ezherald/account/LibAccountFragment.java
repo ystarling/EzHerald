@@ -1,21 +1,16 @@
 package com.herald.ezherald.account;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.DefaultHttpResponseFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.DefaultClientConnection;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
@@ -42,12 +37,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import cn.edu.seu.herald.ws.api.HeraldWebServicesFactory;
-import cn.edu.seu.herald.ws.api.LibraryService;
 import cn.edu.seu.herald.ws.api.ServiceException;
-import cn.edu.seu.herald.ws.api.impl.HeraldWebServicesFactoryImpl;
-import cn.edu.seu.herald.ws.api.library.User;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 
@@ -228,7 +218,7 @@ public class LibAccountFragment extends SherlockFragment {
 						ContentValues values = new ContentValues();
 						values.put("id", 1);
 						values.put("username", userName);
-						values.put("password", password);
+						values.put("password", EncryptionHelper.encryptDES(password, EncryptionHelper.KEY));
 						values.put("type", Authenticate.LIBRARY_TYPE);
 						database.insert(Authenticate.TABLE_NAME, null, values);
 						database.close();

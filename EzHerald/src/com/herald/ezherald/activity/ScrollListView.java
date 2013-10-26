@@ -3,7 +3,6 @@ package com.herald.ezherald.activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View.MeasureSpec;
 import android.widget.ListView;
 import android.widget.ScrollView;
 

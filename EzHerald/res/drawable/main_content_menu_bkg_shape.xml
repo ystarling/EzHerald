@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 侧滑菜单的渐变色 -->
+    <gradient
+        android:type="linear"
+        android:angle="135"
+        android:endColor="#292834"
+        android:startColor="#3f3737"
+         />
+	
+</shape>

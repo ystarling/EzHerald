@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0α" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -11,21 +11,28 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="TD_APP_ID"
+            android:value="148B63970FC0152CD534DC743D6E37EC" />
+
         <activity
             android:name="com.herald.ezherald.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Heraldstyle" >
-            <intent-filter>
+            <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
         <activity
             android:name="com.herald.ezherald.academic.AcademicActivity"
@@ -151,7 +158,7 @@
         <activity
             android:name="com.herald.ezherald.settingframe.MainContentModulePrefActivity"
             android:label="@string/title_activity_main_content_module_pref"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
@@ -163,13 +170,24 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
-            android:name=".settingframe.SyncFrequencySettingActivity"
+            android:name="com.herald.ezherald.settingframe.SyncFrequencySettingActivity"
             android:label="@string/menu_main_content_pref_title"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
-            android:name=".settingframe.MainContentListColorPrefActivity"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:name="com.herald.ezherald.settingframe.MainContentListColorPrefActivity"
+            android:theme="@style/Theme.Transparent_Herald" >
+        </activity>
+        <activity
+            android:name="com.herald.ezherald.FirstScreenActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Transparent"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

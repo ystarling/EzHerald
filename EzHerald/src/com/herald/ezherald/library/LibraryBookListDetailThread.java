@@ -17,8 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.herald.ezherald.R;
-import com.herald.ezherald.library.LibraryFragmentThread.MyHandle2;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,7 +29,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 

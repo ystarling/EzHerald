@@ -25,8 +25,10 @@ public class Authenticate {
 		while (cursor.moveToNext()) {
 			String username = cursor.getString(cursor
 					.getColumnIndex("username"));
-			String password = cursor.getString(cursor
-					.getColumnIndex("password"));
+			String password = EncryptionHelper.decryptDES(cursor.getString(cursor
+					.getColumnIndex("password")), EncryptionHelper.KEY);
+			
+			
 			userAccount = new UserAccount(username, password);
 		}
 		cursor.close();
@@ -45,8 +47,8 @@ public class Authenticate {
 		while (cursor.moveToNext()) {
 			String username = cursor.getString(cursor
 					.getColumnIndex("username"));
-			String password = cursor.getString(cursor
-					.getColumnIndex("password"));
+			String password = EncryptionHelper.decryptDES(cursor.getString(cursor
+					.getColumnIndex("password")), EncryptionHelper.KEY);
 			userAccount = new UserAccount(username, password);
 		}
 		cursor.close();
@@ -65,8 +67,8 @@ public class Authenticate {
 		while (cursor.moveToNext()) {
 			String username = cursor.getString(cursor
 					.getColumnIndex("username"));
-			String password = cursor.getString(cursor
-					.getColumnIndex("password"));
+			String password = EncryptionHelper.decryptDES(cursor.getString(cursor
+					.getColumnIndex("password")), EncryptionHelper.KEY);
 			userAccount = new UserAccount(username, password);
 		}
 		cursor.close();

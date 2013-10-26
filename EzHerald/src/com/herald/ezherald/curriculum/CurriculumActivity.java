@@ -3,11 +3,8 @@ package com.herald.ezherald.curriculum;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
-import com.herald.ezherald.R;
-import com.herald.ezherald.academic.AcademicFragment;
 
 public class CurriculumActivity extends BaseFrameActivity {
 

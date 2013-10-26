@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
-import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
 

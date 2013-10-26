@@ -7,7 +7,6 @@ import com.herald.ezherald.R;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,6 +102,10 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			listItemView.title.setTextColor(Color.parseColor("#eb3c4b"));
 			listItemView.icon.setImageResource((Integer) mListItems.get(position)
 					.get("icon_selected"));
+			convertView.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.main_menu_choosen_color));
+			convertView.getBackground().setAlpha(115); //Í¸Ã÷¶È
+		} else {
+			convertView.setBackgroundColor(Color.TRANSPARENT);
 		}
 		
 		return convertView;

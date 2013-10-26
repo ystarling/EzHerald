@@ -11,7 +11,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="32dp"
-        android:maxLines="7"
+        android:layout_weight="0.03"
+        android:maxLines="17"
         android:scrollbars="vertical"
         android:singleLine="false"
         android:text="跑操播报"
@@ -22,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_weight="0.05"
+        android:layout_weight="0.01"
         android:gravity="right"
         android:text="更新日期" />
 

@@ -1,9 +1,5 @@
 package com.herald.ezherald.activity;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 public class ActiInfo {
 
 	private final int COMMON = 0;
