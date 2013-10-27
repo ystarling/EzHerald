@@ -411,7 +411,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			else{
 				Toast.makeText(context, requestFailed, Toast.LENGTH_LONG).show();
 			}
-			Toast.makeText(context, "exe here", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "exe here", Toast.LENGTH_LONG).show();
 			onRefreshCompleted();
 		}
 
