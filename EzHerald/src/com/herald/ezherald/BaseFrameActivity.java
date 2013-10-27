@@ -68,7 +68,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//TCAgent.setReportUncaughtExceptions(true);//开启远程异常捕获
+		TCAgent.setReportUncaughtExceptions(true);//开启远程异常捕获
 		InitBaseFrame();
 		getSupportActionBar().setIcon(R.drawable.ic_app); //修改程序内部的图标
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
