@@ -48,13 +48,13 @@ public class ActiInfoDetail {
 	public void setIconName(String name)
 	{
 		iconName = name;
-		iconUrl = "http://herald.seu.edu.cn/herald_league/Uploads/LeagueAvatar/m_s_avatar_address/"+name;
+		iconUrl = "http://herald.seu.edu.cn/herald_league/Uploads/LeagueAvatar/"+name+"_100.jpg";
 	}
 	
 	public void setActiPicName(String name)
 	{
 		actiPicName = name;
-		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/" + name;
+		actiPicUrl = "http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/"+"m_" + name;
 	}
 	
 	public void setVoteResult(Map<String,Integer> map)

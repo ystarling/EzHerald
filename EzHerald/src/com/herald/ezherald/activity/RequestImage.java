@@ -29,6 +29,7 @@ public class RequestImage extends AsyncTask<ViewAndUrl,Integer,Bitmap>
 		int response = -1;
 		img = (ImageView) params[0].view;
 		URL url = params[0].url;
+		Log.v("ICON", "request url: "+url.toString());
 		flag= params[0].flag;
 		id = params[0].id;
 		try {
@@ -81,6 +82,9 @@ public class RequestImage extends AsyncTask<ViewAndUrl,Integer,Bitmap>
 			//img.setLayoutParams(new LayoutParams(40, 40));
 			//
 			//actiInfoHolder.clubIcon.setImageResource(R.drawable.ic_launcher);
+		}
+		else{
+			img.setVisibility(View.GONE);
 		}
 		
 	}

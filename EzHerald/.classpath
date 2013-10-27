@@ -8,6 +8,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libDragNDropList_"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/libViewFlow"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

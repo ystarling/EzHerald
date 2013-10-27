@@ -106,9 +106,9 @@
 	    
 
 	    <LinearLayout 
+	        android:id="@+id/acti_outer_acti_pic"
 	        android:layout_width="100dp"
 	        android:layout_height="100dp"
-	        android:visibility="gone"
 	        >
 	        <ImageView 
 				android:id="@+id/acti_listitem_acti_pic"

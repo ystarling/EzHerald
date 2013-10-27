@@ -210,10 +210,12 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 //		actiPic.setImageBitmap(bit_pic);
 		
 		try {
+			Log.v("ICON","requesting url: " + actiInfoDetail.getClubIconUrl());
 			new RequestImage().execute(new ViewAndUrl(clubIcon,new URL(actiInfoDetail.getClubIconUrl()),
 					0,actiInfoDetail.getActiId()));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
+			Log.v("ICON", "error: "+e);
 			e.printStackTrace();
 		}
 		

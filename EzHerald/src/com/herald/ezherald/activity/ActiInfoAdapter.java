@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 	Activity context;
 	List<ActiInfo> actiInfoList;
 	ActiDBAdapter DBAdapter;
+	
 	
 
 	public ActiInfoAdapter(Activity c) {
@@ -120,6 +122,8 @@ public class ActiInfoAdapter extends BaseAdapter {
 				.findViewById(R.id.acti_acti_list_outer_clubicon);
 		actiInfoHolder.time = (TextView) convertView.findViewById(R.id.acti_listitem_acti_time);
 		actiInfoHolder.place = (TextView) convertView.findViewById(R.id.acti_listitem_acti_place);
+		actiInfoHolder.outpic = (LinearLayout) convertView.findViewById(R.id.acti_outer_acti_pic);
+		
 
 		ActiInfo actiInfo = actiInfoList.get(position);
 		actiInfoHolder.clubName.setText(actiInfo.getClubName());
@@ -145,7 +149,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 			try {
 				Log.v("ACTI_ICON", "requesting league icon, url:"+actiInfo.getClubIconURL());
 				new RequestImage().execute(new ViewAndUrl(actiInfoHolder.clubIcon,new URL(actiInfo.getClubIconURL()),
-						0,acti_id));
+						0,acti_id, actiInfoHolder.outpic));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -165,9 +169,9 @@ public class ActiInfoAdapter extends BaseAdapter {
 			}
 			else{
 				try {
-					Log.v("ACTI_PIC", "requesting acti pic,url"+actiInfo.getActiPicURL());
+					Log.v("ACTI_PIC", "requesting acti pic,url "+actiInfo.getActiPicURL());
 					new RequestImage().execute(new ViewAndUrl(actiInfoHolder.actiPic,new URL(actiInfo.getActiPicURL()),
-							1,acti_id));
+							1,acti_id, actiInfoHolder.outpic));
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -203,8 +207,8 @@ public class ActiInfoAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(context, "club icon clicked", Toast.LENGTH_SHORT)
-						.show();
+//				Toast.makeText(context, "club icon clicked", Toast.LENGTH_SHORT)
+//						.show();
 			}
 
 		});
@@ -223,12 +227,14 @@ public class ActiInfoAdapter extends BaseAdapter {
 		public ImageView actiPic;
 		public ImageButton actiShareBtn;
 		public LinearLayout outIcon;
+		public LinearLayout outpic;
 
 	}
 	
 	private class RequestImage extends AsyncTask<ViewAndUrl,Integer,Bitmap>
 	{
 		ImageView img;
+		LinearLayout lay;
 		int flag;
 		int id;
 		@Override
@@ -238,6 +244,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 			Bitmap bitmap = null;
 			int response = -1;
 			img = (ImageView) params[0].view;
+			lay = params[0].layout;
 			URL url = params[0].url;
 			flag= params[0].flag;
 			id = params[0].id;
@@ -287,7 +294,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 				else
 				{
 					DBAdapter.updateActiPicByActi(id, result);
-					Log.v("Save Icon", "complete save pic");
+					Log.v("PIC", "complete save pic");
 				}
 				img.setVisibility(View.VISIBLE);
 				img.setImageBitmap(result);
@@ -295,6 +302,10 @@ public class ActiInfoAdapter extends BaseAdapter {
 				//img.setLayoutParams(new LayoutParams(40, 40));
 				//
 				//actiInfoHolder.clubIcon.setImageResource(R.drawable.ic_launcher);
+			}
+			else
+			{
+				lay.setVisibility(View.GONE);
 			}
 			
 		}
@@ -304,15 +315,17 @@ public class ActiInfoAdapter extends BaseAdapter {
 	private class ViewAndUrl
 	{
 		public View view;
+		public LinearLayout layout;
 		public URL url;
 		public int flag;
 		public int id;
-		public ViewAndUrl(View v,URL u,int f,int i)
+		public ViewAndUrl(View v,URL u,int f,int i,LinearLayout lay)
 		{
 			view= v;
 			url = u;
 			flag = f;
 			id = i;
+			layout = lay;
 		}
 	}
 

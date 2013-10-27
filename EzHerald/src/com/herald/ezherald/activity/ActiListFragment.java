@@ -286,12 +286,13 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		});
 		
 		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
-		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
-				R.array.acti_list_action_spinner, 
-				R.layout.academic_spinner_textitem);
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
+//		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
+//				R.array.acti_list_action_spinner, 
+//				R.layout.academic_spinner_textitem);
+//		actionBar.setDisplayShowTitleEnabled(false);
+//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
+		actionBar.setTitle("У԰�");
 		
 		if(DBAdapter.checkIfDBEmpty())
 		{
@@ -455,7 +456,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			{
 				ActiInfo item = l.get(loop);
 				adapter.insertActiListItem(item.getId(), item.checkIsVote()?1:0, item.getClubName(),
-						item.getClubId(),item.getClubName(), item.getActiTitle(),item.getActiIntro(),
+						item.getClubId(),item.getClubIconName(), item.getActiTitle(),item.getActiIntro(),
 						item.getActiPubTime(),item.getStartTime(), item.getEndTime(), item.getPlace(),
 						item.getActiPicName(),
 						null, null);
