@@ -10,6 +10,7 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.mainframe.SharedPreferencesHandler;
 
 import android.os.Bundle;
+import android.widget.Toast;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
@@ -95,7 +96,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 		switch (id) {
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
-			builder.setTitle("选择需要在主界面显示的模块");
+			builder.setTitle("选择需要显示的模块");
 			builder.setCancelable(false);
 			builder.setMultiChoiceItems(mModuleTitles, mCheckedItems,
 					new OnMultiChoiceClickListener() {
@@ -117,6 +118,8 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					saveCurrentPreferences();
+					Toast.makeText(getBaseContext(), "拖拽主界面中的模块图标可以更换排列顺序哦~", Toast.LENGTH_LONG)
+						.show();
 					finish();
 				}
 			});
