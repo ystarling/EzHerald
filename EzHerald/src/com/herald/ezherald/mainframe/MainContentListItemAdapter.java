@@ -2,12 +2,9 @@ package com.herald.ezherald.mainframe;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import com.herald.ezherald.R;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +63,8 @@ public class MainContentListItemAdapter extends BaseAdapter {
 	 * 规定Id: 0 - 未设置; 1 - curriculum; 2 - activity; 3 - agenda; 4 - library; 5 -
 	 * gpa; 6 - exercise; 7 - academic; 8 - freshman;
 	 */
-	private final String[] ModuleNames = { "纳尼?第一次么?", "课表自习", "校园活动", "我的日程",
-			"图书查询", "绩点查询", "跑操查询", "教务信息", "校园指南" };
+//	private final String[] ModuleNames = { "纳尼?第一次么?", "课表自习", "校园活动", "我的日程",
+//			"图书查询", "绩点查询", "跑操查询", "教务信息", "校园指南" };
 
 	@Override
 	public long getItemId(int position) {
@@ -89,6 +86,8 @@ public class MainContentListItemAdapter extends BaseAdapter {
 			return 7;
 		else if (tag.equals("freshman"))
 			return 8;
+		else if (tag.equals("emptyclassroom"))
+			return 9;
 		return 0;
 	}
 

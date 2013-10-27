@@ -8,7 +8,6 @@ import com.herald.ezherald.R;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
@@ -22,9 +21,9 @@ public class PhotoAdapter extends BaseAdapter {
 	{
 		context = c;
 		photoList = new ArrayList<Integer>();
-		photoList.add(R.drawable.acti_pic1);
-		photoList.add(R.drawable.acti_pic2);
-		photoList.add(R.drawable.acti_pic3);
+		photoList.add(R.drawable.ic_app);
+		photoList.add(R.drawable.ic_app);
+		photoList.add(R.drawable.ic_app);
 	}
 
 	@Override

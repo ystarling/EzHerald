@@ -3,10 +3,8 @@ package com.herald.ezherald.gpa;
 import android.R.color;
 import android.content.Context;
 import android.graphics.Color;
-import android.hardware.Camera.Size;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings.TextSize;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 

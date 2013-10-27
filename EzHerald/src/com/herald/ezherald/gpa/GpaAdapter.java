@@ -3,17 +3,12 @@ package com.herald.ezherald.gpa;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import org.apache.http.client.HttpClient;
 
 import com.herald.ezherald.account.UserAccount;
 
-import android.app.Activity;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.View;
@@ -160,12 +155,6 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	public void removeOptional() {
 		// TODO Auto-generated method stub
 		gpaInfo.removeOptional();//更新数据库的记录
-		/*
-		for(Record r:gpaInfo.getRecords()){
-			if(!r.getExtra().equals(""))
-				r.setSelected(false);
-		}
-		*/
 		notifyDataSetChanged();//更新显示
 	}
 	public void updateFinished(boolean isSuccess){
@@ -189,7 +178,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 			}
 		}
 		Collections.sort(semesters);
-		
+		selectAll();
 		notifyDataSetChanged();
 		
 	}
@@ -220,10 +209,6 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	public void selectAll() {
 		// TODO Auto-generated method stub
 		gpaInfo.selectAll();
-		//for(Record r:gpaInfo.getRecords()){
-		//	if(r.isSelected() == false)
-		//		r.setSelected(true);
-		//}
 		notifyDataSetChanged();
 	}
 }

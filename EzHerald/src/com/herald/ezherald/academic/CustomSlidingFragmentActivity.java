@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
-import com.herald.ezherald.mainframe.MainContentFragment;
 import com.herald.ezherald.mainframe.MainMenuFragment;
 import com.herald.ezherald.mainframe.SecondMenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;

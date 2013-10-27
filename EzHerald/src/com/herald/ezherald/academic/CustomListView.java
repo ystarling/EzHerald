@@ -1,7 +1,5 @@
 package com.herald.ezherald.academic;
 
-import java.util.Date;
-
 import com.herald.ezherald.R;
 
 import android.content.Context;
@@ -11,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.MeasureSpec;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
@@ -330,9 +327,9 @@ public class CustomListView extends ListView implements OnScrollListener {
 
 	public void onRefreshComplete() {
 		state = DONE;
-		lastUpdatedTextView.setText(getResources().getString(
-				R.string.cus_lv_updating)
-				+ new Date().toLocaleString());
+//		lastUpdatedTextView.setText(getResources().getString(
+//				R.string.cus_lv_updating)
+//				+ new Date().toLocaleString());
 		changeHeaderViewByState();
 		invalidateViews();
 		setSelection(0);
@@ -373,9 +370,10 @@ public class CustomListView extends ListView implements OnScrollListener {
 	}
 
 	public void setAdapter(BaseAdapter adapter) {
-		lastUpdatedTextView.setText(getResources().getString(
-				R.string.cus_lv_updating)
-				+ new Date().toLocaleString());
+//		lastUpdatedTextView.setText(getResources().getString(
+//				R.string.cus_lv_updating)
+//				+ new Date().toLocaleString());
+//		lastUpdatedTextView.setText("");
 		super.setAdapter(adapter);
 	}
 

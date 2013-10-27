@@ -2,24 +2,14 @@ package com.herald.ezherald.library;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-
 import com.actionbarsherlock.app.SherlockActivity;
 import com.herald.ezherald.R;
 

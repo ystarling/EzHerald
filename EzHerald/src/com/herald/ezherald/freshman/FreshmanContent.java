@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
 
 public class FreshmanContent extends BaseFrameActivity {
@@ -28,5 +29,20 @@ public class FreshmanContent extends BaseFrameActivity {
 		}
 		return super.onKeyUp(keyCode, event);
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case android.R.id.home:
+			//覆盖这个case，实现按应用图标返回刚才的应用
+			Intent it = new Intent(this,FreshmanActivity.class);
+			startActivity(it);
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
 	
 }

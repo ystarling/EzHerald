@@ -8,7 +8,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -16,7 +15,6 @@ import org.json.JSONException;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,7 +25,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +33,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -52,10 +48,6 @@ import com.herald.ezherald.academic.DataTypeTransition;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.UserAccount;
-import com.herald.ezherald.activity.ActiInfoDetail;
-import com.herald.ezherald.exercise.FragmentA;
-import com.herald.ezherald.exercise.FragmentB;
-import com.herald.ezherald.exercise.FragmentC;
 
 
 public class CurriculumFragment extends SherlockFragment {
@@ -106,6 +98,10 @@ public class CurriculumFragment extends SherlockFragment {
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("Please wait ... ");
+		
 		
 	}
 	
@@ -126,16 +122,6 @@ public class CurriculumFragment extends SherlockFragment {
 		this.savedInstanceState = savedInstanceState;
 		String cardNum = null;
 		bar = getSherlockActivity(). getSupportActionBar();
-//		UserAccount acount = Authenticate.getIDcardUser(context);
-//		if(null == acount)
-//		{
-//			Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
-//			return setNotLoginView(inflater, container, savedInstanceState);
-//		}
-//		else
-//		{
-//			return setLoginView(inflater, container, savedInstanceState);
-//		}
 		return null;
 		
 
@@ -144,7 +130,7 @@ public class CurriculumFragment extends SherlockFragment {
 	@Override
 	public void onResume()
 	{
-		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
 		UserAccount acount = Authenticate.getIDcardUser(context);
 		if(null == acount)
 		{
@@ -221,9 +207,7 @@ public class CurriculumFragment extends SherlockFragment {
 			
 		});
 		
-		progressDialog = new ProgressDialog(context);
-		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("Please wait ... ");
+		
 //		progressDialog.show();
 		
 		if(dbAdapter.isEmpty())
@@ -428,13 +412,17 @@ public class CurriculumFragment extends SherlockFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 //				selectedItem = items[which];
-				Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
+//				Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
 				SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
 				Editor editor = settings.edit();
 				editor.putString(pref_term, tmpSelect);
 				editor.commit();
 				bar.setTitle("课表:"+tmpSelect);
-				update();
+//				update();
+//				new requestCurriculum().execute(curri_url);
+				Message msg = new Message();
+				msg.what = 4;
+				mHandler.sendMessage(msg);
 			}
 		})
 		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -442,7 +430,9 @@ public class CurriculumFragment extends SherlockFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				
+				Message msg = new Message();
+				msg.what = 3;
+				mHandler.sendMessage(msg);
 			}
 		})
 		.setSingleChoiceItems(terms, 0, null)
@@ -534,7 +524,7 @@ public class CurriculumFragment extends SherlockFragment {
 				createItemDialog();
 			}
 			Message msg = new Message();
-			msg.what = 1;
+			msg.what = TERM_REQ_COMPLETED;
 			mHandler.sendMessage(msg);
 		}
 	}
@@ -640,7 +630,7 @@ public class CurriculumFragment extends SherlockFragment {
 				Toast.makeText(context, "数据读取失败．．．", Toast.LENGTH_SHORT).show();
 			}
 			Message msg = new Message();
-			msg.what = 2;
+			msg.what = CURRI_REQ_COMPLETED;
 			mHandler.sendMessage(msg);
 		}
 		
@@ -679,6 +669,8 @@ public class CurriculumFragment extends SherlockFragment {
 	
 	final int TERM_REQ_COMPLETED = 1;
 	final int CURRI_REQ_COMPLETED = 2;
+	final int CURRI_REQ_CANCEL = 3;
+	final int CURRI_REQ_BEGIN = 4;
 	
 	public Handler mHandler = new Handler()
 	{
@@ -714,15 +706,40 @@ public class CurriculumFragment extends SherlockFragment {
 
 				break;
 			}
+			case CURRI_REQ_CANCEL:
+			{
+				onRefreshCompleted();
+				break;
+			}
 				
-			case CURRI_REQ_COMPLETED:
+			case CURRI_REQ_COMPLETED:{
 //				progressDialog.cancel();
 				onRefreshCompleted();
 				break;
 			}
+			case CURRI_REQ_BEGIN:
+			{
+//				progressDialog.show();
+//				onRefreshStart();
+//				new requestCurriculum().execute(get_curr_url());
+				update();
+				break;
+			}
+			
+			}
 			super.handleMessage(msg);
 		}
 	};
+	
+	private String get_curr_url()
+	{
+		UserAccount acount = Authenticate.getIDcardUser(context);
+		String cardNum = acount.getUsername();
+		SharedPreferences preferences = getActivity().getSharedPreferences(prefName, 0);
+		String term = preferences.getString(pref_term, null);
+		String url = String.format(curri_url, cardNum, term);
+		return url;
+	}
 	
 	public void onRefreshCompleted()
 	{
@@ -739,8 +756,15 @@ public class CurriculumFragment extends SherlockFragment {
 	
 	}
 	
+	public void onRefreshStart()
+	{
+		progressDialog.show();
+//		dbAdapter.clear();
+	}
+	
 
 	
 
 
+	
 }

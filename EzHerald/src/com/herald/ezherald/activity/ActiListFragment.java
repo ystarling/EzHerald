@@ -1,6 +1,5 @@
 package com.herald.ezherald.activity;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -19,7 +18,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +28,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
@@ -64,6 +61,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 
 	ActiDBAdapter DBAdapter;
 	
+	private final String noActivityHint = "NOACTIVITYCANGET";
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -73,6 +72,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		
 		context = getActivity();
 		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.setMessage("Please wait ... ");
 		
 		DBAdapter = new ActiDBAdapter(context);
@@ -160,6 +160,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		//REFRESHSTATE = REFRESHDOWN;
 		MenuItem muItem = mMenu.findItem(R.id.menu_acti_list_action_refresh);
 		muItem.setActionView(null);	
+		listView.onRefreshComplete();
+		progressDialog.cancel();
 	}
 	
 	
@@ -183,16 +185,26 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				// TODO Auto-generated method stub
 				//Toast.makeText(getActivity(), "more", Toast.LENGTH_SHORT).show();
 				try {
-					foot.startRequestData();
+					
 					if(ACTITYPE == ALLACTI)
 					{
-						new RequestActiList().execute(new URL(getResources().getString(R.string.acti_url_more_activity)
-								+adapter.getLastActiId()));
+						if(adapter.getLastActiId() != null)
+						{
+							foot.startRequestData();
+							new RequestActiList().execute(new URL(getResources().getString(R.string.acti_url_more_activity)
+									+adapter.getLastActiId()));
+						}
+						
 					}
 					else if(ACTITYPE == CONCERNEDACTI)
 					{
-						new RequestActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_more_activity)
-								+adapter.getLastActiId()));
+						if(adapter.getLastActiId() != null)
+						{
+							foot.startRequestData();
+							new RequestActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_more_activity)
+									+adapter.getLastActiId()));
+						}
+						
 					}
 					
 				} catch (MalformedURLException e) {
@@ -372,6 +384,10 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 					{
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
+						if(str==noActivityHint)
+						{
+							return actiList;
+						}
 						JSONArray jsonArray = new JSONArray(str);
 						//Log.v("Net test", str);
 						for(int loop = 0;loop<jsonArray.length();++loop)
@@ -421,10 +437,11 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				
 				adapter.setActiInfoList(result);
 				adapter.notifyDataSetChanged();
-				listView.onRefreshComplete();
-				onRefreshActionComplete();
-				progressDialog.cancel();
+				
+				
+				
 			}
+			onRefreshActionComplete();
 			
 		}
 		

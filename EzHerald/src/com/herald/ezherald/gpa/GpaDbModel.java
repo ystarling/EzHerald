@@ -65,6 +65,7 @@ public class GpaDbModel {
 	 * É¾³ýËùÓÐ¼ÇÂ¼
 	 */
 	public void clear(){
-		db.delete(GpaDbHelper.DATABASE_NAME, null, null);
+		int del = db.delete(GpaDbHelper.DATABASE_NAME, null, null);
+		Log.v("deleted",Integer.toString(del));
 	}
 }

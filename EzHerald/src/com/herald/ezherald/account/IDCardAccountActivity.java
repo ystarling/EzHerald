@@ -1,19 +1,7 @@
 package com.herald.ezherald.account;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-
-
-
-
-import cn.edu.seu.herald.auth.*;
-
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
-import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.R;
 
 
@@ -21,8 +9,6 @@ import com.herald.ezherald.R;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.widget.Toast;
 
 
 public class IDCardAccountActivity extends SherlockFragmentActivity {

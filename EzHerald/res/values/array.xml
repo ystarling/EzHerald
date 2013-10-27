@@ -10,6 +10,7 @@
         <item >跑操查询</item>
         <item >教务信息</item>
         <item >校园指南</item>
+        <item >空闲教室</item>
     </string-array>
     
     <string-array name="second_menu_items">
@@ -53,7 +54,17 @@
         <item>主界面色调</item>
         <item>同步频率</item>
         <item>软件更新 </item>
+        <item>引导界面</item>
         <item>关于…</item>
+    </string-array>
+    
+    <string-array name="setting_menu_subtitles">
+        <item>选择主界面中需要显示的模块</item>
+        <item>更改主界面随机色调</item>
+        <item>调整软件刷新频率</item>
+        <item>获得最新版本 </item>
+        <item>再看一次引导界面</item>
+        <item>先声客户端</item>
     </string-array>
 	
     
@@ -63,12 +74,5 @@
     
     <!--library 图书馆 end -->
     
-    
-    <integer-array name="main_content_listview_color_resources">
-        <item>@drawable/main_content_listview_round_shape_blue</item>
-        <item>@drawable/main_content_listview_round_shape_green</item>
-        <item>@drawable/main_content_listview_round_shape_navy</item>
-        <item>@drawable/main_content_listview_round_shape_purple</item>
-        <item>@drawable/main_content_listview_round_shape_red</item>
-    </integer-array>
+ 
 </resources>

@@ -3,7 +3,6 @@ package com.herald.ezherald.freshman;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
 
 public class FreshmanActivity extends BaseFrameActivity {

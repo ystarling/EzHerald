@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.herald.ezherald.BaseFrameActivity;
@@ -22,12 +21,13 @@ import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.activity.ActiActivity;
-import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
+import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
+import com.tendcloud.tenddata.TCAgent;
 
 /*
  * 标准左侧侧滑菜单用的ListFragment
@@ -50,7 +50,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_gpa,
 			R.drawable.main_menu_ic_exercise,
 			R.drawable.main_menu_ic_academic,
-			R.drawable.main_menu_ic_freshman }; // 图标(icon)
+			R.drawable.main_menu_ic_freshman,
+			R.drawable.main_menu_ic_emptcls }; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
 			R.drawable.main_menu_ic_mainframe_selected,
@@ -61,7 +62,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_gpa_selected,
 			R.drawable.main_menu_ic_exercise_selected,
 			R.drawable.main_menu_ic_academic_selected,
-			R.drawable.main_menu_ic_freshman_selected }; // 选中状态的图标(icon)
+			R.drawable.main_menu_ic_freshman_selected,
+			R.drawable.main_menu_ic_emptcls_selected }; // 选中状态的图标(icon)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +89,9 @@ public class MainMenuFragment extends ListFragment {
 		
 		setListAdapter(mListViewAdapter);
 		getListView().setCacheColorHint(Color.TRANSPARENT);
+		getListView().setDivider(getResources().getDrawable(R.drawable.main_menu_divider_color));
+		getListView().setDividerHeight(1);
+		getListView().setPadding(0, 0, 0, 0);
 	}
 
 	/*
@@ -100,6 +105,8 @@ public class MainMenuFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		
+		String menuTarget = "Unknown";
 		/*
 		 * Fragment newContent = null; switch (position) { case 0: newContent =
 		 * new StubContentFragment(); break; case 1: newContent = new
@@ -110,32 +117,45 @@ public class MainMenuFragment extends ListFragment {
 		switch (position) {
 		case 0:
 			i.setClass(getActivity(), MainActivity.class);
+			menuTarget = "MainActivity";
 			break;
 		case 1:
 			i.setClass(getActivity(), CurriculumActivity.class);
+			menuTarget = "Curriculum";
 			break;
 		case 2:
 			i.setClass(getActivity(), ActiActivity.class);
+			menuTarget = "Activity";
 			break;
 		/*case 3:
 			i.setClass(getActivity(), AgendaActivity.class);
 			break;*/
 		case 3:
 			i.setClass(getActivity(), LibraryActivity.class);
+			menuTarget = "Library";
 			break;
 		case 4:
 			i.setClass(getActivity(), GPAActivity.class);
+			menuTarget = "GPA";
 			break;
 		case 5:
 			i.setClass(getActivity(), ExerciseActivity.class);
+			menuTarget = "Exercise";
 			break;
 		case 6:
 			i.setClass(getActivity(), AcademicActivity.class);
+			menuTarget = "Academic";
 			break;
 		case 7:
 			i.setClass(getActivity(), FreshmanActivity.class);
+			menuTarget = "CampusGuide";
+			break;
+		case 8:
+			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			break;
 		}
+		TCAgent.onEvent(getActivity(), "主菜单点击", menuTarget);
+		
 		if (i != null) {
 			i.putExtra(KEY_SHOWED_UPDATE, true);
 			startActivity(i);
@@ -210,6 +230,9 @@ public class MainMenuFragment extends ListFragment {
 		}
 		else if(localModuleName.equals("freshman")){
 			return 7;
+		}
+		else if(localModuleName.equals("emptyclassroom")){
+			return 8;
 		}
 		
 		return -1;

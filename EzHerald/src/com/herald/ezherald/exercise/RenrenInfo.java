@@ -1,18 +1,10 @@
 package com.herald.ezherald.exercise;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -26,8 +18,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceActivity.Header;
-import android.util.Base64;
 import android.util.Log;
 
 
@@ -77,8 +67,6 @@ public class RenrenInfo{
 	protected void onSuccess() {
 		// TODO Auto-generated method stub
 		try {
-			//String today = android.text.format.DateFormat.format("yyyy-m-d",new Date()).toString();
-			//Date  date = new Date();
 			Calendar calendar = Calendar.getInstance();
 			String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DATE));
 			JSONObject json = new JSONObject(message);
@@ -90,7 +78,7 @@ public class RenrenInfo{
 				date = date.split(" ")[0];
 				if(date.equals(today)){
 					String info = object.getString("content");
-					setInfo(getInfo()+info+"\n\n\n");
+					setInfo(getInfo()+info+"\n\n发布时间\n"+object.getString("createTime")+"\n\n\n");
 					setDate(date);
 					save();
 				}else{

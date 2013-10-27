@@ -31,7 +31,6 @@ import com.herald.ezherald.mainframe.MainGuideActivity;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,7 +39,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,7 +47,6 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,6 +92,16 @@ public class MainActivity extends BaseFrameActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Intent intent = getIntent();
+		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
+		/////////////////////////////////////////////////
+		//欢迎界面
+//		if(!mShowedUpdate){
+//			Intent firstScreenIntent = new Intent();
+//			firstScreenIntent.setClass(this, FirstScreenActivity.class);
+//			startActivity(firstScreenIntent);
+//		}
+		/////////////////////////////////////////////////
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
@@ -108,15 +115,7 @@ public class MainActivity extends BaseFrameActivity {
 			i.setClass(this, MainGuideActivity.class);
 			startActivity(i);
 			setGuideViewed();
-		}
-
-		Intent intent = getIntent();
-		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
-		// 检查是否有固件版本更新
-		if (!mShowedUpdate) {
-			intent = new Intent();
-			intent.setClass(this, AppUpdateActivity.class);
-			startActivity(intent);
+			
 		}
 
 		doNotUpdateUI = false;
@@ -146,7 +145,7 @@ public class MainActivity extends BaseFrameActivity {
 		Log.d("MainActivity", "Pref. time interval = " + prefTimeInterval
 				+ " minutes");
 
-		if (prefTimeInterval > 0 && timeGap > prefTimeInterval) {
+		if (prefTimeInterval >= 0 && timeGap > prefTimeInterval) {
 			Log.d("MainActivity", "checkRefreshState() = true");
 			return true;
 		}
@@ -208,7 +207,10 @@ public class MainActivity extends BaseFrameActivity {
 			requestInfoUpdate("blabla", item);
 
 		}
-
+		
+		//检查应用程序更新
+		new CheckAppRefreshStateTask().execute(this);
+		
 		return true;
 	}
 
@@ -310,7 +312,7 @@ public class MainActivity extends BaseFrameActivity {
 			@Override
 			public void run() {
 				Looper.prepare(); // 这是关键
-				Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG)
+				Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT)
 						.show();
 				Looper.loop();
 			}
@@ -347,7 +349,7 @@ public class MainActivity extends BaseFrameActivity {
 				int count = 1;
 				int size = remoteImgUrls.size();
 				for (String urlStr : remoteImgUrls) {
-					showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
+					//showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
 					Bitmap bmp = testGetBitmap(urlStr);
 					if (bmp != null) {
 						updList.add(bmp);
@@ -634,7 +636,7 @@ public class MainActivity extends BaseFrameActivity {
 			}
 		});
 
-		builder.show();
+		//builder.show();
 	}
 
 	/**
@@ -645,6 +647,31 @@ public class MainActivity extends BaseFrameActivity {
 		doNotUpdateUI = true;
 		Log.d("MainActivity", "onDestroy");
 		super.onDestroy();
+	}
+	
+	/**
+	 * 异步获取更新状态，防止启动时间缓慢
+	 * @author BorisHe
+	 *
+	 */
+	public class CheckAppRefreshStateTask extends AsyncTask<Context, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Context... context) {
+			if(context == null || context.length == 0){
+				Log.e("CheckAppRefreshStateTask", "Null context");
+				return null;
+			}
+		
+			// 检查是否有固件版本更新
+			if (!mShowedUpdate) {
+				Intent intent = new Intent();
+				intent.setClass(context[0], AppUpdateActivity.class);
+				startActivity(intent);
+			}
+			return null;
+		}
+		
 	}
 
 }

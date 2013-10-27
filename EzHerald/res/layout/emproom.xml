@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/emproom_select_week_and_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第："
+            android:textSize="18sp"
+             />
+
+        <EditText
+            android:id="@+id/emproom_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:ems="5"
+            android:numeric="integer"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周，周："
+            android:textSize="18sp"
+             />
+
+        <EditText
+            android:id="@+id/emproom_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:numeric="integer"
+             />
+
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emproom_select_peroid"
+        android:orientation="horizontal"
+        >
+        
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="从第"
+	        android:textSize="18sp"
+	        />" 
+	    <EditText 
+	        android:id="@+id/emproom_from_peroid"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:ems="5"
+	        android:numeric="integer"
+	        />
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="节到第"
+	        android:textSize="18sp"
+	        />
+	    
+	    <EditText 
+	        android:id="@+id/emproom_to_peroid"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:ems="5"
+	        android:numeric="integer"
+	        />
+	    
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="节"
+	        android:textSize="18sp"
+	        />
+	    
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/emproom_campus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+	    <Spinner 
+	        android:id="@+id/emproom_campus_spinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/emproom_quick_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_search_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询今天"
+            android:textSize="18sp"
+            android:layout_weight="1"
+             />
+
+        <Button
+            android:id="@+id/btn_search_tomorrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询明天"
+            android:textSize="18sp"
+            android:layout_weight="1"
+             />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emproom_advance_search">
+        
+        <Button 
+            android:id="@+id/btn_advance_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="高级搜索"
+            android:textSize="18sp"
+            />
+        
+    </LinearLayout>
+
+    <ListView 
+        android:id="@+id/emproom_room_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:divider="#FF0000"
+        android:dividerHeight="1sp" 
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        >
+        
+    </ListView>
+    
+    
+
+</LinearLayout>

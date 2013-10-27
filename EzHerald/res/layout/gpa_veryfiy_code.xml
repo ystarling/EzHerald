@@ -8,7 +8,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="正在加载验证码"
+        android:text="请稍候"
         android:textAppearance="?android:attr/textAppearanceLarge" 
         android:gravity="center"/>
 

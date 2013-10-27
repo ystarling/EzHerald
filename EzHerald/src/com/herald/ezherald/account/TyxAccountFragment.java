@@ -1,17 +1,17 @@
 package com.herald.ezherald.account;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
@@ -24,7 +24,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,8 +32,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.edu.seu.herald.ws.api.AuthenticationException;
-import cn.edu.seu.herald.ws.api.ServiceException;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
@@ -45,8 +42,8 @@ public class TyxAccountFragment extends SherlockFragment {
 
 	private EditText view_userName;
 	private EditText view_password;
-	private TextView TyxInfo;
 	private TextView TyxUserName;
+	private TextView TyxInfo;
 	private Button view_loginSubmit;
 	private Button view_logoffSubmit;
 	private DatabaseHelper databaseHelper = null;
@@ -111,21 +108,6 @@ public class TyxAccountFragment extends SherlockFragment {
 			getSherlockActivity().finish();
 		}
 	};
-
-	/*
-	 * private void initView(boolean isRememberMe) {
-	 * 
-	 * String userName = share.getString(SHARE_LOGIN_USERNAME, ""); String
-	 * password = share.getString(SHARE_LOGIN_PASSWORD, "");
-	 * Log.d(this.toString(), "userName=" + userName + " password=" + password);
-	 * if (!"".equals(userName)) { view_userName.setText(userName); } if
-	 * (!"".equals(password)) { view_password.setText(password);
-	 * view_rememberMe.setChecked(true); }
-	 * 
-	 * if (view_password.getText().toString().length() > 0) { //
-	 * view_loginSubmit.requestFocus(); // view_password.requestFocus(); } share
-	 * = null; }
-	 */
 	private void setListener() {
 		view_loginSubmit.setOnClickListener(submitListener);
 
@@ -142,79 +124,40 @@ public class TyxAccountFragment extends SherlockFragment {
 	};
 
 	public static boolean isNetworkAvailable(Context context) {
-		Log.v("mynet", "start");
 		ConnectivityManager connectivity = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (connectivity == null) {
-			Log.i("NetWorkState", "Unavailabel");
+		if (connectivity == null) {	
 			return false;
 		} else {
 			NetworkInfo[] info = connectivity.getAllNetworkInfo();
 			if (info != null) {
 				for (int i = 0; i < info.length; i++) {
 					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-						Log.i("NetWorkState", "Availabel");
-						Log.v("mynet", "yes");
 						return true;
 					}
 				}
 			}
 		}
-		Log.v("mynet", "no");
 		return false;
 	}
 
 	class LoginFailureHandler implements Runnable {
-
+		public final String HERALD_WS_TYX_URI = "http://herald.seu.edu.cn/herald_web_service/tyx/checkAccount/";
+		public final String POST_KEY_USERNAME = "card_number";
+		public final String POST_KEY_PASSWORD = "password";
+		
+		public final int VERIFY_AUTH_OKAY = 200; 
+		public final int VERIFY_AUTH_FAIL = 300;
+		public final int VERIFY_SERVICE_ERROR = 500;
+		
 		public void run() {
-			boolean loginState = false;
-			boolean isNetError = !isNetworkAvailable(getActivity());
-			boolean isServiceError = false;
+			Message msg = new Message();
 			userName = view_userName.getText().toString();
 			password = view_password.getText().toString();
 			try {
-				if (!isNetError) {
-					/*
-					 * final String HERALD_WS_BASE_URI =
-					 * "http://herald.seu.edu.cn/ws";
-					 * 
-					 * HeraldWebServicesFactory factory = new
-					 * HeraldWebServicesFactoryImpl(HERALD_WS_BASE_URI);
-					 * 
-					 * MorningExerciseService exeService =
-					 * factory.getMorningExerciseService();
-					 * 
-					 * Log.v("myname", userName); RunTimesData runTimesData =
-					 * exeService.getRunTimesData(userName, password);
-					 */
-					// use new python api
-					final String URL = "http://herald.seu.edu.cn/herald_web_service/tyx/checkAccount/";
-					HttpClient client = new DefaultHttpClient();
-
-					HttpPost post = new HttpPost(URL);
-					List<NameValuePair> param = new ArrayList<NameValuePair>(2);
-					param.add(new BasicNameValuePair("card_number", userName));
-					param.add(new BasicNameValuePair("password", password));
-					post.setEntity(new UrlEncodedFormEntity(param));
-					HttpResponse response = client.execute(post);
-					boolean success = true;
-					if (response.getStatusLine().getStatusCode() != 200) {
-						success = false;
-					} else {
-						String result = EntityUtils.toString(response
-								.getEntity());
-						if (!result.equals("True")) {
-							success = false;
-							throw new AuthenticationException();
-						}
-					}
-
-					if (!success) {
-						loginState = false;
-					} else {
-
-						loginState = true;
-						Log.v("mynet", "insertstart");
+				if (isNetworkAvailable(getActivity())) {
+					int verifyResult = verifyLibUserPswd(userName, password);
+					if(verifyResult == VERIFY_AUTH_OKAY){
 						databaseHelper = new DatabaseHelper(getActivity(),
 								Authenticate.DATABASE_NAME);
 						SQLiteDatabase database = databaseHelper
@@ -225,7 +168,9 @@ public class TyxAccountFragment extends SherlockFragment {
 						ContentValues values = new ContentValues();
 						values.put("id", 1);
 						values.put("username", userName);
-						values.put("password", password);
+	
+						values.put("password", EncryptionHelper.encryptDES(password, EncryptionHelper.KEY));
+						
 						values.put("type", Authenticate.TYX_TYPE);
 						database.insert(Authenticate.TABLE_NAME, null, values);
 						database.close();
@@ -233,63 +178,70 @@ public class TyxAccountFragment extends SherlockFragment {
 								AccountActivity.class);
 						startActivity(newActivity);
 						getSherlockActivity().finish();
+						authenTrueHandler.sendMessage(msg);
+					}else if (verifyResult == VERIFY_AUTH_FAIL) {
+						authenErrorHandler.sendMessage(msg);
+					}else {
+						serviceErrorHandler.sendMessage(msg);
 					}
+					
+				}else {
+					netErrorHandler.sendMessage(msg);
 				}
-				Message message = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("loginState", loginState);
-				bundle.putBoolean("isNetError", isNetError);
-				bundle.putBoolean("isServiceError", isServiceError);
-				message.setData(bundle);
-				loginHandler.sendMessage(message);
-
-			} catch (AuthenticationException e) {
-				Log.v("TyxAccountServiceEx", "TyxAccountServiceEx");
-				loginState = false;
-				Message message = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("loginState", loginState);
-				bundle.putBoolean("isNetError", isNetError);
-				bundle.putBoolean("isServiceError", isServiceError);
-				message.setData(bundle);
-				loginHandler.sendMessage(message);
+				
 				proDialog.dismiss();
-
-			} catch (ServiceException e) {
-				Log.v("TyxAccountAuthenEx", "TyxAccountAuthenEx");
-				isServiceError = true;
+			}catch (Exception e) {
 				Message message = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("loginState", loginState);
-				bundle.putBoolean("isNetError", isNetError);
-				bundle.putBoolean("isServiceError", isServiceError);
-				message.setData(bundle);
-				loginHandler.sendMessage(message);
-				proDialog.dismiss();
-
-			}
-
-			catch (Exception e) {
-				Log.v("TyxAccountEx", "TyxAccountEx");
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				e.printStackTrace(pw);
-				Log.v("errorlog", "\r\n" + sw.toString() + "\r\n");
-
-				Message message = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("isUnknownError", false);
-				message.setData(bundle);
-				UnknownErrorHandler.sendMessage(message);
+				unknownErrorHandler.sendMessage(message);
 				proDialog.dismiss();
 
 			}
 		}
+		
+		private int verifyLibUserPswd(String userName, String passWord) {			
+			int retValue = VERIFY_SERVICE_ERROR;
+			HttpPost httpPost = new HttpPost(HERALD_WS_TYX_URI);  //创建HttpPost对象
+			
+			//设置Http POST请求参数
+			List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
+			params.add(new BasicNameValuePair(POST_KEY_USERNAME, userName));
+			params.add(new BasicNameValuePair(POST_KEY_PASSWORD, passWord));
+			
+			HttpResponse httpResponse = null;
+			try{
+				//设置post请求参数
+				httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+				httpResponse = new DefaultHttpClient().execute(httpPost);
+				if(httpResponse.getStatusLine().getStatusCode() == 200){
+					String result = EntityUtils.toString(httpResponse.getEntity());
+					if(result.equals("True"))
+						retValue = VERIFY_AUTH_OKAY;
+					else{
+						if(result.equals("False")){
+						retValue = VERIFY_AUTH_FAIL;	
+						}else {
+						retValue = VERIFY_SERVICE_ERROR;
+						}
+						
+					}
+						
+				}
+			} catch (ClientProtocolException e){
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return retValue;
+		}
 
-		Handler UnknownErrorHandler = new Handler() {
+		Handler unknownErrorHandler = new Handler() {
 			public void handleMessage(Message msg) {
-				boolean isUnknownError = msg.getData().getBoolean(
-						"isUnknownError");
+				
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}
@@ -297,37 +249,44 @@ public class TyxAccountFragment extends SherlockFragment {
 						Toast.LENGTH_SHORT).show();
 			}
 		};
-
-		Handler loginHandler = new Handler() {
+		Handler netErrorHandler = new Handler() {
 			public void handleMessage(Message msg) {
-
-				boolean isNetError = msg.getData().getBoolean("isNetError");
-				boolean loginState = msg.getData().getBoolean("loginState");
-				boolean isServiceError = msg.getData().getBoolean(
-						"isServiceError");
 				if (proDialog != null) {
 					proDialog.dismiss();
-				}
-				if (isNetError) {
-					Toast.makeText(getActivity(), "当前网络不可用", Toast.LENGTH_SHORT)
-							.show();
-				} else {
-					if (isServiceError) {
-						Toast.makeText(getActivity(), "抱歉，体育系登录服务出错，请稍后再试！",
-								Toast.LENGTH_SHORT).show();
-					} else {
-						if (loginState) {
-							Toast.makeText(getActivity(), "登录成功！",
-									Toast.LENGTH_SHORT).show();
-						} else {
-							Toast.makeText(getActivity(), "错误的用户名或密码",
-									Toast.LENGTH_SHORT).show();
-						}
-					}
-
-				}
+				}			
+				Toast.makeText(getActivity(), "当前网络不可用", Toast.LENGTH_SHORT).show();
+				
 			}
 		};
+		Handler serviceErrorHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (proDialog != null) {
+					proDialog.dismiss();
+				}			
+				Toast.makeText(getActivity(), "抱歉，体育系登录服务出错，请稍后再试", Toast.LENGTH_SHORT).show();
+				
+			}
+		};
+		Handler authenErrorHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (proDialog != null) {
+					proDialog.dismiss();
+				}			
+				Toast.makeText(getActivity(), "错误的用户名或密码", Toast.LENGTH_SHORT).show();
+				
+			}
+		};
+		Handler authenTrueHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (proDialog != null) {
+					proDialog.dismiss();
+				}			
+				Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
+				
+			}
+		};
+
+		
 	}
 
 }
