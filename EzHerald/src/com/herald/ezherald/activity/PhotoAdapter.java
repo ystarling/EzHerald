@@ -21,9 +21,9 @@ public class PhotoAdapter extends BaseAdapter {
 	{
 		context = c;
 		photoList = new ArrayList<Integer>();
-		photoList.add(R.drawable.acti_pic1);
-		photoList.add(R.drawable.acti_pic2);
-		photoList.add(R.drawable.acti_pic3);
+		photoList.add(R.drawable.ic_app);
+		photoList.add(R.drawable.ic_app);
+		photoList.add(R.drawable.ic_app);
 	}
 
 	@Override
