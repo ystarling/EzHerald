@@ -23,14 +23,14 @@ import com.herald.ezherald.R;
 
 /**************set BaseAdapter********************/
 
-public class MineBookMyAdapter extends BaseAdapter{
+public class LibraryMineBookMyAdapter extends BaseAdapter{
 	
 	private LayoutInflater inflater;
 	JSONArray jsonarray;
 	Context context;
 	public String barcode;
 	Activity activity;
-	public MineBookMyAdapter(Activity activity,Context c,JSONArray ar){
+	public LibraryMineBookMyAdapter(Activity activity,Context c,JSONArray ar){
 		this.inflater=LayoutInflater.from(c);
 		this.jsonarray=ar;
 		this.context=c;

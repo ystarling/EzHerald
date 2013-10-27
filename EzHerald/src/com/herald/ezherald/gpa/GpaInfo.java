@@ -65,6 +65,7 @@ public class GpaInfo {
 		gpaDbModel.clear();
 		gpaDbModel.close();
 		
+		
 		Document document = Jsoup.parse(result);
 		Elements trs = document
 				.select("tr[onMouseOver=this.style.backgroundColor=\'#bbbbbb\']");
