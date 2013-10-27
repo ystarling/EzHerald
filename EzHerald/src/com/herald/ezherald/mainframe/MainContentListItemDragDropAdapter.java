@@ -2,7 +2,10 @@ package com.herald.ezherald.mainframe;
 
 import java.util.List;
 import java.util.Map;
+
 import com.herald.ezherald.R;
+import com.terlici.dragndroplist.DragNDropAdapter;
+import com.terlici.dragndroplist.DragNDropListView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 主界面模块中ListView项目内容的Adapter (替代原来的GridView)
@@ -18,7 +22,7 @@ import android.widget.TextView;
  * @author BorisHe
  * @since 20131018
  */
-public class MainContentListItemAdapter extends BaseAdapter {
+public class MainContentListItemDragDropAdapter extends BaseAdapter implements DragNDropAdapter{
 
 	private final String TAG = "MainContentListItemAdapter";
 
@@ -42,7 +46,7 @@ public class MainContentListItemAdapter extends BaseAdapter {
 		public TextView content2; // 内容2
 	}
 
-	public MainContentListItemAdapter(Context c,
+	public MainContentListItemDragDropAdapter(Context c,
 			List<Map<String, Object>> gridItems) {
 		mContext = c;
 		mGridContainer = LayoutInflater.from(mContext);
@@ -142,6 +146,24 @@ public class MainContentListItemAdapter extends BaseAdapter {
 		}
 		
 		return convertView;
+	}
+
+	@Override
+	public void onItemDrag(DragNDropListView parent, View view, int position,
+			long id) {
+		//在MainContentFragment中重载
+	}
+
+	@Override
+	public void onItemDrop(DragNDropListView parent, View view,
+			int startPosition, int endPosition, long id) {
+		//在MainContentFragment中重载
+	}
+
+	@Override
+	public int getDragHandler() {
+		//获得一个视图的id，长按那个视图可以拖拽
+		return R.id.main_frame_content_listitem_icon;
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.herald.ezherald.settingframe;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -22,7 +24,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 
 	private String[] mModuleNames; // 模块名(英文)
 	private String[] mModuleTitles; // 模块名（中文）
-	private Set<String> mChoosenModules; // 已选择的模块
+	private List<String> mChoosenModules; // 已选择的模块
 	private boolean[] mCheckedItems;
 	private Dialog mDialog;
 
@@ -59,11 +61,9 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 		// 获得偏好设置
 		SharedPreferences appPrefs = getSharedPreferences(PREF_NAME,
 				Context.MODE_PRIVATE);
-		Set<String> result_set = null;
-		// try {
-		// result_set = appPrefs.getStringSet(KEY_NAME, null);
-		// } catch (NoSuchMethodError e) {
-		result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME,
+		List<String> result_set = null;
+		
+		result_set = SharedPreferencesHandler.getStringList(appPrefs, KEY_NAME,
 				null);
 		// }
 
@@ -71,7 +71,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 			// Load default settings
 			String[] defaultModePref = getResources().getStringArray(
 					R.array.pref_module_choice_def_vals);
-			mChoosenModules = new HashSet<String>();
+			mChoosenModules = new ArrayList<String>();
 			for (String str : defaultModePref) {
 				mChoosenModules.add(str);
 			}
@@ -129,7 +129,8 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 					mDialog.cancel();
 					finish();
 				}
-			});
+			});			
+			
 
 			mDialog = builder.create();
 			return mDialog;
@@ -142,7 +143,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 		SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 		Editor editor = prefs.edit();
 		SharedPreferencesHandler
-				.putStringSet(editor, KEY_NAME, mChoosenModules);
+				.putStringList(editor, KEY_NAME, mChoosenModules);
 		editor.commit();
 	}
 

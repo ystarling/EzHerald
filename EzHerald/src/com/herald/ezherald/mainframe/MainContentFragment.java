@@ -14,6 +14,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -28,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.MainActivity;
@@ -38,6 +40,7 @@ import com.herald.ezherald.activity.ActiActivity;
 import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriDataGrabber;
 import com.herald.ezherald.curriculum.CurriculumActivity;
+import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.exercise.ExerciseGrabber;
 import com.herald.ezherald.freshman.FreshmanActivity;
@@ -48,15 +51,13 @@ import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 import com.tendcloud.tenddata.TCAgent;
+import com.terlici.dragndroplist.DragNDropListView;
+import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
 
 /**
- * 上传图片: 
- * http://121.248.63.105/EzHerald/pictureupload/ 
- * 上传更新:
- * http://121.248.63.105/EzHerald/updateupload/ 
- * 图片json显示最新五条:
- * http://121.248.63.105/EzHerald/picturejson/ 
- * 更新json显示最新一条:
+ * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 上传更新:
+ * http://121.248.63.105/EzHerald/updateupload/ 图片json显示最新五条:
+ * http://121.248.63.105/EzHerald/picturejson/ 更新json显示最新一条:
  * http://121.248.63.105/EzHerald/updatejson/
  * 
  * @author BorisHe
@@ -74,7 +75,8 @@ import com.tendcloud.tenddata.TCAgent;
  */
 public class MainContentFragment extends SherlockFragment {
 	// private GridView mGridView; // GridView
-	private ListView mListView; // ListView（替代GridView）
+	//private ListView mListView; // ListView（替代GridView）
+	private DragNDropListView mListView;
 
 	private ViewFlow mViewFlow; // ViewFlow
 	private CircleFlowIndicator mCircIndic;
@@ -98,13 +100,12 @@ public class MainContentFragment extends SherlockFragment {
 	private final int MAX_BANNER_SIZE = 5;
 
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
-	
 
 	// ////////////Temporarily used local variables///////////////////
 	String mContentCont1[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
-			"加载中" };
+			"加载中", "加载中" };
 	String mContentCont2[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
-			"加载中" };
+			"加载中", "加载中" };
 
 	private boolean mContentIsDestroyed = false;
 	// /////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
@@ -119,7 +120,7 @@ public class MainContentFragment extends SherlockFragment {
 			R.drawable.main_content_listview_round_shape_navy,
 			R.drawable.main_content_listview_round_shape_purple,
 			R.drawable.main_content_listview_round_shape_orange,
-			R.drawable.main_content_listview_round_shape_yellow};
+			R.drawable.main_content_listview_round_shape_yellow };
 
 	public ViewFlow getViewFlow() {
 		return mViewFlow;
@@ -153,7 +154,6 @@ public class MainContentFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		
 
 		getPrefItems();
 
@@ -162,7 +162,7 @@ public class MainContentFragment extends SherlockFragment {
 
 		mGridItems = getGridItems();
 
-		//int margin = 5;
+		// int margin = 5;
 		// mGridView.setPadding(margin, 0, margin, 0); // have the margin on the
 		// sides as well
 		//
@@ -171,17 +171,20 @@ public class MainContentFragment extends SherlockFragment {
 		// mGridView.setOnItemClickListener(new MyOnItemClickListener());
 
 		// /////////
-		mListView = (ListView) getActivity().findViewById(
+		mListView = (DragNDropListView) getActivity().findViewById(
 				R.id.main_frame_content_listView);
-		mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
-				mGridItems));
+		//mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
+		//		mGridItems));
+		mListView.setDragNDropAdapter(new MainContentListItemDragDropAdapter(getActivity(), mGridItems));
 		mListView.setOnItemClickListener(new MyOnItemClickListener());
 
 		List<Integer> preferredColors = getPreferredColors();
 		Random random = new Random();
 		int random_index = random.nextInt(preferredColors.size());
 		mListView.setBackgroundResource(preferredColors.get(random_index));
-
+		
+		mListView.setOnItemDragNDropListener(new ListViewDragDropListener());
+		
 		// /////////
 
 		mViewFlow = (ViewFlow) getActivity().findViewById(
@@ -201,42 +204,46 @@ public class MainContentFragment extends SherlockFragment {
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
 	}
-	
+
 	/**
-	 * 从首选项中获得可以拿来随机的颜色
-	 * 并转换成resource id
+	 * 从首选项中获得可以拿来随机的颜色 并转换成resource id
+	 * 
 	 * @return
 	 */
 	private List<Integer> getPreferredColors() {
-		String pref_name = getActivity().getResources().getString(R.string.main_frame_preferences);
-		String pref_key = getActivity().getResources().getString(R.string.main_frame_list_color_pref_key);
-		SharedPreferences prefs = getActivity().getSharedPreferences(pref_name, Context.MODE_PRIVATE);
-		Set<String> prefColorNames = SharedPreferencesHandler.getStringSet(prefs, pref_key, null);
+		String pref_name = getActivity().getResources().getString(
+				R.string.main_frame_preferences);
+		String pref_key = getActivity().getResources().getString(
+				R.string.main_frame_list_color_pref_key);
+		SharedPreferences prefs = getActivity().getSharedPreferences(pref_name,
+				Context.MODE_PRIVATE);
+		List<String> prefColorNames = SharedPreferencesHandler.getStringList(
+				prefs, pref_key, null);
 		List<Integer> result = new ArrayList<Integer>();
-		if(prefColorNames == null ||prefColorNames.isEmpty()){
-			for(int resid : color_ids){
+		if (prefColorNames == null || prefColorNames.isEmpty()) {
+			for (int resid : color_ids) {
 				result.add(resid);
 			}
 		} else {
-			for(String colorName: prefColorNames){
-				if(colorName.equals("blue")){
+			for (String colorName : prefColorNames) {
+				if (colorName.equals("blue")) {
 					result.add(R.drawable.main_content_listview_round_shape_blue);
-				} else if (colorName.equals("green")){
+				} else if (colorName.equals("green")) {
 					result.add(R.drawable.main_content_listview_round_shape_green);
-				} else if (colorName.equals("red")){
+				} else if (colorName.equals("red")) {
 					result.add(R.drawable.main_content_listview_round_shape_red);
-				} else if (colorName.equals("navy")){
+				} else if (colorName.equals("navy")) {
 					result.add(R.drawable.main_content_listview_round_shape_navy);
-				} else if (colorName.equals("purple")){
+				} else if (colorName.equals("purple")) {
 					result.add(R.drawable.main_content_listview_round_shape_purple);
-				} else if (colorName.equals("orange")){
+				} else if (colorName.equals("orange")) {
 					result.add(R.drawable.main_content_listview_round_shape_orange);
 				} else {
 					result.add(R.drawable.main_content_listview_round_shape_yellow);
 				}
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -266,11 +273,11 @@ public class MainContentFragment extends SherlockFragment {
 		// 获得偏好设置
 		SharedPreferences appPrefs = getSherlockActivity()
 				.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-		Set<String> result_set;
+		List<String> result_set;
 		// try {
 		// result_set = appPrefs.getStringSet(KEY_NAME, null);
 		// } catch (NoSuchMethodError e) {
-		result_set = SharedPreferencesHandler.getStringSet(appPrefs, KEY_NAME,
+		result_set = SharedPreferencesHandler.getStringList(appPrefs, KEY_NAME,
 				null);
 		// }
 		if (null != result_set && result_set.size() > 0) {
@@ -281,8 +288,6 @@ public class MainContentFragment extends SherlockFragment {
 			}
 		} else {
 			mContentTitles.add("尚未设置");
-			//Toast.makeText(getActivity(), "NULL， use default",
-			//		Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -309,7 +314,7 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new ExerciseGrabber(getActivity());
 			} else if (moduleName.equals("library")) {
 				grabber = new LibraryContentGrabber(getActivity());
-			}
+			} //少活动模块!
 			// else if ....f
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -343,6 +348,8 @@ public class MainContentFragment extends SherlockFragment {
 			retId = R.drawable.main_menu_ic_library;
 		} else if (moduleName.equals("activity")) {
 			retId = R.drawable.main_menu_ic_activity;
+		} else if (moduleName.equals("emptyclassroom")){
+			retId = R.drawable.main_2ndmenu_ic_accsetting; //TODO:换上个好图标
 		}
 		return retId;
 	}
@@ -398,9 +405,13 @@ public class MainContentFragment extends SherlockFragment {
 				i.setClass(getActivity(), FreshmanActivity.class);
 				clickTarget = "Fres";
 				break;
+			case 9:
+				i.setClass(getActivity(), EmptyClassroomActivity.class);
+				clickTarget = "Empt";
+				break;
 			}
 			TCAgent.onEvent(getActivity(), "主界面ListView点击", clickTarget);
-			
+
 			if (i != null) {
 				startActivity(i);
 				if (id != 0)
@@ -411,7 +422,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * 初始化菜单项信息
+	 * 初始化ListView项信息
 	 */
 	private List<Map<String, Object>> getGridItems() {
 		// Update content info
@@ -492,9 +503,11 @@ public class MainContentFragment extends SherlockFragment {
 		mGridItems = getGridItems();
 		// mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
 		// mGridItems));
-		mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
-				mGridItems));
-
+		
+//		mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
+//				mGridItems));
+		mListView.setDragNDropAdapter(new MainContentListItemDragDropAdapter(getActivity(), mGridItems));
+		
 		refreshImageFromDb();
 	}
 
@@ -562,8 +575,10 @@ public class MainContentFragment extends SherlockFragment {
 			// mGridView.setAdapter(new
 			// MainContentGridItemAdapter(getActivity(),
 			// mGridItems));
-			mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
-					mGridItems));
+			
+//			mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
+//					mGridItems));
+			mListView.setDragNDropAdapter(new MainContentListItemDragDropAdapter(getActivity(), mGridItems));
 		}
 
 	}
@@ -604,6 +619,66 @@ public class MainContentFragment extends SherlockFragment {
 		mContentIsDestroyed = true;
 		mInfoHandler.removeCallbacksAndMessages(null);
 		super.onDestroy();
+	}
+	
+	/**
+	 * ListView拖拽操作监听
+	 * @author BorisHe
+	 *
+	 */
+	private class ListViewDragDropListener implements OnItemDragNDropListener{
+		List<String> currentPrefArray = null;  //当前的偏好序列
+
+		@Override
+		public void onItemDrag(DragNDropListView parent, View view,
+				int position, long id) {
+			
+			//Toast.makeText(getActivity(), "Drag outside pos=" + position + " id=" + id, Toast.LENGTH_SHORT).show();
+			SharedPreferences appPrefs = getSherlockActivity()
+					.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+
+			currentPrefArray = SharedPreferencesHandler.getStringList(appPrefs, KEY_NAME,
+					null);
+			mInfoHandler.removeCallbacksAndMessages(null);
+
+		}
+
+		@Override
+		public void onItemDrop(DragNDropListView parent, View view,
+				int startPosition, int endPosition, long id) {
+			if(currentPrefArray == null)
+				return;
+			//Toast.makeText(getActivity(), "Drop outside pos=" + startPosition + "/" + endPosition + " id=" + id, Toast.LENGTH_SHORT).show();
+			switchItemSeq(startPosition, endPosition);
+			
+			//更新Preferences
+			SharedPreferences prefs = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+			Editor editor = prefs.edit();
+			SharedPreferencesHandler
+					.putStringList(editor, KEY_NAME, currentPrefArray);
+			editor.commit();
+			
+			//更新视图
+			mContentCont1[startPosition] = "加载中";
+			mContentCont1[endPosition] = "加载中";
+			mContentCont2[startPosition] = "加载中";
+			mContentCont2[endPosition] = "加载中";
+			refreshInfo();
+		}
+		
+		/**
+		 * 交换列表的两项
+		 * @param pos_a
+		 * @param pos_b
+		 */
+		public void switchItemSeq(int pos_a, int pos_b){
+			if(currentPrefArray == null)
+				return;
+			String temp = currentPrefArray.get(pos_a);
+			currentPrefArray.set(pos_a, currentPrefArray.get(pos_b));
+			currentPrefArray.set(pos_b, temp);
+		}
+		
 	}
 
 }
