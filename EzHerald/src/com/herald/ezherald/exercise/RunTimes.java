@@ -43,6 +43,7 @@ public class RunTimes {
 	private String updateTime;//更新时间
 	private Fragment father;//上一级fragment
 	
+	
 	private String timesAndRateXml;//次数与比例的xml
 	
 	
@@ -280,4 +281,8 @@ public class RunTimes {
 		return advice;
 	}
 	
+	public void clear() {
+		setTimes(0);
+		save();
+	}
 }

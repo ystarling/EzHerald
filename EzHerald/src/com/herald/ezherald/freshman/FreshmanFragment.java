@@ -3,6 +3,8 @@ package com.herald.ezherald.freshman;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +37,10 @@ public class FreshmanFragment extends SherlockFragment {
 	}
 	
 	void initView(){
-		final int SIZE = 190;
+		DisplayMetrics metrics = new DisplayMetrics();
+	    getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		final int SIZE = metrics.widthPixels*35/100;
+		Log.v("size!!",""+SIZE);
 		tv_study = (TextView) getActivity().findViewById(R.id.text_study);
 		tv_life  = (TextView) getActivity().findViewById(R.id.text_life);
 		tv_play  = (TextView) getActivity().findViewById(R.id.text_play);

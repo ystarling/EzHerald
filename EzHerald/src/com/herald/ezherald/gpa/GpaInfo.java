@@ -60,6 +60,11 @@ public class GpaInfo {
 		// Log.w("res",result);
 		adapter.onLoadFinished();
 		adapter.onDealing(0, 100);
+		
+		gpaDbModel.open();
+		gpaDbModel.clear();
+		gpaDbModel.close();
+		
 		Document document = Jsoup.parse(result);
 		Elements trs = document
 				.select("tr[onMouseOver=this.style.backgroundColor=\'#bbbbbb\']");
