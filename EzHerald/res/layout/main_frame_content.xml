@@ -66,7 +66,8 @@
         </GridView>
         
         <!-- 测试的新界面 -->
-        <ListView 
+        <!-- <ListView --> 
+        <com.terlici.dragndroplist.DragNDropListView
             android:id="@+id/main_frame_content_listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +75,7 @@
         	android:cacheColorHint="#00000000"
             >
             
-        </ListView>
+        </com.terlici.dragndroplist.DragNDropListView>
     </LinearLayout>
 
 </FrameLayout>

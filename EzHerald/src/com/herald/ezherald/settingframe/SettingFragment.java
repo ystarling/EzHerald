@@ -1,5 +1,10 @@
 package com.herald.ezherald.settingframe;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.herald.ezherald.R;
+import com.herald.ezherald.mainframe.MainGuideActivity;
 
 public class SettingFragment extends SherlockListFragment {
 	/*
@@ -37,29 +44,36 @@ public class SettingFragment extends SherlockListFragment {
 		super.onActivityCreated(savedInstanceState);
 		String menuItemsStr[] = getResources().getStringArray(
 				R.array.setting_menu_titles);
-		ArrayAdapter<String> menuItemAdapter = new ArrayAdapter<String>(
-				getActivity(), android.R.layout.simple_list_item_1,
-				android.R.id.text1, menuItemsStr);
-		setListAdapter(menuItemAdapter);
+		String menuItemsSubStr[] = getResources().getStringArray(
+				R.array.setting_menu_subtitles);
+
+		List<Map<String, String>> mListItems = new ArrayList<Map<String, String>>();
+		for (int i = 0; i < menuItemsStr.length; i++) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("title", menuItemsStr[i]);
+			map.put("subtitle", menuItemsSubStr[i]);
+			mListItems.add(map);
+		}
+
+		SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity(),
+				mListItems, android.R.layout.simple_list_item_2, new String[] {
+						"title", "subtitle" }, new int[] { android.R.id.text1,
+						android.R.id.text2 });
+		// ArrayAdapter<String> menuItemAdapter = new ArrayAdapter<String>(
+		// getActivity(), android.R.layout.simple_list_item_1,
+		// android.R.id.text1, menuItemsStr);
+
+		setListAdapter(simpleAdapter);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * android.support.v4.app.ListFragment#onListItemClick(android.widget.ListView
-	 * , android.view.View, int, long)
+
+	/**
+	 * 列表项点击的响应
 	 */
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
+		
 		super.onListItemClick(l, v, position, id);
-		/*
-		 * Fragment newContent = null; switch (position) { case 0: newContent =
-		 * new StubContentFragment(); break; case 1: newContent = new
-		 * MainContentFragment(); break; } if (newContent != null){
-		 * switchFragment(newContent); }
-		 */
 		Intent i = new Intent();
 		switch (position) {
 		case 0:
@@ -75,6 +89,9 @@ public class SettingFragment extends SherlockListFragment {
 			i.setClass(getActivity(), AppUpdateActivity.class);
 			break;
 		case 4:
+			i.setClass(getActivity(), MainGuideActivity.class);
+			break;
+		case 5:
 			i.setClass(getActivity(), AboutThisApp.class);
 			break;
 		default:
@@ -85,6 +102,5 @@ public class SettingFragment extends SherlockListFragment {
 			startActivity(i);
 		}
 	}
-
 
 }
