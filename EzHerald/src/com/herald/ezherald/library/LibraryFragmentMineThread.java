@@ -196,7 +196,7 @@ public class LibraryFragmentMineThread extends Thread{
 			
 			JSONArray json1=(JSONArray) msg.obj;
 			ListView listview=(ListView)activity.findViewById(R.id.libr_mine_list);
-			MineBookMyAdapter myAdapter=new MineBookMyAdapter(activity,context,json1);
+			LibraryMineBookMyAdapter myAdapter=new LibraryMineBookMyAdapter(activity,context,json1);
 			listview.setAdapter(myAdapter);
 			if(dialog1.isShowing()){
 			dialog1.cancel();
