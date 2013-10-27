@@ -349,7 +349,7 @@ public class MainContentFragment extends SherlockFragment {
 		} else if (moduleName.equals("activity")) {
 			retId = R.drawable.main_menu_ic_activity;
 		} else if (moduleName.equals("emptyclassroom")){
-			retId = R.drawable.main_2ndmenu_ic_accsetting; //TODO:换上个好图标
+			retId = R.drawable.main_menu_ic_emptcls;
 		}
 		return retId;
 	}

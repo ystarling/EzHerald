@@ -31,9 +31,10 @@
             android:id="@+id/academic_info_item_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="#EB3C4B"
             android:layout_marginTop="2sp"
             android:layout_alignParentLeft="true"
+            android:textStyle="bold"
             android:textSize="17sp"></TextView>
                 
             
@@ -68,9 +69,10 @@
         
         <TextView
 	        android:id="@+id/academic_info_item_date"
-	        android:layout_width="wrap_content"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:textColor="#000000"></TextView>
+	        android:gravity="right"
+	        android:textColor="#4F4F4F"></TextView>
 
 
     </LinearLayout>  

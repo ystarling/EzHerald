@@ -51,7 +51,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_exercise,
 			R.drawable.main_menu_ic_academic,
 			R.drawable.main_menu_ic_freshman,
-			R.drawable.main_menu_ic_emproom }; // 图标(icon)
+			R.drawable.main_menu_ic_emptcls }; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
 			R.drawable.main_menu_ic_mainframe_selected,
@@ -63,7 +63,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_exercise_selected,
 			R.drawable.main_menu_ic_academic_selected,
 			R.drawable.main_menu_ic_freshman_selected,
-			R.drawable.main_menu_ic_emproom_selected }; // 选中状态的图标(icon)
+			R.drawable.main_menu_ic_emptcls_selected }; // 选中状态的图标(icon)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -16,7 +16,7 @@ import com.herald.ezherald.R;
 public class ClubAlbumActivity extends SherlockActivity {
 	
 	private static final int ALBUM_RES[] = {  
-        R.drawable.acti_pic1,R.drawable.acti_pic2,R.drawable.acti_pic3,  
+        R.drawable.ic_app,R.drawable.ic_app,R.drawable.ic_app,  
     }; 
 	
 	private String[] pic_adds;
