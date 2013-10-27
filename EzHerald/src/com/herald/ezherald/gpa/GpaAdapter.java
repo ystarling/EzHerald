@@ -155,12 +155,6 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	public void removeOptional() {
 		// TODO Auto-generated method stub
 		gpaInfo.removeOptional();//更新数据库的记录
-		/*
-		for(Record r:gpaInfo.getRecords()){
-			if(!r.getExtra().equals(""))
-				r.setSelected(false);
-		}
-		*/
 		notifyDataSetChanged();//更新显示
 	}
 	public void updateFinished(boolean isSuccess){
