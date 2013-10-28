@@ -6,8 +6,11 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/libABS"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libSlidingMenu"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libDragNDropList_"/>
+<<<<<<< HEAD
 	<classpathentry combineaccessrules="false" kind="src" path="/libViewFlow"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+=======
+>>>>>>> 5b12721454f999117f648a8d12f00dac39027978
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

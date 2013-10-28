@@ -83,7 +83,7 @@ public class AcademicFragment extends SherlockFragment implements
 		
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("Please wait ... ");
+		progressDialog.setMessage("请稍候 ... ");
 		
 	}
 	

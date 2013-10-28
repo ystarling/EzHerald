@@ -42,7 +42,7 @@ public class LibraryFragmentMineRenewThread extends Thread{
 		this.barcode=barcode;
 		dialog=new ProgressDialog(context);
 		dialog.setCanceledOnTouchOutside(false);
-		dialog.setMessage("Please wait ...");
+		dialog.setMessage("«Î…‘∫Ú ...");
 		}
 	@Override
 	public void run() {
