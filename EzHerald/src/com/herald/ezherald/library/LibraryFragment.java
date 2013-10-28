@@ -3,6 +3,7 @@ package com.herald.ezherald.library;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 
 import android.R.string;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 import com.herald.ezherald.library.LibraryFragmentThread.MyHandle2;
+import com.herald.ezherald.library.LibraryFragmentThread.MyHandle3;
 
 /*
  * @author BIG_SEA
@@ -55,6 +58,8 @@ public class LibraryFragment extends SherlockFragment {
 	View view;
 	Context context;
 
+	Boolean isLastRow=false;
+	int lastItem;
 	// ListView底部View
 	private View moreView;
 	Button moreButton;
@@ -66,10 +71,12 @@ public class LibraryFragment extends SherlockFragment {
 	public ArrayList<HashMap<String, String>> list;
 	SimpleAdapter mSimpleAdapter;
 
-	private int CountOfScroll = 0;
-	private String TestSearchValue = "";//determine loadmore or restart
-	private int jsonarraycount=0;
-
+	private ProgressDialog dialog1;
+	private int CountOfScroll = 1;
+	private int CountOfScroll_two= 2;
+	private String TestSearchValue = "";// determine loadmore or restart
+	private int jsonarraycount = 0;
+	private mHandler myHandler= new mHandler();
 	// private MyHandle myHandler = new MyHandle();
 	public void onCreate(Bundle save) {
 		super.onCreate(save);
@@ -87,7 +94,11 @@ public class LibraryFragment extends SherlockFragment {
 		context = getActivity();
 
 		view = inflater.inflate(R.layout.library_fragment_main, null);
-
+		
+		dialog1 = new ProgressDialog(activity);
+		dialog1.setCanceledOnTouchOutside(false);
+		dialog1.setMessage("加载中...");
+		
 		libr_search_text = (EditText) view.findViewById(R.id.libr_search_text);
 		ImageView libr_search_button = (ImageView) view
 				.findViewById(R.id.libr_search_button);
@@ -124,6 +135,7 @@ public class LibraryFragment extends SherlockFragment {
 
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				CountOfScroll_two= 2;
 				libr_search_value = libr_search_text.getText().toString();
 
 				/******** 隐藏软键盘 *************/
@@ -137,112 +149,120 @@ public class LibraryFragment extends SherlockFragment {
 					toast.show();
 				} else {
 
-					if (!TestSearchValue.equals(libr_search_value)||CountOfScroll!=0) {
-						CountOfScroll = 0;
-					}
+					CountOfScroll = 1;
 
 					LibraryFragmentThread th1 = new LibraryFragmentThread(
 							libr_search_value, activity, CountOfScroll,
 							LibraryFragment.this);
 					Log.e("CountOfScroll", CountOfScroll + "");
 					th1.start();
-					CountOfScroll++;
-					
-					handler.postDelayed(new Runnable() {
+//					TestSearchValue = libr_search_value;
+//					
+//					dialog1.show();
+//					handler.postDelayed(new Runnable() {
+//
+//						@Override
+//						public void run() {
+//							if (jsonarraycount != 20) {
+//								moreButton.setVisibility(View.GONE);
+//							} else {
+//
+//								moreButton.setVisibility(View.VISIBLE);
+//							}
+//							listview.setAdapter(mSimpleAdapter);
+//							mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+//							
+//							dialog1.cancel();
+//							Log.e("list5", list + "");
+//						}
+//					}, 0);
+//					
+//					
+//					CountOfScroll++;
 
-						@Override
-						public void run() {
-							if(jsonarraycount!=20){
-								moreButton.setVisibility(View.GONE);
-							}else{
-							
-								moreButton.setVisibility(View.VISIBLE);
-							}
-							
-							mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
-							Log.e("list3", list + "");
-						}
-					}, 1000);
-
-					/************ loadmore button *****************/
-					moreButton.setVisibility(View.VISIBLE);
-					moreButton.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							// TODO Auto-generated method stub
-							moreButton.setVisibility(View.GONE);// 按钮不可见
-
-							LibraryFragmentThread th = new LibraryFragmentThread(
-									libr_search_value, activity, CountOfScroll,
-									LibraryFragment.this);
-							Log.e("CountOfScroll", CountOfScroll + "");
-							th.start();
-							
-							TestSearchValue=libr_search_value;
-							CountOfScroll++;
-							
-							handler.postDelayed(new Runnable() {
-
-								@Override
-								public void run() {
-
-									if(jsonarraycount!=20){
-										moreButton.setVisibility(View.GONE);
-									}else{
-									
-										moreButton.setVisibility(View.VISIBLE);
-									}
-									mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
-								}
-							}, 1000);
-						}
-					});
-
-					// listview.setOnScrollListener(new OnScrollListener() {
-					//
-					// @Override
-					// public void onScrollStateChanged(AbsListView view,
-					// int scrollState) {
-					// // TODO Auto-generated method stub
-					// // 当滚到最后一行且停止滚动时，执行加载
-					// if (isLastRow == true
-					// && scrollState ==
-					// AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-					// // 加载元素
-					// Toast toast1 = Toast.makeText(activity, "加载更多",
-					// Toast.LENGTH_SHORT);
-					// toast1.show();
-					// /********* 设置编号问题 *************/
-					// if (!TestSearchValue.equals(libr_search_value)) {
-					// CountOfScroll = 0;
-					// }
-					//
-					// }
-					// isLastRow = false;
-					// }
-					//
-					// @Override
-					// public void onScroll(AbsListView view,
-					// int firstVisibleItem, int visibleItemCount,
-					// int totalItemCount) {
-					// // TODO Auto-generated method stub
-					// if (firstVisibleItem + visibleItemCount == totalItemCount
-					// && totalItemCount > 0
-					// && totalItemCount == 20) {
-					// isLastRow = true;
-					// }
-					//
-					// lastItem = firstVisibleItem + visibleItemCount;
-					//
-					// }
-					// });
+//					listview.setOnScrollListener(new OnScrollListener() {
+//						@Override
+//						public void onScroll(AbsListView view,
+//								int firstVisibleItem, int visibleItemCount,
+//								int totalItemCount) {
+//							// TODO Auto-generated method stub
+//							if (firstVisibleItem + visibleItemCount == totalItemCount
+//									&& totalItemCount > 0
+//									&& totalItemCount == 20) {
+//								isLastRow = true;
+//							}
+//
+//							lastItem = firstVisibleItem + visibleItemCount;
+//
+//						}
+//
+//						@Override
+//						public void onScrollStateChanged(AbsListView view,
+//								int scrollState) {
+//							// TODO Auto-generated method stub
+//							// 当滚到最后一行且停止滚动时，执行加载
+//							if (isLastRow == true
+//									&& scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+//								// 加载元素
+//								Toast toast1 = Toast.makeText(activity, "加载更多",
+//										Toast.LENGTH_SHORT);
+//								toast1.show();
+//								/********* 设置编号问题 *************/
+//								if (!TestSearchValue.equals(libr_search_value)) {
+//									CountOfScroll = 0;
+//								}
+//
+//							}
+//							isLastRow = false;
+//						}
+//
+//					});
 
 				}
+				
+			}
+			
+		});
+		/************ loadmore button *****************/
+		//moreButton.setVisibility(View.VISIBLE);
+		moreButton.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				moreButton.setVisibility(View.GONE);// 按钮不可见
+
+				LibraryFragmentThread th = new LibraryFragmentThread(
+						libr_search_value, activity, CountOfScroll_two,
+						LibraryFragment.this);
+				Log.e("CountOfScroll", CountOfScroll_two + "");
+				th.start();
+
+//				TestSearchValue = libr_search_value;
+//				CountOfScroll_two++;
+//				
+//				dialog1.show();
+//				handler.postDelayed(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						
+//						if(dialog1.isShowing()){
+//						dialog1.cancel();
+//						}
+//						if (jsonarraycount != 20) {
+//							moreButton.setVisibility(View.GONE);
+//						} else {
+//
+//							moreButton.setVisibility(View.VISIBLE);
+//						}
+//						mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+//
+//					}
+//				}, 0);
+				
 			}
 		});
-
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			Bundle bundle = null;
@@ -254,22 +274,24 @@ public class LibraryFragment extends SherlockFragment {
 			String loc_callNumber = null;
 			String loc_documentType = null;
 			String loc_marc_no = null;
-			
-			HashMap<String, String> map=new HashMap<String, String>();
+
+			HashMap<String, String> map = new HashMap<String, String>();
+
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view,
 					int position, long id) {
 
 				try {
-					map =list.get(position);
-//					Toast toast=Toast.makeText(context, list+"   "+position, Toast.LENGTH_LONG);
-//					toast.show();
+					map = list.get(position);
+					// Toast toast=Toast.makeText(context, list+"   "+position,
+					// Toast.LENGTH_LONG);
+					// toast.show();
 					loc_name = map.get("libr_title").toString();
 					loc_author = map.get("libr_name").toString();
-					//loc_press = map.get("libr_publisher").toString();
+					// loc_press = map.get("libr_publisher").toString();
 					// loc_date=json.getString("book_date");
-					//loc_callNumber = map.get("libr_isbn").toString();
-					//loc_documentType = map.get("libr_doctype").toString();
+					// loc_callNumber = map.get("libr_isbn").toString();
+					// loc_documentType = map.get("libr_doctype").toString();
 					loc_marc_no = map.get("libr_marc_no").toString();
 				} catch (Exception e) {
 
@@ -278,14 +300,12 @@ public class LibraryFragment extends SherlockFragment {
 				bundle = new Bundle();
 				bundle.putString("loc_name", loc_name);
 				bundle.putString("loc_author", loc_author);
-				//bundle.putString("loc_press", loc_press);
+				// bundle.putString("loc_press", loc_press);
 				// bundle.putString("loc_date", loc_date);
-				//bundle.putString("loc_callNumber", loc_callNumber);
-				//bundle.putString("loc_documentType", loc_documentType);
+				// bundle.putString("loc_callNumber", loc_callNumber);
+				// bundle.putString("loc_documentType", loc_documentType);
 				bundle.putString("loc_marc_no", loc_marc_no);
 
-				Toast toast=Toast.makeText(context, bundle+"", Toast.LENGTH_LONG);
-				toast.show();
 				Intent intent = new Intent(activity,
 						LibraryBookListDetail.class);
 
@@ -293,20 +313,84 @@ public class LibraryFragment extends SherlockFragment {
 				activity.startActivity(intent);
 			}
 		});
-		
+
 		return view;
 
 	}
-	
-	public void LoadMoreData(JSONArray jsonarray) {
+
+	public void LoadMoreData(JSONArray jsonarray,int num) {
 
 		String libr_name = null, libr_author = null, libr_press = null, libr_date = null, libr_callNumber = null, libr_ducumentType = null;
 		String libr_marc_no = null;// view detail request
 		String libr_store_num = null;
 		String libr_landable_num = null;
 		JSONObject json = null;
-		//Log.e("LoadMoreData", jsonarray + "");
-		jsonarraycount=isFilled(jsonarray);
+		// Log.e("LoadMoreData", jsonarray + "");
+		jsonarraycount = isFilled(jsonarray);
+
+		for (int i = 0; i < jsonarray.length(); i++) {
+			HashMap<String, String> map1 = new HashMap<String, String>();
+
+			try {
+				json = jsonarray.getJSONObject(i);
+				libr_name = json.getString("title");
+				libr_author = json.getString("author");
+				libr_press = json.getString("publisher");
+				// libr_date = json.getString("book_date");
+				libr_callNumber = json.getString("isbn");
+				libr_ducumentType = json.getString("doctype");
+				libr_marc_no = json.getString("marc_no");
+				libr_store_num = json.getString("store_num");
+				libr_landable_num = json.getString("lendable_num");
+
+			} catch (Exception e) {
+				Log.e("error", "传来失败");
+			}
+			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
+			map1.put("libr_name", libr_author);
+			map1.put("libr_press", libr_press);
+			map1.put("libr_callNumber", libr_callNumber);
+			map1.put("libr_ducumentType", libr_ducumentType);
+			map1.put("libr_marc_no", libr_marc_no);
+			map1.put("libr_store_num", "馆藏副本 : " + libr_store_num);
+			map1.put("libr_landable_num", "可借副本 : " + libr_landable_num);
+			list.add(map1);
+		}
+		
+		TestSearchValue = libr_search_value;
+		CountOfScroll_two++;
+		
+		dialog1.show();
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				if(dialog1.isShowing()){
+				dialog1.cancel();
+				}
+				if (jsonarraycount != 20) {
+					moreButton.setVisibility(View.GONE);
+				} else {
+
+					moreButton.setVisibility(View.VISIBLE);
+				}
+				mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+
+			}
+		}, 0);
+	}
+
+	public void SetData(JSONArray jsonarray,int num) {
+
+		String libr_name = null, libr_author = null, libr_press = null, libr_date = null, libr_callNumber = null, libr_ducumentType = null;
+		String libr_marc_no = null;// view detail request
+		String libr_store_num = null;
+		String libr_landable_num = null;
+		JSONObject json = null;
+		ShowMsg(jsonarray);
+		jsonarraycount = isFilled(jsonarray);
+		list.clear();// empty list，not allowed list=local_list
 		
 		for (int i = 0; i < jsonarray.length(); i++) {
 			HashMap<String, String> map1 = new HashMap<String, String>();
@@ -326,7 +410,7 @@ public class LibraryFragment extends SherlockFragment {
 			} catch (Exception e) {
 				Log.e("error", "传来失败");
 			}
-			map1.put("libr_title", libr_name);
+			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
 			map1.put("libr_name", libr_author);
 			map1.put("libr_press", libr_press);
 			map1.put("libr_callNumber", libr_callNumber);
@@ -336,53 +420,62 @@ public class LibraryFragment extends SherlockFragment {
 			map1.put("libr_landable_num", "可借副本 : " + libr_landable_num);
 			list.add(map1);
 		}
-	}
+		TestSearchValue = libr_search_value;
+		
+		dialog1.show();
+		handler.postDelayed(new Runnable() {
 
-	public void SetData(JSONArray jsonarray) {
+			@Override
+			public void run() {
+				if (jsonarraycount != 20) {
+					moreButton.setVisibility(View.GONE);
+				} else {
 
-		String libr_name = null, libr_author = null, libr_press = null, libr_date = null, libr_callNumber = null, libr_ducumentType = null;
-		String libr_marc_no = null;// view detail request
-		String libr_store_num = null;
-		String libr_landable_num = null;
-		JSONObject json = null;
-		jsonarraycount=isFilled(jsonarray);
-		list.clear();//empty list，not allowed list=local_list
-		for (int i = 0; i < jsonarray.length(); i++) {
-			HashMap<String, String> map1 = new HashMap<String, String>();
-			
-			try {
-				json = jsonarray.getJSONObject(i);
-				libr_name = json.getString("title");
-				libr_author = json.getString("author");
-				libr_press = json.getString("publisher");
-				// libr_date = json.getString("book_date");
-				libr_callNumber = json.getString("isbn");
-				libr_ducumentType = json.getString("doctype");
-				libr_marc_no = json.getString("marc_no");
-				libr_store_num = json.getString("store_num");
-				libr_landable_num = json.getString("lendable_num");
-
-			} catch (Exception e) {
-				Log.e("error", "传来失败");
+					moreButton.setVisibility(View.VISIBLE);
+				}
+				listview.setAdapter(mSimpleAdapter);
+				mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+				
+				dialog1.cancel();
+				Log.e("list5", list + "");
 			}
-			map1.put("libr_title", libr_name);
-			map1.put("libr_name", libr_author);
-			map1.put("libr_press", libr_press);
-			map1.put("libr_callNumber", libr_callNumber);
-			map1.put("libr_ducumentType", libr_ducumentType);
-			map1.put("libr_marc_no", libr_marc_no);
-			map1.put("libr_store_num", "馆藏副本 : " + libr_store_num);
-			map1.put("libr_landable_num", "可借副本 : " + libr_landable_num);
-			list.add(map1);
-		}
+		}, 0);
+		
+		
+		CountOfScroll++;
 	}
-	
-	public int isFilled(JSONArray jsonarray){
-		if(jsonarray.length()==20){
+
+	public int isFilled(JSONArray jsonarray) {
+		if (jsonarray.length() == 20) {
 			return 20;
-		}else{
+		} else {
 			return jsonarray.length();
 		}
+	}
+	public void SetRemind() {
+		Toast toast1 = Toast.makeText(activity, "该图书不存在!",
+				Toast.LENGTH_SHORT);
+		toast1.show();
+	}
+	public void ShowMsg(JSONArray json){
+		Message m=new Message();
+		m.obj=json;
+		m.setTarget(myHandler);
+		m.sendToTarget();
+		
+	}
+	public class mHandler extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			JSONArray json=(JSONArray) msg.obj;
+			if(json.isNull(0)){
+				SetRemind();
+			}
+			super.handleMessage(msg);
+		}
+		
 	}
 	// public void ShowMsg(Map e) {
 	// Message msg = Message.obtain();

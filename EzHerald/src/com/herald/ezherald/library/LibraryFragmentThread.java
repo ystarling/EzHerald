@@ -161,13 +161,13 @@ public class LibraryFragmentThread extends Thread{
 				dialog1.show();
 			}
 			if(va=="NetWorkingError"){
-				Toast toast1 = Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ1...",
+				Toast toast1 = Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ...",
 						Toast.LENGTH_LONG);
 				toast1.show();
 				dialog1.cancel();
 			}
 			if(va=="ValueError"){
-				Toast toast1 = Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ2...",
+				Toast toast1 = Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ...",
 						Toast.LENGTH_LONG);
 				toast1.show();
 				dialog1.cancel();
@@ -190,92 +190,17 @@ public class LibraryFragmentThread extends Thread{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			JSONArray json3=(JSONArray) msg.obj; 
-			if(CountOfScroll==0){
-				libraryfragment.SetData(json3);
+			if(CountOfScroll==1){
+				libraryfragment.SetData(json3,CountOfScroll);
 				
 			}else{
-				libraryfragment.LoadMoreData(json3);
+				libraryfragment.LoadMoreData(json3,CountOfScroll);
 			}
 				super.handleMessage(msg);
 		}
 
 		
 	}
-//	public class MyHandle extends Handler {
-//
-//		@Override
-//		public void handleMessage(Message msg) {
-//			// TODO Auto-generated method stub
-//
-//			
-//			JSONArray json1 = (JSONArray) msg.obj;
-//			try {
-//
-//				if (json1.isNull(0)) {
-//					SetRemind();
-//					dialog1.cancel();
-//				} else {
-//
-////					LibraryBookMyAdapter myAdapter = new LibraryBookMyAdapter(activity,CountOfScroll,json1);
-//
-//					myAdapter.addData(json1);
-//					myAdapter.setLength(length);
-//					listview.setAdapter(myAdapter);
-//					if (dialog1.isShowing()) {
-//						dialog1.cancel();
-//					}
-//				}
-//			} catch (Exception e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//
-//			listview.setOnItemClickListener(new OnItemClickListener() {
-//
-//				Bundle bundle = null;
-//				JSONObject json = null;
-//				String loc_name = null;
-//				String loc_author = null;
-//				String loc_press = null;
-//				// String loc_date=null;
-//				String loc_callNumber = null;
-//				String loc_documentType = null;
-//				String loc_marc_no = null;
-//
-//				@Override
-//				public void onItemClick(AdapterView<?> arg0, View view,
-//						int position, long id) {
-//
-//					try {
-//						json = jsonarray.getJSONObject(position);
-//						loc_name = json.getString("title");
-//						loc_author = json.getString("author");
-//						loc_press = json.getString("publisher");
-//						// loc_date=json.getString("book_date");
-//						loc_callNumber = json.getString("isbn");
-//						loc_documentType = json.getString("doctype");
-//						loc_marc_no = json.getString("marc_no");
-//					} catch (Exception e) {
-//
-//					}
-//
-//					bundle = new Bundle();
-//					bundle.putString("loc_name", loc_name);
-//					bundle.putString("loc_author", loc_author);
-//					bundle.putString("loc_press", loc_press);
-//					// bundle.putString("loc_date", loc_date);
-//					bundle.putString("loc_callNumber", loc_callNumber);
-//					bundle.putString("loc_documentType", loc_documentType);
-//					bundle.putString("loc_marc_no", loc_marc_no);
-//
-//					Intent intent = new Intent(activity,
-//							LibraryBookListDetail.class);
-//
-//					intent.putExtras(bundle);
-//					activity.startActivity(intent);
-//				}
-//			});
-//		}
 
 		public void SetRemind() {
 			Toast toast1 = Toast.makeText(activity, "∏√Õº È≤ª¥Ê‘⁄!",

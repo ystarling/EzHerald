@@ -41,6 +41,7 @@
         </activity>
         <activity
             android:name="com.herald.ezherald.account.AccountActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
@@ -87,19 +88,23 @@
         <!-- libr  begin -->
         <activity
             android:name="com.herald.ezherald.library.LibraryActivity"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:theme="@style/Theme.Heraldstyle"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryBookListDetail"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:theme="@style/Theme.Heraldstyle"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityNews"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:theme="@style/Theme.Heraldstyle" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityReserve"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:theme="@style/Theme.Heraldstyle"
+            android:screenOrientation="portrait" >
         </activity>
         <!-- libr end -->
 
@@ -154,10 +159,12 @@
 
         <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AboutThisApp"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
@@ -168,6 +175,7 @@
         <activity
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
             android:label="@string/title_activity_app_update"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
