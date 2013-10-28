@@ -156,29 +156,29 @@ public class LibraryFragment extends SherlockFragment {
 							LibraryFragment.this);
 					Log.e("CountOfScroll", CountOfScroll + "");
 					th1.start();
-					TestSearchValue = libr_search_value;
-					
-					dialog1.show();
-					handler.postDelayed(new Runnable() {
-
-						@Override
-						public void run() {
-							if (jsonarraycount != 20) {
-								moreButton.setVisibility(View.GONE);
-							} else {
-
-								moreButton.setVisibility(View.VISIBLE);
-							}
-							
-							mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
-							listview.setAdapter(mSimpleAdapter);
-							dialog1.cancel();
-							Log.e("list5", list + "");
-						}
-					}, 3000);
-					
-					
-					CountOfScroll++;
+//					TestSearchValue = libr_search_value;
+//					
+//					dialog1.show();
+//					handler.postDelayed(new Runnable() {
+//
+//						@Override
+//						public void run() {
+//							if (jsonarraycount != 20) {
+//								moreButton.setVisibility(View.GONE);
+//							} else {
+//
+//								moreButton.setVisibility(View.VISIBLE);
+//							}
+//							listview.setAdapter(mSimpleAdapter);
+//							mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+//							
+//							dialog1.cancel();
+//							Log.e("list5", list + "");
+//						}
+//					}, 0);
+//					
+//					
+//					CountOfScroll++;
 
 //					listview.setOnScrollListener(new OnScrollListener() {
 //						@Override
@@ -238,28 +238,28 @@ public class LibraryFragment extends SherlockFragment {
 				Log.e("CountOfScroll", CountOfScroll_two + "");
 				th.start();
 
-				TestSearchValue = libr_search_value;
-				CountOfScroll_two++;
-				
-				dialog1.show();
-				handler.postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						
-						if(dialog1.isShowing()){
-						dialog1.cancel();
-						}
-						if (jsonarraycount != 20) {
-							moreButton.setVisibility(View.GONE);
-						} else {
-
-							moreButton.setVisibility(View.VISIBLE);
-						}
-						mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
-
-					}
-				}, 3000);
+//				TestSearchValue = libr_search_value;
+//				CountOfScroll_two++;
+//				
+//				dialog1.show();
+//				handler.postDelayed(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						
+//						if(dialog1.isShowing()){
+//						dialog1.cancel();
+//						}
+//						if (jsonarraycount != 20) {
+//							moreButton.setVisibility(View.GONE);
+//						} else {
+//
+//							moreButton.setVisibility(View.VISIBLE);
+//						}
+//						mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+//
+//					}
+//				}, 0);
 				
 			}
 		});
@@ -356,6 +356,29 @@ public class LibraryFragment extends SherlockFragment {
 			map1.put("libr_landable_num", "可借副本 : " + libr_landable_num);
 			list.add(map1);
 		}
+		
+		TestSearchValue = libr_search_value;
+		CountOfScroll_two++;
+		
+		dialog1.show();
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				if(dialog1.isShowing()){
+				dialog1.cancel();
+				}
+				if (jsonarraycount != 20) {
+					moreButton.setVisibility(View.GONE);
+				} else {
+
+					moreButton.setVisibility(View.VISIBLE);
+				}
+				mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+
+			}
+		}, 0);
 	}
 
 	public void SetData(JSONArray jsonarray,int num) {
@@ -397,6 +420,29 @@ public class LibraryFragment extends SherlockFragment {
 			map1.put("libr_landable_num", "可借副本 : " + libr_landable_num);
 			list.add(map1);
 		}
+		TestSearchValue = libr_search_value;
+		
+		dialog1.show();
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				if (jsonarraycount != 20) {
+					moreButton.setVisibility(View.GONE);
+				} else {
+
+					moreButton.setVisibility(View.VISIBLE);
+				}
+				listview.setAdapter(mSimpleAdapter);
+				mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+				
+				dialog1.cancel();
+				Log.e("list5", list + "");
+			}
+		}, 0);
+		
+		
+		CountOfScroll++;
 	}
 
 	public int isFilled(JSONArray jsonarray) {
