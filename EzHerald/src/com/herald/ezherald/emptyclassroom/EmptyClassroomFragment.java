@@ -313,7 +313,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			String to_period = (String) tv_to_period.getText().toString();
 			String url = String.format("http://herald.seu.edu.cn/queryEmptyClassrooms/query/%s/today/%s/%s/",
 					selected_campus, from_period, to_period);
-			if(from_period=="" || to_period=="")
+			if(from_period.trim().equals("") || to_period.trim().equals(""))
 			{
 				Toast.makeText(context, "输入不能为空", Toast.LENGTH_LONG).show();
 				return null;
@@ -330,7 +330,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			String to_period = (String) tv_to_period.getText().toString();
 			String url = String.format("http://herald.seu.edu.cn/queryEmptyClassrooms/query/%s/tomorrow/%s/%s/",
 					selected_campus, from_period, to_period);
-			if(from_period=="" || to_period=="")
+			if(from_period.trim().equals("") || to_period.trim().equals(""))
 			{
 				Toast.makeText(context, "输入不能为空", Toast.LENGTH_LONG).show();
 				return null;
@@ -348,7 +348,8 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			String day = (String) tv_day.getText().toString();
 			String url = String.format("http://herald.seu.edu.cn/queryEmptyClassrooms/query/%s/%s/%s/%s/%s/",
 					selected_campus, week, day, from_period, to_period);
-			if(from_period=="" || to_period=="" || week=="" || day=="")
+			if(from_period.trim().equals("") || to_period.trim().equals("") ||
+					week.trim().equals("") || day.trim().equals(""))
 			{
 				Toast.makeText(context, "输入不能为空", Toast.LENGTH_LONG).show();
 				return null;
