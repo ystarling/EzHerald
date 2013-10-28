@@ -21,19 +21,20 @@ import com.herald.ezherald.R;
 
 /************** set BaseAdapter ********************/
 
-public class BookMyAdapter extends BaseAdapter {
+public class LibraryBookMyAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater;
-	JSONArray jsonarray;
 	List<JSONArray> dataList = new ArrayList<JSONArray>();
 	Context mycontext;
-	int CountOfScroll;
-
-	public BookMyAdapter(Context c, int count, JSONArray array) {
+	//int CountOfScroll;
+	int length;
+	public LibraryBookMyAdapter(Context c) {
 		this.inflater = LayoutInflater.from(c);
-		this.CountOfScroll = count;
-		addData(array);
-		this.jsonarray = array;
+		//this.CountOfScroll = count;
+		for(Iterator<JSONArray> i=dataList.iterator();i.hasNext();){
+			JSONArray json2 = i.next();
+			length=json2.length();
+		}
 	}
 
 	public void setData(List dl) {
@@ -43,11 +44,14 @@ public class BookMyAdapter extends BaseAdapter {
 	public void addData(JSONArray dl) {
 		dataList.add(dl);
 	}
-
+	
+	public void setLength(int num){
+		length=num;
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return jsonarray.length();
+		return 20;
 	}
 
 	@Override
@@ -105,14 +109,17 @@ public class BookMyAdapter extends BaseAdapter {
 		String libr_store_num = null;
 		String libr_landable_num = null;
 
-		List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+		//List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 		for (Iterator<JSONArray> i = dataList.iterator(); i.hasNext();) {
 			JSONArray json2 = i.next();
-
+			int h=1;
+			h++;
+			Log.e("jjjjjjjjjjjjjjjjjjjjj",h+"");
+			List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+			
 			/****** 设置对应的动态数组数据 *********/
-			Log.d("jsonArray length():", json2.length() + "");
-
-			for (int j = 0; j < json2.length(); j++) {
+			
+			for (int j = 0; j < length; j++) {
 
 				HashMap<String, String> map = new HashMap<String, String>();
 
@@ -138,15 +145,17 @@ public class BookMyAdapter extends BaseAdapter {
 					map.put("libr_marc_no", libr_marc_no);
 					map.put("libr_store_num", libr_store_num);
 					map.put("libr_landable_num", libr_landable_num);
-
+					holder.libr_name.setText(libr_name);
 					data.add(map);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			int toalnum = 20 * CountOfScroll + position;
-			holder.libr_name.setText(toalnum + 1 + ".  "
+			//int toalnum = 20 * CountOfScroll + position;
+//			holder.libr_name.setText(toalnum + 1 + ".  "
+//					+ data.get(position).get("libr_name").toString());
+			holder.libr_name.setText( ".  "
 					+ data.get(position).get("libr_name").toString());
 			holder.libr_author.setText(data.get(position).get("libr_author")
 					.toString());

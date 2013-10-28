@@ -50,6 +50,8 @@ public class SecondMenuFragment extends ListFragment {
 	public static final String TEXT_LIB_NOT_LOGIN = "Í¼Êé¹Ý\nÎ´µÇÂ¼";
 	public static final String TEXT_LIB_IS_LOGIN = "Í¼Êé¹Ý\nÒÑµÇÂ¼";
 	
+	public static final String SHARED_PREF_NAME = "pref_secondmenu";
+	
 	
 	private List<Map<String, Object>> mListItems;
 	private SecondMenuListItemAdapter mListViewAdapter;
@@ -228,7 +230,7 @@ public class SecondMenuFragment extends ListFragment {
 	 * @return
 	 */
 	public String getSavedUserId(){
-		SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences prefs = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 		String uid = prefs.getString(PREF_KEY_USERID, null);
 		
 		return uid;
@@ -236,7 +238,7 @@ public class SecondMenuFragment extends ListFragment {
 	
 	public boolean setSavedUserId(String id){
 		try{
-			SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+			SharedPreferences prefs = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 			Editor editor = prefs.edit();
 			editor.putString(PREF_KEY_USERID, id);
 			return editor.commit();
@@ -253,7 +255,7 @@ public class SecondMenuFragment extends ListFragment {
 	 * @return
 	 */
 	public String getSavedUserName(){
-		SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences prefs = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);//.getPreferences(Context.MODE_PRIVATE);
 		String name = prefs.getString(PREF_KEY_USERNAME, null);
 		
 		return name;
@@ -261,7 +263,7 @@ public class SecondMenuFragment extends ListFragment {
 	
 	public boolean setSavedUserName(String name){
 		try{
-			SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+			SharedPreferences prefs = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 			Editor editor = prefs.edit();
 			editor.putString(PREF_KEY_USERNAME, name);
 			return editor.commit();

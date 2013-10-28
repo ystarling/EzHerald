@@ -50,7 +50,7 @@ public class ClubListAdapter extends BaseAdapter {
 		clubList.add(new ClubItem("","跆拳道",true));
 		clubList.add(new ClubItem("","学生会",false));
 		progressDialog = new ProgressDialog(c);
-		progressDialog.setMessage("Please waiting ... ");
+		progressDialog.setMessage("请稍候 ... ");
 	}
 	
 	public void setClubList(ClubItem [] clubArr)

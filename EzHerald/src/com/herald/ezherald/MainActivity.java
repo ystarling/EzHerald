@@ -138,7 +138,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		String strPrefTimeInterval = appPreferences.getString(
 				KEY_NAME_REFRESH_FREQ, null);
-		int prefTimeInterval = (timestamp == 0) ? 0 : 720;
+		int prefTimeInterval = (timestamp == 0) ? 0 : 60;
 		if (strPrefTimeInterval != null) {
 			prefTimeInterval = Integer.parseInt(strPrefTimeInterval);
 		}

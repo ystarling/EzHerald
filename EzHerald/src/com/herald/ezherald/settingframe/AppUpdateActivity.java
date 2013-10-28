@@ -54,7 +54,6 @@ public class AppUpdateActivity extends Activity {
 	private final int SUCCESS = 1;
 	private final int FAILED  = 0;
 	private final int DOING   = 2;
-	private final int CHECKED = 3;
 	private final String checkUrl = "http://herald.seu.edu.cn/ws/update";
 	private boolean running;
 	boolean needUpdate;
@@ -62,10 +61,7 @@ public class AppUpdateActivity extends Activity {
 	private Handler mhandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg){
-		switch(msg.what){
-				case CHECKED:
-					onChecked();
-					break;
+			switch(msg.what){
 				case SUCCESS:
 					onDownloadFinish(); 
 					break;
@@ -79,27 +75,32 @@ public class AppUpdateActivity extends Activity {
 				default:
 			}
 		}
-
-		
 	};
-	private void onChecked() {
-		// TODO Auto-generated method stub
-		if( needUpdate ){
-			update();
-		}else{
-			//Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
-			this.finish();
-		}
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.app_update_main);
+		running = false;
+	    needUpdate = false;
 		checkUpdate();
-		//finish();
-		//setContentView(R.layout.app_update_main);
-
+		
+		Intent intent = getIntent();
+		boolean isCalledInSetting = false;
+		if(intent != null)
+			isCalledInSetting = intent.getBooleanExtra("isCalledInSetting", false);
+		int x=0;
+		while(running){
+			x++;//WAITING
+		}
+		if( needUpdate ){
+			update();
+		}else{
+			if(isCalledInSetting){
+				Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
+			}
+			this.finish();
+		}
 	}
 	/**
 	 * @return boolean 是否有新版本
@@ -108,33 +109,30 @@ public class AppUpdateActivity extends Activity {
 		new Thread(){
 			@Override
 			public void run() {
-				//running = true;
-				
-					try {
-						DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-						DocumentBuilder builder = factory.newDocumentBuilder();
-						Document document = builder.parse(checkUrl);
-						Node versionNode = document.getElementsByTagName("version").item(0);
-						Node uriNode = document.getElementsByTagName("uri").item(0);
-						Node infoNode = document.getElementsByTagName("info").item(0);
-						Node forceNode = document.getElementsByTagName("force").item(0);
-						String version = versionNode.getTextContent();
-						uri = uriNode.getTextContent();
-						isForce = forceNode.getTextContent().equals("true");
-						description = infoNode.getTextContent();
-						newVersion = Integer.parseInt(version);
-						if(newVersion > getVersionCode()){
-							needUpdate = true;
-						}
-						mhandler.obtainMessage(CHECKED,null).sendToTarget();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				running = true;
+				try {
+					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder builder = factory.newDocumentBuilder();
+					Document document = builder.parse(checkUrl);
+					Node versionNode = document.getElementsByTagName("version").item(0);
+					Node uriNode = document.getElementsByTagName("uri").item(0);
+					Node infoNode = document.getElementsByTagName("info").item(0);
+					Node forceNode = document.getElementsByTagName("force").item(0);
+					String version = versionNode.getTextContent();
+					uri = uriNode.getTextContent();
+					isForce = forceNode.getTextContent().equals("true");
+					description = infoNode.getTextContent();
+					newVersion = Integer.parseInt(version);
+					
+					if(newVersion > getVersionCode()){
+						needUpdate = true;
 					}
-					//running = false;
-					//notifyAll();
-				
-
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				running = false;
 			}
 		}.start();
 		
