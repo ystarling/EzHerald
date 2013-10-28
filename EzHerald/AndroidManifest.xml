@@ -154,10 +154,12 @@
 
         <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.settingframe.AboutThisApp"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
@@ -168,6 +170,7 @@
         <activity
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
             android:label="@string/title_activity_app_update"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
