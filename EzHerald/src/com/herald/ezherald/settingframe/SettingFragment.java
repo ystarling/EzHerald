@@ -87,6 +87,7 @@ public class SettingFragment extends SherlockListFragment {
 			break;
 		case 3:
 			i.setClass(getActivity(), AppUpdateActivity.class);
+			i.putExtra("isCalledInSetting", true);
 			break;
 		case 4:
 			i.setClass(getActivity(), MainGuideActivity.class);
