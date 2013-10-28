@@ -4,13 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-=======
->>>>>>> 810bc2c3d5910d6dfc2d055490c5194ed7127ab1
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;

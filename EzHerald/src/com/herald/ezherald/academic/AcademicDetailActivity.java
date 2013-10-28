@@ -45,7 +45,7 @@ public class AcademicDetailActivity extends SherlockActivity {
 		context = this;
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("Please wait ... ");
+		progressDialog.setMessage("«Î…‘∫Ú ... ");
 		
 		super.onCreate(savedInstanceState);
 		 setContentView(R.layout.academic_detail);

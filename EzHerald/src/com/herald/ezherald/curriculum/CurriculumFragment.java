@@ -100,7 +100,7 @@ public class CurriculumFragment extends SherlockFragment {
 		
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("Please wait ... ");
+		progressDialog.setMessage("«Î…‘∫Ú ... ");
 		
 		
 	}

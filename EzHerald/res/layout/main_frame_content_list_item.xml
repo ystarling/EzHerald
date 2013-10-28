@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="left"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:text="Content1"
                 android:layout_alignParentTop="true"
                 android:textColor="@color/abs__bright_foreground_holo_dark"
@@ -57,6 +57,7 @@
                 android:singleLine="true"
                 android:text="Content2"
                 android:textColor="@color/abs__primary_text_disable_only_holo_dark"
+                android:maxLines="2"
                 android:textSize="16sp" />
         </RelativeLayout>
     </LinearLayout>

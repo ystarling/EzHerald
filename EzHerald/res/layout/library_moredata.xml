@@ -8,7 +8,7 @@
       android:id="@+id/bt_load"    
       android:layout_width="fill_parent"    
       android:layout_height="wrap_content"  
-      android:text="查看更多。。。" 
+      android:text="查看更多..." 
       android:visibility="gone"
       /> 
   <ProgressBar
