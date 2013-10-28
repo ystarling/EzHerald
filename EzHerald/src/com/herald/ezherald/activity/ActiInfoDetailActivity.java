@@ -230,7 +230,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("Please wait ... ");
+		progressDialog.setMessage("«Î…‘∫Ú ... ");
 		progressDialog.show();
 
 		ActionBar actionBar = getActionBar();

@@ -93,7 +93,7 @@ public class ClubDetailIntroFragment extends SherlockFragment {
 		btnSend = (Button) v.findViewById(R.id.acti_club_detail_send_msg);
 		
 		progressDialog = new ProgressDialog(context);
-		progressDialog.setMessage("Please wait ... ");
+		progressDialog.setMessage("«Î…‘∫Ú ... ");
 		
 //		tvIcon.setImageResource(R.drawable.ic_launcher);
 		tvIcon.setImageBitmap(BitmapFactory.decodeByteArray(bytes_icon, 0, bytes_icon.length));

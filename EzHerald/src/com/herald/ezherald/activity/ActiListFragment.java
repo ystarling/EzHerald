@@ -73,7 +73,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		context = getActivity();
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("Please wait ... ");
+		progressDialog.setMessage("«Î…‘∫Ú ... ");
 		
 		DBAdapter = new ActiDBAdapter(context);
 		DBAdapter.open();
