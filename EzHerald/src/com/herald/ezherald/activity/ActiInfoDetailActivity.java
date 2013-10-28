@@ -27,6 +27,7 @@ import android.graphics.Paint;
 import android.graphics.Bitmap.Config;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -112,12 +113,12 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(context,ClubDetailActivity.class);
-				intent.putExtra("clubName", actiInfoDetail.getClubName());
-				intent.putExtra("focus", true);
-				intent.putExtra("clubid", actiInfoDetail.getClubId());
-				intent.putExtra("icon", bytes_icon);
-				startActivity(intent);
+//				Intent intent = new Intent(context,ClubDetailActivity.class);
+//				intent.putExtra("clubName", actiInfoDetail.getClubName());
+//				intent.putExtra("focus", true);
+//				intent.putExtra("clubid", actiInfoDetail.getClubId());
+//				intent.putExtra("icon", bytes_icon);
+//				startActivity(intent);
 			}
         	
         };
@@ -130,10 +131,11 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(context,ClubAlbumActivity.class);
-				String pic[] = {actiInfoDetail.getActiPicName()};
-				intent.putExtra("pic_adds", pic);
-				startActivity(intent);
+//				Intent intent = new Intent(context,ClubAlbumActivity.class);
+//				String pic[] = {actiInfoDetail.getActiPicName()};
+//				intent.putExtra("pic_adds", pic);
+//				intent.putExtra("pic_url", actiInfoDetail.getActiPicUrl());
+//				startActivity(intent);
 
 			}
         	
@@ -332,8 +334,6 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 							actiInfoDetail.setVoteResult(result);
 						}
 						
-//						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
-//						cl.add(new Comment("我叫何博学","何博伟","2013-6-30"));
 						currCommentNum += cl.size();
 						totalCommentNum = actiInfoDetail.getCommentNum();
 						actiInfoDetail.setCommentList(cl);
@@ -362,9 +362,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		@Override
 		protected void onPostExecute(ActiInfoDetail result) {
 			if (result != null) {
-				actiDetail.setText(result.getActiDetail());
-				//clubIcon.setImageResource(R.drawable.ic_launcher);
-//				actiPic.setImageResource(R.drawable.ic_launcher);
+				actiDetail.setText( Html.fromHtml(Html.fromHtml(result.getActiDetail()).toString()));
 				if(result.getCommentNum()==0)
 				{
 					moreComment.setText(">>>共"+result.getCommentNum()+"条评论,没有更多评论.");
