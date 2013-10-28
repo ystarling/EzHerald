@@ -4,13 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-=======
->>>>>>> 810bc2c3d5910d6dfc2d055490c5194ed7127ab1
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -192,11 +189,11 @@ public class LibraryFragmentThread extends Thread{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			JSONArray json3=(JSONArray) msg.obj; 
-			if(CountOfScroll==0){
-				libraryfragment.SetData(json3);
+			if(CountOfScroll==1){
+				libraryfragment.SetData(json3,CountOfScroll);
 				
 			}else{
-				libraryfragment.LoadMoreData(json3);
+				libraryfragment.LoadMoreData(json3,CountOfScroll);
 			}
 				super.handleMessage(msg);
 		}
