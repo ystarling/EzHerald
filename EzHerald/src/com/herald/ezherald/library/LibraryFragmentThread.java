@@ -161,13 +161,13 @@ public class LibraryFragmentThread extends Thread{
 				dialog1.show();
 			}
 			if(va=="NetWorkingError"){
-				Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó1...",
+				Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó...",
 						Toast.LENGTH_LONG);
 				toast1.show();
 				dialog1.cancel();
 			}
 			if(va=="ValueError"){
-				Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó2...",
+				Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó...",
 						Toast.LENGTH_LONG);
 				toast1.show();
 				dialog1.cancel();
