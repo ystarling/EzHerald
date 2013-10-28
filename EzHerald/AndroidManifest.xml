@@ -41,6 +41,7 @@
         </activity>
         <activity
             android:name="com.herald.ezherald.account.AccountActivity"
+            android:icon="@drawable/ic_app"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
