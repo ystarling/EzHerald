@@ -84,6 +84,11 @@ public class AppUpdateActivity extends Activity {
 		running = false;
 	    needUpdate = false;
 		checkUpdate();
+		
+		Intent intent = getIntent();
+		boolean isCalledInSetting = false;
+		if(intent != null)
+			isCalledInSetting = intent.getBooleanExtra("isCalledInSetting", false);
 		int x=0;
 		while(running){
 			x++;//WAITING
@@ -91,7 +96,9 @@ public class AppUpdateActivity extends Activity {
 		if( needUpdate ){
 			update();
 		}else{
-			//Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
+			if(isCalledInSetting){
+				Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
+			}
 			this.finish();
 		}
 	}
@@ -116,6 +123,7 @@ public class AppUpdateActivity extends Activity {
 					isForce = forceNode.getTextContent().equals("true");
 					description = infoNode.getTextContent();
 					newVersion = Integer.parseInt(version);
+					
 					if(newVersion > getVersionCode()){
 						needUpdate = true;
 					}
