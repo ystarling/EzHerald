@@ -40,6 +40,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 import com.herald.ezherald.library.LibraryFragmentThread.MyHandle2;
+import com.herald.ezherald.library.LibraryFragmentThread.MyHandle3;
 
 /*
  * @author BIG_SEA
@@ -75,7 +76,7 @@ public class LibraryFragment extends SherlockFragment {
 	private int CountOfScroll_two= 2;
 	private String TestSearchValue = "";// determine loadmore or restart
 	private int jsonarraycount = 0;
-
+	private mHandler myHandler= new mHandler();
 	// private MyHandle myHandler = new MyHandle();
 	public void onCreate(Bundle save) {
 		super.onCreate(save);
@@ -364,6 +365,7 @@ public class LibraryFragment extends SherlockFragment {
 		String libr_store_num = null;
 		String libr_landable_num = null;
 		JSONObject json = null;
+		ShowMsg(jsonarray);
 		jsonarraycount = isFilled(jsonarray);
 		list.clear();// empty list，not allowed list=local_list
 		
@@ -403,6 +405,31 @@ public class LibraryFragment extends SherlockFragment {
 		} else {
 			return jsonarray.length();
 		}
+	}
+	public void SetRemind() {
+		Toast toast1 = Toast.makeText(activity, "该图书不存在!",
+				Toast.LENGTH_SHORT);
+		toast1.show();
+	}
+	public void ShowMsg(JSONArray json){
+		Message m=new Message();
+		m.obj=json;
+		m.setTarget(myHandler);
+		m.sendToTarget();
+		
+	}
+	public class mHandler extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			JSONArray json=(JSONArray) msg.obj;
+			if(json.isNull(0)){
+				SetRemind();
+			}
+			super.handleMessage(msg);
+		}
+		
 	}
 	// public void ShowMsg(Map e) {
 	// Message msg = Message.obtain();
