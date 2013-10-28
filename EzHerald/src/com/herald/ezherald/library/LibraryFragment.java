@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import android.R.string;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,6 +70,7 @@ public class LibraryFragment extends SherlockFragment {
 	public ArrayList<HashMap<String, String>> list;
 	SimpleAdapter mSimpleAdapter;
 
+	private ProgressDialog dialog1;
 	private int CountOfScroll = 1;
 	private int CountOfScroll_two= 2;
 	private String TestSearchValue = "";// determine loadmore or restart
@@ -91,7 +93,11 @@ public class LibraryFragment extends SherlockFragment {
 		context = getActivity();
 
 		view = inflater.inflate(R.layout.library_fragment_main, null);
-
+		
+		dialog1 = new ProgressDialog(activity);
+		dialog1.setCanceledOnTouchOutside(false);
+		dialog1.setMessage("加载中...");
+		
 		libr_search_text = (EditText) view.findViewById(R.id.libr_search_text);
 		ImageView libr_search_button = (ImageView) view
 				.findViewById(R.id.libr_search_button);
@@ -151,7 +157,7 @@ public class LibraryFragment extends SherlockFragment {
 					th1.start();
 					TestSearchValue = libr_search_value;
 					
-
+					dialog1.show();
 					handler.postDelayed(new Runnable() {
 
 						@Override
@@ -165,10 +171,12 @@ public class LibraryFragment extends SherlockFragment {
 							
 							mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
 							listview.setAdapter(mSimpleAdapter);
+							dialog1.cancel();
 							Log.e("list5", list + "");
 						}
 					}, 3000);
-
+					
+					
 					CountOfScroll++;
 
 //					listview.setOnScrollListener(new OnScrollListener() {
@@ -231,12 +239,16 @@ public class LibraryFragment extends SherlockFragment {
 
 				TestSearchValue = libr_search_value;
 				CountOfScroll_two++;
-
+				
+				dialog1.show();
 				handler.postDelayed(new Runnable() {
 
 					@Override
 					public void run() {
-
+						
+						if(dialog1.isShowing()){
+						dialog1.cancel();
+						}
 						if (jsonarraycount != 20) {
 							moreButton.setVisibility(View.GONE);
 						} else {
@@ -244,8 +256,10 @@ public class LibraryFragment extends SherlockFragment {
 							moreButton.setVisibility(View.VISIBLE);
 						}
 						mSimpleAdapter.notifyDataSetChanged();// 通知listView刷新数据
+
 					}
 				}, 3000);
+				
 			}
 		});
 		listview.setOnItemClickListener(new OnItemClickListener() {
@@ -291,9 +305,6 @@ public class LibraryFragment extends SherlockFragment {
 				// bundle.putString("loc_documentType", loc_documentType);
 				bundle.putString("loc_marc_no", loc_marc_no);
 
-				Toast toast = Toast.makeText(context, bundle + "",
-						Toast.LENGTH_LONG);
-				toast.show();
 				Intent intent = new Intent(activity,
 						LibraryBookListDetail.class);
 
@@ -334,7 +345,7 @@ public class LibraryFragment extends SherlockFragment {
 			} catch (Exception e) {
 				Log.e("error", "传来失败");
 			}
-			map1.put("libr_title", ((num-1)*20 +i+1)+ " : " + libr_name);
+			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
 			map1.put("libr_name", libr_author);
 			map1.put("libr_press", libr_press);
 			map1.put("libr_callNumber", libr_callNumber);
@@ -374,7 +385,7 @@ public class LibraryFragment extends SherlockFragment {
 			} catch (Exception e) {
 				Log.e("error", "传来失败");
 			}
-			map1.put("libr_title", ((num-1)*20 +i+1)+ " : " + libr_name);
+			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
 			map1.put("libr_name", libr_author);
 			map1.put("libr_press", libr_press);
 			map1.put("libr_callNumber", libr_callNumber);

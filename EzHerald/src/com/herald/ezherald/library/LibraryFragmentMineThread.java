@@ -20,6 +20,8 @@ import org.json.JSONObject;
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.library.LibraryFragmentMine.LibraryMineBookMyAdapter;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -46,11 +48,13 @@ public class LibraryFragmentMineThread extends Thread{
 	public String barcode;
 	private MyHandle myHandler=new MyHandle();//≥ı ºªØHandler
 	private MyHandle2 myHandler2=new MyHandle2();
+	public LibraryFragmentMine libraryfragmentmine;
+	public LibraryMineBookMyAdapter myAdapter;
 	
-
-	public LibraryFragmentMineThread(View view,Activity ac, Context cn){
+	public LibraryFragmentMineThread(View view,Activity ac, Context cn ,LibraryFragmentMine fra){
 		this.activity=ac;
 		this.context=cn;
+		this.libraryfragmentmine=fra;
 //		pro1=(ProgressBar) view.findViewById(R.id.libr_circleMineProgressBar);
 //		pro1.setIndeterminate(false);
 		
@@ -164,7 +168,7 @@ public class LibraryFragmentMineThread extends Thread{
 					
 				}else
 					if(va=="ValueError"){
-						Toast toast1 = Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ...",
+						Toast toast1 = Toast.makeText(activity, "Õ¯¬Á«Î«Û¥ÌŒÛ",
 								Toast.LENGTH_LONG);
 						toast1.show();
 						dialog1.cancel();
@@ -183,7 +187,7 @@ public class LibraryFragmentMineThread extends Thread{
 			
 			JSONArray json1=(JSONArray) msg.obj;
 			ListView listview=(ListView)activity.findViewById(R.id.libr_mine_list);
-			LibraryMineBookMyAdapter myAdapter=new LibraryMineBookMyAdapter(activity,context,json1);
+			myAdapter=libraryfragmentmine.new LibraryMineBookMyAdapter(activity,context,json1);
 			listview.setAdapter(myAdapter);
 			if(dialog1.isShowing()){
 			dialog1.cancel();
