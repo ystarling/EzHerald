@@ -206,6 +206,7 @@ public class MainContentFragment extends SherlockFragment {
 
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
+		refreshImageFromDb();
 	}
 
 	/**

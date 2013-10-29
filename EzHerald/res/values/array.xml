@@ -2,7 +2,7 @@
 <resources>
     <string-array name="main_menu_items">
         <item > 主界面</item>
-        <item >课表自习</item>
+        <item >课表查询</item>
         <item >校园活动</item>
         <!-- <item >我的日程</item> -->
         <item >图书查询</item>
