@@ -77,7 +77,7 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return titles[type].length+info[type].length;
+		return titles[type].length;
 		//return data.getContent().get(type).size()+data.getTitles().get(type).size();
 	}
 
@@ -103,16 +103,10 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		TextView v = new TextView(activity);
-		if(position%2==0){//БъЬт
-			v.setText(titles[type][position/2]);
-			v.setTextSize(LARGE);
-			v.setTextColor(Color.BLUE);
-			v.setGravity(Gravity.CENTER);
-		}else{
-			v.setText(info[type][position/2]);
-			v.setTextSize(SMALL);
-			v.setPadding(PADDING, PADDING, PADDING, 0);//left top right bottom
-		}
+		v.setText(titles[type][position]);
+		v.setTextSize(LARGE);
+		//v.setTextColor(Color.BLUE);
+		//v.setGravity(Gravity.CENTER);
 		return v;
 	}
 
@@ -149,17 +143,24 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	@Override
 	public boolean areAllItemsEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled(int arg0) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	public void onUpdateSuccess() {
 		Log.v("frshman","updatesuccess");
 		notifyDataSetChanged();
 	}
+
+	public String[][] getInfo() {
+		return info;
+	}
+
+	
+	
 }

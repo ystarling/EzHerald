@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="1"
-    android:versionName="1.0.1029c" >
+    android:versionName="1.0.1029p" > <!-- public beta -->
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -89,6 +89,13 @@
             android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.freshman.FreshmanContent"
             android:theme="@style/Theme.Heraldstyle" >
+        </activity>
+        <activity 
+            android:screenOrientation="sensorPortrait"
+            android:name="com.herald.ezherald.freshman.FreshmanDetail"
+            android:theme="@style/Theme.Heraldstyle" >
+        >
+            
         </activity>
         <activity
             android:screenOrientation="sensorPortrait"

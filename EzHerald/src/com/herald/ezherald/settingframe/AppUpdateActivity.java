@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -37,6 +38,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -66,6 +68,7 @@ public class AppUpdateActivity extends Activity {
 	boolean mIsCalledInSetting = false;
 	private Thread mDownloadThread;
 	private boolean mForceStopOperation = false;
+	private long mExitTime = 0;
 	
 	private Handler mhandler = new Handler(){
 		@Override
@@ -259,16 +262,28 @@ public class AppUpdateActivity extends Activity {
 		progress.setTitle("正在下载...");
 		progress.setMessage("请稍候");
 		//progress.setProgressStyle(ProgressDialog.STYLE_SPINNER); 
-		progress.setCancelable(true);
-		
-		progress.setOnCancelListener(new OnCancelListener() {
+		progress.setCancelable(false);
+		progress.setOnKeyListener(new OnKeyListener() {
 			
 			@Override
-			public void onCancel(DialogInterface dialog) {
-				mForceStopOperation = true;
-				Toast.makeText(getApplicationContext(), "下载已终止...", Toast.LENGTH_SHORT).show();
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				Log.w("KEYCODE", ""+keyCode);
+				Log.w("type=",""+ event.getAction());
+				if(keyCode != KeyEvent.KEYCODE_BACK || event.getAction() != KeyEvent.ACTION_UP)
+					return false;
+				
+				if(System.currentTimeMillis() - mExitTime > 2000){
+					Toast.makeText(getApplicationContext(), "再按一次返回键停止下载", Toast.LENGTH_SHORT).show();
+					mExitTime = System.currentTimeMillis();					 
+				} else {
+					mForceStopOperation = true;
+					Toast.makeText(getApplicationContext(), "下载已停止...", Toast.LENGTH_SHORT).show();
+					progress.cancel();
+				}
+				return true;
 			}
 		});
+		
 		progress.show();
 		
 		new Thread(){
@@ -287,7 +302,7 @@ public class AppUpdateActivity extends Activity {
 	                    File file = new File(  
 	                            Environment.getExternalStorageDirectory(),fileName);  
 	                    fileOutputStream = new FileOutputStream(file);  
-	                    byte[] buf = new byte[1024];  
+	                    byte[] buf = new byte[10240];  
 	                    int ch = -1;  
 	                    while ((ch = is.read(buf)) != -1) {
 	                    	if(mForceStopOperation){
