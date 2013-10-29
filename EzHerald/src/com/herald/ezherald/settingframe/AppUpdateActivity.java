@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +93,7 @@ public class AppUpdateActivity extends Activity {
 		int x=0;
 		while(running){
 			x++;//WAITING
+			SystemClock.sleep(500);
 		}
 		if( needUpdate ){
 			update();
