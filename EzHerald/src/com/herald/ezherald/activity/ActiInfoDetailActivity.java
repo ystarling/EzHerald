@@ -362,7 +362,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		@Override
 		protected void onPostExecute(ActiInfoDetail result) {
 			if (result != null) {
-				actiDetail.setText( Html.fromHtml(Html.fromHtml(result.getActiDetail()).toString()));
+				actiDetail.setText( Html.fromHtml(Html.fromHtml(Html.fromHtml(result.getActiDetail()).toString()).toString()));
 				if(result.getCommentNum()==0)
 				{
 					moreComment.setText(">>>共"+result.getCommentNum()+"条评论,没有更多评论.");

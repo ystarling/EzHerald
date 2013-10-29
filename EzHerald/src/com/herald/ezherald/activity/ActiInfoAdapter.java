@@ -131,7 +131,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 		actiInfoHolder.actiTitle.setText(actiInfo.getActiTitle());
 		actiInfoHolder.actiPubTime.setText(actiInfo.getActiPubTime());
 //		actiInfoHolder.actiIntro.setText(actiInfo.getActiIntro());
-		;
+		
 		actiInfoHolder.actiIntro.setText( Html.fromHtml(Html.fromHtml(actiInfo.getActiIntro()).toString()));
 		actiInfoHolder.time.setText(actiInfo.getStartTime()+"жа"+actiInfo.getEndTime());
 		actiInfoHolder.place.setText(actiInfo.getPlace());
