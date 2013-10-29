@@ -8,6 +8,8 @@ import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -16,16 +18,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -43,7 +49,7 @@ import com.herald.ezherald.R;
  *
  */
 public class AppUpdateActivity extends Activity {
-	private int newVersion = 2;
+	private String newVersion = "x";
 	private boolean isForce = false;
 	private String uri = "http://herald.seu.edu.cn/index/ez.apk" ;
 	private String description = "test";
@@ -57,6 +63,9 @@ public class AppUpdateActivity extends Activity {
 	private final String checkUrl = "http://herald.seu.edu.cn/ws/update";
 	private boolean running;
 	boolean needUpdate;
+	boolean mIsCalledInSetting = false;
+	private Thread mDownloadThread;
+	private boolean mForceStopOperation = false;
 	
 	private Handler mhandler = new Handler(){
 		@Override
@@ -70,7 +79,7 @@ public class AppUpdateActivity extends Activity {
 					break;
 				case DOING:
 					showProgress((Long) msg.obj);
-					Log.w("download",""+(Integer) msg.obj);
+					//Log.w("download",""+(Long) msg.obj);
 					break;
 				default:
 			}
@@ -81,62 +90,111 @@ public class AppUpdateActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_update_main);
+	
 		running = false;
 	    needUpdate = false;
-		checkUpdate();
+		//checkUpdate();
 		
 		Intent intent = getIntent();
-		boolean isCalledInSetting = false;
 		if(intent != null)
-			isCalledInSetting = intent.getBooleanExtra("isCalledInSetting", false);
-		int x=0;
-		while(running){
-			x++;//WAITING
+			mIsCalledInSetting = intent.getBooleanExtra("isCalledInSetting", false);
+		if(mIsCalledInSetting){
+			Toast.makeText(this, "正在检测更新...", Toast.LENGTH_SHORT).show();
 		}
-		if( needUpdate ){
-			update();
-		}else{
-			if(isCalledInSetting){
-				Toast.makeText(this, "未检测到更新", Toast.LENGTH_SHORT).show();
-			}
-			this.finish();
-		}
+		
+		new AppUpdateAsyncTask().execute(this);
+
 	}
-	/**
-	 * @return boolean 是否有新版本
-	 */
-	public void checkUpdate(){
-		new Thread(){
-			@Override
-			public void run() {
-				running = true;
-				try {
-					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-					DocumentBuilder builder = factory.newDocumentBuilder();
-					Document document = builder.parse(checkUrl);
-					Node versionNode = document.getElementsByTagName("version").item(0);
-					Node uriNode = document.getElementsByTagName("uri").item(0);
-					Node infoNode = document.getElementsByTagName("info").item(0);
-					Node forceNode = document.getElementsByTagName("force").item(0);
-					String version = versionNode.getTextContent();
-					uri = uriNode.getTextContent();
-					isForce = forceNode.getTextContent().equals("true");
-					description = infoNode.getTextContent();
-					newVersion = Integer.parseInt(version);
-					
-					if(newVersion > getVersionCode()){
-						needUpdate = true;
-					}
-					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	
+	
+	private class AppUpdateAsyncTask extends AsyncTask<Context, Void, Boolean>{
+		Context mContext;
+		
+		@Override
+		protected Boolean doInBackground(Context... params) {
+			// 检测更新
+			mContext = params[0];
+			try {
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				Document document = builder.parse(checkUrl);
+				Node versionNode = document.getElementsByTagName("version").item(0);
+				Node uriNode = document.getElementsByTagName("uri").item(0);
+				Node infoNode = document.getElementsByTagName("info").item(0);
+				Node forceNode = document.getElementsByTagName("force").item(0);
+				String version = versionNode.getTextContent();
+				uri = uriNode.getTextContent();
+				isForce = forceNode.getTextContent().equals("true");
+				description = infoNode.getTextContent();
+				newVersion = version;
+				
+				if(!newVersion.equals(getVersionName())){
+					return true;
 				}
-				running = false;
+			} catch (ParserConfigurationException e){
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}.start();
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			if(mContext == null)
+				return;
+			if(result == false){
+				if(mIsCalledInSetting)
+					Toast.makeText(mContext, "未检测到更新", Toast.LENGTH_SHORT).show();
+				finish();
+				return;
+			}
+			
+			update();
+		}
 		
 	}
+	
+//	/**
+//	 * @return boolean 是否有新版本
+//	 */
+//	public void checkUpdate(){
+//		new Thread(){
+//			@Override
+//			public void run() {
+//				running = true;
+//				try {
+//					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//					DocumentBuilder builder = factory.newDocumentBuilder();
+//					Document document = builder.parse(checkUrl);
+//					Node versionNode = document.getElementsByTagName("version").item(0);
+//					Node uriNode = document.getElementsByTagName("uri").item(0);
+//					Node infoNode = document.getElementsByTagName("info").item(0);
+//					Node forceNode = document.getElementsByTagName("force").item(0);
+//					String version = versionNode.getTextContent();
+//					uri = uriNode.getTextContent();
+//					isForce = forceNode.getTextContent().equals("true");
+//					description = infoNode.getTextContent();
+//					newVersion = version;
+//					
+//					if(!newVersion.equals(getVersionName())){
+//						needUpdate = true;
+//					}
+//					
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				running = false;
+//			}
+//		}.start();
+//		
+//	}
 	
 	public void update(){
 		if(isForce){
@@ -153,8 +211,6 @@ public class AppUpdateActivity extends Activity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				// TODO Auto-generated method stub
-
 				download();
 			}
 
@@ -182,11 +238,11 @@ public class AppUpdateActivity extends Activity {
 	/**
 	 * @return int 本地的版本号 manifest里面
 	 */
-	public int getVersionCode(){
+	public String getVersionName(){
 		PackageManager manager= this.getPackageManager();
-		int versionCode=-1;
+		String versionCode= "";
 		try {
-			versionCode = manager.getPackageInfo(this.getPackageName(), 0).versionCode;
+			versionCode = manager.getPackageInfo(this.getPackageName(), 0).versionName;
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -194,16 +250,27 @@ public class AppUpdateActivity extends Activity {
 		}
 		return versionCode;
 	}
+	
 	/**
 	 * 开一个线程执行下载
 	 */
 	private void download(){
 		progress = new ProgressDialog(AppUpdateActivity.this);
 		progress.setTitle("正在下载...");
-		progress.setMessage("请稍后");
-		progress.setProgressStyle(ProgressDialog.STYLE_SPINNER); 
-		progress.setCancelable(false);
+		progress.setMessage("请稍候");
+		//progress.setProgressStyle(ProgressDialog.STYLE_SPINNER); 
+		progress.setCancelable(true);
+		
+		progress.setOnCancelListener(new OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				mForceStopOperation = true;
+				Toast.makeText(getApplicationContext(), "下载已终止...", Toast.LENGTH_SHORT).show();
+			}
+		});
 		progress.show();
+		
 		new Thread(){
 			@Override
 			public void run(){
@@ -222,7 +289,13 @@ public class AppUpdateActivity extends Activity {
 	                    fileOutputStream = new FileOutputStream(file);  
 	                    byte[] buf = new byte[1024];  
 	                    int ch = -1;  
-	                    while ((ch = is.read(buf)) != -1) {  
+	                    while ((ch = is.read(buf)) != -1) {
+	                    	if(mForceStopOperation){
+	                    		fileOutputStream.close();
+	                    		file.delete();
+	                    		mhandler.obtainMessage(FAILED).sendToTarget();
+	                    		return;
+	                    	}
 	                        fileOutputStream.write(buf, 0, ch);
 	                        down += ch;
 	                        mhandler.obtainMessage(DOING,Long.valueOf(down) ).sendToTarget();
@@ -250,8 +323,10 @@ public class AppUpdateActivity extends Activity {
         intent.setDataAndType(Uri.fromFile(new File(Environment
                 .getExternalStorageDirectory(), fileName)),
                 "application/vnd.android.package-archive");
-        startActivity(intent);
         
+        startActivity(intent);
+        //Toast.makeText(this, "下载文件已放置于SD卡根目录", Toast.LENGTH_LONG).show();
+        finish();
 	}
 	/**
 	 * 下载失败的时候调用
@@ -259,12 +334,17 @@ public class AppUpdateActivity extends Activity {
 	private void onFailed(){
 		progress.cancel();
 		Toast.makeText(AppUpdateActivity.this, "下载失败,请检查网络", Toast.LENGTH_SHORT).show();
+		finish();
 	}
 	/**
 	 * @param p 进度 单位byte
 	 * 显示下载了多少
 	 */
-	private void showProgress(long p){
-		progress.setMessage(String.format("已下载 %.3f", (double)p/fullSize));//TODO need tobe tested
+	private void showProgress(Long p){
+		String downloadPersentage = "已下载" + p + "/" + fullSize;
+		double presentage = p.doubleValue()/fullSize * 100.0f;
+		downloadPersentage += ("\n" + String.format("%.1f", presentage) + "%");
+		
+		progress.setMessage(downloadPersentage);
 	}
 }

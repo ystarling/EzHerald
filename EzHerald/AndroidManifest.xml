@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="1"
-    android:versionName="1.0.1028" >
+    android:versionName="1.0.1029bb" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -176,7 +176,7 @@
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
             android:label="@string/title_activity_app_update"
             android:icon="@drawable/ic_app"
-            android:theme="@style/Theme.Heraldstyle" >
+            android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
             android:name="com.herald.ezherald.mainframe.MainGuideActivity"
