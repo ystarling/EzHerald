@@ -9,6 +9,8 @@ import org.json.JSONException;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.nfc.NfcAdapter.CreateBeamUrisCallback;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -64,6 +67,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 	private TextView tv_to_period = null;
 	private TextView tv_week = null;
 	private TextView tv_day = null;
+	private TextView tv_room_num = null;
 	
 	
 	private AsyncTask<Void, Integer, String> requestTask = null;
@@ -143,6 +147,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			tv_week = (TextView) view.findViewById(R.id.emproom_week);
 			tv_from_period = (TextView) view.findViewById(R.id.emproom_from_peroid);
 			tv_to_period = (TextView) view.findViewById(R.id.emproom_to_peroid);
+			tv_room_num = (TextView) view.findViewById(R.id.emproom_room_num);
 			
 			spinnerAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, campus);
 			spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
@@ -177,6 +182,12 @@ public class EmptyClassroomFragment extends SherlockFragment {
 						selected_campus = CAMPUS_ALL;
 						break;
 					}
+					
+					SharedPreferences prefs = getActivity().getSharedPreferences("ec_campus", Context.MODE_PRIVATE);
+					Editor editor = prefs.edit();
+					editor.putString("campus", selected_campus);
+					editor.commit();
+					
 				}
 
 				@Override
@@ -292,6 +303,8 @@ public class EmptyClassroomFragment extends SherlockFragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);             
+					imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 					onRefreshStart();
 					requestTask = new requestEmptyRoom(buttonType);
 					requestTask.execute();
@@ -311,7 +324,15 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			String to_period = (String) tv_to_period.getText().toString();
 			String url = String.format("http://herald.seu.edu.cn/queryEmptyClassrooms/query/%s/today/%s/%s/",
 					selected_campus, from_period, to_period);
-			return url;
+			if(from_period.trim().equals("") || to_period.trim().equals(""))
+			{
+				Toast.makeText(context, "输入不能为空", Toast.LENGTH_LONG).show();
+				return null;
+			}
+			else{
+				return url;
+			}
+			
 		}
 		
 		public String getTomorrowUrl()
@@ -320,7 +341,14 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			String to_period = (String) tv_to_period.getText().toString();
 			String url = String.format("http://herald.seu.edu.cn/queryEmptyClassrooms/query/%s/tomorrow/%s/%s/",
 					selected_campus, from_period, to_period);
-			return url;
+			if(from_period.trim().equals("") || to_period.trim().equals(""))
+			{
+				Toast.makeText(context, "输入不能为空", Toast.LENGTH_LONG).show();
+				return null;
+			}
+			else{
+				return url;
+			}
 		}
 		
 		public String getAdvanceUrl()
@@ -331,7 +359,15 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			String day = (String) tv_day.getText().toString();
 			String url = String.format("http://herald.seu.edu.cn/queryEmptyClassrooms/query/%s/%s/%s/%s/%s/",
 					selected_campus, week, day, from_period, to_period);
-			return url;
+			if(from_period.trim().equals("") || to_period.trim().equals("") ||
+					week.trim().equals("") || day.trim().equals(""))
+			{
+				Toast.makeText(context, "输入不能为空", Toast.LENGTH_LONG).show();
+				return null;
+			}
+			else{
+				return url;
+			}
 		}
 		
 	}
@@ -367,6 +403,10 @@ public class EmptyClassroomFragment extends SherlockFragment {
 				return null;
 			
 			try {
+				if(url==null)
+				{
+					return null;
+				}
 				return new NetRequest().request(url);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -394,12 +434,15 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			if(null != result)
 			{
 				List<String> roomList;
-				
+				List<RoomPair> roomPairList;
 				try {
 					roomList = DataParser.strToList(result);
+					roomPairList = DataParser.strToRoomPair(result);
 //					Toast.makeText(context, ""+roomList.size(), Toast.LENGTH_LONG).show();
 					listAdapter.setRoomList(roomList);
+					listAdapter.setRoomPairs(roomPairList);
 					listAdapter.notifyDataSetChanged();
+					tv_room_num.setText("共有空闲教室："+roomList.size()+"间");
 //					Toast.makeText(context, "request success!!", Toast.LENGTH_LONG).show();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -411,7 +454,6 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			else{
 				Toast.makeText(context, requestFailed, Toast.LENGTH_LONG).show();
 			}
-//			Toast.makeText(context, "exe here", Toast.LENGTH_LONG).show();
 			onRefreshCompleted();
 		}
 

@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,7 +130,9 @@ public class ActiInfoAdapter extends BaseAdapter {
 		actiInfoHolder.clubName.setText(actiInfo.getClubName());
 		actiInfoHolder.actiTitle.setText(actiInfo.getActiTitle());
 		actiInfoHolder.actiPubTime.setText(actiInfo.getActiPubTime());
-		actiInfoHolder.actiIntro.setText(actiInfo.getActiIntro());
+//		actiInfoHolder.actiIntro.setText(actiInfo.getActiIntro());
+		;
+		actiInfoHolder.actiIntro.setText( Html.fromHtml(Html.fromHtml(actiInfo.getActiIntro()).toString()));
 		actiInfoHolder.time.setText(actiInfo.getStartTime()+"жа"+actiInfo.getEndTime());
 		actiInfoHolder.place.setText(actiInfo.getPlace());
 		
@@ -296,7 +299,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 					DBAdapter.updateActiPicByActi(id, result);
 					Log.v("PIC", "complete save pic");
 				}
-				img.setVisibility(View.VISIBLE);
+				lay.setVisibility(View.VISIBLE);
 				img.setImageBitmap(result);
 				DBAdapter.close();
 				//img.setLayoutParams(new LayoutParams(40, 40));

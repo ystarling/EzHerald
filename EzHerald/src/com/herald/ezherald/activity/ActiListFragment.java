@@ -41,6 +41,7 @@ import com.herald.ezherald.academic.CustomListView;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
 import com.herald.ezherald.academic.DataTypeTransition;
 import com.herald.ezherald.academic.ListFootView;
+import com.herald.ezherald.mainframe.MainContentGridItemObj;
 
 public class ActiListFragment extends SherlockFragment implements ActionBar.OnNavigationListener {
 	
@@ -151,7 +152,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		//REFRESHSTATE = REFRESHING ;
 		MenuItem muItem = mMenu.findItem(R.id.menu_acti_list_action_refresh);
 		muItem.setActionView(R.layout.academic_refresh_progress);	
-		
+		progressDialog.show();
 	}
 	
 	// Ë¢ÐÂ²Ëµ¥Í£Ö¹Ðý×ª
@@ -176,6 +177,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		adapter = new ActiInfoAdapter(getActivity());
 		//adapter.setActiInfoList(actiArr);
 		listView.setAdapter(adapter);
+		
+//		new GabberTestTask().execute();
 		
 		foot = new ListFootView(getActivity());
 		foot.setOnClickListener(new OnClickListener(){
@@ -222,10 +225,10 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), ""+position+"   "+id, Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(), ""+position+"   "+id, Toast.LENGTH_SHORT).show();
 				
 				ActiInfo actiInfo = (ActiInfo) adapter.getItem((int)id);
-				Toast.makeText(context, ""+actiInfo.getId(), Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, ""+actiInfo.getId(), Toast.LENGTH_SHORT).show();
 				boolean isVote = actiInfo.checkIsVote();
 				Intent intent = new Intent(context,ActiInfoDetailActivity.class);
 				intent.putExtra("clubName", actiInfo.getClubName());
@@ -495,6 +498,10 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 					{
 						in = httpConn.getInputStream();
 						String str = DataTypeTransition.InputStreamToString(in);
+						if(str==noActivityHint)
+						{
+							return actiList;
+						}
 						JSONArray jsonArray = new JSONArray(str);
 						//Log.v("Net test", str);
 						for(int loop = 0;loop<jsonArray.length();++loop)
@@ -554,6 +561,23 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			listView.onRequestComplete();
 			
 		}
+	}
+	
+	
+	private class GabberTestTask extends AsyncTask<Void, Integer, MainContentGridItemObj>{
+
+		@Override
+		protected MainContentGridItemObj doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			return new ActivityDataGrabber().GrabInformationObject();
+		}
+		
+		@Override 
+		protected void onPostExecute(MainContentGridItemObj obj)
+		{
+			Toast.makeText(context, "gabber test:"+obj.getContent1()+obj.getContent2(), Toast.LENGTH_LONG).show();
+		}
+		
 	}
 
 }

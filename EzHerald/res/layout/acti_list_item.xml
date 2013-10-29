@@ -49,15 +49,18 @@
             	    
             
         </LinearLayout>
-    
+    	
+        
 
 	    
 	    <TextView 
 	        android:id="@+id/acti_listitem_acti_title"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:textColor="#0000ff"
-	        android:textSize="17sp"/>
+	        android:textColor="#000000"
+	        android:textSize="17sp"
+	        android:textStyle="bold"
+	        />
 	    
 	    <LinearLayout 
 	        android:layout_width="wrap_content"
@@ -67,6 +70,7 @@
 	        <TextView 
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:textStyle="bold"
 	            android:text="时间:"/>
 	        
 	        <TextView 
@@ -88,6 +92,7 @@
 	        <TextView 
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:textStyle="bold"
 	            android:text="地点:"/>
 	        
 	        <TextView 
@@ -97,11 +102,17 @@
 	        
 	    </LinearLayout>
 	    
+	    <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="活动简介:"/>
 	    
 	    <TextView 
 	        android:id="@+id/acti_listitem_acti_intro"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:textColor="#747474"
 	        android:layout_marginRight="2sp"/>
 	    
 
@@ -109,12 +120,14 @@
 	        android:id="@+id/acti_outer_acti_pic"
 	        android:layout_width="100dp"
 	        android:layout_height="100dp"
+	        android:visibility="gone"
 	        >
 	        <ImageView 
 				android:id="@+id/acti_listitem_acti_pic"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="left"
+				
 				 />
 	        
 	    </LinearLayout>

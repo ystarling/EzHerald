@@ -21,6 +21,25 @@ public class DataParser {
 		return arr;
 	}
 	
+	static public List<RoomPair> strToRoomPair(String str) throws JSONException
+	{
+		List<RoomPair> arr = new ArrayList<RoomPair>();
+		JSONArray jsonArr = new JSONArray(str);
+		for(int i=0;i<jsonArr.length();i+=2)
+		{
+			if(i+1 < jsonArr.length())
+			{
+				arr.add( new RoomPair(jsonArr.getString(i), jsonArr.getString(i+1)) );
+			}
+			else
+			{
+				arr.add( new RoomPair(jsonArr.getString(i), "    ") );
+				break;
+			}
+		}
+		return arr;
+	}
+	
 	
 	static public List<String> strOfAllToList(String str) throws JSONException
 	{

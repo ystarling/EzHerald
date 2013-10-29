@@ -20,6 +20,7 @@ public class ClubAlbumActivity extends SherlockActivity {
     }; 
 	
 	private String[] pic_adds;
+	private String  pic_url;
 	private static final int ALBUM_COUNT = ALBUM_RES.length ;
 	private ViewPager mViewPager; 
 	private ViewPagerAdapter mViewPagerAdapter;
@@ -34,12 +35,13 @@ public class ClubAlbumActivity extends SherlockActivity {
 		
 		Bundle bundle = this.getIntent().getExtras();
 		pic_adds = bundle.getStringArray("pic_adds");
+		pic_url = bundle.getString("pic_url");
 		
 		setupViews();
 		
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setTitle("œ‡≤·");
+		actionBar.setTitle("¥ÛÕº");
 		
 	}
 	

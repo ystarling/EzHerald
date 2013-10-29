@@ -37,10 +37,12 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.academic.AcademicDataGrabber;
 import com.herald.ezherald.activity.ActiActivity;
+import com.herald.ezherald.activity.ActivityDataGrabber;
 import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriDataGrabber;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
+import com.herald.ezherald.emptyclassroom.EmptyClassroomInfoGrabber;
 import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.exercise.ExerciseGrabber;
 import com.herald.ezherald.freshman.FreshmanActivity;
@@ -50,6 +52,7 @@ import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
+import com.herald.ezherald.settingframe.SettingActivity;
 import com.tendcloud.tenddata.TCAgent;
 import com.terlici.dragndroplist.DragNDropListView;
 import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
@@ -203,6 +206,7 @@ public class MainContentFragment extends SherlockFragment {
 
 		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
+		refreshImageFromDb();
 	}
 
 	/**
@@ -314,7 +318,11 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new ExerciseGrabber(getActivity());
 			} else if (moduleName.equals("library")) {
 				grabber = new LibraryContentGrabber(getActivity());
-			} //少活动模块!
+			} else if (moduleName.equals("activity")){
+				grabber = new ActivityDataGrabber();
+			} else if (moduleName.equals("emptyclassroom")){
+				grabber = new EmptyClassroomInfoGrabber(getActivity());
+			}
 			// else if ....f
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -368,7 +376,7 @@ public class MainContentFragment extends SherlockFragment {
 			String clickTarget = "Unknown";
 			switch ((int) id) {
 			case 0:
-				i.setClass(getActivity(), MainContentModulePrefActivity.class);
+				i.setClass(getActivity(), SettingActivity.class); //引导到设置界面比较好
 				MainActivity mainActivity = (MainActivity) getActivity();
 				mainActivity.needRefreshContent = true;
 				clickTarget = "Main";
@@ -483,11 +491,10 @@ public class MainContentFragment extends SherlockFragment {
 		Log.d("MainContentFrag", "OnResume");
 		// 更新内容
 		super.onResume();
-		refreshInfo();
 		MainActivity mainActivity = (MainActivity) getActivity();
 		if (mainActivity.needRefreshContent) {
 			Log.d("MainContentFragment", "Refreshing info");
-
+			refreshInfo();
 			mainActivity.needRefreshContent = false;
 		}
 	}

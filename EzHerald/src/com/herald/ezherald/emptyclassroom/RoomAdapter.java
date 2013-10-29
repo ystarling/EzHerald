@@ -19,28 +19,34 @@ import android.widget.TextView;
 public class RoomAdapter extends BaseAdapter {
 	
 	private List<String> roomList = null;
+	private List<RoomPair> roomPairList = null;
 	private Context context = null;
 	
 	public RoomAdapter(Context c)
 	{
 		context = c;
 		roomList = new ArrayList<String>();
+		roomPairList = new ArrayList<RoomPair>();
 	}
 	
 	public void setRoomList(List<String> rl){
 		roomList = rl;
 	}
+	public void setRoomPairs(List<RoomPair> rp)
+	{
+		roomPairList = rp;
+	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return roomList.size();
+		return roomPairList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return roomList.get(position);
+		return roomPairList.get(position);
 	}
 
 	@Override
@@ -54,9 +60,14 @@ public class RoomAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		View view = LayoutInflater.from(context).inflate(R.layout.emproom_item, null);
 		
-		String room = roomList.get(position);
-		TextView roomView = (TextView) view.findViewById(R.id.emproom_list_item);
-		roomView.setText(room);
+//		String room = roomList.get(position);
+		RoomPair pair = roomPairList.get(position);
+//		TextView roomView = (TextView) view.findViewById(R.id.emproom_list_item);
+//		roomView.setText(room);
+		TextView roomViewLeft = (TextView) view.findViewById(R.id.emproom_list_item_left);
+		TextView roomViewRight = (TextView) view.findViewById(R.id.emproom_list_item_right);
+		roomViewLeft.setText(pair.getRoom1());
+		roomViewRight.setText(pair.getRoom2());
 		
 		return view;
 	}

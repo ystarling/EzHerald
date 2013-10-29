@@ -346,10 +346,11 @@ public class MainActivity extends BaseFrameActivity {
 			if (remoteImgUrls != null && !remoteImgUrls.isEmpty()) {
 				dbAdapter.open();
 				// 有东西需要更新了..
+				
 				int count = 1;
 				int size = remoteImgUrls.size();
 				for (String urlStr : remoteImgUrls) {
-					//showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
+					showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
 					Bitmap bmp = testGetBitmap(urlStr);
 					if (bmp != null) {
 						updList.add(bmp);
@@ -359,7 +360,7 @@ public class MainActivity extends BaseFrameActivity {
 						break;
 					}
 				}
-
+				
 				// 更新数据库
 				int currImgSize = updList.size(); // 当前从网上更新到的新图片数量
 				int dbImgSize = dbAdapter.getCurrentImageCount(); // 数据库中的老图片数量
@@ -648,6 +649,7 @@ public class MainActivity extends BaseFrameActivity {
 		Log.d("MainActivity", "onDestroy");
 		super.onDestroy();
 	}
+	
 	
 	/**
 	 * 异步获取更新状态，防止启动时间缓慢
