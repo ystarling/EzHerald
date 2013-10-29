@@ -152,6 +152,7 @@ public class MainMenuFragment extends ListFragment {
 			break;
 		case 8:
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
+			menuTarget = "EmptyClass";
 			break;
 		}
 		TCAgent.onEvent(getActivity(), "Ö÷²Ëµ¥µã»÷", menuTarget);
