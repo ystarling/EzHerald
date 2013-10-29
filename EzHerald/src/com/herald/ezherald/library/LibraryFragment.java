@@ -415,6 +415,7 @@ public class LibraryFragment extends SherlockFragment {
 			Log.e("libr_title",libr_name);
 
 			map1.put("libr_title", ((num-1)*20 +i+1)+ " " + libr_name);
+
 			map1.put("libr_name", libr_author);
 			map1.put("libr_press", libr_press);
 			map1.put("libr_callNumber", libr_callNumber);
