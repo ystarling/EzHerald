@@ -152,7 +152,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		//REFRESHSTATE = REFRESHING ;
 		MenuItem muItem = mMenu.findItem(R.id.menu_acti_list_action_refresh);
 		muItem.setActionView(R.layout.academic_refresh_progress);	
-		
+		progressDialog.show();
 	}
 	
 	// Ë¢ÐÂ²Ëµ¥Í£Ö¹Ðý×ª
