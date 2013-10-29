@@ -90,6 +90,13 @@
             android:name="com.herald.ezherald.freshman.FreshmanContent"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
+        <activity 
+            android:screenOrientation="sensorPortrait"
+            android:name="com.herald.ezherald.freshman.FreshmanDetail"
+            android:theme="@style/Theme.Heraldstyle" >
+        >
+            
+        </activity>
         <activity
             android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.gpa.GPAActivity"

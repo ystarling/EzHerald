@@ -12,7 +12,7 @@ public class FreshmanActivity extends BaseFrameActivity {
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		
 		mContentFrag = new FreshmanFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);

@@ -1,11 +1,14 @@
 package com.herald.ezherald.freshman;
 
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -28,6 +31,7 @@ public class FreshmanContentFragment extends SherlockFragment {
 		adapter = new FreshmanListViewAdapter(type,getActivity());
 		listView = (ListView)getActivity().findViewById(R.id.lv_content);
 		listView.setAdapter(adapter);
+		/*
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
@@ -37,6 +41,23 @@ public class FreshmanContentFragment extends SherlockFragment {
 				adapter.data.update();
 				return false;
 			}
+		});
+		*/
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				Log.v("click",""+id);
+				String detail = adapter.getInfo()[type][(int) id];
+				Bundle bundle = new Bundle();
+				bundle.putString("detail", detail);
+				bundle.putInt("type",type);
+				Intent intent = new Intent(getActivity(),FreshmanDetail.class);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+			
 		});
 	}
 
