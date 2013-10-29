@@ -9,6 +9,8 @@ import org.json.JSONException;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.nfc.NfcAdapter.CreateBeamUrisCallback;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -180,6 +182,12 @@ public class EmptyClassroomFragment extends SherlockFragment {
 						selected_campus = CAMPUS_ALL;
 						break;
 					}
+					
+					SharedPreferences prefs = getActivity().getSharedPreferences("ec_campus", Context.MODE_PRIVATE);
+					Editor editor = prefs.edit();
+					editor.putString("campus", selected_campus);
+					editor.commit();
+					
 				}
 
 				@Override

@@ -144,7 +144,7 @@ public class LibraryFragment extends SherlockFragment {
 				m.hideSoftInputFromWindow(libr_search_text.getWindowToken(), 0);
 
 				if (libr_search_value.isEmpty()) {
-					Toast toast = Toast.makeText(getActivity(), "你什么东西都没写啊",
+					Toast toast = Toast.makeText(getActivity(), "搜索关键词为空",
 							Toast.LENGTH_SHORT);
 					toast.show();
 				} else {
@@ -346,7 +346,7 @@ public class LibraryFragment extends SherlockFragment {
 			} catch (Exception e) {
 				Log.e("error", "传来失败");
 			}
-			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
+			map1.put("libr_title", ((num-1)*20 +i+1)+ " " + libr_name);
 			map1.put("libr_name", libr_author);
 			map1.put("libr_press", libr_press);
 			map1.put("libr_callNumber", libr_callNumber);
@@ -410,7 +410,12 @@ public class LibraryFragment extends SherlockFragment {
 			} catch (Exception e) {
 				Log.e("error", "传来失败");
 			}
+<<<<<<< HEAD
 			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
+			Log.e("libr_title",libr_name);
+=======
+			map1.put("libr_title", ((num-1)*20 +i+1)+ " " + libr_name);
+>>>>>>> a8d8dea8bc718928577695269270d47774792fc0
 			map1.put("libr_name", libr_author);
 			map1.put("libr_press", libr_press);
 			map1.put("libr_callNumber", libr_callNumber);
