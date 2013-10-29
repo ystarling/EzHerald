@@ -39,7 +39,7 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 				String acti_title = jsonObject.getString("name");
 				String league_name = league_obj.getString("league_name");
 				
-				obj.setContent1(league_name+"发布了新活动：");
+				obj.setContent1(league_name+"发布了新活动:");
 				obj.setContent2(acti_title);
 	
 				
