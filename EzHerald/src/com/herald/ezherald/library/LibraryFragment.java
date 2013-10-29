@@ -410,7 +410,12 @@ public class LibraryFragment extends SherlockFragment {
 			} catch (Exception e) {
 				Log.e("error", "´«À´Ê§°Ü");
 			}
+<<<<<<< HEAD
+			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
+			Log.e("libr_title",libr_name);
+=======
 			map1.put("libr_title", ((num-1)*20 +i+1)+ " " + libr_name);
+>>>>>>> a8d8dea8bc718928577695269270d47774792fc0
 			map1.put("libr_name", libr_author);
 			map1.put("libr_press", libr_press);
 			map1.put("libr_callNumber", libr_callNumber);
