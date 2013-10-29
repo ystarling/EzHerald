@@ -87,7 +87,7 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 						obj.setContent1("学霸你好! ");
 						obj.setContent2(roomString);
 					} else {
-						obj.setContent1("进入空闲教室模块选下校区啦~");
+						obj.setContent1("点击进入空闲教室模块");
 						obj.setContent2("当前湖区共" + roomList.size() + "间教室可自习");
 					}
 					
