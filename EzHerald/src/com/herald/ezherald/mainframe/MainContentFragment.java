@@ -37,6 +37,7 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.academic.AcademicDataGrabber;
 import com.herald.ezherald.activity.ActiActivity;
+import com.herald.ezherald.activity.ActivityDataGrabber;
 import com.herald.ezherald.agenda.AgendaActivity;
 import com.herald.ezherald.curriculum.CurriDataGrabber;
 import com.herald.ezherald.curriculum.CurriculumActivity;
@@ -314,7 +315,9 @@ public class MainContentFragment extends SherlockFragment {
 				grabber = new ExerciseGrabber(getActivity());
 			} else if (moduleName.equals("library")) {
 				grabber = new LibraryContentGrabber(getActivity());
-			} //少活动模块!
+			} else if (moduleName.equals("activity")){
+				grabber = new ActivityDataGrabber();
+			}
 			// else if ....f
 		} catch (Exception e) {
 			e.printStackTrace();
