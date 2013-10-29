@@ -52,6 +52,7 @@ import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
+import com.herald.ezherald.settingframe.SettingActivity;
 import com.tendcloud.tenddata.TCAgent;
 import com.terlici.dragndroplist.DragNDropListView;
 import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
@@ -374,7 +375,7 @@ public class MainContentFragment extends SherlockFragment {
 			String clickTarget = "Unknown";
 			switch ((int) id) {
 			case 0:
-				i.setClass(getActivity(), MainContentModulePrefActivity.class);
+				i.setClass(getActivity(), SettingActivity.class); //引导到设置界面比较好
 				MainActivity mainActivity = (MainActivity) getActivity();
 				mainActivity.needRefreshContent = true;
 				clickTarget = "Main";
@@ -489,11 +490,10 @@ public class MainContentFragment extends SherlockFragment {
 		Log.d("MainContentFrag", "OnResume");
 		// 更新内容
 		super.onResume();
-		refreshInfo();
 		MainActivity mainActivity = (MainActivity) getActivity();
 		if (mainActivity.needRefreshContent) {
 			Log.d("MainContentFragment", "Refreshing info");
-
+			refreshInfo();
 			mainActivity.needRefreshContent = false;
 		}
 	}

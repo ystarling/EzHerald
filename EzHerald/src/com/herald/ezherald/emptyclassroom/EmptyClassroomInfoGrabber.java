@@ -9,7 +9,9 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Looper;
 import android.text.format.Time;
+import android.widget.Toast;
 
 import com.herald.ezherald.mainframe.MainContentGridItemObj;
 import com.herald.ezherald.mainframe.MainContentInfoGrabber;
@@ -40,6 +42,10 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 
 	@Override
 	public MainContentGridItemObj GrabInformationObject() {
+		LocationHelper helper = new LocationHelper(mContext);
+		String currLoc = helper.getCurrentCampusLocation();
+		//Toast.makeText(mContext, currLoc, Toast.LENGTH_LONG).show();
+		
 		String currTimeInClassSpan = getCurrentTimeInClassSpan();
 		MainContentGridItemObj obj = new MainContentGridItemObj();
 		if(currTimeInClassSpan == null){
@@ -49,8 +55,13 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 			Integer toPeroidInt = Integer.parseInt(currTimeInClassSpan) + 2; //自习好歹要两节课吧！
 			if(toPeroidInt > 13)
 				toPeroidInt = 13;
-			SharedPreferences prefs = mContext.getSharedPreferences("ec_campus", Context.MODE_PRIVATE);
-			String selectedCampus = prefs.getString("campus", "jlh");
+			
+			String selectedCampus = currLoc;
+			if(currLoc.equals("unknown")){
+				SharedPreferences prefs = mContext.getSharedPreferences("ec_campus", Context.MODE_PRIVATE);
+				selectedCampus = prefs.getString("campus", "all");
+			}
+			
 			obj.setContent1("抱歉抱歉...");
 			obj.setContent2("服务器暂时链接不上呢");
 			
@@ -82,14 +93,9 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 							roomString += ",";
 						}
 					}
-					roomString += ("等" + roomList.size() + "间教室可自习");
-					if(prefs.contains("campus")){
-						obj.setContent1("学霸你好! ");
-						obj.setContent2(roomString);
-					} else {
-						obj.setContent1("点击进入空闲教室模块");
-						obj.setContent2("当前湖区共" + roomList.size() + "间教室可自习");
-					}
+					roomString += ("等" + roomList.size() + "间教室空闲");
+					obj.setContent1("接下来是第" +  currTimeInClassSpan + "节课");
+					obj.setContent2(roomString);
 					
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

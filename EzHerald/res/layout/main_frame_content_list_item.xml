@@ -48,16 +48,16 @@
                 android:id="@+id/main_frame_content_listitem_content2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
+                android:ellipsize="middle"
                 android:gravity="left|bottom"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/main_frame_content_listitem_content1"
-                android:singleLine="true"
                 android:text="Content2"
                 android:textColor="@color/abs__primary_text_disable_only_holo_dark"
-                android:maxLines="2"
+                android:singleLine="true"
+                
                 android:textSize="16sp" />
         </RelativeLayout>
     </LinearLayout>
