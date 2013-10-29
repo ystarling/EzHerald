@@ -101,7 +101,6 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		TextView v = new TextView(activity);
 		v.setText(titles[type][position]);
 		v.setTextSize(LARGE);

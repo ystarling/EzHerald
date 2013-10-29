@@ -56,6 +56,7 @@ public class FreshmanContentFragment extends SherlockFragment {
 				Intent intent = new Intent(getActivity(),FreshmanDetail.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
+				getActivity().finish();
 			}
 			
 		});
