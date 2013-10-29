@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -294,6 +295,8 @@ public class EmptyClassroomFragment extends SherlockFragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);             
+					imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 					onRefreshStart();
 					requestTask = new requestEmptyRoom(buttonType);
 					requestTask.execute();
@@ -423,11 +426,13 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			if(null != result)
 			{
 				List<String> roomList;
-				
+				List<RoomPair> roomPairList;
 				try {
 					roomList = DataParser.strToList(result);
+					roomPairList = DataParser.strToRoomPair(result);
 //					Toast.makeText(context, ""+roomList.size(), Toast.LENGTH_LONG).show();
 					listAdapter.setRoomList(roomList);
+					listAdapter.setRoomPairs(roomPairList);
 					listAdapter.notifyDataSetChanged();
 					tv_room_num.setText("共有空闲教室："+roomList.size()+"间");
 //					Toast.makeText(context, "request success!!", Toast.LENGTH_LONG).show();

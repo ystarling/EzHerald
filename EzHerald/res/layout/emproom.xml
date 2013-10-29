@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="第："
+            android:text="第"
             android:textSize="18sp"
              />
 
@@ -23,12 +23,13 @@
             android:layout_height="wrap_content" 
             android:ems="5"
             android:numeric="integer"
+            android:hint="输入数字"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="周，周："
+            android:text="周，周"
             android:textSize="18sp"
              />
 
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:ems="5"
             android:numeric="integer"
+            android:hint="输入数字"
              />
 
     </LinearLayout>
@@ -61,6 +63,7 @@
 	        android:layout_height="wrap_content"
 	        android:ems="5"
 	        android:numeric="integer"
+	        android:hint="输入数字"
 	        />
 	    <TextView 
 	        android:layout_width="wrap_content"
@@ -75,6 +78,7 @@
 	        android:layout_height="wrap_content"
 	        android:ems="5"
 	        android:numeric="integer"
+	        android:hint="输入数字"
 	        />
 	    
 	    <TextView 
@@ -160,11 +164,14 @@
         android:layout_height="match_parent"
         android:paddingLeft="10sp"
         android:paddingRight="10sp"
-        android:divider="#FF0000"
-        android:dividerHeight="1sp" 
+		android:divider="@null"
         android:footerDividersEnabled="true"
         android:headerDividersEnabled="true"
         >
+        <!--
+        android:divider="#FF0000"
+        android:dividerHeight="1sp"  
+        -->
         
     </ListView>
     
