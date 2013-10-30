@@ -23,11 +23,14 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 		// TODO Auto-generated method stub
 		
 		String str = DataRequester.request(refresh_url);
+		MainContentGridItemObj obj = new MainContentGridItemObj();
 		if(null == str)
 		{
-			return null;
+			obj.setContent1("加载不了呢~");
+			obj.setContent2("同学同学网络正常不...");
+			return obj;
 		}
-		MainContentGridItemObj obj = new MainContentGridItemObj();
+		
 		
 		if(str == noActivityHint )
 		{
@@ -57,16 +60,13 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 			}
 			catch (Exception e)
 			{
-				return null;
+				obj.setContent1("加载出错啦");
+				obj.setContent2("是因为网络连接不好么");
 			}
 			
 		}
 		return obj;
 		
 	}
-	
-	
-	
-	
 
 }
