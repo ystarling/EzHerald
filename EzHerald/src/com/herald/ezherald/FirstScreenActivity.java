@@ -19,7 +19,7 @@ public class FirstScreenActivity extends Activity {
 	//private ImageView mImageView;
 	private TextView mTextView;
 	private AlphaAnimation mAnimation;
-	private long ANIM_DURATION = 5000; //延时（毫秒）
+	private long ANIM_DURATION = 1000; //延时（毫秒）
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,9 @@ public class FirstScreenActivity extends Activity {
 
 		@Override
 		public void onAnimationEnd(Animation animation) {
+			Intent i = new Intent();
+			i.setClass(getBaseContext(), MainActivity.class);
+			startActivity(i);
 			finish(); //关闭Activity跳转到主界面
 		}
 
@@ -63,9 +66,7 @@ public class FirstScreenActivity extends Activity {
 
 		@Override
 		public void onAnimationStart(Animation animation) {
-			Intent i = new Intent();
-			i.setClass(getBaseContext(), MainActivity.class);
-			startActivity(i);
+			
 		}
 		
 	}
