@@ -44,6 +44,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockActivity;
 import com.herald.ezherald.R;
 
 /**
@@ -63,10 +64,8 @@ public class AppUpdateActivity extends Activity {
 	private final int FAILED  = 0;
 	private final int DOING   = 2;
 	private final String checkUrl = "http://herald.seu.edu.cn/ws/update";
-	private boolean running;
 	boolean needUpdate;
 	boolean mIsCalledInSetting = false;
-	private Thread mDownloadThread;
 	private boolean mForceStopOperation = false;
 	private long mExitTime = 0;
 	
@@ -93,8 +92,7 @@ public class AppUpdateActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_update_main);
-	
-		running = false;
+		setVisible(false);
 	    needUpdate = false;
 		//checkUpdate();
 		
@@ -128,10 +126,11 @@ public class AppUpdateActivity extends Activity {
 				String version = versionNode.getTextContent();
 				uri = uriNode.getTextContent();
 				isForce = forceNode.getTextContent().equals("true");
-				description = infoNode.getTextContent();
+				description = infoNode.getTextContent().replace("##NL##", "\n");
 				newVersion = version;
+				String currentVersionName = getVersionName();
 				
-				if(!newVersion.equals(getVersionName())){
+				if(isNewVersion(currentVersionName, newVersion)){
 					return true;
 				}
 			} catch (ParserConfigurationException e){
@@ -142,6 +141,26 @@ public class AppUpdateActivity extends Activity {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			return false;
+		}
+
+		/**
+		 * 判断是否是新版本
+		 * 版本号按数字、字母序排列
+		 * 版本号必须严格遵守 A.B.C的格式，不允许另外加‘.’
+		 * @param currentVersionName 
+		 * @param newVersion
+		 * @return
+		 */
+		private boolean isNewVersion(String currentVersionName,
+				String newVersion) {
+			String[] currVersions = currentVersionName.split("\\.");
+			String[] newVersions = newVersion.split("\\.");
+			for(int i=0; i<newVersions.length; i++){
+				if(currVersions[i].compareTo(newVersions[i]) < 0){
+					return true;
+				}
 			}
 			return false;
 		}

@@ -2,7 +2,6 @@ package com.herald.ezherald;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	protected Fragment mMenuFrag; // ×ó²à²à»¬²Ëµ¥
 	protected Fragment mSecondaryMenuFrag; // ÓÒ²à²à»¬²Ëµ¥
 	private long mExitTime;
-	private static final String KEY_SHOWED_UPDATE = "showedUpdate";
+	
 	
 	// protected int mContentResId;
 

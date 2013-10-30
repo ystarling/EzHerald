@@ -362,8 +362,8 @@ public class SecondMenuFragment extends ListFragment {
 
 	@Override
 	public void onDestroyView() {
-				
 		mViewDestroyed = true;
+		mUserNameHandler.removeCallbacksAndMessages(null);
 		super.onDestroyView();
 	}
 	

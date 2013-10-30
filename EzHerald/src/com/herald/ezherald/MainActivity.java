@@ -43,6 +43,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -94,14 +95,6 @@ public class MainActivity extends BaseFrameActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
-		/////////////////////////////////////////////////
-		//欢迎界面
-//		if(!mShowedUpdate){
-//			Intent firstScreenIntent = new Intent();
-//			firstScreenIntent.setClass(this, FirstScreenActivity.class);
-//			startActivity(firstScreenIntent);
-//		}
-		/////////////////////////////////////////////////
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
 		super.onCreate(savedInstanceState);
@@ -138,7 +131,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		String strPrefTimeInterval = appPreferences.getString(
 				KEY_NAME_REFRESH_FREQ, null);
-		int prefTimeInterval = (timestamp == 0) ? 0 : 60;
+		int prefTimeInterval = (timestamp == 0) ? 0 : 180;
 		if (strPrefTimeInterval != null) {
 			prefTimeInterval = Integer.parseInt(strPrefTimeInterval);
 		}
@@ -210,6 +203,8 @@ public class MainActivity extends BaseFrameActivity {
 		
 		//检查应用程序更新
 		new CheckAppRefreshStateTask().execute(this);
+		
+		
 		
 		return true;
 	}
@@ -336,7 +331,7 @@ public class MainActivity extends BaseFrameActivity {
 			ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // 图片更新的列表
 			boolean haveUpdate = checkBannerImageUpdateState(); // 从服务器先GET是否有update，然后决定是否下载
 
-			Log.d("MainActivity: AsyncTask", "haveRemoveUpdate?" + haveUpdate);
+			//Log.d("MainActivity: AsyncTask", "haveRemoveUpdate?" + haveUpdate);
 			// ////////////////////////////////////////////////////////////////////////////
 			ArrayList<String> remoteImgUrls = null;
 			if (haveUpdate) {
@@ -364,37 +359,35 @@ public class MainActivity extends BaseFrameActivity {
 				// 更新数据库
 				int currImgSize = updList.size(); // 当前从网上更新到的新图片数量
 				int dbImgSize = dbAdapter.getCurrentImageCount(); // 数据库中的老图片数量
-				int nextIdToInsert = dbImgSize;
-				if (currImgSize + dbImgSize > MAX_BANNER_SIZE) {
+				int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; //需要删除的图片数量
+				
+				if (removeSize > 0) {
 					// 需要删掉一些原图片然后更新
-					int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE;
-					// 删除多余图片
-					while (removeSize > 0) {
-						dbAdapter.deleteImage(dbImgSize - removeSize);
-						removeSize--;
+					for(int i= dbImgSize-removeSize; i < dbImgSize; i++){
+						dbAdapter.deleteImage(i);
 					}
-					// 增加原来的标号
-					removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE;
-					int currDbSize = dbImgSize - removeSize;
-					for (int oldId = currDbSize - 1; oldId >= 0; oldId--) {
-						// 顺道把图片取出来
-						Cursor cs = dbAdapter.getImage(oldId);
-						if (cs != null && cs.moveToFirst()) {
-							byte[] inBytes = cs.getBlob(1); // 图片信息是blob信息
-
-							updList.add(currImgSize,
-									BitmapFactory.decodeByteArray(inBytes, 0,
-											inBytes.length));
-						}
-						// 修改信息
-						dbAdapter.alterImageId(oldId, oldId + removeSize);
-					}
-					nextIdToInsert = 0;
 				}
+				// 增加原来的标号
+				int currIdOld = dbAdapter.getCurrentImageCount() - 1; //当前最底图片的标号(如果为空会变成-1)
+				int currIdNew = currIdOld + currImgSize; //挪动完毕后最底图片的标号(0 -- 4)
+				while(currIdOld >= 0){
+					//挪动
+					Cursor cs = dbAdapter.getImage(currIdOld);
+					if(cs!= null && cs.moveToFirst()){
+						byte[] inBytes = cs.getBlob(1);
+						updList.add(currImgSize,
+								BitmapFactory.decodeByteArray(inBytes, 0, inBytes.length));
+						
+					}
+					dbAdapter.alterImageId(currIdOld, currIdNew);
+					currIdOld--;
+					currIdNew--;
+				}
+						
 
 				// 增加新图到数据库
-				for (int id = nextIdToInsert; id < currImgSize + nextIdToInsert; id++) {
-					dbAdapter.insertImage(id, updList.get(id - nextIdToInsert));
+				for (int id = 0; id < currImgSize; id++) {
+					dbAdapter.insertImage(id, updList.get(id));
 				}
 
 				dbAdapter.close();
@@ -675,5 +668,7 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		
 	}
+	
+
 
 }
