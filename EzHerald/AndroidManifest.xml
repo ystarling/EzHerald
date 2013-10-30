@@ -87,7 +87,7 @@
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.freshman.FreshmanDetail"
+            android:name="com.herald.ezherald.freshman.FreshmanDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         >

@@ -1,8 +1,11 @@
 package com.herald.ezherald.freshman;
 
+import com.herald.ezherald.R;
+
 import android.app.Activity;
 import android.database.DataSetObserver;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -50,7 +53,7 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	private String[][] info;
 	
 	private Activity activity;
-	private static final float LARGE = 23,SMALL=18; //×ÖºÅ
+	private static final float LARGE = 28,SMALL=18; //×ÖºÅ
 	private static final int PADDING = 10;
 	public FreshmanListViewAdapter(int type,Activity activity) {
 		//super(activity);
@@ -104,8 +107,11 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 		TextView v = new TextView(activity);
 		v.setText(titles[type][position]);
 		v.setTextSize(LARGE);
+		v.setBackgroundResource(R.drawable.round_table);
+		v.setPadding(60, 0, 0, 0);
 		//v.setTextColor(Color.BLUE);
 		//v.setGravity(Gravity.CENTER);
+		v.setGravity(Gravity.CENTER_VERTICAL);
 		return v;
 	}
 
@@ -160,6 +166,10 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 		return info;
 	}
 
-	
+	public String[][] getTitle() {
+		// TODO Auto-generated method stub
+		return titles;
+	}
+
 	
 }

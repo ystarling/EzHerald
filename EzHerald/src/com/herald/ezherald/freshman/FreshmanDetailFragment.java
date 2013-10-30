@@ -10,10 +10,13 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 
 public class FreshmanDetailFragment extends SherlockFragment{
-	private TextView txt_Detail;
-	private String detail;
+	private TextView txtDetail,txtTitle;
+	private String detail,title;
 	public void setDetail(String str) { 
 		detail = str;
+	}
+	public void setTitle(String str) {
+		title = str;
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
@@ -26,7 +29,9 @@ public class FreshmanDetailFragment extends SherlockFragment{
 			return inflater.inflate(R.layout.freshman_detail,group,false);
 	}
 	private void initView() {
-		txt_Detail = (TextView)getActivity().findViewById(R.id.txt_detail);
-		txt_Detail.setText(detail);
+		txtDetail = (TextView)getActivity().findViewById(R.id.txt_detail);
+		txtDetail.setText(detail);
+		txtTitle = (TextView)getActivity().findViewById(R.id.txt_titile);
+		txtTitle.setText(title);
 	}
 }
