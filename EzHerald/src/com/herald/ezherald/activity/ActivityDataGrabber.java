@@ -23,9 +23,13 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 		// TODO Auto-generated method stub
 		
 		String str = DataRequester.request(refresh_url);
+		if(null == str)
+		{
+			return null;
+		}
 		MainContentGridItemObj obj = new MainContentGridItemObj();
 		
-		if(str == noActivityHint)
+		if(str == noActivityHint )
 		{
 			obj.setContent1("没有活动哦~");
 			obj.setContent2("赶快提醒您身边的社团组织到先声网上发布活动吧~");
@@ -33,6 +37,7 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 		else
 		{
 			try {
+				
 				JSONArray jsonArr = new JSONArray(str);
 				JSONObject jsonObject = jsonArr.getJSONObject(0);
 				JSONObject league_obj = jsonObject.getJSONObject("league_info");
@@ -48,11 +53,16 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 				e.printStackTrace();
 				obj.setContent1("加载活动出错了 ==");
 				obj.setContent2("");
+				
+			}
+			catch (Exception e)
+			{
+				return null;
 			}
 			
 		}
-		
 		return obj;
+		
 	}
 	
 	
