@@ -96,7 +96,7 @@ public class LibraryFragmentMineThread extends Thread{
 			response=client.execute(post);
 			
 			}catch(Exception ex){
-				Log.d("Networking",ex.getMessage());
+				Log.d("Networking",ex.getMessage()+"");
 				if(!ex.getMessage().isEmpty()){
 					ShowMsg2("Networking");
 				}
@@ -123,7 +123,6 @@ public class LibraryFragmentMineThread extends Thread{
 	        ShowMsg(jsonarray);
 			
  		}catch(Exception e){
-			Log.e("ValueError",e.getMessage());
 			ShowMsg2("ValueError");
 		}
 	}
