@@ -44,6 +44,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockActivity;
 import com.herald.ezherald.R;
 
 /**
@@ -91,7 +92,7 @@ public class AppUpdateActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_update_main);
-	
+		setVisible(false);
 	    needUpdate = false;
 		//checkUpdate();
 		

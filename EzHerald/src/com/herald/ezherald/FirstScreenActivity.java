@@ -19,7 +19,7 @@ public class FirstScreenActivity extends Activity {
 	//private ImageView mImageView;
 	private TextView mTextView;
 	private AlphaAnimation mAnimation;
-	private long ANIM_DURATION = 1000; //—” ±£®∫¡√Î£©
+	private long ANIM_DURATION = 00; //—” ±£®∫¡√Î£©
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class FirstScreenActivity extends Activity {
 
 	private void setAnimation() {
 		// TODO Auto-generated method stub
-		mAnimation = new AlphaAnimation(1.0f, 0.5f);
+		mAnimation = new AlphaAnimation(1.0f, 1.0f);
 		mAnimation.setDuration(ANIM_DURATION);
 		mAnimation.setAnimationListener(new MyAnimationListener());
 		mTextView.setAnimation(mAnimation);

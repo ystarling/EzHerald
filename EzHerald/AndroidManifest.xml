@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="1"
-    android:versionName="1.0.1030ib" > <!-- public beta -->
+    android:versionName="1.0.1030p" >
+ <!-- public beta -->
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -28,11 +29,6 @@
             android:name="com.herald.ezherald.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Heraldstyle" >
-            <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
         </activity>
         <activity
             android:name="com.herald.ezherald.academic.AcademicActivity"
@@ -40,102 +36,101 @@
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.account.AccountActivity"
             android:icon="@drawable/ic_app"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.account.IDCardAccountActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.account.TyxAccountActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.account.LibAccountActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.activity.ActiActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.agenda.AgendaActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.curriculum.CurriculumActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.exercise.ExerciseActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.freshman.FreshmanActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.freshman.FreshmanContent"
-            android:theme="@style/Theme.Heraldstyle" >
-        </activity>
-        <activity 
             android:screenOrientation="sensorPortrait"
-            android:name="com.herald.ezherald.freshman.FreshmanDetail"
             android:theme="@style/Theme.Heraldstyle" >
-        >
-            
         </activity>
         <activity
+            android:name="com.herald.ezherald.freshman.FreshmanDetail"
             android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
+        >
+        </activity>
+        <activity
             android:name="com.herald.ezherald.gpa.GPAActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
         <!-- libr  begin -->
         <activity
             android:name="com.herald.ezherald.library.LibraryActivity"
-            android:theme="@style/Theme.Heraldstyle"
-            android:screenOrientation="sensorPortrait" >
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryBookListDetail"
-            android:theme="@style/Theme.Heraldstyle"
-            android:screenOrientation="sensorPortrait" >
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityNews"
-            android:theme="@style/Theme.Heraldstyle" 
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
             android:name="com.herald.ezherald.library.LibraryActivityReserve"
-            android:theme="@style/Theme.Heraldstyle"
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- libr end -->
 
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.BaseFrameActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
         <!-- academic Begin -->
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.academic.AcademicDetailActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- academic End -->
@@ -143,94 +138,92 @@
 
         <!-- acti  begin -->
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.activity.ClubListActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.activity.ActiInfoDetailActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.activity.ClubDetailActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.activity.ClubAlbumActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.activity.VoteDetailActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- acti  end -->
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.curriculum.CourseDetailActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- curriculum begin -->
 
 
         <!-- curriculum end -->
-        
-        <activity 
-            android:name="com.herald.ezherald.emptyclassroom.EmptyClassroomActivity"
-            android:theme="@style/Theme.Heraldstyle"
-            android:screenOrientation="sensorPortrait"
-            ></activity>
 
         <activity
+            android:name="com.herald.ezherald.emptyclassroom.EmptyClassroomActivity"
             android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
+        </activity>
+        <activity
             android:name="com.herald.ezherald.settingframe.SettingActivity"
             android:icon="@drawable/ic_app"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.settingframe.AboutThisApp"
             android:icon="@drawable/ic_app"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.settingframe.MainContentModulePrefActivity"
             android:label="@string/title_activity_main_content_module_pref"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
-            android:label="@string/title_activity_app_update"
             android:icon="@drawable/ic_app"
-            android:theme="@style/Theme.Transparent_Herald" >
+            android:label="@string/title_activity_app_update"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@android:style/Theme.NoDisplay" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.mainframe.MainGuideActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.settingframe.SyncFrequencySettingActivity"
             android:label="@string/menu_main_content_pref_title"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.settingframe.MainContentListColorPrefActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
-            android:screenOrientation="sensorPortrait"
             android:name="com.herald.ezherald.FirstScreenActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Transparent"
-            >
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Transparent" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -43,6 +43,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -202,6 +203,8 @@ public class MainActivity extends BaseFrameActivity {
 		
 		//检查应用程序更新
 		new CheckAppRefreshStateTask().execute(this);
+		
+		
 		
 		return true;
 	}
@@ -665,5 +668,7 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		
 	}
+	
+
 
 }
