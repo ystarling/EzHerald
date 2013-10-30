@@ -220,8 +220,11 @@ public class AppUpdateActivity extends Activity {
 	
 	public void update(){
 		if(isForce){
-			download();
-			return ;
+			Uri downloadUri = Uri.parse(uri);
+			Intent intent = new Intent(Intent.ACTION_VIEW, downloadUri);
+			startActivity(intent);
+			AppUpdateActivity.this.finish();
+			return;
 		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setIcon(R.drawable.ic_launcher);
@@ -233,7 +236,10 @@ public class AppUpdateActivity extends Activity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				download();
+				Uri downloadUri = Uri.parse(uri);
+				Intent intent = new Intent(Intent.ACTION_VIEW, downloadUri);
+				startActivity(intent);
+				AppUpdateActivity.this.finish();
 			}
 
 		} );
