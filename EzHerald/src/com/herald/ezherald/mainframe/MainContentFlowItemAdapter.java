@@ -23,6 +23,14 @@ public class MainContentFlowItemAdapter extends BaseAdapter{
 
 	private Context mContext; // 运行上下文
 	private List<Map<String, Object>> mListItems; // 菜单项信息
+	public List<Map<String, Object>> getmListItems() {
+		return mListItems;
+	}
+
+	public void setmListItems(List<Map<String, Object>> mListItems) {
+		this.mListItems = mListItems;
+	}
+
 	private LayoutInflater mListContainer; // 视图容器
 
 	public final class ListItemView {
