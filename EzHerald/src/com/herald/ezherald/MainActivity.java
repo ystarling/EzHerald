@@ -74,9 +74,9 @@ public class MainActivity extends BaseFrameActivity {
 	public boolean isReceivingData = false; // 当前是否已经在更新Image
 	private boolean doNotUpdateUI = false;// 不更新UI
 
-	private final String PREF_NAME = "com.herald.ezherald_preferences";
+	private final static String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME_FIRST_START = "first_start";
-	private final String KEY_NAME_LAST_REFRESH = "main_last_refresh_timestamp";
+	private final static String KEY_NAME_LAST_REFRESH = "main_last_refresh_timestamp";
 	private final String KEY_NAME_REFRESH_FREQ = "sync_frequency";
 	private final int MAX_BANNER_SIZE = 5;
 
@@ -253,6 +253,8 @@ public class MainActivity extends BaseFrameActivity {
 			in.close();
 		} catch (IOException e1) {
 			Log.d("MainActivity:test", e1.getLocalizedMessage());
+		} catch (IllegalStateException e){
+			e.printStackTrace();
 		}
 		return bitmap;
 	}
