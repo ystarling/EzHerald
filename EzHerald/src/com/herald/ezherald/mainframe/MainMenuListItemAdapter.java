@@ -106,6 +106,7 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			convertView.getBackground().setAlpha(115); //Í¸Ã÷¶È
 		} else {
 			convertView.setBackgroundColor(Color.TRANSPARENT);
+			listItemView.title.setTextColor(Color.parseColor("#f1f1f1"));//for android 2.3
 		}
 		
 		return convertView;
