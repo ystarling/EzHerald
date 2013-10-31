@@ -2,16 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d0d0d0"
     android:orientation="vertical" >
 
     <ListView
         android:id="@+id/lv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#d0d0d0"
         android:descendantFocusability="blocksDescendants"
-        android:focusable="true" >
+        android:divider="@android:color/transparent"
+        android:dividerHeight="15dp"
+        android:focusable="true" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp">
 
     </ListView>
 

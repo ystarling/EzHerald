@@ -80,4 +80,5 @@ public class FreshmanFragment extends SherlockFragment {
 		//super.onCreate(savedInstanceState);
 			return inflater.inflate(R.layout.freshman_main,group,false);
 	}
+	
 }

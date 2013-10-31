@@ -23,7 +23,7 @@ public class GpaFragment extends SherlockFragment {
 		super.onCreate(saved);
 		ActionBar bar = getSherlockActivity().getSupportActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        int x = bar.getTabCount();
+        bar.setTitle("¼¨µã");
         if(bar.getTabCount()<2) {
         	 ActionBar.Tab tab1 = bar.newTab();
              ActionBar.Tab tab2 = bar.newTab();
