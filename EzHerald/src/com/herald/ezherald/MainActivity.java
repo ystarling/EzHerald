@@ -11,6 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -46,6 +49,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -322,6 +326,7 @@ public class MainActivity extends BaseFrameActivity {
 	private class UpdateBannerImageTask extends
 			AsyncTask<String, Void, ArrayList<Bitmap>> {
 		private boolean connFail = false;
+		private long lastSuccTimeStamp = -1;
 
 		@Override
 		protected ArrayList<Bitmap> doInBackground(String... url) {
@@ -335,7 +340,7 @@ public class MainActivity extends BaseFrameActivity {
 
 			//Log.d("MainActivity: AsyncTask", "haveRemoveUpdate?" + haveUpdate);
 			// ////////////////////////////////////////////////////////////////////////////
-			ArrayList<String> remoteImgUrls = null;
+			List<Pair<String, Long>> remoteImgUrls = null;
 			if (haveUpdate) {
 				remoteImgUrls = getRemoveUpdateImgUrls(REMOTE_UPDATE_QUERY_URL); // 远程更新的图片url放在这边
 			}
@@ -346,11 +351,16 @@ public class MainActivity extends BaseFrameActivity {
 				
 				int count = 1;
 				int size = remoteImgUrls.size();
-				for (String urlStr : remoteImgUrls) {
+				for (Pair<String, Long> pair : remoteImgUrls) {
+					String urlStr = pair.first;
+					Long urlTimeStamp = pair.second;
 					showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
 					Bitmap bmp = testGetBitmap(urlStr);
 					if (bmp != null) {
 						updList.add(bmp);
+						if(urlTimeStamp > lastSuccTimeStamp){
+							lastSuccTimeStamp = urlTimeStamp; //更新成功下载的时间戳
+						}
 					} else {
 						showToastInWorkingThread("网络不大给力的样子呐...");
 						connFail = true;
@@ -408,7 +418,7 @@ public class MainActivity extends BaseFrameActivity {
 				Log.w("MainActivity", "Do not update UI...");
 
 				if (!connFail)
-					setLastRefreshTime(System.currentTimeMillis());
+					setLastRefreshTime(lastSuccTimeStamp);
 
 				isReceivingData = false;
 				mUpdateBannerImageTask = null;
@@ -457,9 +467,10 @@ public class MainActivity extends BaseFrameActivity {
 	/**
 	 * 获得获得远程的最新图片列表
 	 * 
-	 * @return 图片的URLs
+	 * @return List<Map<图片地址，图片更新时间戳>>
 	 */
-	public ArrayList<String> getRemoveUpdateImgUrls(String srcURL) {
+	
+	public List<Pair<String, Long>> getRemoveUpdateImgUrls(String srcURL) {
 		// reference: <Android4编程入门经典>书上P400
 		StringBuilder stringBuilder = new StringBuilder();
 		HttpClient client = new DefaultHttpClient();
@@ -489,7 +500,7 @@ public class MainActivity extends BaseFrameActivity {
 		String jsonStr = stringBuilder.toString(); // JSON元数据
 		// Log.d("MainActivity:getRemoveUpdateImgUrls", "JSON src data = " +
 		// jsonStr);
-		ArrayList<String> retStr = new ArrayList<String>();
+		List<Pair<String, Long>> retList = new ArrayList<Pair<String,Long>>();
 
 		try {
 			JSONArray jsonArray = new JSONArray(jsonStr);
@@ -516,14 +527,15 @@ public class MainActivity extends BaseFrameActivity {
 					// 需要更新，加入列表
 					Log.d("MainActivity:getRemoveUpdateImgUrls",
 							"need update : " + jsonObject.getString("url"));
-					retStr.add(jsonObject.getString("url"));
+					Pair<String, Long> pair = new Pair<String, Long>(jsonObject.getString("url"), remoteTimeStamp);
+					retList.add(pair);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return retStr;
+		return retList;
 	}
 
 	/**
@@ -594,6 +606,10 @@ public class MainActivity extends BaseFrameActivity {
 	 * @param currentTimeMillis
 	 */
 	public void setLastRefreshTime(long currentTimeMillis) {
+		if(currentTimeMillis == -1){
+			Log.w("setLastRefreshTime", "Not a successful timestamp");
+			return;
+		}
 		SharedPreferences appPrefs = getSharedPreferences(PREF_NAME,
 				MODE_PRIVATE);
 		SharedPreferences.Editor editor = appPrefs.edit();
