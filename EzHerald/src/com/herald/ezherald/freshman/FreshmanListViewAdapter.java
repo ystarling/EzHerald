@@ -105,7 +105,7 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView v = new TextView(activity);
 		v.setText(titles[type][position]);
-		v.setTextSize(LARGE);
+		v.setTextSize(SMALL);
 		v.setBackgroundResource(R.drawable.freshman_title_outter);
 		v.setPadding(30, 10, 0, 10);
 		v.setGravity(Gravity.CENTER_VERTICAL);

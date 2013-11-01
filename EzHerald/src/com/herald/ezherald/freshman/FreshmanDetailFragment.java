@@ -44,5 +44,6 @@ public class FreshmanDetailFragment extends SherlockFragment {
 		txtDetail.setText(detail);
 		txtTitle = (TextView) getActivity().findViewById(R.id.txt_titile);
 		txtTitle.setText(title);
+		txtTitle.getPaint().setFakeBoldText(true);//¼Ó´Ö
 	}
 }
