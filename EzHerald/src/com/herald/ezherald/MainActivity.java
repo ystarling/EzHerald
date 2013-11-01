@@ -86,6 +86,7 @@ public class MainActivity extends BaseFrameActivity {
 
 	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false; // 始终显示引导界面
 	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // 始终从网站更新数据，不论新旧
+	private final boolean DEBUG_DONOT_REFRESH = false; //禁止更新主界面轮播图
 
 	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
 	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
@@ -94,6 +95,7 @@ public class MainActivity extends BaseFrameActivity {
 	private boolean mShowedUpdate = false;
 
 	private UpdateBannerImageTask mUpdateBannerImageTask = null;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -124,6 +126,10 @@ public class MainActivity extends BaseFrameActivity {
 	 * @return
 	 */
 	private boolean checkRefreshState() {
+		if(DEBUG_DONOT_REFRESH ){
+			return false;
+		}
+		
 		SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
 				MODE_PRIVATE);
 		long timestamp = appPreferences.getLong(KEY_NAME_LAST_REFRESH, 0);
