@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,6 +25,16 @@
         <meta-data
             android:name="TD_APP_ID"
             android:value="148B63970FC0152CD534DC743D6E37EC" />
+        
+        <receiver android:name="com.herald.ezherald.curriculum.CurriWidgetProvider">
+	        <intent-filter >
+	            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+	        </intent-filter>
+	        <meta-data 
+	            android:name="android.appwidget.provider"
+	            android:resource="@xml/curr_widget_provider_info"/>
+	    </receiver>
+        
 
         <activity
             android:name="com.herald.ezherald.MainActivity"
