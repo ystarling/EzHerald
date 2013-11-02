@@ -63,6 +63,7 @@ public class CurriculumFragment extends SherlockFragment {
 	private ProgressDialog progressDialog;
 	private String prefName = "curriculum";
 	private String pref_term = "selectedTerm";
+	private String pref_prev_user = "prev_user";
 	
 	
 	private String curri_url = "http://herald.seu.edu.cn/herald_web_service/" +
@@ -100,6 +101,8 @@ public class CurriculumFragment extends SherlockFragment {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
+		
+		UserAccount acount = Authenticate.getIDcardUser(context);
 		
 		initProgressDialog();
 		
@@ -149,14 +152,24 @@ public class CurriculumFragment extends SherlockFragment {
 	public void onResume()
 	{
 //		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
+		SharedPreferences prefs = getSherlockActivity().getSharedPreferences(prefName, 0);
+		String username = prefs.getString(pref_prev_user, null);
 		UserAccount acount = Authenticate.getIDcardUser(context);
 		if(null == acount)
 		{
+			dbAdapter.clear();
 			Toast.makeText(context, "ÇëÏÈµÇÂ¼", Toast.LENGTH_LONG).show();
 			getActivity().setContentView(setNotLoginView(inflater, container, savedInstanceState));
 		}
 		else
 		{
+			if( null == username || !username.equals(acount.getUsername()) )
+			{
+				dbAdapter.clear();
+				getSherlockActivity().getSharedPreferences(prefName, 0).edit()
+				.putString(pref_prev_user, acount.getUsername()).commit();
+			}
+
 			getActivity().setContentView(setLoginView(inflater, container, savedInstanceState));
 		}
 		super.onResume();

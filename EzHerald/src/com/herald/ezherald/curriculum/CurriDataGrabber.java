@@ -29,6 +29,16 @@ public class CurriDataGrabber implements MainContentInfoGrabber {
 		return atts;
 	}
 	
+	public List<Attendance> getAttsByWeekday()
+	{
+		dbAdapter.open();
+		int weekday = Tool.getWeekday();
+		List<Attendance> atts = dbAdapter.getAttByWeekday(weekday);
+		Collections.sort(atts);
+		dbAdapter.close();
+		return atts;
+	}
+	
 	public MainContentGridItemObj provide()
 	{
 		List<Attendance> atts = getNextAtts();

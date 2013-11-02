@@ -26,15 +26,16 @@
             android:name="TD_APP_ID"
             android:value="148B63970FC0152CD534DC743D6E37EC" />
         
-        <receiver android:name="com.herald.ezherald.curriculum.CurriWidgetProvider">
+        <receiver android:name=".curriculum.CurriWidgetProvider" android:label="先声课表">
+            <meta-data 
+	            android:name="android.appwidget.provider"
+	            android:resource="@xml/curr_widget_provider_info"
+	            />
 	        <intent-filter >
 	            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+	            <action android:name="com.herald.ezherald.action.NEXT_ATT"/>
 	        </intent-filter>
-	        <meta-data 
-	            android:name="android.appwidget.provider"
-	            android:resource="@xml/curr_widget_provider_info"/>
 	    </receiver>
-        
 
         <activity
             android:name="com.herald.ezherald.MainActivity"

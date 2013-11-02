@@ -72,6 +72,23 @@ public class Attendance implements Comparable {
 		// TODO Auto-generated method stub
 		return this.periodBegin - ((Attendance) arg0).periodBegin;
 	}
+	
+
+	public boolean equals(Attendance att)
+	{
+		if( this.courseName.equals(att.getAttCourseName()) &&
+				this.periodBegin==att.getAttPeriodBegin() &&
+				this.periodEnd==att.getAttPeriodEnd() &&
+				this.place.equals(att.getAttPlace()) &&
+				this.weekBegin == att.getAttWeekBegin() &&
+				this.weekEnd == att.getAttWeekEnd())
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 	
 

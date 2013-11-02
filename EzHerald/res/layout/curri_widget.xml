@@ -8,7 +8,7 @@
         android:id="@+id/curri_widget_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="click me" 
+        android:text="next" 
         android:clickable="true"
         />
     
@@ -16,7 +16,6 @@
         android:id="@+id/curr_widget_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:text="curri widget test"
         />
     
 
