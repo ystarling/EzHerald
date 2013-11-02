@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="left"
-                android:maxLines="1"
+                android:singleLine="true"
                 android:text="Content1"
                 android:layout_alignParentTop="true"
                 android:textColor="@color/abs__bright_foreground_holo_dark"
