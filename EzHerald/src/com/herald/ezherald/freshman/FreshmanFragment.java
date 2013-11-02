@@ -39,7 +39,7 @@ public class FreshmanFragment extends SherlockFragment {
 	void initView(){
 		DisplayMetrics metrics = new DisplayMetrics();
 	    getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		final int SIZE = metrics.widthPixels*35/100;
+		final int SIZE = metrics.widthPixels*30/100;
 		Log.v("size!!",""+SIZE);
 		tv_study = (TextView) getActivity().findViewById(R.id.text_study);
 		tv_life  = (TextView) getActivity().findViewById(R.id.text_life);
