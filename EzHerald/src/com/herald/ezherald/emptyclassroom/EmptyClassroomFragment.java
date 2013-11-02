@@ -52,7 +52,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 	private String ADVANCE_SEARCH = "高级搜索";
 	
 	private String proTitle = "正在加载...";
-	private String requestFailed = "加载失败!!";
+	private String requestFailedHint = "加载失败!!";
 	
 	private LinearLayout week_layout = null;
 	private LinearLayout period_layout = null;
@@ -99,13 +99,19 @@ public class EmptyClassroomFragment extends SherlockFragment {
 		super.onCreate(savedInstanceState);
 		
 		context = getActivity();
-		progressDialog = new ProgressDialog(context);
-		progressDialog.setTitle(this.proTitle);
-		progressDialog.setCanceledOnTouchOutside(false);
+		
+		initProgressDialog();
 		
 		listAdapter  = new RoomAdapter(context);
 		urlFactory = new UrlFactory();
 		
+	}
+	
+	private void initProgressDialog()
+	{
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setTitle(this.proTitle);
+		progressDialog.setCanceledOnTouchOutside(false);
 	}
 	
 	@Override
@@ -128,6 +134,11 @@ public class EmptyClassroomFragment extends SherlockFragment {
 	@Override
 	public void onDestroy()
 	{
+		if(requestTask != null && requestTask.getStatus()==AsyncTask.Status.RUNNING)
+		{
+			requestTask.cancel(true);
+		}
+		
 		super.onDestroy();
 	}
 	
@@ -431,29 +442,36 @@ public class EmptyClassroomFragment extends SherlockFragment {
 		@Override
 		protected void onPostExecute(String result)
 		{
-			if(null != result)
-			{
-				List<String> roomList;
-				List<RoomPair> roomPairList;
-				try {
-					roomList = DataParser.strToList(result);
-					roomPairList = DataParser.strToRoomPair(result);
-//					Toast.makeText(context, ""+roomList.size(), Toast.LENGTH_LONG).show();
-					listAdapter.setRoomList(roomList);
-					listAdapter.setRoomPairs(roomPairList);
-					listAdapter.notifyDataSetChanged();
-					tv_room_num.setText("共有空闲教室："+roomList.size()+"间");
-//					Toast.makeText(context, "request success!!", Toast.LENGTH_LONG).show();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					Log.v("REQUEST ROOM", ""+e);
-					e.printStackTrace();
+			try{
+				if(null != result)
+				{
+					List<String> roomList;
+					List<RoomPair> roomPairList;
+					try {
+						roomList = DataParser.strToList(result);
+						roomPairList = DataParser.strToRoomPair(result);
+//						Toast.makeText(context, ""+roomList.size(), Toast.LENGTH_LONG).show();
+						listAdapter.setRoomList(roomList);
+						listAdapter.setRoomPairs(roomPairList);
+						listAdapter.notifyDataSetChanged();
+						tv_room_num.setText("共有空闲教室："+roomList.size()+"间");
+//						Toast.makeText(context, "request success!!", Toast.LENGTH_LONG).show();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						Log.v("REQUEST ROOM", ""+e);
+						e.printStackTrace();
+					}
+					
 				}
-				
+				else{
+					Toast.makeText(context, requestFailedHint, Toast.LENGTH_LONG).show();
+				}
 			}
-			else{
-				Toast.makeText(context, requestFailed, Toast.LENGTH_LONG).show();
+			catch(Exception e)
+			{
+				Log.e("REQUEST ROOM", "error occured when requesting");
 			}
+			
 			onRefreshCompleted();
 		}
 

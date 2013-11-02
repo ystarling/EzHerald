@@ -29,14 +29,12 @@ public class ActiInfoDetail {
 	private int lastCommentId;
 	private int commentNum;
 	private String commentUrl;
-	private List<Comment> commentList;
 	
 	private Map<String ,Integer> voteResult;
 
 
 	public ActiInfoDetail()
 	{
-		commentList = new ArrayList<Comment>();
 		voteResult = new HashMap<String,Integer>();
 	}
 	
@@ -60,6 +58,11 @@ public class ActiInfoDetail {
 	public void setVoteResult(Map<String,Integer> map)
 	{
 		voteResult = map;
+	}
+	
+	public void setActiTitle(String title)
+	{
+		this.actiTitle = title;
 	}
 	
 	public Map<String,Integer> getVoteResult()
@@ -108,15 +111,6 @@ public class ActiInfoDetail {
 		actiDetail = intro;
 	}
 	
-	public void setCommentList(List<Comment> cl)
-	{
-		commentList.addAll(cl);
-	}
-	
-	public void addCommentList(List<Comment> cl)
-	{
-		commentList.addAll(cl);
-	}
 
 	public String getClubName() {
 		return clubName;
@@ -163,11 +157,7 @@ public class ActiInfoDetail {
 		return actiPicName;
 	}
 	
-	
-	public List<Comment> getCommentList()
-	{
-		return commentList;
-	}
+
 	
 	public int getCommentNum()
 	{

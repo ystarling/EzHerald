@@ -56,11 +56,13 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 	private Activity context;
 	
 	final private int ALLACTI=0;
-	final private int CONCERNEDACTI=1;
 	private int ACTITYPE = ALLACTI;
 	
 
 	ActiDBAdapter DBAdapter;
+	
+	private AsyncTask<URL,Integer,List<ActiInfo>> requestTask;
+	private AsyncTask<URL,Integer,List<ActiInfo>> refreshTask;
 	
 	private final String noActivityHint = "NOACTIVITYCANGET";
 	
@@ -72,23 +74,36 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		setHasOptionsMenu(true);
 		
 		context = getActivity();
-		progressDialog = new ProgressDialog(context);
-		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("请稍候 ... ");
+		initProgressDialog();
 		
 		DBAdapter = new ActiDBAdapter(context);
 		DBAdapter.open();
 	}
 	
+	private void initProgressDialog()
+	{
+		progressDialog = new ProgressDialog(context);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("请稍候 ... ");
+	}
+	
 	@Override
 	public void onDestroy()
 	{
-		super.onDestroy();
+		if(requestTask!=null && requestTask.getStatus()==AsyncTask.Status.RUNNING)
+		{
+			requestTask.cancel(true);
+		}
+		if(refreshTask!=null && refreshTask.getStatus()==AsyncTask.Status.RUNNING)
+		{
+			refreshTask.cancel(true);
+		}
+		
 		if(DBAdapter != null)
 		{
 			DBAdapter.close();
 		}
-		
+		super.onDestroy();
 	}
 	
 //	@Override
@@ -125,16 +140,9 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		case R.id.menu_acti_list_action_refresh:
 			try {
 				onRefreshActionStart();
-				if(ACTITYPE == ALLACTI)
-				{
-					new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_activity_list)));
-				}
-				else if(ACTITYPE == CONCERNEDACTI)
-				{
-					new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_activity_list)));
-				}
-				
-			
+
+				new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_activity_list)));
+
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				onRefreshActionComplete();
@@ -199,16 +207,6 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 						}
 						
 					}
-					else if(ACTITYPE == CONCERNEDACTI)
-					{
-						if(adapter.getLastActiId() != null)
-						{
-							foot.startRequestData();
-							new RequestActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_more_activity)
-									+adapter.getLastActiId()));
-						}
-						
-					}
 					
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
@@ -233,27 +231,17 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				Intent intent = new Intent(context,ActiInfoDetailActivity.class);
 				intent.putExtra("clubName", actiInfo.getClubName());
 				intent.putExtra("title", actiInfo.getActiTitle());
+				Log.d("Intent", "acti title: "+actiInfo.getActiTitle());
 				intent.putExtra("date", actiInfo.getActiPubTime());
 				intent.putExtra("startTime", actiInfo.getStartTime());
 				intent.putExtra("endTime", actiInfo.getEndTime());
 				intent.putExtra("actiId", actiInfo.getId());
 				intent.putExtra("clubId", actiInfo.getClubId());
-//				Bitmap bit_icon = DBAdapter.getClubIconByActi(actiInfo.getId());
-//				ByteArrayOutputStream os_icon = null;
-//				if(bit_icon != null)
-//				{
-//					os_icon = new ByteArrayOutputStream();
-//					bit_icon.compress(Bitmap.CompressFormat.PNG, 100, os_icon);
-//				}
-				
-//				intent.putExtra("clubIcon",os_icon.toByteArray());
+
 				intent.putExtra("place", actiInfo.getPlace());
 				intent.putExtra("picName", actiInfo.getActiPicName());
 				intent.putExtra("iconName", actiInfo.getClubIconName() );
-//				Bitmap bit_pic = DBAdapter.getActiPicByActi(actiInfo.getId());
-//				ByteArrayOutputStream os_pic = new ByteArrayOutputStream();
-//				bit_pic.compress(Bitmap.CompressFormat.PNG, 100, os_pic);
-//				intent.putExtra("actiPic",os_pic.toByteArray());
+
 				intent.putExtra("isVote", actiInfo.checkIsVote());
 				startActivity(intent);
 				
@@ -269,14 +257,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 				// TODO Auto-generated method stub
 				try {
 					onRefreshActionStart();
-					if(ACTITYPE == ALLACTI)
-					{
-						new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_activity_list)));
-					}
-					else if(ACTITYPE == CONCERNEDACTI )
-					{
-						new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_activity_list)));
-					}
+
+					new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_activity_list)));
 					
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
@@ -289,12 +271,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		});
 		
 		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
-//		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
-//				R.array.acti_list_action_spinner, 
-//				R.layout.academic_spinner_textitem);
-//		actionBar.setDisplayShowTitleEnabled(false);
-//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-//		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
+
 		actionBar.setTitle("校园活动");
 		
 		if(DBAdapter.checkIfDBEmpty())
@@ -331,29 +308,6 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		case 0:
 			ACTITYPE = ALLACTI;
 			return true;
-		case 1:
-		{
-			ACTITYPE = CONCERNEDACTI;
-			try {
-				new RefreshActiList().execute(new URL(getResources().getString(R.string.acti_url_focus_activity_list)));
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return true;
-		}
-			
-		case 2:
-			startActivity(new Intent(getActivity(),ClubListActivity.class));
-			
-			return true;
-		case 3:
-			startActivity(new Intent(getActivity(),ClubListActivity.class));
-			
-			return true;
 		
 		}
 		return false;
@@ -365,6 +319,8 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		@Override
 		protected List<ActiInfo> doInBackground(URL... params) {
 			// TODO Auto-generated method stub
+			if (isCancelled())
+				return null;
 			List<ActiInfo> actiList = new ArrayList<ActiInfo>();
 			int response = -1;
 			InputStream in;
@@ -431,20 +387,34 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			return null;
 		}
 		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Task被取消了，不再继续执行后面的代码
+		    if(isCancelled()) 
+		      return;
+		  }
+		
 		@Override
 		protected void onPostExecute(List<ActiInfo> result)
 		{
-			if (result != null)
-			{
-				DBAdapter.clearActiListTb();
-				insertActiInfoToDB(result,DBAdapter);
-				
-				adapter.setActiInfoList(result);
-				adapter.notifyDataSetChanged();
-				
-				
+			try{
+				if (result != null)
+				{
+					DBAdapter.clearActiListTb();
+					insertActiInfoToDB(result,DBAdapter);
+					
+					adapter.setActiInfoList(result);
+					adapter.notifyDataSetChanged();
+
+				}
 				
 			}
+			catch(Exception e)
+			{
+				Log.e("REQUEST", "error occured when refresh acti-list");
+			}
+			
 			onRefreshActionComplete();
 			
 		}
@@ -463,7 +433,6 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 						item.getActiPubTime(),item.getStartTime(), item.getEndTime(), item.getPlace(),
 						item.getActiPicName(),
 						null, null);
-				
 			}
 		}
 	}
@@ -475,6 +444,9 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		@Override
 		protected List<ActiInfo> doInBackground(URL... params) {
 			// TODO Auto-generated method stub
+			if(isCancelled())
+				return null;
+			
 			List<ActiInfo> actiList = new ArrayList<ActiInfo>();
 			int response = -1;
 			InputStream in;
@@ -538,25 +510,39 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			}
 			return null;
 		}
+		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Task被取消了，不再继续执行后面的代码
+		    if(isCancelled()) 
+		      return;
+		  }
 		 
 		@Override
 		protected void onPostExecute(List<ActiInfo>result)
 		{
-			if(result == null)
+			try{
+				if(result == null)
+				{
+					Toast.makeText(context, "加载失败", Toast.LENGTH_LONG).show();
+				}
+				else if(result.size() == 0)
+				{
+					Toast.makeText(context, "没有更多信息", Toast.LENGTH_LONG).show();
+				}
+				else{
+					insertActiInfoToDB(result,DBAdapter);
+					
+					adapter.addActiInfoList(result);
+					adapter.notifyDataSetChanged();
+				}
+			}
+			catch(Exception e)
 			{
-				Toast.makeText(context, "加载失败", Toast.LENGTH_LONG).show();
+				Log.e("REQUEST ACTI", "error occured when requesting");
 			}
-			else if(result.size() == 0)
-			{
-				Toast.makeText(context, "没有更多信息", Toast.LENGTH_LONG).show();
-			}
-			else{
-				insertActiInfoToDB(result,DBAdapter);
-				
-				adapter.addActiInfoList(result);
-				adapter.notifyDataSetChanged();
-			}
-			
+
 			foot.endRequestData();
 			listView.onRequestComplete();
 			

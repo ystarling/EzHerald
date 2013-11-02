@@ -83,6 +83,9 @@ public class CurriculumFragment extends SherlockFragment {
 	private ViewGroup container;
 	private Bundle savedInstanceState;
 	
+	private AsyncTask<String ,Integer, List<String>> termTask;
+	private AsyncTask<String ,Integer ,AttsAndCourses> currTask;
+	
 	
 	
 	@Override
@@ -98,16 +101,31 @@ public class CurriculumFragment extends SherlockFragment {
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		
+		initProgressDialog();
+		
+		
+	}
+	
+	public void initProgressDialog()
+	{
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.setMessage("请稍候 ... ");
-		
-		
 	}
 	
 	@Override 
 	public void onDestroy()
 	{
+		if (termTask != null && termTask.getStatus()==AsyncTask.Status.RUNNING)
+		{
+			termTask.cancel(true);
+		}
+		if (currTask != null && currTask.getStatus()==AsyncTask.Status.RUNNING)
+		{
+			currTask.cancel(true);
+		}
+		
+		
 		dbAdapter.close();
 		super.onDestroy();
 	}
@@ -143,6 +161,8 @@ public class CurriculumFragment extends SherlockFragment {
 		}
 		super.onResume();
 	}
+
+	
 	
 	private View setNotLoginView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -456,6 +476,11 @@ public class CurriculumFragment extends SherlockFragment {
 		protected List<String> doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			Log.v("CURRI TERM", "beginning");
+			if (isCancelled())
+			{
+				return null;
+			}
+			
 			try {
 				URL url = new URL(term_url);
 				int response = -1;
@@ -505,27 +530,42 @@ public class CurriculumFragment extends SherlockFragment {
 			return null;
 		}
 		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Task被取消了，不再继续执行后面的代码
+		    if(isCancelled()) 
+		      return;
+		  }
+		
 		@Override
 		protected void onPostExecute(List<String> terms)
 		{
 //			Toast.makeText(context, "term completed", Toast.LENGTH_SHORT).show();
-			if(terms != null)
-			{
-				dbAdapter.clear();
-				for(String term : terms)
+			try{
+				if(terms != null)
 				{
-					dbAdapter.insertTerm(term);					
+					dbAdapter.clear();
+					for(String term : terms)
+					{
+						dbAdapter.insertTerm(term);					
+					}
 				}
+				SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
+				String term = settings.getString(pref_term, null);
+				if(null == term)
+				{
+					createItemDialog();
+				}
+				Message msg = new Message();
+				msg.what = TERM_REQ_COMPLETED;
+				mHandler.sendMessage(msg);
 			}
-			SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
-			String term = settings.getString(pref_term, null);
-			if(null == term)
+			catch(Exception e)
 			{
-				createItemDialog();
+				Log.e("REQUEST TERM", "error occured when requesting terms");
 			}
-			Message msg = new Message();
-			msg.what = TERM_REQ_COMPLETED;
-			mHandler.sendMessage(msg);
+			
 		}
 	}
 	
@@ -536,7 +576,8 @@ public class CurriculumFragment extends SherlockFragment {
 		@Override
 		protected AttsAndCourses doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			
+			if(isCancelled())
+				return null;
 			try {
 				URL url = new URL(arg0[0]);
 				int response = -1;
@@ -610,6 +651,14 @@ public class CurriculumFragment extends SherlockFragment {
 			return null;
 		}
 		
+		@Override 
+		public void onProgressUpdate(Integer... pro) 
+		  {
+		    //Task被取消了，不再继续执行后面的代码
+		    if(isCancelled()) 
+		      return;
+		  }
+
 		@Override
 		protected void onPostExecute(AttsAndCourses result) {
 			
@@ -662,8 +711,8 @@ public class CurriculumFragment extends SherlockFragment {
 	public void update()
 	{
 		progressDialog.show();
-
-		new requestTerms().execute("");
+		termTask = new requestTerms();
+		termTask.execute("");
 
 	}
 	
@@ -692,14 +741,14 @@ public class CurriculumFragment extends SherlockFragment {
 					SharedPreferences preferences = getActivity().getSharedPreferences(prefName, 0);
 					String term = preferences.getString(pref_term, null);
 					String url = String.format(curri_url, cardNum, term);
-//					Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
 					if(null == term)
 					{
 						Toast.makeText(context, "请先设置学期", Toast.LENGTH_SHORT).show();
 					}
 					else
 					{
-						new requestCurriculum().execute(url);
+						currTask = new requestCurriculum();
+						currTask.execute(url);
 //						Toast.makeText(context, "thread success", Toast.LENGTH_SHORT).show();
 					}
 				}
@@ -713,15 +762,11 @@ public class CurriculumFragment extends SherlockFragment {
 			}
 				
 			case CURRI_REQ_COMPLETED:{
-//				progressDialog.cancel();
 				onRefreshCompleted();
 				break;
 			}
 			case CURRI_REQ_BEGIN:
 			{
-//				progressDialog.show();
-//				onRefreshStart();
-//				new requestCurriculum().execute(get_curr_url());
 				update();
 				break;
 			}
