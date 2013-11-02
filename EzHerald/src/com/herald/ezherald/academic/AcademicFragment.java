@@ -114,9 +114,7 @@ public class AcademicFragment extends SherlockFragment implements
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		/*
-		 * 锟较诧拷Title位锟矫的帮拷钮锟斤拷锟斤拷锟接�
-		 */
+
 		switch (item.getItemId()) {
 		case R.id.academic_list_action_refresh:
 			// item.setActionView(R.layout.academic_refresh_progress);
@@ -162,7 +160,7 @@ public class AcademicFragment extends SherlockFragment implements
 //		return true;
 //	}
 
-	// 刷锟铰菜碉拷锟斤拷始锟斤拷转
+
 	public void onRefreshActionStart() {
 		// REFRESHSTATE = REFRESHING ;
 		if(mMenu == null)
@@ -172,7 +170,7 @@ public class AcademicFragment extends SherlockFragment implements
 		muItem.setActionView(R.layout.academic_refresh_progress);
 	}
 
-	// 刷锟铰菜碉拷停止锟斤拷转
+
 	public void onRefreshActionComplete() {
 		// REFRESHSTATE = REFRESHDOWN;
 		if(mMenu == null)
@@ -197,11 +195,11 @@ public class AcademicFragment extends SherlockFragment implements
 		View v;
 		v = inflater.inflate(R.layout.academic_activity_main, null);
 		listView = (CustomListView) v.findViewById(R.id.list);
-		// 锟斤拷锟斤拷listView锟斤拷adapter
+
 		adapter = new JwcInfoAdapter(getActivity());
 //		adapter.setJwcInfoList(jwcArr);
 		listView.setAdapter(adapter);
-		// 锟斤拷拥撞锟斤拷锟斤拷锟斤拷馗锟洁”锟斤拷view
+
 		foot = new ListFootView(getActivity().getApplicationContext());
 		foot.setOnClickListener(new OnClickListener() {
 
@@ -223,7 +221,7 @@ public class AcademicFragment extends SherlockFragment implements
 
 		});
 		listView.addFooterView(foot.getFootView());
-		// 锟斤拷锟斤拷listview锟斤拷刷锟铰诧拷锟斤拷
+
 		listView.setonRefreshListener(new OnRefreshListener() {
 
 			@Override
@@ -233,7 +231,7 @@ public class AcademicFragment extends SherlockFragment implements
 			}
 
 		});
-		// 锟斤拷锟斤拷listview没锟斤拷item锟侥碉拷锟斤拷锟斤拷锟�
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -249,7 +247,7 @@ public class AcademicFragment extends SherlockFragment implements
 				startActivity(intent);
 			}
 		});
-		// actionbar 锟斤拷 spinner
+
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(
 				getActivity(), R.array.academic_list_action_spinner,
 				R.layout.academic_spinner_textitem);
@@ -290,7 +288,6 @@ public class AcademicFragment extends SherlockFragment implements
 	}
 	
 
-	// actionbar 锟斤拷 spinner 锟斤拷item锟斤拷锟斤拷锟接�
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub

@@ -33,7 +33,11 @@ public class CurriDataGrabber implements MainContentInfoGrabber {
 	{
 		List<Attendance> atts = getNextAtts();
 		MainContentGridItemObj item = new MainContentGridItemObj();
-		if(atts != null && !atts.isEmpty())
+		if(null == atts)
+		{
+			item.setContent1("读取课表出错 ==");
+			item.setContent2("您是不是还没更新课表？");
+		}else if(!atts.isEmpty())
 		{
 			Attendance nextAtt = atts.get(0);
 			item.setContent1("下节课："+nextAtt.getAttCourseName());
