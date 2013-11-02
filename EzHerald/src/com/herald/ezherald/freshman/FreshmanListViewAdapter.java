@@ -2,13 +2,15 @@ package com.herald.ezherald.freshman;
 
 import android.app.Activity;
 import android.database.DataSetObserver;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+
+import com.herald.ezherald.R;
 
 public class FreshmanListViewAdapter extends BaseAdapter {
 
@@ -50,7 +52,7 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	private String[][] info;
 	
 	private Activity activity;
-	private static final float LARGE = 23,SMALL=18; //×ÖºÅ
+	private static final float LARGE = 28,SMALL=18; //×ÖºÅ
 	private static final int PADDING = 10;
 	public FreshmanListViewAdapter(int type,Activity activity) {
 		//super(activity);
@@ -103,9 +105,11 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		TextView v = new TextView(activity);
 		v.setText(titles[type][position]);
-		v.setTextSize(LARGE);
-		//v.setTextColor(Color.BLUE);
-		//v.setGravity(Gravity.CENTER);
+		v.setTextSize(SMALL);
+		v.setBackgroundResource(R.drawable.freshman_title_outter);
+		v.setPadding(30, 10, 0, 10);
+		v.setGravity(Gravity.CENTER_VERTICAL);
+		
 		return v;
 	}
 
@@ -160,6 +164,10 @@ public class FreshmanListViewAdapter extends BaseAdapter {
 		return info;
 	}
 
-	
+	public String[][] getTitle() {
+		// TODO Auto-generated method stub
+		return titles;
+	}
+
 	
 }

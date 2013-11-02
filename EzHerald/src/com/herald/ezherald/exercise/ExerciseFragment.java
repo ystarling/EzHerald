@@ -24,6 +24,7 @@ public class ExerciseFragment extends SherlockFragment {
 			
 			ActionBar bar = getSherlockActivity(). getSupportActionBar();
 			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+			bar.setTitle("Εά²Ω");
 			ActionBar.Tab tab1 = bar.newTab();
 			ActionBar.Tab tab2 = bar.newTab();
 			ActionBar.Tab tab3 = bar.newTab();

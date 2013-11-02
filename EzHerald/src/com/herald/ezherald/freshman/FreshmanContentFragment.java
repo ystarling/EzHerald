@@ -50,10 +50,12 @@ public class FreshmanContentFragment extends SherlockFragment {
 				// TODO Auto-generated method stub
 				Log.v("click",""+id);
 				String detail = adapter.getInfo()[type][(int) id];
+				String title = adapter.getTitle()[type][(int)id];
 				Bundle bundle = new Bundle();
 				bundle.putString("detail", detail);
 				bundle.putInt("type",type);
-				Intent intent = new Intent(getActivity(),FreshmanDetail.class);
+				bundle.putString("title", title);
+				Intent intent = new Intent(getActivity(),FreshmanDetailActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
 				getActivity().finish();

@@ -7,7 +7,7 @@ import android.view.KeyEvent;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
 
-public class FreshmanDetail extends BaseFrameActivity {
+public class FreshmanDetailActivity extends BaseFrameActivity {
 	private FreshmanDetailFragment frag;
 	private int type;
 	public void onCreate(Bundle savedInstanceState) {
@@ -16,6 +16,8 @@ public class FreshmanDetail extends BaseFrameActivity {
 		type = bundle.getInt("type");
 		frag = new FreshmanDetailFragment();
 		frag.setDetail(detail);
+		String title = bundle.getString("title");
+		frag.setTitle(title);
 		super.SetBaseFrameActivity(frag);
 		super.onCreate(savedInstanceState);
 	}

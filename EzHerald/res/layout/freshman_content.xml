@@ -9,7 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="blocksDescendants"
-        android:focusable="true" >
+        android:divider="@android:color/transparent"
+        android:dividerHeight="15dp"
+        android:focusable="true" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp">
 
     </ListView>
 

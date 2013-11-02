@@ -5,12 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
-
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,9 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
@@ -51,7 +45,6 @@ import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
-import com.herald.ezherald.settingframe.MainContentModulePrefActivity;
 import com.herald.ezherald.settingframe.SettingActivity;
 import com.tendcloud.tenddata.TCAgent;
 import com.terlici.dragndroplist.DragNDropListView;
@@ -88,6 +81,7 @@ public class MainContentFragment extends SherlockFragment {
 
 	private List<Map<String, Object>> mGridItems;
 	private List<Map<String, Object>> mImageItems;
+	private MainContentFlowItemAdapter mContentFlowItemAdapter;
 
 	private final String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME = "module_choice";
@@ -103,6 +97,7 @@ public class MainContentFragment extends SherlockFragment {
 	private final int MAX_BANNER_SIZE = 5;
 
 	private ArrayList<String> mContentTitles = new ArrayList<String>();
+	
 
 	// ////////////Temporarily used local variables///////////////////
 	String mContentCont1[] = { "加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
@@ -194,8 +189,9 @@ public class MainContentFragment extends SherlockFragment {
 		mViewFlow = (ViewFlow) getActivity().findViewById(
 				R.id.main_frame_viewflow);
 		mImageItems = getImageItems();
-		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
-				mImageItems));
+		mContentFlowItemAdapter = new MainContentFlowItemAdapter(getActivity(),
+				mImageItems);
+		mViewFlow.setAdapter(mContentFlowItemAdapter);
 
 		mCircIndic = (CircleFlowIndicator) getActivity().findViewById(
 				R.id.main_frame_viewflow_indic);
@@ -260,10 +256,15 @@ public class MainContentFragment extends SherlockFragment {
 			Log.e("MainContentFrag", "Fail to refresh. mViewFlow = null");
 		}
 
-		// 是否这样使用?
-		// //mViewFlow.refreshDrawableState();
-		mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
-				mImageItems));
+		//mViewFlow.setAdapter(new MainContentFlowItemAdapter(getActivity(),
+		//		mImageItems));
+		if(mContentFlowItemAdapter == null){
+			mContentFlowItemAdapter = new MainContentFlowItemAdapter(getActivity(),
+							mImageItems);
+		}
+		mContentFlowItemAdapter.setmListItems(mImageItems);
+		mContentFlowItemAdapter.notifyDataSetChanged();
+		
 		mViewFlow.refreshDrawableState();
 		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
