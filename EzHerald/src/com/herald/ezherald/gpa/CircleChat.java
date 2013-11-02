@@ -21,6 +21,7 @@ public class CircleChat extends View {
 	private float startAngle;
 	private final int TOTAL = 5;
 	private final String[] txt= {"  ","<2.0","2.0~3.0","3.0~4.0",">4.0"};
+	private boolean drawed;
 	
 	public CircleChat(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -28,13 +29,14 @@ public class CircleChat extends View {
 		paint  = new Paint();
 		records = (ArrayList<Record>) new GpaInfo(context).getRecords();
 		sorces = new ArrayList[TOTAL];
-		for(int i=0;i<TOTAL;i++)
-			sorces[i] = new ArrayList<Record>();
+		
 		
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas){
+		for(int i=0;i<TOTAL;i++)
+			sorces[i] = new ArrayList<Record>();
 		radius = getWidth()>getHeight()?getHeight()/2:getWidth()/2;
 		rect = new RectF(0,0,2*radius,2*radius);
 		sum = 0;
@@ -57,8 +59,13 @@ public class CircleChat extends View {
 			}
 			theta[i] = 360*ssum/sum;
 		}
+		
 		float start = (float) (Math.abs(Math.random()*360)),ac = 0;
-		startAngle  = start;
+		if(drawed == false) {
+			startAngle  = start;
+			drawed = true;
+		}
+		
 		for(int i=0;i<TOTAL;i++){
 			paint.setColor(colors[i]);
 			ac = theta[i];
@@ -112,5 +119,5 @@ public class CircleChat extends View {
 	public boolean hasData() {
 		return records !=null && !records.isEmpty();
 	}
-
+	
 }
