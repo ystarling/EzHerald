@@ -448,7 +448,7 @@ public class MainActivity extends BaseFrameActivity {
 
 			// 更新SharedPreference里面最后更新的时间
 			if (!connFail)
-				setLastRefreshTime(System.currentTimeMillis());
+				setLastRefreshTime(lastSuccTimeStamp);
 
 			isReceivingData = false;
 			mUpdateBannerImageTask = null;
