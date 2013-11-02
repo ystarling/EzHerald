@@ -19,7 +19,7 @@ public class FirstScreenActivity extends Activity {
 	//private ImageView mImageView;
 	private TextView mTextView;
 	private AlphaAnimation mAnimation;
-	private long ANIM_DURATION = 00; //—” ±£®∫¡√Î£©
+	private long ANIM_DURATION = 500; //—” ±£®∫¡√Î£©
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

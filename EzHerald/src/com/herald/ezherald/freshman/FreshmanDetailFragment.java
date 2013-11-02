@@ -1,7 +1,5 @@
 package com.herald.ezherald.freshman;
 
-import android.app.AlertDialog.Builder;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
