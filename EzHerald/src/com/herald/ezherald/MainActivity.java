@@ -666,6 +666,9 @@ public class MainActivity extends BaseFrameActivity {
 	protected void onDestroy() {
 		doNotUpdateUI = true;
 		Log.d("MainActivity", "onDestroy");
+		if(mUpdateBannerImageTask != null){
+			mUpdateBannerImageTask.cancel(true);
+		}
 		super.onDestroy();
 	}
 
