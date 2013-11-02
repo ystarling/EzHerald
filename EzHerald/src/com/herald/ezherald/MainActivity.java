@@ -559,7 +559,7 @@ public class MainActivity extends BaseFrameActivity {
 		try {
 			in = OpenHttpConnection(REMOTE_UPDATE_CHECK_URL);
 		} catch (IOException e) {
-			Log.w("MainActivity", e.getLocalizedMessage());
+			//Log.w("MainActivity", e.getLocalizedMessage());
 			showToastInWorkingThread("远程服务器链接超时，网络不大给力？");
 			return false;
 		}
