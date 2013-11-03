@@ -62,6 +62,35 @@ public class Tool {
 		}
 	}
 	
+	public static String getWeekdayStr()
+	{
+		String day = "";
+		switch(Tool.getWeekday()){
+		case 1:
+			day = "周一";
+			break;
+		case 2:
+			day = "周二";
+			break;
+		case 3:
+			day = "周三";
+			break;
+		case 4:
+			day = "周四";
+			break;
+		case 5:
+			day = "周五";
+			break;
+		case 6:
+			day = "周六";
+			break;
+		case 7:
+			day = "周日";
+			break;
+		}
+		return day;
+	}
+	
 
 
 }

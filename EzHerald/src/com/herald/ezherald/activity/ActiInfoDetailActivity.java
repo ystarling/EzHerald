@@ -16,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -40,6 +39,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -116,7 +116,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 			onRequestCompleted();
 		}
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
@@ -300,7 +300,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		protected void onPostExecute(ActiInfoDetail result) {
 			try{
 				if (result != null) {
-					actiDetail.setText( Html.fromHtml(Html.fromHtml(Html.fromHtml(result.getActiDetail()).toString()).toString()));	
+					actiDetail.setText( Html.fromHtml(Html.fromHtml(result.getActiDetail()).toString()).toString());	
 				}
 			}
 			catch(Exception e)

@@ -2,21 +2,112 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <Button
-        android:id="@+id/curri_widget_btn"
+    android:orientation="horizontal"
+    android:background="@drawable/curri_widget_back_style"
+    android:paddingRight="5sp"
+    android:layout_marginTop="10sp"
+    android:layout_marginBottom="10sp"
+     >
+     
+    <LinearLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="next" 
-        android:clickable="true"
-        />
+        android:padding="5sp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginRight="10sp"
+        >
+        
+        <TextView 
+	        android:id="@+id/curri_widget_weekday"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textSize="20sp"
+	        />
+        
+    </LinearLayout>
     
-    <TextView 
-        android:id="@+id/curr_widget_tv"
-        android:layout_width="wrap_content"
+    
+    
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-    
+        android:layout_gravity="center"
+        android:showDividers="end"
+        android:divider="#0BDFCF"
+        >
+        
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            
+            <TextView 
+		        android:id="@+id/curri_widget_period_hint"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="right"
+		        android:textSize="18sp"
+		        />
+		    
+		    <TextView 
+		        android:id="@+id/curri_widget_place"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:textSize="18sp"
+		        android:layout_weight="10"
+		        android:textColor="#0BDFCF"
+		        />
+		    <!-- 
+		    <Button
+	            android:src="@android:drawable/ic_media_ff"
+		        android:id="@+id/curri_widget_btn"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:clickable="true"
+		        android:background="@android:color/transparent"
+		        android:layout_weight="1"
+		        />
+		     -->
+
+		     <TextView 
+		         android:id="@+id/curri_widget_btn"
+		         android:layout_width="wrap_content"
+		         android:layout_height="wrap_content"
+		         android:textSize="20sp"
+		         android:clickable="true"
+		         android:text=">>>"
+		         /> 
+ 
+        </LinearLayout>
+        
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#0BDFCF"
+            />
+        <!-- ?android:attr/listDivider -->
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left">
+            
+            <TextView 
+		        android:id="@+id/curri_widget_course"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="20sp"
+		        />
+            
+        </LinearLayout>
+        
+         
+
+    </LinearLayout>
 
 </LinearLayout>

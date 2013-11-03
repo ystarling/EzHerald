@@ -45,6 +45,7 @@
 		        android:layout_gravity="center|left"
 		        android:layout_marginLeft="4sp"
 		        android:textColor="#ff0000"
+		        android:textStyle="bold"
 		        />
 	        
 	    </LinearLayout>
@@ -54,7 +55,9 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="17sp"
-	        android:textColor="#0000ff"/>
+	        android:textColor="#0000ff"
+	        android:textStyle="bold"
+	        />
 	    <LinearLayout 
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -62,7 +65,9 @@
 	        <TextView 
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="时间:"/>
+		        android:text="时间:"
+		        android:textStyle="bold"
+		        />
 		    <TextView 
 		        android:id="@+id/acti_detail_acti_time"
 		        android:layout_width="wrap_content"
@@ -78,7 +83,9 @@
 	        <TextView 
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="地点:"/>
+		        android:text="地点:"
+		        android:textStyle="bold"
+		        />
 		    
 		    <TextView 
 		        android:id="@+id/acti_detail_acti_place"
@@ -92,14 +99,15 @@
 	    <TextView 
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="活动简介:"/>
+	        android:text="活动简介:"
+	        android:textStyle="bold"
+	        />
 	    <TextView 
 	        android:id="@+id/acti_detail_acti_detail"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="5sp"
 	        android:layout_marginBottom="5sp"
-	        android:maxLength="100"
 	        />
 	    
 	    <LinearLayout 
@@ -110,7 +118,9 @@
 	        <TextView 
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="发布时间:"/>
+		        android:text="发布时间:"
+		        android:textStyle="bold"
+		        />
 		    <TextView 
 		        android:id="@+id/acti_detail_acti_pubtime"
 		        android:layout_width="wrap_content"

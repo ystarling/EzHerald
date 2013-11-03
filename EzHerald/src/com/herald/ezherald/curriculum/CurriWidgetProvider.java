@@ -27,6 +27,11 @@ public class CurriWidgetProvider extends AppWidgetProvider {
 	private String CURR_PREF = "curriculum";
 	private String WIDGET_PERIOD = "curri_num";
 	
+	private String courseName  ;
+	private String place;
+	private String period;
+	private String day;
+	
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
 	{
@@ -57,26 +62,45 @@ public class CurriWidgetProvider extends AppWidgetProvider {
 			{
 				remoteView = new RemoteViews(context.getPackageName(), R.layout.curri_widget);
 			}
+
+			day = Tool.getWeekdayStr();
 			
-			String widget_str ;
 			int num = context.getSharedPreferences(CURR_PREF, 0).getInt(WIDGET_PERIOD, -1);
 			List<Attendance> atts = new CurriDataGrabber(context).getAttsByWeekday();
+			
+			
 			if(atts.size() == 0)
 			{
-				widget_str = "今天没课~";
+				courseName = "今天没课~";
+				period = "";
+				place = "";
 			}
 			else{
 				num+=1;
 				Attendance att = atts.get(num%atts.size());
 				context.getSharedPreferences(CURR_PREF, 0).edit().putInt(WIDGET_PERIOD, num).commit();
-				widget_str = att.getAttPeriod()+ ","+att.getAttCourseName()+","+att.getAttPlace();
+				courseName = att.getAttCourseName();
+				period = att.getAttPeriod();
+				place = att.getAttPlace();
 			}
 			
-			remoteView.setTextViewText(R.id.curr_widget_tv, widget_str);
+			updateView(context);
 
 			appWidgetManager.updateAppWidget(new ComponentName(context, CurriWidgetProvider.class), remoteView);
 		}
 		
+	}
+	
+	private void updateView(Context context)
+	{
+		remoteView.setTextViewText(R.id.curri_widget_course, courseName);
+		remoteView.setTextViewText(R.id.curri_widget_weekday, day);
+		remoteView.setTextViewText(R.id.curri_widget_period_hint, period);
+		remoteView.setTextViewText(R.id.curri_widget_place, place);
+		
+		Intent intent = new Intent(ACTION_NEXT_ATT);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+		remoteView.setOnClickPendingIntent(R.id.curri_widget_btn, pendingIntent);
 	}
 	
 	private RemoteViews updateRemoteView(Context context)
@@ -87,16 +111,21 @@ public class CurriWidgetProvider extends AppWidgetProvider {
 		}
 		List<Attendance> atts = new CurriDataGrabber(context).getNextAtts();
 		SharedPreferences pref = context.getSharedPreferences(CURR_PREF, 0);
-		String widget_str ;
+		
+		day = Tool.getWeekdayStr();
 		if(atts.size()==0)
 		{
 			pref.edit().putInt(WIDGET_PERIOD, -1).commit();
-			widget_str = "下节没课了";
+			courseName = "下节没课了";
+			period = "下节课";
+			place = "";
 		}
 		else
 		{
 			Attendance att = atts.get(0);
-			widget_str = "下节课:"+att.getAttPeriod()+","+att.getAttCourseName()+","+att.getAttPlace();
+			courseName = att.getAttCourseName();
+			period = att.getAttPeriod();
+			place = att.getAttPlace();
 			List<Attendance> allAtt = new CurriDataGrabber(context).getAttsByWeekday();
 			int index = -1;
 			for(int i=0; i<allAtt.size();++i)
@@ -111,10 +140,7 @@ public class CurriWidgetProvider extends AppWidgetProvider {
 
 		}
 
-		remoteView.setTextViewText(R.id.curr_widget_tv, widget_str);
-		Intent intent = new Intent(ACTION_NEXT_ATT);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-		remoteView.setOnClickPendingIntent(R.id.curri_widget_btn, pendingIntent);
+		updateView(context);
 		
 		return remoteView;
 	}
