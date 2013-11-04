@@ -32,7 +32,7 @@ public class ExerciseChat extends View {
 		
 		rect = new RectF(width/2-radius, radius*0.3f, width/2+radius,2.3f*radius);
 		paint.setTextSize(radius*0.4f);
-		canvas.drawText(String.format("%d%%", runtime.getTimes()*100/45), width/2*0.9f, height/2-radius*0.25f,paint);
+		canvas.drawText(String.format("%d%%", runtime.getTimes()*100/45), width/2*0.9f, height/2-radius*0.1f,paint);
 		
 		float startAngle = -90, sweepAngle = ((float)runtime.getTimes())/45*360;
 		if(sweepAngle>=360) {
