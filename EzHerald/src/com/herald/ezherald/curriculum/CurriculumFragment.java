@@ -92,7 +92,7 @@ public class CurriculumFragment extends SherlockFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		context = this.getActivity();
+		context = this.getSherlockActivity();
 		adapter = new CourseAdapter(context);
 		dbAdapter = new CurriDBAdapter(context);
 		dbAdapter.open();
@@ -434,52 +434,60 @@ public class CurriculumFragment extends SherlockFragment {
 	String [] terms = null;
 	protected void createItemDialog()
 	{
-		termList = dbAdapter.getTerms();
-		terms = termList.toArray(new String[termList.size()]);
-		tmpSelect = terms[0];
-		AlertDialog.Builder builder = new Builder(context);
-		builder.setTitle("请选择学期")
-		.setPositiveButton("选择", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-//				selectedItem = items[which];
-//				Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
-				SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
-				Editor editor = settings.edit();
-				editor.putString(pref_term, tmpSelect);
-				editor.commit();
-				bar.setTitle("课表:"+tmpSelect);
-//				update();
-//				new requestCurriculum().execute(curri_url);
-				Message msg = new Message();
-				msg.what = 4;
-				mHandler.sendMessage(msg);
-			}
-		})
-		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				Message msg = new Message();
-				msg.what = 3;
-				mHandler.sendMessage(msg);
-			}
-		})
-		.setSingleChoiceItems(terms, 0, null)
-		.setItems(terms, new DialogInterface.OnClickListener(){
+		try{
+			termList = dbAdapter.getTerms();
+			terms = termList.toArray(new String[termList.size()]);
+			tmpSelect = terms[0];
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-//				Toast.makeText(context, ""+which, Toast.LENGTH_LONG).show();
-				tmpSelect = terms[which];
-			}
-			
-		})
-		.create().show();
+			AlertDialog.Builder builder = new Builder(context);
+			builder.setTitle("请选择学期")
+			.setPositiveButton("选择", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+//					selectedItem = items[which];
+//					Toast.makeText(context, tmpSelect, Toast.LENGTH_LONG).show();
+					SharedPreferences settings = getSherlockActivity().getSharedPreferences(prefName, 0);
+					Editor editor = settings.edit();
+					editor.putString(pref_term, tmpSelect);
+					editor.commit();
+					bar.setTitle("课表:"+tmpSelect);
+//					update();
+//					new requestCurriculum().execute(curri_url);
+					Message msg = new Message();
+					msg.what = 4;
+					mHandler.sendMessage(msg);
+				}
+			})
+			.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					Message msg = new Message();
+					msg.what = 3;
+					mHandler.sendMessage(msg);
+				}
+			})
+			.setSingleChoiceItems(terms, 0, null)
+			.setItems(terms, new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+//					Toast.makeText(context, ""+which, Toast.LENGTH_LONG).show();
+					tmpSelect = terms[which];
+				}
+				
+			})
+			.create().show();
+		}
+		catch(Exception e)
+		{
+			Toast.makeText(context, "请求学期失败, 请检查网络状况", Toast.LENGTH_LONG).show();
+		}
+		
 	}
 	
 	private class requestTerms extends AsyncTask<String ,Integer, List<String>>

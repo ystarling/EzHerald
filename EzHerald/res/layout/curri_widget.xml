@@ -12,18 +12,22 @@
     <LinearLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5sp"
+        android:paddingLeft="5sp"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:layout_marginRight="10sp"
         >
         
         <TextView 
 	        android:id="@+id/curri_widget_weekday"
-	        android:layout_width="wrap_content"
+	        android:layout_width="60dp"
 	        android:layout_height="wrap_content"
 	        android:gravity="center"
 	        android:textSize="20sp"
+	        android:textStyle="bold"
+	        android:background="@drawable/curri_widget_circle"
+	        android:scaleType="centerCrop"
 	        />
         
     </LinearLayout>
