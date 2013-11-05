@@ -7,6 +7,7 @@ import com.herald.ezherald.R;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 	private static final int VIEW_TYPE_GENERAL = 1;
 
 	private static final String HIGHLIGHT_COLOR = "#eb3c4b";
+	private static final String HIGHLIGHT_COLOR_ACC = "#ffffff";
 	private static final String NORMAL_COLOR = "#777777";
 	private static final String DEFAULT_COLOR = "#f1f1f1";
 	private final String TAG = "Ez:MainMenuListItemAdapter";
@@ -238,26 +240,34 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			accountItemView.tyxText.setText(tyxState);
 			accountItemView.libText.setText(libState);
 			// ×ÖµÄÑÕÉ«
-			if (idCardState.equals(SecondMenuFragment.TEXT_IDCARD_IS_LOGIN)) {
+			TextPaint textPaint = accountItemView.idCardText.getPaint();
+			
+			if (idCardState.equals(MainMenuFragment.TEXT_IDCARD_IS_LOGIN)) {
 				accountItemView.idCardText.setTextColor(Color
-						.parseColor(HIGHLIGHT_COLOR));
+						.parseColor(HIGHLIGHT_COLOR_ACC));
+				textPaint.setFakeBoldText(true);
 			} else {
 				accountItemView.idCardText.setTextColor(Color
 						.parseColor(NORMAL_COLOR));
+				textPaint.setFakeBoldText(false);
 			}
-			if (tyxState.equals(SecondMenuFragment.TEXT_TYX_IS_LOGIN)) {
+			if (tyxState.equals(MainMenuFragment.TEXT_TYX_IS_LOGIN)) {
 				accountItemView.tyxText.setTextColor(Color
-						.parseColor(HIGHLIGHT_COLOR));
+						.parseColor(HIGHLIGHT_COLOR_ACC));
+				textPaint.setFakeBoldText(true);
 			} else {
 				accountItemView.tyxText.setTextColor(Color
 						.parseColor(NORMAL_COLOR));
+				textPaint.setFakeBoldText(false);
 			}
-			if (libState.equals(SecondMenuFragment.TEXT_LIB_IS_LOGIN)) {
+			if (libState.equals(MainMenuFragment.TEXT_LIB_IS_LOGIN)) {
 				accountItemView.libText.setTextColor(Color
-						.parseColor(HIGHLIGHT_COLOR));
+						.parseColor(HIGHLIGHT_COLOR_ACC));
+				textPaint.setFakeBoldText(true);
 			} else {
 				accountItemView.libText.setTextColor(Color
 						.parseColor(NORMAL_COLOR));
+				textPaint.setFakeBoldText(false);
 			}
 
 		}
