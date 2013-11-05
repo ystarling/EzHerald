@@ -372,6 +372,10 @@ public class MainActivity extends BaseFrameActivity {
 						connFail = true;
 						break;
 					}
+					if(!bmp.isRecycled()){
+						bmp.recycle();
+						System.gc();
+					}
 				}
 
 				// 更新数据库
@@ -671,6 +675,8 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		super.onDestroy();
 	}
+	
+	
 
 	@Override
 	protected void onResume() {
