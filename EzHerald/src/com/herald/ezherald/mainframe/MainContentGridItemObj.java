@@ -5,6 +5,7 @@ package com.herald.ezherald.mainframe;
  * @author BorisHe
  *
  */
+@Deprecated
 public class MainContentGridItemObj {
 	private String content1 = null; //内容1，字号较大
 	private String content2 = null; //内容2，字号较小

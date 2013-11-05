@@ -19,6 +19,7 @@ import android.widget.TextView;
  * @since 20130630
  * @updated 20130630
  */
+@Deprecated
 public class MainContentGridItemAdapter extends BaseAdapter {
 
 	private final String TAG = "Ez:MainContentGridItemAdapter";

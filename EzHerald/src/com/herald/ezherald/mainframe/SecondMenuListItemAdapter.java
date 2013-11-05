@@ -14,11 +14,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 20131105右侧菜单的内容调整到左侧菜单，删除资源的时候务必注意，共有资源请勿删去！
+ * @author BorisHe
+ *
+ */
+@Deprecated
 public class SecondMenuListItemAdapter extends BaseAdapter {
 	private static final int VIEW_TYPE_SIZE = 2;
-
 	private static final int VIEW_TYPE_ACCOUNT = 0;
-
 	private static final int VIEW_TYPE_GENERAL = 1;
 	
 	private static final String HIGHLIGHT_COLOR  = "#eb3c4b";
