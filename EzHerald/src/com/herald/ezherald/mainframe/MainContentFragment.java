@@ -265,7 +265,7 @@ public class MainContentFragment extends SherlockFragment {
 		mContentFlowItemAdapter.setmListItems(mImageItems);
 		mContentFlowItemAdapter.notifyDataSetChanged();
 		
-		mViewFlow.refreshDrawableState();
+		//mViewFlow.refreshDrawableState();
 		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
 
@@ -524,28 +524,35 @@ public class MainContentFragment extends SherlockFragment {
 	/**
 	 * 从数据库先获得banner数据 如果有的话，替换掉静态的
 	 */
+	private ArrayList<Bitmap> mBitmapList = new ArrayList<Bitmap>();
 	public void refreshImageFromDb() {
-		ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
-		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
-				getSherlockActivity());
+		//ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
+		mBitmapList.clear();
+		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getSherlockActivity());
 		dbAdapter.open();
 		Cursor cs = dbAdapter.getAllImages();
 		if (cs != null && cs.moveToFirst()) {
 			int count = 0;
 			do {
 				byte[] inBytes = cs.getBlob(1);
-				retList.add(BitmapFactory.decodeByteArray(inBytes, 0,
+				int id = cs.getInt(0);
+				mBitmapList.add(BitmapFactory.decodeByteArray(inBytes, 0,
 						inBytes.length));
+//				bufferBitmap = BitmapFactory.decodeByteArray(inBytes, 0,
+//						inBytes.length);
+				updateImageItem(id, mBitmapList.get(id));
+				//bufferBitmap.recycle();
 				count++;
 			} while (count < MAX_BANNER_SIZE && cs.moveToNext());
 		} else {
 			Log.w("MainActivity", "db record does not exist");
 		}
-		for (int i = 0; i < retList.size(); i++) {
-			updateImageItem(i, retList.get(i));
-		}
-		refreshViewFlowImage();
 		dbAdapter.close();
+//		for (int i = 0; i < retList.size(); i++) {
+//			updateImageItem(i, retList.get(i));
+//			retList.get(i).recycle();
+//		}
+		refreshViewFlowImage();
 	}
 
 	@Override
@@ -697,4 +704,11 @@ public class MainContentFragment extends SherlockFragment {
 
 	}
 
+	@Override
+	public void onLowMemory() {
+		super.onLowMemory();
+		System.gc();
+	}
+	
+	
 }
