@@ -190,14 +190,46 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			}
 		} else {
 			if (type == VIEW_TYPE_GENERAL)
-				listItemView = (ListItemView) convertView.getTag();
+				try{
+					listItemView = (ListItemView) convertView.getTag();
+				} catch (ClassCastException e) {
+					//为什么Android2.3老是有这个问题
+					listItemView = new ListItemView();
+					// 除了第0行账户信息之外的行
+					convertView = mListContainer.inflate(
+							R.layout.main_frame_menu_item, null);
+					// 获取控件对象
+					listItemView.icon = (ImageView) convertView
+							.findViewById(R.id.main_frame_menuitem_icon);
+					listItemView.title = (TextView) convertView
+							.findViewById(R.id.main_frame_menuitem_title);
+					// 设置控件集到convertView
+					convertView.setTag(listItemView);
+					System.gc();
+				}
+				
 			else {
 				try {
 					// 莫名其妙的问题？
 					accountItemView = (ListAccountItemView) convertView
 							.getTag();
 				} catch (ClassCastException e) {
-					listItemView = (ListItemView) convertView.getTag();
+					//Android2.3专用蛋疼Bug//
+					accountItemView = new ListAccountItemView();
+					convertView = mListContainer.inflate(
+							R.layout.main_frame_2ndmenu_account_item, null);
+					accountItemView.icon = (ImageView) convertView
+							.findViewById(R.id.main_frame_menuitem_accicon);
+					accountItemView.title = (TextView) convertView
+							.findViewById(R.id.main_frame_menuitem_acctitle);
+					accountItemView.idCardText = (TextView) convertView
+							.findViewById(R.id.main_frame_menuitem_idCardNum);
+					accountItemView.libText = (TextView) convertView
+							.findViewById(R.id.main_frame_menuitem_LibIdNum);
+					accountItemView.tyxText = (TextView) convertView
+							.findViewById(R.id.main_frame_menuitem_TyxIdNum);
+					convertView.setTag(accountItemView);
+					System.gc();
 				}
 			}
 		}
@@ -251,6 +283,8 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 						.parseColor(NORMAL_COLOR));
 				textPaint.setFakeBoldText(false);
 			}
+			
+			textPaint = accountItemView.tyxText.getPaint();
 			if (tyxState.equals(MainMenuFragment.TEXT_TYX_IS_LOGIN)) {
 				accountItemView.tyxText.setTextColor(Color
 						.parseColor(HIGHLIGHT_COLOR_ACC));
@@ -260,6 +294,8 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 						.parseColor(NORMAL_COLOR));
 				textPaint.setFakeBoldText(false);
 			}
+			
+			textPaint = accountItemView.libText.getPaint();
 			if (libState.equals(MainMenuFragment.TEXT_LIB_IS_LOGIN)) {
 				accountItemView.libText.setTextColor(Color
 						.parseColor(HIGHLIGHT_COLOR_ACC));
