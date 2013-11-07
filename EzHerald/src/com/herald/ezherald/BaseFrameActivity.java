@@ -2,6 +2,7 @@ package com.herald.ezherald;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.mainframe.MainMenuFragment;
 import com.herald.ezherald.mainframe.SecondMenuFragment;
+import com.herald.ezherald.settingframe.SettingActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -33,7 +35,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	protected CanvasTransformer mTrans;
 	protected Fragment mContentFrag; // 中间呈现的内容
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
-	protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
+	//protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
 	private long mExitTime;
 	
 	
@@ -88,13 +90,13 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		initSlidingMenu(); // 初始化菜单
 
 		mMenuFrag = new MainMenuFragment();
-		mSecondaryMenuFrag = new SecondMenuFragment();
+		//mSecondaryMenuFrag = new SecondMenuFragment();
 
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
 		t.replace(R.id.main_frame_menu, mMenuFrag); // 切换menu的Fragement
 		t.replace(R.id.empty_frame_content, mContentFrag); // 切换内容的Fragement
-		t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// 切换2ndmenu的Fragement
+		//t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// 切换2ndmenu的Fragement
 		t.commit();
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -111,7 +113,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
 
 		menu = getSlidingMenu();
-		menu.setMode(SlidingMenu.LEFT_RIGHT);
+		//menu.setMode(SlidingMenu.LEFT_RIGHT);
+		menu.setMode(SlidingMenu.LEFT);
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		menu.setFadeDegree(0.35f);
 
@@ -122,8 +125,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu.setBehindScrollScale(1.0f);
 		menu.setBehindCanvasTransformer(mTrans);
-		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
-		menu.setSecondaryShadowDrawable(R.drawable.shadowright);
+		//menu.setSecondaryMenu(R.layout.main_frame_second_menu);
+		//menu.setSecondaryShadowDrawable(R.drawable.shadowright);
 
 	}
 
@@ -143,7 +146,14 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_settings:
 			// Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
-			menu.showSecondaryMenu();
+			Intent i = new Intent();
+			i.setClass(getBaseContext(), SettingActivity.class);
+			String localActivityName = getLocalClassName();
+			if(localActivityName.contains("Main")){
+				MainActivity mainActivity = (MainActivity)this;
+				mainActivity.needRefreshContent = true;
+			}
+			startActivity(i);
 			break;
 		case R.id.mainframe_menu_item_exit:
 			openConfirmDialog();

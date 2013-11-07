@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">先声</string>
-    <string name="action_settings">设置</string>
+    <string name="action_settings">程序设置</string>
     <string name="hello_world">Hello world!</string>
     <string name="main_slidebar_title">主菜单</string>
     <string name="UserName">一卡通</string>
