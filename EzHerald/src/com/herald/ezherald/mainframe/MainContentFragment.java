@@ -529,7 +529,9 @@ public class MainContentFragment extends SherlockFragment {
 	 */
 	private ArrayList<Bitmap> mBitmapList = new ArrayList<Bitmap>();
 	public void refreshImageFromDb() {
-		mBitmapList.clear();
+		if(!mBitmapList.isEmpty()){
+			return;
+		}
 		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getSherlockActivity());
 		dbAdapter.open();
 		Cursor cs = dbAdapter.getAllImages();
@@ -558,7 +560,6 @@ public class MainContentFragment extends SherlockFragment {
 				
 				mBitmapList.add(b);
 				updateImageItem(id, mBitmapList.get(id));
-
 				count++;
 			} while (count < MAX_BANNER_SIZE && cs.moveToNext());
 		} else {
