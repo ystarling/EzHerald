@@ -27,6 +27,7 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
+import com.herald.ezherald.radio.RadioActivity;
 import com.tendcloud.tenddata.TCAgent;
 
 /*
@@ -51,7 +52,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_exercise,
 			R.drawable.main_menu_ic_academic,
 			R.drawable.main_menu_ic_freshman,
-			R.drawable.main_menu_ic_emptcls }; // 图标(icon)
+			R.drawable.main_menu_ic_emptcls, 
+			R.drawable.main_menu_ic_gpa}; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
 			R.drawable.main_menu_ic_mainframe_selected,
@@ -63,8 +65,10 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_exercise_selected,
 			R.drawable.main_menu_ic_academic_selected,
 			R.drawable.main_menu_ic_freshman_selected,
-			R.drawable.main_menu_ic_emptcls_selected }; // 选中状态的图标(icon)
-
+			R.drawable.main_menu_ic_emptcls_selected, 
+			R.drawable.main_menu_ic_gpa_selected,
+	}; // 选中状态的图标(icon)
+			
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -154,6 +158,10 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			menuTarget = "EmptyClass";
 			break;
+		case 9:
+			i.setClass(getActivity(), RadioActivity.class);
+			menuTarget = "Radio";
+			break;
 		}
 		TCAgent.onEvent(getActivity(), "主菜单点击", menuTarget);
 		
@@ -235,7 +243,9 @@ public class MainMenuFragment extends ListFragment {
 		else if(localModuleName.equals("emptyclassroom")){
 			return 8;
 		}
-		
+		else if(localModuleName.equals("radio")){
+			return 9;
+		}
 		return -1;
 	}
 

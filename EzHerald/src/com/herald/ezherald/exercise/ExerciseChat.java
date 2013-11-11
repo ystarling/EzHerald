@@ -53,6 +53,5 @@ public class ExerciseChat extends View {
 		
 		super.onDraw(canvas);
 	}
-	
 
 }
