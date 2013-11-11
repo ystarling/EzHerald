@@ -251,7 +251,7 @@ public class MainActivity extends BaseFrameActivity {
 	 * 
 	 * @return
 	 */
-	private Bitmap testGetBitmap(String URL) {
+	private Bitmap tryGetBitmap(String URL) {
 		Bitmap bitmap = null;
 		InputStream in = null;
 		try {
@@ -329,22 +329,18 @@ public class MainActivity extends BaseFrameActivity {
 	 * 联网更新图片 同时更新数据库内容
 	 */
 	private class UpdateBannerImageTask extends
-			AsyncTask<String, Void, ArrayList<Bitmap>> {
+			AsyncTask<String, Void, Void> {
 		private boolean connFail = false;
 		private long lastSuccTimeStamp = -1;
 
 		@Override
-		protected ArrayList<Bitmap> doInBackground(String... url) {
+		protected Void doInBackground(String... url) {
 			isReceivingData = true;
-			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
-					getBaseContext());
 
 			// ///////////////////////////////////////
-			ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // 图片更新的列表
+			//ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // 图片更新的列表
 			boolean haveUpdate = checkBannerImageUpdateState(); // 从服务器先GET是否有update，然后决定是否下载
 
-			// Log.d("MainActivity: AsyncTask", "haveRemoveUpdate?" +
-			// haveUpdate);
 			// ////////////////////////////////////////////////////////////////////////////
 			List<Pair<String, Long>> remoteImgUrls = null;
 			if (haveUpdate) {
@@ -352,7 +348,7 @@ public class MainActivity extends BaseFrameActivity {
 			}
 
 			if (remoteImgUrls != null && !remoteImgUrls.isEmpty()) {
-				dbAdapter.open();
+				//dbAdapter.open();
 				// 有东西需要更新了..
 
 				int count = 1;
@@ -361,10 +357,12 @@ public class MainActivity extends BaseFrameActivity {
 					String urlStr = pair.first;
 					Long urlTimeStamp = pair.second;
 					showToastInWorkingThread("正在下载图片..." + count++ + "/" + size);
-					Bitmap bmp = testGetBitmap(urlStr);
+					Bitmap bmp = tryGetBitmap(urlStr);
 					if (bmp != null) {
-						updList.add(bmp);
-						if (urlTimeStamp > lastSuccTimeStamp) {
+						//updList.add(bmp);
+						//20131105 直接进行数据库操作，一张一张更新图片。数据库操作结束后，统一从数据库拿图片
+						boolean stateSucc = insertBitmapToDb(bmp);
+						if (urlTimeStamp > lastSuccTimeStamp && stateSucc) {
 							lastSuccTimeStamp = urlTimeStamp; // 更新成功下载的时间戳
 						}
 					} else {
@@ -372,58 +370,117 @@ public class MainActivity extends BaseFrameActivity {
 						connFail = true;
 						break;
 					}
+					if(!bmp.isRecycled()){
+						bmp.recycle();
+						System.gc();
+					}
 				}
 
 				// 更新数据库
-				int currImgSize = updList.size(); // 当前从网上更新到的新图片数量
-				int dbImgSize = dbAdapter.getCurrentImageCount(); // 数据库中的老图片数量
-				int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; // 需要删除的图片数量
-
-				if (removeSize > 0) {
-					// 需要删掉一些原图片然后更新
-					for (int i = dbImgSize - removeSize; i < dbImgSize; i++) {
-						dbAdapter.deleteImage(i);
-					}
-				}
-				// 增加原来的标号
-				int currIdOld = dbAdapter.getCurrentImageCount() - 1; // 当前最底图片的标号(如果为空会变成-1)
-				int currIdNew = currIdOld + currImgSize; // 挪动完毕后最底图片的标号(0 -- 4)
-				while (currIdOld >= 0) {
-					// 挪动
-					Cursor cs = dbAdapter.getImage(currIdOld);
-					if (cs != null && cs.moveToFirst()) {
-						byte[] inBytes = cs.getBlob(1);
-						updList.add(currImgSize, BitmapFactory.decodeByteArray(
-								inBytes, 0, inBytes.length));
-
-					}
-					dbAdapter.alterImageId(currIdOld, currIdNew);
-					currIdOld--;
-					currIdNew--;
-				}
-
-				// 增加新图到数据库
-				for (int id = 0; id < currImgSize; id++) {
-					dbAdapter.insertImage(id, updList.get(id));
-				}
-
-				dbAdapter.close();
+//				int currImgSize = updList.size(); // 当前从网上更新到的新图片数量
+//				int dbImgSize = dbAdapter.getCurrentImageCount(); // 数据库中的老图片数量
+//				int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; // 需要删除的图片数量
+//
+//				if (removeSize > 0) {
+//					// 需要删掉一些原图片然后更新
+//					for (int i = dbImgSize - removeSize; i < dbImgSize; i++) {
+//						dbAdapter.deleteImage(i);
+//					}
+//				}
+//				// 增加原来的标号
+//				int currIdOld = dbAdapter.getCurrentImageCount() - 1; // 当前最底图片的标号(如果为空会变成-1)
+//				int currIdNew = currIdOld + currImgSize; // 挪动完毕后最底图片的标号(0 -- 4)
+//				while (currIdOld >= 0) {
+//					// 挪动
+//					Cursor cs = dbAdapter.getImage(currIdOld);
+//					if (cs != null && cs.moveToFirst()) {
+//						byte[] inBytes = cs.getBlob(1);
+//						updList.add(currImgSize, BitmapFactory.decodeByteArray(
+//								inBytes, 0, inBytes.length));
+//
+//					}
+//					dbAdapter.alterImageId(currIdOld, currIdNew);
+//					currIdOld--;
+//					currIdNew--;
+//				}
+//
+//				// 增加新图到数据库
+//				for (int id = 0; id < currImgSize; id++) {
+//					dbAdapter.insertImage(id, updList.get(id));
+//				}
+//
+//				dbAdapter.close();
 			}
 
 			// ////////////////////////////////////////////////////////////////////////////
+			return null;
+		}
+		
+		/**
+		 * 塞入一张图到数据库
+		 * @param bmp
+		 * @return 操作结果成功否
+		 */
+		private boolean insertBitmapToDb(Bitmap bmp) {
+			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getBaseContext());
+			dbAdapter.open();
+			int currImgSize = 1; // 当前从网上更新到的新图片数量
+			int dbImgSize = dbAdapter.getCurrentImageCount(); // 数据库中的老图片数量
+			int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; // 需要删除的图片数量
 
-			return updList;
+			if (removeSize > 0) {
+				// 需要删掉一些原图片然后更新
+				for (int i = dbImgSize - removeSize; i < dbImgSize; i++) {
+					dbAdapter.deleteImage(i);
+				}
+			}
+			// 增加原来的标号
+			int currIdOld = dbAdapter.getCurrentImageCount() - 1; // 当前最底图片的标号(如果为空会变成-1)
+			int currIdNew = currIdOld + currImgSize; // 挪动完毕后最底图片的标号(0 -- 4)
+			while (currIdOld >= 0) {
+				// 挪动
+				dbAdapter.alterImageId(currIdOld, currIdNew);
+				currIdOld--;
+				currIdNew--;
+			}
+
+			// 增加新图到数据库
+			long result = dbAdapter.insertImage(0, bmp);
+
+			dbAdapter.close();
+			
+			if(result != -1){
+				return true;
+			}
+			return false;
 		}
 
+		/**
+		 * 更新SharedPreference里面首页内容最后更新的时间
+		 * 
+		 * @param currentTimeMillis
+		 */
+		public void setLastRefreshTime(long currentTimeMillis) {
+			if (currentTimeMillis == -1) {
+				return;
+			}
+			SharedPreferences appPrefs = getSharedPreferences(PREF_NAME,
+					MODE_PRIVATE);
+			SharedPreferences.Editor editor = appPrefs.edit();
+			editor.putLong(KEY_NAME_LAST_REFRESH, currentTimeMillis);
+			editor.commit();
+			Log.d("MainActivity", "SetLastRefreshTime = " + currentTimeMillis);
+		}
+		
+
 		@Override
-		protected void onPostExecute(ArrayList<Bitmap> result) {
+		protected void onPostExecute(Void result) {
 			// 数据库更新完毕之后修改View
+
+			setLastRefreshTime(lastSuccTimeStamp);
 
 			if (doNotUpdateUI) {
 				Log.w("MainActivity", "Do not update UI...");
-
-				if (!connFail)
-					setLastRefreshTime(lastSuccTimeStamp);
 
 				isReceivingData = false;
 				mUpdateBannerImageTask = null;
@@ -432,11 +489,13 @@ public class MainActivity extends BaseFrameActivity {
 			}
 
 			// 修改相应的视图
-			for (int i = 0; i < result.size(); i++) {
-				((MainContentFragment) mContentFrag).updateImageItem(i,
-						result.get(i));
-			}
-
+//			for (int i = 0; i < result.size(); i++) {
+//				((MainContentFragment) mContentFrag).updateImageItem(i,
+//						result.get(i));
+//			}
+//
+//			((MainContentFragment) mContentFrag).refreshViewFlowImage();
+			((MainContentFragment)mContentFrag).refreshImageFromDb();
 			((MainContentFragment) mContentFrag).refreshViewFlowImage();
 
 			// 改回ActionBar图标
@@ -446,15 +505,20 @@ public class MainActivity extends BaseFrameActivity {
 					.findItem(R.id.mainframe_menu_item_doing);
 			doingItem.setVisible(false);
 
-			// 更新SharedPreference里面最后更新的时间
-			if (!connFail)
-				setLastRefreshTime(lastSuccTimeStamp);
-
 			isReceivingData = false;
 			mUpdateBannerImageTask = null;
 			mIsUpdateBannerTaskDone = true;
 			super.onPostExecute(result);
 		}
+
+		@Override
+		protected void onCancelled() {
+			setLastRefreshTime(lastSuccTimeStamp);
+			
+			super.onCancelled();
+		}
+		
+		
 
 	}
 
@@ -536,13 +600,13 @@ public class MainActivity extends BaseFrameActivity {
 							"need update : " + jsonObject.getString("url"));
 					Pair<String, Long> pair = new Pair<String, Long>(
 							jsonObject.getString("url"), remoteTimeStamp);
-					retList.add(pair);
+					retList.add(0, pair);  //倒序插入
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return retList;
 	}
 
@@ -608,23 +672,7 @@ public class MainActivity extends BaseFrameActivity {
 		return false;
 	}
 
-	/**
-	 * 更新SharedPreference里面首页内容最后更新的时间
-	 * 
-	 * @param currentTimeMillis
-	 */
-	public void setLastRefreshTime(long currentTimeMillis) {
-		if (currentTimeMillis == -1) {
-			Log.w("setLastRefreshTime", "Not a successful timestamp");
-			return;
-		}
-		SharedPreferences appPrefs = getSharedPreferences(PREF_NAME,
-				MODE_PRIVATE);
-		SharedPreferences.Editor editor = appPrefs.edit();
-		editor.putLong(KEY_NAME_LAST_REFRESH, currentTimeMillis);
-		editor.commit();
-		Log.d("MainActivity", "SetLastRefreshTime = " + currentTimeMillis);
-	}
+
 
 	/**
 	 * 主界面点击banner弹出的对话框
@@ -671,10 +719,19 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		super.onDestroy();
 	}
+	
+	
+
+	@Override
+	protected void onPause() {
+		doNotUpdateUI = true;
+		super.onPause();
+	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		doNotUpdateUI = false;
 		if (mUpdateBannerImageTask == null && mIsUpdateBannerTaskDone) {
 			// 如果更新完成，修改"正在刷新"什么的
 			// 改回ActionBar图标
@@ -687,6 +744,7 @@ public class MainActivity extends BaseFrameActivity {
 			if(mContentFrag != null && mContentFrag instanceof MainContentFragment){
 				((MainContentFragment)mContentFrag).refreshImageFromDb();
 			}
+			mIsUpdateBannerTaskDone = false;
 		}
 	}
 

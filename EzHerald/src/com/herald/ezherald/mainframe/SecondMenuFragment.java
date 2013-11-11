@@ -40,7 +40,10 @@ import com.herald.ezherald.settingframe.SettingActivity;
  * 右侧侧滑菜单的Fragment
  * @author BorisHe
  *	@updated 20130629
+ * 20131105右侧菜单的内容调整到左侧菜单，删除资源的时候务必注意，共有资源请勿删去！
  */
+
+@Deprecated //
 public class SecondMenuFragment extends ListFragment {
 	
 	public static final String TEXT_IDCARD_NOT_LOGIN = "一卡通\n未登录";
@@ -67,11 +70,12 @@ public class SecondMenuFragment extends ListFragment {
 	private String mTyxState;
 	
 	private final String BUNDLE_KEY_USERNAME = "username";
-	private UserNameHandler mUserNameHandler = new UserNameHandler();
+	
 	private final String PREF_KEY_USERID = "userid";
 	private final String PREF_KEY_USERNAME = "username";
 	
 	private boolean mViewDestroyed = false;
+	private UserNameHandler mUserNameHandler = new UserNameHandler();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,10 +92,7 @@ public class SecondMenuFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		mMenuItemsStr = getResources().getStringArray(
 				R.array.second_menu_items);
-		/**
-		 * TODO:替换row0为当前登录的用户名（现在还是一卡通号）
-		 */
-		
+	
 		updateLoginUserNameTitles();
 		
 		/*UserAccount account = Authenticate.getIDcardUser(getActivity());

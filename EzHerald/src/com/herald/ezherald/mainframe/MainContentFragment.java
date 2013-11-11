@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
@@ -16,6 +17,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.Config;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -25,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.MainActivity;
 import com.herald.ezherald.R;
@@ -265,7 +268,7 @@ public class MainContentFragment extends SherlockFragment {
 		mContentFlowItemAdapter.setmListItems(mImageItems);
 		mContentFlowItemAdapter.notifyDataSetChanged();
 		
-		mViewFlow.refreshDrawableState();
+		//mViewFlow.refreshDrawableState();
 		Log.d("MainContentFrag", "ViewFlow refreshed..");
 	}
 
@@ -524,28 +527,47 @@ public class MainContentFragment extends SherlockFragment {
 	/**
 	 * 从数据库先获得banner数据 如果有的话，替换掉静态的
 	 */
+	private ArrayList<Bitmap> mBitmapList = new ArrayList<Bitmap>();
 	public void refreshImageFromDb() {
-		ArrayList<Bitmap> retList = new ArrayList<Bitmap>();
-		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(
-				getSherlockActivity());
+		if(!mBitmapList.isEmpty()){
+			return;
+		}
+		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getSherlockActivity());
 		dbAdapter.open();
 		Cursor cs = dbAdapter.getAllImages();
 		if (cs != null && cs.moveToFirst()) {
 			int count = 0;
+			Bitmap b = null;
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inPreferredConfig = Config.RGB_565;
+			
 			do {
 				byte[] inBytes = cs.getBlob(1);
-				retList.add(BitmapFactory.decodeByteArray(inBytes, 0,
-						inBytes.length));
+				int id = cs.getInt(0);
+				
+				try{
+					b = BitmapFactory.decodeByteArray(inBytes, 0,
+							inBytes.length, options);
+				
+				} catch (OutOfMemoryError e){
+					b.recycle();
+					BitmapFactory.Options options_low_memory = new BitmapFactory.Options();
+					options_low_memory.inSampleSize = 2;
+					options.inPreferredConfig = Config.RGB_565;
+					b = BitmapFactory.decodeByteArray(inBytes, 0,
+							inBytes.length, options_low_memory);
+				}
+				
+				mBitmapList.add(b);
+				updateImageItem(id, mBitmapList.get(id));
 				count++;
 			} while (count < MAX_BANNER_SIZE && cs.moveToNext());
 		} else {
 			Log.w("MainActivity", "db record does not exist");
 		}
-		for (int i = 0; i < retList.size(); i++) {
-			updateImageItem(i, retList.get(i));
-		}
-		refreshViewFlowImage();
+		cs.close(); //回收资源
 		dbAdapter.close();
+		refreshViewFlowImage();
 	}
 
 	@Override
@@ -697,4 +719,11 @@ public class MainContentFragment extends SherlockFragment {
 
 	}
 
+	@Override
+	public void onLowMemory() {
+		super.onLowMemory();
+		System.gc();
+	}
+	
+	
 }
