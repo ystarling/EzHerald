@@ -231,7 +231,7 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			menuTarget = "EmptyClass";
 			break;
-		case 9:
+		case 10:
 			i.setClass(getActivity(), RadioActivity.class);
 			menuTarget = "Radio";
 			break;
