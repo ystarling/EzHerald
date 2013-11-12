@@ -529,9 +529,10 @@ public class MainContentFragment extends SherlockFragment {
 	 */
 	private ArrayList<Bitmap> mBitmapList = new ArrayList<Bitmap>();
 	public void refreshImageFromDb() {
-		if(!mBitmapList.isEmpty()){
+/*		if(!mBitmapList.isEmpty()){
 			return;
-		}
+		}*/
+		mBitmapList.clear();
 		MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getSherlockActivity());
 		dbAdapter.open();
 		Cursor cs = dbAdapter.getAllImages();
