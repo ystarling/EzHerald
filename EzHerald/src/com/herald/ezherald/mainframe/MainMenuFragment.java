@@ -231,7 +231,7 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			menuTarget = "EmptyClass";
 			break;
-		case 9:
+		case 10:
 			i.setClass(getActivity(), RadioActivity.class);
 			menuTarget = "Radio";
 			break;
@@ -330,7 +330,7 @@ public class MainMenuFragment extends ListFragment {
 			return 9;
 		}
 		else if(localModuleName.equals("radio")){
-			return 9;
+			return 10;
 		}
 		return -1;
 	}

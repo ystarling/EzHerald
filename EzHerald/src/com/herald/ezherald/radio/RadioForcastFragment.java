@@ -1,5 +1,7 @@
 package com.herald.ezherald.radio;
 
+import com.herald.ezherald.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,7 +14,8 @@ public class RadioForcastFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		return super.onCreateView(inflater, container, savedInstanceState);
+		super.onCreateView(inflater, container, savedInstanceState);
+		return inflater.inflate(R.layout.radio_forcast, container, false);
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
