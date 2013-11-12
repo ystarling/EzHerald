@@ -187,7 +187,13 @@
 
 
         <!-- curriculum end -->
-
+		<!-- radio begin -->
+		<activity 
+		    android:name = "com.herald.ezherald.radio.RadioActivity"
+		    android:screenOrientation="sensorPortrait"
+		    android:theme= "@style/Theme.Heraldstyle">
+		</activity>
+		<!-- radio end -->
         <activity
             android:name="com.herald.ezherald.emptyclassroom.EmptyClassroomActivity"
             android:screenOrientation="sensorPortrait"

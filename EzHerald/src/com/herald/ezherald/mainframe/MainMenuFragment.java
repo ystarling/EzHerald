@@ -45,6 +45,7 @@ import com.herald.ezherald.exercise.ExerciseActivity;
 import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
+import com.herald.ezherald.radio.RadioActivity;
 import com.tendcloud.tenddata.TCAgent;
 
 /**
@@ -53,7 +54,7 @@ import com.tendcloud.tenddata.TCAgent;
  *
  */
 public class MainMenuFragment extends ListFragment {
-	
+
 	public static final String TEXT_IDCARD_NOT_LOGIN = "一卡通\n未登录";
 	public static final String TEXT_IDCARD_IS_LOGIN = "一卡通\n已登录";
 	public static final String TEXT_TYX_NOT_LOGIN = "体育系\n未登录";
@@ -79,7 +80,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_exercise,
 			R.drawable.main_menu_ic_academic,
 			R.drawable.main_menu_ic_freshman,
-			R.drawable.main_menu_ic_emptcls }; // 图标(icon)
+			R.drawable.main_menu_ic_emptcls, 
+			R.drawable.main_menu_ic_gpa}; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
 			R.drawable.main_2ndmenu_ic_account_login, //已登录账户
@@ -92,8 +94,10 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_exercise_selected,
 			R.drawable.main_menu_ic_academic_selected,
 			R.drawable.main_menu_ic_freshman_selected,
-			R.drawable.main_menu_ic_emptcls_selected }; // 选中状态的图标(icon)
-	
+			R.drawable.main_menu_ic_emptcls_selected, 
+			R.drawable.main_menu_ic_gpa_selected,
+	}; // 选中状态的图标(icon)
+			
 	private String mIdCardState; 
 	private String mLibState;
 	private String mTyxState;
@@ -120,7 +124,7 @@ public class MainMenuFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		mMenuItemsStr = getResources().getStringArray(R.array.main_menu_items);
 		updateLoginUserNameTitles();
-		
+
 		mListItems = getListItems();
 		mListViewAdapter = new MainMenuListItemAdapter(getActivity(),
 				mListItems);
@@ -132,7 +136,7 @@ public class MainMenuFragment extends ListFragment {
 		getListView().setDividerHeight(1);
 		getListView().setPadding(0, 0, 0, 0);
 	}
-	
+
 	/**
 	 * 更新数据集中的登陆状态
 	 */
@@ -227,6 +231,10 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			menuTarget = "EmptyClass";
 			break;
+		case 9:
+			i.setClass(getActivity(), RadioActivity.class);
+			menuTarget = "Radio";
+			break;
 		}
 		TCAgent.onEvent(getActivity(), "主菜单点击", menuTarget);
 		
@@ -234,7 +242,7 @@ public class MainMenuFragment extends ListFragment {
 			i.putExtra(KEY_SHOWED_UPDATE, true);
 			startActivity(i);
 			if(position != 0)
-				TryKillMyself();
+			TryKillMyself();
 		}
 	}
 
@@ -321,7 +329,9 @@ public class MainMenuFragment extends ListFragment {
 		else if(localModuleName.equals("emptyclassroom")){
 			return 9;
 		}
-		
+		else if(localModuleName.equals("radio")){
+			return 9;
+		}
 		return -1;
 	}
 
@@ -351,7 +361,7 @@ public class MainMenuFragment extends ListFragment {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if(mViewDestroyed)
-				return;
+			return;
 			
 			try {
 				Bundle bundle = msg.getData();
@@ -360,7 +370,7 @@ public class MainMenuFragment extends ListFragment {
 				{
 					Log.e("SecondMenuFragment", "Message contains nothing");
 					return;
-				}
+		}
 				mMenuItemsStr[0] = name;
 				mListItems = getListItems();
 				mListViewAdapter.setmListItems(mListItems);
@@ -368,10 +378,10 @@ public class MainMenuFragment extends ListFragment {
 			} catch (NullPointerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-		}
-		
 	}
+		}
+
+}
 	
 	/**
 	 * 联网通过一卡通号获取用户的姓名
