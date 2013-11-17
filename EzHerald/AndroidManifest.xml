@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
-    android:versionCode="4"
-    android:versionName="1.0.1106p2" >
+    android:versionCode="5"
+    android:versionName="1.0.1110p" 
+    >
  <!-- public beta -->
 
     <uses-sdk
@@ -21,7 +22,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:largeHeap="true" 
+        >
         <meta-data
             android:name="TD_APP_ID"
             android:value="148B63970FC0152CD534DC743D6E37EC" />
@@ -184,7 +187,13 @@
 
 
         <!-- curriculum end -->
-
+		<!-- radio begin -->
+		<activity 
+		    android:name = "com.herald.ezherald.radio.RadioActivity"
+		    android:screenOrientation="sensorPortrait"
+		    android:theme= "@style/Theme.Heraldstyle">
+		</activity>
+		<!-- radio end -->
         <activity
             android:name="com.herald.ezherald.emptyclassroom.EmptyClassroomActivity"
             android:screenOrientation="sensorPortrait"
