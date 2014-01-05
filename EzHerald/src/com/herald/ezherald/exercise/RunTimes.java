@@ -32,7 +32,7 @@ import com.herald.ezherald.account.UserAccount;
  * 跑操次数的信息
  */
 public class RunTimes {
-	public static final boolean DEBUG = false;//TODO Only for debugmust be removed
+	public static final boolean DEBUG = false;//TODO Only for debug must be removed
 	private int    times; //查到的跑操次数
 	private int    adjustTimes;//修正的次数
 	private float  rate;//排名比例
@@ -58,7 +58,7 @@ public class RunTimes {
 	private static final int SUCCESS = 1;
 	private static final int FAILED  = 0;
 	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/ws/exercise/remain";
-	private static final String RUNTIMES_URL = "http://herald.seu.edu.cn/ws/exercise/runtimes";
+	private static final String RUNTIMES_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/";
 	
 	private SharedPreferences pref;
 	private Editor editor;
@@ -213,15 +213,14 @@ public class RunTimes {
 							UserAccount user = Authenticate.getTyxUser(context);
 							String name = user.getUsername();
 							String password = user.getPassword();
-							
-							
-							DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-							DocumentBuilder builder = factory.newDocumentBuilder();
-							Document document = builder.parse(RUNTIMES_URL+"?username="+name+"&password="+password);
-							Node timesNode = document.getElementsByTagName("times").item(0);
-							//Node rateNode = document.getElementsByTagName("rate").item(0);
-							
-							setTimes(Integer.parseInt(timesNode.getTextContent()));
+							HttpClient client= new DefaultHttpClient();
+							HttpGet remainDaysGet = new HttpGet(RUNTIMES_URL+"/"+name+"/"+password);
+							HttpResponse response = client.execute(remainDaysGet);
+							if(response.getStatusLine().getStatusCode() != 200){
+								throw new Exception("net error");
+							}
+							String result = EntityUtils.toString(response.getEntity());
+							setTimes(Integer.parseInt(result));
 						}else if(father instanceof FragmentC){
 							HttpClient client= new DefaultHttpClient();
 							HttpGet remainDaysGet = new HttpGet(REMAIN_DAYS_URL);
