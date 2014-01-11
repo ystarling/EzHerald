@@ -2,7 +2,9 @@ package com.herald.ezherald.gpa;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -56,8 +58,6 @@ public class GpaInfo {
 	}
 
 	protected void onSuccess() {
-		// TODO 解析HTML，更新records
-		// Log.w("res",result);
 		adapter.onLoadFinished();
 		adapter.onDealing(0, 100);
 		
@@ -91,7 +91,6 @@ public class GpaInfo {
 	}
 
 	protected void onFailed() {
-		// TODO Auto-generated method stub
 		gpaDbModel.open();
 		records = gpaDbModel.all();
 		adapter.updateFinished(false);
@@ -109,26 +108,37 @@ public class GpaInfo {
 			gpaDbModel.open();
 			records = gpaDbModel.all();
 		} catch (Exception e) {
-			// TODO: handle exception
 			records = null;
 		}
 		gpaDbModel.close();
 	}
 
 	/**
-	 * @return 算出的所有绩点
+	 * @return 算出的平均绩点
 	 * @throws Exception 
 	 */
 	public float calcAverage() throws Exception {
 		float totalGrade = 0, totalCredit = 0;
-		for (Record r : records) {
-			if (r.isSelected() && r.getPoint() > 0) {
-				totalGrade += r.getPoint() * r.getCredit();
-				totalCredit += r.getCredit();
+		Map<String,Float> gradeMap = new HashMap<String,Float>();
+		for(Record r:records) {
+			if(r.isSelected()){
+				if(gradeMap.containsKey(r.getName())){
+					Float grades = gradeMap.get(r.getName());
+					if(r.getPoint()*r.getCredit()>grades) {
+						gradeMap.put(r.getName(), r.getPoint()*r.getCredit());
+					}
+				}else{
+					gradeMap.put(r.getName(), r.getPoint()*r.getCredit());
+					totalCredit+=r.getCredit();
+				}
 			}
 		}
+		
+		for(Float r:gradeMap.values()){
+			totalGrade += r;
+		}
 		if(totalCredit == 0) {
-			throw new Exception();
+			throw new Exception("No course is selected");
 		}
 		return totalGrade / totalCredit;
 	}
