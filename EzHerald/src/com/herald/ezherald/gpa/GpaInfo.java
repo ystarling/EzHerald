@@ -2,7 +2,9 @@ package com.herald.ezherald.gpa;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -116,19 +118,30 @@ public class GpaInfo {
 	}
 
 	/**
-	 * @return 算出的所有绩点
+	 * @return 算出的平均绩点
 	 * @throws Exception 
 	 */
 	public float calcAverage() throws Exception {
-		float totalGrade = 0, totalCredit = 0;
-		for (Record r : records) {
-			if (r.isSelected() && r.getPoint() > 0) {
-				totalGrade += r.getPoint() * r.getCredit();
-				totalCredit += r.getCredit();
+		Map<Record,Float> gradeMap = new HashMap<Record,Float>();
+		for(Record r:records) {
+			if(r.isSelected()){
+				if(gradeMap.containsKey(r)){
+					Float grade = gradeMap.get(r);
+					if(r.getPoint()>grade) {
+						gradeMap.put(r, grade);
+					}
+				}
+			}else{
+				gradeMap.put(r, r.getPoint());
 			}
 		}
+		float totalGrade = 0, totalCredit = 0;
+		for(Record r:gradeMap.keySet()){
+			totalGrade += r.getPoint() * r.getCredit();
+			totalCredit += r.getCredit();
+		}
 		if(totalCredit == 0) {
-			throw new Exception();
+			throw new Exception("No course is selected");
 		}
 		return totalGrade / totalCredit;
 	}
