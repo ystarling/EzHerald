@@ -74,28 +74,27 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_mainframe,
 			R.drawable.main_menu_ic_curriculum,
 			R.drawable.main_menu_ic_activity,
-			//R.drawable.main_menu_ic_agenda,
 			R.drawable.main_menu_ic_library,
 			R.drawable.main_menu_ic_gpa,
 			R.drawable.main_menu_ic_exercise,
 			R.drawable.main_menu_ic_academic,
 			R.drawable.main_menu_ic_freshman,
 			R.drawable.main_menu_ic_emptcls, 
-			R.drawable.main_menu_ic_gpa}; // 图标(icon)
+			//R.drawable.main_menu_ic_gpa
+			}; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
 			R.drawable.main_2ndmenu_ic_account_login, //已登录账户
 			R.drawable.main_menu_ic_mainframe_selected,
 			R.drawable.main_menu_ic_curriculum_selected,
 			R.drawable.main_menu_ic_activity_selected,
-			//R.drawable.main_menu_ic_agenda,
 			R.drawable.main_menu_ic_library_selected,
 			R.drawable.main_menu_ic_gpa_selected,
 			R.drawable.main_menu_ic_exercise_selected,
 			R.drawable.main_menu_ic_academic_selected,
 			R.drawable.main_menu_ic_freshman_selected,
 			R.drawable.main_menu_ic_emptcls_selected, 
-			R.drawable.main_menu_ic_gpa_selected,
+			//R.drawable.main_menu_ic_gpa_selected,
 	}; // 选中状态的图标(icon)
 			
 	private String mIdCardState; 
@@ -231,10 +230,12 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			menuTarget = "EmptyClass";
 			break;
+		/*	
 		case 10:
 			i.setClass(getActivity(), RadioActivity.class);
 			menuTarget = "Radio";
 			break;
+		*/
 		}
 		TCAgent.onEvent(getActivity(), "主菜单点击", menuTarget);
 		
@@ -308,9 +309,6 @@ public class MainMenuFragment extends ListFragment {
 		else if(localModuleName.equals("activity")){
 			return 3;
 		}
-		/*else if(localModuleName.equals("agenda")){
-			return 3;
-		}*/
 		else if(localModuleName.equals("library")){
 			return 4;
 		}
@@ -329,9 +327,11 @@ public class MainMenuFragment extends ListFragment {
 		else if(localModuleName.equals("emptyclassroom")){
 			return 9;
 		}
+		/*
 		else if(localModuleName.equals("radio")){
 			return 10;
 		}
+		*/
 		return -1;
 	}
 

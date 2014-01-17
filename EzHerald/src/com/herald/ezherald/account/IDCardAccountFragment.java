@@ -1,36 +1,42 @@
 package com.herald.ezherald.account;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
-
-import android.widget.TextView;
-
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-
 import cn.edu.seu.herald.auth.AuthenticationService;
 import cn.edu.seu.herald.auth.AuthenticationServiceException;
 import cn.edu.seu.herald.auth.AuthenticationServiceFactory;
 import cn.edu.seu.herald.auth.AuthenticationServiceFactoryImpl;
 import cn.edu.seu.herald.auth.StudentUser;
-
-
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
@@ -142,13 +148,13 @@ public class IDCardAccountFragment extends SherlockFragment {
 			try {
 				if(!isNetError){
 					//Log.v("mynet", "querystart");
-				AuthenticationServiceFactory factory = new AuthenticationServiceFactoryImpl();
+				//AuthenticationServiceFactory factory = new AuthenticationServiceFactoryImpl();
 				
-				AuthenticationService service = factory.getAuthenticationService();
-				//Log.v("mynet", "querystop");
-				StudentUser studentUser = service.authenticate(userName,password);
-				
-			if(studentUser == null){
+				//AuthenticationService service = factory.getAuthenticationService();
+				 //Log.v("mynet", "querystop");
+				//StudentUser studentUser = service.authenticate(userName,password);
+
+			if( webAuth(userName, password) == false){
 				loginState = false;
 			}else {
 				//登陆成功
@@ -249,6 +255,38 @@ public class IDCardAccountFragment extends SherlockFragment {
 			
 		}
 	};
+	// 新的登陆，服务器挂了，改用105直接验证
+	private Boolean webAuth(String username,String password) {
+		final String URL = "http://121.248.63.105/authentication/";
+		HttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost(URL);
+		List<NameValuePair> param = new ArrayList<NameValuePair>();
+		param.add(new BasicNameValuePair("username", userName));
+		param.add(new BasicNameValuePair("password", password));
+		try {
+			post.setEntity(new UrlEncodedFormEntity(param));
+			HttpResponse response = client.execute(post);
+			int state = response.getStatusLine().getStatusCode();
+			if(state == 200){
+				return true;
+			} else {
+				return false;
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 }
 	
    

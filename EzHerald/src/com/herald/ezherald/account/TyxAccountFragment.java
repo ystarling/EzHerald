@@ -142,7 +142,7 @@ public class TyxAccountFragment extends SherlockFragment {
 	}
 
 	class LoginFailureHandler implements Runnable {
-		public final String HERALD_WS_TYX_URI = "http://herald.seu.edu.cn/herald_web_service/tyx/checkAccount/";
+		public final String HERALD_WS_TYX_URI = "http://121.248.63.105/herald_web_service/tyx/checkAccount/";
 		public final String POST_KEY_USERNAME = "card_number";
 		public final String POST_KEY_PASSWORD = "password";
 		
@@ -156,7 +156,7 @@ public class TyxAccountFragment extends SherlockFragment {
 			password = view_password.getText().toString();
 			try {
 				if (isNetworkAvailable(getActivity())) {
-					int verifyResult = verifyLibUserPswd(userName, password);
+					int verifyResult = verifyTyxUserPswd(userName, password);
 					if(verifyResult == VERIFY_AUTH_OKAY){
 						databaseHelper = new DatabaseHelper(getActivity(),
 								Authenticate.DATABASE_NAME);
@@ -198,7 +198,7 @@ public class TyxAccountFragment extends SherlockFragment {
 			}
 		}
 		
-		private int verifyLibUserPswd(String userName, String passWord) {			
+		private int verifyTyxUserPswd(String userName, String passWord) {			
 			int retValue = VERIFY_SERVICE_ERROR;
 			HttpPost httpPost = new HttpPost(HERALD_WS_TYX_URI);  //创建HttpPost对象
 			

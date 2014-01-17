@@ -146,7 +146,7 @@ public class LibAccountFragment extends SherlockFragment {
 	}
 
 	class LoginFailureHandler implements Runnable {
-		public final String HERALD_WS_LIB_URI = "http://herald.seu.edu.cn/herald_web_service/library/check_account/";
+		public final String HERALD_WS_LIB_URI = "http://121.248.63.105/herald_web_service/library/check_account/";
 		public final String POST_KEY_USERNAME = "username";
 		public final String POST_KEY_PASSWORD = "password";
 		
