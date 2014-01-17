@@ -47,7 +47,7 @@ public class RunTimes {
 	private String timesAndRateXml;//次数与比例的xml
 	
 	
-	public static final int    DEFAULT_TIMES = -1;
+	public static final int    DEFAULT_TIMES = 0;
 	public static final int    DEFAULT_ADJUST_TIMES = 0;
 	public static final float  DEFAULT_RATE = -1;
 	public static final int    DEFAULT_REMAIN_DAYS = -1;  
@@ -58,7 +58,7 @@ public class RunTimes {
 	private static final int SUCCESS = 1;
 	private static final int FAILED  = 0;
 	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/ws/exercise/remain";
-	private static final String RUNTIMES_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/";
+	private static final String RUNTIMES_URL = "http://121.248.63.105/herald_web_service/tyx/";
 	
 	private SharedPreferences pref;
 	private Editor editor;
