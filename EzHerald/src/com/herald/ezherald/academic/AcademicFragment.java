@@ -58,8 +58,8 @@ public class AcademicFragment extends SherlockFragment implements
 
 	private int JwcInfoMode = ALL;
 	
-	private final String REFRESH_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/%d/";
-	private final String MORE_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/more/%d/%d";
+	private final String REFRESH_URL = "http://121.248.63.105/herald_web_service/jwc/%d/";
+	private final String MORE_URL = "http://121.248.63.105/herald_web_service/jwc/more/%d/%d";
 	
 	
 	private Integer lastid = null;

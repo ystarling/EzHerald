@@ -80,7 +80,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_academic,
 			R.drawable.main_menu_ic_freshman,
 			R.drawable.main_menu_ic_emptcls, 
-			//R.drawable.main_menu_ic_gpa
+			R.drawable.main_menu_ic_gpa
 			}; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
@@ -94,7 +94,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_academic_selected,
 			R.drawable.main_menu_ic_freshman_selected,
 			R.drawable.main_menu_ic_emptcls_selected, 
-			//R.drawable.main_menu_ic_gpa_selected,
+			R.drawable.main_menu_ic_gpa_selected,
 	}; // 选中状态的图标(icon)
 			
 	private String mIdCardState; 
@@ -230,12 +230,12 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			menuTarget = "EmptyClass";
 			break;
-		/*	
+			
 		case 10:
 			i.setClass(getActivity(), RadioActivity.class);
 			menuTarget = "Radio";
 			break;
-		*/
+		
 		}
 		TCAgent.onEvent(getActivity(), "主菜单点击", menuTarget);
 		

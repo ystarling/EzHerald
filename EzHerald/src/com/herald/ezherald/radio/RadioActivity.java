@@ -16,27 +16,12 @@ import com.herald.ezherald.gpa.GpaDbModel;
 public class RadioActivity extends BaseFrameActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		UserAccount user = Authenticate.getIDcardUser(this);
-		if(null == user) {
-			turnToLogin();
-		} else {
+		//UserAccount user = Authenticate.getIDcardUser(this);
+		//if(null == user) {
+			//turnToLogin();
+		//} else {
 			SetBaseFrameActivity(new RadioFragment());
 			super.onCreate(savedInstanceState);
-		}
-	}
-	@Override
-	protected void onResume() {
-		UserAccount user = Authenticate.getIDcardUser(this);
-		if(null == user) {
-			turnToLogin();
-		} else {
-			super.onResume();
-		}
-	}
-	private void turnToLogin() {
-		Intent login = new Intent();
-		login.putExtra("remoteCall", true);
-		login.setClass(this,IDCardAccountActivity.class);
-		startActivity(login);
+		//}
 	}
 }

@@ -74,6 +74,7 @@ public class GPAActivity extends BaseFrameActivity {
 			super.SetBaseFrameActivity(mContentFrag);
 		}else{
 			//if(content == null) {
+
 				content = new GpaFragment();
 			//}
 			SetBaseFrameActivity(content);

@@ -6,6 +6,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
+import com.sun.jersey.core.impl.provider.entity.XMLJAXBElementProvider.Text;
 
 
 public class RadioForcastFragment extends Fragment {
@@ -31,7 +34,7 @@ public class RadioForcastFragment extends Fragment {
 	private TextView txtForcast;
 	private Button btnUpdate;
 	private boolean isDetached;
-	private final static String URL = "";
+	private final static String URL = "http://herald.seu.edu.cn/seub/mobile/announcement/";
 	private final static int SUCCESS = 1;
 	private final static int FAILED = 0;
 	private Handler handler = new Handler(){
@@ -43,7 +46,17 @@ public class RadioForcastFragment extends Fragment {
 				switch (msg.what) {
 				case SUCCESS:
 					Toast.makeText(context, "更新成功", Toast.LENGTH_LONG).show();
-					btnUpdate.setText(forcast);
+					try {
+						JSONArray json = new JSONArray(forcast);
+						String inf = json.getString(0);
+						String date = json.getString(1);
+						txtForcast.setText(inf);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
 					break;
 				case FAILED:
 				default:
@@ -88,7 +101,7 @@ public class RadioForcastFragment extends Fragment {
 							HttpGet get = new HttpGet(URL);
 							HttpResponse response = client.execute(get);
 							if( response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-								forcast = EntityUtils.toString(response.getEntity());
+								forcast = EntityUtils.toString(response.getEntity(),"UTF-8");
 								handler.obtainMessage(SUCCESS).sendToTarget();
 							}
 						}catch(Exception e){

@@ -89,8 +89,8 @@ public class MainActivity extends BaseFrameActivity {
 	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // 始终从网站更新数据，不论新旧
 	private final boolean DEBUG_DONOT_REFRESH = false; // 禁止更新主界面轮播图
 
-	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
-	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
+	private final String REMOTE_UPDATE_CHECK_URL = "http://121.248.63.105/EzHerald/picupdatetime/";
+	private final String REMOTE_UPDATE_QUERY_URL = "http://121.248.63.105/EzHerald/picturejson/";
 	private final int CONN_TIMEOUT = 5000;
 
 	private boolean mShowedUpdate = false;

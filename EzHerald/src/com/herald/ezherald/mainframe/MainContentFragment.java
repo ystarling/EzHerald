@@ -204,7 +204,6 @@ public class MainContentFragment extends SherlockFragment {
 		mViewFlow.setTimeSpan(10000);
 		mViewFlow.startAutoFlowTimer();
 
-		// mInfoHandler = new InfoHandler();
 		refreshViewFlowImage();
 		refreshImageFromDb();
 	}
