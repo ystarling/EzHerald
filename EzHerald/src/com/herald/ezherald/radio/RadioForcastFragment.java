@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,19 +25,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
-import com.sun.jersey.core.impl.provider.entity.XMLJAXBElementProvider.Text;
 
 
 public class RadioForcastFragment extends Fragment {
-	private SharedPreferences shared;
 	private String forcast;
 	private Context context;
-	private TextView txtForcast;
+	private TextView txtForcast,txtDate;
 	private Button btnUpdate;
 	private boolean isDetached;
 	private final static String URL = "http://herald.seu.edu.cn/seub/mobile/announcement/";
 	private final static int SUCCESS = 1;
 	private final static int FAILED = 0;
+	private SharedPreferences shared;
 	private Handler handler = new Handler(){
 		
 		@Override
@@ -51,6 +51,11 @@ public class RadioForcastFragment extends Fragment {
 						String inf = json.getString(0);
 						String date = json.getString(1);
 						txtForcast.setText(inf);
+						txtDate.setText("更新与:"+date);
+						shared.edit().putString("forcast", inf).commit();
+						shared.edit().putString("date", date).commit();
+						String tst = shared.getString("forcast", "");
+						Log.v("for",shared.getString("forcast", ""));
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -79,10 +84,14 @@ public class RadioForcastFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		txtForcast = (TextView) getActivity().findViewById(R.id.txt_boardcast);
+		txtDate = (TextView)getActivity().findViewById(R.id.txt_date);
 		btnUpdate = (Button) getActivity().findViewById(R.id.btn_update);
 		context = getActivity();
-		shared = context.getSharedPreferences("radio", 0);
-		forcast = shared.getString("forcast", null);
+		shared = getActivity().getSharedPreferences("radio", Context.MODE_PRIVATE);
+		String oldInf = shared.getString("forcast", "请先更新");
+		String date = shared.getString("date", "还没有更新");
+		txtForcast.setText(oldInf);
+		txtDate.setText("更新与"+date);
 		if( forcast != null ){
 			txtForcast.setText(forcast);
 		}else{

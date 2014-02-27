@@ -6,9 +6,24 @@
 
     <TextView
         android:id="@+id/txt_boardcast"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.80"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="0.84"
+        android:background="@drawable/freshman_title_outter"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="TextView" />
 
     <Button

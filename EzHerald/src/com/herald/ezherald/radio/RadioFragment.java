@@ -1,23 +1,34 @@
 package com.herald.ezherald.radio;
 
 
+import android.accounts.Account;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.IDCardAccountActivity;
+import com.herald.ezherald.account.UserAccount;
 
 
 public class RadioFragment extends SherlockFragment {
 	private static enum RadioType{
 		DEMAND_SONG,FORCAST,
 	};
+	private Context context;
+	private LayoutInflater inflater;
+	private ViewGroup container;
+	private Bundle savedInstanceState;
 	
 	private class Listener implements ActionBar.TabListener{
 		Fragment frag;
@@ -51,6 +62,10 @@ public class RadioFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {	
 		 super.onCreateView(inflater, container, savedInstanceState);
+		 context = getSherlockActivity();
+		 this.inflater = inflater;
+		 this.container = container;
+		 this.savedInstanceState = savedInstanceState;
 		 ActionBar bar = getSherlockActivity().getSupportActionBar();
 		 bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		 bar.setTitle("¹ã²¥Ì¨");
@@ -59,6 +74,19 @@ public class RadioFragment extends SherlockFragment {
 		 bar.addTab(tab1);
 		 bar.addTab(tab2);
 		 return inflater.inflate(R.layout.radio_fragment_main,container,false);
+	}
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		UserAccount user = Authenticate.getIDcardUser(context);
+		if(user == null ){
+			Toast.makeText(context, "ÇëÏÈµÇÂ¼", Toast.LENGTH_SHORT).show();
+			//getActivity().setContentView(setNotLoginView(inflater, container, savedInstanceState));
+			Intent intent = new Intent();
+			intent.setClass(context, IDCardAccountActivity.class);
+			startActivity(intent);
+		}
+		super.onResume();
 	}
 }
 

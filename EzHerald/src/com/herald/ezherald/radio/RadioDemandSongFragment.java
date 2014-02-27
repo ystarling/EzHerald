@@ -1,23 +1,30 @@
 package com.herald.ezherald.radio;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,13 +34,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.herald.ezherald.R;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.mainframe.SecondMenuFragment;
 
 public class RadioDemandSongFragment extends Fragment {
 	private Button btn_demand;
 	private EditText edt_song,edt_message;
 	private final static int SUCCESS = 1;
 	private final static int FAILED = 0;
-	private final static String URL = "www.baidu.com";
+	private final static String URL = "http://herald.seu.edu.cn/seub/mobile/comment/";
 	private ProgressDialog progress;
 	private boolean isDetaced;
 	private String jsonStr;
@@ -100,7 +110,16 @@ public class RadioDemandSongFragment extends Fragment {
 							HttpClient client = new DefaultHttpClient();
 							HttpPost post = new HttpPost(URL);
 							List<NameValuePair> params = new ArrayList<NameValuePair>();
-							params.add(new BasicNameValuePair("", ""));
+							String message = "∏Ë√˚:"+edt_song.getText().toString()+"\n";
+							message.concat("¡Ù—‘:"+edt_message.getText().toString());
+							UserAccount user = Authenticate.getIDcardUser(getActivity());
+							//SecondMenuFragment second = new SecondMenuFragment();
+							Log.v("message",message);
+							Log.v("author",getSavedUserName(user.getUsername()));
+							Log.v("card",user.getUsername());
+							params.add(new BasicNameValuePair("content", message));
+							params.add(new BasicNameValuePair("author", getSavedUserName(user.getUsername())));
+							params.add(new BasicNameValuePair("card_num", user.getUsername()));
 							post.setEntity(new UrlEncodedFormEntity(params));
 							HttpResponse response = client.execute(post);
 							if( response.getStatusLine().getStatusCode() == 200 ) {
@@ -124,4 +143,29 @@ public class RadioDemandSongFragment extends Fragment {
 		isDetaced = true;
 		super.onDetach();
 	}
+	
+	public String getSavedUserName(String card){
+		String url = "http://herald.seu.edu.cn/EzHerald/getname/?cardnum="+card;
+		HttpGet get = new HttpGet(url);
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpResponse httpResponse;
+		String name="";
+		try {
+			httpResponse = httpClient.execute(get);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				name = EntityUtils.toString(httpResponse.getEntity());
+			}else{
+				Log.e("name Not Found","");
+			}
+				
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
+	}
+		
 }
