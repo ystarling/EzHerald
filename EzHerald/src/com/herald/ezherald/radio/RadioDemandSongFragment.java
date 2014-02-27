@@ -124,7 +124,12 @@ public class RadioDemandSongFragment extends Fragment {
 							HttpResponse response = client.execute(post);
 							if( response.getStatusLine().getStatusCode() == 200 ) {
 								jsonStr = EntityUtils.toString(response.getEntity(), "UTF-8");
-								handler.obtainMessage(SUCCESS).sendToTarget();
+								if(jsonStr.equals("success")){
+									handler.obtainMessage(SUCCESS).sendToTarget();
+								}else{
+									handler.obtainMessage(FAILED).sendToTarget();
+								}
+								
 							} else {
 								handler.obtainMessage(FAILED).sendToTarget();
 							}
