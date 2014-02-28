@@ -103,6 +103,11 @@ public class RadioDemandSongFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				progress.show();
+				if(edt_song.getText().toString().equals("")){
+					Toast.makeText(getActivity(), "歌名不能为空", Toast.LENGTH_SHORT).show();
+					progress.cancel();
+					return;
+				}
 				new Thread() {
 					@Override
 					public void run() {
@@ -110,8 +115,9 @@ public class RadioDemandSongFragment extends Fragment {
 							HttpClient client = new DefaultHttpClient();
 							HttpPost post = new HttpPost(URL);
 							List<NameValuePair> params = new ArrayList<NameValuePair>();
+							
 							String message = "歌名:"+edt_song.getText().toString()+"\n";
-							message.concat("留言:"+edt_message.getText().toString());
+							message = message.concat("留言:"+edt_message.getText().toString());
 							UserAccount user = Authenticate.getIDcardUser(getActivity());
 							//SecondMenuFragment second = new SecondMenuFragment();
 							Log.v("message",message);
@@ -120,7 +126,7 @@ public class RadioDemandSongFragment extends Fragment {
 							params.add(new BasicNameValuePair("content", message));
 							params.add(new BasicNameValuePair("author", getSavedUserName(user.getUsername())));
 							params.add(new BasicNameValuePair("card_num", user.getUsername()));
-							post.setEntity(new UrlEncodedFormEntity(params));
+							post.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
 							HttpResponse response = client.execute(post);
 							if( response.getStatusLine().getStatusCode() == 200 ) {
 								jsonStr = EntityUtils.toString(response.getEntity(), "UTF-8");
