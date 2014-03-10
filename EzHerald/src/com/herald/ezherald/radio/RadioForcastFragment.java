@@ -54,7 +54,7 @@ public class RadioForcastFragment extends Fragment {
 						txtDate.setText("更新与:"+date);
 						shared.edit().putString("forcast", inf).commit();
 						shared.edit().putString("date", date).commit();
-						String tst = shared.getString("forcast", "");
+						//String tst = shared.getString("forcast", "");
 						Log.v("for",shared.getString("forcast", ""));
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -92,11 +92,7 @@ public class RadioForcastFragment extends Fragment {
 		String date = shared.getString("date", "还没有更新");
 		txtForcast.setText(oldInf);
 		txtDate.setText("更新与"+date);
-		if( forcast != null ){
-			txtForcast.setText(forcast);
-		}else{
-			txtForcast.setText("请先更新");
-		}
+		txtForcast.setText(oldInf);
 		btnUpdate.setOnClickListener(new OnClickListener() {
 			
 			@Override
