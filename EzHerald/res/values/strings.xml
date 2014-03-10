@@ -43,7 +43,7 @@
     <string name="main_frame_menu_refreshing">正在刷新...</string>
     <string name="main_frame_menu_more">More...</string>
     <string name="setting_powered_by_herald">Powered by Herald</string>
-    <string name="setting_about_2001_2013">2001-2013</string>
+    <string name="setting_about_2001_2014">2001-2014</string>
     <string name="setting_about_version">build 20131027</string>
     <string name="title_activity_main_content_module_pref">主界面模块</string>
     <string name="main_frame_list_color_pref_key">list_choice</string>

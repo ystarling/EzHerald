@@ -76,11 +76,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_about_2001_2013"
+        android:text="@string/setting_about_2001_2014"
         android:textAppearance="?android:attr/textAppearanceLarge" 
         android:layout_gravity="center_horizontal"
         android:textSize="16sp"
         android:textColor="#bbbbbb"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="各项活动，欢迎联系"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="邮箱: heraldstudio.seu@gmail.com"
+        android:autoLink="email"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="手机: 13222086228 熊同学"
+        android:autoLink="phone"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>
