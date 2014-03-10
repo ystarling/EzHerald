@@ -1,5 +1,6 @@
 package com.herald.ezherald.exercise;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
@@ -73,7 +74,8 @@ public class FragmentA extends Fragment {
 	}
 	//信息更新成功及失败的显示
 	public void onSuccess(){
-		if(getActivity() != null){
+		Context context = getActivity();
+		if(context != null){
 			txt_info.setText("  "+renren.getInfo());
 		txt_date.setText("更新于" + renren.getDate());
 		Toast.makeText(getActivity(),"人人信息更新成功", Toast.LENGTH_LONG).show();
@@ -82,8 +84,9 @@ public class FragmentA extends Fragment {
 		
 	}
 	public void onFailed(){
-		if(getActivity() != null){
-			Toast.makeText(getActivity(),"人人信息更新失败", Toast.LENGTH_LONG).show();
+		Context context = getActivity();
+		if(context != null){
+			Toast.makeText(context,"人人信息更新失败", Toast.LENGTH_LONG).show();
 			btn_update.setText("更新");
 		}
 			
