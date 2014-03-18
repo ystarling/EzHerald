@@ -1,14 +1,18 @@
 package com.herald.ezherald;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.herald.ezherald.wifi.WifiReceiver;
 
 /**
  * µ⁄“ª∆¡
@@ -20,6 +24,7 @@ public class FirstScreenActivity extends Activity {
 	private TextView mTextView;
 	private AlphaAnimation mAnimation;
 	private long ANIM_DURATION = 500; //—” ±£®∫¡√Î£©
+	private WifiReceiver receiver ;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class FirstScreenActivity extends Activity {
 		setAnimation();
 		
 	}
+
 
 	private void setAnimation() {
 		// TODO Auto-generated method stub
@@ -47,7 +53,6 @@ public class FirstScreenActivity extends Activity {
 		getMenuInflater().inflate(R.menu.first_screen, menu);
 		return true;
 	}
-	
 	private class MyAnimationListener implements AnimationListener {
 
 		@Override
@@ -68,6 +73,7 @@ public class FirstScreenActivity extends Activity {
 		public void onAnimationStart(Animation animation) {
 			
 		}
+		
 		
 	}
 
