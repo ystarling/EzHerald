@@ -126,7 +126,7 @@ public class WifiReceiver extends BroadcastReceiver {
 			response = client.execute(get);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				return true;
-			} else {// should be 304 when site redirected
+			} else {// should be 302 when site redirected
 				return false;
 			}
 		} catch (ClientProtocolException e) {
