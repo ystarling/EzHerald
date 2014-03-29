@@ -261,6 +261,8 @@
         </activity>
         <!-- wifi begin -->
         <activity android:name="com.herald.ezherald.wifi.LinkDialogActivity"></activity>
+        <activity android:name="com.herald.ezherald.wifi.LoginDialogActivity"></activity>
+        <!-- wifi end -->
     </application>
 
 </manifest>

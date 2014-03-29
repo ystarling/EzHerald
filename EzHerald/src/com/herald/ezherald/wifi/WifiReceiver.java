@@ -1,28 +1,48 @@
 package com.herald.ezherald.wifi;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
+import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 public class WifiReceiver extends BroadcastReceiver {
 	public static String SEU_WLAN = "seu-wlan";
+	private Context context;
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg){
+			switch(msg.what){
+			case 0:doNotLogin();break;
+			case 1:break;
+			}
+		}
 
+		private void doNotLogin() {
+			// TODO Auto-generated method stub
+			Intent it = new Intent(context,LoginDialogActivity.class);
+			it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(it);
+		}
+	};
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		this.context = context;
 		String action = intent.getAction();
 		Log.v("action", action);
 		if (action.equals("android.net.wifi.SCAN_RESULTS")) {
@@ -106,38 +126,56 @@ public class WifiReceiver extends BroadcastReceiver {
 						current == null ? "no connection"
 								: (current.getSSID() == null ? "no ssid"
 										: current.getSSID()));
-				if (current != null && SEU_WLAN.equals(current.getSSID())) {// Connected
-					if (checkLogin() == true) {
-						// TODO may be nothing
-					} else {
-						// TODO try login
-					}
+				Log.v("supplicantState",current.getSupplicantState().toString());
+				if (current != null && SEU_WLAN.equals(current.getSSID()) && current.getSupplicantState() == SupplicantState.COMPLETED) {// Connected
+					checkLogin();
+					//					if (checkLogin() == true) {
+//						// TODO may be nothing
+//					} else {
+//						Intent it = new Intent(context,LoginDialogActivity.class);
+//						it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//						context.startActivity(it);
+//					}
 				}
 			}
 		}
 
 	}
 
-	private boolean checkLogin() {
-		HttpClient client = new DefaultHttpClient();
-		HttpGet get = new HttpGet("http://www.baidu.com");// TODO any other web?
-		HttpResponse response;
-		try {
-			response = client.execute(get);
-			if (response.getStatusLine().getStatusCode() == 200) {
-				return true;
-			} else {// should be 302 when site redirected
-				return false;
-			}
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
+	public void checkLogin() {
+		/*
+		 * Example json
+		 * {"login":"\u8be5IP\u5730\u5740\u5df2\u6210\u529f\u767b\u5f55","login_username":"213xxxxxx","login_time":2,"login_ip":"223.xxx.xxx.xxx","login_location":"\u672a\u77e5\u4f4d\u7f6e"}
+		 * {"notlogin":"\u65b0\u7528\u6237\u767b\u5f55","login_ip":"223.xxx.xxx.xxx","login_location":"\u672a\u77e5\u4f4d\u7f6e"}
+		 */
+		new Thread(){
+			@Override
+			public void run(){
+				HttpClient client = new DefaultHttpClient();
+				HttpGet get = new HttpGet("https://w.seu.edu.cn/portal/init.php");
+				HttpResponse response;
+				try {
+					response = client.execute(get);
+					if (response.getStatusLine().getStatusCode() != 200) {
+						handler.obtainMessage(0).sendToTarget();//return false;
+					} else {
+						String msg = EntityUtils.toString(response.getEntity());
+						while(!msg.startsWith("{")){
+							msg = msg.substring(1);
+						}
+						JSONObject json = new JSONObject(msg);
+						if(json.has("login")){
+							handler.obtainMessage(1).sendToTarget();//return true;
+						}else{
+							handler.obtainMessage(0).sendToTarget();//return false;
+						}
+					}
+				} catch( Exception e){
+					e.printStackTrace();
+					handler.obtainMessage(0).sendToTarget();//return false;
+				}
 
+			}
+		}.start();
 	}
 }
