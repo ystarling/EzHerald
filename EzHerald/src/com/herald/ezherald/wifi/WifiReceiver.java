@@ -23,17 +23,19 @@ import android.util.Log;
 
 public class WifiReceiver extends BroadcastReceiver {
 	public static String SEU_WLAN = "seu-wlan";
+	private final int LOGIN = 1;
+	private final int NOT_LOGIN = 0;
 	private Context context;
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg){
 			switch(msg.what){
-			case 0:doNotLogin();break;
-			case 1:break;
+			case NOT_LOGIN:onNotLogin();break;
+			case LOGIN:break;
 			}
 		}
 
-		private void doNotLogin() {
+		private void onNotLogin() {
 			// TODO Auto-generated method stub
 			Intent it = new Intent(context,LoginDialogActivity.class);
 			it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -70,51 +72,7 @@ public class WifiReceiver extends BroadcastReceiver {
 			}
 
 		} else if (action.equals("android.net.wifi.WIFI_STATE_CHANGED")) {
-			// enabled, disabled, enabling, disabling
-			// WifiManager manager = (WifiManager)
-			// context.getSystemService(Context.WIFI_SERVICE);
-			// if(manager.isWifiEnabled() ){
-			//
-			// WifiInfo current = manager.getConnectionInfo();
-			// Log.v("current","got current");
-			// Log.v("current",current==null?"no connection":(current.getSSID()==null?"no ssid":current.getSSID()));
-			// if(current!=null &&
-			// SEU_WLAN.equals(current.getSSID())){//Connected
-			// return ;
-			// //TODO check if login ?
-			// }
-			// List<ScanResult> scanResults = manager.getScanResults();
-			// boolean hasSeu = false;
-			// if(scanResults == null)
-			// scanResults = Collections.emptyList();
-			// for(ScanResult net:scanResults){
-			// String ssid = net.SSID;
-			// Log.v("ssid",ssid);
-			// if(ssid.equals(SEU_WLAN)){
-			// hasSeu = true;
-			// }
-			// }
-			// if(hasSeu){
-			// WifiConfiguration conf = new WifiConfiguration();
-			// conf.SSID = "\""+SEU_WLAN+"\"";
-			// conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-			// manager.addNetwork(conf);
-			// List<WifiConfiguration> list = manager.getConfiguredNetworks();
-			// for( WifiConfiguration i : list ) {
-			// if(i.SSID != null && i.SSID.equals("\""+SEU_WLAN+"\"")) {
-			// manager.disconnect();
-			// Log.v("wifi","disconnecting");
-			// manager.enableNetwork(i.networkId, true);
-			// manager.reconnect();
-			// Log.v("wifi","connecting");
-			// break;
-			// }
-			// }
-			// }
-			// }else{
-			// Log.v("wifi","wifi is closed");
-			// }
-			//
+			
 		} else if (action.equals("android.net.wifi.STATE_CHANGE")) {
 			WifiManager manager = (WifiManager) context
 					.getSystemService(Context.WIFI_SERVICE);
@@ -165,14 +123,14 @@ public class WifiReceiver extends BroadcastReceiver {
 						}
 						JSONObject json = new JSONObject(msg);
 						if(json.has("login")){
-							handler.obtainMessage(1).sendToTarget();//return true;
+							handler.obtainMessage(LOGIN).sendToTarget();;
 						}else{
-							handler.obtainMessage(0).sendToTarget();//return false;
+							handler.obtainMessage( NOT_LOGIN).sendToTarget();
 						}
 					}
 				} catch( Exception e){
 					e.printStackTrace();
-					handler.obtainMessage(0).sendToTarget();//return false;
+					handler.obtainMessage( NOT_LOGIN).sendToTarget();
 				}
 
 			}
