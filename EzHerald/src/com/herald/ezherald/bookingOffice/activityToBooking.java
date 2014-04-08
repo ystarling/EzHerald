@@ -57,7 +57,7 @@ public class activityToBooking extends ListFragment{
 	    	 mCallback.OnItemSelected(position);
 	    	
 	    	 // Set the item as checked to be highlighted when in two-pane layout
-	         getListView().setItemChecked(position, true);
+	         //getListView().setItemChecked(position, true);
 	    	 
 	     }
   

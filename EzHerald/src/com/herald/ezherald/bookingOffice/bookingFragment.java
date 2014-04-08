@@ -22,11 +22,7 @@ public class bookingFragment extends SherlockFragment {
         
         @Override 
         public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        	
-        	
-        	
-        	
-        	
+          	
         	
         	return inflater.inflate(R.layout.booking_fragment,container,false);
         }
