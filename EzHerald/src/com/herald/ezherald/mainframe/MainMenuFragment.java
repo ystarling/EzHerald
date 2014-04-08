@@ -39,6 +39,7 @@ import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.activity.ActiActivity;
+import com.herald.ezherald.bookingOffice.bookingActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
@@ -80,6 +81,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_academic,
 			R.drawable.main_menu_ic_freshman,
 			R.drawable.main_menu_ic_emptcls, 
+			R.drawable.main_menu_ic_gpa,
 			R.drawable.main_menu_ic_gpa
 			}; // 图标(icon)
 	
@@ -95,6 +97,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_freshman_selected,
 			R.drawable.main_menu_ic_emptcls_selected, 
 			R.drawable.main_menu_ic_gpa_selected,
+			R.drawable.main_menu_ic_gpa_selected
 	}; // 选中状态的图标(icon)
 			
 	private String mIdCardState; 
@@ -234,6 +237,10 @@ public class MainMenuFragment extends ListFragment {
 		case 10:
 			i.setClass(getActivity(), RadioActivity.class);
 			menuTarget = "Radio";
+			break;
+		case 11:
+			i.setClass(getActivity(), bookingActivity.class);
+			menuTarget = "bookingOffice";
 			break;
 		
 		}
