@@ -60,7 +60,7 @@ public class RadioFragment extends SherlockFragment {
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {	
+		 Bundle savedInstanceState) {	
 		 super.onCreateView(inflater, container, savedInstanceState);
 		 context = getSherlockActivity();
 		 this.inflater = inflater;
