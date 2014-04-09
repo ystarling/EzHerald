@@ -39,7 +39,11 @@
 	            <action android:name="com.herald.ezherald.action.NEXT_ATT"/>
 	        </intent-filter>
 	    </receiver>
-
+         <activity
+            android:name="com.herald.ezherald.bookingOffice.bookingDetailActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
+        </activity>
          <activity
             android:name="com.herald.ezherald.bookingOffice.bookingActivity"
             android:screenOrientation="sensorPortrait"
