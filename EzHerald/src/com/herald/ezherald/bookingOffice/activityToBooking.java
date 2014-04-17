@@ -14,7 +14,7 @@ import com.herald.ezherald.R;
 public class activityToBooking extends ListFragment{
 	    
 	     OnItemSelectedListener mCallback;
-	     String[] activity_list={"test","test1","test2"};
+	     
 	     public interface OnItemSelectedListener{
 	    	 public void OnItemSelected(int position);
 	     }
