@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -213,7 +214,8 @@ public class TyxAccountFragment extends SherlockFragment {
 				httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 				httpResponse = new DefaultHttpClient().execute(httpPost);
 				if(httpResponse.getStatusLine().getStatusCode() == 200){
-					String result = EntityUtils.toString(httpResponse.getEntity());
+					HttpEntity res = httpResponse.getEntity();
+					String result = EntityUtils.toString(res);
 					if(result.equals("True"))
 						retValue = VERIFY_AUTH_OKAY;
 					else{

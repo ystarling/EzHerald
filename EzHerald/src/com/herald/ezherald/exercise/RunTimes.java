@@ -193,18 +193,6 @@ public class RunTimes {
 	 * 更新数据
 	 */
 	public void update(final UserAccount user){
-		if(DEBUG){//一些测试数据
-			setTimes(19);
-			setRate((float)0.23);
-			setStartDate("2013-06-01");
-			//setRemainDays(calcRemainDays());
-			setAdviceTime(calcAdviceTime());
-			setAverageRunTime("07:00");
-			DateFormat fmt = SimpleDateFormat.getDateTimeInstance();
-			setUpdateTime(fmt.format(new Date()));
-			save();
-			return;
-		}else{
 			new Thread(){
 				@Override
 				public void run(){
@@ -241,7 +229,6 @@ public class RunTimes {
 					}
 				}
 			}.start();
-		}	
 	}
 	/**
 	 * 保存数据到sharedPreference
