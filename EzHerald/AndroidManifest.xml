@@ -41,7 +41,7 @@
 	            
 	        </intent-filter>
 	    </receiver>
-<<<<<<< HEAD
+
          <activity
             android:name="com.herald.ezherald.bookingOffice.bookingDetailActivity"
             android:screenOrientation="sensorPortrait"
@@ -52,7 +52,7 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
-=======
+
 		<receiver android:name="com.herald.ezherald.wifi.WifiReceiver" >
 		    <intent-filter >
 		        <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
@@ -60,7 +60,6 @@
 		        <action android:name="android.net.wifi.SCAN_RESULTS"></action>
 		    </intent-filter>
 		</receiver>
->>>>>>> a3538e3a0bcee0b124759a03ae382f1fbff65246
         <activity
             android:name="com.herald.ezherald.MainActivity"
             android:label="@string/app_name"
