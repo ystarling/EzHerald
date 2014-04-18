@@ -161,4 +161,10 @@ public class FragmentB extends Fragment {
 		}
 			
 	}
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //TODO check login
+    }
 }

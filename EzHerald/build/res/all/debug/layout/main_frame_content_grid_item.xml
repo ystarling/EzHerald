@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 主界面模块的item (GridView的Item) -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="#cccccc"
+    android:paddingBottom="1dp"
+    android:paddingRight="1dp"
+    
+    >
+		<RelativeLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:background="#ffffff"
+		    android:minHeight="100dp"
+		    >
+		   <TextView
+	        android:id="@+id/main_frame_content_griditem_title"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:paddingLeft="5dp"
+	        android:paddingRight="5dp"
+	        android:text="Title"
+	        android:textSize="14sp" 
+	        android:background="#43484d"
+	        android:textColor="#c0bfbf"
+	        />
+
+	    <TextView
+	        android:id="@+id/main_frame_content_griditem_content1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/main_frame_content_griditem_title"
+	        android:paddingLeft="5dp"
+	        android:ellipsize="end"
+	        android:gravity="left"
+	        android:maxLines="2"
+	        android:text="Content1"
+	        android:textColor="#575757"
+	        android:textSize="22sp" />
+
+	    <TextView
+	        android:id="@+id/main_frame_content_griditem_content2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentBottom="true"
+	        android:paddingBottom="3dp"
+	        android:paddingLeft="5dp"
+	        android:ellipsize="end"
+	        android:gravity="left"
+	        android:singleLine="true"
+	        android:text="Content2"
+	        android:textColor="#4abdcc"
+	        android:textSize="16sp" />
+
+	    <TextView
+	        android:id="@+id/main_frame_content_griditem_bigtext"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentBottom="true"
+	        android:layout_marginRight="-30dp"
+	        android:layout_marginBottom="-60dp"
+	        android:text="屌"
+	        android:textSize="80sp"
+	        android:textColor="#cecece"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	         /> 
+		    
+		</RelativeLayout>
+	    
+   
+</FrameLayout>
+<!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/main_frame_content_grid_item.xml -->

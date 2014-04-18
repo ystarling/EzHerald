@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10sp"
+    android:descendantFocusability="blocksDescendants">
+    
+    <!-- 
+    <LinearLayout
+	  	android:layout_width="wrap_content"
+	  	android:layout_height="wrap_content"
+	  	android:orientation="vertical">
+	 
+    	<ImageView 
+        android:id="@+id/libr_listitem_book_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"/>
+ 
+    </LinearLayout>
+     -->
+    <LinearLayout
+       	android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+       	
+       	android:orientation="vertical">
+    	
+        <TextView 
+        android:id="@+id/libr_listitem_book_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textColor="#003399"/>
+    	<TextView 
+        android:id="@+id/libr_listitem_book_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5sp"/>
+	    <TextView 
+	    android:id="@+id/libr_listitem_book_press"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+
+   	    <TextView 
+	    android:id="@+id/libr_listitem_book_callNumber"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+   	   	<TextView 
+	    android:id="@+id/libr_listitem_book_date"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+   	   	
+  	    <TextView 
+	    android:id="@+id/libr_listitem_book_documentType"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+  	    <TextView
+  	        android:id="@+id/libr_listitem_book_store_num"
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        />
+  	    <TextView
+  	        android:id="@+id/libr_listitem_book_landable_num"
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:textColor="#CC3300"/>
+    </LinearLayout>
+    
+    <!-- 
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="10sp"
+        android:orientation="vertical">
+        
+        <Button 
+        android:id="@+id/libr_listitem_book_reserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="预约"
+        android:textSize="17sp"
+        android:textColor="#2932E1"
+        android:focusable="false"
+        
+        />
+    </LinearLayout>
+    
+     -->
+</LinearLayout><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/library_book_list_item.xml -->

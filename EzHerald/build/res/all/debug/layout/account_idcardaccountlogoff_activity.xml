@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+<TextView
+    android:id="@+id/IDCardInfo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:text="@string/IDCardInfo"
+    android:textSize="22sp" />
+
+<TextView
+    android:id="@+id/IDCardUserName"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:textSize="22sp" />
+
+<Button
+    android:id="@+id/logoffSubmit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:text="@string/IDCardLoginOffButton"
+    android:textSize="23dp" />
+
+</LinearLayout><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/account_idcardaccountlogoff_activity.xml -->

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/acti_club_detail_acti_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    
+</ListView>
+    
+<!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/acti_club_detail_actis.xml -->

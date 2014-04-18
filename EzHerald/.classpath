@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="src" path="/libDragNDropList_"/>
-	<classpathentry kind="src" path="/libABS"/>
-	<classpathentry kind="src" path="/libSlidingMenu"/>
-	<classpathentry kind="src" path="/libViewFlow"/>
-	<classpathentry kind="lib" path="D:/green/adt-bundle-windows-x86_64-20130219/sdk/platforms/android-10/android.jar">
+	<classpathentry exported="true" kind="src" path="/libDragNDropList_"/>
+	<classpathentry exported="true" kind="src" path="/libABS"/>
+	<classpathentry exported="true" kind="src" path="/libSlidingMenu"/>
+	<classpathentry exported="true" kind="src" path="/libViewFlow"/>
+	<classpathentry exported="true" kind="lib" path="D:/green/adt-bundle-windows-x86_64-20130219/sdk/platforms/android-10/android.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/D:/green/adt-bundle-windows-x86_64-20130219/sdk/docs/reference"/>
 		</attributes>
@@ -17,5 +17,6 @@
 			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
 		</accessrules>
 	</classpathentry>
+	<classpathentry kind="lib" path="/libDragNDropList_/bin/libdragndroplist_.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="unspecified" >
+        <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\libViewFlow\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\libABS\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\libSlidingMenu\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\libDragNDropList_\unspecified\assets" />
+    </dataSet>
+    <dataSet config="main" >
+        <source path="D:\GitHub\Ezherald\EzHerald\assets" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="D:\GitHub\Ezherald\EzHerald\build-types\debug\assets" />
+    </dataSet>
+
+</merger>

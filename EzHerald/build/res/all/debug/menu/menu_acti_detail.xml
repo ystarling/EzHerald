@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item 
+        android:id="@+id/menu_acti_detail_action_share"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="share"/>
+    
+
+</menu><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/menu/menu_acti_detail.xml -->

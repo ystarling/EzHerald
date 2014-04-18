@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/libr_reserve_suoshuhao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15sp"
+        android:paddingLeft="15sp"
+        android:textSize="15sp"
+        android:textIsSelectable="true"
+        />
+   	<TextView
+        android:id="@+id/libr_reserve_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15sp"
+        android:textSize="15sp"
+        android:textIsSelectable="true"/>
+	
+   	<TextView
+        android:id="@+id/libr_reserve_can_borrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15sp"
+        android:textSize="15sp"
+        android:textIsSelectable="true"/>
+   	
+	<TextView
+        android:id="@+id/libr_reserve_exist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15sp"
+        android:textSize="15sp"
+        android:textIsSelectable="true"/>
+	
+   	<TextView
+        android:id="@+id/libr_reserve_reserved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15sp"
+        android:textSize="15sp"
+        android:textIsSelectable="true"/>
+	<TextView
+        android:id="@+id/libr_reserve_whether_borrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15sp"
+        android:textSize="15sp"
+        android:textIsSelectable="true"/>
+</LinearLayout><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/library_reserve_list_item.xml -->

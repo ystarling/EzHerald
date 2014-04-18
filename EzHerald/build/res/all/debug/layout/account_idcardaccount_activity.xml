@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:orientation="vertical" >
+
+<EditText
+      android:id="@+id/loginUserNameEdit"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:singleLine="true"
+	  android:paddingLeft="10sp"
+      android:paddingRight="10sp"
+      android:paddingTop="10sp"
+      android:paddingBottom="10sp"
+      android:background="@drawable/account_text_frame"
+      android:hint="@string/IDCardUserName" />
+   
+<EditText
+    android:id="@+id/loginPasswordEdit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:paddingTop="10sp"
+    android:paddingBottom="10sp"
+    android:background="@drawable/account_text_frame"
+    android:hint="@string/IDCardPassWord"
+    android:inputType="textPassword" />
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20sp" >
+   	 <Button
+    	android:id="@+id/loginSubmit"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+      	android:background="#FF6600"
+      	android:text="@string/IDCardLoginButton"
+    >
+   </Button>
+</LinearLayout>
+
+
+</LinearLayout><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/account_idcardaccount_activity.xml -->

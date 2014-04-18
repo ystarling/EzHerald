@@ -11,11 +11,11 @@ public class bookingDBAdapter {
 			"id int not null,"+
 			"content text not null"+
 			")";
-	
+	/*
 	final Context context;
 	DatabaseHelper DBHelper;
 	SQLLiteDatebase db;
-			
+		*/	
 			
 
 }
