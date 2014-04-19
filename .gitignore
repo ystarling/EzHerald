@@ -42,8 +42,8 @@ tmp/**/*
 .buildpath
 
 # Libs
-libABS/
-libSlidingMenu/
+#libABS/
+#libSlidingMenu/
 *.classpath
 /libABS/gen
 

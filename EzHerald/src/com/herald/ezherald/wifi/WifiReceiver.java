@@ -72,7 +72,7 @@ public class WifiReceiver extends BroadcastReceiver {
 			}
 
 		} else if (action.equals("android.net.wifi.WIFI_STATE_CHANGED")) {
-			
+			//DO nothing
 		} else if (action.equals("android.net.wifi.STATE_CHANGE")) {
 			WifiManager manager = (WifiManager) context
 					.getSystemService(Context.WIFI_SERVICE);
@@ -84,7 +84,7 @@ public class WifiReceiver extends BroadcastReceiver {
 						current == null ? "no connection"
 								: (current.getSSID() == null ? "no ssid"
 										: current.getSSID()));
-				Log.v("supplicantState",current.getSupplicantState().toString());
+				Log.v("supplicantState", current != null ? current.getSupplicantState().toString() : "");
 				if (current != null && SEU_WLAN.equals(current.getSSID()) && current.getSupplicantState() == SupplicantState.COMPLETED) {// Connected
 					checkLogin();
 					//					if (checkLogin() == true) {
@@ -123,7 +123,7 @@ public class WifiReceiver extends BroadcastReceiver {
 						}
 						JSONObject json = new JSONObject(msg);
 						if(json.has("login")){
-							handler.obtainMessage(LOGIN).sendToTarget();;
+							handler.obtainMessage(LOGIN).sendToTarget();
 						}else{
 							handler.obtainMessage( NOT_LOGIN).sendToTarget();
 						}

@@ -125,7 +125,8 @@
             android:name="com.herald.ezherald.freshman.FreshmanDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
-        >
+        >
+
         </activity>
         <activity
             android:name="com.herald.ezherald.gpa.GPAActivity"
@@ -273,7 +274,11 @@
         </activity>
         <!-- wifi begin -->
         <activity android:name="com.herald.ezherald.wifi.LinkDialogActivity"></activity>
-        <activity android:name="com.herald.ezherald.wifi.LoginDialogActivity" android:launchMode="singleTop" android:noHistory="true"></activity>
+        <activity
+            android:name="com.herald.ezherald.wifi.LoginDialogActivity"
+            android:launchMode="singleTop"
+            android:noHistory="true">
+        </activity>
         <!-- wifi end -->
     </application>
 
