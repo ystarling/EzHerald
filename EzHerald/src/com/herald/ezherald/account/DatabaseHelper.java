@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE account (id int ,username varchar(20),password varchar(30),type varchar(10))");
 		//db.execSQL("CREATE TABLE account (id int ,username varchar(20),password varchar(30),type varchar(10),name varchar(30))");
-		//username为一卡通号，name为姓名！
+		//username涓轰竴鍗￠�氬彿锛宯ame涓哄鍚嶏紒
 	}
 
 	@Override

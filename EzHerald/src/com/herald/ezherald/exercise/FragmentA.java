@@ -18,7 +18,7 @@ import com.herald.ezherald.R;
 
 /**
  * @author xie
- * ÏÔÊ¾ÌåÓıÏµÈËÈËÔç²Ù²¥±¨µÄĞÅÏ¢
+ * æ˜¾ç¤ºä½“è‚²ç³»äººäººæ—©æ“æ’­æŠ¥çš„ä¿¡æ¯
  *
  */
 public class FragmentA extends Fragment {
@@ -35,13 +35,13 @@ public class FragmentA extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		renren = new RenrenInfo(getActivity(),this);
 		txt_info = (TextView)getActivity().findViewById(R.id.txt_info);
-		txt_info.setMovementMethod(ScrollingMovementMethod.getInstance());//ÊµÏÖ¶àĞĞ¹ö¶¯
+		txt_info.setMovementMethod(ScrollingMovementMethod.getInstance());//å®ç°å¤šè¡Œæ»šåŠ¨
 		txt_date = (TextView)getActivity().findViewById(R.id.txt_date);
 		btn_update = (Button)getActivity().findViewById(R.id.btn_update);
 		if(renren.isSet()){
 			show();
 		}else{
-			txt_info.setText("Ê×´ÎÊ¹ÓÃ£¬ÕıÔÚ¸üĞÂÊı¾İ");
+			txt_info.setText("é¦–æ¬¡ä½¿ç”¨ï¼Œæ­£åœ¨æ›´æ–°æ•°æ®");
 			txt_date.setText("");
 			update();
 		}
@@ -56,38 +56,38 @@ public class FragmentA extends Fragment {
 		});
 	}
 	/**
-	 * ¸üĞÂĞÅÏ¢
+	 * æ›´æ–°ä¿¡æ¯
 	 */
 	private void update(){
-		btn_update.setText("ÕıÔÚ¸üĞÂ...");
+		btn_update.setText("æ­£åœ¨æ›´æ–°...");
 		renren.update();
 	}
 	/**
-	 * ½«ĞÅÏ¢ÏÔÊ¾
+	 * å°†ä¿¡æ¯æ˜¾ç¤º
 	 */
 	public void show(){
 		txt_info.setText("  "+renren.getInfo());
 		if (renren.getDate() != null) {
-			txt_date.setText("¸üĞÂÓÚ" + renren.getDate());
+			txt_date.setText("æ›´æ–°äº" + renren.getDate());
 		}
 		
 	}
-	//ĞÅÏ¢¸üĞÂ³É¹¦¼°Ê§°ÜµÄÏÔÊ¾
+	//ä¿¡æ¯æ›´æ–°æˆåŠŸåŠå¤±è´¥çš„æ˜¾ç¤º
 	public void onSuccess(){
 		Context context = getActivity();
 		if(context != null){
 			txt_info.setText("  "+renren.getInfo());
-		txt_date.setText("¸üĞÂÓÚ" + renren.getDate());
-		Toast.makeText(getActivity(),"ÈËÈËĞÅÏ¢¸üĞÂ³É¹¦", Toast.LENGTH_LONG).show();
-		btn_update.setText("¸üĞÂ");
+		txt_date.setText("æ›´æ–°äº" + renren.getDate());
+		Toast.makeText(getActivity(),"äººäººä¿¡æ¯æ›´æ–°æˆåŠŸ", Toast.LENGTH_LONG).show();
+		btn_update.setText("æ›´æ–°");
 		}
 		
 	}
 	public void onFailed(){
 		Context context = getActivity();
 		if(context != null){
-			Toast.makeText(context,"ÈËÈËĞÅÏ¢¸üĞÂÊ§°Ü", Toast.LENGTH_LONG).show();
-			btn_update.setText("¸üĞÂ");
+			Toast.makeText(context,"äººäººä¿¡æ¯æ›´æ–°å¤±è´¥", Toast.LENGTH_LONG).show();
+			btn_update.setText("æ›´æ–°");
 		}
 			
 	}

@@ -20,7 +20,7 @@ public class FreshmanContent extends BaseFrameActivity {
 	}
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		// ·µ»ØÉÏÒ»²ã£¬ÒòÎªÒÑ¾­±»finish£¬ĞèÒªÖØĞÂintent
+		// è¿”å›ä¸Šä¸€å±‚ï¼Œå› ä¸ºå·²ç»è¢«finishï¼Œéœ€è¦é‡æ–°intent
 		if(keyCode == KeyEvent.KEYCODE_BACK){
 			Intent it = new Intent(this,FreshmanActivity.class);
 			startActivity(it);
@@ -34,7 +34,7 @@ public class FreshmanContent extends BaseFrameActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()){
 		case android.R.id.home:
-			//¸²¸ÇÕâ¸öcase£¬ÊµÏÖ°´Ó¦ÓÃÍ¼±ê·µ»Ø¸Õ²ÅµÄÓ¦ÓÃ
+			//è¦†ç›–è¿™ä¸ªcaseï¼Œå®ç°æŒ‰åº”ç”¨å›¾æ ‡è¿”å›åˆšæ‰çš„åº”ç”¨
 			Intent it = new Intent(this,FreshmanActivity.class);
 			startActivity(it);
 			finish();

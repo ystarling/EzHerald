@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 /**
- * Ö÷½çÃæÄ£¿éÖĞGridViewÏîÄ¿ÄÚÈİµÄAdapter
+ * ä¸»ç•Œé¢æ¨¡å—ä¸­GridViewé¡¹ç›®å†…å®¹çš„Adapter
  * @author BorisHe
  * @since 20130630
  * @updated 20130630
@@ -25,23 +25,23 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	private final String TAG = "Ez:MainContentGridItemAdapter";
 	
 	private Context mContext;
-	private List< Map<String, Object> > mGridItemList; // GridÏîĞÅÏ¢
-	private LayoutInflater mGridContainer; //ÊÓÍ¼ÈİÆ÷
+	private List< Map<String, Object> > mGridItemList; // Gridé¡¹ä¿¡æ¯
+	private LayoutInflater mGridContainer; //è§†å›¾å®¹å™¨
 	private Random mRandom;
 	
-	private final String STR_UNDEF_ITEM_CONT1 = "µã»÷ÕâÀï";
-	private final String STR_UNDEF_ITEM_CONT2 = "¶¨ÒåĞèÒªÏÔÊ¾µÄÄ£¿é";
+	private final String STR_UNDEF_ITEM_CONT1 = "ç‚¹å‡»è¿™é‡Œ";
+	private final String STR_UNDEF_ITEM_CONT2 = "å®šä¹‰éœ€è¦æ˜¾ç¤ºçš„æ¨¡å—";
 	
 	/**
-	 * GridÏîÄ¿µÄ×Ô¶¨Òå¿Ø¼ş¼¯
+	 * Gridé¡¹ç›®çš„è‡ªå®šä¹‰æ§ä»¶é›†
 	 * @author BorisHe
 	 *
 	 */
 	public final class GridItemView{
-		public TextView title;		//Ä£¿éÃû×Ö
-		public TextView content1;	//ÄÚÈİ1
-		public TextView content2;	//ÄÚÈİ2
-		public TextView bigText;   //¾Ş´óµÄ×Ö
+		public TextView title;		//æ¨¡å—åå­—
+		public TextView content1;	//å†…å®¹1
+		public TextView content2;	//å†…å®¹2
+		public TextView bigText;   //å·¨å¤§çš„å­—
 	}
 	
 	public MainContentGridItemAdapter(Context c, List<Map<String, Object>> gridItems){
@@ -62,8 +62,8 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ¹æ¶¨Id:
-	 * 0 - Î´ÉèÖÃ;
+	 * è§„å®šId:
+	 * 0 - æœªè®¾ç½®;
 	 * 1 - curriculum;
 	 * 2 - activity;
 	 * 3 - agenda;
@@ -74,10 +74,10 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	 * 8 - freshman;
 	 */
 	private final String[] ModuleNames = {
-			"ÄÉÄá?µÚÒ»´ÎÃ´?",
-			"¿Î±í²éÑ¯", "Ğ£Ô°»î¶¯", "ÎÒµÄÈÕ³Ì", 
-			"Í¼Êé²éÑ¯", "¼¨µã²éÑ¯", "ÅÜ²Ù²éÑ¯",
-			"½ÌÎñĞÅÏ¢", "Ğ£Ô°Ö¸ÄÏ"
+			"çº³å°¼?ç¬¬ä¸€æ¬¡ä¹ˆ?",
+			"è¯¾è¡¨æŸ¥è¯¢", "æ ¡å›­æ´»åŠ¨", "æˆ‘çš„æ—¥ç¨‹", 
+			"å›¾ä¹¦æŸ¥è¯¢", "ç»©ç‚¹æŸ¥è¯¢", "è·‘æ“æŸ¥è¯¢",
+			"æ•™åŠ¡ä¿¡æ¯", "æ ¡å›­æŒ‡å—"
 	};
 	
 	@Override
@@ -105,13 +105,13 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// »ñµÃÊÓÍ¼
+		// è·å¾—è§†å›¾
 		GridItemView gridItemView;
 		if(convertView == null){// if it's not recycled, initialize some attributes
 			gridItemView = new GridItemView();
-			// »ñÈ¡²Ëµ¥Ïî²¼¾ÖÎÄ¼şµÄÊÓÍ¼
+			// è·å–èœå•é¡¹å¸ƒå±€æ–‡ä»¶çš„è§†å›¾
 			convertView = mGridContainer.inflate(R.layout.main_frame_content_grid_item, null);
-			// »ñÈ¡¿Ø¼ş¶ÔÏó
+			// è·å–æ§ä»¶å¯¹è±¡
 			gridItemView.title = (TextView)convertView
 					.findViewById(R.id.main_frame_content_griditem_title);
 			gridItemView.content1 = (TextView)convertView
@@ -120,13 +120,13 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 					.findViewById(R.id.main_frame_content_griditem_content2);
 			gridItemView.bigText = (TextView)convertView
 					.findViewById(R.id.main_frame_content_griditem_bigtext);
-			// ÉèÖÃ¿Ø¼ş¼¯µ½convertView
+			// è®¾ç½®æ§ä»¶é›†åˆ°convertView
 			convertView.setTag(gridItemView);
 		}	else{
 			gridItemView = (GridItemView)convertView.getTag();
 		}
 		
-		// ÉèÖÃtitleÓëcontents
+		// è®¾ç½®titleä¸contents
 		String titleText = ModuleNames[(int) getItemId(position)];
 		gridItemView.title.setText(titleText);
 		//gridItemView.title.setTextColor(getRandomLightColor());
@@ -134,7 +134,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		
 		String cont1txt = (String) mGridItemList.get(position).get("content1");
 		if(getItemId(position)==0){
-			//Î´¶¨Òå£¬Ìæ»»ÎÄ±¾ÄÚÈİ
+			//æœªå®šä¹‰ï¼Œæ›¿æ¢æ–‡æœ¬å†…å®¹
 			cont1txt = STR_UNDEF_ITEM_CONT1;
 		}
 		/*if(cont1txt.length() > 20)
@@ -151,14 +151,14 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		
 		String cont2txt = (String) mGridItemList.get(position).get("content2");
 		if(getItemId(position)==0){
-			//Î´¶¨Òå£¬Ìæ»»ÎÄ±¾ÄÚÈİ
+			//æœªå®šä¹‰ï¼Œæ›¿æ¢æ–‡æœ¬å†…å®¹
 			cont2txt = STR_UNDEF_ITEM_CONT2;
 		}
 		/*if(cont2txt.length() > 15)
 		{
 			cont2txt = cont2txt.substring(0, 12);
 			cont2txt += "...";
-		}*/ //Ö±½ÓLayoutÀïÃæÉèÖÃandroid:ellipsize
+		}*/ //ç›´æ¥Layouté‡Œé¢è®¾ç½®android:ellipsize
 		int cont2size = cont2txt.length();
 		gridItemView.content2.setText(cont2txt);
 		gridItemView.content2.bringToFront();
@@ -173,7 +173,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	}
 	
 	/**
-	 * ¸ù¾İ×ÖÊı»ñµÃÊÊºÏµÄ×ÖºÅ´óĞ¡
+	 * æ ¹æ®å­—æ•°è·å¾—é€‚åˆçš„å­—å·å¤§å°
 	 * @param txtLength
 	 * @return
 	 */
@@ -194,7 +194,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	}
 	
 	private int getRandomLightColor(){
-		//Ê¹ÓÃHSV»ñµÃËæ»úµÄµ­É«
+		//ä½¿ç”¨HSVè·å¾—éšæœºçš„æ·¡è‰²
 		int h = mRandom.nextInt(360);
 		float s = 0.17f;
 		float v = 0.95f;

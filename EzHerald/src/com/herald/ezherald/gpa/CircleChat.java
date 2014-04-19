@@ -82,9 +82,9 @@ public class CircleChat extends View {
 		
 	}
 	/**
-	 * @param x ºá×ø±ê
-	 * @param y ×İ×ø±ê
-	 * @return µã¶ÔÓ¦µÄ¿Î³Ì
+	 * @param x æ¨ªåæ ‡
+	 * @param y çºµåæ ‡
+	 * @return ç‚¹å¯¹åº”çš„è¯¾ç¨‹
 	 */
 	public ArrayList<Record> onTouch(float x,float y){
 		x -= radius;
@@ -98,7 +98,7 @@ public class CircleChat extends View {
 			ag = Math.PI +Math.atan(y/x);
 		else //if(x<0 && y<0 )
 			ag = Math.atan(y/x)+Math.PI;
-		ag *= 180/Math.PI;//»¡¶È»¯Îª½Ç¶È
+		ag *= 180/Math.PI;//å¼§åº¦åŒ–ä¸ºè§’åº¦
 		ag -= startAngle;
 		if(ag<0)
 			ag+=360f;

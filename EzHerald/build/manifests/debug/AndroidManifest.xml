@@ -134,7 +134,8 @@
         </activity>
         <!-- wifi begin -->
         <activity android:name="com.herald.ezherald.wifi.LinkDialogActivity"/>
-        <activity android:launchMode="singleTop" android:name="com.herald.ezherald.wifi.LoginDialogActivity" android:noHistory="true"/>
+        <activity android:launchMode="singleTop" android:name="com.herald.ezherald.wifi.LoginDialogActivity" android:noHistory="true">
+        </activity>
         <!-- wifi end -->
     </application>
 

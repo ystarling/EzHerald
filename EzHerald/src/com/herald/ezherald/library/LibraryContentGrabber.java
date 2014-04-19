@@ -25,7 +25,7 @@ import com.herald.ezherald.mainframe.MainContentInfoGrabber;
 
 public class LibraryContentGrabber implements MainContentInfoGrabber {
 
-	public String content1="Í¼Êé¹İ·şÎñÒì³£";
+	public String content1="å›¾ä¹¦é¦†æœåŠ¡å¼‚å¸¸";
 	public String content2="";
 	Context context = null;
 	private JSONArray jsonarray;
@@ -45,7 +45,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 			HttpResponse response = null;
 			UserAccount LibrAccount = Authenticate.getLibUser(context);
 			if (LibrAccount == null) {
-				content1 = "ÓÃ»§Î´µÇÂ¼Í¼Êé¹İÄ£¿é";
+				content1 = "ç”¨æˆ·æœªç™»å½•å›¾ä¹¦é¦†æ¨¡å—";
 				Log.e("Nologin", "1111");
 			} else {
 				try {
@@ -70,7 +70,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 					UrlEncodedFormEntity entity = new UrlEncodedFormEntity(
 							list, "UTF-8");
 
-					// ÉèÖÃÍøÂç³¬Ê±²ÎÊı
+					// è®¾ç½®ç½‘ç»œè¶…æ—¶å‚æ•°
 					HttpParams httpParams = client.getParams();
 					HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
 					HttpConnectionParams.setSoTimeout(httpParams, 5000);
@@ -94,7 +94,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 					jsonarray = new JSONArray(sb.toString());
 					int count = 0;
 					if (jsonarray.isNull(0)) {
-						content1 = "»¹Ã»ÓĞ½èÊé";
+						content1 = "è¿˜æ²¡æœ‰å€Ÿä¹¦";
 					} else {
 						for(int i=0;i<jsonarray.length();i++){
 							String date1=jsonarray.getJSONObject(0).getString("due_date").toString();
@@ -106,10 +106,10 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 								Log.e("count", count+"");
 							}
 						}
-						content1 = "×î½üĞèÒª¹é»¹ÈÕÆÚ£º"
+						content1 = "æœ€è¿‘éœ€è¦å½’è¿˜æ—¥æœŸï¼š"
 								+ jsonarray.getJSONObject(0)
 										.getString("due_date").toString();
-						content2=jsonarray.getJSONObject(0).getString("title").toString()+" µÈ"+count+"±¾Êé";
+						content2=jsonarray.getJSONObject(0).getString("title").toString()+" ç­‰"+count+"æœ¬ä¹¦";
 					}
 
 					// }
@@ -118,7 +118,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 					Log.d("Networking", ex.getMessage());
 					if (!ex.getMessage().isEmpty()) {
 
-						content1 = "ÍøÂçÒì³£";
+						content1 = "ç½‘ç»œå¼‚å¸¸";
 					}
 				}
 			}
@@ -127,7 +127,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 			// for (int i = 0; i < jsonarray.length(); i++) {
 			// JSONObject json = jsonarray.getJSONObject(i);
 			// BookName[i] = json.getString("title");
-			// Log.d("ÊéÃû:", "" + BookName[i]);
+			// Log.d("ä¹¦å:", "" + BookName[i]);
 			// }
 
 		} catch (Exception ex) {
@@ -173,7 +173,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 	// UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
 	//
 	//
-	// // ÉèÖÃÍøÂç³¬Ê±²ÎÊı
+	// // è®¾ç½®ç½‘ç»œè¶…æ—¶å‚æ•°
 	// HttpParams httpParams = client.getParams();
 	// HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
 	// HttpConnectionParams.setSoTimeout(httpParams, 5000);
@@ -188,7 +188,7 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 	// }catch(Exception ex){
 	// Log.d("Networking",ex.getMessage());
 	// if(!ex.getMessage().isEmpty()){
-	// content1="ÍøÂçÒì³£";
+	// content1="ç½‘ç»œå¼‚å¸¸";
 	// }
 	// }
 	// InputStream isr=response.getEntity().getContent();
@@ -202,16 +202,16 @@ public class LibraryContentGrabber implements MainContentInfoGrabber {
 	//
 	// jsonarray=new JSONArray(sb.toString());
 	// if(jsonarray.isNull(0)){
-	// content1="»¹Ã»ÓĞ½èÊé";
+	// content1="è¿˜æ²¡æœ‰å€Ÿä¹¦";
 	// }else{
-	// content1="×î½üĞèÒª¹é»¹"+jsonarray.getJSONObject(0).getString("libr_remand_date").toString();
+	// content1="æœ€è¿‘éœ€è¦å½’è¿˜"+jsonarray.getJSONObject(0).getString("libr_remand_date").toString();
 	// }
 	//
 	// String[] BookName=new String[jsonarray.length()];
 	// for(int i=0;i<jsonarray.length();i++){
 	// JSONObject json=jsonarray.getJSONObject(i);
 	// BookName[i] = json.getString("title");
-	// Log.d("ÊéÃû:",""+BookName[i]);
+	// Log.d("ä¹¦å:",""+BookName[i]);
 	// }
 	//
 	// }catch(Exception ex){

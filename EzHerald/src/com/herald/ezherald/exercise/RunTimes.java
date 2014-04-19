@@ -29,22 +29,22 @@ import com.herald.ezherald.account.UserAccount;
 
 /**
  * @author xie
- * ÅÜ²Ù´ÎÊıµÄĞÅÏ¢
+ * è·‘æ“æ¬¡æ•°çš„ä¿¡æ¯
  */
 public class RunTimes {
 	public static final boolean DEBUG = false;//TODO Only for debug must be removed
-	private int    times; //²éµ½µÄÅÜ²Ù´ÎÊı
-	private int    adjustTimes;//ĞŞÕıµÄ´ÎÊı
-	private float  rate;//ÅÅÃû±ÈÀı
-	private int    remainDays;//±¾Ñ§ÆÚÊ£ÓàÌìÊı
-	private String startDate;//±¾Ñ§ÆÚ¿ªÊ¼µÄÈÕÆÚ
-	private String averageRunTime;//Æ½¾ù´ò¿¨Ê±¼ä
-	private int    adviceTime;//ÍÆ¼öÃ¿ÖÜÅÜ²ÙÌìÊı
-	private String updateTime;//¸üĞÂÊ±¼ä
-	private Fragment father;//ÉÏÒ»¼¶fragment
+	private int    times; //æŸ¥åˆ°çš„è·‘æ“æ¬¡æ•°
+	private int    adjustTimes;//ä¿®æ­£çš„æ¬¡æ•°
+	private float  rate;//æ’åæ¯”ä¾‹
+	private int    remainDays;//æœ¬å­¦æœŸå‰©ä½™å¤©æ•°
+	private String startDate;//æœ¬å­¦æœŸå¼€å§‹çš„æ—¥æœŸ
+	private String averageRunTime;//å¹³å‡æ‰“å¡æ—¶é—´
+	private int    adviceTime;//æ¨èæ¯å‘¨è·‘æ“å¤©æ•°
+	private String updateTime;//æ›´æ–°æ—¶é—´
+	private Fragment father;//ä¸Šä¸€çº§fragment
 	
 	
-	private String timesAndRateXml;//´ÎÊıÓë±ÈÀıµÄxml
+	private String timesAndRateXml;//æ¬¡æ•°ä¸æ¯”ä¾‹çš„xml
 	
 	
 	public static final int    DEFAULT_TIMES = 0;
@@ -83,7 +83,7 @@ public class RunTimes {
 	}
 	protected void onFiled() {
 		// TODO Auto-generated method stub
-		//Toast.makeText(activity, "¸üĞÂÊ§°Ü", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(activity, "æ›´æ–°å¤±è´¥", Toast.LENGTH_SHORT).show();
 		if(father == null)
 			return ;
 		if(father instanceof FragmentB){
@@ -153,7 +153,7 @@ public class RunTimes {
 		this.updateTime = updateTime;
 	}
  /**
- * ¿Õ¹¹Ôìº¯Êı£¬²»¶ÁÈ¡sharedµÄÊı¾İ
+ * ç©ºæ„é€ å‡½æ•°ï¼Œä¸è¯»å–sharedçš„æ•°æ®
  */
 	public RunTimes() {
 		
@@ -165,8 +165,8 @@ public class RunTimes {
 	}
 	
 	/**
-	 * @param activity µ÷ÓÃÕßµÄActivity
-	 * ¹¹ÔìÊ±»á³¢ÊÔ´ÓsharedPreference¶ÁÈ¡Êı¾İ
+	 * @param activity è°ƒç”¨è€…çš„Activity
+	 * æ„é€ æ—¶ä¼šå°è¯•ä»sharedPreferenceè¯»å–æ•°æ®
 	 */
 	public RunTimes(Context context){
 		this.context = context; 
@@ -182,7 +182,7 @@ public class RunTimes {
 		setAdviceTime(calcAdviceTime());
 	}
 	/**
-	 * @return Boolean ÊÇ·ñÒÑ¾­ÓĞÊı¾İ
+	 * @return Boolean æ˜¯å¦å·²ç»æœ‰æ•°æ®
 	 */
 	public boolean isSet(){
 		return times != DEFAULT_TIMES && rate  !=DEFAULT_RATE 
@@ -190,7 +190,7 @@ public class RunTimes {
 			&& updateTime!= DEFAULT_UPDATE_TIME ;
 	}															  
 	/**
-	 * ¸üĞÂÊı¾İ
+	 * æ›´æ–°æ•°æ®
 	 */
 	public void update(final UserAccount user){
 			new Thread(){
@@ -231,7 +231,7 @@ public class RunTimes {
 			}.start();
 	}
 	/**
-	 * ±£´æÊı¾İµ½sharedPreference
+	 * ä¿å­˜æ•°æ®åˆ°sharedPreference
 	 */
 	public void save(){
 		editor = pref.edit();
@@ -246,7 +246,7 @@ public class RunTimes {
 	
 	
 	/**
-	 * @return ½¨ÒéÃ¿ÖÜÅÜ²ÙÊ±¼ä,ÏòÉÏÈ¡Õû
+	 * @return å»ºè®®æ¯å‘¨è·‘æ“æ—¶é—´,å‘ä¸Šå–æ•´
 	 */
 	private int calcAdviceTime(){
 		//TODO calculate the advise time

@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 /**
- * µÚÒ»´ÎÊ¹ÓÃÊ±µÄÒıµ¼½çÃæ
+ * ç¬¬ä¸€æ¬¡ä½¿ç”¨æ—¶çš„å¼•å¯¼ç•Œé¢
  * @since 20130702
  * @author BorisHe
  *
@@ -30,17 +30,17 @@ public class MainGuideActivity extends Activity
 	private MainGuideViewPagerAdapter mViewPagerAdapter;
 	private List<View> mViews;
 	
-	//Òıµ¼½çÃæÍ¼Æ¬×ÊÔ´
+	//å¼•å¯¼ç•Œé¢å›¾ç‰‡èµ„æº
 	private static final int[] image_res = {
 		R.drawable.main_frame_welcome_0, R.drawable.main_frame_welcome_1, 
 		R.drawable.main_frame_welcome_2, R.drawable.main_frame_welcome_3,
 		R.drawable.main_frame_welcome_4
 	};
 	
-	//µ×²¿Ğ¡µãµÄView
+	//åº•éƒ¨å°ç‚¹çš„View
 	private ImageView[] mDots;
 	
-	//µ±Ç°Î»ÖÃ
+	//å½“å‰ä½ç½®
 	private int mCurrentIndex;
 	
 	
@@ -55,7 +55,7 @@ public class MainGuideActivity extends Activity
 		LinearLayout.LayoutParams mParams = 
 				new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		
-		//³õÊ¼»¯Òıµ¼Í¼Æ¬ÁĞ±í
+		//åˆå§‹åŒ–å¼•å¯¼å›¾ç‰‡åˆ—è¡¨
 		for(int imgid : image_res){
 			ImageView iv = new ImageView(this);
 			iv.setLayoutParams(mParams);
@@ -65,33 +65,33 @@ public class MainGuideActivity extends Activity
 		}
 		
 		mViewPager = (ViewPager)findViewById(R.id.main_frame_guide_viewpager);
-		//³õÊ¼»¯Adapter
+		//åˆå§‹åŒ–Adapter
 		mViewPagerAdapter = new MainGuideViewPagerAdapter(mViews);
 		mViewPager.setAdapter(mViewPagerAdapter);
 		
-		//°ó¶¨Listener»Øµ÷
+		//ç»‘å®šListenerå›è°ƒ
 		mViewPager.setOnPageChangeListener(this);
 		
-		//³õÊ¼»¯µ×²¿µÄĞ¡µã
+		//åˆå§‹åŒ–åº•éƒ¨çš„å°ç‚¹
 		initDots();
 	}
 
 	/**
-	 * ³õÊ¼»¯µ×ÏÂµÄĞ¡µã
+	 * åˆå§‹åŒ–åº•ä¸‹çš„å°ç‚¹
 	 */
 	private void initDots() {
 		LinearLayout ll = (LinearLayout)findViewById(R.id.main_frame_guide_linearlayout);
 		mDots = new ImageView[image_res.length];
-		//Ñ­»·È¡µÃĞ¡µãµÄÍ¼Æ¬
-		//TODO:5ÕÅÍ¼Æ¬ÒÔÉÏÔõÃ´°ì>!!!!
+		//å¾ªç¯å–å¾—å°ç‚¹çš„å›¾ç‰‡
+		//TODO:5å¼ å›¾ç‰‡ä»¥ä¸Šæ€ä¹ˆåŠ>!!!!
 		for(int i=0; i < image_res.length; i++){
 			mDots[i] = (ImageView)ll.getChildAt(i);
-			mDots[i].setEnabled(true); //Ä¬ÈÏÉèÖÃÎª»ÒÉ«
+			mDots[i].setEnabled(true); //é»˜è®¤è®¾ç½®ä¸ºç°è‰²
 			mDots[i].setOnClickListener(this);
-			mDots[i].setTag(i); //Î»ÖÃtag,·½±ã¶Á³öÓëµ±Ç°Î»ÖÃ¶ÔÓ¦
+			mDots[i].setTag(i); //ä½ç½®tag,æ–¹ä¾¿è¯»å‡ºä¸å½“å‰ä½ç½®å¯¹åº”
 			mDots[i].setVisibility(View.VISIBLE);
 		}
-		//×îºóÒ»Ò³²»ÔÚ»¬¶¯·¶Î§ÄÚ£¬²»ÏÔÊ¾Ğ¡µã
+		//æœ€åä¸€é¡µä¸åœ¨æ»‘åŠ¨èŒƒå›´å†…ï¼Œä¸æ˜¾ç¤ºå°ç‚¹
 		mDots[image_res.length-1].setVisibility(View.GONE);
 		
 		mCurrentIndex = 0;
@@ -99,8 +99,8 @@ public class MainGuideActivity extends Activity
 	}
 	
 	/**
-	 * ÉèÖÃµ±Ç°µÄÒıµ¼Ò³
-	 * @param position Î»ÖÃ
+	 * è®¾ç½®å½“å‰çš„å¼•å¯¼é¡µ
+	 * @param position ä½ç½®
 	 */
 	private void setCurrView(int position){
 		if(position<0 || position >= image_res.length){
@@ -110,7 +110,7 @@ public class MainGuideActivity extends Activity
 	}
 	
 	/**
-	 * ÉèÖÃµ±Ç°Òıµ¼µÄĞ¡µãÎªÑ¡ÖĞ×´Ì¬
+	 * è®¾ç½®å½“å‰å¼•å¯¼çš„å°ç‚¹ä¸ºé€‰ä¸­çŠ¶æ€
 	 * @param position
 	 */
 	private void setCurrDot(int position){
@@ -125,34 +125,34 @@ public class MainGuideActivity extends Activity
 	}
 	
 
-	//µ±»¬¶¯×´Ì¬¸Ä±äÊ±µ÷ÓÃ
+	//å½“æ»‘åŠ¨çŠ¶æ€æ”¹å˜æ—¶è°ƒç”¨
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
 		// TODO Auto-generated method stub
 		//Log.d("MainGuideActivity", "PageScrollStateChanged arg0 = " + arg0);
 	}
 	
-	//µ±µ±Ç°Ò³Ãæ±»»¬¶¯Ê±µ÷ÓÃ
+	//å½“å½“å‰é¡µé¢è¢«æ»‘åŠ¨æ—¶è°ƒç”¨
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
 		// TODO Auto-generated method stub
 		Log.d("MainGuideActivity", "PageScrolled arg0 = " + arg0
 				+ "; arg1 = " + arg1 + "; arg2 = " + arg2);
-		//»¬µ½Ä©Ò³µÄÊ±ºò¹Ø±ÕActivity
+		//æ»‘åˆ°æœ«é¡µçš„æ—¶å€™å…³é—­Activity
 		if(arg0 == image_res.length-2 && arg1 > 0.5f)
 			finish();
 		if(arg0 == image_res.length-1)
 			finish();
 	}
 	
-	//µ±ĞÂµÄÒ³Ãæ±»Ñ¡ÖĞÊ±µ÷ÓÃ
+	//å½“æ–°çš„é¡µé¢è¢«é€‰ä¸­æ—¶è°ƒç”¨
 	@Override
 	public void onPageSelected(int arg0) {
 		Log.d("MainGuideActivity", "PageSelected arg0 = " + arg0);
 		setCurrDot(arg0);
 	}
 
-	//Ğ¡µãµÄOnClick..
+	//å°ç‚¹çš„OnClick..
 	@Override
 	public void onClick(View v) {
 		int position = (Integer)v.getTag();

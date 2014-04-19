@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * 20131105ÓÒ²à²Ëµ¥µÄÄÚÈİµ÷Õûµ½×ó²à²Ëµ¥£¬É¾³ı×ÊÔ´µÄÊ±ºòÎñ±Ø×¢Òâ£¬¹²ÓĞ×ÊÔ´ÇëÎğÉ¾È¥£¡
+ * 20131105å³ä¾§èœå•çš„å†…å®¹è°ƒæ•´åˆ°å·¦ä¾§èœå•ï¼Œåˆ é™¤èµ„æºçš„æ—¶å€™åŠ¡å¿…æ³¨æ„ï¼Œå…±æœ‰èµ„æºè¯·å‹¿åˆ å»ï¼
  * @author BorisHe
  *
  */
@@ -29,12 +29,12 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 	private static final String NORMAL_COLOR = "#777777";
 
 	/**
-	 * ÓÒ²à²Ëµ¥ÁĞ±íÏîµÄAdapter
+	 * å³ä¾§èœå•åˆ—è¡¨é¡¹çš„Adapter
 	 */
 	private final String TAG = "Ez:SecondMenuListItemAdapter";
 
-	private Context mContext; // ÔËĞĞÉÏÏÂÎÄ
-	private List<Map<String, Object>> mListItems; // ²Ëµ¥ÏîĞÅÏ¢
+	private Context mContext; // è¿è¡Œä¸Šä¸‹æ–‡
+	private List<Map<String, Object>> mListItems; // èœå•é¡¹ä¿¡æ¯
 
 	public List<Map<String, Object>> getmListItems() {
 		return mListItems;
@@ -44,36 +44,36 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 		this.mListItems = mListItems;
 	}
 
-	private LayoutInflater mListContainer; // ÊÓÍ¼ÈİÆ÷
+	private LayoutInflater mListContainer; // è§†å›¾å®¹å™¨
 
 	public final class ListItemView {
-		// ×Ô¶¨Òå¿Ø¼ş¼¯
+		// è‡ªå®šä¹‰æ§ä»¶é›†
 		public ImageView icon;
 		public TextView title;
 	}
 
 	public final class ListAccountItemView {
-		// ÕË»§µÇÂ½×´Ì¬µÄ¿Ø¼ş¼¯
+		// è´¦æˆ·ç™»é™†çŠ¶æ€çš„æ§ä»¶é›†
 		public ImageView icon;
 		public TextView title;
-		public TextView idCardText; // Ò»¿¨Í¨×´Ì¬
-		public TextView tyxText; // ÌåÓıÏµ×´Ì¬
-		public TextView libText; // Í¼Êé¹İ×´Ì¬
+		public TextView idCardText; // ä¸€å¡é€šçŠ¶æ€
+		public TextView tyxText; // ä½“è‚²ç³»çŠ¶æ€
+		public TextView libText; // å›¾ä¹¦é¦†çŠ¶æ€
 	}
 
 	public SecondMenuListItemAdapter(Context context,
 			List<Map<String, Object>> listItems) {
 		/**
-		 * ¹¹Ôìº¯Êı
+		 * æ„é€ å‡½æ•°
 		 */
 		mContext = context;
-		mListContainer = LayoutInflater.from(mContext); // ´´½¨ÊÓÍ¼
+		mListContainer = LayoutInflater.from(mContext); // åˆ›å»ºè§†å›¾
 		mListItems = listItems;
 	}
 
 	@Override
 	public int getCount() {
-		// ÏîÄ¿ÊıÁ¿
+		// é¡¹ç›®æ•°é‡
 		return mListItems.size();
 	}
 
@@ -110,29 +110,29 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// »ñµÃÊÓÍ¼
+		// è·å¾—è§†å›¾
 		// Log.d(TAG, "getView");
-		// ×Ô¶¨ÒåÊÓÍ¼
+		// è‡ªå®šä¹‰è§†å›¾
 		ListItemView listItemView = null;
 		ListAccountItemView accountItemView = null;
 		int type = getItemViewType(position);
 		if (convertView == null) {
 
-			// »ñÈ¡²Ëµ¥Ïî²¼¾ÖÎÄ¼şµÄÊÓÍ¼
+			// è·å–èœå•é¡¹å¸ƒå±€æ–‡ä»¶çš„è§†å›¾
 			if (type == VIEW_TYPE_GENERAL) {
 				listItemView = new ListItemView();
-				// ³ıÁËµÚ0ĞĞÕË»§ĞÅÏ¢Ö®ÍâµÄĞĞ
+				// é™¤äº†ç¬¬0è¡Œè´¦æˆ·ä¿¡æ¯ä¹‹å¤–çš„è¡Œ
 				convertView = mListContainer.inflate(
 						R.layout.main_frame_menu_item, null);
-				// »ñÈ¡¿Ø¼ş¶ÔÏó
+				// è·å–æ§ä»¶å¯¹è±¡
 				listItemView.icon = (ImageView) convertView
 						.findViewById(R.id.main_frame_menuitem_icon);
 				listItemView.title = (TextView) convertView
 						.findViewById(R.id.main_frame_menuitem_title);
-				// ÉèÖÃ¿Ø¼ş¼¯µ½convertView
+				// è®¾ç½®æ§ä»¶é›†åˆ°convertView
 				convertView.setTag(listItemView);
 			} else {
-				// ÕË»§ĞÅÏ¢ÄÇÒ»ĞĞ
+				// è´¦æˆ·ä¿¡æ¯é‚£ä¸€è¡Œ
 				accountItemView = new ListAccountItemView();
 				convertView = mListContainer.inflate(
 						R.layout.main_frame_2ndmenu_account_item, null);
@@ -155,7 +155,7 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 				listItemView = (ListItemView) convertView.getTag();
 			else{
 				try{
-					//ÄªÃûÆäÃîµÄÎÊÌâ£¿
+					//è«åå…¶å¦™çš„é—®é¢˜ï¼Ÿ
 					accountItemView = (ListAccountItemView) convertView.getTag();
 				} catch (ClassCastException e){
 					listItemView = (ListItemView) convertView.getTag();
@@ -163,7 +163,7 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 			}
 		}
 
-		// ÉèÖÃÎÄ×ÖºÍÍ¼±ê
+		// è®¾ç½®æ–‡å­—å’Œå›¾æ ‡
 
 		if (type == VIEW_TYPE_GENERAL) {
 			listItemView.icon.setImageResource((Integer) mListItems.get(
@@ -186,7 +186,7 @@ public class SecondMenuListItemAdapter extends BaseAdapter {
 			accountItemView.idCardText.setText(idCardState);
 			accountItemView.tyxText.setText(tyxState);
 			accountItemView.libText.setText(libState);
-			//×ÖµÄÑÕÉ«
+			//å­—çš„é¢œè‰²
 			if(idCardState.equals(SecondMenuFragment.TEXT_IDCARD_IS_LOGIN)){
 				accountItemView.idCardText.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
 			} else {

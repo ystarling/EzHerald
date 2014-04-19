@@ -58,7 +58,7 @@ public class SyncFrequencySettingActivity extends SherlockActivity {
 		switch(id){
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
-			builder.setTitle("Ñ¡ÔñÖ÷½çÃæĞÅÏ¢¸üĞÂÆµÂÊ");
+			builder.setTitle("é€‰æ‹©ä¸»ç•Œé¢ä¿¡æ¯æ›´æ–°é¢‘ç‡");
 			builder.setCancelable(false);
 			builder.setSingleChoiceItems(mTimeSpanTitles, mCheckedItem, new OnClickListener() {
 				
@@ -68,7 +68,7 @@ public class SyncFrequencySettingActivity extends SherlockActivity {
 					mUpdateFreq = mTimeSpanValues[which];
 				}
 			});
-			builder.setPositiveButton("È·¶¨", new OnClickListener() {
+			builder.setPositiveButton("ç¡®å®š", new OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -76,7 +76,7 @@ public class SyncFrequencySettingActivity extends SherlockActivity {
 					finish();
 				}
 			});
-			builder.setNegativeButton("È¡Ïû", new OnClickListener() {
+			builder.setNegativeButton("å–æ¶ˆ", new OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

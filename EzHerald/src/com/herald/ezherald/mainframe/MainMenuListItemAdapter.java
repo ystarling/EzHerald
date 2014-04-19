@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Ö÷²Ëµ¥ÁĞ±íÏîµÄadapter
+ * ä¸»èœå•åˆ—è¡¨é¡¹çš„adapter
  * 
  * @author BorisHe
  * 
@@ -33,8 +33,8 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 	private static final String DEFAULT_COLOR = "#f1f1f1";
 	private final String TAG = "Ez:MainMenuListItemAdapter";
 
-	private Context mContext; // ÔËĞĞÉÏÏÂÎÄ
-	private List<Map<String, Object>> mListItems; // ²Ëµ¥ÏîĞÅÏ¢
+	private Context mContext; // è¿è¡Œä¸Šä¸‹æ–‡
+	private List<Map<String, Object>> mListItems; // èœå•é¡¹ä¿¡æ¯
 
 	public List<Map<String, Object>> getmListItems() {
 		return mListItems;
@@ -44,36 +44,36 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 		this.mListItems = mListItems;
 	}
 
-	private LayoutInflater mListContainer; // ÊÓÍ¼ÈİÆ÷
+	private LayoutInflater mListContainer; // è§†å›¾å®¹å™¨
 
 	public final class ListItemView {
-		// ×Ô¶¨Òå¿Ø¼ş¼¯
+		// è‡ªå®šä¹‰æ§ä»¶é›†
 		public ImageView icon;
 		public TextView title;
 	}
 
 	public final class ListAccountItemView {
-		// ÕË»§µÇÂ½×´Ì¬µÄ¿Ø¼ş¼¯
+		// è´¦æˆ·ç™»é™†çŠ¶æ€çš„æ§ä»¶é›†
 		public ImageView icon;
 		public TextView title;
-		public TextView idCardText; // Ò»¿¨Í¨×´Ì¬
-		public TextView tyxText; // ÌåÓıÏµ×´Ì¬
-		public TextView libText; // Í¼Êé¹İ×´Ì¬
+		public TextView idCardText; // ä¸€å¡é€šçŠ¶æ€
+		public TextView tyxText; // ä½“è‚²ç³»çŠ¶æ€
+		public TextView libText; // å›¾ä¹¦é¦†çŠ¶æ€
 	}
 
 	public MainMenuListItemAdapter(Context context,
 			List<Map<String, Object>> listItems) {
 		/**
-		 * ¹¹Ôìº¯Êı
+		 * æ„é€ å‡½æ•°
 		 */
 		mContext = context;
-		mListContainer = LayoutInflater.from(mContext); // ´´½¨ÊÓÍ¼
+		mListContainer = LayoutInflater.from(mContext); // åˆ›å»ºè§†å›¾
 		mListItems = listItems;
 	}
 
 	@Override
 	public int getCount() {
-		// ÏîÄ¿ÊıÁ¿
+		// é¡¹ç›®æ•°é‡
 		return mListItems.size();
 	}
 
@@ -105,27 +105,27 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 
 	// @Override
 	// public View getView(int position, View convertView, ViewGroup parent) {
-	// // »ñµÃÊÓÍ¼
+	// // è·å¾—è§†å›¾
 	// //Log.d(TAG, "getView");
-	// // ×Ô¶¨ÒåÊÓÍ¼
+	// // è‡ªå®šä¹‰è§†å›¾
 	// ListItemView listItemView = null;
 	// if (convertView == null) {
 	// listItemView = new ListItemView();
-	// // »ñÈ¡²Ëµ¥Ïî²¼¾ÖÎÄ¼şµÄÊÓÍ¼
+	// // è·å–èœå•é¡¹å¸ƒå±€æ–‡ä»¶çš„è§†å›¾
 	// convertView = mListContainer.inflate(R.layout.main_frame_menu_item,
 	// null);
-	// // »ñÈ¡¿Ø¼ş¶ÔÏó
+	// // è·å–æ§ä»¶å¯¹è±¡
 	// listItemView.icon = (ImageView) convertView
 	// .findViewById(R.id.main_frame_menuitem_icon);
 	// listItemView.title = (TextView) convertView
 	// .findViewById(R.id.main_frame_menuitem_title);
-	// // ÉèÖÃ¿Ø¼ş¼¯µ½convertView
+	// // è®¾ç½®æ§ä»¶é›†åˆ°convertView
 	// convertView.setTag(listItemView);
 	// } else {
 	// listItemView = (ListItemView) convertView.getTag();
 	// }
 	//
-	// // ÉèÖÃÎÄ×ÖºÍÍ¼±ê
+	// // è®¾ç½®æ–‡å­—å’Œå›¾æ ‡
 	//
 	// listItemView.icon.setImageResource((Integer) mListItems.get(position)
 	// .get("icon"));
@@ -133,13 +133,13 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 	// "title"));
 	// Boolean selected = (Boolean)mListItems.get(position).get("selected");
 	// if(selected!= null && selected.equals(true)){
-	// //´ËÏîÑ¡ÖĞ
+	// //æ­¤é¡¹é€‰ä¸­
 	// //convertView.setBackgroundColor(Color.parseColor("#10ff0000"));
 	// listItemView.title.setTextColor(Color.parseColor("#eb3c4b"));
 	// listItemView.icon.setImageResource((Integer) mListItems.get(position)
 	// .get("icon_selected"));
 	// convertView.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.main_menu_choosen_color));
-	// convertView.getBackground().setAlpha(115); //Í¸Ã÷¶È
+	// convertView.getBackground().setAlpha(115); //é€æ˜åº¦
 	// } else {
 	// convertView.setBackgroundColor(Color.TRANSPARENT);
 	// listItemView.title.setTextColor(Color.parseColor("#f1f1f1"));//for
@@ -150,29 +150,29 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 	// }
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// »ñµÃÊÓÍ¼
+		// è·å¾—è§†å›¾
 		// Log.d(TAG, "getView");
-		// ×Ô¶¨ÒåÊÓÍ¼
+		// è‡ªå®šä¹‰è§†å›¾
 		ListItemView listItemView = null;
 		ListAccountItemView accountItemView = null;
 		int type = getItemViewType(position);
 		if (convertView == null) {
 
-			// »ñÈ¡²Ëµ¥Ïî²¼¾ÖÎÄ¼şµÄÊÓÍ¼
+			// è·å–èœå•é¡¹å¸ƒå±€æ–‡ä»¶çš„è§†å›¾
 			if (type == VIEW_TYPE_GENERAL) {
 				listItemView = new ListItemView();
-				// ³ıÁËµÚ0ĞĞÕË»§ĞÅÏ¢Ö®ÍâµÄĞĞ
+				// é™¤äº†ç¬¬0è¡Œè´¦æˆ·ä¿¡æ¯ä¹‹å¤–çš„è¡Œ
 				convertView = mListContainer.inflate(
 						R.layout.main_frame_menu_item, null);
-				// »ñÈ¡¿Ø¼ş¶ÔÏó
+				// è·å–æ§ä»¶å¯¹è±¡
 				listItemView.icon = (ImageView) convertView
 						.findViewById(R.id.main_frame_menuitem_icon);
 				listItemView.title = (TextView) convertView
 						.findViewById(R.id.main_frame_menuitem_title);
-				// ÉèÖÃ¿Ø¼ş¼¯µ½convertView
+				// è®¾ç½®æ§ä»¶é›†åˆ°convertView
 				convertView.setTag(listItemView);
 			} else {
-				// ÕË»§ĞÅÏ¢ÄÇÒ»ĞĞ
+				// è´¦æˆ·ä¿¡æ¯é‚£ä¸€è¡Œ
 				accountItemView = new ListAccountItemView();
 				convertView = mListContainer.inflate(
 						R.layout.main_frame_2ndmenu_account_item, null);
@@ -193,28 +193,28 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 				try{
 					listItemView = (ListItemView) convertView.getTag();
 				} catch (ClassCastException e) {
-					//ÎªÊ²Ã´Android2.3ÀÏÊÇÓĞÕâ¸öÎÊÌâ
+					//ä¸ºä»€ä¹ˆAndroid2.3è€æ˜¯æœ‰è¿™ä¸ªé—®é¢˜
 					listItemView = new ListItemView();
-					// ³ıÁËµÚ0ĞĞÕË»§ĞÅÏ¢Ö®ÍâµÄĞĞ
+					// é™¤äº†ç¬¬0è¡Œè´¦æˆ·ä¿¡æ¯ä¹‹å¤–çš„è¡Œ
 					convertView = mListContainer.inflate(
 							R.layout.main_frame_menu_item, null);
-					// »ñÈ¡¿Ø¼ş¶ÔÏó
+					// è·å–æ§ä»¶å¯¹è±¡
 					listItemView.icon = (ImageView) convertView
 							.findViewById(R.id.main_frame_menuitem_icon);
 					listItemView.title = (TextView) convertView
 							.findViewById(R.id.main_frame_menuitem_title);
-					// ÉèÖÃ¿Ø¼ş¼¯µ½convertView
+					// è®¾ç½®æ§ä»¶é›†åˆ°convertView
 					convertView.setTag(listItemView);
 					System.gc();
 				}
 				
 			else {
 				try {
-					// ÄªÃûÆäÃîµÄÎÊÌâ£¿
+					// è«åå…¶å¦™çš„é—®é¢˜ï¼Ÿ
 					accountItemView = (ListAccountItemView) convertView
 							.getTag();
 				} catch (ClassCastException e) {
-					//Android2.3×¨ÓÃµ°ÌÛBug//
+					//Android2.3ä¸“ç”¨è›‹ç–¼Bug//
 					accountItemView = new ListAccountItemView();
 					convertView = mListContainer.inflate(
 							R.layout.main_frame_2ndmenu_account_item, null);
@@ -234,7 +234,7 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			}
 		}
 
-		// ÉèÖÃÎÄ×ÖºÍÍ¼±ê
+		// è®¾ç½®æ–‡å­—å’Œå›¾æ ‡
 
 		if (type == VIEW_TYPE_GENERAL) {
 			listItemView.icon.setImageResource((Integer) mListItems.get(
@@ -244,13 +244,13 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			Boolean selected = (Boolean) mListItems.get(position).get(
 					"selected");
 			if (selected != null && selected.equals(true)) {
-				// ´ËÏîÑ¡ÖĞ
+				// æ­¤é¡¹é€‰ä¸­
 				listItemView.title.setTextColor(Color.parseColor(HIGHLIGHT_COLOR));
 				listItemView.icon.setImageResource((Integer) mListItems.get(
 						position).get("icon_selected"));
 				convertView.setBackgroundDrawable(mContext.getResources()
 						.getDrawable(R.drawable.main_menu_choosen_color));
-				convertView.getBackground().setAlpha(115); // Í¸Ã÷¶È
+				convertView.getBackground().setAlpha(115); // é€æ˜åº¦
 			} else {
 				convertView.setBackgroundColor(Color.TRANSPARENT);
 				listItemView.title.setTextColor(Color.parseColor(DEFAULT_COLOR));// for
@@ -271,7 +271,7 @@ public class MainMenuListItemAdapter extends BaseAdapter {
 			accountItemView.idCardText.setText(idCardState);
 			accountItemView.tyxText.setText(tyxState);
 			accountItemView.libText.setText(libState);
-			// ×ÖµÄÑÕÉ«
+			// å­—çš„é¢œè‰²
 			TextPaint textPaint = accountItemView.idCardText.getPaint();
 			
 			if (idCardState.equals(MainMenuFragment.TEXT_IDCARD_IS_LOGIN)) {

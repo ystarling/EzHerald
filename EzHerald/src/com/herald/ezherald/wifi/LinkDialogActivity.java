@@ -20,9 +20,9 @@ public class LinkDialogActivity extends Activity {
 		AlertDialog.Builder builder = new Builder(this);
 		final WifiManager manager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
 		builder.setCancelable(false);
-		builder.setTitle("·¢ÏÖseu-wlan");
-		builder.setMessage("ÊÇ·ñÁ¬½Ó?");
-		builder.setPositiveButton("ÊÇ", new OnClickListener() {
+		builder.setTitle("å‘ç°seu-wlan");
+		builder.setMessage("æ˜¯å¦è¿æ¥?");
+		builder.setPositiveButton("æ˜¯", new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -38,7 +38,7 @@ public class LinkDialogActivity extends Activity {
 				LinkDialogActivity.this.finish();
 			}
 		});
-		builder.setNegativeButton("·ñ", new OnClickListener() {
+		builder.setNegativeButton("å¦", new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

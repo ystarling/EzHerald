@@ -40,7 +40,7 @@ import android.widget.TextView;
 public class LibraryFragmentMine extends SherlockFragment {
 
 	/**
-	 * ¸öÈË½èÔÄ½çÃæ
+	 * ä¸ªäººå€Ÿé˜…ç•Œé¢
 	 */
 	public ListView mlistView;
 	public UserAccount LibUser;
@@ -83,7 +83,7 @@ public class LibraryFragmentMine extends SherlockFragment {
 			image.setImageResource(R.drawable.libr_mine_nobook);
 			TextView text = (TextView) activity
 					.findViewById(R.id.libr_mine_NoBook);
-			text.setText("µã»÷µÇÂ¼");
+			text.setText("ç‚¹å‡»ç™»å½•");
 			text.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -117,7 +117,7 @@ public class LibraryFragmentMine extends SherlockFragment {
 			Bundle save) {
 		view = inflater.inflate(R.layout.library_fragment_mine, null);
 		Activity ac = getActivity();
-		ac.setTitle("ÎÒµÄÍ¼Êé¹İ");
+		ac.setTitle("æˆ‘çš„å›¾ä¹¦é¦†");
 
 		activity = getActivity();
 		context = getActivity();
@@ -205,19 +205,19 @@ public class LibraryFragmentMine extends SherlockFragment {
 						.findViewById(R.id.libr_mine_attachment);
 				holder.renew_btn = (Button) convertView
 						.findViewById(R.id.libr_mine_renew_btn);
-				convertView.setTag(holder);// °ó¶¨ViewHolder¶ÔÏó
+				convertView.setTag(holder);// ç»‘å®šViewHolderå¯¹è±¡
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
 			String libr_barcode = null, libr_title = null, libr_author = null, libr_borrow_date = null, libr_remand_date = null, libr_renew_num = null;
-			String libr_marc_no = null;// ²é¿´ÏêÇé±ØÌî
+			String libr_marc_no = null;// æŸ¥çœ‹è¯¦æƒ…å¿…å¡«
 			String libr_collection = null;
 			String libr_attachment = null;
 
 			List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 
-			/****** ÉèÖÃ¶ÔÓ¦µÄ¶¯Ì¬Êı×éÊı¾İ *********/
+			/****** è®¾ç½®å¯¹åº”çš„åŠ¨æ€æ•°ç»„æ•°æ® *********/
 			Log.d("jsonArray length():", jsonarray.length() + "");
 
 			for (int i = 0; i < jsonarray.length(); i++) {
@@ -267,30 +267,30 @@ public class LibraryFragmentMine extends SherlockFragment {
 				holder.attachment.setText(data.get(position).get("libr_attachment").toString());
 				holder.renew_btn.setVisibility(View.GONE);
 			} else {
-				holder.barCode.setText(position + 1 + ".  ÌõĞÎÂë£º"
+				holder.barCode.setText(position + 1 + ".  æ¡å½¢ç ï¼š"
 						+ data.get(position).get("libr_barcode").toString());
 				barcode = data.get(position).get("libr_barcode").toString();
-				holder.title.setText("ÌâÃû£º"
+				holder.title.setText("é¢˜åï¼š"
 						+ data.get(position).get("libr_title").toString());
-				holder.author.setText("ÔğÈÎÕß£º"
+				holder.author.setText("è´£ä»»è€…ï¼š"
 						+ data.get(position).get("libr_author").toString());
 				holder.borrow_date
-						.setText("½èÔÄÈÕÆÚ£º"
+						.setText("å€Ÿé˜…æ—¥æœŸï¼š"
 								+ data.get(position).get("libr_borrow_date")
 										.toString());
 				holder.remand_date
-						.setText("Ó¦»¹ÈÕÆÚ£º"
+						.setText("åº”è¿˜æ—¥æœŸï¼š"
 								+ data.get(position).get("libr_remand_date")
 										.toString());
-				holder.renew_num.setText("Ğø½è´ÎÊı£º"
+				holder.renew_num.setText("ç»­å€Ÿæ¬¡æ•°ï¼š"
 						+ data.get(position).get("libr_renew_num").toString());
-				holder.collection.setText("¹İ²ØµØ£º"
+				holder.collection.setText("é¦†è—åœ°ï¼š"
 						+ data.get(position).get("libr_collection").toString());
-				holder.attachment.setText("¸½¼ş£º"
+				holder.attachment.setText("é™„ä»¶ï¼š"
 						+ data.get(position).get("libr_attachment").toString());
-				holder.renew_btn.setText("Ğø½è");
+				holder.renew_btn.setText("ç»­å€Ÿ");
 			}
-			// ShareSaved(data.get(0).get("libr_borrow_date").toString());//´æ´¢
+			// ShareSaved(data.get(0).get("libr_borrow_date").toString());//å­˜å‚¨
 			holder.renew_btn.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -326,13 +326,13 @@ public class LibraryFragmentMine extends SherlockFragment {
 	// HashMap<String,Object> map=new HashMap<String,Object>();
 	// for(int i=0;i<=2;i++){
 	// map.clear();
-	// map.put("barcode", i+"ÌõÂëºÅ: "+"0000123");
-	// map.put("author", "ÌâÃû/ÔğÈÎÕß: "+"½ªÈÖ");
-	// map.put("borrow_date", "½èÔÄÈÕÆÚ: "+"2013/1/1");
-	// map.put("remand_date", "¹é»ØÈÕÆÚ: "+"2013/1/2");
-	// map.put("renew_num", "Ğø½è´ÎÊı: "+"1");
-	// map.put("collection", "¹İ²ØµØ: "+"¾ÅÁúºş");
-	// map.put("attachment", "¸½¼ş: "+"ÎŞ");
+	// map.put("barcode", i+"æ¡ç å·: "+"0000123");
+	// map.put("author", "é¢˜å/è´£ä»»è€…: "+"å§œæˆ");
+	// map.put("borrow_date", "å€Ÿé˜…æ—¥æœŸ: "+"2013/1/1");
+	// map.put("remand_date", "å½’å›æ—¥æœŸ: "+"2013/1/2");
+	// map.put("renew_num", "ç»­å€Ÿæ¬¡æ•°: "+"1");
+	// map.put("collection", "é¦†è—åœ°: "+"ä¹é¾™æ¹–");
+	// map.put("attachment", "é™„ä»¶: "+"æ— ");
 	//
 	// list.add(map);
 	// }
@@ -399,14 +399,14 @@ public class LibraryFragmentMine extends SherlockFragment {
 	// holder.renew_num.setText(get_value().get(position).get("renew_num").toString());
 	// holder.collection.setText(get_value().get(position).get("collection").toString());
 	// holder.attachment.setText(get_value().get(position).get("attachment").toString());
-	// holder.renew_btn.setText("Ğø½è");
+	// holder.renew_btn.setText("ç»­å€Ÿ");
 	//
 	// holder.renew_btn.setOnClickListener(new OnClickListener(){
 	//
 	// @Override
 	// public void onClick(View v) {
 	// // TODO Auto-generated method stub
-	// Toast th=Toast.makeText(getActivity(), "Äã²Â", Toast.LENGTH_LONG);
+	// Toast th=Toast.makeText(getActivity(), "ä½ çŒœ", Toast.LENGTH_LONG);
 	// th.show();
 	// }
 	//

@@ -78,12 +78,12 @@ public class FragmentB extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		user = Authenticate.getIDcardUser(getActivity());
 		progress = new ProgressDialog(getActivity());
-		progress.setTitle("ÕıÔÚ»ñÈ¡,¿ÉÄÜÊ±¼ä½Ï³¤");
-		progress.setIndeterminate(true);// È¦È¦¶ø²»ÊÇ½ø¶ÈÌõ
+		progress.setTitle("æ­£åœ¨è·å–,å¯èƒ½æ—¶é—´è¾ƒé•¿");
+		progress.setIndeterminate(true);// åœˆåœˆè€Œä¸æ˜¯è¿›åº¦æ¡
 		progress.setCancelable(false);
 		final GpaAdapter adapter = new GpaAdapter(getActivity(), progress, user);
 		if (adapter.getGroupCount() == 0) {
-			Toast.makeText(getActivity(), "ÇëÏÈ¸üĞÂÊı¾İ", Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "è¯·å…ˆæ›´æ–°æ•°æ®", Toast.LENGTH_LONG).show();
 		}
 		txtGpa = (TextView) getActivity().findViewById(R.id.txt_gpa);
 		elv = (ExpandableListView) getActivity().findViewById(R.id.eList);
@@ -98,13 +98,13 @@ public class FragmentB extends Fragment {
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						getActivity());
 				builder.setIcon(R.drawable.ic_launcher);
-				builder.setTitle("ÇëÊäÈëÑéÖ¤Âë");
+				builder.setTitle("è¯·è¾“å…¥éªŒè¯ç ");
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				view = inflater.inflate(R.layout.gpa_veryfiy_code, null);
 				imageView = (ImageView) view.findViewById(R.id.imageView);
 				getveryfyCode();
 				//imageView.setImageBitmap(bitmap);
-				builder.setPositiveButton("¸üĞÂ",
+				builder.setPositiveButton("æ›´æ–°",
 						new DialogInterface.OnClickListener() {
 
 							@Override
@@ -120,13 +120,13 @@ public class FragmentB extends Fragment {
 									// TODO: handle exception
 									vercode = 0;
 								}
-								Toast.makeText(getActivity(), "ÕıÔÚ¸üĞÂ",
+								Toast.makeText(getActivity(), "æ­£åœ¨æ›´æ–°",
 										Toast.LENGTH_SHORT).show();
 								progress.show();
 								adapter.update(vercode, client);
 							}
 						});
-				builder.setNegativeButton("È¡Ïû",
+				builder.setNegativeButton("å–æ¶ˆ",
 						new DialogInterface.OnClickListener() {
 
 							@Override
@@ -150,12 +150,12 @@ public class FragmentB extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				try {
-					txtGpa.setText(String.format("ËùÑ¡¼¨µãÎª:%.2f", adapter.getGpaInfo()
+					txtGpa.setText(String.format("æ‰€é€‰ç»©ç‚¹ä¸º:%.2f", adapter.getGpaInfo()
 							.calcAverage()));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					Toast.makeText(getActivity(), "»¹Ã»ÓĞÑ¡Ôñ¿Î³Ì", Toast.LENGTH_SHORT).show();
-					txtGpa.setText("ËùÑ¡¼¨µãÎª:0.00");
+					Toast.makeText(getActivity(), "è¿˜æ²¡æœ‰é€‰æ‹©è¯¾ç¨‹", Toast.LENGTH_SHORT).show();
+					txtGpa.setText("æ‰€é€‰ç»©ç‚¹ä¸º:0.00");
 					e.printStackTrace();
 				}
 			}
@@ -217,7 +217,7 @@ public class FragmentB extends Fragment {
 	}
 
 	private void onLoadImageFailed() {
-		Toast.makeText(getActivity(), "»ñÈ¡ÑéÖ¤ÂëÊ§°Ü", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getActivity(), "è·å–éªŒè¯ç å¤±è´¥", Toast.LENGTH_SHORT).show();
 		dialog.cancel();
 	}
 }

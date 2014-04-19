@@ -67,25 +67,25 @@ public class Tool {
 		String day = "";
 		switch(Tool.getWeekday()){
 		case 1:
-			day = "周一";
+			day = "鍛ㄤ竴";
 			break;
 		case 2:
-			day = "周二";
+			day = "鍛ㄤ簩";
 			break;
 		case 3:
-			day = "周三";
+			day = "鍛ㄤ笁";
 			break;
 		case 4:
-			day = "周四";
+			day = "鍛ㄥ洓";
 			break;
 		case 5:
-			day = "周五";
+			day = "鍛ㄤ簲";
 			break;
 		case 6:
-			day = "周六";
+			day = "鍛ㄥ叚";
 			break;
 		case 7:
-			day = "周日";
+			day = "鍛ㄦ棩";
 			break;
 		}
 		return day;

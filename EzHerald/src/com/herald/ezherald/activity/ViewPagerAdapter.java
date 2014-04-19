@@ -14,22 +14,22 @@ import android.view.View;
 
 /**
  * @author frankiewei
- * Ïà²áµÄÊÊÅäÆ÷.
+ * ç›¸å†Œçš„é€‚é…å™¨.
  */
 public class ViewPagerAdapter extends PagerAdapter {
 
 	/**
-	 * ÉÏÏÂÎÄ
+	 * ä¸Šä¸‹æ–‡
 	 */
 	private Context mContext;
 	
 	/**
-	 * Êı¾İÔ´,ÕâÀïÊÇJSONARRAY
+	 * æ•°æ®æº,è¿™é‡Œæ˜¯JSONARRAY
 	 */
 	private JSONArray mJsonArray;
 	
 	/**
-	 * Hashmap±£´æÏàÆ¬µÄÎ»ÖÃÒÔ¼°ItemView.
+	 * Hashmapä¿å­˜ç›¸ç‰‡çš„ä½ç½®ä»¥åŠItemView.
 	 */
 	private HashMap<Integer, ViewPagerItemView> mHashMap;
 	
@@ -39,7 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 		mHashMap = new HashMap<Integer, ViewPagerItemView>();
 	}
 	
-	//ÕâÀï½øĞĞ»ØÊÕ£¬µ±ÎÒÃÇ×óÓÒ»¬¶¯µÄÊ±ºò£¬»á°ÑÔçÆÚµÄÍ¼Æ¬»ØÊÕµô.
+	//è¿™é‡Œè¿›è¡Œå›æ”¶ï¼Œå½“æˆ‘ä»¬å·¦å³æ»‘åŠ¨çš„æ—¶å€™ï¼Œä¼šæŠŠæ—©æœŸçš„å›¾ç‰‡å›æ”¶æ‰.
 	@Override
 	public void destroyItem(View container, int position, Object object) {
 		ViewPagerItemView itemView = (ViewPagerItemView)object;
@@ -51,14 +51,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 	}
 
-	//ÕâÀï·µ»ØÏà²áÓĞ¶àÉÙÌõ,ºÍBaseAdapterÒ»Ñù.
+	//è¿™é‡Œè¿”å›ç›¸å†Œæœ‰å¤šå°‘æ¡,å’ŒBaseAdapterä¸€æ ·.
 	@Override
 	public int getCount() {
 		return mJsonArray.length();
 	}
 
-	//ÕâÀï¾ÍÊÇ³õÊ¼»¯ViewPagerItemView.Èç¹ûViewPagerItemViewÒÑ¾­´æÔÚ,
-	//ÖØĞÂreload£¬²»´æÔÚnewÒ»¸ö²¢ÇÒÌî³äÊı¾İ.
+	//è¿™é‡Œå°±æ˜¯åˆå§‹åŒ–ViewPagerItemView.å¦‚æœViewPagerItemViewå·²ç»å­˜åœ¨,
+	//é‡æ–°reloadï¼Œä¸å­˜åœ¨newä¸€ä¸ªå¹¶ä¸”å¡«å……æ•°æ®.
 	@Override
 	public Object instantiateItem(View container, int position) {	
 		ViewPagerItemView itemView;

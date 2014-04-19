@@ -24,7 +24,7 @@ import com.tendcloud.tenddata.TCAgent;
 import com.herald.ezherald.R;
 
 /**
- * »ù±¾µÄ¿ò¼Ü£¬Ö÷Òª°üº¬ÁË×óÓÒ²àµÄ²à»¬²Ëµ¥£¬»¹ÓĞµã»÷²Ëµ¥ÏîµÄ²Ù×÷
+ * åŸºæœ¬çš„æ¡†æ¶ï¼Œä¸»è¦åŒ…å«äº†å·¦å³ä¾§çš„ä¾§æ»‘èœå•ï¼Œè¿˜æœ‰ç‚¹å‡»èœå•é¡¹çš„æ“ä½œ
  * 
  * @author BorisHe
  * @updated 20130630
@@ -33,9 +33,9 @@ import com.herald.ezherald.R;
 public class BaseFrameActivity extends SlidingFragmentActivity {
 	protected SlidingMenu menu;
 	protected CanvasTransformer mTrans;
-	protected Fragment mContentFrag; // ÖĞ¼ä³ÊÏÖµÄÄÚÈİ
-	protected Fragment mMenuFrag; // ×ó²à²à»¬²Ëµ¥
-	//protected Fragment mSecondaryMenuFrag; // ÓÒ²à²à»¬²Ëµ¥
+	protected Fragment mContentFrag; // ä¸­é—´å‘ˆç°çš„å†…å®¹
+	protected Fragment mMenuFrag; // å·¦ä¾§ä¾§æ»‘èœå•
+	//protected Fragment mSecondaryMenuFrag; // å³ä¾§ä¾§æ»‘èœå•
 	private long mExitTime;
 	
 	
@@ -43,7 +43,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 
 	protected void initTransformer() {
 		/*
-		 * ³õÊ¼»¯TransformerÊµÏÖSlidingmenuµÄÇĞ»»Ğ§¹û
+		 * åˆå§‹åŒ–Transformerå®ç°Slidingmenuçš„åˆ‡æ¢æ•ˆæœ
 		 */
 		mTrans = new CanvasTransformer() {
 
@@ -59,7 +59,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 
 	public void SetBaseFrameActivity(Fragment contentFragment) {
 		/*
-		 * @prarm contentFragment : ÄÚÈİµÄFragment
+		 * @prarm contentFragment : å†…å®¹çš„Fragment
 		 */
 		// mContentResId = contentResourceId;
 		mContentFrag = contentFragment;
@@ -69,34 +69,34 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		TCAgent.setReportUncaughtExceptions(true);//¿ªÆôÔ¶³ÌÒì³£²¶»ñ
+		TCAgent.setReportUncaughtExceptions(true);//å¼€å¯è¿œç¨‹å¼‚å¸¸æ•è·
 		InitBaseFrame();
-		getSupportActionBar().setIcon(R.drawable.ic_app); //ĞŞ¸Ä³ÌĞòÄÚ²¿µÄÍ¼±ê
+		getSupportActionBar().setIcon(R.drawable.ic_app); //ä¿®æ”¹ç¨‹åºå†…éƒ¨çš„å›¾æ ‡
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 	}
 
 	public void InitBaseFrame() {
 		/**
-		 * ³õÊ¼»¯Õâ¸ö¿ò¼ÜActovity ÔÚsuper.OnCreateÖ®ºóÔÙÊ¹ÓÃ
+		 * åˆå§‹åŒ–è¿™ä¸ªæ¡†æ¶Actovity åœ¨super.OnCreateä¹‹åå†ä½¿ç”¨
 		 * 
 		 * @param contentResourceId
-		 *            : ÄÚÈİlayoutµÄ×ÊÔ´Id
-		 * @prarm contentFragment : ÄÚÈİµÄFragment
+		 *            : å†…å®¹layoutçš„èµ„æºId
+		 * @prarm contentFragment : å†…å®¹çš„Fragment
 		 */
 
 		setBehindContentView(R.layout.main_frame_menu);
 		setContentView(R.layout.empty_frame_content);
-		initTransformer(); // ³õÊ¼»¯¶¯»­
-		initSlidingMenu(); // ³õÊ¼»¯²Ëµ¥
+		initTransformer(); // åˆå§‹åŒ–åŠ¨ç”»
+		initSlidingMenu(); // åˆå§‹åŒ–èœå•
 
 		mMenuFrag = new MainMenuFragment();
 		//mSecondaryMenuFrag = new SecondMenuFragment();
 
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		t.replace(R.id.main_frame_menu, mMenuFrag); // ÇĞ»»menuµÄFragement
-		t.replace(R.id.empty_frame_content, mContentFrag); // ÇĞ»»ÄÚÈİµÄFragement
-		//t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// ÇĞ»»2ndmenuµÄFragement
+		t.replace(R.id.main_frame_menu, mMenuFrag); // åˆ‡æ¢menuçš„Fragement
+		t.replace(R.id.empty_frame_content, mContentFrag); // åˆ‡æ¢å†…å®¹çš„Fragement
+		//t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// åˆ‡æ¢2ndmenuçš„Fragement
 		t.commit();
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -104,13 +104,13 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 
 	private void initSlidingMenu() {
 		/**
-		 * ³õÊ¼»¯²à»¬²Ëµ¥
+		 * åˆå§‹åŒ–ä¾§æ»‘èœå•
 		 */
 		WindowManager wMng = getWindowManager();
 		Display disp = wMng.getDefaultDisplay();
 		int screenWidth = disp.getWidth();
-		int shadowWidth = (int) (0.05 * screenWidth); // ²Ëµ¥ÒõÓ°ÕÚÕÖ¿í¶È
-		int behindOffset = (int) (0.4 * screenWidth); // ²Ëµ¥Ö®ÍâÄÚÈİµÄÏÔÊ¾¿í¶È
+		int shadowWidth = (int) (0.05 * screenWidth); // èœå•é˜´å½±é®ç½©å®½åº¦
+		int behindOffset = (int) (0.4 * screenWidth); // èœå•ä¹‹å¤–å†…å®¹çš„æ˜¾ç¤ºå®½åº¦
 
 		menu = getSlidingMenu();
 		//menu.setMode(SlidingMenu.LEFT_RIGHT);
@@ -141,7 +141,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * ÉÏ²àTitleÎ»ÖÃµÄ°´Å¥µã»÷ÏàÓ¦
+		 * ä¸Šä¾§Titleä½ç½®çš„æŒ‰é’®ç‚¹å‡»ç›¸åº”
 		 */
 		switch (item.getItemId()) {
 		case R.id.action_settings:
@@ -159,31 +159,31 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 			openConfirmDialog();
 			break;
 		case android.R.id.home:
-			menu.toggle(true); // µã»÷ÁË³ÌĞòÍ¼±êºó£¬»áµ¯³ö/ÊÕ»Ø²àÃæ²Ëµ¥
+			menu.toggle(true); // ç‚¹å‡»äº†ç¨‹åºå›¾æ ‡åï¼Œä¼šå¼¹å‡º/æ”¶å›ä¾§é¢èœå•
 			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	/**
-	 * ÍË³ö³ÌĞòÈ·ÈÏ
+	 * é€€å‡ºç¨‹åºç¡®è®¤
 	 */
 	private void openConfirmDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("\nÕæµÄÒªÍË³öÃ´...\n");
-		builder.setPositiveButton("àÅ..", new DialogInterface.OnClickListener() {
+		builder.setMessage("\nçœŸçš„è¦é€€å‡ºä¹ˆ...\n");
+		builder.setPositiveButton("å—¯..", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// È·ÈÏ°´Å¥
+				// ç¡®è®¤æŒ‰é’®
 				finish();
 			}
 		});
-		builder.setNegativeButton("²»ÒªÂï~", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton("ä¸è¦å˜›~", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Toast.makeText(getBaseContext(), "Ì«ºÃÁËÌ«ºÃÁË~", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getBaseContext(), "å¤ªå¥½äº†å¤ªå¥½äº†~", Toast.LENGTH_SHORT).show();
 			}
 		});
 		builder.show();
@@ -195,12 +195,12 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		// Á½´Î·µ»Ø¼üÍË³ö
+		// ä¸¤æ¬¡è¿”å›é”®é€€å‡º
 		
 		if(keyCode == KeyEvent.KEYCODE_BACK){
 			if((System.currentTimeMillis() - mExitTime) > 2000){
 				//Object mHelperUtils;
-				Toast.makeText(this, "ÔÙ°´Ò»´ÎÍË³ö³ÌĞò", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "å†æŒ‰ä¸€æ¬¡é€€å‡ºç¨‹åº", Toast.LENGTH_SHORT).show();
 				mExitTime = System.currentTimeMillis();
 				menu.showMenu();
 			} else {
@@ -214,14 +214,14 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// Í³¼ÆÄ£¿é
+		// ç»Ÿè®¡æ¨¡å—
 		TCAgent.onPause(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// Í³¼ÆÄ£¿é
+		// ç»Ÿè®¡æ¨¡å—
 		TCAgent.onResume(this);
 	}
 	

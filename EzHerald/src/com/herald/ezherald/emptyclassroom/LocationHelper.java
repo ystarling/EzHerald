@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 /**
- * »ñµÃÎ»ÖÃĞÅÏ¢£¨¾ÅÁúºş/¶¡¼ÒÇÅ/ËÄÅÆÂ¥/Î´Öª£©
+ * è·å¾—ä½ç½®ä¿¡æ¯ï¼ˆä¹é¾™æ¹–/ä¸å®¶æ¡¥/å››ç‰Œæ¥¼/æœªçŸ¥ï¼‰
  * 
  * @author BorisHe
  * 
@@ -25,9 +25,9 @@ public class LocationHelper {
 	}
 
 	/**
-	 * ·µ»Øµ±Ç°Î»ÖÃ
+	 * è¿”å›å½“å‰ä½ç½®
 	 * 
-	 * @return spl/djq/jlh/all(ÎŞ·¨¾«È·¶¨Î»)/unknown(·şÎñÃ»¿ª)
+	 * @return spl/djq/jlh/all(æ— æ³•ç²¾ç¡®å®šä½)/unknown(æœåŠ¡æ²¡å¼€)
 	 */
 	public String getCurrentCampusLocation() {
 		String currLoc = "unknown";
@@ -46,9 +46,9 @@ public class LocationHelper {
 					.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 		}
 		if (location != null && location.getAccuracy() < 5000) {
-			// ¾«¶È¹»ÁË
-			double longitude = location.getLongitude(); // ¾­¶È
-			double latitude = location.getLatitude(); // Î³¶È
+			// ç²¾åº¦å¤Ÿäº†
+			double longitude = location.getLongitude(); // ç»åº¦
+			double latitude = location.getLatitude(); // çº¬åº¦
 			int nearestId = getNearestCampusId(longitude, latitude);
 			switch (nearestId) {
 			case 0:
@@ -101,7 +101,7 @@ public class LocationHelper {
 	}
 
 	/**
-	 * ÔİÊ±ÎŞÓÃ
+	 * æš‚æ—¶æ— ç”¨
 	 * 
 	 * @return
 	 */
@@ -114,7 +114,7 @@ public class LocationHelper {
 	}
 
 	/**
-	 * ¿ªÆôÏµÍ³µÄÎ»ÖÃÉèÖÃ
+	 * å¼€å¯ç³»ç»Ÿçš„ä½ç½®è®¾ç½®
 	 */
 	private void enableLocationSettings() {
 		Intent settingsIntent = new Intent(

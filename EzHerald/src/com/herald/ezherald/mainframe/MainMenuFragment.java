@@ -50,28 +50,28 @@ import com.herald.ezherald.radio.RadioActivity;
 import com.tendcloud.tenddata.TCAgent;
 
 /**
- * Ö÷²Ëµ¥Fragment
+ * ä¸»èœå•Fragment
  * @author BorisHe
  *
  */
 public class MainMenuFragment extends ListFragment {
 
-	public static final String TEXT_IDCARD_NOT_LOGIN = "Ò»¿¨Í¨\nÎ´µÇÂ¼";
-	public static final String TEXT_IDCARD_IS_LOGIN = "Ò»¿¨Í¨\nÒÑµÇÂ¼";
-	public static final String TEXT_TYX_NOT_LOGIN = "ÌåÓıÏµ\nÎ´µÇÂ¼";
-	public static final String TEXT_TYX_IS_LOGIN = "ÌåÓıÏµ\nÒÑµÇÂ¼";
-	public static final String TEXT_LIB_NOT_LOGIN = "Í¼Êé¹İ\nÎ´µÇÂ¼";
-	public static final String TEXT_LIB_IS_LOGIN = "Í¼Êé¹İ\nÒÑµÇÂ¼";
+	public static final String TEXT_IDCARD_NOT_LOGIN = "ä¸€å¡é€š\næœªç™»å½•";
+	public static final String TEXT_IDCARD_IS_LOGIN = "ä¸€å¡é€š\nå·²ç™»å½•";
+	public static final String TEXT_TYX_NOT_LOGIN = "ä½“è‚²ç³»\næœªç™»å½•";
+	public static final String TEXT_TYX_IS_LOGIN = "ä½“è‚²ç³»\nå·²ç™»å½•";
+	public static final String TEXT_LIB_NOT_LOGIN = "å›¾ä¹¦é¦†\næœªç™»å½•";
+	public static final String TEXT_LIB_IS_LOGIN = "å›¾ä¹¦é¦†\nå·²ç™»å½•";
 	
 	public static final String SHARED_PREF_NAME = "pref_secondmenu";
 
-	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; //´Ë´ÎÔËĞĞÒÑ¾­ÏÔÊ¾¹ı¸üĞÂÁË
+	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; //æ­¤æ¬¡è¿è¡Œå·²ç»æ˜¾ç¤ºè¿‡æ›´æ–°äº†
 	private final boolean DEBUG_DONOT_KILL_ACTIVITY = false;
 	private List<Map<String, Object>> mListItems;
 	private MainMenuListItemAdapter mListViewAdapter;
-	private String mMenuItemsStr[]; // ÎÄ×Ö(title)
+	private String mMenuItemsStr[]; // æ–‡å­—(title)
 	private Integer mMenuItemsIconResId[] = {
-			R.drawable.main_2ndmenu_ic_account, //ÕË»§µÄÍ¼±ê
+			R.drawable.main_2ndmenu_ic_account, //è´¦æˆ·çš„å›¾æ ‡
 			R.drawable.main_menu_ic_mainframe,
 			R.drawable.main_menu_ic_curriculum,
 			R.drawable.main_menu_ic_activity,
@@ -83,10 +83,10 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_emptcls, 
 			R.drawable.main_menu_ic_gpa,
 			R.drawable.main_menu_ic_gpa
-			}; // Í¼±ê(icon)
+			}; // å›¾æ ‡(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
-			R.drawable.main_2ndmenu_ic_account_login, //ÒÑµÇÂ¼ÕË»§
+			R.drawable.main_2ndmenu_ic_account_login, //å·²ç™»å½•è´¦æˆ·
 			R.drawable.main_menu_ic_mainframe_selected,
 			R.drawable.main_menu_ic_curriculum_selected,
 			R.drawable.main_menu_ic_activity_selected,
@@ -98,7 +98,7 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_emptcls_selected, 
 			R.drawable.main_menu_ic_gpa_selected,
 			R.drawable.main_menu_ic_gpa_selected
-	}; // Ñ¡ÖĞ×´Ì¬µÄÍ¼±ê(icon)
+	}; // é€‰ä¸­çŠ¶æ€çš„å›¾æ ‡(icon)
 			
 	private String mIdCardState; 
 	private String mLibState;
@@ -140,7 +140,7 @@ public class MainMenuFragment extends ListFragment {
 	}
 
 	/**
-	 * ¸üĞÂÊı¾İ¼¯ÖĞµÄµÇÂ½×´Ì¬
+	 * æ›´æ–°æ•°æ®é›†ä¸­çš„ç™»é™†çŠ¶æ€
 	 */
 	private void updateLoginUserNameTitles() {
 		UserAccount account = Authenticate.getIDcardUser(getActivity());
@@ -155,11 +155,11 @@ public class MainMenuFragment extends ListFragment {
 			}
 			mIdCardState = TEXT_IDCARD_IS_LOGIN;
 		} else {
-			mMenuItemsStr[0] = "ÉĞÎ´µÇÂ½";
+			mMenuItemsStr[0] = "å°šæœªç™»é™†";
 			mIdCardState = TEXT_IDCARD_NOT_LOGIN;
 		}
 		
-		//¸üĞÂÁíÍâ2¸öµÇÂ½ÕË»§µÄ×´Ì¬
+		//æ›´æ–°å¦å¤–2ä¸ªç™»é™†è´¦æˆ·çš„çŠ¶æ€
 		account = Authenticate.getLibUser(getActivity());
 		if(null != account){
 			mLibState =  TEXT_LIB_IS_LOGIN;
@@ -244,7 +244,7 @@ public class MainMenuFragment extends ListFragment {
 			break;
 		
 		}
-		TCAgent.onEvent(getActivity(), "Ö÷²Ëµ¥µã»÷", menuTarget);
+		TCAgent.onEvent(getActivity(), "ä¸»èœå•ç‚¹å‡»", menuTarget);
 		
 		if (i != null) {
 			i.putExtra(KEY_SHOWED_UPDATE, true);
@@ -255,10 +255,10 @@ public class MainMenuFragment extends ListFragment {
 	}
 
 	/**
-	 * ³õÊ¼»¯²Ëµ¥ÏîĞÅÏ¢
+	 * åˆå§‹åŒ–èœå•é¡¹ä¿¡æ¯
 	 */
 	private List<Map<String, Object>> getListItems() {
-		//»ñÈ¡parentµÄÀàĞÅÏ¢
+		//è·å–parentçš„ç±»ä¿¡æ¯
 		String localActivityName = getActivity().getLocalClassName();
 		Log.d("MainMenuFragment", "Parent`s class = " + localActivityName);
 		int selectedId = getActivityIdFromString(localActivityName);
@@ -274,7 +274,7 @@ public class MainMenuFragment extends ListFragment {
 			map.put("icon_selected", mMenuItemsIconSelectedResId[i]);
 			map.put("title", mMenuItemsStr[i]);
 			if(i == 0){
-				//ÕË»§µÄ¸½¼ÓĞÅÏ¢
+				//è´¦æˆ·çš„é™„åŠ ä¿¡æ¯
 				map.put("idCardState", mIdCardState);
 				map.put("tyxState", mTyxState);
 				map.put("libState", mLibState);
@@ -294,9 +294,9 @@ public class MainMenuFragment extends ListFragment {
 	}
 
 	/**
-	 * ´ÓgetPackageName()µÃµ½µÄĞÅÏ¢»ñµÃµ±Ç°µÄActivityÊÇÄÄ¸ö
-	 * IDÅÅĞò¼ûR.array.main_menu_itemsÀïÃæµÄË³Ğò£¬´Ó0¿ªÊ¼
-	 * @param localActivityName getActivity().getPackageName()µÄ·µ»ØÖµ
+	 * ä»getPackageName()å¾—åˆ°çš„ä¿¡æ¯è·å¾—å½“å‰çš„Activityæ˜¯å“ªä¸ª
+	 * IDæ’åºè§R.array.main_menu_itemsé‡Œé¢çš„é¡ºåºï¼Œä»0å¼€å§‹
+	 * @param localActivityName getActivity().getPackageName()çš„è¿”å›å€¼
 	 * @return
 	 */
 	private int getActivityIdFromString(String localActivityName) {
@@ -343,7 +343,7 @@ public class MainMenuFragment extends ListFragment {
 	}
 
 	/**
-	 * µ÷ÓÃĞÂµÄActivityºóÉ±ËÀ×Ô¼º..
+	 * è°ƒç”¨æ–°çš„Activityåæ€æ­»è‡ªå·±..
 	 */
 	private void TryKillMyself() {
 
@@ -358,7 +358,7 @@ public class MainMenuFragment extends ListFragment {
 
 	
 	/**
-	 * ÊÕµ½ÓÃ»§Ãû¸üĞÂÇëÇóºó£¬½«ÓÒ²à²Ëµ¥µÄÄÚÈİ¸üĞÂ
+	 * æ”¶åˆ°ç”¨æˆ·åæ›´æ–°è¯·æ±‚åï¼Œå°†å³ä¾§èœå•çš„å†…å®¹æ›´æ–°
 	 * @author BorisHe
 	 *
 	 */
@@ -391,7 +391,7 @@ public class MainMenuFragment extends ListFragment {
 }
 	
 	/**
-	 * ÁªÍøÍ¨¹ıÒ»¿¨Í¨ºÅ»ñÈ¡ÓÃ»§µÄĞÕÃû
+	 * è”ç½‘é€šè¿‡ä¸€å¡é€šå·è·å–ç”¨æˆ·çš„å§“å
 	 * @author BorisHe
 	 *
 	 */
@@ -409,9 +409,9 @@ public class MainMenuFragment extends ListFragment {
 			HttpGet httpGet = new HttpGet(url);
 			
 			try{
-				//È¡µÃHttpClient¶ÔÏó
+				//å–å¾—HttpClientå¯¹è±¡
 				HttpClient httpClient = new DefaultHttpClient();
-				//ÇëÇóHttpClient£¬ÄÃµ½Response
+				//è¯·æ±‚HttpClientï¼Œæ‹¿åˆ°Response
 				HttpResponse httpResponse = httpClient.execute(httpGet);
 				
 				if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
@@ -420,7 +420,7 @@ public class MainMenuFragment extends ListFragment {
 					if(mViewDestroyed)
 						return;
 					
-					setSavedUserId(mIdNum);  //±£´æPrefs!
+					setSavedUserId(mIdNum);  //ä¿å­˜Prefs!
 					setSavedUserName(username);
 					
 					Message msg = new Message();
@@ -444,8 +444,8 @@ public class MainMenuFragment extends ListFragment {
 	}
 	
 	/**
-	 * »ñµÃPreferencesÀïÃæ±£´æ×ÅµÄÒ»¿¨Í¨ºÅ
-	 * Èç¹ûÃ»ÓĞÔò·µ»Ønull
+	 * è·å¾—Preferencesé‡Œé¢ä¿å­˜ç€çš„ä¸€å¡é€šå·
+	 * å¦‚æœæ²¡æœ‰åˆ™è¿”å›null
 	 * @return
 	 */
 	public String getSavedUserId(){
@@ -469,8 +469,8 @@ public class MainMenuFragment extends ListFragment {
 	}
 	
 	/**
-	 * »ñµÃPreferencesÀïÃæ±£´æ×ÅµÄĞÕÃû
-	 * Èç¹ûÃ»ÓĞÔò·µ»Ønull
+	 * è·å¾—Preferencesé‡Œé¢ä¿å­˜ç€çš„å§“å
+	 * å¦‚æœæ²¡æœ‰åˆ™è¿”å›null
 	 * @return
 	 */
 	public String getSavedUserName(){
@@ -493,7 +493,7 @@ public class MainMenuFragment extends ListFragment {
 	}
 	
 	/**
-	 * ĞĞÎª£º¸üĞÂÓÒ²àµÄµÇÂ½×´Ì¬ĞÅÏ¢
+	 * è¡Œä¸ºï¼šæ›´æ–°å³ä¾§çš„ç™»é™†çŠ¶æ€ä¿¡æ¯
 	 */
 	@Override
 	public void onResume() {

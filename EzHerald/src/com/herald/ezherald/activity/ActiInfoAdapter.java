@@ -133,7 +133,7 @@ public class ActiInfoAdapter extends BaseAdapter {
 //		actiInfoHolder.actiIntro.setText(actiInfo.getActiIntro());
 		
 		actiInfoHolder.actiIntro.setText( Html.fromHtml(Html.fromHtml(actiInfo.getActiIntro()).toString()));
-		actiInfoHolder.time.setText(actiInfo.getStartTime()+"ÖÁ"+actiInfo.getEndTime());
+		actiInfoHolder.time.setText(actiInfo.getStartTime()+"è‡³"+actiInfo.getEndTime());
 		actiInfoHolder.place.setText(actiInfo.getPlace());
 		
 		//actiInfoHolder.clubIcon.setImageResource(R.drawable.ic_launcher);
@@ -195,11 +195,11 @@ public class ActiInfoAdapter extends BaseAdapter {
 				Intent intent = new Intent(Intent.ACTION_SEND);
 
 				intent.setType("text/plain");
-				intent.putExtra(Intent.EXTRA_SUBJECT, "·ÖÏí");
+				intent.putExtra(Intent.EXTRA_SUBJECT, "åˆ†äº«");
 				intent.putExtra(Intent.EXTRA_TEXT,
-						name +" ·¢²¼ÁËĞÂ»î¶¯¡¶"+title+"¡·");
+						name +" å‘å¸ƒäº†æ–°æ´»åŠ¨ã€Š"+title+"ã€‹");
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				context.startActivity(Intent.createChooser(intent, "·ÖÏíµ½"));
+				context.startActivity(Intent.createChooser(intent, "åˆ†äº«åˆ°"));
 
 			}
 

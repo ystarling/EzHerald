@@ -46,7 +46,7 @@ public class LibraryFragmentMineThread extends Thread{
 	Context context;
 	JSONArray jsonarray;
 	public String barcode;
-	private MyHandle myHandler=new MyHandle();//³õÊ¼»¯Handler
+	private MyHandle myHandler=new MyHandle();//åˆå§‹åŒ–Handler
 	private MyHandle2 myHandler2=new MyHandle2();
 	public LibraryFragmentMine libraryfragmentmine;
 	public LibraryMineBookMyAdapter myAdapter;
@@ -60,7 +60,7 @@ public class LibraryFragmentMineThread extends Thread{
 		
 		dialog1=new ProgressDialog(context);
 		dialog1.setCanceledOnTouchOutside(false);
-		dialog1.setMessage("¼ÓÔØÖĞ...");
+		dialog1.setMessage("åŠ è½½ä¸­...");
 	}
 	
 	@Override
@@ -83,7 +83,7 @@ public class LibraryFragmentMineThread extends Thread{
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
 			
 			
-			// ÉèÖÃÍøÂç³¬Ê±²ÎÊı
+			// è®¾ç½®ç½‘ç»œè¶…æ—¶å‚æ•°
 			HttpParams httpParams = client.getParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
@@ -118,7 +118,7 @@ public class LibraryFragmentMineThread extends Thread{
 	        for(int i=0;i<jsonarray.length();i++){
 			JSONObject json=jsonarray.getJSONObject(i);
 			BookName[i] = json.getString("title");
-		 	Log.d("ÊéÃû:",""+BookName[i]);
+		 	Log.d("ä¹¦å:",""+BookName[i]);
 	        }
 	        ShowMsg(jsonarray);
 			
@@ -152,22 +152,22 @@ public class LibraryFragmentMineThread extends Thread{
 				dialog1.show();
 			}else
 				if(va=="Networking"){
-				Toast toast1=Toast.makeText(activity, "ÍøÂçÁ¬½Ó´íÎó", Toast.LENGTH_LONG);
+				Toast toast1=Toast.makeText(activity, "ç½‘ç»œè¿æ¥é”™è¯¯", Toast.LENGTH_LONG);
 				toast1.show();
 				dialog1.cancel();
 			}else
 				if(va=="ContentNull"){
-					Toast toast1=Toast.makeText(activity, "Ä¿Ç°Ã»ÓĞ½èÊé", Toast.LENGTH_LONG);
+					Toast toast1=Toast.makeText(activity, "ç›®å‰æ²¡æœ‰å€Ÿä¹¦", Toast.LENGTH_LONG);
 					toast1.show();
 					dialog1.cancel();
 					ImageView image=(ImageView)activity.findViewById(R.id.libr_mine_NoBook2);
 					image.setImageResource(R.drawable.libr_mine_nobook);
 					TextView text=(TextView) activity.findViewById(R.id.libr_mine_NoBook);
-					text.setText("Ä¿Ç°Ã»ÓĞ½èÊé...");
+					text.setText("ç›®å‰æ²¡æœ‰å€Ÿä¹¦...");
 					
 				}else
 					if(va=="ValueError"){
-						Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó",
+						Toast toast1 = Toast.makeText(activity, "ç½‘ç»œè¯·æ±‚é”™è¯¯",
 								Toast.LENGTH_LONG);
 						toast1.show();
 						dialog1.cancel();
@@ -295,21 +295,21 @@ public class LibraryFragmentMineThread extends Thread{
 //				holder.collection=(TextView) convertView.findViewById(R.id.libr_mine_collection);
 //				holder.attachment=(TextView)convertView.findViewById(R.id.libr_mine_attachment);
 //				holder.renew_btn=(Button)convertView.findViewById(R.id.libr_mine_renew_btn);
-//				convertView.setTag(holder);//°ó¶¨ViewHolder¶ÔÏó
+//				convertView.setTag(holder);//ç»‘å®šViewHolderå¯¹è±¡
 //			}
 //			else{
 //				holder=(ViewHolder)convertView.getTag();
 //				}
 //			
 //			String libr_barcode = null,libr_title = null,libr_author = null,libr_borrow_date=null,libr_remand_date=null,libr_renew_num=null;
-//			String libr_marc_no=null;//²é¿´ÏêÇé±ØÌî
+//			String libr_marc_no=null;//æŸ¥çœ‹è¯¦æƒ…å¿…å¡«
 //			String libr_collection=null;
 //			String libr_attachment=null;
 //			
 //			
 //			List<HashMap<String,String>> data=new ArrayList<HashMap<String,String>>();
 //			
-//			/******ÉèÖÃ¶ÔÓ¦µÄ¶¯Ì¬Êı×éÊı¾İ*********/
+//			/******è®¾ç½®å¯¹åº”çš„åŠ¨æ€æ•°ç»„æ•°æ®*********/
 //			Log.d("jsonArray length():",jsonarray.length()+"");
 //			
 //			for(int i=0;i<jsonarray.length();i++){
@@ -344,18 +344,18 @@ public class LibraryFragmentMineThread extends Thread{
 //				e.printStackTrace();
 //			}
 //		}
-//			holder.barCode.setText(position+1+".  ÌõĞÎÂë£º"+data.get(position).get("libr_barcode").toString());
+//			holder.barCode.setText(position+1+".  æ¡å½¢ç ï¼š"+data.get(position).get("libr_barcode").toString());
 //			barcode=data.get(position).get("libr_barcode").toString();
-//			holder.title.setText("ÌâÃû£º"+data.get(position).get("libr_title").toString());
-//			holder.author.setText("ÔğÈÎÕß£º"+data.get(position).get("libr_author").toString());
-//			holder.borrow_date.setText("½èÔÄÈÕÆÚ£º"+data.get(position).get("libr_borrow_date").toString());
-//			holder.remand_date.setText("Ó¦»¹ÈÕÆÚ£º"+data.get(position).get("libr_remand_date").toString());
-//			holder.renew_num.setText("Ğø½è´ÎÊı£º"+data.get(position).get("libr_renew_num").toString());
-//			holder.collection.setText("¹İ²ØµØ£º"+data.get(position).get("libr_collection").toString());
-//			holder.attachment.setText("¸½¼ş£º"+data.get(position).get("libr_attachment").toString());
-//			holder.renew_btn.setText("Ğø½è");
+//			holder.title.setText("é¢˜åï¼š"+data.get(position).get("libr_title").toString());
+//			holder.author.setText("è´£ä»»è€…ï¼š"+data.get(position).get("libr_author").toString());
+//			holder.borrow_date.setText("å€Ÿé˜…æ—¥æœŸï¼š"+data.get(position).get("libr_borrow_date").toString());
+//			holder.remand_date.setText("åº”è¿˜æ—¥æœŸï¼š"+data.get(position).get("libr_remand_date").toString());
+//			holder.renew_num.setText("ç»­å€Ÿæ¬¡æ•°ï¼š"+data.get(position).get("libr_renew_num").toString());
+//			holder.collection.setText("é¦†è—åœ°ï¼š"+data.get(position).get("libr_collection").toString());
+//			holder.attachment.setText("é™„ä»¶ï¼š"+data.get(position).get("libr_attachment").toString());
+//			holder.renew_btn.setText("ç»­å€Ÿ");
 //			
-//			//ShareSaved(data.get(0).get("libr_borrow_date").toString());//´æ´¢
+//			//ShareSaved(data.get(0).get("libr_borrow_date").toString());//å­˜å‚¨
 //			holder.renew_btn.setOnClickListener(new OnClickListener() {
 //				
 //				@Override
@@ -383,7 +383,7 @@ public class LibraryFragmentMineThread extends Thread{
 //		public Button renew_btn;
 //	}
 	
-//	/*************±£´æÓÃ»§ĞÅÏ¢**************/
+//	/*************ä¿å­˜ç”¨æˆ·ä¿¡æ¯**************/
 //	public void ShareSaved(String date){
 //		
 //		LibraryUserSharedPreferences Usershare=new LibraryUserSharedPreferences();

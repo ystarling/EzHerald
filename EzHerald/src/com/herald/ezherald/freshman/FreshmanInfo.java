@@ -34,7 +34,7 @@ public class FreshmanInfo {
 	
 	
 	
-	private String testJson = "{\"play\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"...\", \"title\": \"...\"}], \"study\": [{\"content\": \"内容\", \"title\": \"标题\"}, {\"content\": \"..\", \"title\": \"..\"}],\"faq\": [{\"content\": \"问题内容\", \"best_reply\": \"最佳回复\", \"title\": \"问题标题\"},{\"content\": \"...\", \"best_reply\": \"...\", \"title\": \"...\"}], \"life\": [{\"content\": \"内容\", \"title\": \"标题\"}]} ";
+	private String testJson = "{\"play\": [{\"content\": \"鍐呭\", \"title\": \"鏍囬\"}, {\"content\": \"...\", \"title\": \"...\"}], \"study\": [{\"content\": \"鍐呭\", \"title\": \"鏍囬\"}, {\"content\": \"..\", \"title\": \"..\"}],\"faq\": [{\"content\": \"闂鍐呭\", \"best_reply\": \"鏈�浣冲洖澶峔", \"title\": \"闂鏍囬\"},{\"content\": \"...\", \"best_reply\": \"...\", \"title\": \"...\"}], \"life\": [{\"content\": \"鍐呭\", \"title\": \"鏍囬\"}]} ";
 	private FreshmanListViewAdapter adapter;
 	
 	FreshmanInfo(final Activity activity,final FreshmanListViewAdapter freshmanListViewAdapter){

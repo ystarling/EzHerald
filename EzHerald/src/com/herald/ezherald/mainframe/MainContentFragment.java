@@ -54,9 +54,9 @@ import com.terlici.dragndroplist.DragNDropListView;
 import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
 
 /**
- * ÉÏ´«Í¼Æ¬: http://121.248.63.105/EzHerald/pictureupload/ ÉÏ´«¸üĞÂ:
- * http://121.248.63.105/EzHerald/updateupload/ Í¼Æ¬jsonÏÔÊ¾×îĞÂÎåÌõ:
- * http://121.248.63.105/EzHerald/picturejson/ ¸üĞÂjsonÏÔÊ¾×îĞÂÒ»Ìõ:
+ * ä¸Šä¼ å›¾ç‰‡: http://121.248.63.105/EzHerald/pictureupload/ ä¸Šä¼ æ›´æ–°:
+ * http://121.248.63.105/EzHerald/updateupload/ å›¾ç‰‡jsonæ˜¾ç¤ºæœ€æ–°äº”æ¡:
+ * http://121.248.63.105/EzHerald/picturejson/ æ›´æ–°jsonæ˜¾ç¤ºæœ€æ–°ä¸€æ¡:
  * http://121.248.63.105/EzHerald/updatejson/
  * 
  * @author BorisHe
@@ -64,17 +64,17 @@ import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
  */
 
 /*
- * @author ºÎ²©Î°
+ * @author ä½•åšä¼Ÿ
  * 
  * @since 20130514
  * 
  * @updated 20130630
  * 
- * Ö÷½çÃæ³ÊÏÖÄÚÈİµÄFragement ÆäËû¸÷Ä£¿é¿É²ÎÕÕ±¾FragementµÄ¶¨Òå³ÊÏÖÄÚÈİ
+ * ä¸»ç•Œé¢å‘ˆç°å†…å®¹çš„Fragement å…¶ä»–å„æ¨¡å—å¯å‚ç…§æœ¬Fragementçš„å®šä¹‰å‘ˆç°å†…å®¹
  */
 public class MainContentFragment extends SherlockFragment {
 	// private GridView mGridView; // GridView
-	// private ListView mListView; // ListView£¨Ìæ´úGridView£©
+	// private ListView mListView; // ListViewï¼ˆæ›¿ä»£GridViewï¼‰
 	private DragNDropListView mListView;
 
 	private ViewFlow mViewFlow; // ViewFlow
@@ -103,18 +103,18 @@ public class MainContentFragment extends SherlockFragment {
 	
 
 	// ////////////Temporarily used local variables///////////////////
-	String mContentCont1[] = { "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ",
-			"¼ÓÔØÖĞ", "¼ÓÔØÖĞ" };
-	String mContentCont2[] = { "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ", "¼ÓÔØÖĞ",
-			"¼ÓÔØÖĞ", "¼ÓÔØÖĞ" };
+	String mContentCont1[] = { "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­",
+			"åŠ è½½ä¸­", "åŠ è½½ä¸­" };
+	String mContentCont2[] = { "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­", "åŠ è½½ä¸­",
+			"åŠ è½½ä¸­", "åŠ è½½ä¸­" };
 
 	private boolean mContentIsDestroyed = false;
-	// /////¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢¡¢////////
+	// /////ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€ã€////////
 	private static final int[] image_ids = { R.drawable.main_frame_pic0,
 			R.drawable.main_frame_pic1, R.drawable.main_frame_pic2,
 			R.drawable.main_frame_pic3, R.drawable.main_frame_pic4 };
 
-	private int[] color_ids // Ö÷½çÃæListViewµÄ±³¾°É«
+	private int[] color_ids // ä¸»ç•Œé¢ListViewçš„èƒŒæ™¯è‰²
 	= { R.drawable.main_content_listview_round_shape_blue,
 			R.drawable.main_content_listview_round_shape_green,
 			R.drawable.main_content_listview_round_shape_red,
@@ -144,7 +144,7 @@ public class MainContentFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// ÊÓÍ¼
+		// è§†å›¾
 		View v = inflater.inflate(R.layout.main_frame_content, null);
 
 		mContentIsDestroyed = false;
@@ -209,7 +209,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ´ÓÊ×Ñ¡ÏîÖĞ»ñµÃ¿ÉÒÔÄÃÀ´Ëæ»úµÄÑÕÉ« ²¢×ª»»³Éresource id
+	 * ä»é¦–é€‰é¡¹ä¸­è·å¾—å¯ä»¥æ‹¿æ¥éšæœºçš„é¢œè‰² å¹¶è½¬æ¢æˆresource id
 	 * 
 	 * @return
 	 */
@@ -251,7 +251,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * Ë¢ĞÂViewFlow
+	 * åˆ·æ–°ViewFlow
 	 */
 	public void refreshViewFlowImage() {
 		if (mViewFlow == null) {
@@ -272,13 +272,13 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * »ñµÃÆ«ºÃÉèÖÃ
+	 * è·å¾—åå¥½è®¾ç½®
 	 */
 	private void getPrefItems() {
-		// É¾³ı¾ÉµÄ¶«Î÷
+		// åˆ é™¤æ—§çš„ä¸œè¥¿
 		mContentTitles.clear();
 
-		// »ñµÃÆ«ºÃÉèÖÃ
+		// è·å¾—åå¥½è®¾ç½®
 		SharedPreferences appPrefs = getSherlockActivity()
 				.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 		List<String> result_set;
@@ -295,16 +295,16 @@ public class MainContentFragment extends SherlockFragment {
 				mContentTitles.add(result);
 			}
 		} else {
-			mContentTitles.add("ÉĞÎ´ÉèÖÃ");
+			mContentTitles.add("å°šæœªè®¾ç½®");
 		}
 
 	}
 
 	/**
-	 * ¿ªÏß³Ì¸üĞÂÄ£¿éÃû³Æ Èç¹ûÄ¿Ç°Ã»ÓĞÊµÏÖÕâ¸ö½Ó¿Ú£¬ÄÇÃ´ÏÖÔÚÈûÒ»¸önullµÄ½øÈ¥
+	 * å¼€çº¿ç¨‹æ›´æ–°æ¨¡å—åç§° å¦‚æœç›®å‰æ²¡æœ‰å®ç°è¿™ä¸ªæ¥å£ï¼Œé‚£ä¹ˆç°åœ¨å¡ä¸€ä¸ªnullçš„è¿›å»
 	 * 
 	 * @param moduleName
-	 *            Ä£¿éÓ¢ÎÄÃû³Æ
+	 *            æ¨¡å—è‹±æ–‡åç§°
 	 */
 	private void fetchInfoObjForName(String moduleName, int index) {
 		// MainContentGridItemObj obj = null;
@@ -330,7 +330,7 @@ public class MainContentFragment extends SherlockFragment {
 			// else if ....f
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.w("MainContentFragment", "¸üĞÂ³ö´í..");
+			Log.w("MainContentFragment", "æ›´æ–°å‡ºé”™..");
 		}
 		if (grabber != null) {
 			new Thread(new InfoRunnable(grabber, index)).start();
@@ -339,7 +339,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ¸ù¾İÄ£¿éÃû³ÆµÃµ½Í¼±êµÄ×ÊÔ´id
+	 * æ ¹æ®æ¨¡å—åç§°å¾—åˆ°å›¾æ ‡çš„èµ„æºid
 	 * 
 	 * @param moduleName
 	 * @return
@@ -367,7 +367,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/*
-	 * µã»÷ItemÌø×ªµ½¸÷¸öÄ£¿é
+	 * ç‚¹å‡»Itemè·³è½¬åˆ°å„ä¸ªæ¨¡å—
 	 */
 	private class MyOnItemClickListener implements
 			AdapterView.OnItemClickListener {
@@ -380,7 +380,7 @@ public class MainContentFragment extends SherlockFragment {
 			String clickTarget = "Unknown";
 			switch ((int) id) {
 			case 0:
-				i.setClass(getActivity(), SettingActivity.class); // Òıµ¼µ½ÉèÖÃ½çÃæ±È½ÏºÃ
+				i.setClass(getActivity(), SettingActivity.class); // å¼•å¯¼åˆ°è®¾ç½®ç•Œé¢æ¯”è¾ƒå¥½
 				MainActivity mainActivity = (MainActivity) getActivity();
 				mainActivity.needRefreshContent = true;
 				clickTarget = "Main";
@@ -422,7 +422,7 @@ public class MainContentFragment extends SherlockFragment {
 				clickTarget = "Empt";
 				break;
 			}
-			TCAgent.onEvent(getActivity(), "Ö÷½çÃæListViewµã»÷", clickTarget);
+			TCAgent.onEvent(getActivity(), "ä¸»ç•Œé¢ListViewç‚¹å‡»", clickTarget);
 
 			if (i != null) {
 				startActivity(i);
@@ -434,7 +434,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ³õÊ¼»¯ListViewÏîĞÅÏ¢
+	 * åˆå§‹åŒ–ListViewé¡¹ä¿¡æ¯
 	 */
 	private List<Map<String, Object>> getGridItems() {
 		// Update content info
@@ -458,7 +458,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ³õÊ¼»¯Í¼Æ¬ĞÅÏ¢ key: image Í¼Æ¬µÄID»òÕßÖ±½ÓµÄBitmap¶ÔÏó key: type 0-Í¼Æ¬×ÊÔ´ID, 1-Bitmap¶ÔÏó
+	 * åˆå§‹åŒ–å›¾ç‰‡ä¿¡æ¯ key: image å›¾ç‰‡çš„IDæˆ–è€…ç›´æ¥çš„Bitmapå¯¹è±¡ key: type 0-å›¾ç‰‡èµ„æºID, 1-Bitmapå¯¹è±¡
 	 */
 	private List<Map<String, Object>> getImageItems() {
 		List<Map<String, Object>> imgItems = new ArrayList<Map<String, Object>>();
@@ -474,7 +474,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ¸üĞÂÄ³Ò»ÏîµÄÍ¼Æ¬¶ÔÏó
+	 * æ›´æ–°æŸä¸€é¡¹çš„å›¾ç‰‡å¯¹è±¡
 	 * 
 	 * @param index
 	 * @param bitmap
@@ -493,7 +493,7 @@ public class MainContentFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		Log.d("MainContentFrag", "OnResume");
-		// ¸üĞÂÄÚÈİ
+		// æ›´æ–°å†…å®¹
 		super.onResume();
 		MainActivity mainActivity = (MainActivity) getActivity();
 		if (mainActivity.needRefreshContent) {
@@ -504,13 +504,13 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/*
-	 * ¸üĞÂÄÚÈİ
+	 * æ›´æ–°å†…å®¹
 	 */
 	public void refreshInfo() {
 		// Toast.makeText(getActivity(), "Refreshing...",
 		// Toast.LENGTH_SHORT).show();
 		getPrefItems();
-		// Í¬²½»ñÈ¡¸÷Ä£¿éµÄ¸üĞÂÏîÄ¿
+		// åŒæ­¥è·å–å„æ¨¡å—çš„æ›´æ–°é¡¹ç›®
 		mGridItems = getGridItems();
 		// mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
 		// mGridItems));
@@ -524,7 +524,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ´ÓÊı¾İ¿âÏÈ»ñµÃbannerÊı¾İ Èç¹ûÓĞµÄ»°£¬Ìæ»»µô¾²Ì¬µÄ
+	 * ä»æ•°æ®åº“å…ˆè·å¾—banneræ•°æ® å¦‚æœæœ‰çš„è¯ï¼Œæ›¿æ¢æ‰é™æ€çš„
 	 */
 	private ArrayList<Bitmap> mBitmapList = new ArrayList<Bitmap>();
 	public void refreshImageFromDb() {
@@ -565,7 +565,7 @@ public class MainContentFragment extends SherlockFragment {
 		} else {
 			Log.w("MainActivity", "db record does not exist");
 		}
-		cs.close(); //»ØÊÕ×ÊÔ´
+		cs.close(); //å›æ”¶èµ„æº
 		dbAdapter.close();
 		refreshViewFlowImage();
 	}
@@ -578,7 +578,7 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ´ÓÆ«ºÃÖĞ¸üĞÂ¸÷Ä£¿éĞÅÏ¢µÄ×ÊÁÏ Ö±½Ó¸ü¸ÄmContentCont
+	 * ä»åå¥½ä¸­æ›´æ–°å„æ¨¡å—ä¿¡æ¯çš„èµ„æ–™ ç›´æ¥æ›´æ”¹mContentCont
 	 */
 	public void loadGridContentsFromPref() {
 		SharedPreferences prefs = getActivity().getPreferences(
@@ -598,7 +598,7 @@ public class MainContentFragment extends SherlockFragment {
 
 			int retVal = msg.arg1;
 			if (retVal == 200) {
-				// ¸üĞÂ½çÃæ
+				// æ›´æ–°ç•Œé¢
 				int index = msg.arg2;
 				mGridItems.get(index).put(MAPKEY_CONT1, mContentCont1[index]);
 				mGridItems.get(index).put(MAPKEY_CONT2, mContentCont2[index]);
@@ -657,13 +657,13 @@ public class MainContentFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ListViewÍÏ×§²Ù×÷¼àÌı
+	 * ListViewæ‹–æ‹½æ“ä½œç›‘å¬
 	 * 
 	 * @author BorisHe
 	 * 
 	 */
 	private class ListViewDragDropListener implements OnItemDragNDropListener {
-		List<String> currentPrefArray = null; // µ±Ç°µÄÆ«ºÃĞòÁĞ
+		List<String> currentPrefArray = null; // å½“å‰çš„åå¥½åºåˆ—
 
 		@Override
 		public void onItemDrag(DragNDropListView parent, View view,
@@ -687,7 +687,7 @@ public class MainContentFragment extends SherlockFragment {
 			// + "/" + endPosition + " id=" + id, Toast.LENGTH_SHORT).show();
 			switchItemSeq(startPosition, endPosition);
 
-			// ¸üĞÂPreferences
+			// æ›´æ–°Preferences
 			SharedPreferences prefs = getActivity().getSharedPreferences(
 					PREF_NAME, Context.MODE_PRIVATE);
 			Editor editor = prefs.edit();
@@ -695,16 +695,16 @@ public class MainContentFragment extends SherlockFragment {
 					currentPrefArray);
 			editor.commit();
 
-			// ¸üĞÂÊÓÍ¼
-			mContentCont1[startPosition] = "¼ÓÔØÖĞ";
-			mContentCont1[endPosition] = "¼ÓÔØÖĞ";
-			mContentCont2[startPosition] = "¼ÓÔØÖĞ";
-			mContentCont2[endPosition] = "¼ÓÔØÖĞ";
+			// æ›´æ–°è§†å›¾
+			mContentCont1[startPosition] = "åŠ è½½ä¸­";
+			mContentCont1[endPosition] = "åŠ è½½ä¸­";
+			mContentCont2[startPosition] = "åŠ è½½ä¸­";
+			mContentCont2[endPosition] = "åŠ è½½ä¸­";
 			refreshInfo();
 		}
 
 		/**
-		 * ½»»»ÁĞ±íµÄÁ½Ïî
+		 * äº¤æ¢åˆ—è¡¨çš„ä¸¤é¡¹
 		 * 
 		 * @param pos_a
 		 * @param pos_b

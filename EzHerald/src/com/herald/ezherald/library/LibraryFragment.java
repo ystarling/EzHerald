@@ -44,7 +44,7 @@ import com.herald.ezherald.library.LibraryFragmentThread.MyHandle3;
 
 /*
  * @author BIG_SEA
- *	µÚÒ»¸öfragment£¬ËÑË÷½çÃæ
+ *	ç¬¬ä¸€ä¸ªfragmentï¼Œæœç´¢ç•Œé¢
  */
 public class LibraryFragment extends SherlockFragment {
 
@@ -60,13 +60,13 @@ public class LibraryFragment extends SherlockFragment {
 
 	Boolean isLastRow=false;
 	int lastItem;
-	// ListViewµ×²¿View
+	// ListViewåº•éƒ¨View
 	private View moreView;
 	Button moreButton;
 	private Handler handler;
-	// ÉèÖÃÒ»¸ö×î´óµÄÊı¾İÌõÊı£¬³¬¹ı¼´²»ÔÙ¼ÓÔØ
+	// è®¾ç½®ä¸€ä¸ªæœ€å¤§çš„æ•°æ®æ¡æ•°ï¼Œè¶…è¿‡å³ä¸å†åŠ è½½
 	private int MaxDateNum;
-	// ×îºó¿É¼ûÌõÄ¿µÄË÷Òı
+	// æœ€åå¯è§æ¡ç›®çš„ç´¢å¼•
 	private int lastVisibleIndex;
 	public ArrayList<HashMap<String, String>> list;
 	SimpleAdapter mSimpleAdapter;
@@ -90,14 +90,14 @@ public class LibraryFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		activity = getActivity();
-		activity.setTitle("Í¼ÊéËÑË÷");
+		activity.setTitle("å›¾ä¹¦æœç´¢");
 		context = getActivity();
 
 		view = inflater.inflate(R.layout.library_fragment_main, null);
 		
 		dialog1 = new ProgressDialog(activity);
 		dialog1.setCanceledOnTouchOutside(false);
-		dialog1.setMessage("¼ÓÔØÖĞ...");
+		dialog1.setMessage("åŠ è½½ä¸­...");
 		
 		libr_search_text = (EditText) view.findViewById(R.id.libr_search_text);
 		ImageView libr_search_button = (ImageView) view
@@ -125,7 +125,7 @@ public class LibraryFragment extends SherlockFragment {
 						R.id.libr_listitem_book_store_num,
 						R.id.libr_listitem_book_landable_num });
 
-		// ¼ÓÉÏµ×²¿View£¬×¢ÒâÒª·ÅÔÚsetAdapter·½·¨Ç°
+		// åŠ ä¸Šåº•éƒ¨Viewï¼Œæ³¨æ„è¦æ”¾åœ¨setAdapteræ–¹æ³•å‰
 		listview.addFooterView(moreView);
 		listview.setAdapter(mSimpleAdapter);
 
@@ -138,13 +138,13 @@ public class LibraryFragment extends SherlockFragment {
 				CountOfScroll_two= 2;
 				libr_search_value = libr_search_text.getText().toString();
 
-				/******** Òş²ØÈí¼üÅÌ *************/
+				/******** éšè—è½¯é”®ç›˜ *************/
 				InputMethodManager m = (InputMethodManager) getActivity()
 						.getSystemService(Context.INPUT_METHOD_SERVICE);
 				m.hideSoftInputFromWindow(libr_search_text.getWindowToken(), 0);
 
 				if (libr_search_value.isEmpty()) {
-					Toast toast = Toast.makeText(getActivity(), "ËÑË÷¹Ø¼ü´ÊÎª¿Õ",
+					Toast toast = Toast.makeText(getActivity(), "æœç´¢å…³é”®è¯ä¸ºç©º",
 							Toast.LENGTH_SHORT);
 					toast.show();
 				} else {
@@ -170,7 +170,7 @@ public class LibraryFragment extends SherlockFragment {
 //								moreButton.setVisibility(View.VISIBLE);
 //							}
 //							listview.setAdapter(mSimpleAdapter);
-//							mSimpleAdapter.notifyDataSetChanged();// Í¨ÖªlistViewË¢ĞÂÊı¾İ
+//							mSimpleAdapter.notifyDataSetChanged();// é€šçŸ¥listViewåˆ·æ–°æ•°æ®
 //							
 //							dialog1.cancel();
 //							Log.e("list5", list + "");
@@ -200,14 +200,14 @@ public class LibraryFragment extends SherlockFragment {
 //						public void onScrollStateChanged(AbsListView view,
 //								int scrollState) {
 //							// TODO Auto-generated method stub
-//							// µ±¹öµ½×îºóÒ»ĞĞÇÒÍ£Ö¹¹ö¶¯Ê±£¬Ö´ĞĞ¼ÓÔØ
+//							// å½“æ»šåˆ°æœ€åä¸€è¡Œä¸”åœæ­¢æ»šåŠ¨æ—¶ï¼Œæ‰§è¡ŒåŠ è½½
 //							if (isLastRow == true
 //									&& scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-//								// ¼ÓÔØÔªËØ
-//								Toast toast1 = Toast.makeText(activity, "¼ÓÔØ¸ü¶à",
+//								// åŠ è½½å…ƒç´ 
+//								Toast toast1 = Toast.makeText(activity, "åŠ è½½æ›´å¤š",
 //										Toast.LENGTH_SHORT);
 //								toast1.show();
-//								/********* ÉèÖÃ±àºÅÎÊÌâ *************/
+//								/********* è®¾ç½®ç¼–å·é—®é¢˜ *************/
 //								if (!TestSearchValue.equals(libr_search_value)) {
 //									CountOfScroll = 0;
 //								}
@@ -230,7 +230,7 @@ public class LibraryFragment extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				moreButton.setVisibility(View.GONE);// °´Å¥²»¿É¼û
+				moreButton.setVisibility(View.GONE);// æŒ‰é’®ä¸å¯è§
 
 				LibraryFragmentThread th = new LibraryFragmentThread(
 						libr_search_value, activity, CountOfScroll_two,
@@ -256,7 +256,7 @@ public class LibraryFragment extends SherlockFragment {
 //
 //							moreButton.setVisibility(View.VISIBLE);
 //						}
-//						mSimpleAdapter.notifyDataSetChanged();// Í¨ÖªlistViewË¢ĞÂÊı¾İ
+//						mSimpleAdapter.notifyDataSetChanged();// é€šçŸ¥listViewåˆ·æ–°æ•°æ®
 //
 //					}
 //				}, 0);
@@ -344,7 +344,7 @@ public class LibraryFragment extends SherlockFragment {
 				libr_landable_num = json.getString("lendable_num");
 
 			} catch (Exception e) {
-				Log.e("error", "´«À´Ê§°Ü");
+				Log.e("error", "ä¼ æ¥å¤±è´¥");
 			}
 			map1.put("libr_title", ((num-1)*20 +i+1)+ " " + libr_name);
 			map1.put("libr_name", libr_author);
@@ -352,8 +352,8 @@ public class LibraryFragment extends SherlockFragment {
 			map1.put("libr_callNumber", libr_callNumber);
 			map1.put("libr_ducumentType", libr_ducumentType);
 			map1.put("libr_marc_no", libr_marc_no);
-			map1.put("libr_store_num", "¹İ²Ø¸±±¾ : " + libr_store_num);
-			map1.put("libr_landable_num", "¿É½è¸±±¾ : " + libr_landable_num);
+			map1.put("libr_store_num", "é¦†è—å‰¯æœ¬ : " + libr_store_num);
+			map1.put("libr_landable_num", "å¯å€Ÿå‰¯æœ¬ : " + libr_landable_num);
 			list.add(map1);
 		}
 		
@@ -375,7 +375,7 @@ public class LibraryFragment extends SherlockFragment {
 
 					moreButton.setVisibility(View.VISIBLE);
 				}
-				mSimpleAdapter.notifyDataSetChanged();// Í¨ÖªlistViewË¢ĞÂÊı¾İ
+				mSimpleAdapter.notifyDataSetChanged();// é€šçŸ¥listViewåˆ·æ–°æ•°æ®
 
 			}
 		}, 0);
@@ -390,7 +390,7 @@ public class LibraryFragment extends SherlockFragment {
 		JSONObject json = null;
 		ShowMsg(jsonarray);
 		jsonarraycount = isFilled(jsonarray);
-		list.clear();// empty list£¬not allowed list=local_list
+		list.clear();// empty listï¼Œnot allowed list=local_list
 		
 		for (int i = 0; i < jsonarray.length(); i++) {
 			HashMap<String, String> map1 = new HashMap<String, String>();
@@ -408,7 +408,7 @@ public class LibraryFragment extends SherlockFragment {
 				libr_landable_num = json.getString("lendable_num");
 
 			} catch (Exception e) {
-				Log.e("error", "´«À´Ê§°Ü");
+				Log.e("error", "ä¼ æ¥å¤±è´¥");
 			}
 
 			map1.put("libr_title", ((num-1)*20 +i+1)+ " . " + libr_name);
@@ -421,8 +421,8 @@ public class LibraryFragment extends SherlockFragment {
 			map1.put("libr_callNumber", libr_callNumber);
 			map1.put("libr_ducumentType", libr_ducumentType);
 			map1.put("libr_marc_no", libr_marc_no);
-			map1.put("libr_store_num", "¹İ²Ø¸±±¾ : " + libr_store_num);
-			map1.put("libr_landable_num", "¿É½è¸±±¾ : " + libr_landable_num);
+			map1.put("libr_store_num", "é¦†è—å‰¯æœ¬ : " + libr_store_num);
+			map1.put("libr_landable_num", "å¯å€Ÿå‰¯æœ¬ : " + libr_landable_num);
 			list.add(map1);
 		}
 		TestSearchValue = libr_search_value;
@@ -439,7 +439,7 @@ public class LibraryFragment extends SherlockFragment {
 					moreButton.setVisibility(View.VISIBLE);
 				}
 				listview.setAdapter(mSimpleAdapter);
-				mSimpleAdapter.notifyDataSetChanged();// Í¨ÖªlistViewË¢ĞÂÊı¾İ
+				mSimpleAdapter.notifyDataSetChanged();// é€šçŸ¥listViewåˆ·æ–°æ•°æ®
 				
 				dialog1.cancel();
 				Log.e("list5", list + "");
@@ -458,7 +458,7 @@ public class LibraryFragment extends SherlockFragment {
 		}
 	}
 	public void SetRemind() {
-		Toast toast1 = Toast.makeText(activity, "¸ÃÍ¼Êé²»´æÔÚ!",
+		Toast toast1 = Toast.makeText(activity, "è¯¥å›¾ä¹¦ä¸å­˜åœ¨!",
 				Toast.LENGTH_SHORT);
 		toast1.show();
 	}
@@ -549,19 +549,19 @@ public class LibraryFragment extends SherlockFragment {
 	// convertView.findViewById(R.id.libr_listitem_book_date);
 	// holder.libr_button_reserve=(Button)
 	// convertView.findViewById(R.id.libr_listitem_book_reserve);
-	// convertView.setTag(holder);//°ó¶¨ViewHolder¶ÔÏó
+	// convertView.setTag(holder);//ç»‘å®šViewHolderå¯¹è±¡
 	// }
 	// else{
 	// holder=(ViewHolder)convertView.getTag();
 	// }
 	//
-	// /******ÉèÖÃ¶ÔÓ¦µÄ¶¯Ì¬Êı×éÊı¾İ*********/
+	// /******è®¾ç½®å¯¹åº”çš„åŠ¨æ€æ•°ç»„æ•°æ®*********/
 	// //holder.libr_photo.setImageResource(R.drawable.seu);
 	// holder.libr_name.setText(.get(position).get("name").toString());
 	// holder.libr_author.setText(.get(position).get("author").toString());
 	// holder.libr_press.setText(.get(position).get("press").toString());
 	// holder.libr_date.setText(.get(position).get("date").toString());
-	// holder.libr_button_reserve.setText("Ô¤Ô¼");
+	// holder.libr_button_reserve.setText("é¢„çº¦");
 	//
 	// holder.libr_button_reserve.setOnClickListener(new OnClickListener(){
 	//
@@ -569,7 +569,7 @@ public class LibraryFragment extends SherlockFragment {
 	// public void onClick(View v) {
 	// // TODO Auto-generated method stub
 	//
-	// Toast th=Toast.makeText(getActivity(),"ÄãücµÄÊÇ",Toast.LENGTH_SHORT);
+	// Toast th=Toast.makeText(getActivity(),"ä½ é»çš„æ˜¯",Toast.LENGTH_SHORT);
 	// th.show();
 	// Intent intent=new Intent(getActivity(), LibraryActivityReserve.class);
 	// startActivity(intent);

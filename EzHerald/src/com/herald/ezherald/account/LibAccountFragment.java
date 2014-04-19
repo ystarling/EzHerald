@@ -118,7 +118,7 @@ public class LibAccountFragment extends SherlockFragment {
 
 	private OnClickListener submitListener = new OnClickListener() {
 		public void onClick(View v) {
-			proDialog = ProgressDialog.show(getActivity(), "ÇëÉÔºò", "", true,
+			proDialog = ProgressDialog.show(getActivity(), "è¯·ç¨å€™", "", true,
 					true);
 
 			Thread loginThread = new Thread(new LoginFailureHandler());
@@ -203,23 +203,23 @@ public class LibAccountFragment extends SherlockFragment {
 		}
 		
 		/**
-		 * ÑéÖ¤¸ø¶¨µÄÓÃ»§Ãû£¬ÃÜÂëÊÇ·ñºÏ·¨
+		 * éªŒè¯ç»™å®šçš„ç”¨æˆ·åï¼Œå¯†ç æ˜¯å¦åˆæ³•
 		 * @param userName
 		 * @param password
 		 * @return
 		 */
 		private int verifyLibUserPswd(String userName, String passWord) {			
 			int retValue = VERIFY_SERVICE_ERROR;
-			HttpPost httpPost = new HttpPost(HERALD_WS_LIB_URI);  //´´½¨HttpPost¶ÔÏó
+			HttpPost httpPost = new HttpPost(HERALD_WS_LIB_URI);  //åˆ›å»ºHttpPostå¯¹è±¡
 			
-			//ÉèÖÃHttp POSTÇëÇó²ÎÊı
+			//è®¾ç½®Http POSTè¯·æ±‚å‚æ•°
 			List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
 			params.add(new BasicNameValuePair(POST_KEY_USERNAME, userName));
 			params.add(new BasicNameValuePair(POST_KEY_PASSWORD, passWord));
 			
 			HttpResponse httpResponse = null;
 			try{
-				//ÉèÖÃpostÇëÇó²ÎÊı
+				//è®¾ç½®postè¯·æ±‚å‚æ•°
 				httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 				httpResponse = new DefaultHttpClient().execute(httpPost);
 				if(httpResponse.getStatusLine().getStatusCode() == 200){
@@ -255,7 +255,7 @@ public class LibAccountFragment extends SherlockFragment {
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}
-				Toast.makeText(getActivity(), "±§Ç¸£¬·şÎñ³ö´í£¬ÇëÉÔºóÔÙÊÔ£¡",
+				Toast.makeText(getActivity(), "æŠ±æ­‰ï¼ŒæœåŠ¡å‡ºé”™ï¼Œè¯·ç¨åå†è¯•ï¼",
 						Toast.LENGTH_SHORT).show();
 			}
 		};
@@ -264,7 +264,7 @@ public class LibAccountFragment extends SherlockFragment {
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}			
-				Toast.makeText(getActivity(), "µ±Ç°ÍøÂç²»¿ÉÓÃ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "å½“å‰ç½‘ç»œä¸å¯ç”¨", Toast.LENGTH_SHORT).show();
 				
 			}
 		};
@@ -273,7 +273,7 @@ public class LibAccountFragment extends SherlockFragment {
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}			
-				Toast.makeText(getActivity(), "±§Ç¸£¬Í¼Êé¹İµÇÂ¼·şÎñ³ö´í£¬ÇëÉÔºóÔÙÊÔ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "æŠ±æ­‰ï¼Œå›¾ä¹¦é¦†ç™»å½•æœåŠ¡å‡ºé”™ï¼Œè¯·ç¨åå†è¯•", Toast.LENGTH_SHORT).show();
 				
 			}
 		};
@@ -282,7 +282,7 @@ public class LibAccountFragment extends SherlockFragment {
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}			
-				Toast.makeText(getActivity(), "´íÎóµÄÓÃ»§Ãû»òÃÜÂë", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "é”™è¯¯çš„ç”¨æˆ·åæˆ–å¯†ç ", Toast.LENGTH_SHORT).show();
 				
 			}
 		};
@@ -291,7 +291,7 @@ public class LibAccountFragment extends SherlockFragment {
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}			
-				Toast.makeText(getActivity(), "µÇÂ¼³É¹¦", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "ç™»å½•æˆåŠŸ", Toast.LENGTH_SHORT).show();
 				
 			}
 		};

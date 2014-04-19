@@ -68,9 +68,9 @@ public class RadioFragment extends SherlockFragment {
 		 this.savedInstanceState = savedInstanceState;
 		 ActionBar bar = getSherlockActivity().getSupportActionBar();
 		 bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		 bar.setTitle("¹ã²¥Ì¨");
-		 ActionBar.Tab tab1 = bar.newTab().setText("ÎÒÒªµã¸è").setTabListener(new Listener());
-		 ActionBar.Tab tab2 = bar.newTab().setText("¹ã²¥Ô¤±¨").setTabListener(new Listener());
+		 bar.setTitle("å¹¿æ’­å°");
+		 ActionBar.Tab tab1 = bar.newTab().setText("æˆ‘è¦ç‚¹æ­Œ").setTabListener(new Listener());
+		 ActionBar.Tab tab2 = bar.newTab().setText("å¹¿æ’­é¢„æŠ¥").setTabListener(new Listener());
 		 bar.addTab(tab1);
 		 bar.addTab(tab2);
 		 return inflater.inflate(R.layout.radio_fragment_main,container,false);
@@ -80,7 +80,7 @@ public class RadioFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		UserAccount user = Authenticate.getIDcardUser(context);
 		if(user == null ){
-			Toast.makeText(context, "ÇëÏÈµÇÂ¼", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "è¯·å…ˆç™»å½•", Toast.LENGTH_SHORT).show();
 			//getActivity().setContentView(setNotLoginView(inflater, container, savedInstanceState));
 			Intent intent = new Intent();
 			intent.setClass(context, IDCardAccountActivity.class);

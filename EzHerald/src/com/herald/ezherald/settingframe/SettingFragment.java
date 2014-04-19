@@ -21,7 +21,7 @@ import com.herald.ezherald.mainframe.MainGuideActivity;
 
 public class SettingFragment extends SherlockListFragment {
 	/*
-	 * 软件设置的ListFragment (non-Javadoc)
+	 * 杞欢璁剧疆鐨凩istFragment (non-Javadoc)
 	 * 
 	 * @see
 	 * android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater
@@ -68,7 +68,7 @@ public class SettingFragment extends SherlockListFragment {
 
 
 	/**
-	 * 列表项点击的响应
+	 * 鍒楄〃椤圭偣鍑荤殑鍝嶅簲
 	 */
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {

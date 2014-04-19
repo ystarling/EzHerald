@@ -41,7 +41,7 @@ public class LibraryFragmentThread extends Thread{
 	LibraryFragment libraryfragment;
 	//int length;
 	//boolean isLastRow = false;
-	//private MyHandle myHandler = new MyHandle();// ³õÊ¼»¯Handler
+	//private MyHandle myHandler = new MyHandle();// åˆå§‹åŒ–Handler
 	private MyHandle2 myHandler2 = new MyHandle2();
 	private MyHandle3 myHandler3 = new MyHandle3();
 	
@@ -57,7 +57,7 @@ public class LibraryFragmentThread extends Thread{
 		
 		dialog1 = new ProgressDialog(activity);
 		dialog1.setCanceledOnTouchOutside(false);
-		dialog1.setMessage("¼ÓÔØÖĞ...");
+		dialog1.setMessage("åŠ è½½ä¸­...");
 		
 	}
 
@@ -161,13 +161,13 @@ public class LibraryFragmentThread extends Thread{
 				dialog1.show();
 			}
 			if(va=="NetWorkingError"){
-				Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó...",
+				Toast toast1 = Toast.makeText(activity, "ç½‘ç»œè¯·æ±‚é”™è¯¯...",
 						Toast.LENGTH_LONG);
 				toast1.show();
 				dialog1.cancel();
 			}
 			if(va=="ValueError"){
-				Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó...",
+				Toast toast1 = Toast.makeText(activity, "ç½‘ç»œè¯·æ±‚é”™è¯¯...",
 						Toast.LENGTH_LONG);
 				toast1.show();
 				dialog1.cancel();
@@ -203,7 +203,7 @@ public class LibraryFragmentThread extends Thread{
 	}
 
 		public void SetRemind() {
-			Toast toast1 = Toast.makeText(activity, "¸ÃÍ¼Êé²»´æÔÚ!",
+			Toast toast1 = Toast.makeText(activity, "è¯¥å›¾ä¹¦ä¸å­˜åœ¨!",
 					Toast.LENGTH_SHORT);
 			toast1.show();
 		}

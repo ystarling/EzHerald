@@ -114,7 +114,7 @@ public class GpaInfo {
 	}
 
 	/**
-	 * @return Ëã³öµÄÆ½¾ù¼¨µã
+	 * @return ç®—å‡ºçš„å¹³å‡ç»©ç‚¹
 	 * @throws Exception 
 	 */
 	public float calcAverage() throws Exception {
@@ -209,15 +209,15 @@ public class GpaInfo {
 		gpaDbModel.open();
 		for (Record r : records) {
 			if (!r.getExtra().equals("")) {
-				r.setSelected(false);//¸üĞÂÏÔÊ¾µÄÊı¾İ
-				gpaDbModel.changeSelection(r.getName(), false);//¸üĞÂÊı¾İ¿â
+				r.setSelected(false);//æ›´æ–°æ˜¾ç¤ºçš„æ•°æ®
+				gpaDbModel.changeSelection(r.getName(), false);//æ›´æ–°æ•°æ®åº“
 			}
 		}
 		gpaDbModel.close();
 	}
 
 	/**
-	 * È¥³ı×îÓÒ±ßµÄÒ»¸öÒì³£×Ö·û£¬Ô­ÉúµÄtrim²»Æğ×÷ÓÃ
+	 * å»é™¤æœ€å³è¾¹çš„ä¸€ä¸ªå¼‚å¸¸å­—ç¬¦ï¼ŒåŸç”Ÿçš„trimä¸èµ·ä½œç”¨
 	 * 
 	 * @param s
 	 * @return
@@ -231,8 +231,8 @@ public class GpaInfo {
 		gpaDbModel.open();
 		for(Record r:records){
 			if(r.isSelected() == false){
-				r.setSelected(true);//¸üĞÂÏÔÊ¾µÄÊı¾İ
-				gpaDbModel.changeSelection(r.getName(), true);//¸üĞÂÊı¾İ¿â
+				r.setSelected(true);//æ›´æ–°æ˜¾ç¤ºçš„æ•°æ®
+				gpaDbModel.changeSelection(r.getName(), true);//æ›´æ–°æ•°æ®åº“
 			}
 			
 		}

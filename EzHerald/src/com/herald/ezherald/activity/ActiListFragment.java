@@ -84,7 +84,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 	{
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("ÇëÉÔºò ... ");
+		progressDialog.setMessage("è¯·ç¨å€™ ... ");
 	}
 	
 	@Override
@@ -154,7 +154,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		return super.onOptionsItemSelected(item);
 	}
 	
-	// Ë¢ĞÂ²Ëµ¥¿ªÊ¼Ğı×ª
+	// åˆ·æ–°èœå•å¼€å§‹æ—‹è½¬
 	public void onRefreshActionStart()
 	{
 		//REFRESHSTATE = REFRESHING ;
@@ -163,7 +163,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		progressDialog.show();
 	}
 	
-	// Ë¢ĞÂ²Ëµ¥Í£Ö¹Ğı×ª
+	// åˆ·æ–°èœå•åœæ­¢æ—‹è½¬
 	public void onRefreshActionComplete()
 	{
 		//REFRESHSTATE = REFRESHDOWN;
@@ -272,7 +272,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		
 		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
 
-		actionBar.setTitle("Ğ£Ô°»î¶¯");
+		actionBar.setTitle("æ ¡å›­æ´»åŠ¨");
 		
 		if(DBAdapter.checkIfDBEmpty())
 		{
@@ -390,7 +390,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		  {
-		    //Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		      return;
 		  }
@@ -514,7 +514,7 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		  {
-		    //Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		      return;
 		  }
@@ -525,11 +525,11 @@ public class ActiListFragment extends SherlockFragment implements ActionBar.OnNa
 			try{
 				if(result == null)
 				{
-					Toast.makeText(context, "¼ÓÔØÊ§°Ü", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "åŠ è½½å¤±è´¥", Toast.LENGTH_LONG).show();
 				}
 				else if(result.size() == 0)
 				{
-					Toast.makeText(context, "Ã»ÓĞ¸ü¶àĞÅÏ¢", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "æ²¡æœ‰æ›´å¤šä¿¡æ¯", Toast.LENGTH_LONG).show();
 				}
 				else{
 					insertActiInfoToDB(result,DBAdapter);

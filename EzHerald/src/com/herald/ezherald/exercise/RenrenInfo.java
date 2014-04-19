@@ -23,15 +23,15 @@ import android.util.Log;
 
 /**
  * @author xie
- * ÌåÓıÏµÈËÈËµÄÔç²Ù²¥±¨ÏûÏ¢
+ * ä½“è‚²ç³»äººäººçš„æ—©æ“æ’­æŠ¥æ¶ˆæ¯
  */
 public class RenrenInfo{
-	public static final boolean DEBUG = false;//TODO¡¡just for debug,must be removed before release 
+	public static final boolean DEBUG = false;//TODOã€€just for debug,must be removed before release 
 	private final String URL = "https://api.renren.com/v2/status/list?access_token=";
 	private final int SUCCESS = 1,FAILED = 0;
 	private String info;
 	private String date;
-	private String message;//ÁªÍø¶ÁÈ¡µ½µÄĞÅÏ¢
+	private String message;//è”ç½‘è¯»å–åˆ°çš„ä¿¡æ¯
 	private SharedPreferences pref;
 	private FragmentA father;
 	public Context context;
@@ -49,8 +49,8 @@ public class RenrenInfo{
 		}
 	};
 	/**
-	 * @param activity µ÷ÓÃÕßµÄactivity
-	 * ¹¹ÔìÊ±»á´ÓsharedPreference³¢ÊÔ¶ÁÊı¾İ
+	 * @param activity è°ƒç”¨è€…çš„activity
+	 * æ„é€ æ—¶ä¼šä»sharedPreferenceå°è¯•è¯»æ•°æ®
 	 */
 	public RenrenInfo(Context context,FragmentA father){
 		this.context = context;
@@ -78,15 +78,15 @@ public class RenrenInfo{
 				date = date.split(" ")[0];
 				if(date.equals(today)){
 					String info = object.getString("content");
-					setInfo(getInfo()+info+"\n\n·¢²¼Ê±¼ä\n"+object.getString("createTime")+"\n\n\n");
+					setInfo(getInfo()+info+"\n\nå‘å¸ƒæ—¶é—´\n"+object.getString("createTime")+"\n\n\n");
 					setDate(date);
 					save();
 				}else{
 					break;
 				}
 			}
-			if(getInfo()==null||getInfo().equals("")){//Ã»ÓĞÕÒµ½½ñÌìµÄ£¬ÏÔÊ¾×îĞÂÒ»Ìõ
-				String info = "\n\n½ñÌìÃ»ÓĞÅÜ²ÙÏûÏ¢\n\n";
+			if(getInfo()==null||getInfo().equals("")){//æ²¡æœ‰æ‰¾åˆ°ä»Šå¤©çš„ï¼Œæ˜¾ç¤ºæœ€æ–°ä¸€æ¡
+				String info = "\n\nä»Šå¤©æ²¡æœ‰è·‘æ“æ¶ˆæ¯\n\n";
 				setInfo(info);
 				setDate(today);
 				save();
@@ -102,15 +102,15 @@ public class RenrenInfo{
 	}
 	protected void onFailed() {
 		// TODO Auto-generated method stub
-		//Toast.makeText(activity, "ÈËÈËĞÅÏ¢¸üĞÂÊ§°Ü", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(activity, "äººäººä¿¡æ¯æ›´æ–°å¤±è´¥", Toast.LENGTH_SHORT).show();
 		father.onFailed();
 	}
 	/**
-	 * ¸üĞÂÊı¾İ
+	 * æ›´æ–°æ•°æ®
 	 */
 	public void update(){
-		if(DEBUG){//Ò»Ğ©²âÊÔÊı¾İ
-			setInfo("½ñÌìÕı³£ÅÜ²Ù¡£20 ~ 30¡æ¡£¶àÔÆ×ªÇç¡£Ã»Æğ´²µÄ¸÷Î»Ç×ÃÇ¸Ï½ôÆğÀ´ÅÜ²Ù°É¡£");
+		if(DEBUG){//ä¸€äº›æµ‹è¯•æ•°æ®
+			setInfo("ä»Šå¤©æ­£å¸¸è·‘æ“ã€‚20 ~ 30â„ƒã€‚å¤šäº‘è½¬æ™´ã€‚æ²¡èµ·åºŠçš„å„ä½äº²ä»¬èµ¶ç´§èµ·æ¥è·‘æ“å§ã€‚");
 			DateFormat fmt = SimpleDateFormat.getDateTimeInstance(); 
 			setDate(fmt.format(new Date()));
 			save();
@@ -151,7 +151,7 @@ public class RenrenInfo{
 	}
 	
 	/**
-	 * ±£´æÊı¾İµ½sharedPreference;
+	 * ä¿å­˜æ•°æ®åˆ°sharedPreference;
 	 */
 	public void save(){
 		Editor editor = pref.edit();
@@ -161,7 +161,7 @@ public class RenrenInfo{
 	}
 	
 	/**
-	 * @return boolean Êı¾İÊÇ·ñÎª¿Õ
+	 * @return boolean æ•°æ®æ˜¯å¦ä¸ºç©º
 	 */
 	public boolean isSet(){
 		if(info == null || date == null)

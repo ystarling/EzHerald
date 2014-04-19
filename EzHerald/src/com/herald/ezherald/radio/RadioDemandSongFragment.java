@@ -63,7 +63,7 @@ public class RadioDemandSongFragment extends Fragment {
 		private void onFailed() {
 			if( !isDetaced ) {
 				progress.cancel();
-				Toast.makeText(getActivity(), "点歌失败", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "鐐规瓕澶辫触", Toast.LENGTH_LONG).show();
 			}
 			
 		}
@@ -71,7 +71,7 @@ public class RadioDemandSongFragment extends Fragment {
 		private void onSuccess() {
 			if ( !isDetaced ) {
 				progress.cancel();
-				Toast.makeText(getActivity(), "点歌成功", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "鐐规瓕鎴愬姛", Toast.LENGTH_LONG).show();
 			}
 			
 		}
@@ -92,7 +92,7 @@ public class RadioDemandSongFragment extends Fragment {
 	}
 	private void  initView() {
 		progress = new ProgressDialog(getActivity());
-		progress.setTitle("正在提交");
+		progress.setTitle("姝ｅ湪鎻愪氦");
 		progress.setCancelable(true);
 		progress.setIndeterminate(true);
 		btn_demand = (Button)getActivity().findViewById(R.id.btn_demand);
@@ -104,7 +104,7 @@ public class RadioDemandSongFragment extends Fragment {
 			public void onClick(View v) {
 				progress.show();
 				if(edt_song.getText().toString().equals("")){
-					Toast.makeText(getActivity(), "歌名不能为空", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "姝屽悕涓嶈兘涓虹┖", Toast.LENGTH_SHORT).show();
 					progress.cancel();
 					return;
 				}
@@ -116,8 +116,8 @@ public class RadioDemandSongFragment extends Fragment {
 							HttpPost post = new HttpPost(URL);
 							List<NameValuePair> params = new ArrayList<NameValuePair>();
 							
-							String message = "歌名:"+edt_song.getText().toString()+"\n";
-							message = message.concat("留言:"+edt_message.getText().toString());
+							String message = "姝屽悕:"+edt_song.getText().toString()+"\n";
+							message = message.concat("鐣欒█:"+edt_message.getText().toString());
 							UserAccount user = Authenticate.getIDcardUser(getActivity());
 							//SecondMenuFragment second = new SecondMenuFragment();
 							Log.v("message",message);

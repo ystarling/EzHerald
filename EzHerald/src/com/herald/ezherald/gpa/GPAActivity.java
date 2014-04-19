@@ -30,7 +30,7 @@ public class GPAActivity extends BaseFrameActivity {
 			GpaDbModel model = new GpaDbModel(this);
 			model.open();
 			model.clear();
-			model.close();//É¾³ı¾ÉÓÃ»§µÄÊı¾İ
+			model.close();//åˆ é™¤æ—§ç”¨æˆ·çš„æ•°æ®
 			//mContentFrag = new FailFragment();
 			content = new FailFragment();
 			super.SetBaseFrameActivity(content);
@@ -60,7 +60,7 @@ public class GPAActivity extends BaseFrameActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * ÉÏ²àTitleÎ»ÖÃµÄ°´Å¥µã»÷ÏàÓ¦
+		 * ä¸Šä¾§Titleä½ç½®çš„æŒ‰é’®ç‚¹å‡»ç›¸åº”
 		 */
 		return super.onOptionsItemSelected(item);
 	}

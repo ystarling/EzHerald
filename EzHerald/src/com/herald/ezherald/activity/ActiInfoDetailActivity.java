@@ -145,7 +145,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 	{
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("ÇëÉÔºò ... ");
+		progressDialog.setMessage("è¯·ç¨å€™ ... ");
 	}
 	
 	public void onRequestStart()
@@ -191,7 +191,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		clubName.setText(bundle.getString("clubName"));
 		actiTitle.setText(bundle.getString("title"));
 		actiPubTime.setText(bundle.getString("date"));
-		time.setText(bundle.getString("startTime")+"ÖÁ"+bundle.getString("endTime"));
+		time.setText(bundle.getString("startTime")+"è‡³"+bundle.getString("endTime"));
 		place.setText(bundle.getString("place"));
 	}
 
@@ -208,11 +208,11 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		case R.id.menu_acti_detail_action_share:
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("text/plain");
-			intent.putExtra(Intent.EXTRA_SUBJECT, "·ÖÏí");
+			intent.putExtra(Intent.EXTRA_SUBJECT, "åˆ†äº«");
 			intent.putExtra(Intent.EXTRA_TEXT,
-					actiInfoDetail.getClubName()+" ·¢²¼ÁËĞÂ»î¶¯¡¶"+actiInfoDetail.getActiTitle()+"¡·"+"(ÏûÏ¢À´×ÔÏÈÉù¿Í»§¶Ë)");
+					actiInfoDetail.getClubName()+" å‘å¸ƒäº†æ–°æ´»åŠ¨ã€Š"+actiInfoDetail.getActiTitle()+"ã€‹"+"(æ¶ˆæ¯æ¥è‡ªå…ˆå£°å®¢æˆ·ç«¯)");
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(Intent.createChooser(intent, "·ÖÏíµ½"));
+			startActivity(Intent.createChooser(intent, "åˆ†äº«åˆ°"));
 			return true;
 		case android.R.id.home:
 			finish();
@@ -291,7 +291,7 @@ public class ActiInfoDetailActivity extends SherlockActivity {
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		  {
-		    //Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		      return;
 		  }

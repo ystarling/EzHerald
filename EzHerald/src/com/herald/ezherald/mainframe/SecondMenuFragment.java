@@ -37,33 +37,33 @@ import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.settingframe.SettingActivity;
 
 /**
- * ÓÒ²à²à»¬²Ëµ¥µÄFragment
+ * å³ä¾§ä¾§æ»‘èœå•çš„Fragment
  * @author BorisHe
  *	@updated 20130629
- * 20131105ÓÒ²à²Ëµ¥µÄÄÚÈİµ÷Õûµ½×ó²à²Ëµ¥£¬É¾³ı×ÊÔ´µÄÊ±ºòÎñ±Ø×¢Òâ£¬¹²ÓĞ×ÊÔ´ÇëÎğÉ¾È¥£¡
+ * 20131105å³ä¾§èœå•çš„å†…å®¹è°ƒæ•´åˆ°å·¦ä¾§èœå•ï¼Œåˆ é™¤èµ„æºçš„æ—¶å€™åŠ¡å¿…æ³¨æ„ï¼Œå…±æœ‰èµ„æºè¯·å‹¿åˆ å»ï¼
  */
 
 @Deprecated //
 public class SecondMenuFragment extends ListFragment {
 	
-	public static final String TEXT_IDCARD_NOT_LOGIN = "Ò»¿¨Í¨\nÎ´µÇÂ¼";
-	public static final String TEXT_IDCARD_IS_LOGIN = "Ò»¿¨Í¨\nÒÑµÇÂ¼";
-	public static final String TEXT_TYX_NOT_LOGIN = "ÌåÓıÏµ\nÎ´µÇÂ¼";
-	public static final String TEXT_TYX_IS_LOGIN = "ÌåÓıÏµ\nÒÑµÇÂ¼";
-	public static final String TEXT_LIB_NOT_LOGIN = "Í¼Êé¹İ\nÎ´µÇÂ¼";
-	public static final String TEXT_LIB_IS_LOGIN = "Í¼Êé¹İ\nÒÑµÇÂ¼";
+	public static final String TEXT_IDCARD_NOT_LOGIN = "ä¸€å¡é€š\næœªç™»å½•";
+	public static final String TEXT_IDCARD_IS_LOGIN = "ä¸€å¡é€š\nå·²ç™»å½•";
+	public static final String TEXT_TYX_NOT_LOGIN = "ä½“è‚²ç³»\næœªç™»å½•";
+	public static final String TEXT_TYX_IS_LOGIN = "ä½“è‚²ç³»\nå·²ç™»å½•";
+	public static final String TEXT_LIB_NOT_LOGIN = "å›¾ä¹¦é¦†\næœªç™»å½•";
+	public static final String TEXT_LIB_IS_LOGIN = "å›¾ä¹¦é¦†\nå·²ç™»å½•";
 	
 	public static final String SHARED_PREF_NAME = "pref_secondmenu";
 	
 	
 	private List<Map<String, Object>> mListItems;
 	private SecondMenuListItemAdapter mListViewAdapter;
-	private String mMenuItemsStr[]; // ÎÄ×Ö(title)
+	private String mMenuItemsStr[]; // æ–‡å­—(title)
 	private Integer mMenuItemsIconResId[] = {
 			R.drawable.main_2ndmenu_ic_account,
 			R.drawable.main_2ndmenu_ic_setting,
 			R.drawable.main_2ndmenu_ic_accsetting,
-	}; // Í¼±ê(icon)
+	}; // å›¾æ ‡(icon)
 	
 	private String mIdCardState; 
 	private String mLibState;
@@ -99,8 +99,8 @@ public class SecondMenuFragment extends ListFragment {
 		if(null != account){
 			mMenuItemsStr[0] = account.getUsername();
 		} else {
-			mMenuItemsStr[0] = "ÉĞÎ´µÇÂ½";
-		}*/ //ÏÖÍ¨¹ıupdateLoginUserNameTitles()·½·¨µ÷ÓÃ
+			mMenuItemsStr[0] = "å°šæœªç™»é™†";
+		}*/ //ç°é€šè¿‡updateLoginUserNameTitles()æ–¹æ³•è°ƒç”¨
 		
 		mListItems = getListItems();
 		mListViewAdapter = new SecondMenuListItemAdapter(getActivity(), mListItems);
@@ -110,7 +110,7 @@ public class SecondMenuFragment extends ListFragment {
 	}
 
 	/**
-	 * ¸üĞÂÊı¾İ¼¯ÖĞµÄµÇÂ½×´Ì¬
+	 * æ›´æ–°æ•°æ®é›†ä¸­çš„ç™»é™†çŠ¶æ€
 	 */
 	private void updateLoginUserNameTitles() {
 		UserAccount account = Authenticate.getIDcardUser(getActivity());
@@ -125,11 +125,11 @@ public class SecondMenuFragment extends ListFragment {
 			}
 			mIdCardState = TEXT_IDCARD_IS_LOGIN;
 		} else {
-			mMenuItemsStr[0] = "ÉĞÎ´µÇÂ½";
+			mMenuItemsStr[0] = "å°šæœªç™»é™†";
 			mIdCardState = TEXT_IDCARD_NOT_LOGIN;
 		}
 		
-		//¸üĞÂÁíÍâ2¸öµÇÂ½ÕË»§µÄ×´Ì¬
+		//æ›´æ–°å¦å¤–2ä¸ªç™»é™†è´¦æˆ·çš„çŠ¶æ€
 		account = Authenticate.getLibUser(getActivity());
 		if(null != account){
 			mLibState =  TEXT_LIB_IS_LOGIN;
@@ -181,7 +181,7 @@ public class SecondMenuFragment extends ListFragment {
 	}
 	
 	/**
-	 * ³õÊ¼»¯²Ëµ¥ÏîĞÅÏ¢
+	 * åˆå§‹åŒ–èœå•é¡¹ä¿¡æ¯
 	 */
 	private List<Map<String, Object>> getListItems() {
 		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
@@ -191,7 +191,7 @@ public class SecondMenuFragment extends ListFragment {
 			map.put("icon", mMenuItemsIconResId[i]);
 			map.put("title", mMenuItemsStr[i]);
 			if(i == 0){
-				//ÕË»§µÄ¸½¼ÓĞÅÏ¢
+				//è´¦æˆ·çš„é™„åŠ ä¿¡æ¯
 				map.put("idCardState", mIdCardState);
 				map.put("tyxState", mTyxState);
 				map.put("libState", mLibState);
@@ -208,7 +208,7 @@ public class SecondMenuFragment extends ListFragment {
 
 
 	/**
-	 * ĞĞÎª£º¸üĞÂÓÒ²àµÄµÇÂ½×´Ì¬ĞÅÏ¢
+	 * è¡Œä¸ºï¼šæ›´æ–°å³ä¾§çš„ç™»é™†çŠ¶æ€ä¿¡æ¯
 	 */
 	@Override
 	public void onResume() {
@@ -226,8 +226,8 @@ public class SecondMenuFragment extends ListFragment {
 	}
 	
 	/**
-	 * »ñµÃPreferencesÀïÃæ±£´æ×ÅµÄÒ»¿¨Í¨ºÅ
-	 * Èç¹ûÃ»ÓĞÔò·µ»Ønull
+	 * è·å¾—Preferencesé‡Œé¢ä¿å­˜ç€çš„ä¸€å¡é€šå·
+	 * å¦‚æœæ²¡æœ‰åˆ™è¿”å›null
 	 * @return
 	 */
 	public String getSavedUserId(){
@@ -251,8 +251,8 @@ public class SecondMenuFragment extends ListFragment {
 	}
 	
 	/**
-	 * »ñµÃPreferencesÀïÃæ±£´æ×ÅµÄĞÕÃû
-	 * Èç¹ûÃ»ÓĞÔò·µ»Ønull
+	 * è·å¾—Preferencesé‡Œé¢ä¿å­˜ç€çš„å§“å
+	 * å¦‚æœæ²¡æœ‰åˆ™è¿”å›null
 	 * @return
 	 */
 	public String getSavedUserName(){
@@ -276,7 +276,7 @@ public class SecondMenuFragment extends ListFragment {
 	
 	
 	/**
-	 * ÊÕµ½ÓÃ»§Ãû¸üĞÂÇëÇóºó£¬½«ÓÒ²à²Ëµ¥µÄÄÚÈİ¸üĞÂ
+	 * æ”¶åˆ°ç”¨æˆ·åæ›´æ–°è¯·æ±‚åï¼Œå°†å³ä¾§èœå•çš„å†…å®¹æ›´æ–°
 	 * @author BorisHe
 	 *
 	 */
@@ -309,7 +309,7 @@ public class SecondMenuFragment extends ListFragment {
 	}
 	
 	/**
-	 * ÁªÍøÍ¨¹ıÒ»¿¨Í¨ºÅ»ñÈ¡ÓÃ»§µÄĞÕÃû
+	 * è”ç½‘é€šè¿‡ä¸€å¡é€šå·è·å–ç”¨æˆ·çš„å§“å
 	 * @author BorisHe
 	 *
 	 */
@@ -327,9 +327,9 @@ public class SecondMenuFragment extends ListFragment {
 			HttpGet httpGet = new HttpGet(url);
 			
 			try{
-				//È¡µÃHttpClient¶ÔÏó
+				//å–å¾—HttpClientå¯¹è±¡
 				HttpClient httpClient = new DefaultHttpClient();
-				//ÇëÇóHttpClient£¬ÄÃµ½Response
+				//è¯·æ±‚HttpClientï¼Œæ‹¿åˆ°Response
 				HttpResponse httpResponse = httpClient.execute(httpGet);
 				
 				if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
@@ -338,7 +338,7 @@ public class SecondMenuFragment extends ListFragment {
 					if(mViewDestroyed)
 						return;
 					
-					setSavedUserId(mIdNum);  //±£´æPrefs!
+					setSavedUserId(mIdNum);  //ä¿å­˜Prefs!
 					setSavedUserName(username);
 					
 					Message msg = new Message();

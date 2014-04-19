@@ -16,13 +16,13 @@ public class GpaGrabber implements MainContentInfoGrabber{
 		float gpa;
 		try {
 			gpa = gpaInfo.calcAverage();
-			item.setContent1("ËùÑ¡¿Î³Ì¼¨µã");
+			item.setContent1("æ‰€é€‰è¯¾ç¨‹ç»©ç‚¹");
 			item.setContent2(String.format("%.2f", gpa));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			item.setContent1("»¹Ã»ÓĞ³É¼¨");
-			item.setContent2("µã»÷½øÈë¸üĞÂ");
+			item.setContent1("è¿˜æ²¡æœ‰æˆç»©");
+			item.setContent2("ç‚¹å‡»è¿›å…¥æ›´æ–°");
 		}
 		return item;
 	}

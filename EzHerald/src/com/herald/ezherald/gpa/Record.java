@@ -4,16 +4,16 @@ import android.util.Log;
 
 /**
  * @author xie
- * ¼¨µã¸÷ÏîÊı¾İ
+ * ç»©ç‚¹å„é¡¹æ•°æ®
  */
 public class Record {
-	private String  name;//¿Î³ÌÃû³Æ
-	private String  score;//³É¼¨ ÓĞÊ±ºò¿ÉÄÜ²»ÊÇÊı×Ö
-	private float   credit;//Ñ§·Ö
-	private String  semester;//Ñ§ÆÚ
-	private String  scoreType;//³É¼¨ĞÔÖÊ£¨Ê×ĞŞ/ÖØĞŞ/...)
-	private String  extra;//Ñ¡ĞŞĞÅÏ¢£¨ÈËÎÄ/ÒÕÊõ/×ÔÈ»¿ÆÑ§/)
-	private boolean isSelected;//ÊÇ·ñÒÑ¾­Ñ¡ÖĞ
+	private String  name;//è¯¾ç¨‹åç§°
+	private String  score;//æˆç»© æœ‰æ—¶å€™å¯èƒ½ä¸æ˜¯æ•°å­—
+	private float   credit;//å­¦åˆ†
+	private String  semester;//å­¦æœŸ
+	private String  scoreType;//æˆç»©æ€§è´¨ï¼ˆé¦–ä¿®/é‡ä¿®/...)
+	private String  extra;//é€‰ä¿®ä¿¡æ¯ï¼ˆäººæ–‡/è‰ºæœ¯/è‡ªç„¶ç§‘å­¦/)
+	private boolean isSelected;//æ˜¯å¦å·²ç»é€‰ä¸­
 	public Record(String name, String score, float credit, String semester,
 			String scoreType, String extra, boolean isSelected) {
 		super();
@@ -28,7 +28,7 @@ public class Record {
 	public Record() {
 		// TODO Auto-generated constructor stub
 	}
-	public float getPoint(){//ÓÉ³É¼¨¼ÆËã¼¨µã
+	public float getPoint(){//ç”±æˆç»©è®¡ç®—ç»©ç‚¹
 		float point=0;
 		try{
 			float RealScore = Float.parseFloat(score);
@@ -45,14 +45,14 @@ public class Record {
 			if(point < 1.0)
 				point = 0;
 			return point;
-		}catch(Exception e){//²»ÊÇÊı×Ö
-			if("ÓÅ".equals(score))
+		}catch(Exception e){//ä¸æ˜¯æ•°å­—
+			if("ä¼˜".equals(score))
 				point  = 4.5f;
-			else if("Á¼".equals(score))
+			else if("è‰¯".equals(score))
 				point  = 3.5f;
-			else if("ÖĞ".equals(score))
+			else if("ä¸­".equals(score))
 				point  = 2.5f;
-			else if("¼°¸ñ".equals(score))
+			else if("åŠæ ¼".equals(score))
 				point  = 1.5f;
 			else{
 				point = 0;
@@ -65,7 +65,7 @@ public class Record {
 	
 	@Override
 	public String toString() {
-		return String.format("%s  Ñ§·Ö:%s   ³É¼¨:%s   %s", name, credit,score,scoreType);
+		return String.format("%s  å­¦åˆ†:%s   æˆç»©:%s   %s", name, credit,score,scoreType);
 	}
 	public String getName() {
 		return name;

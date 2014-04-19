@@ -11,17 +11,17 @@ public class LibraryBooksList {
 	 */
 	
 	public String BookName(){
-		BookName="ÀÇÍ¼ÌÚ";
+		BookName="ç‹¼å›¾è…¾";
 		return BookName;
 		
 	}
 	public String BookAuthor(){
-		BookAuthor="½ªÈÖ";
+		BookAuthor="å§œæˆ";
 		return BookAuthor;
 		
 	}
 	public String BookPress(){
-		BookPress="¶«ÄÏ´óÑ§³ö°æÉç";
+		BookPress="ä¸œå—å¤§å­¦å‡ºç‰ˆç¤¾";
 		return BookPress;
 		
 	}

@@ -9,7 +9,7 @@ import android.view.View;
 
 public class MainGuideViewPagerAdapter extends PagerAdapter {
 
-	private List<View> mViews; //ViewµÄÁĞ±í
+	private List<View> mViews; //Viewçš„åˆ—è¡¨
 	
 	public MainGuideViewPagerAdapter (List<View> views){
 		mViews = views;
@@ -19,7 +19,7 @@ public class MainGuideViewPagerAdapter extends PagerAdapter {
 	
 	@Override
 	public void destroyItem(View container, int position, Object object) {
-		// Ïú»ÙpositionÎ»ÖÃµÄ½çÃæ
+		// é”€æ¯positionä½ç½®çš„ç•Œé¢
 		//super.destroyItem(container, position, object);
 		((ViewPager)container).removeView(mViews.get(position));
 	}
@@ -35,7 +35,7 @@ public class MainGuideViewPagerAdapter extends PagerAdapter {
 
 
 
-	//»ñµÃµ±Ç°ViewÊı
+	//è·å¾—å½“å‰Viewæ•°
 	@Override
 	public int getCount() {
 		if(mViews != null)
@@ -44,7 +44,7 @@ public class MainGuideViewPagerAdapter extends PagerAdapter {
 	}
 
 	
-	//ÊµÀı»¯positionÎ»ÖÃµÄView
+	//å®ä¾‹åŒ–positionä½ç½®çš„View
 	@Override
 	public Object instantiateItem(View container, int position) {
 		((ViewPager)container).addView(mViews.get(position), 0);
@@ -54,7 +54,7 @@ public class MainGuideViewPagerAdapter extends PagerAdapter {
 
 
 
-	//ÅĞ¶ÏÊÇ·ñÓÉ¶ÔÏóÉú³ÉView
+	//åˆ¤æ–­æ˜¯å¦ç”±å¯¹è±¡ç”ŸæˆView
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
 		// TODO Auto-generated method stub

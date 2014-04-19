@@ -42,16 +42,16 @@ public class RadioForcastFragment extends Fragment {
 		@Override
 		public void handleMessage(Message msg) {
 			if( !isDetached ) {
-				btnUpdate.setText("¸üĞÂ");
+				btnUpdate.setText("æ›´æ–°");
 				switch (msg.what) {
 				case SUCCESS:
-					Toast.makeText(context, "¸üĞÂ³É¹¦", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "æ›´æ–°æˆåŠŸ", Toast.LENGTH_LONG).show();
 					try {
 						JSONArray json = new JSONArray(forcast);
 						String inf = json.getString(0);
 						String date = json.getString(1);
 						txtForcast.setText(inf);
-						txtDate.setText("¸üĞÂÓë:"+date);
+						txtDate.setText("æ›´æ–°ä¸:"+date);
 						shared.edit().putString("forcast", inf).commit();
 						shared.edit().putString("date", date).commit();
 						//String tst = shared.getString("forcast", "");
@@ -65,7 +65,7 @@ public class RadioForcastFragment extends Fragment {
 					break;
 				case FAILED:
 				default:
-					Toast.makeText(context, "¸üĞÂÊ§°Ü", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "æ›´æ–°å¤±è´¥", Toast.LENGTH_LONG).show();
 					break;
 				}
 			}
@@ -88,17 +88,17 @@ public class RadioForcastFragment extends Fragment {
 		btnUpdate = (Button) getActivity().findViewById(R.id.btn_update);
 		context = getActivity();
 		shared = getActivity().getSharedPreferences("radio", Context.MODE_PRIVATE);
-		String oldInf = shared.getString("forcast", "ÇëÏÈ¸üĞÂ");
-		String date = shared.getString("date", "»¹Ã»ÓĞ¸üĞÂ");
+		String oldInf = shared.getString("forcast", "è¯·å…ˆæ›´æ–°");
+		String date = shared.getString("date", "è¿˜æ²¡æœ‰æ›´æ–°");
 		txtForcast.setText(oldInf);
-		txtDate.setText("¸üĞÂÓë"+date);
+		txtDate.setText("æ›´æ–°ä¸"+date);
 		txtForcast.setText(oldInf);
 		btnUpdate.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				btnUpdate.setText("ÕıÔÚ¸üĞÂ....");
+				btnUpdate.setText("æ­£åœ¨æ›´æ–°....");
 				new Thread(){
 					public void run(){
 						try {

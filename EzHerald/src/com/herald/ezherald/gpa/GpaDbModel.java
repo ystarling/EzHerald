@@ -10,8 +10,8 @@ import android.util.Log;
 
 /**
  * @author xie
- * GPAµÄÊı¾İ¿âÄ£ĞÍÀà
- * ÔÚµôÓÃºóĞèÒªclose()
+ * GPAçš„æ•°æ®åº“æ¨¡å‹ç±»
+ * åœ¨æ‰ç”¨åéœ€è¦close()
  * http://www.vogella.com/articles/AndroidSQLite/article.html
  */
 public class GpaDbModel {
@@ -47,7 +47,7 @@ public class GpaDbModel {
 		for(Record r:records) { 
 			String sSql2= String.format(sql2, GpaDbHelper.DATABASE_NAME,r.getName());
 			Cursor cursor = db.rawQuery(sSql2, null);
-			if(cursor.getCount() == 0){//²»´æÔÚÊı¾İ
+			if(cursor.getCount() == 0){//ä¸å­˜åœ¨æ•°æ®
 				String sSql = String.format(sql, GpaDbHelper.DATABASE_NAME,r.getName(),r.getScore(),r.getCredit(),r.getSemester(),r.getScoreType(),r.getExtra(),r.isSelected()?1:0);
 				db.execSQL(sSql);
 			}
@@ -62,7 +62,7 @@ public class GpaDbModel {
 		db.execSQL(sql);
 	}
 	/**
-	 * É¾³ıËùÓĞ¼ÇÂ¼
+	 * åˆ é™¤æ‰€æœ‰è®°å½•
 	 */
 	public void clear(){
 		int del = db.delete(GpaDbHelper.DATABASE_NAME, null, null);

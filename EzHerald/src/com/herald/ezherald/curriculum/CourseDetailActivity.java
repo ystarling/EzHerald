@@ -47,7 +47,7 @@ public class CourseDetailActivity extends SherlockActivity {
 		
 		ActionBar actionBar = getSupportActionBar();
 //		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setTitle("¿Î³ÌÏêÇé");
+		actionBar.setTitle("è¯¾ç¨‹è¯¦æƒ…");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 	}

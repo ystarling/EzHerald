@@ -23,14 +23,14 @@ public class GpaFragment extends SherlockFragment {
 		super.onCreate(saved);
 		ActionBar bar = getSherlockActivity().getSupportActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        bar.setTitle("绩点");
+        bar.setTitle("缁╃偣");
         if(bar.getTabCount()<2) {
         	 ActionBar.Tab tab1 = bar.newTab();
              ActionBar.Tab tab2 = bar.newTab();
              ActionBar.Tab tab3 = bar.newTab();
-//             tab1.setText("绩点政策");
-             tab2.setText("成绩查询");
-             tab3.setText("成绩分析");
+//             tab1.setText("缁╃偣鏀跨瓥");
+             tab2.setText("鎴愮哗鏌ヨ");
+             tab3.setText("鎴愮哗鍒嗘瀽");
              tab1.setTabListener(new MyTabListener());
              tab2.setTabListener(new MyTabListener());
              tab3.setTabListener(new MyTabListener());

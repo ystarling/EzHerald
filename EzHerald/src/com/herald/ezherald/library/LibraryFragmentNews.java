@@ -36,7 +36,7 @@ public class LibraryFragmentNews extends SherlockFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup group , Bundle save){
 		View view=inflater.inflate(R.layout.library_fragment_news, null);
 		Activity ac=getActivity();
-		ac.setTitle("Í¼Êé¹Ý¹«¸æ");
+		ac.setTitle("å›¾ä¹¦é¦†å…¬å‘Š");
 		
 		libr_listView=(ListView) view.findViewById(R.id.libr_news_list);
 		
@@ -55,7 +55,7 @@ public class LibraryFragmentNews extends SherlockFragment{
 			public void onItemClick(AdapterView<?> arg0, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Toast th=Toast.makeText(getActivity(), "ÄãµãµÄÊÇ",Toast.LENGTH_SHORT);
+				Toast th=Toast.makeText(getActivity(), "ä½ ç‚¹çš„æ˜¯",Toast.LENGTH_SHORT);
 				th.show();
 				Intent intent=new Intent(getActivity(), LibraryActivityNews.class);
 				startActivity(intent);
@@ -71,7 +71,7 @@ public class LibraryFragmentNews extends SherlockFragment{
 	protected List< HashMap<String, Object> > libr_get_list_value(){
 		//HashMap<String, Object> map=new HashMap<String ,Object>();
 		for(int i=0;i<=3;i++){
-		map.put("name","Í¼Êé¹Ý°ì¹«ÊÒÕÐÆ¸ÇÚ¹¤ÖúÑ§±¾¿ÆÉú");
+		map.put("name","å›¾ä¹¦é¦†åŠžå…¬å®¤æ‹›è˜å‹¤å·¥åŠ©å­¦æœ¬ç§‘ç”Ÿ");
 		libr_list.add(map);
 		}
 		return libr_list;

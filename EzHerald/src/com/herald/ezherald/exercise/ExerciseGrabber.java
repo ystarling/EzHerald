@@ -17,10 +17,10 @@ public class ExerciseGrabber implements MainContentInfoGrabber {
 		int remain = runTimes.getRemainDays();
 		MainContentGridItemObj item = new MainContentGridItemObj();
 		if(times >= 0)
-			item.setContent1(String.format("ÒÑ´ò¿¨%d´Î", times));
+			item.setContent1(String.format("å·²æ‰“å¡%dæ¬¡", times));
 		else
-			item.setContent1("Ã»ÓĞÅÜ²ÙÊı¾İ");
-		item.setContent2(String.format("Ê£Óà%dÌìÉÏ¿Î", remain>=0?remain:0));
+			item.setContent1("æ²¡æœ‰è·‘æ“æ•°æ®");
+		item.setContent2(String.format("å‰©ä½™%då¤©ä¸Šè¯¾", remain>=0?remain:0));
 		return item;
 	}
 	

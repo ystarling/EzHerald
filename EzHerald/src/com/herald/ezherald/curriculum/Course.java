@@ -19,7 +19,7 @@ public class Course {
 	}
 	
 	/**
-	 * ¹¹Ôìº¯Êý
+	 * æž„é€ å‡½æ•°
 	 * @param id
 	 * @param name
 	 * @param lec

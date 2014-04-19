@@ -58,7 +58,7 @@ public class NetRequest {
 			
 		}
 		else{
-			throw new HttpException("«Î«Û ß∞‹");
+			throw new HttpException("ËØ∑Ê±ÇÂ§±Ë¥•");
 		}
 		
 	}

@@ -31,9 +31,9 @@ public class LibraryBookListDetail extends SherlockActivity{
 	public void onCreate(Bundle saveInstanceSate){
 		super.onCreate(saveInstanceSate);
 		setContentView(R.layout.library_activity_book);
-		setTitle("ËÑË÷½á¹û");
+		setTitle("æœç´¢ç»“æœ");
 		
-		bundle=this.getIntent().getExtras();//»ñÈ¡bundle
+		bundle=this.getIntent().getExtras();//è·å–bundle
 		
 
 		LibraryBookListDetailThread th=new LibraryBookListDetailThread(bundle, LibraryBookListDetail.this, this);
@@ -112,12 +112,12 @@ public class LibraryBookListDetail extends SherlockActivity{
 //					holder=(ViewHolder) convertView.getTag();
 //				}
 //				
-//				holder.text1.setText("Ë÷ÊéºÅ: "+libr_get_book().get(position).get("soushuhao").toString());
-//				holder.text2.setText("ÌõĞÎÂë£º"+libr_get_book().get(position).get("barCode").toString());
-//				holder.text3.setText("Äê¾íÆÚ£º"+libr_get_book().get(position).get("year_title").toString());
-//				holder.text4.setText("Ğ£Çø£º "+libr_get_book().get(position).get("campus").toString());
-//				holder.text5.setText("¹İ²ØµØ£º "+libr_get_book().get(position).get("collection").toString());
-//				holder.text6.setText("Êé¿¯×´Ì¬£º"+libr_get_book().get(position).get("status").toString());
+//				holder.text1.setText("ç´¢ä¹¦å·: "+libr_get_book().get(position).get("soushuhao").toString());
+//				holder.text2.setText("æ¡å½¢ç ï¼š"+libr_get_book().get(position).get("barCode").toString());
+//				holder.text3.setText("å¹´å·æœŸï¼š"+libr_get_book().get(position).get("year_title").toString());
+//				holder.text4.setText("æ ¡åŒºï¼š "+libr_get_book().get(position).get("campus").toString());
+//				holder.text5.setText("é¦†è—åœ°ï¼š "+libr_get_book().get(position).get("collection").toString());
+//				holder.text6.setText("ä¹¦åˆŠçŠ¶æ€ï¼š"+libr_get_book().get(position).get("status").toString());
 //				
 //				return convertView;
 //			}
@@ -141,9 +141,9 @@ public class LibraryBookListDetail extends SherlockActivity{
 //				map.put("soushuhao", "123456789");
 //				map.put("barCode", "123456789");
 //				map.put("year_title", "--");
-//				map.put("campus", "¾ÅÁúºşĞ£Çø");
-//				map.put("collection", "ÖĞÎÄ±£´æ±¾ÔÄÀÀÊÒ");
-//				map.put("status", "½è³ö-Ó¦»¹ÈÕÆÚ£º2013-09-18");
+//				map.put("campus", "ä¹é¾™æ¹–æ ¡åŒº");
+//				map.put("collection", "ä¸­æ–‡ä¿å­˜æœ¬é˜…è§ˆå®¤");
+//				map.put("status", "å€Ÿå‡º-åº”è¿˜æ—¥æœŸï¼š2013-09-18");
 //				
 //				libr_list.add(map);
 //			}

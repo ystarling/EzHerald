@@ -25,7 +25,7 @@ public class FreshmanFragment extends SherlockFragment {
 		}
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(getActivity(), "正在更新", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "姝ｅ湪鏇存柊", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(getActivity(),FreshmanContent.class);
 			Bundle bundle = new Bundle();
 			bundle.putInt("type", type);

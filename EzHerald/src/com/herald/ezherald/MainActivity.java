@@ -60,24 +60,24 @@ import com.herald.ezherald.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 /*
- * @author ºÎ²©Î°
+ * @author ä½•åšä¼Ÿ
  * @since 2013.05.14
  * @updated 2013.7.1
- * ³ÌĞòµÄÖ÷Activity
+ * ç¨‹åºçš„ä¸»Activity
  * 
  * 
  */
 public class MainActivity extends BaseFrameActivity {
 
-	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; // ´Ë´ÎÔËĞĞÒÑ¾­ÏÔÊ¾¹ı¸üĞÂÁË
+	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; // æ­¤æ¬¡è¿è¡Œå·²ç»æ˜¾ç¤ºè¿‡æ›´æ–°äº†
 	Fragment mContentFrag;
 	Menu mActionMenu;
 	Handler mMoveHandler;
 	SlidingMenu mSlidingMenu;
 
-	public boolean needRefreshContent = false; // ÊÇ·ñĞèÒªË¢ĞÂContent
-	public boolean isReceivingData = false; // µ±Ç°ÊÇ·ñÒÑ¾­ÔÚ¸üĞÂImage
-	private boolean doNotUpdateUI = false;// ²»¸üĞÂUI
+	public boolean needRefreshContent = false; // æ˜¯å¦éœ€è¦åˆ·æ–°Content
+	public boolean isReceivingData = false; // å½“å‰æ˜¯å¦å·²ç»åœ¨æ›´æ–°Image
+	private boolean doNotUpdateUI = false;// ä¸æ›´æ–°UI
 
 	private final static String PREF_NAME = "com.herald.ezherald_preferences";
 	private final String KEY_NAME_FIRST_START = "first_start";
@@ -85,9 +85,9 @@ public class MainActivity extends BaseFrameActivity {
 	private final String KEY_NAME_REFRESH_FREQ = "sync_frequency";
 	private final int MAX_BANNER_SIZE = 5;
 
-	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false; // Ê¼ÖÕÏÔÊ¾Òıµ¼½çÃæ
-	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // Ê¼ÖÕ´ÓÍøÕ¾¸üĞÂÊı¾İ£¬²»ÂÛĞÂ¾É
-	private final boolean DEBUG_DONOT_REFRESH = false; // ½ûÖ¹¸üĞÂÖ÷½çÃæÂÖ²¥Í¼
+	private final boolean DEBUG_ALWAYS_SHOW_GUIDE = false; // å§‹ç»ˆæ˜¾ç¤ºå¼•å¯¼ç•Œé¢
+	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // å§‹ç»ˆä»ç½‘ç«™æ›´æ–°æ•°æ®ï¼Œä¸è®ºæ–°æ—§
+	private final boolean DEBUG_DONOT_REFRESH = false; // ç¦æ­¢æ›´æ–°ä¸»ç•Œé¢è½®æ’­å›¾
 
 	private final String REMOTE_UPDATE_CHECK_URL = "http://121.248.63.105/EzHerald/picupdatetime/";
 	private final String REMOTE_UPDATE_QUERY_URL = "http://121.248.63.105/EzHerald/picturejson/";
@@ -122,7 +122,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * Í¨¹ı¼ì²éSharedPreferencesÅĞ¶ÏÊÇ·ñĞèÒªÔÚÏß¸üĞÂ
+	 * é€šè¿‡æ£€æŸ¥SharedPreferencesåˆ¤æ–­æ˜¯å¦éœ€è¦åœ¨çº¿æ›´æ–°
 	 * 
 	 * @return
 	 */
@@ -135,9 +135,9 @@ public class MainActivity extends BaseFrameActivity {
 				MODE_PRIVATE);
 		long timestamp = appPreferences.getLong(KEY_NAME_LAST_REFRESH, 0);
 
-		float timeInMinute = timestamp / 60000.0f; // 1·ÖÖÓ = 60 000ºÁÃë
+		float timeInMinute = timestamp / 60000.0f; // 1åˆ†é’Ÿ = 60 000æ¯«ç§’
 		float currentTimeInMinute = System.currentTimeMillis() / 60000.0f;
-		float timeGap = currentTimeInMinute - timeInMinute; // Ê±¼ä²î
+		float timeGap = currentTimeInMinute - timeInMinute; // æ—¶é—´å·®
 		Log.d("MainActivity", "Time interval = " + timeGap + " minutes");
 
 		String strPrefTimeInterval = appPreferences.getString(
@@ -158,20 +158,20 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * ´ÓSharedPreferenceÖĞ¶ÁÈ¡ÊÇ·ñÒÑ¾­ÔËĞĞ¹ı³ÌĞò pref: true:ÒÑ¾­ÔËĞĞ¹ı false:Ã»ÓĞÔËĞĞ¹ı£¨ĞèÒªÔËĞĞÒ»´ÎGuide£©
+	 * ä»SharedPreferenceä¸­è¯»å–æ˜¯å¦å·²ç»è¿è¡Œè¿‡ç¨‹åº pref: true:å·²ç»è¿è¡Œè¿‡ false:æ²¡æœ‰è¿è¡Œè¿‡ï¼ˆéœ€è¦è¿è¡Œä¸€æ¬¡Guideï¼‰
 	 * 
 	 * @return
 	 */
 	private boolean checkGuideState() {
 
-		// @ref Pg251 <Android4 ±à³ÌÈëÃÅ¾­µä>
+		// @ref Pg251 <Android4 ç¼–ç¨‹å…¥é—¨ç»å…¸>
 		SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
 				MODE_PRIVATE);
 		return appPreferences.getBoolean(KEY_NAME_FIRST_START, false);
 	}
 
 	/**
-	 * ÉèÖÃGuideÒÑ¾­ÔÄ¶Á¹ı
+	 * è®¾ç½®Guideå·²ç»é˜…è¯»è¿‡
 	 */
 	private void setGuideViewed() {
 		SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
@@ -187,9 +187,9 @@ public class MainActivity extends BaseFrameActivity {
 	 */
 	public void switchContent(Fragment fragment) {
 		/*
-		 * ÇĞ»»contentËéÆ¬ÄÚÈİ
+		 * åˆ‡æ¢contentç¢ç‰‡å†…å®¹
 		 * 
-		 * @param fragment ´«ÈëµÄÒªÌæ»»µÄËéÆ¬
+		 * @param fragment ä¼ å…¥çš„è¦æ›¿æ¢çš„ç¢ç‰‡
 		 */
 		mContentFrag = fragment;
 		getSupportFragmentManager().beginTransaction()
@@ -202,7 +202,7 @@ public class MainActivity extends BaseFrameActivity {
 		getSupportMenuInflater().inflate(R.menu.menu_main_content, menu);
 		mActionMenu = menu;
 
-		// ¼ì²éÊÇ·ñĞèÒªÔÚÏß¸üĞÂ
+		// æ£€æŸ¥æ˜¯å¦éœ€è¦åœ¨çº¿æ›´æ–°
 		boolean needOnlineRefresh = checkRefreshState();
 
 		if (needOnlineRefresh) {
@@ -212,7 +212,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		}
 
-		// ¼ì²éÓ¦ÓÃ³ÌĞò¸üĞÂ
+		// æ£€æŸ¥åº”ç”¨ç¨‹åºæ›´æ–°
 		new CheckAppRefreshStateTask().execute(this);
 
 		return true;
@@ -221,17 +221,17 @@ public class MainActivity extends BaseFrameActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * ÉÏ²àTitleÎ»ÖÃµÄ°´Å¥µã»÷ÏàÓ¦
+		 * ä¸Šä¾§Titleä½ç½®çš„æŒ‰é’®ç‚¹å‡»ç›¸åº”
 		 */
 		switch (item.getItemId()) {
 		case R.id.main_content_refresh:
 			MainContentFragment mainFrag = (MainContentFragment) mContentFrag;
-			mainFrag.refreshInfo(); // ¸÷Ä£¿éµÄÄÚÈİ(GridViewÖĞ)Í¬²½¸üĞÂ¾ÍĞĞ£¬Ïò¸÷¸öÄ£¿éË÷È¡
+			mainFrag.refreshInfo(); // å„æ¨¡å—çš„å†…å®¹(GridViewä¸­)åŒæ­¥æ›´æ–°å°±è¡Œï¼Œå‘å„ä¸ªæ¨¡å—ç´¢å–
 			requestInfoUpdate("blabla", item);
 			return true;
 		}
 
-		return super.onOptionsItemSelected(item); // Õâ¾ÍÊÇÆæ¹ÖbugµÄÀ´ÓÉ£¬ÏûÏ¢±»´¦ÀíÁËÁ½´ÎÁË!
+		return super.onOptionsItemSelected(item); // è¿™å°±æ˜¯å¥‡æ€ªbugçš„æ¥ç”±ï¼Œæ¶ˆæ¯è¢«å¤„ç†äº†ä¸¤æ¬¡äº†!
 	}
 
 	public void requestInfoUpdate(String url, MenuItem item) {
@@ -247,7 +247,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * ´ÓÄ³ÍøÕ¾ÏÂÔØÒ»¸öÍ¼
+	 * ä»æŸç½‘ç«™ä¸‹è½½ä¸€ä¸ªå›¾
 	 * 
 	 * @return
 	 */
@@ -269,7 +269,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * ¿ªHttpÁ¬½Ó
+	 * å¼€Httpè¿æ¥
 	 * 
 	 * @param uRL
 	 * @return
@@ -308,16 +308,16 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * ¹¤×÷Ïß³ÌÖĞÓÃToast
+	 * å·¥ä½œçº¿ç¨‹ä¸­ç”¨Toast
 	 * 
 	 * @param str
-	 *            ÌáÊ¾µÄÎÄ×Ö
+	 *            æç¤ºçš„æ–‡å­—
 	 */
 	private void showToastInWorkingThread(final String str) {
 		new Thread() {
 			@Override
 			public void run() {
-				Looper.prepare(); // ÕâÊÇ¹Ø¼ü
+				Looper.prepare(); // è¿™æ˜¯å…³é”®
 				Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT)
 						.show();
 				Looper.loop();
@@ -326,7 +326,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * ÁªÍø¸üĞÂÍ¼Æ¬ Í¬Ê±¸üĞÂÊı¾İ¿âÄÚÈİ
+	 * è”ç½‘æ›´æ–°å›¾ç‰‡ åŒæ—¶æ›´æ–°æ•°æ®åº“å†…å®¹
 	 */
 	private class UpdateBannerImageTask extends
 			AsyncTask<String, Void, Void> {
@@ -338,35 +338,35 @@ public class MainActivity extends BaseFrameActivity {
 			isReceivingData = true;
 
 			// ///////////////////////////////////////
-			//ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // Í¼Æ¬¸üĞÂµÄÁĞ±í
-			boolean haveUpdate = checkBannerImageUpdateState(); // ´Ó·şÎñÆ÷ÏÈGETÊÇ·ñÓĞupdate£¬È»ºó¾ö¶¨ÊÇ·ñÏÂÔØ
+			//ArrayList<Bitmap> updList = new ArrayList<Bitmap>(); // å›¾ç‰‡æ›´æ–°çš„åˆ—è¡¨
+			boolean haveUpdate = checkBannerImageUpdateState(); // ä»æœåŠ¡å™¨å…ˆGETæ˜¯å¦æœ‰updateï¼Œç„¶åå†³å®šæ˜¯å¦ä¸‹è½½
 
 			// ////////////////////////////////////////////////////////////////////////////
 			List<Pair<String, Long>> remoteImgUrls = null;
 			if (haveUpdate) {
-				remoteImgUrls = getRemoveUpdateImgUrls(REMOTE_UPDATE_QUERY_URL); // Ô¶³Ì¸üĞÂµÄÍ¼Æ¬url·ÅÔÚÕâ±ß
+				remoteImgUrls = getRemoveUpdateImgUrls(REMOTE_UPDATE_QUERY_URL); // è¿œç¨‹æ›´æ–°çš„å›¾ç‰‡urlæ”¾åœ¨è¿™è¾¹
 			}
 
 			if (remoteImgUrls != null && !remoteImgUrls.isEmpty()) {
 				//dbAdapter.open();
-				// ÓĞ¶«Î÷ĞèÒª¸üĞÂÁË..
+				// æœ‰ä¸œè¥¿éœ€è¦æ›´æ–°äº†..
 
 				int count = 1;
 				int size = remoteImgUrls.size();
 				for (Pair<String, Long> pair : remoteImgUrls) {
 					String urlStr = pair.first;
 					Long urlTimeStamp = pair.second;
-					showToastInWorkingThread("ÕıÔÚÏÂÔØÍ¼Æ¬..." + count++ + "/" + size);
+					showToastInWorkingThread("æ­£åœ¨ä¸‹è½½å›¾ç‰‡..." + count++ + "/" + size);
 					Bitmap bmp = tryGetBitmap(urlStr);
 					if (bmp != null) {
 						//updList.add(bmp);
-						//20131105 Ö±½Ó½øĞĞÊı¾İ¿â²Ù×÷£¬Ò»ÕÅÒ»ÕÅ¸üĞÂÍ¼Æ¬¡£Êı¾İ¿â²Ù×÷½áÊøºó£¬Í³Ò»´ÓÊı¾İ¿âÄÃÍ¼Æ¬
+						//20131105 ç›´æ¥è¿›è¡Œæ•°æ®åº“æ“ä½œï¼Œä¸€å¼ ä¸€å¼ æ›´æ–°å›¾ç‰‡ã€‚æ•°æ®åº“æ“ä½œç»“æŸåï¼Œç»Ÿä¸€ä»æ•°æ®åº“æ‹¿å›¾ç‰‡
 						boolean stateSucc = insertBitmapToDb(bmp);
 						if (urlTimeStamp > lastSuccTimeStamp && stateSucc) {
-							lastSuccTimeStamp = urlTimeStamp; // ¸üĞÂ³É¹¦ÏÂÔØµÄÊ±¼ä´Á
+							lastSuccTimeStamp = urlTimeStamp; // æ›´æ–°æˆåŠŸä¸‹è½½çš„æ—¶é—´æˆ³
 						}
 					} else {
-						showToastInWorkingThread("ÍøÂç²»´ó¸øÁ¦µÄÑù×ÓÄÅ...");
+						showToastInWorkingThread("ç½‘ç»œä¸å¤§ç»™åŠ›çš„æ ·å­å‘...");
 						connFail = true;
 						break;
 					}
@@ -376,22 +376,22 @@ public class MainActivity extends BaseFrameActivity {
 					}
 				}
 
-				// ¸üĞÂÊı¾İ¿â
-//				int currImgSize = updList.size(); // µ±Ç°´ÓÍøÉÏ¸üĞÂµ½µÄĞÂÍ¼Æ¬ÊıÁ¿
-//				int dbImgSize = dbAdapter.getCurrentImageCount(); // Êı¾İ¿âÖĞµÄÀÏÍ¼Æ¬ÊıÁ¿
-//				int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; // ĞèÒªÉ¾³ıµÄÍ¼Æ¬ÊıÁ¿
+				// æ›´æ–°æ•°æ®åº“
+//				int currImgSize = updList.size(); // å½“å‰ä»ç½‘ä¸Šæ›´æ–°åˆ°çš„æ–°å›¾ç‰‡æ•°é‡
+//				int dbImgSize = dbAdapter.getCurrentImageCount(); // æ•°æ®åº“ä¸­çš„è€å›¾ç‰‡æ•°é‡
+//				int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; // éœ€è¦åˆ é™¤çš„å›¾ç‰‡æ•°é‡
 //
 //				if (removeSize > 0) {
-//					// ĞèÒªÉ¾µôÒ»Ğ©Ô­Í¼Æ¬È»ºó¸üĞÂ
+//					// éœ€è¦åˆ æ‰ä¸€äº›åŸå›¾ç‰‡ç„¶åæ›´æ–°
 //					for (int i = dbImgSize - removeSize; i < dbImgSize; i++) {
 //						dbAdapter.deleteImage(i);
 //					}
 //				}
-//				// Ôö¼ÓÔ­À´µÄ±êºÅ
-//				int currIdOld = dbAdapter.getCurrentImageCount() - 1; // µ±Ç°×îµ×Í¼Æ¬µÄ±êºÅ(Èç¹ûÎª¿Õ»á±ä³É-1)
-//				int currIdNew = currIdOld + currImgSize; // Å²¶¯Íê±Ïºó×îµ×Í¼Æ¬µÄ±êºÅ(0 -- 4)
+//				// å¢åŠ åŸæ¥çš„æ ‡å·
+//				int currIdOld = dbAdapter.getCurrentImageCount() - 1; // å½“å‰æœ€åº•å›¾ç‰‡çš„æ ‡å·(å¦‚æœä¸ºç©ºä¼šå˜æˆ-1)
+//				int currIdNew = currIdOld + currImgSize; // æŒªåŠ¨å®Œæ¯•åæœ€åº•å›¾ç‰‡çš„æ ‡å·(0 -- 4)
 //				while (currIdOld >= 0) {
-//					// Å²¶¯
+//					// æŒªåŠ¨
 //					Cursor cs = dbAdapter.getImage(currIdOld);
 //					if (cs != null && cs.moveToFirst()) {
 //						byte[] inBytes = cs.getBlob(1);
@@ -404,7 +404,7 @@ public class MainActivity extends BaseFrameActivity {
 //					currIdNew--;
 //				}
 //
-//				// Ôö¼ÓĞÂÍ¼µ½Êı¾İ¿â
+//				// å¢åŠ æ–°å›¾åˆ°æ•°æ®åº“
 //				for (int id = 0; id < currImgSize; id++) {
 //					dbAdapter.insertImage(id, updList.get(id));
 //				}
@@ -417,34 +417,34 @@ public class MainActivity extends BaseFrameActivity {
 		}
 		
 		/**
-		 * ÈûÈëÒ»ÕÅÍ¼µ½Êı¾İ¿â
+		 * å¡å…¥ä¸€å¼ å›¾åˆ°æ•°æ®åº“
 		 * @param bmp
-		 * @return ²Ù×÷½á¹û³É¹¦·ñ
+		 * @return æ“ä½œç»“æœæˆåŠŸå¦
 		 */
 		private boolean insertBitmapToDb(Bitmap bmp) {
 			MainFrameDbAdapter dbAdapter = new MainFrameDbAdapter(getBaseContext());
 			dbAdapter.open();
-			int currImgSize = 1; // µ±Ç°´ÓÍøÉÏ¸üĞÂµ½µÄĞÂÍ¼Æ¬ÊıÁ¿
-			int dbImgSize = dbAdapter.getCurrentImageCount(); // Êı¾İ¿âÖĞµÄÀÏÍ¼Æ¬ÊıÁ¿
-			int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; // ĞèÒªÉ¾³ıµÄÍ¼Æ¬ÊıÁ¿
+			int currImgSize = 1; // å½“å‰ä»ç½‘ä¸Šæ›´æ–°åˆ°çš„æ–°å›¾ç‰‡æ•°é‡
+			int dbImgSize = dbAdapter.getCurrentImageCount(); // æ•°æ®åº“ä¸­çš„è€å›¾ç‰‡æ•°é‡
+			int removeSize = currImgSize + dbImgSize - MAX_BANNER_SIZE; // éœ€è¦åˆ é™¤çš„å›¾ç‰‡æ•°é‡
 
 			if (removeSize > 0) {
-				// ĞèÒªÉ¾µôÒ»Ğ©Ô­Í¼Æ¬È»ºó¸üĞÂ
+				// éœ€è¦åˆ æ‰ä¸€äº›åŸå›¾ç‰‡ç„¶åæ›´æ–°
 				for (int i = dbImgSize - removeSize; i < dbImgSize; i++) {
 					dbAdapter.deleteImage(i);
 				}
 			}
-			// Ôö¼ÓÔ­À´µÄ±êºÅ
-			int currIdOld = dbAdapter.getCurrentImageCount() - 1; // µ±Ç°×îµ×Í¼Æ¬µÄ±êºÅ(Èç¹ûÎª¿Õ»á±ä³É-1)
-			int currIdNew = currIdOld + currImgSize; // Å²¶¯Íê±Ïºó×îµ×Í¼Æ¬µÄ±êºÅ(0 -- 4)
+			// å¢åŠ åŸæ¥çš„æ ‡å·
+			int currIdOld = dbAdapter.getCurrentImageCount() - 1; // å½“å‰æœ€åº•å›¾ç‰‡çš„æ ‡å·(å¦‚æœä¸ºç©ºä¼šå˜æˆ-1)
+			int currIdNew = currIdOld + currImgSize; // æŒªåŠ¨å®Œæ¯•åæœ€åº•å›¾ç‰‡çš„æ ‡å·(0 -- 4)
 			while (currIdOld >= 0) {
-				// Å²¶¯
+				// æŒªåŠ¨
 				dbAdapter.alterImageId(currIdOld, currIdNew);
 				currIdOld--;
 				currIdNew--;
 			}
 
-			// Ôö¼ÓĞÂÍ¼µ½Êı¾İ¿â
+			// å¢åŠ æ–°å›¾åˆ°æ•°æ®åº“
 			long result = dbAdapter.insertImage(0, bmp);
 
 			dbAdapter.close();
@@ -456,7 +456,7 @@ public class MainActivity extends BaseFrameActivity {
 		}
 
 		/**
-		 * ¸üĞÂSharedPreferenceÀïÃæÊ×Ò³ÄÚÈİ×îºó¸üĞÂµÄÊ±¼ä
+		 * æ›´æ–°SharedPreferenceé‡Œé¢é¦–é¡µå†…å®¹æœ€åæ›´æ–°çš„æ—¶é—´
 		 * 
 		 * @param currentTimeMillis
 		 */
@@ -475,7 +475,7 @@ public class MainActivity extends BaseFrameActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// Êı¾İ¿â¸üĞÂÍê±ÏÖ®ºóĞŞ¸ÄView
+			// æ•°æ®åº“æ›´æ–°å®Œæ¯•ä¹‹åä¿®æ”¹View
 
 			setLastRefreshTime(lastSuccTimeStamp);
 
@@ -488,7 +488,7 @@ public class MainActivity extends BaseFrameActivity {
 				return;
 			}
 
-			// ĞŞ¸ÄÏàÓ¦µÄÊÓÍ¼
+			// ä¿®æ”¹ç›¸åº”çš„è§†å›¾
 //			for (int i = 0; i < result.size(); i++) {
 //				((MainContentFragment) mContentFrag).updateImageItem(i,
 //						result.get(i));
@@ -498,7 +498,7 @@ public class MainActivity extends BaseFrameActivity {
 			((MainContentFragment)mContentFrag).refreshImageFromDb();
 			((MainContentFragment) mContentFrag).refreshViewFlowImage();
 
-			// ¸Ä»ØActionBarÍ¼±ê
+			// æ”¹å›ActionBarå›¾æ ‡
 			MenuItem item = mActionMenu.findItem(R.id.main_content_refresh);
 			item.setVisible(true);
 			MenuItem doingItem = mActionMenu
@@ -523,7 +523,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * ViewFlowÖĞµã»÷ÊÂ¼şµÄÏìÓ¦
+	 * ViewFlowä¸­ç‚¹å‡»äº‹ä»¶çš„å“åº”
 	 * 
 	 * @param v
 	 */
@@ -536,13 +536,13 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * »ñµÃ»ñµÃÔ¶³ÌµÄ×îĞÂÍ¼Æ¬ÁĞ±í
+	 * è·å¾—è·å¾—è¿œç¨‹çš„æœ€æ–°å›¾ç‰‡åˆ—è¡¨
 	 * 
-	 * @return List<Map<Í¼Æ¬µØÖ·£¬Í¼Æ¬¸üĞÂÊ±¼ä´Á>>
+	 * @return List<Map<å›¾ç‰‡åœ°å€ï¼Œå›¾ç‰‡æ›´æ–°æ—¶é—´æˆ³>>
 	 */
 
 	public List<Pair<String, Long>> getRemoveUpdateImgUrls(String srcURL) {
-		// reference: <Android4±à³ÌÈëÃÅ¾­µä>ÊéÉÏP400
+		// reference: <Android4ç¼–ç¨‹å…¥é—¨ç»å…¸>ä¹¦ä¸ŠP400
 		StringBuilder stringBuilder = new StringBuilder();
 		HttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(srcURL);
@@ -568,7 +568,7 @@ public class MainActivity extends BaseFrameActivity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String jsonStr = stringBuilder.toString(); // JSONÔªÊı¾İ
+		String jsonStr = stringBuilder.toString(); // JSONå…ƒæ•°æ®
 		// Log.d("MainActivity:getRemoveUpdateImgUrls", "JSON src data = " +
 		// jsonStr);
 		List<Pair<String, Long>> retList = new ArrayList<Pair<String, Long>>();
@@ -580,8 +580,8 @@ public class MainActivity extends BaseFrameActivity {
 			SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
 					MODE_PRIVATE);
 			long timestampHere = appPreferences.getLong(KEY_NAME_LAST_REFRESH,
-					0); // ±¾µØ×îºó¸üĞÂµÄÊ±¼ä
-			// ´¦ÀíjsonÊı¾İ
+					0); // æœ¬åœ°æœ€åæ›´æ–°çš„æ—¶é—´
+			// å¤„ç†jsonæ•°æ®
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				/*
@@ -595,12 +595,12 @@ public class MainActivity extends BaseFrameActivity {
 						.getTime();
 				if (remoteTimeStamp > timestampHere
 						|| DEBUG_ALWAYS_UPDATE_ONLINE) {
-					// ĞèÒª¸üĞÂ£¬¼ÓÈëÁĞ±í
+					// éœ€è¦æ›´æ–°ï¼ŒåŠ å…¥åˆ—è¡¨
 					Log.d("MainActivity:getRemoveUpdateImgUrls",
 							"need update : " + jsonObject.getString("url"));
 					Pair<String, Long> pair = new Pair<String, Long>(
 							jsonObject.getString("url"), remoteTimeStamp);
-					retList.add(0, pair);  //µ¹Ğò²åÈë
+					retList.add(0, pair);  //å€’åºæ’å…¥
 				}
 			}
 		} catch (Exception e) {
@@ -611,7 +611,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * ½«ÍøÉÏÍ¼Æ¬×îĞÂµÄ¸üĞÂÊ±¼äÓë±¾µØµÄ×îºó¸üĞÂÊ±¼ä±È¶Ô£¬ÒÔÅĞ¶ÏÊÇ·ñĞèÒªÁªÍø¸üĞÂÍ¼Æ¬
+	 * å°†ç½‘ä¸Šå›¾ç‰‡æœ€æ–°çš„æ›´æ–°æ—¶é—´ä¸æœ¬åœ°çš„æœ€åæ›´æ–°æ—¶é—´æ¯”å¯¹ï¼Œä»¥åˆ¤æ–­æ˜¯å¦éœ€è¦è”ç½‘æ›´æ–°å›¾ç‰‡
 	 * 
 	 * @return
 	 */
@@ -624,7 +624,7 @@ public class MainActivity extends BaseFrameActivity {
 			in = OpenHttpConnection(REMOTE_UPDATE_CHECK_URL);
 		} catch (IOException e) {
 			//Log.w("MainActivity", e.getLocalizedMessage());
-			showToastInWorkingThread("Ô¶³Ì·şÎñÆ÷Á´½Ó³¬Ê±£¬ÍøÂç²»´ó¸øÁ¦£¿");
+			showToastInWorkingThread("è¿œç¨‹æœåŠ¡å™¨é“¾æ¥è¶…æ—¶ï¼Œç½‘ç»œä¸å¤§ç»™åŠ›ï¼Ÿ");
 			return false;
 		}
 		if (in == null)
@@ -647,15 +647,15 @@ public class MainActivity extends BaseFrameActivity {
 			return false;
 		}
 
-		// ±È¶ÔÊ±¼ä
+		// æ¯”å¯¹æ—¶é—´
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			Date date = format.parse(str);
-			long updTimeInServer = date.getTime(); // ·şÎñÆ÷Ê±¼ä£¨·ÖÖÓ£©
+			long updTimeInServer = date.getTime(); // æœåŠ¡å™¨æ—¶é—´ï¼ˆåˆ†é’Ÿï¼‰
 			SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
 					MODE_PRIVATE);
 			long timestampHere = appPreferences.getLong(KEY_NAME_LAST_REFRESH,
-					0); // ±¾µØ×îºó¸üĞÂµÄÊ±¼ä
+					0); // æœ¬åœ°æœ€åæ›´æ–°çš„æ—¶é—´
 			Log.d("MainActivity", "Remote : " + updTimeInServer + ", local : "
 					+ timestampHere);
 			if (updTimeInServer > timestampHere) {
@@ -675,12 +675,12 @@ public class MainActivity extends BaseFrameActivity {
 
 
 	/**
-	 * Ö÷½çÃæµã»÷bannerµ¯³öµÄ¶Ô»°¿ò
+	 * ä¸»ç•Œé¢ç‚¹å‡»bannerå¼¹å‡ºçš„å¯¹è¯æ¡†
 	 * 
 	 * @param context
-	 *            ÉÏÏÂÎÄ
+	 *            ä¸Šä¸‹æ–‡
 	 * @param content
-	 *            ÎÄ±¾ÄÚÈİ
+	 *            æ–‡æœ¬å†…å®¹
 	 */
 	public void showInfoDialog(Context context, String title, String content) {
 		LayoutInflater inflater = LayoutInflater.from(this);
@@ -696,11 +696,11 @@ public class MainActivity extends BaseFrameActivity {
 		builder.setTitle(title);
 		builder.setView(dialogView);
 
-		builder.setPositiveButton("ºÃµÄ", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton("å¥½çš„", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// ÔİÊ±Ã»É¶ÓÃ
+				// æš‚æ—¶æ²¡å•¥ç”¨
 			}
 		});
 
@@ -708,7 +708,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * Ïú»ÙÊ±Èç¹û»¹ÓĞÃ»ÓĞ¸ãÍêµÄÒì²½Ïß³Ì£¬ÉèÖÃflagÈÃÏß³ÌÈ¡Ïû¸üĞÂUIµÄ²Ù×÷£¡
+	 * é”€æ¯æ—¶å¦‚æœè¿˜æœ‰æ²¡æœ‰æå®Œçš„å¼‚æ­¥çº¿ç¨‹ï¼Œè®¾ç½®flagè®©çº¿ç¨‹å–æ¶ˆæ›´æ–°UIçš„æ“ä½œï¼
 	 */
 	@Override
 	protected void onDestroy() {
@@ -733,14 +733,14 @@ public class MainActivity extends BaseFrameActivity {
 		super.onResume();
 		doNotUpdateUI = false;
 		if (mUpdateBannerImageTask == null && mIsUpdateBannerTaskDone) {
-			// Èç¹û¸üĞÂÍê³É£¬ĞŞ¸Ä"ÕıÔÚË¢ĞÂ"Ê²Ã´µÄ
-			// ¸Ä»ØActionBarÍ¼±ê
+			// å¦‚æœæ›´æ–°å®Œæˆï¼Œä¿®æ”¹"æ­£åœ¨åˆ·æ–°"ä»€ä¹ˆçš„
+			// æ”¹å›ActionBarå›¾æ ‡
 			MenuItem item = mActionMenu.findItem(R.id.main_content_refresh);
 			item.setVisible(true);
 			MenuItem doingItem = mActionMenu
 					.findItem(R.id.mainframe_menu_item_doing);
 			doingItem.setVisible(false);
-			//´ÓÊı¾İ¿âÖØĞÂ¶ÁÈ¡Í¼Æ¬
+			//ä»æ•°æ®åº“é‡æ–°è¯»å–å›¾ç‰‡
 			if(mContentFrag != null && mContentFrag instanceof MainContentFragment){
 				((MainContentFragment)mContentFrag).refreshImageFromDb();
 			}
@@ -749,7 +749,7 @@ public class MainActivity extends BaseFrameActivity {
 	}
 
 	/**
-	 * Òì²½»ñÈ¡¸üĞÂ×´Ì¬£¬·ÀÖ¹Æô¶¯Ê±¼ä»ºÂı
+	 * å¼‚æ­¥è·å–æ›´æ–°çŠ¶æ€ï¼Œé˜²æ­¢å¯åŠ¨æ—¶é—´ç¼“æ…¢
 	 * 
 	 * @author BorisHe
 	 * 
@@ -764,7 +764,7 @@ public class MainActivity extends BaseFrameActivity {
 				return null;
 			}
 
-			// ¼ì²éÊÇ·ñÓĞ¹Ì¼ş°æ±¾¸üĞÂ
+			// æ£€æŸ¥æ˜¯å¦æœ‰å›ºä»¶ç‰ˆæœ¬æ›´æ–°
 			if (!mShowedUpdate) {
 				Intent intent = new Intent();
 				intent.setClass(context[0], AppUpdateActivity.class);

@@ -8,7 +8,7 @@ import java.util.Set;
 import android.content.SharedPreferences;
 
 /**
- * ½â¾öAndroid 3.0ÒÔÏÂ°æ±¾PreferencesÖĞÃ»ÓĞgetStringSetÕâ¸ö·½·¨µÄÎÊÌâ
+ * è§£å†³Android 3.0ä»¥ä¸‹ç‰ˆæœ¬Preferencesä¸­æ²¡æœ‰getStringSetè¿™ä¸ªæ–¹æ³•çš„é—®é¢˜
  * @author BorisHe
  *
  */

@@ -21,7 +21,7 @@ import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
 
 /**
- * @author xie ÏÔÊ¾ÅÜ²Ù´ÎÊıµÄĞÅÏ¢
+ * @author xie æ˜¾ç¤ºè·‘æ“æ¬¡æ•°çš„ä¿¡æ¯
  */
 public class FragmentB extends Fragment {
 	private RunTimes runTimesInfo;
@@ -88,7 +88,7 @@ public class FragmentB extends Fragment {
 						runTimesInfo.save();
 						show();
 					} catch (Exception e) {
-						Toast.makeText(getActivity(), "Êı¾İÎŞĞ§",
+						Toast.makeText(getActivity(), "æ•°æ®æ— æ•ˆ",
 								Toast.LENGTH_SHORT).show();
 					}
 				}
@@ -99,7 +99,7 @@ public class FragmentB extends Fragment {
 
 				@Override
 				public void onClick(View v) {
-					btnUpdate.setText("ÕıÔÚ¸üĞÂ...");
+					btnUpdate.setText("æ­£åœ¨æ›´æ–°...");
 					update();
 				}
 
@@ -109,18 +109,18 @@ public class FragmentB extends Fragment {
 	}
 
 	/**
-	 * ¸üĞÂĞÅÏ¢
+	 * æ›´æ–°ä¿¡æ¯
 	 */
 	public void update() {
 		runTimesInfo.update(user);
 	}
 
 	/**
-	 * ÏÔÊ¾ĞÅÏ¢
+	 * æ˜¾ç¤ºä¿¡æ¯
 	 */
 	public void show() {
 		if (runTimesInfo.getTimes() == RunTimes.DEFAULT_TIMES) {
-			txtTimes.setText("»¹Ã»ÓĞÊı¾İ");
+			txtTimes.setText("è¿˜æ²¡æœ‰æ•°æ®");
 		} else {
 			if (runTimesInfo.getAdjustTimes() != RunTimes.DEFAULT_ADJUST_TIMES) {
 				txtTimes.setText(""
@@ -134,7 +134,7 @@ public class FragmentB extends Fragment {
 			}
 		}
 		if (runTimesInfo.getUpdateTime() != RunTimes.DEFAULT_UPDATE_TIME) {
-			txtUpdateTime.setText(String.format("¸üĞÂÓÚ%s",
+			txtUpdateTime.setText(String.format("æ›´æ–°äº%s",
 					runTimesInfo.getUpdateTime()));
 		} else {
 			txtUpdateTime.setText("");
@@ -142,10 +142,10 @@ public class FragmentB extends Fragment {
 	}
 	public void onSuccess(){
 		Log.w("err","failed herer!!!!!!!!!!!BBS");
-		btnUpdate.setText("¸üĞÂ");
+		btnUpdate.setText("æ›´æ–°");
 		Activity act = getActivity();
 		if(act != null){
-			Toast.makeText(act, "¸üĞÂ³É¹¦", Toast.LENGTH_LONG).show();
+			Toast.makeText(act, "æ›´æ–°æˆåŠŸ", Toast.LENGTH_LONG).show();
 			show();
 		}
 			
@@ -153,10 +153,10 @@ public class FragmentB extends Fragment {
 
 	public void onFailed() {
 		Log.w("err","failed herer!!!!!!!!!!!BBF");
-		btnUpdate.setText("¸üĞÂ");
+		btnUpdate.setText("æ›´æ–°");
 		Activity act = getActivity();
 		if(act != null){
-			Toast.makeText(act, "¸üĞÂÊ§°Ü", Toast.LENGTH_LONG).show();
+			Toast.makeText(act, "æ›´æ–°å¤±è´¥", Toast.LENGTH_LONG).show();
 			show();
 		}
 			

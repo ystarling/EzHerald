@@ -26,16 +26,16 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 		MainContentGridItemObj obj = new MainContentGridItemObj();
 		if(null == str)
 		{
-			obj.setContent1("¼ÓÔØ²»ÁËÄØ~");
-			obj.setContent2("Í¬Ñ§Í¬Ñ§ÍøÂçÕı³£²»...");
+			obj.setContent1("åŠ è½½ä¸äº†å‘¢~");
+			obj.setContent2("åŒå­¦åŒå­¦ç½‘ç»œæ­£å¸¸ä¸...");
 			return obj;
 		}
 		
 		
 		if(str == noActivityHint )
 		{
-			obj.setContent1("Ã»ÓĞ»î¶¯Å¶~");
-			obj.setContent2("¸Ï¿ìÌáĞÑÄúÉí±ßµÄÉçÍÅ×éÖ¯µ½ÏÈÉùÍøÉÏ·¢²¼»î¶¯°É~");
+			obj.setContent1("æ²¡æœ‰æ´»åŠ¨å“¦~");
+			obj.setContent2("èµ¶å¿«æé†’æ‚¨èº«è¾¹çš„ç¤¾å›¢ç»„ç»‡åˆ°å…ˆå£°ç½‘ä¸Šå‘å¸ƒæ´»åŠ¨å§~");
 		}
 		else
 		{
@@ -47,21 +47,21 @@ public class ActivityDataGrabber implements MainContentInfoGrabber {
 				String acti_title = jsonObject.getString("name");
 				String league_name = league_obj.getString("league_name");
 				
-				obj.setContent1(league_name+"·¢²¼ÁËĞÂ»î¶¯:");
+				obj.setContent1(league_name+"å‘å¸ƒäº†æ–°æ´»åŠ¨:");
 				obj.setContent2(acti_title);
 	
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				obj.setContent1("¼ÓÔØ»î¶¯³ö´íÁË ==");
+				obj.setContent1("åŠ è½½æ´»åŠ¨å‡ºé”™äº† ==");
 				obj.setContent2("");
 				
 			}
 			catch (Exception e)
 			{
-				obj.setContent1("¼ÓÔØ³ö´íÀ²");
-				obj.setContent2("ÊÇÒòÎªÍøÂçÁ¬½Ó²»ºÃÃ´");
+				obj.setContent1("åŠ è½½å‡ºé”™å•¦");
+				obj.setContent2("æ˜¯å› ä¸ºç½‘ç»œè¿æ¥ä¸å¥½ä¹ˆ");
 			}
 			
 		}

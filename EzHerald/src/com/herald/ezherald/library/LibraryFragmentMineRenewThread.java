@@ -42,7 +42,7 @@ public class LibraryFragmentMineRenewThread extends Thread{
 		this.barcode=barcode;
 		dialog=new ProgressDialog(context);
 		dialog.setCanceledOnTouchOutside(false);
-		dialog.setMessage("ÇëÉÔºò ...");
+		dialog.setMessage("è¯·ç¨å€™ ...");
 		}
 	@Override
 	public void run() {
@@ -62,7 +62,7 @@ public class LibraryFragmentMineRenewThread extends Thread{
 			NameValuePair pair3=new BasicNameValuePair("barcode",barcode); 
 			list.add(pair3);
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,"UTF-8");
-			// ÉèÖÃÍøÂç³¬Ê±²ÎÊı
+			// è®¾ç½®ç½‘ç»œè¶…æ—¶å‚æ•°
 			HttpParams httpParams = client.getParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
 			HttpConnectionParams.setSoTimeout(httpParams, 5000);
@@ -119,20 +119,20 @@ public class LibraryFragmentMineRenewThread extends Thread{
 				dialog.show();
 			}else
 			if(va=="Networking"){
-				Toast toast1=Toast.makeText(activity, "ÍøÂçÁ¬½Ó´íÎó...", Toast.LENGTH_LONG);
+				Toast toast1=Toast.makeText(activity, "ç½‘ç»œè¿æ¥é”™è¯¯...", Toast.LENGTH_LONG);
 				toast1.show();
 				dialog.cancel();
 			}else
 			if(va=="RenewSuccess"){
 				
-				Toast toast1=Toast.makeText(activity, "Ğø½è³É¹¦...", Toast.LENGTH_LONG);
+				Toast toast1=Toast.makeText(activity, "ç»­å€ŸæˆåŠŸ...", Toast.LENGTH_LONG);
 				toast1.show();
 				dialog.cancel();
 				
 			}else
 				if(va=="RenewFalse"){
 					
-					Toast toast1=Toast.makeText(activity, "Ğø½èÊ§°Ü...", Toast.LENGTH_LONG);
+					Toast toast1=Toast.makeText(activity, "ç»­å€Ÿå¤±è´¥...", Toast.LENGTH_LONG);
 					toast1.show();
 					dialog.cancel();
 				}

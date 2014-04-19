@@ -83,7 +83,7 @@ public class AcademicFragment extends SherlockFragment implements
 		
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("ÇëÉÔºò ... ");
+		progressDialog.setMessage("è¯·ç¨å€™ ... ");
 		
 	}
 	
@@ -378,7 +378,7 @@ public class AcademicFragment extends SherlockFragment implements
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		  {
-		    //Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		      return;
 		  }
@@ -474,7 +474,7 @@ public class AcademicFragment extends SherlockFragment implements
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		  {
-		    //Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		      return;
 		  }
@@ -485,7 +485,7 @@ public class AcademicFragment extends SherlockFragment implements
 				if (result != null) {
 					if(result.size() == 0)
 					{
-						Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË.", Toast.LENGTH_LONG).show();
+						Toast.makeText(context, "æ²¡æœ‰æ›´å¤šäº†.", Toast.LENGTH_LONG).show();
 					}
 					adapter.addJwcInfoList(result);
 					adapter.notifyDataSetChanged();

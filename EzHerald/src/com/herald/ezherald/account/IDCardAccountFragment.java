@@ -109,7 +109,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 
 	private OnClickListener submitListener = new OnClickListener() {
 		public void onClick(View v) {
-			proDialog = ProgressDialog.show(getActivity(), "ÇëÉÔºò",
+			proDialog = ProgressDialog.show(getActivity(), "è¯·ç¨å€™",
 					"", true, true);
 
 			Thread loginThread = new Thread(new LoginFailureHandler());
@@ -137,7 +137,7 @@ public class IDCardAccountFragment extends SherlockFragment {
     }
 	class LoginFailureHandler implements Runnable {
 
-		protected static final int LOGIN_REQ_RESULT_CODE = 200;  //ÇëÇó½á¹ûµÄcode
+		protected static final int LOGIN_REQ_RESULT_CODE = 200;  //è¯·æ±‚ç»“æœçš„code
 
 		public void run() {
 			boolean loginState = false;
@@ -157,7 +157,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			if( webAuth(userName, password) == false){
 				loginState = false;
 			}else {
-				//µÇÂ½³É¹¦
+				//ç™»é™†æˆåŠŸ
 				loginState = true;
 				
 				databaseHelper = new DatabaseHelper(getActivity(), Authenticate.DATABASE_NAME);
@@ -176,7 +176,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 				IDCardAccountActivity currActivity = (IDCardAccountActivity)getActivity();
 				boolean isRemoteCall = currActivity.isRemoteModuleCall;
 				if(!isRemoteCall){
-					//Èç¹ûÊÇ±ğµÄÄ£¿éÌø×ªµ½ÕâÀïµÄ£¬²»ÓÃÌø»ØÈ¥£¡
+					//å¦‚æœæ˜¯åˆ«çš„æ¨¡å—è·³è½¬åˆ°è¿™é‡Œçš„ï¼Œä¸ç”¨è·³å›å»ï¼
 					
 					Intent newActivity = new Intent(getSherlockActivity(),AccountActivity.class);
 			        startActivity(newActivity);
@@ -216,7 +216,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 				if (proDialog != null) {
 					proDialog.dismiss();
 				}
-				Toast.makeText(getActivity(), "±§Ç¸£¬·şÎñ³ö´í£¬ÇëÉÔºóÔÙÊÔ£¡",
+				Toast.makeText(getActivity(), "æŠ±æ­‰ï¼ŒæœåŠ¡å‡ºé”™ï¼Œè¯·ç¨åå†è¯•ï¼",
 						Toast.LENGTH_SHORT).show();
 			}
 		};
@@ -233,19 +233,19 @@ public class IDCardAccountFragment extends SherlockFragment {
 				proDialog.dismiss();
 			}
 			if (isNetError) {
-				Toast.makeText(getActivity(), "µ±Ç°ÍøÂç²»¿ÉÓÃ",
+				Toast.makeText(getActivity(), "å½“å‰ç½‘ç»œä¸å¯ç”¨",
 						Toast.LENGTH_SHORT).show();
 			} else {
 				if(isServiceError){
-					Toast.makeText(getActivity(), "µ±Ç°·şÎñ²»¿ÉÓÃ£¬ÇëÉÔºóÔÙÊÔ",
+					Toast.makeText(getActivity(), "å½“å‰æœåŠ¡ä¸å¯ç”¨ï¼Œè¯·ç¨åå†è¯•",
 							Toast.LENGTH_SHORT).show();
 				}else{
 				if (loginState) {
-					Toast.makeText(getActivity(), "µÇÂ¼³É¹¦£¡",
+					Toast.makeText(getActivity(), "ç™»å½•æˆåŠŸï¼",
 							Toast.LENGTH_SHORT).show();
 					returnMsgIntent.putExtra("loginSucceed", true);
 				} else {
-					Toast.makeText(getActivity(), "´íÎóµÄÓÃ»§Ãû»òÃÜÂë",
+					Toast.makeText(getActivity(), "é”™è¯¯çš„ç”¨æˆ·åæˆ–å¯†ç ",
 							Toast.LENGTH_SHORT).show();
 				}
 				}
@@ -255,7 +255,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			
 		}
 	};
-	// ĞÂµÄµÇÂ½£¬·şÎñÆ÷¹ÒÁË£¬¸ÄÓÃ105Ö±½ÓÑéÖ¤
+	// æ–°çš„ç™»é™†ï¼ŒæœåŠ¡å™¨æŒ‚äº†ï¼Œæ”¹ç”¨105ç›´æ¥éªŒè¯
 	private Boolean webAuth(String username,String password) {
 		final String URL = "http://121.248.63.105/authentication/";
 		HttpClient client = new DefaultHttpClient();

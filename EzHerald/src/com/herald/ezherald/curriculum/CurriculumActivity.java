@@ -47,7 +47,7 @@ public class CurriculumActivity extends BaseFrameActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * ÉÏ²àTitleÎ»ÖÃµÄ°´Å¥µã»÷ÏàÓ¦
+		 * ä¸Šä¾§Titleä½ç½®çš„æŒ‰é’®ç‚¹å‡»ç›¸åº”
 		 */
 		return super.onOptionsItemSelected(item);
 	}

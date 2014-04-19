@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Ö÷½çÃæÄ£¿éÖĞListViewÏîÄ¿ÄÚÈİµÄAdapter (Ìæ´úÔ­À´µÄGridView)
+ * ä¸»ç•Œé¢æ¨¡å—ä¸­ListViewé¡¹ç›®å†…å®¹çš„Adapter (æ›¿ä»£åŸæ¥çš„GridView)
  * 
  * @author BorisHe
  * @since 20131018
@@ -23,23 +23,23 @@ public class MainContentListItemAdapter extends BaseAdapter {
 	private final String TAG = "MainContentListItemAdapter";
 
 	private Context mContext;
-	private List<Map<String, Object>> mGridItemList; // GridÏîĞÅÏ¢
-	private LayoutInflater mGridContainer; // ÊÓÍ¼ÈİÆ÷
+	private List<Map<String, Object>> mGridItemList; // Gridé¡¹ä¿¡æ¯
+	private LayoutInflater mGridContainer; // è§†å›¾å®¹å™¨
 
-	private final String STR_UNDEF_ITEM_CONT1 = "µã»÷ÕâÀï";
-	private final String STR_UNDEF_ITEM_CONT2 = "¶¨ÒåĞèÒªÏÔÊ¾µÄÄ£¿é";
-	private final int IMG_UNDEF_ITEM_RESID = R.drawable.main_2ndmenu_ic_accsetting; // Í¼±ê
+	private final String STR_UNDEF_ITEM_CONT1 = "ç‚¹å‡»è¿™é‡Œ";
+	private final String STR_UNDEF_ITEM_CONT2 = "å®šä¹‰éœ€è¦æ˜¾ç¤ºçš„æ¨¡å—";
+	private final int IMG_UNDEF_ITEM_RESID = R.drawable.main_2ndmenu_ic_accsetting; // å›¾æ ‡
 
 	/**
-	 * GridÏîÄ¿µÄ×Ô¶¨Òå¿Ø¼ş¼¯
+	 * Gridé¡¹ç›®çš„è‡ªå®šä¹‰æ§ä»¶é›†
 	 * 
 	 * @author BorisHe
 	 * 
 	 */
 	public final class GridItemView {
-		public ImageView icon; // Ä£¿éÍ¼±ê
-		public TextView content1; // ÄÚÈİ1
-		public TextView content2; // ÄÚÈİ2
+		public ImageView icon; // æ¨¡å—å›¾æ ‡
+		public TextView content1; // å†…å®¹1
+		public TextView content2; // å†…å®¹2
 	}
 
 	public MainContentListItemAdapter(Context c,
@@ -60,11 +60,11 @@ public class MainContentListItemAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ¹æ¶¨Id: 0 - Î´ÉèÖÃ; 1 - curriculum; 2 - activity; 3 - agenda; 4 - library; 5 -
+	 * è§„å®šId: 0 - æœªè®¾ç½®; 1 - curriculum; 2 - activity; 3 - agenda; 4 - library; 5 -
 	 * gpa; 6 - exercise; 7 - academic; 8 - freshman;
 	 */
-//	private final String[] ModuleNames = { "ÄÉÄá?µÚÒ»´ÎÃ´?", "¿Î±í×ÔÏ°", "Ğ£Ô°»î¶¯", "ÎÒµÄÈÕ³Ì",
-//			"Í¼Êé²éÑ¯", "¼¨µã²éÑ¯", "ÅÜ²Ù²éÑ¯", "½ÌÎñĞÅÏ¢", "Ğ£Ô°Ö¸ÄÏ" };
+//	private final String[] ModuleNames = { "çº³å°¼?ç¬¬ä¸€æ¬¡ä¹ˆ?", "è¯¾è¡¨è‡ªä¹ ", "æ ¡å›­æ´»åŠ¨", "æˆ‘çš„æ—¥ç¨‹",
+//			"å›¾ä¹¦æŸ¥è¯¢", "ç»©ç‚¹æŸ¥è¯¢", "è·‘æ“æŸ¥è¯¢", "æ•™åŠ¡ä¿¡æ¯", "æ ¡å›­æŒ‡å—" };
 
 	@Override
 	public long getItemId(int position) {
@@ -93,28 +93,28 @@ public class MainContentListItemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// »ñµÃÊÓÍ¼
+		// è·å¾—è§†å›¾
 		GridItemView gridItemView;
 		if (convertView == null) {// if it's not recycled, initialize some
 									// attributes
 			gridItemView = new GridItemView();
-			// »ñÈ¡²Ëµ¥Ïî²¼¾ÖÎÄ¼şµÄÊÓÍ¼
+			// è·å–èœå•é¡¹å¸ƒå±€æ–‡ä»¶çš„è§†å›¾
 			convertView = mGridContainer.inflate(
 					R.layout.main_frame_content_list_item, null);
-			// »ñÈ¡¿Ø¼ş¶ÔÏó
+			// è·å–æ§ä»¶å¯¹è±¡
 			gridItemView.icon = (ImageView) convertView
 					.findViewById(R.id.main_frame_content_listitem_icon);
 			gridItemView.content1 = (TextView) convertView
 					.findViewById(R.id.main_frame_content_listitem_content1);
 			gridItemView.content2 = (TextView) convertView
 					.findViewById(R.id.main_frame_content_listitem_content2);
-			// ÉèÖÃ¿Ø¼ş¼¯µ½convertView
+			// è®¾ç½®æ§ä»¶é›†åˆ°convertView
 			convertView.setTag(gridItemView);
 		} else {
 			gridItemView = (GridItemView) convertView.getTag();
 		}
 
-		// ÉèÖÃiconÓëcontents
+		// è®¾ç½®iconä¸contents
 		if(getItemId(position) != 0){
 			gridItemView.icon.setImageResource((Integer) mGridItemList
 					.get(position).get("icon"));
@@ -122,7 +122,7 @@ public class MainContentListItemAdapter extends BaseAdapter {
 		
 		String cont1txt = (String) mGridItemList.get(position).get("content1");
 		if (getItemId(position) == 0) {
-			// Î´¶¨Òå£¬Ìæ»»ÎÄ±¾ÄÚÈİ
+			// æœªå®šä¹‰ï¼Œæ›¿æ¢æ–‡æœ¬å†…å®¹
 			cont1txt = STR_UNDEF_ITEM_CONT1;
 		}
 
@@ -131,7 +131,7 @@ public class MainContentListItemAdapter extends BaseAdapter {
 		
 		String cont2txt = (String) mGridItemList.get(position).get("content2");
 		if (getItemId(position) == 0) {
-			// Î´¶¨Òå£¬Ìæ»»ÎÄ±¾ÄÚÈİ
+			// æœªå®šä¹‰ï¼Œæ›¿æ¢æ–‡æœ¬å†…å®¹
 			cont2txt = STR_UNDEF_ITEM_CONT2;
 		}
 		gridItemView.content2.setText(cont2txt);

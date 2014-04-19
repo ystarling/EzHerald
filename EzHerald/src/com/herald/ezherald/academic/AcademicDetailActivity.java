@@ -45,7 +45,7 @@ public class AcademicDetailActivity extends SherlockActivity {
 		context = this;
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("ÇëÉÔºò ... ");
+		progressDialog.setMessage("è¯·ç¨å€™ ... ");
 		
 		super.onCreate(savedInstanceState);
 		 setContentView(R.layout.academic_detail);
@@ -90,11 +90,11 @@ public class AcademicDetailActivity extends SherlockActivity {
 			Intent intent = new Intent(Intent.ACTION_SEND);
 
 			intent.setType("text/plain");
-			intent.putExtra(Intent.EXTRA_SUBJECT, "·ÖÏí");
+			intent.putExtra(Intent.EXTRA_SUBJECT, "åˆ†äº«");
 			intent.putExtra(Intent.EXTRA_TEXT,
-					"½ÌÎñ´¦·¢²¼ÁËĞÂµÄÍ¨Öª£º"+ infoTitle);
+					"æ•™åŠ¡å¤„å‘å¸ƒäº†æ–°çš„é€šçŸ¥ï¼š"+ infoTitle);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(Intent.createChooser(intent, "·ÖÏíµ½"));
+			context.startActivity(Intent.createChooser(intent, "åˆ†äº«åˆ°"));
 			return true;
 
 		}

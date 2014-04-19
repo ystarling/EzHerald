@@ -40,3 +40,6 @@ android {
         release.setRoot('build-types/release')
     }
 }
+tasks.withType(Compile) {
+    options.encoding = "UTF-8"
+}

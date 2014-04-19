@@ -58,7 +58,7 @@ public class AppUpdateActivity extends Activity {
 	private String description = "test";
 	private ProgressDialog progress;
 	private int down = 0;
-	private long fullSize;//¸üĞÂ°üµÄ×Ü´óĞ¡ 
+	private long fullSize;//æ›´æ–°åŒ…çš„æ€»å¤§å° 
 	private final String fileName ="ezHErald"+ newVersion+".apk"; 
 	private final int SUCCESS = 1;
 	private final int FAILED  = 0;
@@ -100,7 +100,7 @@ public class AppUpdateActivity extends Activity {
 		if(intent != null)
 			mIsCalledInSetting = intent.getBooleanExtra("isCalledInSetting", false);
 		if(mIsCalledInSetting){
-			Toast.makeText(this, "ÕıÔÚ¼ì²â¸üĞÂ...", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "æ­£åœ¨æ£€æµ‹æ›´æ–°...", Toast.LENGTH_SHORT).show();
 		}
 		
 		new AppUpdateAsyncTask().execute(this);
@@ -113,7 +113,7 @@ public class AppUpdateActivity extends Activity {
 		
 		@Override
 		protected Boolean doInBackground(Context... params) {
-			// ¼ì²â¸üĞÂ
+			// æ£€æµ‹æ›´æ–°
 			mContext = params[0];
 			try {
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -146,9 +146,9 @@ public class AppUpdateActivity extends Activity {
 		}
 
 		/**
-		 * ÅĞ¶ÏÊÇ·ñÊÇĞÂ°æ±¾
-		 * °æ±¾ºÅ°´Êı×Ö¡¢×ÖÄ¸ĞòÅÅÁĞ
-		 * °æ±¾ºÅ±ØĞëÑÏ¸ñ×ñÊØ A.B.CµÄ¸ñÊ½£¬²»ÔÊĞíÁíÍâ¼Ó¡®.¡¯
+		 * åˆ¤æ–­æ˜¯å¦æ˜¯æ–°ç‰ˆæœ¬
+		 * ç‰ˆæœ¬å·æŒ‰æ•°å­—ã€å­—æ¯åºæ’åˆ—
+		 * ç‰ˆæœ¬å·å¿…é¡»ä¸¥æ ¼éµå®ˆ A.B.Cçš„æ ¼å¼ï¼Œä¸å…è®¸å¦å¤–åŠ â€˜.â€™
 		 * @param currentVersionName 
 		 * @param newVersion
 		 * @return
@@ -172,7 +172,7 @@ public class AppUpdateActivity extends Activity {
 				return;
 			if(result == false){
 				if(mIsCalledInSetting)
-					Toast.makeText(mContext, "Î´¼ì²âµ½¸üĞÂ", Toast.LENGTH_SHORT).show();
+					Toast.makeText(mContext, "æœªæ£€æµ‹åˆ°æ›´æ–°", Toast.LENGTH_SHORT).show();
 				finish();
 				return;
 			}
@@ -183,7 +183,7 @@ public class AppUpdateActivity extends Activity {
 	}
 	
 //	/**
-//	 * @return boolean ÊÇ·ñÓĞĞÂ°æ±¾
+//	 * @return boolean æ˜¯å¦æœ‰æ–°ç‰ˆæœ¬
 //	 */
 //	public void checkUpdate(){
 //		new Thread(){
@@ -228,11 +228,11 @@ public class AppUpdateActivity extends Activity {
 		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setIcon(R.drawable.ic_launcher);
-		builder.setTitle("ĞÂµÄ°æ±¾,ÊÇ·ñÉı¼¶");
+		builder.setTitle("æ–°çš„ç‰ˆæœ¬,æ˜¯å¦å‡çº§");
 		LayoutInflater inflater = this.getLayoutInflater();
 		View dialogView = inflater.inflate(R.layout.app_update,null);
 		builder.setView(dialogView);
-		builder.setPositiveButton("¸üĞÂ",new OnClickListener(){
+		builder.setPositiveButton("æ›´æ–°",new OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
@@ -243,7 +243,7 @@ public class AppUpdateActivity extends Activity {
 			}
 
 		} );
-		builder.setNegativeButton("ÏÂ´ÎÔÙËµ", new OnClickListener(){
+		builder.setNegativeButton("ä¸‹æ¬¡å†è¯´", new OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
@@ -256,7 +256,7 @@ public class AppUpdateActivity extends Activity {
 		AlertDialog dialog  = builder.create();
 		
 		TextView txt_version = (TextView) dialogView.findViewById(R.id.txt_version);
-		txt_version.setText("°æ±¾ºÅ£º"+newVersion);
+		txt_version.setText("ç‰ˆæœ¬å·ï¼š"+newVersion);
 		TextView txt_description = (TextView) dialogView.findViewById(R.id.txt_description);
 		txt_description.setText(description);
 		dialog.setCancelable(false);
@@ -264,7 +264,7 @@ public class AppUpdateActivity extends Activity {
 	}
 
 	/**
-	 * @return int ±¾µØµÄ°æ±¾ºÅ manifestÀïÃæ
+	 * @return int æœ¬åœ°çš„ç‰ˆæœ¬å· manifesté‡Œé¢
 	 */
 	public String getVersionName(){
 		PackageManager manager= this.getPackageManager();
@@ -280,12 +280,12 @@ public class AppUpdateActivity extends Activity {
 	}
 	
 	/**
-	 * ¿ªÒ»¸öÏß³ÌÖ´ĞĞÏÂÔØ
+	 * å¼€ä¸€ä¸ªçº¿ç¨‹æ‰§è¡Œä¸‹è½½
 	 */
 	private void download(){
 		progress = new ProgressDialog(AppUpdateActivity.this);
-		progress.setTitle("ÕıÔÚÏÂÔØ...");
-		progress.setMessage("ÇëÉÔºò");
+		progress.setTitle("æ­£åœ¨ä¸‹è½½...");
+		progress.setMessage("è¯·ç¨å€™");
 		//progress.setProgressStyle(ProgressDialog.STYLE_SPINNER); 
 		progress.setCancelable(false);
 		progress.setOnKeyListener(new OnKeyListener() {
@@ -298,11 +298,11 @@ public class AppUpdateActivity extends Activity {
 					return false;
 				
 				if(System.currentTimeMillis() - mExitTime > 2000){
-					Toast.makeText(getApplicationContext(), "ÔÙ°´Ò»´Î·µ»Ø¼üÍ£Ö¹ÏÂÔØ", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "å†æŒ‰ä¸€æ¬¡è¿”å›é”®åœæ­¢ä¸‹è½½", Toast.LENGTH_SHORT).show();
 					mExitTime = System.currentTimeMillis();					 
 				} else {
 					mForceStopOperation = true;
-					Toast.makeText(getApplicationContext(), "ÏÂÔØÒÑÍ£Ö¹...", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "ä¸‹è½½å·²åœæ­¢...", Toast.LENGTH_SHORT).show();
 					progress.cancel();
 				}
 				return true;
@@ -355,7 +355,7 @@ public class AppUpdateActivity extends Activity {
 		}.start();
 	}
 	/**
-	 * ÏÂÔØ³É¹¦Ê±ºòµ÷ÓÃ
+	 * ä¸‹è½½æˆåŠŸæ—¶å€™è°ƒç”¨
 	 */
 	private void onDownloadFinish(){
         progress.cancel();  
@@ -365,23 +365,23 @@ public class AppUpdateActivity extends Activity {
                 "application/vnd.android.package-archive");
         
         startActivity(intent);
-        //Toast.makeText(this, "ÏÂÔØÎÄ¼şÒÑ·ÅÖÃÓÚSD¿¨¸ùÄ¿Â¼", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "ä¸‹è½½æ–‡ä»¶å·²æ”¾ç½®äºSDå¡æ ¹ç›®å½•", Toast.LENGTH_LONG).show();
         finish();
 	}
 	/**
-	 * ÏÂÔØÊ§°ÜµÄÊ±ºòµ÷ÓÃ
+	 * ä¸‹è½½å¤±è´¥çš„æ—¶å€™è°ƒç”¨
 	 */
 	private void onFailed(){
 		progress.cancel();
-		Toast.makeText(AppUpdateActivity.this, "ÏÂÔØÊ§°Ü,Çë¼ì²éÍøÂç", Toast.LENGTH_SHORT).show();
+		Toast.makeText(AppUpdateActivity.this, "ä¸‹è½½å¤±è´¥,è¯·æ£€æŸ¥ç½‘ç»œ", Toast.LENGTH_SHORT).show();
 		finish();
 	}
 	/**
-	 * @param p ½ø¶È µ¥Î»byte
-	 * ÏÔÊ¾ÏÂÔØÁË¶àÉÙ
+	 * @param p è¿›åº¦ å•ä½byte
+	 * æ˜¾ç¤ºä¸‹è½½äº†å¤šå°‘
 	 */
 	private void showProgress(Long p){
-		String downloadPersentage = "ÒÑÏÂÔØ" + p + "/" + fullSize;
+		String downloadPersentage = "å·²ä¸‹è½½" + p + "/" + fullSize;
 		double presentage = p.doubleValue()/fullSize * 100.0f;
 		downloadPersentage += ("\n" + String.format("%.1f", presentage) + "%");
 		

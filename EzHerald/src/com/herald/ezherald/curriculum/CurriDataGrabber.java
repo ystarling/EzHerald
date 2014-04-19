@@ -45,18 +45,18 @@ public class CurriDataGrabber implements MainContentInfoGrabber {
 		MainContentGridItemObj item = new MainContentGridItemObj();
 		if(null == atts)
 		{
-			item.setContent1("¶ÁÈ¡¿Î±í³ö´í ==");
-			item.setContent2("ÄúÊÇ²»ÊÇ»¹Ã»¸üĞÂ¿Î±í£¿");
+			item.setContent1("è¯»å–è¯¾è¡¨å‡ºé”™ ==");
+			item.setContent2("æ‚¨æ˜¯ä¸æ˜¯è¿˜æ²¡æ›´æ–°è¯¾è¡¨ï¼Ÿ");
 		}else if(!atts.isEmpty())
 		{
 			Attendance nextAtt = atts.get(0);
-			item.setContent1("ÏÂ½Ú¿Î£º"+nextAtt.getAttCourseName());
+			item.setContent1("ä¸‹èŠ‚è¯¾ï¼š"+nextAtt.getAttCourseName());
 			item.setContent2(nextAtt.getAttPlace());	
 		}
 		else
 		{
-			item.setContent1("¹§Ï²¹§Ï²");
-			item.setContent2("½ñÌìÄ¾ÓĞ¿ÎÁË!");
+			item.setContent1("æ­å–œæ­å–œ");
+			item.setContent2("ä»Šå¤©æœ¨æœ‰è¯¾äº†!");
 		}
 		return item;
 	}

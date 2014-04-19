@@ -25,22 +25,22 @@ public class AccountFragment extends SherlockFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){ 	
 		
 		View view = inflater.inflate(R.layout.account_activity_main, group, false);
-	        //°ó¶¨XMLÖĞµÄListView£¬×÷ÎªItemµÄÈİÆ÷
+	        //ç»‘å®šXMLä¸­çš„ListViewï¼Œä½œä¸ºItemçš„å®¹å™¨
 		UserAccount IDCardAccount = Authenticate.getIDcardUser(getSherlockActivity());
 		UserAccount tyxAccount = Authenticate.getTyxUser(getSherlockActivity());
 		UserAccount libAccount = Authenticate.getLibUser(getSherlockActivity());
-		String IDCardString = "[Î´µÇÂ¼] Ò»¿¨Í¨ÕËºÅ";
-		String tyxString = "[Î´µÇÂ¼] ÌåÓıÏµÕËºÅ";
-		String libString = "[Î´µÇÂ¼] Í¼Êé¹İÕËºÅ";
+		String IDCardString = "[æœªç™»å½•] ä¸€å¡é€šè´¦å·";
+		String tyxString = "[æœªç™»å½•] ä½“è‚²ç³»è´¦å·";
+		String libString = "[æœªç™»å½•] å›¾ä¹¦é¦†è´¦å·";
 		
 		if(IDCardAccount!=null){
-			IDCardString = "[ÒÑµÇÂ¼] Ò»¿¨Í¨ÕËºÅ";
+			IDCardString = "[å·²ç™»å½•] ä¸€å¡é€šè´¦å·";
 		}
 		if(tyxAccount!=null){
-			tyxString = "[ÒÑµÇÂ¼] ÌåÓıÏµÕËºÅ";
+			tyxString = "[å·²ç™»å½•] ä½“è‚²ç³»è´¦å·";
 		}
 		if(libAccount!=null){
-			libString = "[ÒÑµÇÂ¼] Í¼Êé¹İÕËºÅ";
+			libString = "[å·²ç™»å½•] å›¾ä¹¦é¦†è´¦å·";
 		}
 		
 	    String lv_arr[]={

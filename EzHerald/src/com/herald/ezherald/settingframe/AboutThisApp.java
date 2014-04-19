@@ -24,7 +24,7 @@ public class AboutThisApp extends SherlockActivity {
 		PackageInfo pkgInfo;
 		try {
 			pkgInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-			mAppVersionText.setText("�汾:" + pkgInfo.versionName);
+			mAppVersionText.setText("版本:" + pkgInfo.versionName);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

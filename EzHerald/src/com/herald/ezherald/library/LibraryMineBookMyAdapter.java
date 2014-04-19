@@ -77,21 +77,21 @@ import com.herald.ezherald.R;
 //			holder.collection=(TextView) convertView.findViewById(R.id.libr_mine_collection);
 //			holder.attachment=(TextView)convertView.findViewById(R.id.libr_mine_attachment);
 //			holder.renew_btn=(Button)convertView.findViewById(R.id.libr_mine_renew_btn);
-//			convertView.setTag(holder);//°ó¶¨ViewHolder¶ÔÏó
+//			convertView.setTag(holder);//ç»‘å®šViewHolderå¯¹è±¡
 //		}
 //		else{
 //			holder=(ViewHolder)convertView.getTag();
 //			}
 //		
 //		String libr_barcode = null,libr_title = null,libr_author = null,libr_borrow_date=null,libr_remand_date=null,libr_renew_num=null;
-//		String libr_marc_no=null;//²é¿´ÏêÇé±ØÌî
+//		String libr_marc_no=null;//æŸ¥çœ‹è¯¦æƒ…å¿…å¡«
 //		String libr_collection=null;
 //		String libr_attachment=null;
 //		
 //		
 //		List<HashMap<String,String>> data=new ArrayList<HashMap<String,String>>();
 //		
-//		/******ÉèÖÃ¶ÔÓ¦µÄ¶¯Ì¬Êı×éÊı¾İ*********/
+//		/******è®¾ç½®å¯¹åº”çš„åŠ¨æ€æ•°ç»„æ•°æ®*********/
 //		Log.d("jsonArray length():",jsonarray.length()+"");
 //		
 //		for(int i=0;i<jsonarray.length();i++){
@@ -126,18 +126,18 @@ import com.herald.ezherald.R;
 //			e.printStackTrace();
 //		}
 //	}
-//		holder.barCode.setText(position+1+".  ÌõĞÎÂë£º"+data.get(position).get("libr_barcode").toString());
+//		holder.barCode.setText(position+1+".  æ¡å½¢ç ï¼š"+data.get(position).get("libr_barcode").toString());
 //		barcode=data.get(position).get("libr_barcode").toString();
-//		holder.title.setText("ÌâÃû£º"+data.get(position).get("libr_title").toString());
-//		holder.author.setText("ÔğÈÎÕß£º"+data.get(position).get("libr_author").toString());
-//		holder.borrow_date.setText("½èÔÄÈÕÆÚ£º"+data.get(position).get("libr_borrow_date").toString());
-//		holder.remand_date.setText("Ó¦»¹ÈÕÆÚ£º"+data.get(position).get("libr_remand_date").toString());
-//		holder.renew_num.setText("Ğø½è´ÎÊı£º"+data.get(position).get("libr_renew_num").toString());
-//		holder.collection.setText("¹İ²ØµØ£º"+data.get(position).get("libr_collection").toString());
-//		holder.attachment.setText("¸½¼ş£º"+data.get(position).get("libr_attachment").toString());
-//		holder.renew_btn.setText("Ğø½è");
+//		holder.title.setText("é¢˜åï¼š"+data.get(position).get("libr_title").toString());
+//		holder.author.setText("è´£ä»»è€…ï¼š"+data.get(position).get("libr_author").toString());
+//		holder.borrow_date.setText("å€Ÿé˜…æ—¥æœŸï¼š"+data.get(position).get("libr_borrow_date").toString());
+//		holder.remand_date.setText("åº”è¿˜æ—¥æœŸï¼š"+data.get(position).get("libr_remand_date").toString());
+//		holder.renew_num.setText("ç»­å€Ÿæ¬¡æ•°ï¼š"+data.get(position).get("libr_renew_num").toString());
+//		holder.collection.setText("é¦†è—åœ°ï¼š"+data.get(position).get("libr_collection").toString());
+//		holder.attachment.setText("é™„ä»¶ï¼š"+data.get(position).get("libr_attachment").toString());
+//		holder.renew_btn.setText("ç»­å€Ÿ");
 //		
-//		//ShareSaved(data.get(0).get("libr_borrow_date").toString());//´æ´¢
+//		//ShareSaved(data.get(0).get("libr_borrow_date").toString());//å­˜å‚¨
 //		holder.renew_btn.setOnClickListener(new OnClickListener() {
 //			
 //			@Override

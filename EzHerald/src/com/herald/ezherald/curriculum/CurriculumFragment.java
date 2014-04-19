@@ -113,7 +113,7 @@ public class CurriculumFragment extends SherlockFragment {
 	{
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setMessage("ÇëÉÔºò ... ");
+		progressDialog.setMessage("è¯·ç¨å€™ ... ");
 	}
 	
 	@Override 
@@ -158,7 +158,7 @@ public class CurriculumFragment extends SherlockFragment {
 		if(null == acount)
 		{
 			dbAdapter.clear();
-			Toast.makeText(context, "ÇëÏÈµÇÂ¼", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "è¯·å…ˆç™»å½•", Toast.LENGTH_LONG).show();
 			getActivity().setContentView(setNotLoginView(inflater, container, savedInstanceState));
 		}
 		else
@@ -184,7 +184,7 @@ public class CurriculumFragment extends SherlockFragment {
 		View v;
 		v = inflater.inflate(R.layout.curri_not_login, null);
 		bar.removeAllTabs();
-		bar.setTitle("ÉĞÎ´µÇÂ¼");
+		bar.setTitle("å°šæœªç™»å½•");
 		Button login_btn = (Button) v.findViewById(R.id.curri_btn_to_login);
 		login_btn.setOnClickListener(new OnClickListener(){
 
@@ -249,9 +249,9 @@ public class CurriculumFragment extends SherlockFragment {
 		}
 		
 //		ActionBar actionBar = this.getSherlockActivity().getSupportActionBar();
-//		actionBar.setTitle("¿Î±í");
+//		actionBar.setTitle("è¯¾è¡¨");
 //		bar = this.getSherlockActivity().getSupportActionBar();
-		setTitle("¿Î±í");
+		setTitle("è¯¾è¡¨");
 		
 		return v;
 	}
@@ -272,13 +272,13 @@ public class CurriculumFragment extends SherlockFragment {
 		tab5 = bar.newTab();
 		tab6 = bar.newTab();
 		tab7 = bar.newTab();
-		tab1.setText("ÖÜÒ»");
-		tab2.setText("ÖÜ¶ş");
-		tab3.setText("ÖÜÈı");
-		tab4.setText("ÖÜËÄ");
-		tab5.setText("ÖÜÎå");
-		tab6.setText("ÖÜÁù");
-		tab7.setText("ÖÜÈÕ");
+		tab1.setText("å‘¨ä¸€");
+		tab2.setText("å‘¨äºŒ");
+		tab3.setText("å‘¨ä¸‰");
+		tab4.setText("å‘¨å››");
+		tab5.setText("å‘¨äº”");
+		tab6.setText("å‘¨å…­");
+		tab7.setText("å‘¨æ—¥");
 		tab1.setTabListener(new MyTabListener());
 		tab2.setTabListener(new MyTabListener());
 		tab3.setTabListener(new MyTabListener());
@@ -440,8 +440,8 @@ public class CurriculumFragment extends SherlockFragment {
 			tmpSelect = terms[0];
 
 			AlertDialog.Builder builder = new Builder(context);
-			builder.setTitle("ÇëÑ¡ÔñÑ§ÆÚ")
-			.setPositiveButton("Ñ¡Ôñ", new DialogInterface.OnClickListener() {
+			builder.setTitle("è¯·é€‰æ‹©å­¦æœŸ")
+			.setPositiveButton("é€‰æ‹©", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -452,7 +452,7 @@ public class CurriculumFragment extends SherlockFragment {
 					Editor editor = settings.edit();
 					editor.putString(pref_term, tmpSelect);
 					editor.commit();
-					bar.setTitle("¿Î±í:"+tmpSelect);
+					bar.setTitle("è¯¾è¡¨:"+tmpSelect);
 //					update();
 //					new requestCurriculum().execute(curri_url);
 					Message msg = new Message();
@@ -460,7 +460,7 @@ public class CurriculumFragment extends SherlockFragment {
 					mHandler.sendMessage(msg);
 				}
 			})
-			.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -485,7 +485,7 @@ public class CurriculumFragment extends SherlockFragment {
 		}
 		catch(Exception e)
 		{
-			Toast.makeText(context, "ÇëÇóÑ§ÆÚÊ§°Ü, Çë¼ì²éÍøÂç×´¿ö", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "è¯·æ±‚å­¦æœŸå¤±è´¥, è¯·æ£€æŸ¥ç½‘ç»œçŠ¶å†µ", Toast.LENGTH_LONG).show();
 		}
 		
 	}
@@ -554,7 +554,7 @@ public class CurriculumFragment extends SherlockFragment {
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		  {
-		    //Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		      return;
 		  }
@@ -675,7 +675,7 @@ public class CurriculumFragment extends SherlockFragment {
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		  {
-		    //Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+		    //Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		      return;
 		  }
@@ -697,7 +697,7 @@ public class CurriculumFragment extends SherlockFragment {
 			}
 			else
 			{
-				Toast.makeText(context, "Êı¾İ¶ÁÈ¡Ê§°Ü£®£®£®", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "æ•°æ®è¯»å–å¤±è´¥ï¼ï¼ï¼", Toast.LENGTH_SHORT).show();
 			}
 			Message msg = new Message();
 			msg.what = CURRI_REQ_COMPLETED;
@@ -754,7 +754,7 @@ public class CurriculumFragment extends SherlockFragment {
 				UserAccount acount = Authenticate.getIDcardUser(context);
 				if(null == acount)
 				{
-					Toast.makeText(context, "ÇëÏÈµÇÂ¼", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "è¯·å…ˆç™»å½•", Toast.LENGTH_LONG).show();
 				}
 				else
 				{
@@ -764,7 +764,7 @@ public class CurriculumFragment extends SherlockFragment {
 					String url = String.format(curri_url, cardNum, term);
 					if(null == term)
 					{
-						Toast.makeText(context, "ÇëÏÈÉèÖÃÑ§ÆÚ", Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, "è¯·å…ˆè®¾ç½®å­¦æœŸ", Toast.LENGTH_SHORT).show();
 					}
 					else
 					{

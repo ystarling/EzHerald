@@ -12,7 +12,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * ¼ÓÃÜ½âÃÜ×Ö·û´®ÓÃµÄ
+ * åŠ å¯†è§£å¯†å­—ç¬¦ä¸²ç”¨çš„
  * 
  * @author BorisHe
  * 
@@ -24,13 +24,13 @@ public class EncryptionHelper {
 	private static String CIPHER_TRANSFORMATION = "DES/CBC/PKCS5Padding";
 	public static String KEY = "ENC1234E";
 	/**
-	 * ¼ÓÃÜ
+	 * åŠ å¯†
 	 * 
 	 * @param encryptStr
-	 *            Ã÷ÎÄ
+	 *            æ˜æ–‡
 	 * @param encryptKey
-	 *            ÃÜÔ¿
-	 * @return ÎŞ·¨¼ÓÃÜÔò·µ»Ønull
+	 *            å¯†é’¥
+	 * @return æ— æ³•åŠ å¯†åˆ™è¿”å›null
 	 */
 	public static String encryptDES(String encryptStr, String encryptKey) {
 		String retString = null;
@@ -66,13 +66,13 @@ public class EncryptionHelper {
 	}
 
 	/**
-	 * ½âÃÜ
+	 * è§£å¯†
 	 * 
 	 * @param decryptStr
-	 *            ÃÜÎÄ
+	 *            å¯†æ–‡
 	 * @param decryptKey
-	 *            ÃÜÔ¿
-	 * @return ÎŞ·¨½âÃÜÔò·µ»Ønull
+	 *            å¯†é’¥
+	 * @return æ— æ³•è§£å¯†åˆ™è¿”å›null
 	 */
 	public static String decryptDES(String decryptStr, String decryptKey) {
 		String retStr = null;
@@ -110,7 +110,7 @@ public class EncryptionHelper {
 	}
 
 	/**
-	 * byte[]×ª»»³É×Ö·û´®
+	 * byte[]è½¬æ¢æˆå­—ç¬¦ä¸²
 	 * 
 	 * @param b
 	 * @return
@@ -129,7 +129,7 @@ public class EncryptionHelper {
 	}
 
 	/**
-	 * 16½øÖÆ×ª»»³Ébyte[]
+	 * 16è¿›åˆ¶è½¬æ¢æˆbyte[]
 	 * 
 	 * @param hexString
 	 * @return

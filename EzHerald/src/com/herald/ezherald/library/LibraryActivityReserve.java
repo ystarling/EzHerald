@@ -19,20 +19,20 @@ public class LibraryActivityReserve extends SherlockActivity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.library_activity_reserve);
-		setTitle("Êé¼®Ô¤Ô¼");
+		setTitle("ä¹¦ç±é¢„çº¦");
 		
 		TextView libr_name=(TextView) this.findViewById(R.id.libr_book_Reserve_name);
-		libr_name.setText("ÌâÃû/ÔğÈÎÕß:  "+"²»ÖªµÀ");
+		libr_name.setText("é¢˜å/è´£ä»»è€…:  "+"ä¸çŸ¥é“");
 		TextView libr_press=(TextView) this.findViewById(R.id.libr_book_Reserve_press);
-		libr_press.setText("³ö°æ·¢ĞĞÏî:  "+"ß€ÊÇ²»ÖªµÀ");
+		libr_press.setText("å‡ºç‰ˆå‘è¡Œé¡¹:  "+"é‚„æ˜¯ä¸çŸ¥é“");
 		TextView libr_prize=(TextView) this.findViewById(R.id.libr_book_Reserve_prize);
-		libr_prize.setText("ISBN¼°¶¨¼Û:  "+"È·Êµ²»ÖªµÀ");
+		libr_prize.setText("ISBNåŠå®šä»·:  "+"ç¡®å®ä¸çŸ¥é“");
 		TextView libr_vector=(TextView) this.findViewById(R.id.libr_book_Reserve_vector);
-		libr_vector.setText("¸öÈËÔğÈÎÕß:  "+"È·ÊµÕæ²»ÖªµÀ");
+		libr_vector.setText("ä¸ªäººè´£ä»»è€…:  "+"ç¡®å®çœŸä¸çŸ¥é“");
 		TextView libr_personal=(TextView) this.findViewById(R.id.libr_book_Reserve_personal);
-		libr_personal.setText("Ñ§¿ÆÖ÷Ìâ:  "+"È·ÊµÕæ²»ÖªµÀ");
+		libr_personal.setText("å­¦ç§‘ä¸»é¢˜:  "+"ç¡®å®çœŸä¸çŸ¥é“");
 		TextView libr_sort=(TextView) this.findViewById(R.id.libr_book_Reserve_sort);
-		libr_sort.setText("ÖĞÍ¼·¨·ÖÀàºÅ:  "+"È·ÊµÕæ²»ÖªµÀ");
+		libr_sort.setText("ä¸­å›¾æ³•åˆ†ç±»å·:  "+"ç¡®å®çœŸä¸çŸ¥é“");
 		
 	}
 	
@@ -111,12 +111,12 @@ public class LibraryActivityReserve extends SherlockActivity{
 			HashMap<String,Object> map=new HashMap<String,Object>();
 			for(int i=0;i<=2;i++){
 			map.clear();
-			map.put("suoshuhao", "Ë÷ÊéºÅ£º "+ "I247.5/2334");
-			map.put("collection", "¹İ²ØµØ£º "+ "¾ÅÁúºş");
-			map.put("can_borrow", "¿É½è¸´±¾: "+"3");
-			map.put("exist", "ÔÚ¹İ¸´±¾: "+"0");
-			map.put("reserved", "ÒÑÔ¤Ô¼Êı: "+"0");
-			map.put("whether_borrow", "¿É·ñÔ¤Ô¼: "+"·ñ");
+			map.put("suoshuhao", "ç´¢ä¹¦å·ï¼š "+ "I247.5/2334");
+			map.put("collection", "é¦†è—åœ°ï¼š "+ "ä¹é¾™æ¹–");
+			map.put("can_borrow", "å¯å€Ÿå¤æœ¬: "+"3");
+			map.put("exist", "åœ¨é¦†å¤æœ¬: "+"0");
+			map.put("reserved", "å·²é¢„çº¦æ•°: "+"0");
+			map.put("whether_borrow", "å¯å¦é¢„çº¦: "+"å¦");
 			
 			list.add(map);
 			}

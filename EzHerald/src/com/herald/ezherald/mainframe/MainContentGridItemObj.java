@@ -1,14 +1,14 @@
 package com.herald.ezherald.mainframe;
 
 /**
- * Ö÷½çÃæ¸÷Ä£¿éÕªÒªĞÅÏ¢µÄÀà
+ * ä¸»ç•Œé¢å„æ¨¡å—æ‘˜è¦ä¿¡æ¯çš„ç±»
  * @author BorisHe
  *
  */
 @Deprecated
 public class MainContentGridItemObj {
-	private String content1 = null; //ÄÚÈİ1£¬×ÖºÅ½Ï´ó
-	private String content2 = null; //ÄÚÈİ2£¬×ÖºÅ½ÏĞ¡
+	private String content1 = null; //å†…å®¹1ï¼Œå­—å·è¾ƒå¤§
+	private String content2 = null; //å†…å®¹2ï¼Œå­—å·è¾ƒå°
 	
 	public String getContent1() {
 		if(content1 != null)

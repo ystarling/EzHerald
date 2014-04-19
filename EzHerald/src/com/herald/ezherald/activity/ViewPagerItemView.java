@@ -27,29 +27,29 @@ import android.widget.TextView;
 
 /**
  * @author frankiewei
- * Ïà²áµÄItemView,×Ô¶¨ÒåView.·½±ã¸´ÓÃ.
+ * ç›¸å†Œçš„ItemView,è‡ªå®šä¹‰View.æ–¹ä¾¿å¤ç”¨.
  */
 public class ViewPagerItemView extends FrameLayout {
 
 	/**
-	 * Í¼Æ¬µÄImageView.
+	 * å›¾ç‰‡çš„ImageView.
 	 */
 	private ImageView mAlbumImageView;
 	
 	/**
-	 * Í¼Æ¬Ãû×ÖµÄTextView.
+	 * å›¾ç‰‡åå­—çš„TextView.
 	 */
 	private TextView mALbumNameTextView;
 	
 	private ProgressBar mALbumProgress;
 	
 	/**
-	 * Í¼Æ¬µÄBitmap.
+	 * å›¾ç‰‡çš„Bitmap.
 	 */
 	private Bitmap mBitmap;
 	
 	/**
-	 * ÒªÏÔÊ¾Í¼Æ¬µÄJSONOBjectÀà.
+	 * è¦æ˜¾ç¤ºå›¾ç‰‡çš„JSONOBjectç±».
 	 */
 	private JSONObject mObject;
 	
@@ -64,7 +64,7 @@ public class ViewPagerItemView extends FrameLayout {
 		setupViews();
 	}
 	
-	//³õÊ¼»¯View.
+	//åˆå§‹åŒ–View.
 	private void setupViews(){
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		View view = inflater.inflate(R.layout.acti_club_detail_photo_item, null);
@@ -76,7 +76,7 @@ public class ViewPagerItemView extends FrameLayout {
 	}
 
 	/**
-	 * Ìî³äÊı¾İ£¬¹²Íâ²¿µ÷ÓÃ.
+	 * å¡«å……æ•°æ®ï¼Œå…±å¤–éƒ¨è°ƒç”¨.
 	 * @param object
 	 */
 	public void setData(JSONObject object){
@@ -85,7 +85,7 @@ public class ViewPagerItemView extends FrameLayout {
 //			int resId = object.getInt("resid");
 			String post_add = object.getString("pic_add");
 			String name = object.getString("name");
-			//ÊµÕ½ÖĞÈç¹ûÍ¼Æ¬ºÄÊ±Ó¦¸ÃÁîÆäÒ»¸öÏß³ÌÈ¥À­Í¼Æ¬Òì²½,²»È»°ÑUIÏß³Ì¿¨ËÀ.
+			//å®æˆ˜ä¸­å¦‚æœå›¾ç‰‡è€—æ—¶åº”è¯¥ä»¤å…¶ä¸€ä¸ªçº¿ç¨‹å»æ‹‰å›¾ç‰‡å¼‚æ­¥,ä¸ç„¶æŠŠUIçº¿ç¨‹å¡æ­».
 			new RequestImage().execute(post_add);
 //			mAlbumImageView.setImageResource(resId);
 			mALbumNameTextView.setText(name);
@@ -96,7 +96,7 @@ public class ViewPagerItemView extends FrameLayout {
 	}
 		
 	/**
-	 * ÕâÀïÄÚ´æ»ØÊÕ.Íâ²¿µ÷ÓÃ.
+	 * è¿™é‡Œå†…å­˜å›æ”¶.å¤–éƒ¨è°ƒç”¨.
 	 */
 	public void recycle(){
 		mAlbumImageView.setImageBitmap(null);
@@ -108,11 +108,11 @@ public class ViewPagerItemView extends FrameLayout {
 	
 	
 	/**
-	 * ÖØĞÂ¼ÓÔØ.Íâ²¿µ÷ÓÃ.
+	 * é‡æ–°åŠ è½½.å¤–éƒ¨è°ƒç”¨.
 	 */
 	public void reload(){
 		//			int resId = mObject.getInt("resid");
-		//ÊµÕ½ÖĞÈç¹ûÍ¼Æ¬ºÄÊ±Ó¦¸ÃÁîÆäÒ»¸öÏß³ÌÈ¥À­Í¼Æ¬Òì²½,²»È»°ÑUIÏß³Ì¿¨ËÀ.
+		//å®æˆ˜ä¸­å¦‚æœå›¾ç‰‡è€—æ—¶åº”è¯¥ä»¤å…¶ä¸€ä¸ªçº¿ç¨‹å»æ‹‰å›¾ç‰‡å¼‚æ­¥,ä¸ç„¶æŠŠUIçº¿ç¨‹å¡æ­».
 //			mAlbumImageView.setImageResource(resId);
 		mAlbumImageView.setImageBitmap(mBitmap);
 	}

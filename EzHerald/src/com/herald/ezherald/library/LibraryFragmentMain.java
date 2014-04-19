@@ -10,7 +10,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 
-/***********ÉèÖÃtab£¬·ÖÎªËÑË÷£¬²éÑ¯£¬¸öÈËĞÅÏ¢***********/
+/***********è®¾ç½®tabï¼Œåˆ†ä¸ºæœç´¢ï¼ŒæŸ¥è¯¢ï¼Œä¸ªäººä¿¡æ¯***********/
 public class LibraryFragmentMain extends SherlockFragment{
 	
 	ActionBar.Tab libr_tab1;
@@ -27,9 +27,9 @@ public class LibraryFragmentMain extends SherlockFragment{
 		//libr_tab2=bar.newTab();
 		libr_tab3=bar.newTab();
 		
-		libr_tab1.setText("ËÑË÷");
-		//libr_tab2.setText("¹«¸æ");
-		libr_tab3.setText("ÎÒµÄ½èÔÄ");
+		libr_tab1.setText("æœç´¢");
+		//libr_tab2.setText("å…¬å‘Š");
+		libr_tab3.setText("æˆ‘çš„å€Ÿé˜…");
 		
 		
 		libr_tab1.setTabListener(new LibraryFragmentTabSelect());

@@ -6,15 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 public class Authenticate {
-	public static final String DATABASE_NAME = "Info.db"; // ¶¨ÒåÊı¾İ¿âÃû³Æ
-	public static final int DATABASE_VERSION = 1;// ¶¨ÒåÊı¾İ¿â°æ±¾
-	public static final String TABLE_NAME = "account";// ¶¨ÒåÊı¾İ±íÃû³Æ
+	public static final String DATABASE_NAME = "Info.db"; // å®šä¹‰æ•°æ®åº“åç§°
+	public static final int DATABASE_VERSION = 1;// å®šä¹‰æ•°æ®åº“ç‰ˆæœ¬
+	public static final String TABLE_NAME = "account";// å®šä¹‰æ•°æ®è¡¨åç§°
 	public static final String IDCARD_TYPE = "idcard";
 	public static final String TYX_TYPE = "tyx";
 	public static final String LIBRARY_TYPE = "library";
 	private static DatabaseHelper dbHelper = null;
 
-	// ÈôÒÑµÇÂ¼Ò»¿¨Í¨ÕË»§Ôò·µ»ØÀàĞÍÎªUserAccountµÄ¶ÔÏó£¬ÈôÃ»ÓĞµÇÂ¼Ôò·µ»Ønull
+	// è‹¥å·²ç™»å½•ä¸€å¡é€šè´¦æˆ·åˆ™è¿”å›ç±»å‹ä¸ºUserAccountçš„å¯¹è±¡ï¼Œè‹¥æ²¡æœ‰ç™»å½•åˆ™è¿”å›null
 	public static UserAccount getIDcardUser(Context context) {
 		UserAccount userAccount = null;
 		dbHelper = new DatabaseHelper(context, "Info.db");

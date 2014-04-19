@@ -48,11 +48,11 @@ public class EmptyClassroomFragment extends SherlockFragment {
 	private ActionBar.Tab bar_common = null;
 	private ActionBar.Tab bar_advance = null;
 	
-	private String COMMON_SEARCH = "¿ì½İËÑË÷";
-	private String ADVANCE_SEARCH = "¸ß¼¶ËÑË÷";
+	private String COMMON_SEARCH = "å¿«æ·æœç´¢";
+	private String ADVANCE_SEARCH = "é«˜çº§æœç´¢";
 	
-	private String proTitle = "ÕıÔÚ¼ÓÔØ...";
-	private String requestFailedHint = "¼ÓÔØÊ§°Ü!!";
+	private String proTitle = "æ­£åœ¨åŠ è½½...";
+	private String requestFailedHint = "åŠ è½½å¤±è´¥!!";
 	
 	private LinearLayout week_layout = null;
 	private LinearLayout period_layout = null;
@@ -82,7 +82,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 	private final Integer TOMORROW = 2;
 	private final Integer ADVANCE = 3;
 	
-	private final String [] campus = {"¾ÅÁúºş","ËÄÅÆÂ¥","¶¡¼ÒÇÅ","È«²¿"};
+	private final String [] campus = {"ä¹é¾™æ¹–","å››ç‰Œæ¥¼","ä¸å®¶æ¡¥","å…¨éƒ¨"};
 	private final String CAMPUS_JLH = "jlh";
 	private final String CAMPUS_SPL = "spl";
 	private final String CAMPUS_DJQ = "djq";
@@ -337,7 +337,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 					selected_campus, from_period, to_period);
 			if(from_period.trim().equals("") || to_period.trim().equals(""))
 			{
-				Toast.makeText(context, "ÊäÈë²»ÄÜÎª¿Õ", Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "è¾“å…¥ä¸èƒ½ä¸ºç©º", Toast.LENGTH_LONG).show();
 				return null;
 			}
 			else{
@@ -354,7 +354,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 					selected_campus, from_period, to_period);
 			if(from_period.trim().equals("") || to_period.trim().equals(""))
 			{
-				Toast.makeText(context, "ÊäÈë²»ÄÜÎª¿Õ", Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "è¾“å…¥ä¸èƒ½ä¸ºç©º", Toast.LENGTH_LONG).show();
 				return null;
 			}
 			else{
@@ -373,7 +373,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 			if(from_period.trim().equals("") || to_period.trim().equals("") ||
 					week.trim().equals("") || day.trim().equals(""))
 			{
-				Toast.makeText(context, "ÊäÈë²»ÄÜÎª¿Õ", Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "è¾“å…¥ä¸èƒ½ä¸ºç©º", Toast.LENGTH_LONG).show();
 				return null;
 			}
 			else{
@@ -434,7 +434,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 		@Override 
 		public void onProgressUpdate(Integer... pro) 
 		{
-			//Task±»È¡ÏûÁË£¬²»ÔÙ¼ÌĞøÖ´ĞĞºóÃæµÄ´úÂë
+			//Taskè¢«å–æ¶ˆäº†ï¼Œä¸å†ç»§ç»­æ‰§è¡Œåé¢çš„ä»£ç 
 		    if(isCancelled()) 
 		    	return ;
 		}
@@ -454,7 +454,7 @@ public class EmptyClassroomFragment extends SherlockFragment {
 						listAdapter.setRoomList(roomList);
 						listAdapter.setRoomPairs(roomPairList);
 						listAdapter.notifyDataSetChanged();
-						tv_room_num.setText("¹²ÓĞ¿ÕÏĞ½ÌÊÒ£º"+roomList.size()+"¼ä");
+						tv_room_num.setText("å…±æœ‰ç©ºé—²æ•™å®¤ï¼š"+roomList.size()+"é—´");
 //						Toast.makeText(context, "request success!!", Toast.LENGTH_LONG).show();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block

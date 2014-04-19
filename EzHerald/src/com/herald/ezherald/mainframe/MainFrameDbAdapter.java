@@ -12,7 +12,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 /**
- * Ö÷½çÃæÄ£¿é´æ·ÅÊı¾İµÄDBAdapter
+ * ä¸»ç•Œé¢æ¨¡å—å­˜æ”¾æ•°æ®çš„DBAdapter
  * 
  * @author BorisHe
  * 
@@ -42,9 +42,9 @@ public class MainFrameDbAdapter {
 	}
 
 	/**
-	 * ´ò¿ªÊı¾İ¿â
+	 * æ‰“å¼€æ•°æ®åº“
 	 * 
-	 * @return ·µ»ØµÄÊı¾İ¿â(this)
+	 * @return è¿”å›çš„æ•°æ®åº“(this)
 	 * @throws SQLException
 	 */
 	public MainFrameDbAdapter open() throws SQLException {
@@ -53,19 +53,19 @@ public class MainFrameDbAdapter {
 	}
 
 	/**
-	 * ¹Ø±ÕÊı¾İ¿â
+	 * å…³é—­æ•°æ®åº“
 	 */
 	public void close() {
 		mDbHelper.close();
 	}
 
 	/**
-	 * Íù±íÖĞ¼ÓÈëÍ¼Æ¬
+	 * å¾€è¡¨ä¸­åŠ å…¥å›¾ç‰‡
 	 * 
 	 * @param img_id
-	 *            Í¼Æ¬µÄidºÅ£¨Î¨Ò»È·¶¨£¬¼´ÔÚÖ÷½çÃæÖĞÏÔÊ¾µÄË³ĞòºÅ:0,1,2,...£©
+	 *            å›¾ç‰‡çš„idå·ï¼ˆå”¯ä¸€ç¡®å®šï¼Œå³åœ¨ä¸»ç•Œé¢ä¸­æ˜¾ç¤ºçš„é¡ºåºå·:0,1,2,...ï¼‰
 	 * @param bitmap
-	 *            Î»Í¼
+	 *            ä½å›¾
 	 * @return
 	 * @see http://www.cnblogs.com/hedalixin/archive/2011/01/21/1941390.html
 	 */
@@ -73,7 +73,7 @@ public class MainFrameDbAdapter {
 		ContentValues initialValues = new ContentValues();
 		initialValues.put(KEY_IMAGE_ID, img_id);
 
-		// ´¦Àíbitmap£¬×ª»»ÎªBlob
+		// å¤„ç†bitmapï¼Œè½¬æ¢ä¸ºBlob
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.PNG, 95, os);
 		initialValues.put(KEY_IMAGE_RAW, os.toByteArray());
@@ -81,10 +81,10 @@ public class MainFrameDbAdapter {
 	}
 
 	/**
-	 * É¾³ıÄ³IDµÄÍ¼Æ¬¼ÇÂ¼
+	 * åˆ é™¤æŸIDçš„å›¾ç‰‡è®°å½•
 	 * 
 	 * @param img_id
-	 *            Í¼Æ¬ID
+	 *            å›¾ç‰‡ID
 	 * @return
 	 */
 	public boolean deleteImage(long img_id) {
@@ -92,7 +92,7 @@ public class MainFrameDbAdapter {
 	}
 
 	/**
-	 * »ñµÃËùÓĞÍ¼Æ¬¼ÇÂ¼
+	 * è·å¾—æ‰€æœ‰å›¾ç‰‡è®°å½•
 	 * 
 	 * @return
 	 */
@@ -102,10 +102,10 @@ public class MainFrameDbAdapter {
 	}
 
 	/**
-	 * »ñµÃÖ¸¶¨idµÄÍ¼Æ¬¼ÇÂ¼
+	 * è·å¾—æŒ‡å®šidçš„å›¾ç‰‡è®°å½•
 	 * 
 	 * @param img_id
-	 *            Í¼Æ¬ID
+	 *            å›¾ç‰‡ID
 	 * @return Cursor
 	 */
 	public Cursor getImage(long img_id) {
@@ -118,19 +118,19 @@ public class MainFrameDbAdapter {
 	}
 
 	/**
-	 * ¸üĞÂÍ¼Æ¬
+	 * æ›´æ–°å›¾ç‰‡
 	 * 
 	 * @param img_id
-	 *            Í¼Æ¬id
+	 *            å›¾ç‰‡id
 	 * @param img
-	 *            Í¼Æ¬bitmap
+	 *            å›¾ç‰‡bitmap
 	 * @return
 	 */
 	public boolean updateImage(long img_id, Bitmap bitmap) {
 		ContentValues args = new ContentValues();
 		args.put(KEY_IMAGE_ID, img_id);
 
-		// ´¦Àíbitmap£¬×ª»»ÎªBlob
+		// å¤„ç†bitmapï¼Œè½¬æ¢ä¸ºBlob
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.PNG, 95, os);
 		args.put(KEY_IMAGE_RAW, os.toByteArray());
@@ -138,7 +138,7 @@ public class MainFrameDbAdapter {
 	}
 	
 	/**
-	 * ¸ü¸ÄÍ¼Æ¬µÄID
+	 * æ›´æ”¹å›¾ç‰‡çš„ID
 	 * @param oldId
 	 * @param newId
 	 * @return
@@ -150,7 +150,7 @@ public class MainFrameDbAdapter {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÒÑ´æÈ¡µÄÍ¼Æ¬ÊıÁ¿
+	 * è·å–å½“å‰å·²å­˜å–çš„å›¾ç‰‡æ•°é‡
 	 * @return
 	 */
 	public int getCurrentImageCount(){
@@ -165,7 +165,7 @@ public class MainFrameDbAdapter {
 	
 
 	/**
-	 * Ë½ÓÃµÄDBHelper
+	 * ç§ç”¨çš„DBHelper
 	 * 
 	 * @author BorisHe
 	 * 
@@ -178,7 +178,7 @@ public class MainFrameDbAdapter {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			// DB´´½¨
+			// DBåˆ›å»º
 			try {
 				Log.d("MainFrameDbAdapter", "CREATING TABLEs...");
 				db.execSQL(DATABASE_CREATE);
@@ -189,7 +189,7 @@ public class MainFrameDbAdapter {
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			// DB°æ±¾¸üĞÂ
+			// DBç‰ˆæœ¬æ›´æ–°
 			Log.w(TAG, "Database updated to version " + newVersion);
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
 			onCreate(db);

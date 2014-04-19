@@ -21,9 +21,9 @@ import android.widget.Toast;
 
 public class MainContentListColorPrefActivity extends SherlockActivity {
 
-	private String[] mColorNames; // Ä£¿éÃû(Ó¢ÎÄ)
-	private String[] mColorTitles; // Ä£¿éÃû£¨ÖĞÎÄ£©
-	private Set<String> mChoosenColors; // ÒÑÑ¡ÔñµÄÄ£¿é
+	private String[] mColorNames; // æ¨¡å—å(è‹±æ–‡)
+	private String[] mColorTitles; // æ¨¡å—åï¼ˆä¸­æ–‡ï¼‰
+	private Set<String> mChoosenColors; // å·²é€‰æ‹©çš„æ¨¡å—
 	private boolean[] mCheckedItems;
 	private Dialog mDialog;
 
@@ -44,7 +44,7 @@ public class MainContentListColorPrefActivity extends SherlockActivity {
 	}
 
 	/**
-	 * ´ÓXML×ÊÔ´ÎÄ¼şÖĞ¶ÁÈ¡¿ÉÒÔÅäÖÃµÄÄ£¿é
+	 * ä»XMLèµ„æºæ–‡ä»¶ä¸­è¯»å–å¯ä»¥é…ç½®çš„æ¨¡å—
 	 */
 	private void readXMLForChoiceArray() {
 		Resources resources = getResources();
@@ -55,11 +55,11 @@ public class MainContentListColorPrefActivity extends SherlockActivity {
 	}
 
 	/**
-	 * ´ÓSharedPreferencesÀïÃæ¶ÁÈ¡µ±Ç°µÄÄ£¿éÅäÖÃÇé¿ö
+	 * ä»SharedPreferencesé‡Œé¢è¯»å–å½“å‰çš„æ¨¡å—é…ç½®æƒ…å†µ
 	 */
 
 	private void loadSharedPreferences() {
-		// »ñµÃÆ«ºÃÉèÖÃ
+		// è·å¾—åå¥½è®¾ç½®
 		SharedPreferences appPrefs = getSharedPreferences(PREF_NAME,
 				Context.MODE_PRIVATE);
 		Set<String> result_set = null;
@@ -96,7 +96,7 @@ public class MainContentListColorPrefActivity extends SherlockActivity {
 		switch (id) {
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
-			builder.setTitle("Ñ¡ÔñÖ÷½çÃæÁĞ±íËæ»úÏÔÊ¾µÄÑÕÉ«");
+			builder.setTitle("é€‰æ‹©ä¸»ç•Œé¢åˆ—è¡¨éšæœºæ˜¾ç¤ºçš„é¢œè‰²");
 			builder.setCancelable(false);
 			builder.setMultiChoiceItems(mColorTitles, mCheckedItems,
 					new OnMultiChoiceClickListener() {
@@ -112,24 +112,24 @@ public class MainContentListColorPrefActivity extends SherlockActivity {
 							}
 						}
 					});
-			builder.setPositiveButton("È·¶¨", new OnClickListener() {
+			builder.setPositiveButton("ç¡®å®š", new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (mChoosenColors.isEmpty()) {
 						Toast.makeText(getApplicationContext(),
-								"Ã»ÓĞÑ¡Ôñ¿ÉÓÃÑÕÉ«£¬½«Ê¹ÓÃËæ»úÑÕÉ«", Toast.LENGTH_LONG).show();
+								"æ²¡æœ‰é€‰æ‹©å¯ç”¨é¢œè‰²ï¼Œå°†ä½¿ç”¨éšæœºé¢œè‰²", Toast.LENGTH_LONG).show();
 						finish();
 					} else {
 						Toast.makeText(getApplicationContext(),
-								"¸ü¸Ä½«ÔÚÓ¦ÓÃÏÂ´Î¿ªÆôÊ±ÉúĞ§", Toast.LENGTH_LONG).show();
+								"æ›´æ”¹å°†åœ¨åº”ç”¨ä¸‹æ¬¡å¼€å¯æ—¶ç”Ÿæ•ˆ", Toast.LENGTH_LONG).show();
 						saveCurrentPreferences();
 						finish();
 					}
 				}
 			});
 
-			builder.setNegativeButton("È¡Ïû", new OnClickListener() {
+			builder.setNegativeButton("å–æ¶ˆ", new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

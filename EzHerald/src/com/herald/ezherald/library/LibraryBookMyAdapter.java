@@ -99,13 +99,13 @@ public class LibraryBookMyAdapter extends BaseAdapter {
 			holder.libr_landable_num = (TextView) convertView
 					.findViewById(R.id.libr_listitem_book_landable_num);
 
-			convertView.setTag(holder);// °ó¶¨ViewHolder¶ÔÏó
+			convertView.setTag(holder);// ç»‘å®šViewHolderå¯¹è±¡
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
 		String libr_name = null, libr_author = null, libr_press = null, libr_date = null, libr_callNumber = null, libr_ducumentType = null;
-		String libr_marc_no = null;// ²é¿´ÏêÇé±ØÌî
+		String libr_marc_no = null;// æŸ¥çœ‹è¯¦æƒ…å¿…å¡«
 		String libr_store_num = null;
 		String libr_landable_num = null;
 
@@ -117,7 +117,7 @@ public class LibraryBookMyAdapter extends BaseAdapter {
 			Log.e("jjjjjjjjjjjjjjjjjjjjj",h+"");
 			List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 			
-			/****** ÉèÖÃ¶ÔÓ¦µÄ¶¯Ì¬Êı×éÊı¾İ *********/
+			/****** è®¾ç½®å¯¹åº”çš„åŠ¨æ€æ•°ç»„æ•°æ® *********/
 			
 			for (int j = 0; j < length; j++) {
 
@@ -166,9 +166,9 @@ public class LibraryBookMyAdapter extends BaseAdapter {
 					.get("libr_callNumber").toString());
 			holder.libr_ducumentType.setText(data.get(position)
 					.get("libr_ducumentType").toString());
-			holder.libr_storenum.setText("¹İ²Ø¸±±¾£º"
+			holder.libr_storenum.setText("é¦†è—å‰¯æœ¬ï¼š"
 					+ data.get(position).get("libr_store_num").toString());
-			holder.libr_landable_num.setText("¿É½è¸±±¾£º"
+			holder.libr_landable_num.setText("å¯å€Ÿå‰¯æœ¬ï¼š"
 					+ data.get(position).get("libr_landable_num").toString());
 
 		}

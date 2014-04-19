@@ -7,7 +7,7 @@ import android.util.Log;
 
 /**
  * @author xie
- *	GPA的数据库操作的类
+ *	GPA鐨勬暟鎹簱鎿嶄綔鐨勭被
  */
 public class GpaDbHelper extends SQLiteOpenHelper {
 	public  final static String DATABASE_NAME    = "GPA";

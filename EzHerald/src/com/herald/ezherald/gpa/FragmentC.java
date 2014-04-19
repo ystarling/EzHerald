@@ -35,30 +35,30 @@ public class FragmentC extends Fragment {
 			circleChat = (CircleChat) getActivity().findViewById(
 					R.id.circleChat);
 			if( !circleChat.hasData() ) {
-				Toast.makeText(getActivity(), "ÇëÏÈ¸üĞÂÊı¾İ", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "è¯·å…ˆæ›´æ–°æ•°æ®", Toast.LENGTH_LONG).show();
 			}
 			circleChat.setOnTouchListener(new OnTouchListener() {
 
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 					// TODO Auto-generated method stub
-					if (event.getAction() == MotionEvent.ACTION_UP) {// µ¯ÆğÊ±´¥·¢£¬·ñÔòÓ°Ïì»¬¶¯
+					if (event.getAction() == MotionEvent.ACTION_UP) {// å¼¹èµ·æ—¶è§¦å‘ï¼Œå¦åˆ™å½±å“æ»‘åŠ¨
 						ArrayList<Record> records = circleChat.onTouch(
 								event.getX(), event.getY());
-						if (records == null) {// µÚÒ»´ÎÔËĞĞ¿ÉÄÜÃ»ÓĞÊı¾İ
+						if (records == null) {// ç¬¬ä¸€æ¬¡è¿è¡Œå¯èƒ½æ²¡æœ‰æ•°æ®
 							return true;
 						}
 						AlertDialog.Builder builderSingle = new AlertDialog.Builder(
 								getActivity());
 						builderSingle.setIcon(R.drawable.ic_launcher);
-						builderSingle.setTitle(String.format("¹²%dÃÅ", records.size()));
+						builderSingle.setTitle(String.format("å…±%dé—¨", records.size()));
 						final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
 								getActivity(),
 								android.R.layout.simple_list_item_1);
 						for (Record r : records) {
 							arrayAdapter.add(r.getName() + "   " + r.getScore());
 						}
-						builderSingle.setNegativeButton("¹Ø±Õ",
+						builderSingle.setNegativeButton("å…³é—­",
 								new DialogInterface.OnClickListener() {
 
 									@Override

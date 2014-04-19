@@ -30,7 +30,7 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 
 	void initTransformer() {
 		/*
-		 * ³õÊ¼»¯TransformerÊµÏÖSlidingmenuµÄÇĞ»»Ğ§¹û
+		 * åˆå§‹åŒ–Transformerå®ç°Slidingmenuçš„åˆ‡æ¢æ•ˆæœ
 		 */
 		mTrans = new CanvasTransformer() {
 
@@ -48,10 +48,10 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setBehindContentView(R.layout.main_frame_menu);
-		setContentView(R.layout.empty_frame_content); // ÉèÖÃ¿Õ°×µÄµ×²ãFrameÈİÆ÷
+		setContentView(R.layout.empty_frame_content); // è®¾ç½®ç©ºç™½çš„åº•å±‚Frameå®¹å™¨
 
-		initTransformer(); // ³õÊ¼»¯¶¯»­
-		initSlidingMenu(); // ³õÊ¼»¯²Ëµ¥
+		initTransformer(); // åˆå§‹åŒ–åŠ¨ç”»
+		initSlidingMenu(); // åˆå§‹åŒ–èœå•
 
 		// mContentFrag = new MainContentFragment();
 		// mContentFrag = new AcademicFragment();
@@ -60,9 +60,9 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		t.replace(R.id.main_frame_menu, mMenuFrag); // ÇĞ»»menuµÄFragement
-		t.replace(R.id.empty_frame_content, mContentFrag); // ÇĞ»»ÄÚÈİµÄFragement
-		t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// ÇĞ»»2ndmenuµÄFragement
+		t.replace(R.id.main_frame_menu, mMenuFrag); // åˆ‡æ¢menuçš„Fragement
+		t.replace(R.id.empty_frame_content, mContentFrag); // åˆ‡æ¢å†…å®¹çš„Fragement
+		t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// åˆ‡æ¢2ndmenuçš„Fragement
 		t.commit();
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,13 +70,13 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 
 	private void initSlidingMenu() {
 		/*
-		 * ³õÊ¼»¯SlidingMenu
+		 * åˆå§‹åŒ–SlidingMenu
 		 */
 		WindowManager wMng = getWindowManager();
 		Display disp = wMng.getDefaultDisplay();
 		int screenWidth = disp.getWidth();
-		int shadowWidth = (int) (0.05 * screenWidth); // ²Ëµ¥ÒõÓ°ÕÚÕÖ¿í¶È
-		int behindOffset = (int) (0.4 * screenWidth); // ²Ëµ¥Ö®ÍâÄÚÈİµÄÏÔÊ¾¿í¶È
+		int shadowWidth = (int) (0.05 * screenWidth); // èœå•é˜´å½±é®ç½©å®½åº¦
+		int behindOffset = (int) (0.4 * screenWidth); // èœå•ä¹‹å¤–å†…å®¹çš„æ˜¾ç¤ºå®½åº¦
 
 		// menu = new SlidingMenu(this);
 		menu = getSlidingMenu();
@@ -117,14 +117,14 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		/*
-		 * ÉÏ²àTitleÎ»ÖÃµÄ°´Å¥µã»÷ÏàÓ¦
+		 * ä¸Šä¾§Titleä½ç½®çš„æŒ‰é’®ç‚¹å‡»ç›¸åº”
 		 */
 		switch (item.getItemId()) {
 		case R.id.action_settings:
 			Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
 			break;
 		case android.R.id.home:
-			menu.toggle(true); // µã»÷ÁË³ÌĞòÍ¼±êºó£¬»áµ¯³ö/ÊÕ»Ø²àÃæ²Ëµ¥
+			menu.toggle(true); // ç‚¹å‡»äº†ç¨‹åºå›¾æ ‡åï¼Œä¼šå¼¹å‡º/æ”¶å›ä¾§é¢èœå•
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -132,9 +132,9 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 
 	public void switchContent(Fragment fragment) {
 		/*
-		 * ÇĞ»»contentËéÆ¬ÄÚÈİ
+		 * åˆ‡æ¢contentç¢ç‰‡å†…å®¹
 		 * 
-		 * @param fragment ´«ÈëµÄÒªÌæ»»µÄËéÆ¬
+		 * @param fragment ä¼ å…¥çš„è¦æ›¿æ¢çš„ç¢ç‰‡
 		 */
 		mContentFrag = fragment;
 		getSupportFragmentManager().beginTransaction()

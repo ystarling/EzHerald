@@ -40,7 +40,7 @@ public class LibraryActivityNewsThread extends Thread {
 	Activity activity;
 	Context context;
 	JSONArray jsonarray;
-	private MyHandle myHandler = new MyHandle();// ³õÊ¼»¯Handler
+	private MyHandle myHandler = new MyHandle();// åˆå§‹åŒ–Handler
 
 	public LibraryActivityNewsThread(Activity ac, Context cn) {
 		this.activity = ac;
@@ -186,14 +186,14 @@ public class LibraryActivityNewsThread extends Thread {
 
 				holder.libr_news = (TextView) convertView
 						.findViewById(R.id.libr_listitem_news_name);
-				convertView.setTag(holder);// °ó¶¨ViewHolder¶ÔÏó
+				convertView.setTag(holder);// ç»‘å®šViewHolderå¯¹è±¡
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
 			List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 
-			/****** ÉèÖÃ¶ÔÓ¦µÄ¶¯Ì¬Êı×éÊı¾İ *********/
+			/****** è®¾ç½®å¯¹åº”çš„åŠ¨æ€æ•°ç»„æ•°æ® *********/
 			Log.d("jsonArray length():", jsonarray.length() + "");
 
 			for (int i = 0; i < jsonarray.length(); i++) {

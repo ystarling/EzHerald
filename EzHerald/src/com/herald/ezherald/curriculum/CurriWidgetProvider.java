@@ -71,7 +71,7 @@ public class CurriWidgetProvider extends AppWidgetProvider {
 			
 			if(atts.size() == 0)
 			{
-				courseName = "½ñÌìÃ»¿Î~";
+				courseName = "ä»Šå¤©æ²¡è¯¾~";
 				period = "";
 				place = "";
 			}
@@ -116,8 +116,8 @@ public class CurriWidgetProvider extends AppWidgetProvider {
 		if(atts.size()==0)
 		{
 			pref.edit().putInt(WIDGET_PERIOD, -1).commit();
-			courseName = "ÏÂ½ÚÃ»¿ÎÁË";
-			period = "ÏÂ½Ú¿Î";
+			courseName = "ä¸‹èŠ‚æ²¡è¯¾äº†";
+			period = "ä¸‹èŠ‚è¯¾";
 			place = "";
 		}
 		else
@@ -145,15 +145,15 @@ public class CurriWidgetProvider extends AppWidgetProvider {
 		return remoteView;
 	}
 	
-    // Ã¿´ÎÉ¾³ı¸ÃÀàĞÍµÄ´°¿ÚĞ¡²¿¼ş(AppWidget)Ê±¶¼»á´¥·¢ £¬Í¬Ê±·¢ËÍACTION_APPWIDGET_DELETED¹ã²¥£¬
-    //     ¸Ã¹ã²¥¿É±»onReceive()·½·¨½ÓÊÜµ½.
+    // æ¯æ¬¡åˆ é™¤è¯¥ç±»å‹çš„çª—å£å°éƒ¨ä»¶(AppWidget)æ—¶éƒ½ä¼šè§¦å‘ ï¼ŒåŒæ—¶å‘é€ACTION_APPWIDGET_DELETEDå¹¿æ’­ï¼Œ
+    //     è¯¥å¹¿æ’­å¯è¢«onReceive()æ–¹æ³•æ¥å—åˆ°.
    @Override
    public void onDeleted(Context context, int[] appWidgetIds)
    {
        super.onDeleted(context, appWidgetIds);
        Log.i(TAG, "--- onDeleted ---");
    }
-   // ×îºóÉ¾³ı¸ÃÀàĞÍµÄ´°¿ÚĞ¡²¿¼ş(AppWidget)Ê±´¥·¢   
+   // æœ€ååˆ é™¤è¯¥ç±»å‹çš„çª—å£å°éƒ¨ä»¶(AppWidget)æ—¶è§¦å‘   
    @Override
    public void onDisabled(Context context)
    {
@@ -161,7 +161,7 @@ public class CurriWidgetProvider extends AppWidgetProvider {
        Log.i(TAG, "--- onDisabled ---");
    }
 
-   //µÚÒ»´ÎÌí¼Ó¸ÃÀàĞÍµÄ´°¿ÚĞ¡²¿¼ş´°¿ÚĞ¡²¿¼ş(AppWidget)Ê±´¥·¢
+   //ç¬¬ä¸€æ¬¡æ·»åŠ è¯¥ç±»å‹çš„çª—å£å°éƒ¨ä»¶çª—å£å°éƒ¨ä»¶(AppWidget)æ—¶è§¦å‘
    @Override
    public void onEnabled(Context context)
    {

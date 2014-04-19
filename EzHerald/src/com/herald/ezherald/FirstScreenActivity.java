@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.herald.ezherald.wifi.WifiReceiver;
 
 /**
- * µÚÒ»ÆÁ
+ * ç¬¬ä¸€å±
  * @author BorisHe
  *
  */
@@ -23,7 +23,7 @@ public class FirstScreenActivity extends Activity {
 	//private ImageView mImageView;
 	private TextView mTextView;
 	private AlphaAnimation mAnimation;
-	private long ANIM_DURATION = 500; //ÑÓÊ±£¨ºÁÃë£©
+	private long ANIM_DURATION = 500; //å»¶æ—¶ï¼ˆæ¯«ç§’ï¼‰
 	private WifiReceiver receiver ;
 	
 	@Override
@@ -60,7 +60,7 @@ public class FirstScreenActivity extends Activity {
 			Intent i = new Intent();
 			i.setClass(getBaseContext(), MainActivity.class);
 			startActivity(i);
-			finish(); //¹Ø±ÕActivityÌø×ªµ½Ö÷½çÃæ
+			finish(); //å…³é—­Activityè·³è½¬åˆ°ä¸»ç•Œé¢
 		}
 
 		@Override

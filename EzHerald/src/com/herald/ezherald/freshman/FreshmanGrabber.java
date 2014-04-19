@@ -9,8 +9,8 @@ public class FreshmanGrabber implements MainContentInfoGrabber {
 	public MainContentGridItemObj GrabInformationObject() {
 		// TODO Auto-generated method stub
 		MainContentGridItemObj item = new MainContentGridItemObj();
-		item.setContent1("Éú»î£¬Ñ§Ï°£¬ÓéÀÖ£¬ÎÊ´ğ");
-		item.setContent2("¾¡ÔÚĞ£Ô°Ö¸ÄÏ");
+		item.setContent1("ç”Ÿæ´»ï¼Œå­¦ä¹ ï¼Œå¨±ä¹ï¼Œé—®ç­”");
+		item.setContent2("å°½åœ¨æ ¡å›­æŒ‡å—");
 		return item;
 	}
 

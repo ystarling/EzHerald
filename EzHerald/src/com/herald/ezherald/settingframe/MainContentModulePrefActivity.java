@@ -23,9 +23,9 @@ import android.content.res.Resources;
 
 public class MainContentModulePrefActivity extends SherlockActivity {
 
-	private String[] mModuleNames; // Ä£¿éÃû(Ó¢ÎÄ)
-	private String[] mModuleTitles; // Ä£¿éÃû£¨ÖĞÎÄ£©
-	private List<String> mChoosenModules; // ÒÑÑ¡ÔñµÄÄ£¿é
+	private String[] mModuleNames; // æ¨¡å—å(è‹±æ–‡)
+	private String[] mModuleTitles; // æ¨¡å—åï¼ˆä¸­æ–‡ï¼‰
+	private List<String> mChoosenModules; // å·²é€‰æ‹©çš„æ¨¡å—
 	private boolean[] mCheckedItems;
 	private Dialog mDialog;
 
@@ -44,7 +44,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 	}
 
 	/**
-	 * ´ÓXML×ÊÔ´ÎÄ¼şÖĞ¶ÁÈ¡¿ÉÒÔÅäÖÃµÄÄ£¿é
+	 * ä»XMLèµ„æºæ–‡ä»¶ä¸­è¯»å–å¯ä»¥é…ç½®çš„æ¨¡å—
 	 */
 	private void readXMLForChoiceArray() {
 		Resources resources = getResources();
@@ -55,11 +55,11 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 	}
 
 	/**
-	 * ´ÓSharedPreferencesÀïÃæ¶ÁÈ¡µ±Ç°µÄÄ£¿éÅäÖÃÇé¿ö
+	 * ä»SharedPreferencesé‡Œé¢è¯»å–å½“å‰çš„æ¨¡å—é…ç½®æƒ…å†µ
 	 */
 
 	private void loadSharedPreferences() {
-		// »ñµÃÆ«ºÃÉèÖÃ
+		// è·å¾—åå¥½è®¾ç½®
 		SharedPreferences appPrefs = getSharedPreferences(PREF_NAME,
 				Context.MODE_PRIVATE);
 		List<String> result_set = null;
@@ -96,7 +96,7 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 		switch (id) {
 		case DIALOG_ID:
 			Builder builder = new Builder(this);
-			builder.setTitle("Ñ¡ÔñĞèÒªÏÔÊ¾µÄÄ£¿é");
+			builder.setTitle("é€‰æ‹©éœ€è¦æ˜¾ç¤ºçš„æ¨¡å—");
 			builder.setCancelable(false);
 			builder.setMultiChoiceItems(mModuleTitles, mCheckedItems,
 					new OnMultiChoiceClickListener() {
@@ -113,18 +113,18 @@ public class MainContentModulePrefActivity extends SherlockActivity {
 						}
 					});
 
-			builder.setPositiveButton("È·¶¨", new OnClickListener() {
+			builder.setPositiveButton("ç¡®å®š", new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					saveCurrentPreferences();
-					Toast.makeText(getBaseContext(), "ÍÏ×§Ö÷½çÃæÖĞµÄÄ£¿éÍ¼±ê¿ÉÒÔ¸ü»»ÅÅÁĞË³ĞòÅ¶~", Toast.LENGTH_LONG)
+					Toast.makeText(getBaseContext(), "æ‹–æ‹½ä¸»ç•Œé¢ä¸­çš„æ¨¡å—å›¾æ ‡å¯ä»¥æ›´æ¢æ’åˆ—é¡ºåºå“¦~", Toast.LENGTH_LONG)
 						.show();
 					finish();
 				}
 			});
 
-			builder.setNegativeButton("È¡Ïû", new OnClickListener() {
+			builder.setNegativeButton("å–æ¶ˆ", new OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

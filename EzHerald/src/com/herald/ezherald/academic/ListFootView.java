@@ -35,13 +35,13 @@ public class ListFootView {
 	}
 
 	public void startRequestData() {
-		moreView.setText("¼ÓÔØÖĞ...");
+		moreView.setText("åŠ è½½ä¸­...");
 		progressBar.setVisibility(View.VISIBLE);
 
 	}
 
 	public void endRequestData() {
-		moreView.setText("»ñÈ¡¸ü¶à");
+		moreView.setText("è·å–æ›´å¤š");
 		progressBar.setVisibility(View.GONE);
 	}
 

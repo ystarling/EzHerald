@@ -17,12 +17,12 @@ import android.widget.ImageView;
 
 public class MainContentFlowItemAdapter extends BaseAdapter{
 	/**
-	 * Ö÷½çÃæViewFlowµÄAdapter
+	 * ä¸»ç•Œé¢ViewFlowçš„Adapter
 	 */
 	private final String TAG = "Ez:MainContentViewFlowItemAdapter";
 
-	private Context mContext; // ÔËĞĞÉÏÏÂÎÄ
-	private List<Map<String, Object>> mListItems; // ²Ëµ¥ÏîĞÅÏ¢
+	private Context mContext; // è¿è¡Œä¸Šä¸‹æ–‡
+	private List<Map<String, Object>> mListItems; // èœå•é¡¹ä¿¡æ¯
 	public List<Map<String, Object>> getmListItems() {
 		return mListItems;
 	}
@@ -31,29 +31,29 @@ public class MainContentFlowItemAdapter extends BaseAdapter{
 		this.mListItems = mListItems;
 	}
 
-	private LayoutInflater mListContainer; // ÊÓÍ¼ÈİÆ÷
+	private LayoutInflater mListContainer; // è§†å›¾å®¹å™¨
 
 	public final class ListItemView {
-		// ×Ô¶¨Òå¿Ø¼ş¼¯
+		// è‡ªå®šä¹‰æ§ä»¶é›†
 		public ImageView image;
 	}
 
 	public MainContentFlowItemAdapter(Context context,
 			List<Map<String, Object>> listItems) {
 		/**
-		 * ¹¹Ôìº¯Êı
+		 * æ„é€ å‡½æ•°
 		 */
 		mContext = context;
-		mListContainer = LayoutInflater.from(mContext); // ´´½¨ÊÓÍ¼
+		mListContainer = LayoutInflater.from(mContext); // åˆ›å»ºè§†å›¾
 		mListItems = listItems;
 	}
 
 	@Override
 	public int getCount() {
-		// ÏîÄ¿ÊıÁ¿
+		// é¡¹ç›®æ•°é‡
 		return mListItems.size();
 		//return Integer.MAX_VALUE; 
-		//·µ»ØºÜ´óµÄÖµÊ¹µÃgetViewÖĞµÄposition²»¶ÏÔö´óÀ´ÊµÏÖÑ­»·
+		//è¿”å›å¾ˆå¤§çš„å€¼ä½¿å¾—getViewä¸­çš„positionä¸æ–­å¢å¤§æ¥å®ç°å¾ªç¯
 	}
 
 	@Override
@@ -70,25 +70,25 @@ public class MainContentFlowItemAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// »ñµÃÊÓÍ¼
+		// è·å¾—è§†å›¾
 		Log.d(TAG, "getView");
-		// ×Ô¶¨ÒåÊÓÍ¼
+		// è‡ªå®šä¹‰è§†å›¾
 		ListItemView listItemView = null;
 		if (convertView == null) {
 			listItemView = new ListItemView();
-			// »ñÈ¡²Ëµ¥Ïî²¼¾ÖÎÄ¼şµÄÊÓÍ¼
+			// è·å–èœå•é¡¹å¸ƒå±€æ–‡ä»¶çš„è§†å›¾
 			convertView = mListContainer.inflate(R.layout.main_frame_content_imageitem,
 					null);
-			// »ñÈ¡¿Ø¼ş¶ÔÏó
+			// è·å–æ§ä»¶å¯¹è±¡
 			listItemView.image = (ImageView) convertView
 					.findViewById(R.id.main_frame_content_imageView);
-			// ÉèÖÃ¿Ø¼ş¼¯µ½convertView
+			// è®¾ç½®æ§ä»¶é›†åˆ°convertView
 			convertView.setTag(listItemView);
 		} else {
 			listItemView = (ListItemView) convertView.getTag();
 		}
 
-		// ÉèÖÃÎÄ×ÖºÍÍ¼±ê
+		// è®¾ç½®æ–‡å­—å’Œå›¾æ ‡
 		int type = (Integer)mListItems.get(position % mListItems.size()).get("type");
 		if(type == 0){
 			listItemView.image.setImageResource((Integer) mListItems.get(position % mListItems.size())

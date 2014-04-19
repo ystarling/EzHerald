@@ -4,7 +4,7 @@ package com.herald.ezherald.gpa;
  * @author xie
  */
 public class GpaPoliticsModel {
-	private static double userGpa = -1;// ÓÃ»§µÄgpa£¬Î´µÇÂ½Ê±Îª-1
+	private static double userGpa = -1;// ç”¨æˆ·çš„gpaï¼Œæœªç™»é™†æ—¶ä¸º-1
 
 	public class politic {
 		public politic(String title, String content, String relation,
@@ -41,14 +41,14 @@ public class GpaPoliticsModel {
 
 	/**
 	 * @param n
-	 *            £¬ÅĞ¶ÏµÄÏîÊı
+	 *            ï¼Œåˆ¤æ–­çš„é¡¹æ•°
 	 * @return Boolean
 	 */
 	public Boolean judge(int n) {
 		if (userGpa == -1 || n > politics.length) {
 			return false;
 		} else {
-			// ÅĞ¶ÏÓÃ»§µÄ¼¨µãÊÇ·ñÂú×ãÒªÇó
+			// åˆ¤æ–­ç”¨æˆ·çš„ç»©ç‚¹æ˜¯å¦æ»¡è¶³è¦æ±‚
 			if (politics[n].relation == ">"
 					&& userGpa > politics[n].requiredGpa)
 				return true;

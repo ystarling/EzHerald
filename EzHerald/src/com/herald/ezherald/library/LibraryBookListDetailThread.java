@@ -51,7 +51,7 @@ public class LibraryBookListDetailThread extends Thread {
 		this.context = cn;
 		dialog = new ProgressDialog(context);
 		dialog.setCanceledOnTouchOutside(false);
-		dialog.setMessage("¼ÓÔØÖĞ...");
+		dialog.setMessage("åŠ è½½ä¸­...");
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class LibraryBookListDetailThread extends Thread {
 			HttpGet get;
 			try {
 				DefaultHttpClient client = new DefaultHttpClient();
-				// ÉèÖÃÍøÂç³¬Ê±²ÎÊı
+				// è®¾ç½®ç½‘ç»œè¶…æ—¶å‚æ•°
 				HttpParams httpParams = client.getParams();
 				HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
 				HttpConnectionParams.setSoTimeout(httpParams, 5000);
@@ -78,7 +78,7 @@ public class LibraryBookListDetailThread extends Thread {
 
 				LibraryUrl url = new LibraryUrl();
 				String url_vaue = "?marc_no=" + bundle.getString("loc_marc_no");
-				Log.d("²éÊéºÅ£º", bundle.getString("loc_marc_no"));
+				Log.d("æŸ¥ä¹¦å·ï¼š", bundle.getString("loc_marc_no"));
 				get = new HttpGet(url.getLIBRARY_SEARCH_DETAIL() + url_vaue);
 				response = client.execute(get);
 			} catch (Exception ex) {
@@ -89,7 +89,7 @@ public class LibraryBookListDetailThread extends Thread {
 			}
 			// if(response.getStatusLine().getStatusCode()==400){
 			// ShowMsg2("aa");
-			// Log.e("Á¬½Ó´íÎó","´íÎó");
+			// Log.e("è¿æ¥é”™è¯¯","é”™è¯¯");
 			// }
 
 			InputStream is = response.getEntity().getContent();
@@ -132,7 +132,7 @@ public class LibraryBookListDetailThread extends Thread {
 			if (va == "view") {
 				dialog.show();
 			} else {
-				Toast toast1 = Toast.makeText(activity, "ÍøÂçÇëÇó´íÎó...",
+				Toast toast1 = Toast.makeText(activity, "ç½‘ç»œè¯·æ±‚é”™è¯¯...",
 						Toast.LENGTH_LONG);
 				toast1.show();
 				if (dialog.isShowing()) {
@@ -155,20 +155,20 @@ public class LibraryBookListDetailThread extends Thread {
 
 			try {
 				json_detail = json1.getJSONObject("detail");
-				subject_topic = json_detail.getString("Ñ§¿ÆÖ÷Ìâ:").toString();
-				press = json_detail.getString("³ö°æ·¢ĞĞÏî:").toString();
-				vector = json_detail.getString("ÔØÌåĞÎÌ¬Ïî:").toString();
-				author = json_detail.getString("ÌâÃû/ÔğÈÎÕß:").toString();
-				// uniform_title=json_detail.getString("Í³Ò»ÌâÃû:").toString();
-				clc = json_detail.getString("ÖĞÍ¼·¨·ÖÀàºÅ:").toString();
-				// faxingfuzhu=json_detail.getString("³ö°æ·¢ĞĞ¸½×¢:").toString();
-				// second_Responsible=json_detail.getString("¸öÈË´ÎÒªÔğÈÎÕß:").toString();
-				personal_responsible = json_detail.getString("¸öÈËÔğÈÎÕß:")
+				subject_topic = json_detail.getString("å­¦ç§‘ä¸»é¢˜:").toString();
+				press = json_detail.getString("å‡ºç‰ˆå‘è¡Œé¡¹:").toString();
+				vector = json_detail.getString("è½½ä½“å½¢æ€é¡¹:").toString();
+				author = json_detail.getString("é¢˜å/è´£ä»»è€…:").toString();
+				// uniform_title=json_detail.getString("ç»Ÿä¸€é¢˜å:").toString();
+				clc = json_detail.getString("ä¸­å›¾æ³•åˆ†ç±»å·:").toString();
+				// faxingfuzhu=json_detail.getString("å‡ºç‰ˆå‘è¡Œé™„æ³¨:").toString();
+				// second_Responsible=json_detail.getString("ä¸ªäººæ¬¡è¦è´£ä»»è€…:").toString();
+				personal_responsible = json_detail.getString("ä¸ªäººè´£ä»»è€…:")
 						.toString();
-				// version_note=json_detail.getString("°æ±¾¸½×¢:").toString();
-				price = json_detail.getString("ISBN¼°¶¨¼Û:").toString();
-				other_titles = json_detail.getString("ÆäËüÌâÃû:").toString();
-				// corpus_items=json_detail.getString("´Ô±àÏî:").toString();
+				// version_note=json_detail.getString("ç‰ˆæœ¬é™„æ³¨:").toString();
+				price = json_detail.getString("ISBNåŠå®šä»·:").toString();
+				other_titles = json_detail.getString("å…¶å®ƒé¢˜å:").toString();
+				// corpus_items=json_detail.getString("ä¸›ç¼–é¡¹:").toString();
 			} catch (JSONException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -176,35 +176,35 @@ public class LibraryBookListDetailThread extends Thread {
 
 			TextView textView1 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_name);
-			textView1.setText("ÌâÃû/ÔğÈÎÕß: " + author);
+			textView1.setText("é¢˜å/è´£ä»»è€…: " + author);
 
 			TextView textView2 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_press);
-			textView2.setText("³ö°æ·¢ĞĞÏî: " + press);
+			textView2.setText("å‡ºç‰ˆå‘è¡Œé¡¹: " + press);
 
 			TextView textView3 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_prize);
-			textView3.setText("ISBN¼°¶¨¼Û: " + price);
+			textView3.setText("ISBNåŠå®šä»·: " + price);
 
 			TextView textView4 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_vector);
-			textView4.setText("ÔØÌåĞÎÌ¬Ïî: " + vector);
+			textView4.setText("è½½ä½“å½¢æ€é¡¹: " + vector);
 
 			TextView textView5 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_other_title);
-			textView5.setText("ÆäËüÌâÃû: " + other_titles);
+			textView5.setText("å…¶å®ƒé¢˜å: " + other_titles);
 
 			TextView textView6 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_personal);
-			textView6.setText("¸öÈËÔğÈÎÕß: " + personal_responsible);
+			textView6.setText("ä¸ªäººè´£ä»»è€…: " + personal_responsible);
 
 			TextView textView7 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_subject_topic);
-			textView7.setText("Ñ§¿ÆÖ÷Ìâ: " + subject_topic);
+			textView7.setText("å­¦ç§‘ä¸»é¢˜: " + subject_topic);
 
 			TextView textView8 = (TextView) activity
 					.findViewById(R.id.libr_book_listdetailA_feiliehao);
-			textView8.setText("ÖĞÍ¼·¨·ÖÀàºÅ: " + clc);
+			textView8.setText("ä¸­å›¾æ³•åˆ†ç±»å·: " + clc);
 
 			ListView listview = (ListView) activity
 					.findViewById(R.id.libr_book_listViewB);
@@ -223,7 +223,7 @@ public class LibraryBookListDetailThread extends Thread {
 
 		public void SetRemind() {
 			Toast toast1 = Toast
-					.makeText(activity, "ÍøÂç¹ÊÕÏ!", Toast.LENGTH_SHORT);
+					.makeText(activity, "ç½‘ç»œæ•…éšœ!", Toast.LENGTH_SHORT);
 			toast1.show();
 		}
 
@@ -287,7 +287,7 @@ public class LibraryBookListDetailThread extends Thread {
 
 			List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
 
-			/****** ÉèÖÃ¶ÔÓ¦µÄ¶¯Ì¬Êı×éÊı¾İ *********/
+			/****** è®¾ç½®å¯¹åº”çš„åŠ¨æ€æ•°ç»„æ•°æ® *********/
 			Log.d("jsonArray length():", jsonarray.length() + "");
 
 			for (int i = 0; i < jsonarray.length(); i++) {
@@ -319,17 +319,17 @@ public class LibraryBookListDetailThread extends Thread {
 				}
 			}
 
-			holder.text1.setText("Ë÷ÊéºÅ: "
+			holder.text1.setText("ç´¢ä¹¦å·: "
 					+ data.get(position).get("libr_callNumber").toString());
-			holder.text2.setText("ÌõĞÎÂë£º"
+			holder.text2.setText("æ¡å½¢ç ï¼š"
 					+ data.get(position).get("libr_barcode").toString());
-			holder.text3.setText("Äê¾íÆÚ£º"
+			holder.text3.setText("å¹´å·æœŸï¼š"
 					+ data.get(position).get("libr_year").toString());
-			holder.text4.setText("Ğ£Çø£º "
+			holder.text4.setText("æ ¡åŒºï¼š "
 					+ data.get(position).get("libr_campus").toString());
-			holder.text5.setText("¹İ²ØµØ£º "
+			holder.text5.setText("é¦†è—åœ°ï¼š "
 					+ data.get(position).get("libr_collection").toString());
-			holder.text6.setText("Êé¿¯×´Ì¬£º"
+			holder.text6.setText("ä¹¦åˆŠçŠ¶æ€ï¼š"
 					+ data.get(position).get("libr_bookStatus").toString());
 
 			return convertView;

@@ -53,7 +53,7 @@ public class FragmentC extends Fragment {
 				@Override
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
-					btn_update.setText("ÕıÔÚ¸üĞÂ");
+					btn_update.setText("æ­£åœ¨æ›´æ–°");
 					update(user);
 					
 				}
@@ -73,10 +73,10 @@ public class FragmentC extends Fragment {
 	}
 
 	private void show() {
-		final String noData = "»¹Ã»ÓĞÊı¾İ";
+		final String noData = "è¿˜æ²¡æœ‰æ•°æ®";
 		/*
 		if (runTimes.getRate() != RunTimes.DEFAULT_RATE) {
-			txt_rate.setText(String.format("ÄãµÄ´ÎÊı»÷°ÜÁË\n%d%%µÄÍ¬Ñ§",
+			txt_rate.setText(String.format("ä½ çš„æ¬¡æ•°å‡»è´¥äº†\n%d%%çš„åŒå­¦",
 					(int) (runTimes.getRate() * 100)));// TODO
 														// 1-runTimes.getRate()?
 		} else {
@@ -85,10 +85,10 @@ public class FragmentC extends Fragment {
 		*/
 		if (runTimes.getRemainDays() > 0
 				&& runTimes.getAdviceTime() != RunTimes.DEFAULT_ADVICE_TIME) {
-			txt_remainDays.setText(String.format("±¾Ñ§ÆÚ»¹Ê£%dÌìÉÏ¿Î\n\n½¨ÒéÄãÃ¿ÖÜÖÁÉÙÅÜ%d´Î",
+			txt_remainDays.setText(String.format("æœ¬å­¦æœŸè¿˜å‰©%då¤©ä¸Šè¯¾\n\nå»ºè®®ä½ æ¯å‘¨è‡³å°‘è·‘%dæ¬¡",
 					runTimes.getRemainDays(), runTimes.getAdviceTime()));
 			if (runTimes.getAdviceTime() <= 0) {
-				txt_remainDays.setText("ÒÑ¾­ÅÜ¹»ÁË£¬ÒªÌôÕ½ÂúÇÚÃ´£¿");
+				txt_remainDays.setText("å·²ç»è·‘å¤Ÿäº†ï¼Œè¦æŒ‘æˆ˜æ»¡å‹¤ä¹ˆï¼Ÿ");
 			} else if (runTimes.getAdviceTime() < 3)
 				txt_remainDays.setTextColor(Color.GREEN);
 			else if (runTimes.getAdviceTime() <= 4)
@@ -96,19 +96,19 @@ public class FragmentC extends Fragment {
 			else
 				txt_remainDays.setTextColor(Color.RED);
 		} else if (runTimes.getRemainDays() < 0) {
-			txt_remainDays.setText("ÅÜ²ÙÒÑ¾­½áÊø»òÎŞĞÅÏ¢");
+			txt_remainDays.setText("è·‘æ“å·²ç»ç»“æŸæˆ–æ— ä¿¡æ¯");
 		} else {
 			txt_remainDays.setText(noData);
 		}
 		/*
 		if (runTimes.getAverageRunTime() != RunTimes.DEFAULT_AVERAGE_RUN_TIME) {
-			txt_notice.setText("Æ½¾ù´ò¿¨Ê±¼ä£º" + runTimes.getAverageRunTime());
+			txt_notice.setText("å¹³å‡æ‰“å¡æ—¶é—´ï¼š" + runTimes.getAverageRunTime());
 		} else {
 			txt_notice.setText(noData);
 		}
 		*/
 		if (runTimes.getUpdateTime() != RunTimes.DEFAULT_UPDATE_TIME) {
-			txt_updateTime.setText("¸üĞÂÓÚ" + runTimes.getUpdateTime());
+			txt_updateTime.setText("æ›´æ–°äº" + runTimes.getUpdateTime());
 		} else {
 			txt_updateTime.setText("");
 		}
@@ -122,10 +122,10 @@ public class FragmentC extends Fragment {
 	public void onFailed() {
 		// TODO Auto-generated method stub
 		Log.w("err","failed herer!!!!!!!!!!!CCF");
-		btn_update.setText("¸üĞÂ");
+		btn_update.setText("æ›´æ–°");
 		Activity act = getActivity();
 		if(act != null){
-			Toast.makeText(act, "¸üĞÂÊ§°Ü", Toast.LENGTH_LONG).show();
+			Toast.makeText(act, "æ›´æ–°å¤±è´¥", Toast.LENGTH_LONG).show();
 			show();
 		}
 		
@@ -134,10 +134,10 @@ public class FragmentC extends Fragment {
 	public void onSuccess() {
 		// TODO Auto-generated method stub
 		Log.w("err","failed herer!!!!!!!!!!!CCS");
-		btn_update.setText("¸üĞÂ");
+		btn_update.setText("æ›´æ–°");
 		Activity act = getActivity();
 		if(act != null){
-			Toast.makeText(act, "¸üĞÂ³É¹¦", Toast.LENGTH_LONG).show();
+			Toast.makeText(act, "æ›´æ–°æˆåŠŸ", Toast.LENGTH_LONG).show();
 			show();
 		}
 			

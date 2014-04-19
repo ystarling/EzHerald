@@ -38,7 +38,7 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 		19 * 60 + 15,
 		20 * 60 + 5,
 		20 * 60 + 55
-	}; //Ã¿½Ú¿ÎµÄÊ±¼ä¶Î
+	}; //æ¯èŠ‚è¯¾çš„æ—¶é—´æ®µ
 
 	@Override
 	public MainContentGridItemObj GrabInformationObject() {
@@ -49,10 +49,10 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 		String currTimeInClassSpan = getCurrentTimeInClassSpan();
 		MainContentGridItemObj obj = new MainContentGridItemObj();
 		if(currTimeInClassSpan == null){
-			obj.setContent1("´ó¼Ò¶¼²»ÉÏ¿ÎÀ²~");
-			obj.setContent2("Ì«ÍíÁË,ÔçµãĞİÏ¢°É");
+			obj.setContent1("å¤§å®¶éƒ½ä¸ä¸Šè¯¾å•¦~");
+			obj.setContent2("å¤ªæ™šäº†,æ—©ç‚¹ä¼‘æ¯å§");
 		} else {
-			Integer toPeroidInt = Integer.parseInt(currTimeInClassSpan) + 2; //×ÔÏ°ºÃ´õÒªÁ½½Ú¿Î°É£¡
+			Integer toPeroidInt = Integer.parseInt(currTimeInClassSpan) + 2; //è‡ªä¹ å¥½æ­¹è¦ä¸¤èŠ‚è¯¾å§ï¼
 			if(toPeroidInt > 13)
 				toPeroidInt = 13;
 			
@@ -62,8 +62,8 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 				selectedCampus = prefs.getString("campus", "all");
 			}
 			
-			obj.setContent1("±§Ç¸±§Ç¸...");
-			obj.setContent2("·şÎñÆ÷ÔİÊ±Á´½Ó²»ÉÏÄØ");
+			obj.setContent1("æŠ±æ­‰æŠ±æ­‰...");
+			obj.setContent2("æœåŠ¡å™¨æš‚æ—¶é“¾æ¥ä¸ä¸Šå‘¢");
 			
 			String url = String.format("http://herald.seu.edu.cn/queryEmptyClassrooms/query/%s/today/%s/%s/",
 					selectedCampus, currTimeInClassSpan, toPeroidInt.toString());
@@ -77,7 +77,7 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 			}
 			
 			if(responseStr != null){
-				//ÓĞ·µ»ØĞÅÏ¢
+				//æœ‰è¿”å›ä¿¡æ¯
 				try {
 					List<String> roomList = DataParser.strToList(responseStr);
 					
@@ -93,8 +93,8 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 							roomString += ",";
 						}
 					}
-					roomString += ("µÈ" + roomList.size() + "¼ä½ÌÊÒ¿ÕÏĞ");
-					obj.setContent1("½ÓÏÂÀ´ÊÇµÚ" +  currTimeInClassSpan + "½Ú¿Î");
+					roomString += ("ç­‰" + roomList.size() + "é—´æ•™å®¤ç©ºé—²");
+					obj.setContent1("æ¥ä¸‹æ¥æ˜¯ç¬¬" +  currTimeInClassSpan + "èŠ‚è¯¾");
 					obj.setContent2(roomString);
 					
 				} catch (JSONException e) {
@@ -110,9 +110,9 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 	}
 	
 	/**
-	 * »ñµÃµ±Ç°ÊÇµÚ¼¸½Ú¿Î
-	 * Èç¹ûÊ±¼äÌ«Ôç£¬·µ»ØµÚÒ»½Ú
-	 * Ê±¼äÌ«Íí£¬·µ»Ønull
+	 * è·å¾—å½“å‰æ˜¯ç¬¬å‡ èŠ‚è¯¾
+	 * å¦‚æœæ—¶é—´å¤ªæ—©ï¼Œè¿”å›ç¬¬ä¸€èŠ‚
+	 * æ—¶é—´å¤ªæ™šï¼Œè¿”å›null
 	 * @return
 	 */
 	public static String getCurrentTimeInClassSpan(){
@@ -124,7 +124,7 @@ public class EmptyClassroomInfoGrabber implements MainContentInfoGrabber {
 			int t = mTimeOfClasses[i];
 			if(hourMinuteInteger >= t)
 				continue;
-			retStr = Integer.valueOf(i+1).toString(); //·µ»ØÖµ´Ó1¿ªÊ¼
+			retStr = Integer.valueOf(i+1).toString(); //è¿”å›å€¼ä»1å¼€å§‹
 			break;
 		}
 						

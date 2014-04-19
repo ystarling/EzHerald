@@ -78,7 +78,7 @@ public class GpaPolitcsAdapter extends BaseExpandableListAdapter {
 		tv.setText(gpaPoliticsModel.politics[groupPosition].title);
 		tv.setPadding(60, 0, 0, 0);
 		tv.setTextSize(titleTextSize);
-		if (gpaPoliticsModel.judge(groupPosition)) {// TODO Î´µÇÂ½²»±äÉ«
+		if (gpaPoliticsModel.judge(groupPosition)) {// TODO æœªç™»é™†ä¸å˜è‰²
 			tv.setBackgroundColor(Color.GREEN);
 		} else {
 			tv.setBackgroundColor(Color.RED);

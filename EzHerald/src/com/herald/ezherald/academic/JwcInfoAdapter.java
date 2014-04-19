@@ -109,11 +109,11 @@ public class JwcInfoAdapter extends BaseAdapter {
 					Intent intent = new Intent(Intent.ACTION_SEND);
 
 					intent.setType("text/plain");
-					intent.putExtra(Intent.EXTRA_SUBJECT, "·ÖÏí");
+					intent.putExtra(Intent.EXTRA_SUBJECT, "åˆ†äº«");
 					intent.putExtra(Intent.EXTRA_TEXT,
-							"½ÌÎñ´¦·¢²¼ÁËĞÂµÄÍ¨Öª£º"+ jwcInfo.GetTitle());
+							"æ•™åŠ¡å¤„å‘å¸ƒäº†æ–°çš„é€šçŸ¥ï¼š"+ jwcInfo.GetTitle());
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					context.startActivity(Intent.createChooser(intent, "·ÖÏíµ½"));
+					context.startActivity(Intent.createChooser(intent, "åˆ†äº«åˆ°"));
 
 				}
 

@@ -51,10 +51,10 @@ public class ScrollListView extends ListView {
 
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-            	//当指触到listview的时候，让父ScrollView交出ontouch权限，也就是让父scrollview 停住不能滚动
+            	//褰撴寚瑙﹀埌listview鐨勬椂鍊欙紝璁╃埗ScrollView浜ゅ嚭ontouch鏉冮檺锛屼篃灏辨槸璁╃埗scrollview 鍋滀綇涓嶈兘婊氬姩
                 setParentScrollAble(false);
             case MotionEvent.ACTION_CANCEL:
-            	//当手指松开时，让父ScrollView重新拿到onTouch权限
+            	//褰撴墜鎸囨澗寮�鏃讹紝璁╃埗ScrollView閲嶆柊鎷垮埌onTouch鏉冮檺
                 setParentScrollAble(true);
                 break;
             default:

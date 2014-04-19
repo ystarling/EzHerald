@@ -25,8 +25,8 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	private Map<String,ArrayList<Record>> semester;
 	private List<String> semesters;
 	private Context context;
-	private ProgressDialog progress;//´¦ÀíÊı¾İµÄ½ø¶ÈÌõ
-	private ProgressDialog progressDialog;//¸üĞÂÊı¾İµÄ½ø¶ÈÌõ
+	private ProgressDialog progress;//å¤„ç†æ•°æ®çš„è¿›åº¦æ¡
+	private ProgressDialog progressDialog;//æ›´æ–°æ•°æ®çš„è¿›åº¦æ¡
 	private UserAccount user;
 	
  	public GpaAdapter(Context context) {
@@ -68,7 +68,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 				gpaInfo.selectionChanged(rc, isChecked);
 				ArrayList<Record> li = semester.get(rc.getSemester());
 				li.get(li.indexOf(rc)).setSelected(isChecked);
-				notifyDataSetChanged();//¸üĞÂÏÔÊ¾
+				notifyDataSetChanged();//æ›´æ–°æ˜¾ç¤º
 			}
 			
 		});
@@ -105,7 +105,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		final int TEXT_SIZE = 20;
 		TextView txt = new TextView(context);
 		txt.setTextSize(TEXT_SIZE);
-		txt.setText(semesters.get(groupPosition)+"Ñ§ÆÚ");
+		txt.setText(semesters.get(groupPosition)+"å­¦æœŸ");
 		txt.setPadding(PADDING_LEFT, 0, 0, 0);
 		return txt;
 	}
@@ -122,23 +122,23 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		return false;
 	}
 	public void update(int vercode,HttpClient client){
-		if(gpaInfo == null || vercode == -1|| client == null){//³õÊ¼»¯µÄµ÷ÓÃ
+		if(gpaInfo == null || vercode == -1|| client == null){//åˆå§‹åŒ–çš„è°ƒç”¨
 			gpaInfo = new GpaInfo(context,this);
 		}else{
 			gpaInfo.update(vercode,client,user);
 			gpaInfo.save();
 		}
-		//³õÊ¼»¯ÒªÓÃ
-		semester  = new HashMap<String,ArrayList<Record>>();//Ñ§ÆÚºÍ¶ÔÓ¦³É¼¨listµÄÓ³Éä±í
-		semesters = new ArrayList<String>(); //ËùÓĞµÄÑ§ÆÚĞÅÏ¢
-		for(Record r: gpaInfo.getRecords()){//½«Ã¿Ò»Ïî¸ù¾İÑ§ÆÚ¼ÓÈëµ½mapÖ®ÖĞ
+		//åˆå§‹åŒ–è¦ç”¨
+		semester  = new HashMap<String,ArrayList<Record>>();//å­¦æœŸå’Œå¯¹åº”æˆç»©listçš„æ˜ å°„è¡¨
+		semesters = new ArrayList<String>(); //æ‰€æœ‰çš„å­¦æœŸä¿¡æ¯
+		for(Record r: gpaInfo.getRecords()){//å°†æ¯ä¸€é¡¹æ ¹æ®å­¦æœŸåŠ å…¥åˆ°mapä¹‹ä¸­
 			if(semester.containsKey(r.getSemester())) {
 				ArrayList<Record> list = semester.get(r.getSemester());
 				list.add(r);
 			} else {
 				ArrayList<Record> list = new ArrayList<Record>();
 				list.add(r);
-				semesters.add(r.getSemester());//¸üĞÂÑ§ÆÚĞÅÏ¢
+				semesters.add(r.getSemester());//æ›´æ–°å­¦æœŸä¿¡æ¯
 				semester.put(r.getSemester(),list);
 			}
 		}
@@ -154,26 +154,26 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 
 	public void removeOptional() {
 		// TODO Auto-generated method stub
-		gpaInfo.removeOptional();//¸üĞÂÊı¾İ¿âµÄ¼ÇÂ¼
-		notifyDataSetChanged();//¸üĞÂÏÔÊ¾
+		gpaInfo.removeOptional();//æ›´æ–°æ•°æ®åº“çš„è®°å½•
+		notifyDataSetChanged();//æ›´æ–°æ˜¾ç¤º
 	}
 	public void updateFinished(boolean isSuccess){
 		if(isSuccess){
-			Toast.makeText(context, "¸üĞÂ³É¹¦", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "æ›´æ–°æˆåŠŸ", Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(context, "¸üĞÂÊ§°Ü£¬¼ì²éÍøÂç", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "æ›´æ–°å¤±è´¥ï¼Œæ£€æŸ¥ç½‘ç»œ", Toast.LENGTH_SHORT).show();
 		}
 		progress.cancel();
-		semester  = new HashMap<String,ArrayList<Record>>();//Ñ§ÆÚºÍ¶ÔÓ¦³É¼¨listµÄÓ³Éä±í
-		semesters = new ArrayList<String>(); //ËùÓĞµÄÑ§ÆÚĞÅÏ¢
-		for(Record r: gpaInfo.getRecords()){//½«Ã¿Ò»Ïî¸ù¾İÑ§ÆÚ¼ÓÈëµ½mapÖ®ÖĞ
+		semester  = new HashMap<String,ArrayList<Record>>();//å­¦æœŸå’Œå¯¹åº”æˆç»©listçš„æ˜ å°„è¡¨
+		semesters = new ArrayList<String>(); //æ‰€æœ‰çš„å­¦æœŸä¿¡æ¯
+		for(Record r: gpaInfo.getRecords()){//å°†æ¯ä¸€é¡¹æ ¹æ®å­¦æœŸåŠ å…¥åˆ°mapä¹‹ä¸­
 			if(semester.containsKey(r.getSemester())) {
 				ArrayList<Record> list = semester.get(r.getSemester());
 				list.add(r);
 			} else {
 				ArrayList<Record> list = new ArrayList<Record>();
 				list.add(r);
-				semesters.add(r.getSemester());//¸üĞÂÑ§ÆÚĞÅÏ¢
+				semesters.add(r.getSemester());//æ›´æ–°å­¦æœŸä¿¡æ¯
 				semester.put(r.getSemester(),list);
 			}
 		}
@@ -183,7 +183,7 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		
 	}
 	public void onLoadFinished(){
-		Toast.makeText(context, "»ñÈ¡Êı¾İÍê³É", Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "è·å–æ•°æ®å®Œæˆ", Toast.LENGTH_SHORT).show();
 		if(progressDialog!=null){
 			progressDialog.cancel();
 		}
@@ -193,8 +193,8 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		if(progress == null){//init
 			progress = new ProgressDialog(context);
-			progress.setTitle("ÕıÔÚ·ÖÎö");
-			progress.setIndeterminate(false);//½ø¶ÈÌõ¶ø²»ÊÇÈ¦È¦
+			progress.setTitle("æ­£åœ¨åˆ†æ");
+			progress.setIndeterminate(false);//è¿›åº¦æ¡è€Œä¸æ˜¯åœˆåœˆ
 			progress.setMax(count);
 			progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			progress.setCancelable(false);

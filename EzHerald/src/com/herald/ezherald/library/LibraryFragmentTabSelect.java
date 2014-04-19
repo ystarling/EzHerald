@@ -11,7 +11,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 
 /**
  * @author BIG_SEA
- *	TabÑ¡Ôñ
+ *	Tabé€‰æ‹©
  */
 class LibraryFragmentTabSelect implements ActionBar.TabListener{
 

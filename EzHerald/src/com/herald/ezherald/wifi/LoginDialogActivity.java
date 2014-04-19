@@ -57,7 +57,7 @@ public class LoginDialogActivity extends Activity {
 		}
 
 		private void onLoginSuccess() {
-			//TODO ÏÔÊ¾Á÷Á¿Çé¿ö
+			//TODO æ˜¾ç¤ºæµé‡æƒ…å†µ
 			Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
 		}
 		
@@ -71,15 +71,15 @@ public class LoginDialogActivity extends Activity {
 
 	private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle("·¢ÏÖseu-wlan");
-		builder.setMessage("ÊÇ·ñ×Ô¶¯µÇÂ¼");
-		builder.setPositiveButton("ÊÇ", new OnClickListener() {
+		builder.setTitle("å‘ç°seu-wlan");
+		builder.setMessage("æ˜¯å¦è‡ªåŠ¨ç™»å½•");
+		builder.setPositiveButton("æ˜¯", new OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 user = Authenticate.getIDcardUser(context);
                 if (user == null) {
-                    Toast.makeText(context, "ÇëÏÈµÇÂ¼ÏÈÉù", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "è¯·å…ˆç™»å½•å…ˆå£°", Toast.LENGTH_SHORT).show();
                     LoginDialogActivity.this.finish();
                     //TODO lead to app to login
                 } else {
@@ -96,7 +96,7 @@ public class LoginDialogActivity extends Activity {
 				 */
                 //ProgressBar progress = new ProgressBar(context);
                 final ProgressDialog progress = new ProgressDialog(context);
-                progress.setTitle("ÕıÔÚµÇÂ¼");
+                progress.setTitle("æ­£åœ¨ç™»å½•");
                 progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 progress.show();
                 new Thread() {
@@ -139,7 +139,7 @@ public class LoginDialogActivity extends Activity {
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            handler.obtainMessage(FAILED, "ÍøÂç´íÎó").sendToTarget();
+                            handler.obtainMessage(FAILED, "ç½‘ç»œé”™è¯¯").sendToTarget();
                         }
                         dialog.dismiss();
                         progress.dismiss();
@@ -148,7 +148,7 @@ public class LoginDialogActivity extends Activity {
             }
 
         });
-		builder.setNegativeButton("·ñ", new OnClickListener() {
+		builder.setNegativeButton("å¦", new OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
