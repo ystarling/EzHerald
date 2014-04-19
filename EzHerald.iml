@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":EzHerald" />
+        <option name="GRADLE_PROJECT_PATH" value=":" />
       </configuration>
     </facet>
     <facet type="android" name="Android">
@@ -21,6 +21,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/EzHerald/build/classes/debug" />
     <exclude-output />
+    <content url="file://$MODULE_DIR$" />
     <content url="file://$MODULE_DIR$/EzHerald">
       <sourceFolder url="file://$MODULE_DIR$/EzHerald/build/source/r/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/EzHerald/build/source/aidl/debug" isTestSource="false" generated="true" />
@@ -64,7 +65,7 @@
       <excludeFolder url="file://$MODULE_DIR$/EzHerald/build/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/EzHerald/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 18 Platform" jdkType="Android SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android-support-v4" level="project" />
     <orderEntry type="library" exported="" name="herald-web-services-api-1.1-20130830.125040-41" level="project" />
