@@ -16,4 +16,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/abs__ic_menu_moreoverflow_normal_holo_light" />
 </selector>
-<!-- From: file:/D:/GitHub/Ezherald/libABS/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml --><!-- From: file:/D:/GitHub/Ezherald/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml -->
+<!-- From: file:/F:/android/EzHerald/libABS/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml --><!-- From: file:/F:/android/EzHerald/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml -->

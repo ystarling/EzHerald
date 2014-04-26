@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentTransaction;
 import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.R;
 
-public class bookingActivity extends BaseFrameActivity implements activityToBooking.OnItemSelectedListener{
+public class BookingActivity extends BaseFrameActivity implements BookingList.OnItemSelectedListener{
     
 	public void  OnItemSelected(int position){
-		 Intent intent = new Intent(this,bookingDetailActivity.class);
+		 Intent intent = new Intent(this,BookingDetailActivity.class);
 		 intent.putExtra("position", position);
 		 startActivity(intent);
 		
@@ -19,9 +19,9 @@ public class bookingActivity extends BaseFrameActivity implements activityToBook
 	@Override 
     public void onCreate(Bundle savedInstanceState){
 		  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	  SetBaseFrameActivity(new bookingFragment());
+    	  SetBaseFrameActivity(new BookingFragment());
     	  super.onCreate(savedInstanceState);
-    	  activityToBooking firstFragment = new activityToBooking();
+    	  BookingList firstFragment = new BookingList();
     	  FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     	  transaction.add(R.id.booking_fragment_container,firstFragment);
     	  transaction.addToBackStack(null);

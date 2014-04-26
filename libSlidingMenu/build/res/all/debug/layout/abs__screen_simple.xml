@@ -36,4 +36,4 @@ enabled.
          android:foregroundGravity="fill_horizontal|top"
          android:foreground="?attr/windowContentOverlay" />
 </LinearLayout>
-<!-- From: file:/D:/GitHub/Ezherald/libABS/res/layout/abs__screen_simple.xml --><!-- From: file:/D:/GitHub/Ezherald/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml -->
+<!-- From: file:/F:/android/EzHerald/libABS/res/layout/abs__screen_simple.xml --><!-- From: file:/F:/android/EzHerald/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml -->

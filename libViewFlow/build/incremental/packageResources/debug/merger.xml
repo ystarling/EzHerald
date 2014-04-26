@@ -2,14 +2,14 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\GitHub\Ezherald\libViewFlow\res" >
+        <source path="F:\android\EzHerald\libViewFlow\res" >
             <file
                 name="icon"
-                path="D:\GitHub\Ezherald\libViewFlow\res\drawable\icon.png"
+                path="F:\android\EzHerald\libViewFlow\res\drawable\icon.png"
                 qualifiers=""
                 type="drawable" />
             <file
-                path="D:\GitHub\Ezherald\libViewFlow\res\values\attrs.xml"
+                path="F:\android\EzHerald\libViewFlow\res\values\attrs.xml"
                 qualifiers="" >
                 <declare-styleable name="CircleFlowIndicator" >
                     <attr
@@ -90,7 +90,7 @@
                 </declare-styleable>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libViewFlow\res\values\strings.xml"
+                path="F:\android\EzHerald\libViewFlow\res\values\strings.xml"
                 qualifiers="" >
                 <string name="app_name" >ViewFlow
                 </string>
@@ -98,11 +98,11 @@
                 </string>
             </file>
         </source>
-        <source path="D:\GitHub\Ezherald\libViewFlow\build\res\rs\debug" />
-        <source path="D:\GitHub\Ezherald\libViewFlow\build\res\generated\debug" />
+        <source path="F:\android\EzHerald\libViewFlow\build\res\rs\debug" />
+        <source path="F:\android\EzHerald\libViewFlow\build\res\generated\debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="D:\GitHub\Ezherald\libViewFlow\build-types\debug\res" />
+        <source path="F:\android\EzHerald\libViewFlow\build-types\debug\res" />
     </dataSet>
 
 </merger>

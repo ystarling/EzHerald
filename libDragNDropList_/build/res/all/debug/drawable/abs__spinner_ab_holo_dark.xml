@@ -23,4 +23,4 @@
           android:drawable="@drawable/abs__spinner_ab_focused_holo_dark" />
     <item android:drawable="@drawable/abs__spinner_ab_default_holo_dark" />
 </selector>
-<!-- From: file:/D:/GitHub/Ezherald/libABS/res/drawable/abs__spinner_ab_holo_dark.xml --><!-- From: file:/D:/GitHub/Ezherald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml -->
+<!-- From: file:/F:/android/EzHerald/libABS/res/drawable/abs__spinner_ab_holo_dark.xml --><!-- From: file:/F:/android/EzHerald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml -->

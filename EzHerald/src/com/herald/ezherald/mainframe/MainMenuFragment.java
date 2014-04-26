@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,7 +38,7 @@ import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.activity.ActiActivity;
-import com.herald.ezherald.bookingOffice.bookingActivity;
+import com.herald.ezherald.bookingOffice.BookingActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
@@ -239,7 +238,7 @@ public class MainMenuFragment extends ListFragment {
 			menuTarget = "Radio";
 			break;
 		case 11:
-			i.setClass(getActivity(), bookingActivity.class);
+			i.setClass(getActivity(), BookingActivity.class);
 			menuTarget = "bookingOffice";
 			break;
 		

@@ -52,4 +52,4 @@
 	     android:layout_height="wrap_content"
 	     android:text="图书馆账号可是相当之复杂:\n 13级及以后的童鞋请用一卡通号\n 其余同学请用你的原始学号(转系之前)\n 默认密码据说是原始学号" />
 
-</LinearLayout><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/account_libaccount_activity.xml -->
+</LinearLayout><!-- From: file:/F:/android/EzHerald/EzHerald/res/layout/account_libaccount_activity.xml -->

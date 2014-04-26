@@ -16,4 +16,4 @@
         android:text="登录"
         android:onClick="sendMessage" />
 
-</LinearLayout><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/account_userinfo_activity.xml -->
+</LinearLayout><!-- From: file:/F:/android/EzHerald/EzHerald/res/layout/account_userinfo_activity.xml -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/D:/GitHub/Ezherald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml -->
     <eat-comment />
 
     <bool name="abs__action_bar_expanded_action_views_exclusive">false</bool>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/D:/GitHub/Ezherald/libSlidingMenu/res/values/attrs.xml -->
+    <!-- From: file:/F:/android/EzHerald/libSlidingMenu/res/values/attrs.xml -->
     <eat-comment />
 
     <declare-styleable name="SlidingMenu">
@@ -29,7 +29,7 @@
         <attr name="selectorEnabled" format="boolean" />
         <attr name="selectorDrawable" format="reference" />
     </declare-styleable>
-    <!-- From: file:/D:/GitHub/Ezherald/libSlidingMenu/res/values/ids.xml -->
+    <!-- From: file:/F:/android/EzHerald/libSlidingMenu/res/values/ids.xml -->
     <eat-comment />
 
     <item name="selected_view" type="id"/>

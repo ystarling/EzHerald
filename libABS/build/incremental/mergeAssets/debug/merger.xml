@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\GitHub\Ezherald\libABS\assets" />
+        <source path="F:\android\EzHerald\libABS\assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="D:\GitHub\Ezherald\libABS\build-types\debug\assets" />
+        <source path="F:\android\EzHerald\libABS\build-types\debug\assets" />
     </dataSet>
 
 </merger>

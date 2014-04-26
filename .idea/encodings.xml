@@ -1,30 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/FirstScreenActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/MainActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/academic/AcademicDataGrabber.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/academic/AcademicFragment.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/exercise/ExerciseGrabber.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/exercise/FragmentA.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragment.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryMineBookMyAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainContentFlowItemAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainContentFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainContentGridItemAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainContentGridItemObj.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainContentListItemAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainContentListItemDragDropAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainMenuFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainMenuListItemAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/SecondMenuFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/SecondMenuListItemAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/wifi/LinkDialogActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/wifi/LoginDialogActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/wifi/WifiReceiver.java" charset="UTF-8" />
-    <file url="PROJECT" charset="UTF-8" />
-  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
 </project>
 

@@ -20,4 +20,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
     <solid android:color="@color/pressed_heraldstyle" />
 </shape>
-<!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/drawable/pressed_background_heraldstyle.xml -->
+<!-- From: file:/F:/android/EzHerald/EzHerald/res/drawable/pressed_background_heraldstyle.xml -->

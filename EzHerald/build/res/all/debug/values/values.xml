@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/array.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/array.xml -->
     <eat-comment />
 
     <string-array name="academic_list_action_spinner">
@@ -39,7 +39,7 @@
         <item>广播台</item>
         <item>预约排票</item>
     </string-array>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings_activity_main_content_module_pref.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings_activity_main_content_module_pref.xml -->
     <eat-comment />
 
     <string-array name="pref_listview_color_titles">
@@ -103,7 +103,7 @@
         <item>360</item>
         <item>-1</item>
     </string-array>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/array.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/array.xml -->
     <eat-comment />
 
     <string-array name="second_menu_items">
@@ -127,7 +127,7 @@
         <item>引导界面</item>
         <item>关于…</item>
     </string-array>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <attr name="background" format="reference|color" />
@@ -150,11 +150,11 @@
     <color name="abs__bright_foreground_disabled_holo_light">#ffb2b2b2</color>
     <color name="abs__bright_foreground_holo_dark">@color/abs__background_holo_light</color>
     <color name="abs__bright_foreground_holo_light">@color/abs__background_holo_dark</color>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/colors_heraldstyle.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/colors_heraldstyle.xml -->
     <eat-comment />
 
     <color name="pressed_heraldstyle">#CCEB3C4B</color>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <declare-styleable name="CircleFlowIndicator">
@@ -173,7 +173,7 @@
             <flag name="fill" value="1" />
         </attr>
     </declare-styleable>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <declare-styleable name="SherlockActionBar">
@@ -620,7 +620,7 @@
     <declare-styleable name="SherlockView">
         <attr name="android:focusable" />
     </declare-styleable>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <declare-styleable name="SlidingMenu">
@@ -648,7 +648,7 @@
         <attr name="selectorEnabled" format="boolean" />
         <attr name="selectorDrawable" format="reference" />
     </declare-styleable>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <declare-styleable name="TitleFlowIndicator">
@@ -668,7 +668,7 @@
     <declare-styleable name="ViewFlow">
         <attr name="sidebuffer" format="integer" />
     </declare-styleable>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <dimen name="abs__action_bar_default_height">48dip</dimen>
@@ -684,14 +684,14 @@
     <dimen name="abs__dropdownitem_text_padding_right">8dip</dimen>
     <dimen name="abs__search_view_preferred_width">320dip</dimen>
     <dimen name="abs__search_view_text_min_width">160dip</dimen>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/dimens.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/dimens.xml -->
     <eat-comment />
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="list_padding">10dp</dimen>
     <dimen name="main_menu_shadow_width">5dp</dimen>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <item name="abs__action_menu_divider" type="id"/>
@@ -700,15 +700,15 @@
     <item name="abs__progress_circular" type="id"/>
     <item name="abs__progress_horizontal" type="id"/>
     <item name="abs__up" type="id"/>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <item name="selected_view" type="id"/>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <integer name="abs__max_action_buttons">2</integer>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings.xml -->
     <eat-comment />
 
     <string name="IDCardInfo">一卡通账号：</string>
@@ -732,7 +732,7 @@
     <string name="TyxUserName">体育系账号(一卡通号)</string>
     <string name="UserName">一卡通</string>
     <string name="aboutInfo">aboutInfo</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <string name="abs__action_bar_home_description">Navigate home</string>
@@ -748,11 +748,11 @@
     <string name="abs__searchview_description_voice">Voice search</string>
     <string name="abs__shareactionprovider_share_with">Share with</string>
     <string name="abs__shareactionprovider_share_with_application">Share with <ns1:g id="application_name" example="Bluetooth">%s</ns1:g></string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings.xml -->
     <eat-comment />
 
     <string name="account_library_detail">图书馆账号可是相当常之复杂:\\n 13级及以后的童鞋请用一卡通号\\n 其余同学请用你的原始学号(转系之前)\\n 默认密码据说是原始学号</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings_acti_module.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings_acti_module.xml -->
     <eat-comment />
 
     <string name="acti_url_activity_comment">http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/getactivitycomment/activityid/1</string>
@@ -767,7 +767,7 @@
     <string name="acti_url_middle_pic">http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_m_post_add/</string>
     <string name="acti_url_more_activity">http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/getmore/lastactivityid/</string>
     <string name="acti_url_small_pic">http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings.xml -->
     <eat-comment />
 
     <string name="action_settings">程序设置</string>
@@ -778,11 +778,11 @@
     <string name="cus_lv_release_to_refresh">Release to refresh</string>
     <string name="cus_lv_updating">Updating：</string>
     <string name="first_screen_loading">先声客户端玩命启动中...</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <string name="hello">Hello World, DragNDropListActivity!</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings.xml -->
     <eat-comment />
 
     <string name="hello_world">Hello world!</string>
@@ -797,12 +797,12 @@
     <string name="mainmenu_exit_app">退出</string>
     <string name="menu_main_content_pref_title">偏好设置</string>
     <string name="ok_label">ok_label</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings_activity_main_content_module_pref.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings_activity_main_content_module_pref.xml -->
     <eat-comment />
 
     <string name="pref_title_module">勾选所需模块</string>
     <string name="pref_title_sync_frequency">同步频率</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings.xml -->
     <eat-comment />
 
     <string name="setting_about_2001_2014">2001-2014</string>
@@ -810,11 +810,11 @@
     <string name="setting_powered_by_herald">Powered by Herald</string>
     <string name="title_activity_app_update">软件更新</string>
     <string name="title_activity_first_screen">FirstScreenActivity</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings_activity_main_content_module_pref.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/strings_activity_main_content_module_pref.xml -->
     <eat-comment />
 
     <string name="title_activity_main_content_module_pref">主界面模块偏好</string>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/styles_heraldstyle.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/styles_heraldstyle.xml -->
     <eat-comment />
 
     <style name="ActionBar.Solid.Heraldstyle" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
@@ -836,7 +836,7 @@
     <style name="ActionButton.CloseMode.Heraldstyle" parent="@style/Widget.Sherlock.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_heraldstyle</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/styles.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/styles.xml -->
     <eat-comment />
 
     <style name="AppBaseTheme" parent="android:Theme.Light">
@@ -850,7 +850,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/styles_heraldstyle.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/styles_heraldstyle.xml -->
     <eat-comment />
 
     <style name="DropDownListView.Heraldstyle" parent="@style/Widget.Sherlock.ListView.DropDown">
@@ -870,7 +870,7 @@
     <style name="ProgressBar.Heraldstyle" parent="@style/Widget.Sherlock.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_heraldstyle</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <style name="Sherlock.__TextAppearance.Small" parent="Widget">
@@ -1059,7 +1059,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">normal</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/styles_heraldstyle.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/styles_heraldstyle.xml -->
     <eat-comment />
 
     <style name="Theme.Heraldstyle" parent="@style/Theme.Sherlock.Light.DarkActionBar">
@@ -1081,7 +1081,7 @@
         <item name="popupMenuStyle">@style/PopupMenu.Heraldstyle</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Heraldstyle</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <style name="Theme.Sherlock" parent="Sherlock.__Theme">
@@ -1264,7 +1264,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/styles.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/styles.xml -->
     <eat-comment />
 
     <style name="Theme.Transparent" parent="android:Theme.Light">
@@ -1275,7 +1275,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/styles_heraldstyle.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/styles_heraldstyle.xml -->
     <eat-comment />
 
     <style name="Theme.Transparent_Herald" parent="@style/Theme.Heraldstyle">
@@ -1286,7 +1286,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <style name="Widget" />
