@@ -143,7 +143,7 @@ public class TyxAccountFragment extends SherlockFragment {
 	}
 
 	class LoginFailureHandler implements Runnable {
-		public final String HERALD_WS_TYX_URI = "http://121.248.63.105/herald_web_service/tyx/checkAccount/";
+		public final String HERALD_WS_TYX_URI = "http://herald.seu.edu.cn/herald_web_service/tyx/checkAccount/";
 		public final String POST_KEY_USERNAME = "card_number";
 		public final String POST_KEY_PASSWORD = "password";
 		

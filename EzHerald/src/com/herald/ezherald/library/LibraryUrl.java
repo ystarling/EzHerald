@@ -5,7 +5,7 @@ public class LibraryUrl {
 	String LIBRARY_SEARCH_URL="http://herald.seu.edu.cn/herald_web_service/library/search_book/";
 	String LIBRARY_SEARCH_DETAIL="http://herald.seu.edu.cn/herald_web_service/library/book_detail/";
 	String LIBRARY_MINE_BOOKS="http://herald.seu.edu.cn/herald_web_service/library/rendered_books/";
-	String LIBRARY_MINE_BOOK_RENEW="http://121.248.63.105/herald_web_service/library/renew/";
+	String LIBRARY_MINE_BOOK_RENEW="http://herald.seu.edu.cn/herald_web_service/library/renew/";
 	
 
 

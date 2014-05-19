@@ -12,6 +12,9 @@ public final class R {
         public static final int academic_list_action_spinner=0x7f050000;
         public static final int acti_club_detail_action_spinner=0x7f050001;
         public static final int acti_list_action_spinner=0x7f050002;
+        /**  <item >广播台</item> 
+ <item>预约排票</item> 
+         */
         public static final int main_menu_items=0x7f050003;
         public static final int pref_listview_color_titles=0x7f050004;
         public static final int pref_listview_color_values=0x7f050005;

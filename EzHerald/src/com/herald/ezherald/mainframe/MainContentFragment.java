@@ -54,10 +54,10 @@ import com.terlici.dragndroplist.DragNDropListView;
 import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
 
 /**
- * 上传图片: http://121.248.63.105/EzHerald/pictureupload/ 上传更新:
- * http://121.248.63.105/EzHerald/updateupload/ 图片json显示最新五条:
- * http://121.248.63.105/EzHerald/picturejson/ 更新json显示最新一条:
- * http://121.248.63.105/EzHerald/updatejson/
+ * 上传图片: http://herald.seu.edu.cn/EzHerald/pictureupload/ 上传更新:
+ * http://herald.seu.edu.cn/EzHerald/updateupload/ 图片json显示最新五条:
+ * http://herald.seu.edu.cn/EzHerald/picturejson/ 更新json显示最新一条:
+ * http://herald.seu.edu.cn/EzHerald/updatejson/
  * 
  * @author BorisHe
  * 

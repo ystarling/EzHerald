@@ -11,9 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,29 +32,24 @@ import com.herald.ezherald.mainframe.MainGuideActivity;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.util.MonthDisplayHelper;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.herald.ezherald.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 /*
@@ -89,8 +82,8 @@ public class MainActivity extends BaseFrameActivity {
 	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // 始终从网站更新数据，不论新旧
 	private final boolean DEBUG_DONOT_REFRESH = false; // 禁止更新主界面轮播图
 
-	private final String REMOTE_UPDATE_CHECK_URL = "http://121.248.63.105/EzHerald/picupdatetime/";
-	private final String REMOTE_UPDATE_QUERY_URL = "http://121.248.63.105/EzHerald/picturejson/";
+	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
+	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
 	private final int CONN_TIMEOUT = 5000;
 
 	private boolean mShowedUpdate = false;
@@ -271,7 +264,7 @@ public class MainActivity extends BaseFrameActivity {
 	/**
 	 * 开Http连接
 	 * 
-	 * @param uRL
+	 * @param urlStr
 	 * @return
 	 * @throws IOException
 	 */
@@ -625,7 +618,14 @@ public class MainActivity extends BaseFrameActivity {
 		} catch (IOException e) {
 			//Log.w("MainActivity", e.getLocalizedMessage());
 			showToastInWorkingThread("远程服务器链接超时，网络不大给力？");
-			return false;
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return false;
 		}
 		if (in == null)
 			return false;
@@ -644,6 +644,13 @@ public class MainActivity extends BaseFrameActivity {
 			in.close();
 		} catch (IOException e) {
 			Log.w("MainActivity", e.getLocalizedMessage());
+            if(in!=null) {
+                try {
+                    in.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
 			return false;
 		}
 

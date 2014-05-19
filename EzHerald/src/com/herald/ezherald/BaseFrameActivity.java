@@ -37,7 +37,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
 	//protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
 	private long mExitTime;
-	
+
+    //protected static final String DOMAIN = "http://herald.seu.edu.cn";
 	
 	// protected int mContentResId;
 

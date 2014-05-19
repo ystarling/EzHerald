@@ -1,4 +1,4 @@
-<!-- From: file:/D:/GitHub/Ezherald/EzHerald/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="6" android:versionName="1.1.0000" package="com.herald.ezherald">
+<!-- From: file:/D:/GitHub/Ezherald/EzHerald/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="7" android:versionName="1.1.0000" package="com.herald.ezherald">
  <!-- public beta -->
 
     <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="15"/>

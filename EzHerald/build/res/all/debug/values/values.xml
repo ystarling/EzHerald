@@ -36,8 +36,8 @@
         <item>教务信息</item>
         <item>校园指南</item>
         <item>空闲教室</item>
-        <item>广播台</item>
-        <item>预约排票</item>
+        <!-- <item >广播台</item> -->
+        <!-- <item>预约排票</item> -->
     </string-array>
     <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values/strings_activity_main_content_module_pref.xml -->
     <eat-comment />

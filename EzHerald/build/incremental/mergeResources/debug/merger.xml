@@ -6240,12 +6240,8 @@ true
                     <item>
 空闲教室
                     </item>
-                    <item>
-广播台
-                    </item>
-                    <item>
-预约排票
-                    </item>
+                    <!-- <item >广播台</item> -->
+                    <!-- <item>预约排票</item> -->
                 </string-array>
                 <string-array name="setting_menu_subtitles" >
                     <item>

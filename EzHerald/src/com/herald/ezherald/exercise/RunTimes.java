@@ -57,8 +57,8 @@ public class RunTimes {
 	public static final String DEFAULT_UPDATE_TIME = null;
 	private static final int SUCCESS = 1;
 	private static final int FAILED  = 0;
-	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/ws/exercise/remain";
-	private static final String RUNTIMES_URL = "http://121.248.63.105/herald_web_service/tyx/";
+	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/remain_days/";
+	private static final String RUNTIMES_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/";
 	
 	private SharedPreferences pref;
 	private Editor editor;
@@ -217,7 +217,7 @@ public class RunTimes {
 								throw new Exception("net error");
 							}
 							String result = EntityUtils.toString(response.getEntity());
-							int remDays = Integer.parseInt( result);
+							int remDays = Integer.parseInt(result);
 							setRemainDays(remDays);
 							setAdviceTime(calcAdviceTime());
 						}
