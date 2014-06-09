@@ -1,21 +1,6 @@
 package com.herald.ezherald.exercise;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -25,6 +10,12 @@ import android.support.v4.app.Fragment;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 
 /**
@@ -165,7 +156,7 @@ public class RunTimes {
 	}
 	
 	/**
-	 * @param activity 调用者的Activity
+	 * @param context 调用者的Activity
 	 * 构造时会尝试从sharedPreference读取数据
 	 */
 	public RunTimes(Context context){
@@ -249,7 +240,6 @@ public class RunTimes {
 	 * @return 建议每周跑操时间,向上取整
 	 */
 	private int calcAdviceTime(){
-		//TODO calculate the advise time
 		if(times == DEFAULT_ADVICE_TIME)
 			return -1;
 		int remainWeeks = remainDays/5;
@@ -259,7 +249,7 @@ public class RunTimes {
 			advice = remainTimes/remainWeeks;
 			if( advice*remainWeeks <remainTimes)
 				advice++;
-		}else if(remainDays == 0){
+		}else if(remainDays != 0){
 			advice = remainTimes;
 		}else{
 			advice = 0;

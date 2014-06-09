@@ -61,13 +61,7 @@ public class FragmentC extends Fragment {
 			});
 			//update(user);
 			show();
-			/*
-			if (runTimes.isSet()) {
-				show();
-			} else {
-				
-			}
-			*/
+
 		}
 
 	}
