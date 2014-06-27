@@ -8,24 +8,30 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
+import com.herald.ezherald.academic.AcademicActivity;
+import com.herald.ezherald.account.AccountActivity;
+import com.herald.ezherald.activity.ActiActivity;
+import com.herald.ezherald.bookingOffice.bookingActivity;
+import com.herald.ezherald.curriculum.CurriculumActivity;
+import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
+import com.herald.ezherald.exercise.ExerciseActivity;
+import com.herald.ezherald.freshman.FreshmanActivity;
+import com.herald.ezherald.gpa.GPAActivity;
+import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.mainframe.MainMenuFragment;
-import com.herald.ezherald.mainframe.SecondMenuFragment;
+import com.herald.ezherald.radio.RadioActivity;
 import com.herald.ezherald.settingframe.SettingActivity;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
 import com.tendcloud.tenddata.TCAgent;
-import com.herald.ezherald.R;
 
 /**
  * 基本的框架，主要包含了左右侧的侧滑菜单，还有点击菜单项的操作
@@ -37,12 +43,14 @@ import com.herald.ezherald.R;
 public class BaseFrameActivity extends SlidingFragmentActivity implements View.OnClickListener {
 	//protected SlidingMenu menu;
     protected ResideMenu menu;
+    protected ResideMenuItem[] menuItems;
+
 	protected CanvasTransformer mTrans;
 	protected Fragment mContentFrag; // 中间呈现的内容
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
 	//protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
 	private long mExitTime;
-
+    private static final String KEY_SHOWED_UPDATE = "showedUpdate"; //此次运行已经显示过更新了
     //protected static final String DOMAIN = "http://herald.seu.edu.cn";
 	
 	// protected int mContentResId;
@@ -100,7 +108,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		t.replace(R.id.main_frame_menu, mMenuFrag); // 切换menu的Fragement
+		//t.replace(R.id.main_frame_menu, mMenuFrag); // 切换menu的Fragement
 		t.replace(R.id.empty_frame_content, mContentFrag); // 切换内容的Fragement
 		//t.replace(R.id.main_frame_second_menu, mSecondaryMenuFrag);// 切换2ndmenu的Fragement
 		t.commit();
@@ -110,7 +118,9 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
     private void initSlidingMenu(){
         menu = new ResideMenu(this);
         menu.setBackground(R.drawable.menu_background);
+        menu.setShadowVisible(false);
         menu.attachToActivity(this);
+
         int[] menuIcon = new int[]{
                 R.drawable.main_menu_ic_mainframe,
                 R.drawable.main_menu_ic_curriculum,
@@ -121,44 +131,15 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 R.drawable.main_menu_ic_academic,
                 R.drawable.main_menu_ic_freshman,
                 R.drawable.main_menu_ic_emptcls,
-                R.drawable.main_menu_ic_gpa,
         }; // 图标(icon)
         String[] menuName = getResources().getStringArray(R.array.main_menu_items);
-
+        menuItems = new ResideMenuItem[menuIcon.length];
         for(int i=0;i<menuIcon.length;++i) {
-            ResideMenuItem item = new ResideMenuItem(this,menuIcon[i],menuName[i]);
-            item.setOnClickListener(this);
-            menu.addMenuItem(item,ResideMenu.DIRECTION_LEFT);
+            menuItems[i] = new ResideMenuItem(this,menuIcon[i],menuName[i]);
+            menuItems[i].setOnClickListener(this);
+            menu.addMenuItem(menuItems[i],ResideMenu.DIRECTION_LEFT);
         }
-
     }
-//	private void initSlidingMenu() {
-//		/**
-//		 * 初始化侧滑菜单
-//		 */
-//		WindowManager wMng = getWindowManager();
-//		Display disp = wMng.getDefaultDisplay();
-//		int screenWidth = disp.getWidth();
-//		int shadowWidth = (int) (0.05 * screenWidth); // 菜单阴影遮罩宽度
-//		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
-//
-//		menu = getSlidingMenu();
-//		//menu.setMode(SlidingMenu.LEFT_RIGHT);
-//		menu.setMode(SlidingMenu.LEFT);
-//		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//		menu.setFadeDegree(0.35f);
-//
-//		menu.setShadowWidth(shadowWidth);
-//		menu.setShadowDrawable(R.drawable.shadow);
-//		menu.setBehindOffset(behindOffset);
-//
-//		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-//		menu.setBehindScrollScale(1.0f);
-//		menu.setBehindCanvasTransformer(mTrans);
-//		//menu.setSecondaryMenu(R.layout.main_frame_second_menu);
-//		//menu.setSecondaryShadowDrawable(R.drawable.shadowright);
-//
-//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -224,7 +205,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		builder.show();
 	}
 
-	public void KillMyself() {
+	public void killMyself() {
 		finish();
 	}
 
@@ -264,7 +245,78 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
     @Override
     public void onClick(View v) {
+        for(int i=0;i<menuItems.length;++i) {
+            if(v == menuItems[i]) {
+                runModel(i);
+                break;
+            }
+        }
+        menu.closeMenu();
+    }
 
+    private void runModel(int position) {
+        String menuTarget = "Unknown";
+        Intent intent = new Intent();
+        switch (position) {
+            case 0:
+                intent.setClass(this, AccountActivity.class);
+                menuTarget = "Account";
+                break;
+            case 1:
+                intent.setClass(this, MainActivity.class);
+                menuTarget = "MainActivity";
+                break;
+            case 2:
+                intent.setClass(this, CurriculumActivity.class);
+                menuTarget = "Curriculum";
+                break;
+            case 3:
+                intent.setClass(this, ActiActivity.class);
+                menuTarget = "Activity";
+                break;
+            case 4:
+                intent.setClass(this, LibraryActivity.class);
+                menuTarget = "Library";
+                break;
+            case 5:
+                intent.setClass(this, GPAActivity.class);
+                menuTarget = "GPA";
+                break;
+            case 6:
+                intent.setClass(this, ExerciseActivity.class);
+                menuTarget = "Exercise";
+                break;
+            case 7:
+                intent.setClass(this, AcademicActivity.class);
+                menuTarget = "Academic";
+                break;
+            case 8:
+                intent.setClass(this, FreshmanActivity.class);
+                menuTarget = "CampusGuide";
+                break;
+            case 9:
+                intent.setClass(this, EmptyClassroomActivity.class);
+                menuTarget = "EmptyClass";
+                break;
+
+            case 10:
+                intent.setClass(this, RadioActivity.class);
+                menuTarget = "Radio";
+                break;
+            case 11:
+                intent.setClass(this, bookingActivity.class);
+                menuTarget = "bookingOffice";
+                break;
+
+        }
+        TCAgent.onEvent(this, "主菜单点击", menuTarget);
+
+        if (intent != null) {
+            intent.putExtra(KEY_SHOWED_UPDATE, true);
+            startActivity(intent);
+            if(position != 0)
+                killMyself();
+        }
     }
 
     @Override

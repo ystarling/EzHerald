@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="main_menu_items">
-        <item >[帐户名]</item>
+        <!--<item >[帐户名]</item>-->
         <item > 主界面</item>
         <item >课表查询</item>
         <item >校园活动</item>

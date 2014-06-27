@@ -1154,6 +1154,7 @@ containing a value of this type.
         public static final int academic_shareto_renren=0x7f020076;
         public static final int academic_shareto_weibo=0x7f020077;
         public static final int account_text_frame=0x7f020078;
+        public static final int backgroundColor=0x7f0200de;
         public static final int btn_cab_done_default_heraldstyle=0x7f020079;
         public static final int btn_cab_done_focused_heraldstyle=0x7f02007a;
         public static final int btn_cab_done_heraldstyle=0x7f02007b;
