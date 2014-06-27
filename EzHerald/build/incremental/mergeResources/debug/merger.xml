@@ -2,6 +2,51 @@
 <merger xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" >
 
     <dataSet config="unspecified" >
+        <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res" >
+            <file
+                name="ic_launcher"
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="shadow"
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\drawable-hdpi\shadow.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\drawable-ldpi\ic_launcher.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="residemenu"
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\layout\residemenu.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="residemenu_item"
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\layout\residemenu_item.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\res\values\values.xml"
+                qualifiers="" >
+                <string name="app_name" >ResideMenu
+                </string>
+            </file>
+        </source>
+    </dataSet>
+    <dataSet config="unspecified" >
         <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\libViewFlow\unspecified\res" >
             <file
                 name="icon"
@@ -4815,6 +4860,11 @@ true
             <file
                 name="main_menu_ic_emptcls_selected"
                 path="D:\GitHub\Ezherald\EzHerald\res\drawable-hdpi\main_menu_ic_emptcls_selected.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="menu_background"
+                path="D:\GitHub\Ezherald\EzHerald\res\drawable-hdpi\menu_background.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file

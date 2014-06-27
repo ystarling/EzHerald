@@ -2,6 +2,9 @@
 <merger>
 
     <dataSet config="unspecified" >
+        <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\resideMenu\unspecified\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
         <source path="D:\GitHub\Ezherald\EzHerald\build\exploded-aar\Ezherald\libViewFlow\unspecified\assets" />
     </dataSet>
     <dataSet config="unspecified" >

@@ -51,6 +51,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.special.ResideMenu.ResideMenu;
 
 /*
  * @author 何博伟
@@ -66,7 +67,7 @@ public class MainActivity extends BaseFrameActivity {
 	Fragment mContentFrag;
 	Menu mActionMenu;
 	Handler mMoveHandler;
-	SlidingMenu mSlidingMenu;
+	ResideMenu mSlidingMenu;
 
 	public boolean needRefreshContent = false; // 是否需要刷新Content
 	public boolean isReceivingData = false; // 当前是否已经在更新Image

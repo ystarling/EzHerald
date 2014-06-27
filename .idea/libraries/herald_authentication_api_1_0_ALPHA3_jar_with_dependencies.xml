@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="herald-authentication-api-1.0.ALPHA3-jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/EzHerald/libs/herald-authentication-api-1.0.ALPHA3-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

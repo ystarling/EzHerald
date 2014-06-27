@@ -3,3 +3,6 @@ include ':EzHerald'
 include ':libABS'
 include ':libSlidingMenu'
 include ':libViewFlow'
+
+
+include ':resideMenu'
