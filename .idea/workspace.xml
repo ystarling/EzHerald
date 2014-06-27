@@ -25,18 +25,280 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.herald.ezherald" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b1a5303-6bcf-457f-8278-cadf60047bcc" name="Default" comment="">
+    <list default="true" id="2b1a5303-6bcf-457f-8278-cadf60047bcc" name="Default" comment="修复背景的黑色快">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Ezherald.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libViewFlow/libViewFlow.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resideMenu/resideMenu.iml" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\TalkingdataAnalytics-a5004cf8432f8edaea33ba7065dc15c255192c51.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\android-support-v4-b869d4750fb97aeb7a9b74e2c373c6e73b527fb7.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\classes-06fc2da9638ee0a15c5afe772e48f405ff035da9.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\classes-9787b7443cd85dc4a49b5f21628b9ec8fed11a7b.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\classes-b66f0646212cfd63a1ed7ae1aa7ac5374d706065.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\classes-b7a4b85be03ed721987cb9d74d193b8e5bf16ee0.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\classes-dd0f612ff0d8571955505abb273702187ff62e84.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\herald-authentication-api-1.0.ALPHA3-jar-with-dependencies-045162951dec128cc74535b9c47a8593aae874c4.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\herald-web-services-api-1.1-20130830.125040-41-afbf1bba39a7cc1d268e251fa8ff9bb821f25cdb.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\jersey-core-1.17.1-3786c905abf2e4a55f1c2aa77de21f1ed18d20f2.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\jsoup-1.7.2-41570999d2dc5fcfd1c7820bd56c75979648be07.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\nineoldandroids-library-2.4.0-fa6159ecf482c7ad4eb5e575d86f1b2fb4acd1d6.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\build\pre-dexed\debug\wink-common-1.3.0-f94481a99c3ef1d050111ef211ef5ad2ba997d48.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\GitHub\Ezherald\EzHerald\src\BaseResideMenu.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/pre-dexed/debug/classes-f0df3231936459acbbb709b700039f8333900a93.jar" afterPath="$PROJECT_DIR$/EzHerald/build/pre-dexed/debug/classes-f0df3231936459acbbb709b700039f8333900a93.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/classes.jar" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/classes.jar" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/classes.jar" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/classes.jar" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/classes.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/resideMenu/unspecified/classes.jar" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/resideMenu/unspecified/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/classes.jar" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/classes.jar" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/pre-dexed/debug/nineoldandroids-library-2.4.0-2dfc664cd1ff0b7e16d32cdbbbfa14d76ed09e3b.jar" afterPath="$PROJECT_DIR$/EzHerald/build/pre-dexed/debug/nineoldandroids-library-2.4.0-2dfc664cd1ff0b7e16d32cdbbbfa14d76ed09e3b.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/AndroidManifest.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/AndroidManifest.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/AndroidManifest.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/AndroidManifest.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/AndroidManifest.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/AndroidManifest.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java" afterPath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainMenuFragment.java" afterPath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/mainframe/MainMenuFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resideMenu/build/source/buildConfig/debug/com/special/ResideMenu/BuildConfig.java" afterPath="$PROJECT_DIR$/resideMenu/build/source/buildConfig/debug/com/special/ResideMenu/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resideMenu/build/source/buildConfig/release/com/special/ResideMenu/BuildConfig.java" afterPath="$PROJECT_DIR$/resideMenu/build/source/buildConfig/release/com/special/ResideMenu/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/EzHerald.iml" afterPath="$PROJECT_DIR$/EzHerald/EzHerald.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/source/r/debug/com/herald/ezherald/R.java" afterPath="$PROJECT_DIR$/EzHerald/build/source/r/debug/com/herald/ezherald/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/source/r/debug/com/jeremyfeinstein/slidingmenu/lib/R.java" afterPath="$PROJECT_DIR$/EzHerald/build/source/r/debug/com/jeremyfeinstein/slidingmenu/lib/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/source/r/debug/com/special/ResideMenu/R.java" afterPath="$PROJECT_DIR$/EzHerald/build/source/r/debug/com/special/ResideMenu/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenu.java" afterPath="$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/res/values/array.xml" afterPath="$PROJECT_DIR$/EzHerald/res/values/array.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/res/layout/gpa_activity_main.xml" afterPath="$PROJECT_DIR$/EzHerald/res/layout/gpa_activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/res/layout/library_fragment_main.xml" afterPath="$PROJECT_DIR$/EzHerald/res/layout/library_fragment_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/res/values/strings.xml" afterPath="$PROJECT_DIR$/EzHerald/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/res/values/styles.xml" afterPath="$PROJECT_DIR$/EzHerald/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_home.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_home.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_home.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab_bar_view.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab_bar_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab_bar_view.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab_bar_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab_bar_view.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_tab_bar_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_title_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_title_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_title_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_title_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_title_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_bar_title_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_item_layout.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_layout.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_layout.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_layout.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_menu_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_bar.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_bar.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_bar.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-large/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-large/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-large/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-large/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-large/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-large/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__activated_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view_list_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view_list_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view_list_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__activity_chooser_view_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__btn_cab_done_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_clear_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__ic_menu_moreoverflow_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__item_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_checkbox.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_checkbox.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_checkbox.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_checkbox.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_checkbox.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_checkbox.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_icon.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_icon.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_icon.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_icon.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_icon.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_icon.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_radio.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_radio.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_radio.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_radio.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_radio.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__list_menu_item_radio.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_background_transition_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__list_selector_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__popup_menu_item_layout.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__popup_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__popup_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__popup_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__popup_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__popup_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_disable_only_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/color/abs__primary_text_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_horizontal_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable-v11/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable-v11/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable-v11/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable-v11/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable-v11/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable-v11/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-xlarge/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple_overlay_action_mode.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple_overlay_action_mode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple_overlay_action_mode.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple_overlay_action_mode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple_overlay_action_mode.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__screen_simple_overlay_action_mode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_dropdown_item_icons_2line.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_dropdown_item_icons_2line.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_dropdown_item_icons_2line.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_dropdown_item_icons_2line.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_dropdown_item_icons_2line.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_dropdown_item_icons_2line.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__search_dropdown_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_view.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_view.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_view.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__search_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__simple_dropdown_hint.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__simple_dropdown_hint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__simple_dropdown_hint.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__simple_dropdown_hint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__simple_dropdown_hint.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/abs__simple_dropdown_hint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__spinner_ab_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__tab_indicator_ab_holo.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__tab_indicator_ab_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__tab_indicator_ab_holo.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__tab_indicator_ab_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__tab_indicator_ab_holo.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__tab_indicator_ab_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_dark.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_dark.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_dark.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_light.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_light.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_light.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/drawable/abs__textfield_searchview_right_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/android_support_v4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/android_support_v4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libABS/libABS.iml" afterPath="$PROJECT_DIR$/libABS/libABS.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/libDragNDropList_.iml" afterPath="$PROJECT_DIR$/libDragNDropList_/libDragNDropList_.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/libSlidingMenu.iml" afterPath="$PROJECT_DIR$/libSlidingMenu/libSlidingMenu.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/res/layout/main.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/nineoldandroids_library_2_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/nineoldandroids_library_2_4_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/resideMenu/unspecified/res/layout/residemenu.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/resideMenu/unspecified/res/layout/residemenu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resideMenu/src/main/res/layout/residemenu.xml" afterPath="$PROJECT_DIR$/resideMenu/src/main/res/layout/residemenu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/layout-v14/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/layout/slidingmenumain.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/layout/slidingmenumain.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-land/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-land/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v11/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v11/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w360dp/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w360dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w480dp/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w480dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w500dp/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w500dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w600dp/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-xlarge/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-xlarge/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/res/values/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libDragNDropList_/unspecified/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/values/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libSlidingMenu/unspecified/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/res/values/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/libViewFlow/unspecified/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/resideMenu/unspecified/res/values/values.xml" afterPath="$PROJECT_DIR$/EzHerald/build/exploded-aar/Ezherald/resideMenu/unspecified/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-land/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-land/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v11/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v11/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w360dp/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w360dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w480dp/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w480dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w500dp/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w500dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w600dp/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-xlarge/values.xml" afterPath="$PROJECT_DIR$/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values-xlarge/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-land/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-land/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-land-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-large-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-sw600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v11/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v11/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w360dp/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w360dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w480dp/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w480dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w500dp/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w500dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w600dp/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-w600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-xlarge/values.xml" afterPath="$PROJECT_DIR$/libSlidingMenu/build/exploded-aar/Ezherald/libABS/unspecified/res/values-xlarge/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ezherald.iws" />
@@ -108,80 +370,28 @@
       <file leaf-file-name="BaseFrameActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2414" max-vertical-offset="6042">
-              <caret line="142" column="9" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/res/values/styles.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="148" max-vertical-offset="722">
-              <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="5415">
+              <caret line="120" column="18" selection-start-line="120" selection-start-column="18" selection-end-line="120" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResideMenu.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ResideMenu.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2459" max-vertical-offset="10583">
-              <caret line="145" column="6" selection-start-line="145" selection-start-column="6" selection-end-line="145" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.47408828" vertical-offset="2660" max-vertical-offset="10640">
+              <caret line="175" column="10" selection-start-line="175" selection-start-column="10" selection-end-line="175" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="View.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://D:/green/adt-bundle-windows-x86_64-20130219/sdk/sources/android-18/android/view/View.java">
+      <file leaf-file-name="residemenu.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resideMenu/src/main/res/layout/residemenu.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="11740" max-vertical-offset="348498">
-              <caret line="727" column="37" selection-start-line="727" selection-start-column="28" selection-end-line="727" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryFragmentMain.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragmentMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="836">
-              <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryFragmentTabSelect.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragmentTabSelect.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
-              <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="10336">
-              <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="library_fragment_main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/res/layout/library_fragment_main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.9230769" vertical-offset="0" max-vertical-offset="1140">
-              <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+            <state vertical-scroll-proportion="-8.769231" vertical-offset="342" max-vertical-offset="1197">
+              <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -190,21 +400,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="View.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://D:/green/adt-bundle-windows-x86_64-20130219/sdk/sources/android-18/android/view/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41060904" vertical-offset="0" max-vertical-offset="1121">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="13965" max-vertical-offset="357162">
+              <caret line="735" column="0" selection-start-line="735" selection-start-column="0" selection-end-line="735" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LibraryFragmentMine.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragmentMine.java">
+      <file leaf-file-name="settings.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="7600">
-              <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="266">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -3070,7 +3280,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="11200426995238" />
+        <entry key="$PROJECT_DIR$" value="11200442048647" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3479,7 +3689,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/libABS/build.gradle" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/exercise/FragmentB.java" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragment.java" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/wifi/LinkDialogActivity.java" />
@@ -3527,9 +3736,10 @@
         <option value="$PROJECT_DIR$/EzHerald/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/EzHerald/res/drawable/background.xml" />
         <option value="$PROJECT_DIR$/EzHerald/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenu.java" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java" />
         <option value="$PROJECT_DIR$/EzHerald/res/layout/library_fragment_main.xml" />
+        <option value="$PROJECT_DIR$/resideMenu/src/main/res/layout/residemenu.xml" />
+        <option value="$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenu.java" />
       </list>
     </option>
   </component>
@@ -3653,7 +3863,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -4047,9 +4257,6 @@
         <item index="0" class="java.lang.String" itemvalue="Groovy.build" />
       </list>
     </recent_temporary>
-    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-    </configuration>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -4074,7 +4281,11 @@
       <created>1402312197382</created>
       <updated>1402312197382</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="修复背景的黑色快">
+      <created>1403868720442</created>
+      <updated>1403868720442</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -4098,7 +4309,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -4107,9 +4318,8 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21072507" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327787" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5607321" sideWeight="0.63141996" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14143094" sideWeight="0.78625375" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06655574" sideWeight="0.16767372" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.06655574" sideWeight="0.16767372" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22583081" sideWeight="0.50087875" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.16614906" order="4" side_tool="true" content_ui="tabs" />
@@ -4122,10 +4332,14 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2839879" sideWeight="0.8352745" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3602719" sideWeight="0.8352745" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327787" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294509" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5607321" sideWeight="0.63141996" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55740434" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294509" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -4175,7 +4389,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="修复小bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复小bug" />
+    <MESSAGE value="修复背景的黑色快" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复背景的黑色快" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -4211,36 +4426,15 @@
           <properties />
           <option name="timeStamp" value="41" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java</url>
-          <line>122</line>
-          <properties />
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java</url>
-          <line>123</line>
-          <properties />
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
       </breakpoints>
       <option name="time" value="47" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/libViewFlow/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="760">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resideMenu/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23170732" vertical-offset="0" max-vertical-offset="574">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4248,7 +4442,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275262" vertical-offset="1595" max-vertical-offset="2660">
           <caret line="102" column="23" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4256,7 +4449,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5177" max-vertical-offset="5738">
           <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4264,7 +4456,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4369" max-vertical-offset="6004">
           <caret line="266" column="31" selection-start-line="266" selection-start-column="31" selection-end-line="266" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4272,7 +4463,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="574">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4284,27 +4474,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libViewFlow/libViewFlow.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="490" max-vertical-offset="1482">
-          <caret line="44" column="60" selection-start-line="42" selection-start-column="6" selection-end-line="44" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resideMenu/resideMenu.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="494" max-vertical-offset="1577">
-          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenuItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="267" max-vertical-offset="1330">
           <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4312,7 +4485,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35384616" vertical-offset="13253" max-vertical-offset="14079">
           <caret line="747" column="38" selection-start-line="747" selection-start-column="38" selection-end-line="747" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4320,7 +4492,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27032968" vertical-offset="8237" max-vertical-offset="44745">
           <caret line="482" column="47" selection-start-line="482" selection-start-column="28" selection-end-line="482" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4328,7 +4499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="580" max-vertical-offset="9747">
           <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4336,7 +4506,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15873016" vertical-offset="138" max-vertical-offset="93879">
           <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4344,7 +4513,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36541888" vertical-offset="5552" max-vertical-offset="9044">
           <caret line="349" column="53" selection-start-line="349" selection-start-column="53" selection-end-line="349" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4352,7 +4520,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275262" vertical-offset="2621" max-vertical-offset="6536">
           <caret line="163" column="13" selection-start-line="163" selection-start-column="13" selection-end-line="163" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4360,9 +4527,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275262" vertical-offset="2260" max-vertical-offset="12939">
           <caret line="182" column="22" selection-start-line="182" selection-start-column="22" selection-end-line="182" selection-end-column="22" />
-          <folding>
-            <element signature="e#7019#7095#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4378,7 +4542,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.4615384" vertical-offset="0" max-vertical-offset="266">
           <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4397,7 +4560,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="535">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4408,7 +4570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1216">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4419,7 +4580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.3846154" vertical-offset="0" max-vertical-offset="228">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4430,7 +4590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3496">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4441,7 +4600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="535">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4452,7 +4610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="548">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4463,7 +4620,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.9230769" vertical-offset="0" max-vertical-offset="893">
           <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4474,7 +4630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="247">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4485,7 +4640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="950">
           <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4493,7 +4647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1634">
           <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4501,7 +4654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="574">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4509,7 +4661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="598" max-vertical-offset="1178">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4517,7 +4668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4525,7 +4675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="574">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4533,7 +4682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4541,7 +4689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1824">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4549,7 +4696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1577">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4557,7 +4703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.692307" vertical-offset="0" max-vertical-offset="1159">
           <caret line="16" column="46" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4568,7 +4713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
           <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4584,41 +4728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="21235" max-vertical-offset="22192">
           <caret line="1202" column="50" selection-start-line="1202" selection-start-column="50" selection-end-line="1202" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2459" max-vertical-offset="10583">
-          <caret line="145" column="6" selection-start-line="145" selection-start-column="6" selection-end-line="145" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2414" max-vertical-offset="6042">
-          <caret line="142" column="9" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EzHerald/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="148" max-vertical-offset="722">
-          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/green/adt-bundle-windows-x86_64-20130219/sdk/sources/android-18/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11740" max-vertical-offset="348498">
-          <caret line="727" column="37" selection-start-line="727" selection-start-column="28" selection-end-line="727" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4626,38 +4735,82 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="7600">
           <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragmentMain.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="836">
-          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragmentTabSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
-          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="10336">
-          <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="361" max-vertical-offset="1121">
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/res/layout/library_fragment_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9230769" vertical-offset="0" max-vertical-offset="1140">
+        <state vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="1140">
           <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6309963" vertical-offset="1843" max-vertical-offset="10336">
+          <caret line="119" column="53" selection-start-line="119" selection-start-column="53" selection-end-line="119" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragmentTabSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10990991" vertical-offset="338" max-vertical-offset="1007">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/library/LibraryFragmentMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6576577" vertical-offset="129" max-vertical-offset="836">
+          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="266">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/bookingOffice/BookingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1402214" vertical-offset="0" max-vertical-offset="646">
+          <caret line="9" column="41" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76292336" vertical-offset="161" max-vertical-offset="722">
+          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/green/adt-bundle-windows-x86_64-20130219/sdk/sources/android-18/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="11859" max-vertical-offset="348498">
+          <caret line="735" column="0" selection-start-line="735" selection-start-column="0" selection-end-line="735" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resideMenu/src/main/res/layout/residemenu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.769231" vertical-offset="342" max-vertical-offset="1197">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -4665,10 +4818,18 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/BaseFrameActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41060904" vertical-offset="0" max-vertical-offset="1121">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1402" max-vertical-offset="5567">
+          <caret line="120" column="18" selection-start-line="120" selection-start-column="18" selection-end-line="120" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resideMenu/src/main/java/com/special/ResideMenu/ResideMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47408828" vertical-offset="2660" max-vertical-offset="10640">
+          <caret line="175" column="10" selection-start-line="175" selection-start-column="10" selection-end-line="175" selection-end-column="10" />
           <folding />
         </state>
       </provider>

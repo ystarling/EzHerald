@@ -21,12 +21,14 @@
             android:id="@+id/sv_left_menu"
             android:scrollbars="none"
             android:paddingLeft="30dp"
+
             android:layout_width="150dp"
             android:layout_height="fill_parent"
             android:visibility="gone">
         <LinearLayout
                 android:id="@+id/layout_left_menu"
                 android:orientation="vertical"
+                android:paddingTop="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

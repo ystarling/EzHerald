@@ -17,7 +17,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.activity.ActiActivity;
-import com.herald.ezherald.bookingOffice.bookingActivity;
+import com.herald.ezherald.bookingOffice.BookingActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
@@ -304,7 +304,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 menuTarget = "Radio";
                 break;
             case 11:
-                intent.setClass(this, bookingActivity.class);
+                intent.setClass(this, BookingActivity.class);
                 menuTarget = "bookingOffice";
                 break;
 

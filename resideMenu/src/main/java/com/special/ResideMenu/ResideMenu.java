@@ -141,7 +141,8 @@ public class ResideMenu extends FrameLayout{
      */
     public void setShadowVisible(boolean isVisible){
         if (isVisible)
-            imageViewShadow.setImageResource(R.drawable.shadow);
+            //imageViewShadow.setImageResource(R.drawable.shadow);
+            imageViewShadow.setVisibility(VISIBLE);
         else
             imageViewShadow.setVisibility(INVISIBLE);
     }
@@ -171,6 +172,8 @@ public class ResideMenu extends FrameLayout{
             this.rightMenuItems.add(menuItem);
             layoutRightMenu.addView(menuItem);
         }
+
+        //scrollViewLeftMenu.set
     }
 
     /**
