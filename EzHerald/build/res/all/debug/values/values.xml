@@ -25,7 +25,8 @@
         <item>我关注的社团</item>
     </string-array>
     <string-array name="main_menu_items">
-        <item>[帐户名]</item>
+
+        <!-- <item >[帐户名]</item> -->
         <item> 主界面</item>
         <item>课表查询</item>
         <item>校园活动</item>
@@ -691,6 +692,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="list_padding">10dp</dimen>
     <dimen name="main_menu_shadow_width">5dp</dimen>
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values/styles.xml -->
+    <eat-comment />
+
+    <drawable name="backgroundColor">#f2f2f2</drawable>
     <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 

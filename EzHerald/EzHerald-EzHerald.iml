@@ -73,9 +73,9 @@
     <orderEntry type="library" exported="" name="TalkingdataAnalytics" level="project" />
     <orderEntry type="library" exported="" name="jsoup-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="jersey-core-1.17.1" level="project" />
-    <orderEntry type="module" module-name="libViewFlow" exported="" />
-    <orderEntry type="module" module-name="ResideMenu" exported="" />
+    <orderEntry type="library" exported="" name="libViewFlow" level="project" />
     <orderEntry type="module" module-name="libABS" exported="" />
+    <orderEntry type="module" module-name="resideMenu" exported="" />
     <orderEntry type="module" module-name="libSlidingMenu" exported="" />
     <orderEntry type="module" module-name="libDragNDropList_" exported="" />
   </component>

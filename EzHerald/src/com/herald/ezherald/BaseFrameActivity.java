@@ -17,7 +17,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.activity.ActiActivity;
-import com.herald.ezherald.bookingOffice.bookingActivity;
+import com.herald.ezherald.bookingOffice.BookingActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
@@ -44,6 +44,9 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 	//protected SlidingMenu menu;
     protected ResideMenu menu;
     protected ResideMenuItem[] menuItems;
+    protected ResideMenu setting;
+    protected ResideMenuItem[] settingItems;
+
 
 	protected CanvasTransformer mTrans;
 	protected Fragment mContentFrag; // 中间呈现的内容
@@ -132,6 +135,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 R.drawable.main_menu_ic_freshman,
                 R.drawable.main_menu_ic_emptcls,
         }; // 图标(icon)
+
         String[] menuName = getResources().getStringArray(R.array.main_menu_items);
         menuItems = new ResideMenuItem[menuIcon.length];
         for(int i=0;i<menuIcon.length;++i) {
@@ -139,6 +143,24 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
             menuItems[i].setOnClickListener(this);
             menu.addMenuItem(menuItems[i],ResideMenu.DIRECTION_LEFT);
         }
+
+        int[] settingIcon = new int[]{
+                R.drawable.main_menu_ic_mainframe,
+                R.drawable.main_menu_ic_curriculum,
+                R.drawable.main_menu_ic_curriculum
+        };
+        String[] settingName = getResources().getStringArray(R.array.second_menu_items);
+        settingItems = new ResideMenuItem[settingName.length];
+        for (int i=0;i<settingName.length;i++){
+            settingItems[i] = new ResideMenuItem(this,settingIcon[i],settingName[i]);
+            settingItems[i].setOnClickListener(this);
+            menu.addMenuItem(settingItems[i],ResideMenu.DIRECTION_RIGHT);
+        }
+
+
+
+
+
     }
 
 	@Override
@@ -247,14 +269,54 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
     public void onClick(View v) {
         for(int i=0;i<menuItems.length;++i) {
             if(v == menuItems[i]) {
-                runModel(i);
+                runLeftMenuModel(i);
+                break;
+            }
+        }
+        for(int i=0;i<settingItems.length;++i){
+            if(v==settingItems[i]){
+                runRightMenuModel(i);
                 break;
             }
         }
         menu.closeMenu();
     }
 
-    private void runModel(int position) {
+    private void runRightMenuModel(int position){
+        String menuTarget = "Unknown";
+        Intent intent = new Intent();
+        switch (position) {
+            case 0:
+                //intent.setClass(this, AccountActivity.class);
+               // menuTarget = "Account";
+               intent.setClass(this, AccountActivity.class);
+                menuTarget = "Accouont";
+                break;
+            case 1:
+                //intent.setClass(this, AccountActivity.class);
+                // menuTarget = "Account";
+                intent.setClass(this, SettingActivity.class);
+                menuTarget = "Setting";
+                break;
+            case 2:
+                //intent.setClass(this, MainActivity.class);
+               // menuTarget = "MainActivity";
+                intent.setClass(this, AccountActivity.class);
+                menuTarget = "Accouont";
+                break;
+
+        }
+        TCAgent.onEvent(this, "主菜单点击", menuTarget);
+
+        if (intent != null) {
+            intent.putExtra(KEY_SHOWED_UPDATE, true);
+            startActivity(intent);
+            if(position != 0)
+                killMyself();
+        }
+    }
+
+    private void runLeftMenuModel(int position) {
         String menuTarget = "Unknown";
         Intent intent = new Intent();
         switch (position) {
@@ -304,7 +366,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 menuTarget = "Radio";
                 break;
             case 11:
-                intent.setClass(this, bookingActivity.class);
+                intent.setClass(this, BookingActivity.class);
                 menuTarget = "bookingOffice";
                 break;
 

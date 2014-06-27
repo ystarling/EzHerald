@@ -2,54 +2,54 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\GitHub\Ezherald\resideMenu\src\main\res" >
+        <source path="F:\android\EzHerald\ResideMenu\src\main\res" >
             <file
                 name="ic_launcher"
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\drawable-hdpi\ic_launcher.png"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\drawable-hdpi\ic_launcher.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="shadow"
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\drawable-hdpi\shadow.9.png"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\drawable-hdpi\shadow.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\drawable-ldpi\ic_launcher.png"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\drawable-ldpi\ic_launcher.png"
                 qualifiers="ldpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\drawable-mdpi\ic_launcher.png"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\drawable-mdpi\ic_launcher.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\drawable-xhdpi\ic_launcher.png"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\drawable-xhdpi\ic_launcher.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="residemenu"
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\layout\residemenu.xml"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\layout\residemenu.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="residemenu_item"
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\layout\residemenu_item.xml"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\layout\residemenu_item.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                path="D:\GitHub\Ezherald\resideMenu\src\main\res\values\strings.xml"
+                path="F:\android\EzHerald\ResideMenu\src\main\res\values\strings.xml"
                 qualifiers="" >
                 <string name="app_name" >ResideMenu
                 </string>
             </file>
         </source>
-        <source path="D:\GitHub\Ezherald\resideMenu\build\res\rs\release" />
-        <source path="D:\GitHub\Ezherald\resideMenu\build\res\generated\release" />
+        <source path="F:\android\EzHerald\ResideMenu\build\res\rs\release" />
+        <source path="F:\android\EzHerald\ResideMenu\build\res\generated\release" />
     </dataSet>
     <dataSet config="release" >
-        <source path="D:\GitHub\Ezherald\resideMenu\src\release\res" />
+        <source path="F:\android\EzHerald\ResideMenu\src\release\res" />
     </dataSet>
 
 </merger>
