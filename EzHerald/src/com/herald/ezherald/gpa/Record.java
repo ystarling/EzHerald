@@ -2,6 +2,8 @@ package com.herald.ezherald.gpa;
 
 import android.util.Log;
 
+import org.json.JSONObject;
+
 /**
  * @author xie
  * 绩点各项数据
@@ -9,7 +11,7 @@ import android.util.Log;
 public class Record {
 	private String  name;//课程名称
 	private String  score;//成绩 有时候可能不是数字
-	private float   credit;//学分
+	private double   credit;//学分
 	private String  semester;//学期
 	private String  scoreType;//成绩性质（首修/重修/...)
 	private String  extra;//选修信息（人文/艺术/自然科学/)
@@ -25,10 +27,23 @@ public class Record {
 		this.extra = extra;
 		this.isSelected = isSelected;
 	}
-	public Record() {
-		// TODO Auto-generated constructor stub
-	}
-	public float getPoint(){//由成绩计算绩点
+
+    public Record(JSONObject json) {
+        try{
+            setCredit(json.getDouble("credit"));
+            setExtra(json.getString("extra"));
+            setName(json.getString("name"));
+            setScore(json.getString("score"));
+            setScoreType(json.getString("score_type"));
+            setSelected(false);
+            setSemester(json.getString("semester"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public float getPoint(){//由成绩计算绩点
 		float point=0;
 		try{
 			float RealScore = Float.parseFloat(score);
@@ -79,10 +94,10 @@ public class Record {
 	public void setScore(String score) {
 		this.score = score;
 	}
-	public float getCredit() {
+	public double getCredit() {
 		return credit;
 	}
-	public void setCredit(float credit) {
+	public void setCredit(double credit) {
 		this.credit = credit;
 	}
 	public String getSemester() {

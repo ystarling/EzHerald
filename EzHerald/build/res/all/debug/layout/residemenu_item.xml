@@ -21,4 +21,4 @@
             android:layout_marginLeft="10dp"
             android:id="@+id/tv_title"/>
 
-</LinearLayout><!-- From: file:/F:/android/EzHerald/ResideMenu/src/main/res/layout/residemenu_item.xml --><!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/ResideMenu/unspecified/res/layout/residemenu_item.xml -->
+</LinearLayout><!-- From: file:/D:/GitHub/Ezherald/resideMenu/src/main/res/layout/residemenu_item.xml --><!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/resideMenu/unspecified/res/layout/residemenu_item.xml -->

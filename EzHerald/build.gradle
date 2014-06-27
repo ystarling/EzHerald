@@ -10,7 +10,7 @@ dependencies {
     compile project(':libABS')
     compile project(':libSlidingMenu')
     compile project(':libViewFlow')
-    compile project(':ResideMenu')
+    compile project(':resideMenu')
 }
 
 android {

@@ -35,10 +35,7 @@ public class GPAActivity extends BaseFrameActivity {
 			content = new FailFragment();
 			super.SetBaseFrameActivity(content);
 		}else{
-			//if(content == null ) { 
-				content  = new  GpaFragment();
-			//}
-			
+			content  = new  GpaFragment();
 			SetBaseFrameActivity(content);
 		}
 		super.onCreate(savedInstanceState);
@@ -73,11 +70,8 @@ public class GPAActivity extends BaseFrameActivity {
 			mContentFrag = new FailFragment();
 			super.SetBaseFrameActivity(mContentFrag);
 		}else{
-			//if(content == null) {
-
-				content = new GpaFragment();
-			//}
-			SetBaseFrameActivity(content);
+			content = new GpaFragment();
+			super.SetBaseFrameActivity(content);
 			InitBaseFrame();
 		}
 		super.onResume();

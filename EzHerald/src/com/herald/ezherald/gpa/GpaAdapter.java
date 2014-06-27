@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.http.client.HttpClient;
 
 import com.herald.ezherald.account.UserAccount;
 
@@ -25,20 +24,16 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	private Map<String,ArrayList<Record>> semester;
 	private List<String> semesters;
 	private Context context;
-	private ProgressDialog progress;//处理数据的进度条
-	private ProgressDialog progressDialog;//更新数据的进度条
+	private ProgressDialog progress;
 	private UserAccount user;
-	
- 	public GpaAdapter(Context context) {
+
+ 	public GpaAdapter(Context context,ProgressDialog progress, UserAccount user) {
 		this.context = context;
- 		update(-1,null);//TODO 
-	}
- 	public GpaAdapter(Context context,ProgressDialog progressDialog, UserAccount user) {
-		this.context = context;
- 		update(-1,null);//TODO 
- 		this.progressDialog = progressDialog;
+ 		this.progress = progress;
  		this.user = user;
-	} 
+        this.gpaInfo = new GpaInfo(context,this);
+        organizeData();
+	}
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
@@ -94,9 +89,9 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public long getGroupId(int roupPosition) {
+	public long getGroupId(int groupPosition) {
 		// TODO Auto-generated method stub
-		return roupPosition; 
+		return groupPosition;
 	} 
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded, View coverView, ViewGroup parent) {
@@ -121,32 +116,30 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public void update(int vercode,HttpClient client){
-		if(gpaInfo == null || vercode == -1|| client == null){//初始化的调用
-			gpaInfo = new GpaInfo(context,this);
-		}else{
-			gpaInfo.update(vercode,client,user);
-			gpaInfo.save();
-		}
-		//初始化要用
-		semester  = new HashMap<String,ArrayList<Record>>();//学期和对应成绩list的映射表
-		semesters = new ArrayList<String>(); //所有的学期信息
-		for(Record r: gpaInfo.getRecords()){//将每一项根据学期加入到map之中
-			if(semester.containsKey(r.getSemester())) {
-				ArrayList<Record> list = semester.get(r.getSemester());
-				list.add(r);
-			} else {
-				ArrayList<Record> list = new ArrayList<Record>();
-				list.add(r);
-				semesters.add(r.getSemester());//更新学期信息
-				semester.put(r.getSemester(),list);
-			}
-		}
-		Collections.sort(semesters);
-		
-		notifyDataSetChanged();
-		
-	}
+
+    public void update(){
+        gpaInfo.update(user, progress);
+    }
+
+    public void organizeData(){
+        semester  = new HashMap<String,ArrayList<Record>>();//学期和对应成绩list的映射表
+        semesters = new ArrayList<String>(); //所有的学期信息
+        List<Record> records = gpaInfo.getRecords();
+        if( records != null) {
+            for(Record r: gpaInfo.getRecords()){//将每一项根据学期加入到map之中
+                if(semester.containsKey(r.getSemester())) {
+                    ArrayList<Record> list = semester.get(r.getSemester());
+                    list.add(r);
+                } else {
+                    ArrayList<Record> list = new ArrayList<Record>();
+                    list.add(r);
+                    semesters.add(r.getSemester());//更新学期信息
+                    semester.put(r.getSemester(),list);
+                }
+            }
+            Collections.sort(semesters);
+        }
+    }
 
 	public GpaInfo getGpaInfo() {
 		return gpaInfo;
@@ -158,56 +151,21 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 		notifyDataSetChanged();//更新显示
 	}
 	public void updateFinished(boolean isSuccess){
+        progress.cancel();
+
 		if(isSuccess){
 			Toast.makeText(context, "更新成功", Toast.LENGTH_SHORT).show();
 		}else{
 			Toast.makeText(context, "更新失败，检查网络", Toast.LENGTH_SHORT).show();
 		}
-		progress.cancel();
-		semester  = new HashMap<String,ArrayList<Record>>();//学期和对应成绩list的映射表
-		semesters = new ArrayList<String>(); //所有的学期信息
-		for(Record r: gpaInfo.getRecords()){//将每一项根据学期加入到map之中
-			if(semester.containsKey(r.getSemester())) {
-				ArrayList<Record> list = semester.get(r.getSemester());
-				list.add(r);
-			} else {
-				ArrayList<Record> list = new ArrayList<Record>();
-				list.add(r);
-				semesters.add(r.getSemester());//更新学期信息
-				semester.put(r.getSemester(),list);
-			}
-		}
-		Collections.sort(semesters);
+
+		organizeData();
 		selectAll();
-		notifyDataSetChanged();
-		
-	}
-	public void onLoadFinished(){
-		Toast.makeText(context, "获取数据完成", Toast.LENGTH_SHORT).show();
-		if(progressDialog!=null){
-			progressDialog.cancel();
-		}
 	}
 
-	public void onDealing(int i, int count) {
-		// TODO Auto-generated method stub
-		if(progress == null){//init
-			progress = new ProgressDialog(context);
-			progress.setTitle("正在分析");
-			progress.setIndeterminate(false);//进度条而不是圈圈
-			progress.setMax(count);
-			progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			progress.setCancelable(false);
-			progress.setProgress(0);
-			progress.show();
-		}else{
-			progress.setProgress(i);
-		}
-		
-		
-	}
+
+
 	public void selectAll() {
-		// TODO Auto-generated method stub
 		gpaInfo.selectAll();
 		notifyDataSetChanged();
 	}

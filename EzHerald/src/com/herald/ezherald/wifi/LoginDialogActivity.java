@@ -94,7 +94,6 @@ public class LoginDialogActivity extends Activity {
 				 * {"error":"\u8ba4\u8bc1\u5931\u8d25, \u5931\u8d25\u53ef\u80fd\u539f\u56e0\uff1a1\u3001\u7528\u6237\u540d\u5bc6\u7801\u9519\u8bef\uff1b2\u3001\u65b0\u589e\u7528\u6237\u672a\u4fee\u6539\u521d\u59cb\u5316\u5bc6\u7801\uff0c\u8bf7\u767b\u5f55\u6821\u56ed\u4fe1\u606f\u95e8\u6237\u4fee\u6539\u521d\u59cb\u5bc6\u7801\u3002"}
 				 * {"success":"\u8ba4\u8bc1\u6210\u529f","login_username":"213xxxxxx","login_ip":"xxx.xxx.xxx.xxx","login_location":"\u672a\u77e5\u4f4d\u7f6e","login_time":0,"login_url":null}
 				 */
-                //ProgressBar progress = new ProgressBar(context);
                 final ProgressDialog progress = new ProgressDialog(context);
                 progress.setTitle("正在登录");
                 progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -152,8 +151,8 @@ public class LoginDialogActivity extends Activity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
                 dialog.dismiss();
+                LoginDialogActivity.this.finish();
             }
 
         });

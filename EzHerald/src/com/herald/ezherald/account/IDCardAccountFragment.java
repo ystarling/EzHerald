@@ -257,7 +257,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 	};
 	// 新的登陆，服务器挂了，改用105直接验证
 	private Boolean webAuth(String username,String password) {
-		final String URL = "http://121.248.63.105/authentication/";
+		final String URL = "http://herald.seu.edu.cn/authentication/";
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(URL);
 		List<NameValuePair> param = new ArrayList<NameValuePair>();

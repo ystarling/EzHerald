@@ -16,10 +16,10 @@ Moved Files:
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => ResideMenu\src\main\AndroidManifest.xml
-* libs\nineoldandroids-library-2.4.0.jar => ResideMenu\libs\nineoldandroids-library-2.4.0.jar
-* res\ => ResideMenu\src\main\res\
-* src\ => ResideMenu\src\main\java\
+* AndroidManifest.xml => resideMenu\src\main\AndroidManifest.xml
+* libs\nineoldandroids-library-2.4.0.jar => resideMenu\libs\nineoldandroids-library-2.4.0.jar
+* res\ => resideMenu\src\main\res\
+* src\ => resideMenu\src\main\java\
 
 Next Steps:
 -----------

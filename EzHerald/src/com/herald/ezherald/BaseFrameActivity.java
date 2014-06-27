@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import com.herald.ezherald.settingframe.SettingActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.special.ResideMenu.ResideMenu;
+import com.special.ResideMenu.ResideMenuItem;
 import com.tendcloud.tenddata.TCAgent;
 import com.herald.ezherald.R;
 
@@ -30,14 +34,16 @@ import com.herald.ezherald.R;
  * @updated 20130630
  * 
  */
-public class BaseFrameActivity extends SlidingFragmentActivity {
-	protected SlidingMenu menu;
+public class BaseFrameActivity extends SlidingFragmentActivity implements View.OnClickListener {
+	//protected SlidingMenu menu;
+    protected ResideMenu menu;
 	protected CanvasTransformer mTrans;
 	protected Fragment mContentFrag; // 中间呈现的内容
 	protected Fragment mMenuFrag; // 左侧侧滑菜单
 	//protected Fragment mSecondaryMenuFrag; // 右侧侧滑菜单
 	private long mExitTime;
-	
+
+    //protected static final String DOMAIN = "http://herald.seu.edu.cn";
 	
 	// protected int mContentResId;
 
@@ -90,7 +96,6 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		initSlidingMenu(); // 初始化菜单
 
 		mMenuFrag = new MainMenuFragment();
-        //mMenuFrag = new SecondMenuFragment();
 		//mSecondaryMenuFrag = new SecondMenuFragment();
 
 		FragmentTransaction t = this.getSupportFragmentManager()
@@ -102,35 +107,58 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
+    private void initSlidingMenu(){
+        menu = new ResideMenu(this);
+        menu.setBackground(R.drawable.menu_background);
+        menu.attachToActivity(this);
+        int[] menuIcon = new int[]{
+                R.drawable.main_menu_ic_mainframe,
+                R.drawable.main_menu_ic_curriculum,
+                R.drawable.main_menu_ic_activity,
+                R.drawable.main_menu_ic_library,
+                R.drawable.main_menu_ic_gpa,
+                R.drawable.main_menu_ic_exercise,
+                R.drawable.main_menu_ic_academic,
+                R.drawable.main_menu_ic_freshman,
+                R.drawable.main_menu_ic_emptcls,
+                R.drawable.main_menu_ic_gpa,
+        }; // 图标(icon)
+        String[] menuName = getResources().getStringArray(R.array.main_menu_items);
 
-	private void initSlidingMenu() {
-		/**
-		 * 初始化侧滑菜单
-		 */
-		WindowManager wMng = getWindowManager();
-		Display disp = wMng.getDefaultDisplay();
-		int screenWidth = disp.getWidth();
-		int shadowWidth = (int) (0.05 * screenWidth); // 菜单阴影遮罩宽度
-		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
-        //int behindOffset = (int) (0 * screenWidth);
+        for(int i=0;i<menuIcon.length;++i) {
+            ResideMenuItem item = new ResideMenuItem(this,menuIcon[i],menuName[i]);
+            item.setOnClickListener(this);
+            menu.addMenuItem(item,ResideMenu.DIRECTION_LEFT);
+        }
 
-		menu = getSlidingMenu();
-		//menu.setMode(SlidingMenu.LEFT_RIGHT);
-		menu.setMode(SlidingMenu.LEFT);
-		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		menu.setFadeDegree(0.35f);
-
-		menu.setShadowWidth(shadowWidth);
-		menu.setShadowDrawable(R.drawable.shadow);
-		menu.setBehindOffset(behindOffset);
-		
-		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		menu.setBehindScrollScale(1.0f);
-		menu.setBehindCanvasTransformer(mTrans);
-		//menu.setSecondaryMenu(R.layout.main_frame_second_menu);
-		//menu.setSecondaryShadowDrawable(R.drawable.shadowright);
-
-	}
+    }
+//	private void initSlidingMenu() {
+//		/**
+//		 * 初始化侧滑菜单
+//		 */
+//		WindowManager wMng = getWindowManager();
+//		Display disp = wMng.getDefaultDisplay();
+//		int screenWidth = disp.getWidth();
+//		int shadowWidth = (int) (0.05 * screenWidth); // 菜单阴影遮罩宽度
+//		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
+//
+//		menu = getSlidingMenu();
+//		//menu.setMode(SlidingMenu.LEFT_RIGHT);
+//		menu.setMode(SlidingMenu.LEFT);
+//		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+//		menu.setFadeDegree(0.35f);
+//
+//		menu.setShadowWidth(shadowWidth);
+//		menu.setShadowDrawable(R.drawable.shadow);
+//		menu.setBehindOffset(behindOffset);
+//
+//		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+//		menu.setBehindScrollScale(1.0f);
+//		menu.setBehindCanvasTransformer(mTrans);
+//		//menu.setSecondaryMenu(R.layout.main_frame_second_menu);
+//		//menu.setSecondaryShadowDrawable(R.drawable.shadowright);
+//
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -161,7 +189,12 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 			openConfirmDialog();
 			break;
 		case android.R.id.home:
-			menu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
+			//menu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
+            if(menu.isOpened()){
+                menu.closeMenu();
+            }else{
+                menu.openMenu(ResideMenu.DIRECTION_LEFT);
+            }
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -204,7 +237,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 				//Object mHelperUtils;
 				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
 				mExitTime = System.currentTimeMillis();
-				menu.showMenu();
+				//menu.showMenu();
+                menu.openMenu(ResideMenu.DIRECTION_LEFT);
 			} else {
 				finish();
 			}
@@ -226,6 +260,15 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		// 统计模块
 		TCAgent.onResume(this);
 	}
-	
-	
+
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return menu.dispatchTouchEvent(ev);
+    }
 }

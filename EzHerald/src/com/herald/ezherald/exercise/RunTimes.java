@@ -1,21 +1,6 @@
 package com.herald.ezherald.exercise;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -25,6 +10,12 @@ import android.support.v4.app.Fragment;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 
 /**
@@ -57,8 +48,8 @@ public class RunTimes {
 	public static final String DEFAULT_UPDATE_TIME = null;
 	private static final int SUCCESS = 1;
 	private static final int FAILED  = 0;
-	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/ws/exercise/remain";
-	private static final String RUNTIMES_URL = "http://121.248.63.105/herald_web_service/tyx/";
+	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/remain_days/";
+	private static final String RUNTIMES_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/";
 	
 	private SharedPreferences pref;
 	private Editor editor;
@@ -165,7 +156,7 @@ public class RunTimes {
 	}
 	
 	/**
-	 * @param activity 调用者的Activity
+	 * @param context 调用者的Activity
 	 * 构造时会尝试从sharedPreference读取数据
 	 */
 	public RunTimes(Context context){
@@ -217,7 +208,7 @@ public class RunTimes {
 								throw new Exception("net error");
 							}
 							String result = EntityUtils.toString(response.getEntity());
-							int remDays = Integer.parseInt( result);
+							int remDays = Integer.parseInt(result);
 							setRemainDays(remDays);
 							setAdviceTime(calcAdviceTime());
 						}
@@ -249,7 +240,6 @@ public class RunTimes {
 	 * @return 建议每周跑操时间,向上取整
 	 */
 	private int calcAdviceTime(){
-		//TODO calculate the advise time
 		if(times == DEFAULT_ADVICE_TIME)
 			return -1;
 		int remainWeeks = remainDays/5;
@@ -259,7 +249,7 @@ public class RunTimes {
 			advice = remainTimes/remainWeeks;
 			if( advice*remainWeeks <remainTimes)
 				advice++;
-		}else if(remainDays == 0){
+		}else if(remainDays != 0){
 			advice = remainTimes;
 		}else{
 			advice = 0;

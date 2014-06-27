@@ -32,7 +32,7 @@ public class GpaDbModel {
 		Cursor cursor = db.rawQuery(sql, null);
 		if(cursor.moveToFirst()){// not empty
 			do{
-				Record r = new Record(cursor.getString(1),cursor.getString(2),cursor.getFloat(3),cursor.getString(4),cursor.getString(5),cursor.getString(6), cursor.getInt(7)==1);//0 for id //TODO  need to be tested
+				Record r = new Record(cursor.getString(1),cursor.getString(2),cursor.getFloat(3),cursor.getString(4),cursor.getString(5),cursor.getString(6), cursor.getInt(7)==1);//0 for id
 				records.add(r);
 			}while(cursor.moveToNext());
 		}

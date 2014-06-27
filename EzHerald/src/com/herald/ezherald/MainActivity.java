@@ -11,9 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -33,34 +31,27 @@ import com.herald.ezherald.mainframe.MainFrameDbAdapter;
 import com.herald.ezherald.mainframe.MainGuideActivity;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.util.MonthDisplayHelper;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.herald.ezherald.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.special.ResideMenu.ResideMenu;
-import com.special.ResideMenu.ResideMenuItem;
 
 /*
  * @author 何博伟
@@ -70,17 +61,13 @@ import com.special.ResideMenu.ResideMenuItem;
  * 
  * 
  */
-public class MainActivity extends BaseFrameActivity
-//public class MainActivity extends Activity
-{
-    //test
-    ResideMenu resideMenu = null;
-    //
+public class MainActivity extends BaseFrameActivity {
+
 	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; // 此次运行已经显示过更新了
 	Fragment mContentFrag;
 	Menu mActionMenu;
 	Handler mMoveHandler;
-	SlidingMenu mSlidingMenu;
+	ResideMenu mSlidingMenu;
 
 	public boolean needRefreshContent = false; // 是否需要刷新Content
 	public boolean isReceivingData = false; // 当前是否已经在更新Image
@@ -96,8 +83,8 @@ public class MainActivity extends BaseFrameActivity
 	private final boolean DEBUG_ALWAYS_UPDATE_ONLINE = false; // 始终从网站更新数据，不论新旧
 	private final boolean DEBUG_DONOT_REFRESH = false; // 禁止更新主界面轮播图
 
-	private final String REMOTE_UPDATE_CHECK_URL = "http://121.248.63.105/EzHerald/picupdatetime/";
-	private final String REMOTE_UPDATE_QUERY_URL = "http://121.248.63.105/EzHerald/picturejson/";
+	private final String REMOTE_UPDATE_CHECK_URL = "http://herald.seu.edu.cn/EzHerald/picupdatetime/";
+	private final String REMOTE_UPDATE_QUERY_URL = "http://herald.seu.edu.cn/EzHerald/picturejson/";
 	private final int CONN_TIMEOUT = 5000;
 
 	private boolean mShowedUpdate = false;
@@ -107,7 +94,7 @@ public class MainActivity extends BaseFrameActivity
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        Intent intent = getIntent();
+		Intent intent = getIntent();
 		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
@@ -126,9 +113,7 @@ public class MainActivity extends BaseFrameActivity
 		}
 
 		doNotUpdateUI = false;
-
-
-    }
+	}
 
 	/**
 	 * 通过检查SharedPreferences判断是否需要在线更新
@@ -280,7 +265,7 @@ public class MainActivity extends BaseFrameActivity
 	/**
 	 * 开Http连接
 	 * 
-	 * @param uRL
+	 * @param urlStr
 	 * @return
 	 * @throws IOException
 	 */
@@ -634,7 +619,14 @@ public class MainActivity extends BaseFrameActivity
 		} catch (IOException e) {
 			//Log.w("MainActivity", e.getLocalizedMessage());
 			showToastInWorkingThread("远程服务器链接超时，网络不大给力？");
-			return false;
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return false;
 		}
 		if (in == null)
 			return false;
@@ -653,6 +645,13 @@ public class MainActivity extends BaseFrameActivity
 			in.close();
 		} catch (IOException e) {
 			Log.w("MainActivity", e.getLocalizedMessage());
+            if(in!=null) {
+                try {
+                    in.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
 			return false;
 		}
 

@@ -1,31 +1,30 @@
 package com.herald.ezherald.gpa;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 
+import com.herald.ezherald.account.UserAccount;
+
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.json.JSONArray;
+import org.json.JSONException;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-
-import com.herald.ezherald.account.UserAccount;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GpaInfo {
 	public static final boolean DEBUG = false;
@@ -58,33 +57,18 @@ public class GpaInfo {
 	}
 
 	protected void onSuccess() {
-		adapter.onLoadFinished();
-		adapter.onDealing(0, 100);
-		
-		gpaDbModel.open();
-		gpaDbModel.clear();
-		gpaDbModel.close();
-		
-		
-		Document document = Jsoup.parse(result);
-		Elements trs = document
-				.select("tr[onMouseOver=this.style.backgroundColor=\'#bbbbbb\']");
-		int count = trs.size(), i = 0;
-		records = new ArrayList<Record>();
-		for (Element tr : trs) {
-			Log.w("re", tr.child(4).text().trim());
-			Record temp = new Record();
-			temp.setSemester(tr.child(1).text().trim());
-			temp.setName(rtrim(tr.child(3).text().trim()));
-			temp.setCredit(Float.parseFloat(rtrim(tr.child(4).text())));
+        try{
+            JSONArray json = new JSONArray(result);
+            records = new ArrayList<Record>();
+            for (int i = 0; i < json.length(); i++) {
+                Record record = new Record(json.getJSONObject(i));
+                records.add(record);
+            }
 
-			temp.setScore(rtrim(tr.child(5).text().trim()));
-			temp.setScoreType(rtrim(tr.child(6).text().trim()));
-			temp.setExtra(tr.child(7).text().isEmpty() ? null : rtrim(tr.child(
-					7).text()));
-			records.add(temp);
-			adapter.onDealing(++i, count);
-		}
+        }catch(JSONException e){
+
+            e.printStackTrace();
+        }
 		save();
 		adapter.updateFinished(true);
 
@@ -93,6 +77,7 @@ public class GpaInfo {
 	protected void onFailed() {
 		gpaDbModel.open();
 		records = gpaDbModel.all();
+        gpaDbModel.close();
 		adapter.updateFinished(false);
 	}
 
@@ -119,11 +104,11 @@ public class GpaInfo {
 	 */
 	public float calcAverage() throws Exception {
 		float totalGrade = 0, totalCredit = 0;
-		Map<String,Float> gradeMap = new HashMap<String,Float>();
+		Map<String,Double> gradeMap = new HashMap<String,Double>();
 		for(Record r:records) {
 			if(r.isSelected()){
 				if(gradeMap.containsKey(r.getName())){
-					Float grades = gradeMap.get(r.getName());
+					double grades = gradeMap.get(r.getName());
 					if(r.getPoint()*r.getCredit()>grades) {
 						gradeMap.put(r.getName(), r.getPoint()*r.getCredit());
 					}
@@ -134,7 +119,7 @@ public class GpaInfo {
 			}
 		}
 		
-		for(Float r:gradeMap.values()){
+		for(double r:gradeMap.values()){
 			totalGrade += r;
 		}
 		if(totalCredit == 0) {
@@ -143,40 +128,29 @@ public class GpaInfo {
 		return totalGrade / totalCredit;
 	}
 
-	public void update(final int vercode, final HttpClient client,
-			final UserAccount user) {
+	public void update(final UserAccount user, final ProgressDialog progress) {
+        final String URL = "http://herald.seu.edu.cn/herald_web_service/gpa/gpa";
 		new Thread() {
 			@Override
 			public void run() {
-				HttpClient httpclient = client;
-				HttpPost httppost = new HttpPost(
-						"http://xk.urp.seu.edu.cn/studentService/system/login.action");
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpPost httppost = new HttpPost(URL);
 
 				try {
-					// Add your data
 					List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 							2);
-					nameValuePairs.add(new BasicNameValuePair("userName", user
+					nameValuePairs.add(new BasicNameValuePair("username", user
 							.getUsername()));
 					nameValuePairs.add(new BasicNameValuePair("password", user
 							.getPassword()));
-					nameValuePairs.add(new BasicNameValuePair("vercode", ""
-							+ vercode));
 					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
 					// Execute HTTP Post Request
 					HttpResponse response = httpclient.execute(httppost);
-
 					if (response.getStatusLine().getStatusCode() == 200) {
-						String url = "http://xk.urp.seu.edu.cn/studentService/cs/stuServe/studentExamResultQuery.action";
-						HttpResponse response2 = httpclient
-								.execute(new HttpGet(url));
-						if (response2.getStatusLine().getStatusCode() != 200) {
-							throw new IOException();
-						}
-						String result2 = EntityUtils.toString(response2
-								.getEntity());
-						Message msg = handler.obtainMessage(SUCCESS, result2);
+
+                        HttpEntity entity = response.getEntity();
+                        String result = EntityUtils.toString(entity);
+						Message msg = handler.obtainMessage(SUCCESS, result);
 						handler.sendMessage(msg);
 					} else {
 						handler.obtainMessage(FAILED).sendToTarget();
