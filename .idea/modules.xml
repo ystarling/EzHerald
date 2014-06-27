@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EzHerald.iml" filepath="$PROJECT_DIR$/EzHerald.iml" />
       <module fileurl="file://$PROJECT_DIR$/EzHerald/EzHerald-EzHerald.iml" filepath="$PROJECT_DIR$/EzHerald/EzHerald-EzHerald.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ResideMenu/ResideMenu.iml" filepath="$PROJECT_DIR$/ResideMenu/ResideMenu.iml" />
       <module fileurl="file://$PROJECT_DIR$/libABS/libABS.iml" filepath="$PROJECT_DIR$/libABS/libABS.iml" />
       <module fileurl="file://$PROJECT_DIR$/libDragNDropList_/libDragNDropList_.iml" filepath="$PROJECT_DIR$/libDragNDropList_/libDragNDropList_.iml" />
       <module fileurl="file://$PROJECT_DIR$/libSlidingMenu/libSlidingMenu.iml" filepath="$PROJECT_DIR$/libSlidingMenu/libSlidingMenu.iml" />

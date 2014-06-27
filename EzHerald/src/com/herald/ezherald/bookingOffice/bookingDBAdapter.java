@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BookingDBAdapter {
-	static final String DATABASE_NAME = "bookingDB";
+	static final String DATABASE_NAME = "bookingDB.db";
 	static final int DATABASE_VERSION = 1;
 	static final String TABLE_BOOKING_LIST = "tb_booking_list";
 	
 	static final String CREAT_TB_BOOKING_LIST = 
 			"create table " +TABLE_BOOKING_LIST +
-			"(_id interger pramary key autoincreament," +
-			"id int not null,"+
+			"(_id integer primary key autoincrement," +
+			"id text not null,"+
 			"caption text,"+
             "posterUrl text," +
             "number int not null," +
@@ -30,8 +30,8 @@ public class BookingDBAdapter {
         mContext = context;
         mDBHelper = new DatabaseHelper(mContext);
     }
-    public boolean insert(int id,String caption,String posterUrl,int number,String activity_time,String deadline){
-          boolean boolRet = false;
+    public Long insert(String id,String caption,String posterUrl,int number,String activity_time,String deadline){
+
         ContentValues value = new ContentValues();
         value.put("id",id);
         value.put("caption",caption);
@@ -39,25 +39,30 @@ public class BookingDBAdapter {
         value.put("number",number);
         value.put("activity_time",activity_time);
         value.put("deadline",deadline);
-        mDB.insert(TABLE_BOOKING_LIST,null,value);
-        boolRet = true;
-        return boolRet;
+        Long LongRet = mDB.insert(TABLE_BOOKING_LIST,null,value);
+
+        return LongRet;
     }
-    private boolean isExists(int id){
+    public void close(){
+        mDB.close();
+    }
+
+    public boolean isExists(String id){
         boolean boolRet = false;
-        Cursor cursor = mDB.query(true,TABLE_BOOKING_LIST,new String[]{"id"},"id="+id,null,null,null,null,null);
+        Cursor cursor = mDB.query(false,TABLE_BOOKING_LIST,new String[]{"id","caption","number"},"id="+id,null,null,null,null,null);
+
         int count = cursor.getCount();
-        if(count != 0){
+        if(count > 0){
             boolRet = true;
         }
-
         return boolRet;
     }
 
 
     public BookingDBAdapter open(){
-          mDB = mDBHelper.getWritableDatabase();
+        mDB = mDBHelper.getWritableDatabase();
         return this;
+
     }
 
 

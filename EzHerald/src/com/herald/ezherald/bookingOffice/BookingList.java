@@ -62,7 +62,8 @@ public class BookingList extends ListFragment{
 	     public void onListItemClick(ListView l,View v,int position,long id){
 	    	 
 	    	 mCallback.OnItemSelected(position);
-	    	
+
+
 	    	 // Set the item as checked to be highlighted when in two-pane layout
 	         //getListView().setItemChecked(position, true);
 	    	 

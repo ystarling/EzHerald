@@ -33,6 +33,7 @@ import com.herald.ezherald.mainframe.MainFrameDbAdapter;
 import com.herald.ezherald.mainframe.MainGuideActivity;
 import com.herald.ezherald.settingframe.AppUpdateActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -58,6 +59,8 @@ import android.widget.Toast;
 
 import com.herald.ezherald.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.special.ResideMenu.ResideMenu;
+import com.special.ResideMenu.ResideMenuItem;
 
 /*
  * @author 何博伟
@@ -67,8 +70,12 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
  * 
  * 
  */
-public class MainActivity extends BaseFrameActivity {
-
+public class MainActivity extends BaseFrameActivity
+//public class MainActivity extends Activity
+{
+    //test
+    ResideMenu resideMenu = null;
+    //
 	private static final String KEY_SHOWED_UPDATE = "showedUpdate"; // 此次运行已经显示过更新了
 	Fragment mContentFrag;
 	Menu mActionMenu;
@@ -100,7 +107,7 @@ public class MainActivity extends BaseFrameActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Intent intent = getIntent();
+        Intent intent = getIntent();
 		mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
 		mContentFrag = new MainContentFragment();
 		super.SetBaseFrameActivity(mContentFrag);
@@ -119,7 +126,9 @@ public class MainActivity extends BaseFrameActivity {
 		}
 
 		doNotUpdateUI = false;
-	}
+
+
+    }
 
 	/**
 	 * 通过检查SharedPreferences判断是否需要在线更新

@@ -2,6 +2,51 @@
 <merger xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" >
 
     <dataSet config="unspecified" >
+        <source path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res" >
+            <file
+                name="ic_launcher"
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="shadow"
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\drawable-hdpi\shadow.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\drawable-ldpi\ic_launcher.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="residemenu"
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\layout\residemenu.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="residemenu_item"
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\layout\residemenu_item.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\ResideMenu\unspecified\res\values\values.xml"
+                qualifiers="" >
+                <string name="app_name" >ResideMenu
+                </string>
+            </file>
+        </source>
+    </dataSet>
+    <dataSet config="unspecified" >
         <source path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\libViewFlow\unspecified\res" >
             <file
                 name="icon"
@@ -1790,6 +1835,10 @@ bold
                     parent="@android:style/TextAppearance" />
 
                 <style
+                    name="Widget.Sherlock.Light.ActionButton"
+                    parent="Widget.Sherlock.ActionButton" />
+
+                <style
                     name="Widget.Sherlock.Light.ListPopupWindow"
                     parent="Widget" >
                     <item name="android:dropDownSelector">
@@ -1809,9 +1858,11 @@ wrap_content
                     </item>
                 </style>
 
-                <style
-                    name="Widget.Sherlock.Light.ActionButton"
-                    parent="Widget.Sherlock.ActionButton" />
+                <style name="TextAppearance.Sherlock.Light.SearchResult.Title" >
+                    <item name="android:textSize">
+18sp
+                    </item>
+                </style>
 
                 <style
                     name="Widget.Sherlock.TextView.SpinnerItem"
@@ -1824,12 +1875,6 @@ wrap_content
                     </item>
                     <item name="android:paddingRight">
 8dp
-                    </item>
-                </style>
-
-                <style name="TextAppearance.Sherlock.Light.SearchResult.Title" >
-                    <item name="android:textSize">
-18sp
                     </item>
                 </style>
 
@@ -1846,6 +1891,10 @@ wrap_content
 ?android:attr/textColorPrimaryInverse
                     </item>
                 </style>
+
+                <attr
+                    name="subtitleTextStyle"
+                    format="reference" />
 
                 <style
                     name="Theme.Sherlock.Light.DarkActionBar"
@@ -1943,10 +1992,6 @@ wrap_content
 @drawable/abs__ic_commit_search_api_holo_dark
                     </item>
                 </style>
-
-                <attr
-                    name="subtitleTextStyle"
-                    format="reference" />
 
                 <style
                     name="Widget.Sherlock.Light.ProgressBar.Horizontal"
@@ -3335,6 +3380,10 @@ false
                 </string>
 
                 <style
+                    name="TextAppearance.Sherlock.Light.Widget.PopupMenu.Large"
+                    parent="TextAppearance.Sherlock.Widget.PopupMenu.Large" />
+
+                <style
                     name="Widget.Sherlock.SearchAutoCompleteTextView"
                     parent="Sherlock.__Widget.SearchAutoCompleteTextView" >
                     <item name="android:dropDownSelector">
@@ -3345,29 +3394,14 @@ false
                     </item>
                 </style>
 
-                <style
-                    name="TextAppearance.Sherlock.Light.Widget.PopupMenu.Large"
-                    parent="TextAppearance.Sherlock.Widget.PopupMenu.Large" />
-
-                <color name="abs__bright_foreground_disabled_holo_light" >#ffb2b2b2
-                </color>
-
                 <style name="TextAppearance.Sherlock.Widget.PopupMenu.Large" >
                     <item name="android:textSize">
 18sp
                     </item>
                 </style>
 
-                <style
-                    name="TextAppearance.Sherlock.Widget.DropDownHint"
-                    parent="Widget" >
-                    <item name="android:textColor">
-?textColorPrimary
-                    </item>
-                    <item name="android:textSize">
-14sp
-                    </item>
-                </style>
+                <color name="abs__bright_foreground_disabled_holo_light" >#ffb2b2b2
+                </color>
 
                 <style
                     name="Theme.Sherlock"
@@ -3553,6 +3587,17 @@ false
                     </item>
                 </style>
 
+                <style
+                    name="TextAppearance.Sherlock.Widget.DropDownHint"
+                    parent="Widget" >
+                    <item name="android:textColor">
+?textColorPrimary
+                    </item>
+                    <item name="android:textSize">
+14sp
+                    </item>
+                </style>
+
                 <dimen name="abs__action_bar_default_height" >48dip
                 </dimen>
 
@@ -3564,14 +3609,6 @@ false
                     </item>
                     <item name="android:textColor">
 ?android:attr/textColorSecondary
-                    </item>
-                </style>
-
-                <style
-                    name="Widget.Sherlock.Spinner.DropDown.ActionBar"
-                    parent="Sherlock.__Widget.Holo.Spinner" >
-                    <item name="android:background">
-@drawable/abs__spinner_ab_holo_dark
                     </item>
                 </style>
 
@@ -3608,6 +3645,14 @@ false
                     </item>
                 </style>
 
+                <style
+                    name="Widget.Sherlock.Spinner.DropDown.ActionBar"
+                    parent="Sherlock.__Widget.Holo.Spinner" >
+                    <item name="android:background">
+@drawable/abs__spinner_ab_holo_dark
+                    </item>
+                </style>
+
                 <bool name="abs__config_actionMenuItemAllCaps" >
 true
                 </bool>
@@ -3623,6 +3668,17 @@ true
                 <style
                     name="TextAppearance.Sherlock.Small"
                     parent="Sherlock.__TextAppearance.Small" />
+
+                <style
+                    name="Sherlock.__Widget.Holo.ListView"
+                    parent="android:Widget.ListView" >
+                    <item name="android:divider">
+@drawable/abs__list_divider_holo_dark
+                    </item>
+                    <item name="android:listSelector">
+@drawable/abs__list_selector_holo_dark
+                    </item>
+                </style>
 
                 <style
                     name="Widget.Sherlock.ActionButton"
@@ -3647,17 +3703,6 @@ center
                     </item>
                     <item name="android:scaleType">
 center
-                    </item>
-                </style>
-
-                <style
-                    name="Sherlock.__Widget.Holo.ListView"
-                    parent="android:Widget.ListView" >
-                    <item name="android:divider">
-@drawable/abs__list_divider_holo_dark
-                    </item>
-                    <item name="android:listSelector">
-@drawable/abs__list_selector_holo_dark
                     </item>
                 </style>
 
@@ -3771,24 +3816,6 @@ marquee
                     type="id"/>
 
                 <style
-                    name="Widget.Sherlock.ProgressBar.Horizontal"
-                    parent="android:Widget.ProgressBar.Horizontal" >
-                    <item name="android:progressDrawable">
-@drawable/abs__progress_horizontal_holo_dark
-                    </item>
-                    <!-- item name="android:indeterminateDrawable">@drawable/abs__progress_indeterminate_horizontal_holo</item -->
-                    <item name="android:minHeight">
-16dip
-                    </item>
-                    <item name="android:maxHeight">
-16dip
-                    </item>
-                </style>
-
-                <string name="abs__action_menu_overflow_description" >More options
-                </string>
-
-                <style
                     name="Sherlock.__Widget.Holo.DropDownItem"
                     parent="Widget" >
                     <item name="android:textAppearance">
@@ -3802,6 +3829,24 @@ marquee
                     </item>
                     <item name="android:gravity">
 center_vertical
+                    </item>
+                </style>
+
+                <string name="abs__action_menu_overflow_description" >More options
+                </string>
+
+                <style
+                    name="Widget.Sherlock.ProgressBar.Horizontal"
+                    parent="android:Widget.ProgressBar.Horizontal" >
+                    <item name="android:progressDrawable">
+@drawable/abs__progress_horizontal_holo_dark
+                    </item>
+                    <!-- item name="android:indeterminateDrawable">@drawable/abs__progress_indeterminate_horizontal_holo</item -->
+                    <item name="android:minHeight">
+16dip
+                    </item>
+                    <item name="android:maxHeight">
+16dip
                     </item>
                 </style>
 
@@ -3853,6 +3898,8 @@ center_vertical
 
                 <dimen name="abs__action_bar_subtitle_top_margin" >-3dp
                 </dimen>
+                <dimen name="abs__action_bar_subtitle_bottom_margin" >5dip
+                </dimen>
 
                 <style name="Theme.Sherlock.Light.NoActionBar" >
                     <item name="windowActionBar">
@@ -3862,9 +3909,6 @@ false
 true
                     </item>
                 </style>
-
-                <dimen name="abs__action_bar_subtitle_bottom_margin" >5dip
-                </dimen>
 
                 <style
                     name="Widget.Sherlock.Light.Button.Small"
@@ -3895,10 +3939,6 @@ normal
                     </item>
                 </style>
 
-                <style
-                    name="Widget.Sherlock.Light.DropDownItem.Spinner"
-                    parent="Sherlock.__Widget.Holo.DropDownItem" />
-
                 <style name="TextAppearance.Sherlock.SearchResult.Subtitle" >
                     <item name="android:textSize">
 14sp
@@ -3907,6 +3947,10 @@ normal
 ?android:attr/textColorSecondary
                     </item>
                 </style>
+
+                <style
+                    name="Widget.Sherlock.Light.DropDownItem.Spinner"
+                    parent="Sherlock.__Widget.Holo.DropDownItem" />
 
                 <style
                     name="Widget.Sherlock.Light.ActionMode.Inverse"
@@ -3948,10 +3992,6 @@ wrap_content
                 </style>
 
                 <style
-                    name="Widget.Sherlock.Light.ActionBar.TabText"
-                    parent="Widget.Sherlock.ActionBar.TabText" />
-
-                <style
                     name="TextAppearance.Sherlock.Widget.ActionMode.Title"
                     parent="Widget" >
                     <item name="android:textSize">
@@ -3961,6 +4001,10 @@ wrap_content
 ?android:attr/textColorPrimary
                     </item>
                 </style>
+
+                <style
+                    name="Widget.Sherlock.Light.ActionBar.TabText"
+                    parent="Widget.Sherlock.ActionBar.TabText" />
 
                 <bool name="abs__config_showMenuShortcutsWhenKeyboardPresent" >
 false
@@ -3977,9 +4021,9 @@ false
                 </dimen>
                 <dimen name="abs__action_bar_subtitle_text_size" >12dp
                 </dimen>
-                <dimen name="abs__action_bar_subtitle_top_margin" >-2dp
-                </dimen>
                 <dimen name="abs__action_bar_default_height" >40dip
+                </dimen>
+                <dimen name="abs__action_bar_subtitle_top_margin" >-2dp
                 </dimen>
                 <dimen name="abs__action_bar_title_text_size" >16dp
                 </dimen>
@@ -3997,9 +4041,9 @@ false
                 </dimen>
                 <dimen name="abs__action_bar_icon_vertical_padding" >8dip
                 </dimen>
-                <dimen name="abs__action_bar_subtitle_top_margin" >-3dp
-                </dimen>
                 <dimen name="abs__action_bar_default_height" >48dip
+                </dimen>
+                <dimen name="abs__action_bar_subtitle_top_margin" >-3dp
                 </dimen>
             </file>
             <file
@@ -4011,9 +4055,9 @@ false
                 </dimen>
                 <dimen name="abs__action_bar_icon_vertical_padding" >4dip
                 </dimen>
-                <dimen name="abs__action_bar_subtitle_text_size" >12dp
-                </dimen>
                 <dimen name="abs__action_bar_subtitle_bottom_margin" >4dip
+                </dimen>
+                <dimen name="abs__action_bar_subtitle_text_size" >12dp
                 </dimen>
                 <dimen name="abs__action_bar_subtitle_top_margin" >-2dp
                 </dimen>
@@ -4023,9 +4067,9 @@ false
                 qualifiers="large-land-mdpi-1024x600" >
                 <dimen name="abs__action_bar_default_height" >48dip
                 </dimen>
-                <dimen name="abs__action_bar_subtitle_text_size" >14dp
-                </dimen>
                 <dimen name="abs__action_bar_icon_vertical_padding" >8dip
+                </dimen>
+                <dimen name="abs__action_bar_subtitle_text_size" >14dp
                 </dimen>
                 <dimen name="abs__action_bar_subtitle_bottom_margin" >5dip
                 </dimen>
@@ -4037,9 +4081,9 @@ false
             <file
                 path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-mdpi-1024x600\values.xml"
                 qualifiers="large-mdpi-1024x600" >
-                <dimen name="abs__action_button_min_width" >64dip
-                </dimen>
                 <dimen name="abs__action_bar_subtitle_bottom_margin" >9dip
+                </dimen>
+                <dimen name="abs__action_button_min_width" >64dip
                 </dimen>
                 <dimen name="abs__action_bar_icon_vertical_padding" >4dip
                 </dimen>
@@ -4072,12 +4116,13 @@ false
                 </dimen>
                 <dimen name="abs__action_bar_default_height" >56dip
                 </dimen>
-                <dimen name="abs__action_bar_subtitle_text_size" >14dp
-                </dimen>
 
                 <bool name="abs__action_bar_expanded_action_views_exclusive" >
 false
                 </bool>
+
+                <dimen name="abs__action_bar_subtitle_text_size" >14dp
+                </dimen>
             </file>
             <file
                 path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\libABS\unspecified\res\values-v11\values.xml"
@@ -4184,24 +4229,24 @@ false
                     parent="android:Widget.Holo.Spinner" />
 
                 <style
-                    name="Widget.Sherlock.ActionBar.TabView"
-                    parent="android:Widget.Holo.ActionBar.TabView" />
-
-                <style
                     name="TextAppearance.Sherlock.Widget.PopupMenu"
                     parent="android:TextAppearance.Holo.Widget.PopupMenu" />
+
+                <style
+                    name="Widget.Sherlock.ActionBar.TabView"
+                    parent="android:Widget.Holo.ActionBar.TabView" />
 
                 <style
                     name="Widget.Sherlock.Light.ActionButton.Overflow"
                     parent="android:Widget.Holo.Light.ActionButton.Overflow" />
 
                 <style
-                    name="Widget.Sherlock.Light.ActionBar.TabView"
-                    parent="android:Widget.Holo.Light.ActionBar.TabView" />
-
-                <style
                     name="Widget.Sherlock.Light.ProgressBar"
                     parent="android:Widget.Holo.Light.ProgressBar" />
+
+                <style
+                    name="Widget.Sherlock.Light.ActionBar.TabView"
+                    parent="android:Widget.Holo.Light.ActionBar.TabView" />
 
                 <style
                     name="Sherlock.__Theme"
@@ -4334,32 +4379,32 @@ true
                     parent="android:Widget.Holo.ListView.DropDown" />
 
                 <style
-                    name="Widget.Sherlock.ProgressBar.Horizontal"
-                    parent="android:Widget.Holo.ProgressBar.Horizontal" />
-
-                <style
                     name="Widget.Sherlock.Light.ActionBar"
                     parent="android:Widget.Holo.Light.ActionBar" />
+
+                <style
+                    name="Widget.Sherlock.ProgressBar.Horizontal"
+                    parent="android:Widget.Holo.ProgressBar.Horizontal" />
 
                 <style
                     name="Widget.Sherlock.Light.SearchAutoCompleteTextView"
                     parent="android:Widget.Holo.Light.AutoCompleteTextView" />
 
                 <style
-                    name="TextAppearance.Sherlock.Light.Widget.PopupMenu.Large"
-                    parent="android:TextAppearance.Holo.Widget.PopupMenu.Large" />
-
-                <style
                     name="Widget.Sherlock.Light.ActionBar.Solid"
                     parent="android:Widget.Holo.Light.ActionBar.Solid" />
 
                 <style
-                    name="TextAppearance.Sherlock.Widget.ActionMode.Title"
-                    parent="android:TextAppearance.Holo.Widget.ActionMode.Title" />
+                    name="TextAppearance.Sherlock.Light.Widget.PopupMenu.Large"
+                    parent="android:TextAppearance.Holo.Widget.PopupMenu.Large" />
 
                 <style
                     name="TextAppearance.Sherlock.Widget.ActionBar.Subtitle"
                     parent="android:TextAppearance.Holo.Widget.ActionBar.Subtitle" />
+
+                <style
+                    name="TextAppearance.Sherlock.Widget.ActionMode.Title"
+                    parent="android:TextAppearance.Holo.Widget.ActionMode.Title" />
 
                 <style
                     name="Widget.Sherlock.SearchAutoCompleteTextView"
@@ -4402,17 +4447,20 @@ true
             <file
                 path="F:\android\EzHerald\EzHerald\build\exploded-aar\Ezherald\libABS\unspecified\res\values-xlarge\values.xml"
                 qualifiers="xlarge" >
+                <dimen name="abs__action_bar_title_text_size" >18dp
+                </dimen>
+
                 <item
                     name="abs__dialog_min_width_minor"
                     type="dimen">
 72%
                 </item>
 
-                <dimen name="abs__action_bar_title_text_size" >18dp
-                </dimen>
                 <dimen name="abs__action_bar_subtitle_bottom_margin" >9dip
                 </dimen>
                 <dimen name="abs__action_button_min_width" >64dip
+                </dimen>
+                <dimen name="abs__action_bar_subtitle_top_margin" >-3dp
                 </dimen>
 
                 <item
@@ -4421,13 +4469,11 @@ true
 45%
                 </item>
 
-                <dimen name="abs__action_bar_subtitle_top_margin" >-3dp
-                </dimen>
                 <dimen name="abs__action_bar_default_height" >56dip
                 </dimen>
-                <dimen name="abs__action_bar_subtitle_text_size" >14dp
-                </dimen>
                 <dimen name="abs__action_bar_icon_vertical_padding" >4dip
+                </dimen>
+                <dimen name="abs__action_bar_subtitle_text_size" >14dp
                 </dimen>
             </file>
         </source>
@@ -6312,9 +6358,9 @@ true
                 </dimen>
                 <dimen name="activity_horizontal_margin" >16dp
                 </dimen>
-                <dimen name="list_padding" >10dp
-                </dimen>
                 <dimen name="activity_vertical_margin" >16dp
+                </dimen>
+                <dimen name="list_padding" >10dp
                 </dimen>
             </file>
             <file
@@ -6328,21 +6374,21 @@ true
                 </string>
                 <string name="setting_about_version" >build 20131027
                 </string>
-                <string name="main_frame_content_refresh" >刷新
-                </string>
                 <string name="main_slidebar_title" >主菜单
                 </string>
-                <string name="cus_lv_refreshing" >Refreshing...
-                </string>
-                <string name="IDCardLoginButton" >登录一卡通账户
-                </string>
-                <string name="LibUserName" >图书馆账号
+                <string name="main_frame_content_refresh" >刷新
                 </string>
                 <string name="LibLoginOffButton" >退出图书馆账户
                 </string>
-                <string name="main_frame_preferences" >com.herald.ezherald_preferences
+                <string name="LibUserName" >图书馆账号
+                </string>
+                <string name="IDCardLoginButton" >登录一卡通账户
+                </string>
+                <string name="cus_lv_refreshing" >Refreshing...
                 </string>
                 <string name="cus_lv_release_to_refresh" >Release to refresh
+                </string>
+                <string name="main_frame_preferences" >com.herald.ezherald_preferences
                 </string>
                 <string name="LibInfo" >图书馆账号用户名：
                 </string>
@@ -6372,9 +6418,9 @@ true
                 </string>
                 <string name="cus_lv_updating" >Updating：
                 </string>
-                <string name="http_herald_seu_edu_cn_" >http://herald.seu.edu.cn/
-                </string>
                 <string name="aboutInfo" >aboutInfo
+                </string>
+                <string name="http_herald_seu_edu_cn_" >http://herald.seu.edu.cn/
                 </string>
                 <string name="IDCardUserName" >一卡通账号
                 </string>
@@ -6388,11 +6434,11 @@ true
                 </string>
                 <string name="TyxPassWord" >体育系密码
                 </string>
-                <string name="main_frame_list_color_pref_key" >list_choice
+                <string name="LibLoginButton" >登录图书馆账户
                 </string>
                 <string name="TyxLoginOffButton" >退出体育系账户
                 </string>
-                <string name="LibLoginButton" >登录图书馆账户
+                <string name="main_frame_list_color_pref_key" >list_choice
                 </string>
                 <string name="cus_lv_pull_to_refresh" >Pull to refresh
                 </string>
@@ -6400,19 +6446,19 @@ true
                 </string>
                 <string name="IDCardPassWord" >一卡通密码
                 </string>
-                <string name="menu_main_content_pref_title" >偏好设置
-                </string>
                 <string name="app_name" >先声
+                </string>
+                <string name="menu_main_content_pref_title" >偏好设置
                 </string>
                 <string name="first_screen_loading" >先声客户端玩命启动中...
                 </string>
                 <string name="LoginButton" >登录
                 </string>
-                <string name="IDCardLoginOffButton" >退出一卡通账户
+                <string name="TyxLoginButton" >登录体育系账户
                 </string>
                 <string name="PassWord" >密码
                 </string>
-                <string name="TyxLoginButton" >登录体育系账户
+                <string name="IDCardLoginOffButton" >退出一卡通账户
                 </string>
             </file>
             <file
@@ -6438,6 +6484,10 @@ true
 -1
                     </item>
                 </string-array>
+
+                <string name="title_activity_main_content_module_pref" >主界面模块偏好
+                </string>
+
                 <string-array name="pref_module_choice_values" >
                     <item>
 curriculum
@@ -6465,10 +6515,6 @@ freshman
 emptyclassroom
                     </item>
                 </string-array>
-
-                <string name="title_activity_main_content_module_pref" >主界面模块偏好
-                </string>
-
                 <string-array name="pref_listview_color_titles" >
                     <item>
 蓝色
@@ -6506,6 +6552,8 @@ gpa
 
                 <string name="pref_title_module" >勾选所需模块
                 </string>
+                <string name="pref_title_sync_frequency" >同步频率
+                </string>
 
                 <string-array name="pref_sync_frequency_titles" >
                     <item>
@@ -6527,10 +6575,6 @@ gpa
 从不
                     </item>
                 </string-array>
-
-                <string name="pref_title_sync_frequency" >同步频率
-                </string>
-
                 <string-array name="pref_module_choice_titles" >
                     <item>
 课表查询
@@ -6585,9 +6629,9 @@ yellow
             <file
                 path="F:\android\EzHerald\EzHerald\res\values\strings_acti_module.xml"
                 qualifiers="" >
-                <string name="acti_url_club_intro" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/leaguezone/leagueid/
-                </string>
                 <string name="acti_url_activity_comment" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/getactivitycomment/activityid/1
+                </string>
+                <string name="acti_url_club_intro" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/leaguezone/leagueid/
                 </string>
                 <string name="acti_url_activity_detail" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/activitydetail/activityid/
                 </string>
@@ -6597,17 +6641,17 @@ yellow
                 </string>
                 <string name="acti_url_focus_more_activity" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/getmore/lastactivityid/
                 </string>
-                <string name="acti_url_middle_pic" >http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_m_post_add/
-                </string>
                 <string name="acti_url_club_icon" >http://herald.seu.edu.cn/herald_league/Uploads/LeagueAvatar/m_s_avatar_address/
+                </string>
+                <string name="acti_url_middle_pic" >http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_m_post_add/
                 </string>
                 <string name="acti_url_large_pic" >http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_l_post_add/
                 </string>
                 <string name="acti_url_more_activity" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/getmore/lastactivityid/
                 </string>
-                <string name="acti_url_focus_activity_list" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/getactivity
-                </string>
                 <string name="acti_url_small_pic" >http://herald.seu.edu.cn/herald_league/Uploads/ActivityPost/m_s_post_add/
+                </string>
+                <string name="acti_url_focus_activity_list" >http://herald.seu.edu.cn/herald_league_api/index.php?/command/select/selectoperate/getactivity
                 </string>
             </file>
             <file
@@ -6658,13 +6702,10 @@ false
                 qualifiers="" >
 
                 <style
-                    name="Theme.Heraldstyle.Widget"
-                    parent="@style/Theme.Sherlock" >
-                    <item name="popupMenuStyle">
-@style/PopupMenu.Heraldstyle
-                    </item>
-                    <item name="dropDownListViewStyle">
-@style/DropDownListView.Heraldstyle
+                    name="PopupMenu.Heraldstyle"
+                    parent="@style/Widget.Sherlock.ListPopupWindow" >
+                    <item name="android:popupBackground">
+@drawable/menu_dropdown_panel_heraldstyle
                     </item>
                 </style>
 
@@ -6677,35 +6718,13 @@ false
                 </style>
 
                 <style
-                    name="PopupMenu.Heraldstyle"
-                    parent="@style/Widget.Sherlock.ListPopupWindow" >
-                    <item name="android:popupBackground">
-@drawable/menu_dropdown_panel_heraldstyle
+                    name="Theme.Heraldstyle.Widget"
+                    parent="@style/Theme.Sherlock" >
+                    <item name="popupMenuStyle">
+@style/PopupMenu.Heraldstyle
                     </item>
-                </style>
-
-                <style
-                    name="DropDownNav.Heraldstyle"
-                    parent="@style/Widget.Sherlock.Spinner.DropDown.ActionBar" >
-                    <item name="android:background">
-@drawable/spinner_background_ab_heraldstyle
-                    </item>
-                    <item name="android:popupBackground">
-@drawable/menu_dropdown_panel_heraldstyle
-                    </item>
-                    <item name="android:dropDownSelector">
-@drawable/selectable_background_heraldstyle
-                    </item>
-                </style>
-
-                <style
-                    name="ActionBar.Transparent.Heraldstyle"
-                    parent="@style/Widget.Sherlock.ActionBar" >
-                    <item name="background">
-@drawable/ab_transparent_heraldstyle
-                    </item>
-                    <item name="progressBarStyle">
-@style/ProgressBar.Heraldstyle
+                    <item name="dropDownListViewStyle">
+@style/DropDownListView.Heraldstyle
                     </item>
                 </style>
 
@@ -6747,19 +6766,27 @@ false
                 </style>
 
                 <style
-                    name="ActionBar.Solid.Heraldstyle"
-                    parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse" >
+                    name="ActionBar.Transparent.Heraldstyle"
+                    parent="@style/Widget.Sherlock.ActionBar" >
                     <item name="background">
-@drawable/ab_solid_heraldstyle
-                    </item>
-                    <item name="backgroundStacked">
-@drawable/ab_stacked_solid_heraldstyle
-                    </item>
-                    <item name="backgroundSplit">
-@drawable/ab_bottom_solid_heraldstyle
+@drawable/ab_transparent_heraldstyle
                     </item>
                     <item name="progressBarStyle">
 @style/ProgressBar.Heraldstyle
+                    </item>
+                </style>
+
+                <style
+                    name="DropDownNav.Heraldstyle"
+                    parent="@style/Widget.Sherlock.Spinner.DropDown.ActionBar" >
+                    <item name="android:background">
+@drawable/spinner_background_ab_heraldstyle
+                    </item>
+                    <item name="android:popupBackground">
+@drawable/menu_dropdown_panel_heraldstyle
+                    </item>
+                    <item name="android:dropDownSelector">
+@drawable/selectable_background_heraldstyle
                     </item>
                 </style>
 
@@ -6781,6 +6808,23 @@ true
                     </item>
                     <item name="android:backgroundDimEnabled">
 false
+                    </item>
+                </style>
+
+                <style
+                    name="ActionBar.Solid.Heraldstyle"
+                    parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse" >
+                    <item name="background">
+@drawable/ab_solid_heraldstyle
+                    </item>
+                    <item name="backgroundStacked">
+@drawable/ab_stacked_solid_heraldstyle
+                    </item>
+                    <item name="backgroundSplit">
+@drawable/ab_bottom_solid_heraldstyle
+                    </item>
+                    <item name="progressBarStyle">
+@style/ProgressBar.Heraldstyle
                     </item>
                 </style>
 

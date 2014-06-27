@@ -1,36 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     >
-    <ImageView
-        android:id="@+id/booking_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="1dp"
-        />
+
     <LinearLayout
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@id/booking_imageview"
-        android:layout_centerVertical="true"
-        android:orientation="vertical"    
-      >
+        android:id="@+id/linearLayout"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true">
       <TextView
           android:id="@+id/booking_cn_word"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="center"
+          android:layout_gravity="left"
           android:textColor="#191970"
           android:textSize="30sp"
-          />
+          android:autoText="false" />
       <TextView
           android:id="@+id/booking_en_word"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:textColor="#800080"
@@ -38,6 +31,61 @@
           />
                
     </LinearLayout>
-    
-    </RelativeLayout>
-    <!-- From: file:/F:/android/EzHerald/EzHerald/res/layout/booking_listview_subview.xml -->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true" />
+
+</RelativeLayout>-->
+
+
+
+<RelativeLayout
+    android:id="@+id/widget57"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/booking_activity_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignTop="@+id/booking_deadline"
+        android:layout_alignLeft="@+id/booking_caption"
+        android:textSize="15sp" />
+    <TextView
+        android:id="@+id/booking_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/booking_icon"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/booking_deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignTop="@+id/booking_is_order"
+        android:layout_alignParentRight="true"
+        android:textSize="15sp"
+        android:textIsSelectable="false" />
+    <TextView
+        android:id="@+id/booking_is_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="15sp" />
+    <ImageView
+        android:id="@+id/booking_icon"
+        android:layout_width="111dp"
+        android:layout_height="87dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+</RelativeLayout>
+<!-- From: file:/F:/android/EzHerald/EzHerald/res/layout/booking_listview_subview.xml -->

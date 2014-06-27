@@ -90,6 +90,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		initSlidingMenu(); // 初始化菜单
 
 		mMenuFrag = new MainMenuFragment();
+        //mMenuFrag = new SecondMenuFragment();
 		//mSecondaryMenuFrag = new SecondMenuFragment();
 
 		FragmentTransaction t = this.getSupportFragmentManager()
@@ -111,6 +112,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity {
 		int screenWidth = disp.getWidth();
 		int shadowWidth = (int) (0.05 * screenWidth); // 菜单阴影遮罩宽度
 		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
+        //int behindOffset = (int) (0 * screenWidth);
 
 		menu = getSlidingMenu();
 		//menu.setMode(SlidingMenu.LEFT_RIGHT);

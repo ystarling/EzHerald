@@ -77,7 +77,7 @@ public class GetImageViaUrl extends AsyncTask<ViewUrlInfo,Integer,Bitmap> {
     }
     @Override
     protected void onPreExecute(){
-        downDialog = ProgressDialog.show(mContext,"友情提示","正在下载");
+       // downDialog = ProgressDialog.show(mContext,"友情提示","正在下载");
         //Toast.makeText(mContext,"正在下载",Toast.LENGTH_SHORT);
     }
     @SuppressLint("NewApi")
@@ -89,11 +89,11 @@ public class GetImageViaUrl extends AsyncTask<ViewUrlInfo,Integer,Bitmap> {
          if(bitmap==null){
             view.setVisibility(view.GONE);
              Log.v("Booking Icon","bitmap is null");
-            downDialog.dismiss();
+          //  downDialog.dismiss();
          }
         else{
             Log.v("Booking Icon","bitmap is not null");
-            downDialog.dismiss();
+          //  downDialog.dismiss();
             view.setVisibility(view.VISIBLE);
             view.setImageBitmap(bitmap);
 
