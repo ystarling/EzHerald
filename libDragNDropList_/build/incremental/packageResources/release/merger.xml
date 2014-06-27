@@ -2,14 +2,14 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\res" >
+        <source path="F:\android\EzHerald\libDragNDropList_\res" >
             <file
                 name="main"
-                path="D:\GitHub\Ezherald\libDragNDropList_\res\layout\main.xml"
+                path="F:\android\EzHerald\libDragNDropList_\res\layout\main.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\res\values\strings.xml"
+                path="F:\android\EzHerald\libDragNDropList_\res\values\strings.xml"
                 qualifiers="" >
                 <string name="app_name" >DragNDropList
                 </string>
@@ -17,11 +17,11 @@
                 </string>
             </file>
         </source>
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\build\res\rs\release" />
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\build\res\generated\release" />
+        <source path="F:\android\EzHerald\libDragNDropList_\build\res\rs\release" />
+        <source path="F:\android\EzHerald\libDragNDropList_\build\res\generated\release" />
     </dataSet>
     <dataSet config="release" >
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\build-types\release\res" />
+        <source path="F:\android\EzHerald\libDragNDropList_\build-types\release\res" />
     </dataSet>
 
 </merger>

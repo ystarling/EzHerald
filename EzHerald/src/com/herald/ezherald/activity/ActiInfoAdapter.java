@@ -327,8 +327,8 @@ public class ActiInfoAdapter extends BaseAdapter {
 			view= v;
 			url = u;
 			flag = f;
-			id = i;
-			layout = lay;
+            id = i;
+            layout = lay;
 		}
 	}
 

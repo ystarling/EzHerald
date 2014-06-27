@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- From: file:/D:/GitHub/Ezherald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <attr name="background" format="reference|color" />
@@ -506,12 +506,12 @@
     <string name="abs__searchview_description_voice">Voice search</string>
     <string name="abs__shareactionprovider_share_with">Share with</string>
     <string name="abs__shareactionprovider_share_with_application">Share with <ns1:g id="application_name" example="Bluetooth">%s</ns1:g></string>
-    <!-- From: file:/D:/GitHub/Ezherald/libDragNDropList_/res/values/strings.xml -->
+    <!-- From: file:/F:/android/EzHerald/libDragNDropList_/res/values/strings.xml -->
     <eat-comment />
 
     <string name="app_name">DragNDropList</string>
     <string name="hello">Hello World, DragNDropListActivity!</string>
-    <!-- From: file:/D:/GitHub/Ezherald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/libDragNDropList_/build/exploded-aar/Ezherald/libABS/unspecified/res/values/values.xml -->
     <eat-comment />
 
     <style name="Sherlock.__TextAppearance.Small" parent="Widget">

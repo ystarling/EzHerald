@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
    <solid android:color="#ffffff" />
    <stroke android:width="1dip" android:color="#EEEEEE"/>
-</shape><!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/drawable/libr_search_frame.xml -->
+</shape><!-- From: file:/F:/android/EzHerald/EzHerald/res/drawable/libr_search_frame.xml -->

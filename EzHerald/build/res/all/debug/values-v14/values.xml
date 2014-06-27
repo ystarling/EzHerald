@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values-v14/styles_heraldstyle.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values-v14/styles_heraldstyle.xml -->
     <eat-comment />
 
     <style name="ActionBar.Solid.Heraldstyle" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
@@ -15,13 +15,13 @@
         <item name="android:background">@drawable/ab_transparent_heraldstyle</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Heraldstyle</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values-v14/styles.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values-v14/styles.xml -->
     <eat-comment />
 
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- API 14 theme customizations can go here. -->
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml -->
     <eat-comment />
 
     <style name="Sherlock.__Theme" parent="android:Theme.Holo" />
@@ -69,7 +69,7 @@
     <style name="TextAppearance.Sherlock.Widget.PopupMenu.Large" parent="android:TextAppearance.Holo.Widget.PopupMenu.Large" />
 
     <style name="TextAppearance.Sherlock.Widget.PopupMenu.Small" parent="android:TextAppearance.Holo.Widget.PopupMenu.Small" />
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/values-v14/styles_heraldstyle.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/res/values-v14/styles_heraldstyle.xml -->
     <eat-comment />
 
     <style name="Theme.Heraldstyle" parent="@style/Theme.Sherlock.Light.DarkActionBar">
@@ -91,7 +91,7 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Heraldstyle</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Heraldstyle</item>
     </style>
-    <!-- From: file:/D:/GitHub/Ezherald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml -->
+    <!-- From: file:/F:/android/EzHerald/EzHerald/build/exploded-aar/Ezherald/libABS/unspecified/res/values-v14/values.xml -->
     <eat-comment />
 
     <style name="Theme.Sherlock.Light.NoActionBar">

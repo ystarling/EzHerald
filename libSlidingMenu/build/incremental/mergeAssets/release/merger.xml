@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\GitHub\Ezherald\libSlidingMenu\assets" />
+        <source path="F:\android\EzHerald\libSlidingMenu\assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="D:\GitHub\Ezherald\libSlidingMenu\build-types\release\assets" />
+        <source path="F:\android\EzHerald\libSlidingMenu\build-types\release\assets" />
     </dataSet>
 
 </merger>

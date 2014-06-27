@@ -2,1589 +2,1589 @@
 <merger xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" >
 
     <dataSet config="unspecified" >
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res" >
+        <source path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res" >
             <file
                 name="abs__primary_text_disable_only_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_disable_only_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_disable_only_holo_dark.xml"
                 qualifiers=""
                 type="color" />
             <file
                 name="abs__primary_text_disable_only_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_disable_only_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_disable_only_holo_light.xml"
                 qualifiers=""
                 type="color" />
             <file
                 name="abs__primary_text_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_holo_dark.xml"
                 qualifiers=""
                 type="color" />
             <file
                 name="abs__primary_text_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\color\abs__primary_text_holo_light.xml"
                 qualifiers=""
                 type="color" />
             <file
                 name="abs__activated_background_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__activated_background_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__activated_background_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__activated_background_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__activated_background_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__activated_background_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__btn_cab_done_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__btn_cab_done_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__btn_cab_done_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__btn_cab_done_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__ic_clear"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_clear.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_clear.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__ic_clear_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_clear_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_clear_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_menu_moreoverflow_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_menu_moreoverflow_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_menu_moreoverflow_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__ic_menu_moreoverflow_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__item_background_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__item_background_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__item_background_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__item_background_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__item_background_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__item_background_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__list_selector_background_transition_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_background_transition_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_background_transition_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__list_selector_background_transition_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_background_transition_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_background_transition_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__list_selector_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__list_selector_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__list_selector_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__progress_horizontal_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__progress_horizontal_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__progress_horizontal_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__progress_horizontal_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__progress_horizontal_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__progress_horizontal_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__progress_medium_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__progress_medium_holo.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__progress_medium_holo.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__search_dropdown_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__search_dropdown_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__search_dropdown_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__search_dropdown_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__search_dropdown_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__search_dropdown_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__spinner_ab_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__spinner_ab_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__spinner_ab_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__spinner_ab_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__spinner_ab_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__spinner_ab_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__tab_indicator_ab_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__tab_indicator_ab_holo.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__tab_indicator_ab_holo.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__textfield_searchview_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__textfield_searchview_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__textfield_searchview_right_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_right_holo_dark.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_right_holo_dark.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__textfield_searchview_right_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_right_holo_light.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable\abs__textfield_searchview_right_holo_light.xml"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_solid_dark_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_inverse_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_solid_inverse_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_solid_inverse_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_solid_light_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_transparent_dark_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_bottom_transparent_light_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_share_pack_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_share_pack_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_share_pack_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_share_pack_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_share_pack_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_share_pack_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_solid_dark_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_solid_light_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_shadow_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_solid_shadow_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_solid_shadow_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_solid_dark_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_solid_light_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_transparent_dark_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_stacked_transparent_light_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_transparent_dark_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ab_transparent_light_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_default_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_default_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_focused_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_focused_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_focused_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_focused_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_focused_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_focused_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_pressed_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__btn_cab_done_pressed_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_bottom_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_bottom_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_bottom_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_bottom_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_bottom_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_bottom_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_top_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_top_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_top_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_top_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_top_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__cab_background_top_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_ab_back_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_ab_back_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_ab_back_holo_dark.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_ab_back_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_ab_back_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_ab_back_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_cab_done_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_cab_done_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_cab_done_holo_dark.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_cab_done_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_cab_done_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_cab_done_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_disabled"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_disabled.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_disabled.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_normal"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_normal.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_normal.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_search_api_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_search_api_disabled_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_search_api_disabled_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_clear_search_api_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_commit_search_api_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_commit_search_api_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_commit_search_api_holo_dark.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_commit_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_commit_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_commit_search_api_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_go"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_go.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_go.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_go_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_go_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_go_search_api_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_normal_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_moreoverflow_normal_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_moreoverflow_normal_holo_dark.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_normal_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_moreoverflow_normal_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_moreoverflow_normal_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_share_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_share_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_share_holo_dark.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_share_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_share_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_menu_share_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_search"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_search.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_search.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_search_api_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_voice_search"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_voice_search.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_voice_search.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ic_voice_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_voice_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__ic_voice_search_api_holo_light.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_activated_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_activated_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_activated_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_divider_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_divider_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_divider_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_divider_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_divider_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_divider_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_focused_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_focused_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_focused_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_longpressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_longpressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_longpressed_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_pressed_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_pressed_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_selector_disabled_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_selector_disabled_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_selector_disabled_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__list_selector_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_selector_disabled_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__list_selector_disabled_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__menu_dropdown_panel_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__menu_dropdown_panel_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__menu_dropdown_panel_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__menu_dropdown_panel_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__menu_dropdown_panel_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__menu_dropdown_panel_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__progress_bg_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_bg_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_bg_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__progress_bg_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_bg_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_bg_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__progress_primary_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_primary_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_primary_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__progress_primary_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_primary_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_primary_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__progress_secondary_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_secondary_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_secondary_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__progress_secondary_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_secondary_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__progress_secondary_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_48_inner_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_48_inner_holo.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_48_inner_holo.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_48_outer_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_48_outer_holo.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_48_outer_holo.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_default_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_default_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_disabled_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_disabled_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_disabled_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_disabled_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_disabled_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_focused_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_focused_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_focused_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_focused_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_focused_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_focused_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_pressed_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__spinner_ab_pressed_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_focused_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_selected_focused_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_selected_focused_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_selected_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_selected_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_pressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_selected_pressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_selected_pressed_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__tab_unselected_pressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_unselected_pressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__tab_unselected_pressed_holo.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_default_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_default_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_default_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_default_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_selected_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_selected_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_selected_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_selected_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_selected_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_right_selected_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_selected_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_selected_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_selected_holo_dark.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_selected_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_selected_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__textfield_search_selected_holo_light.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__toast_frame"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__toast_frame.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-hdpi\abs__toast_frame.9.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_solid_dark_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_inverse_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_solid_inverse_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_solid_inverse_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_solid_light_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_transparent_dark_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_bottom_transparent_light_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_share_pack_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_share_pack_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_share_pack_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_share_pack_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_share_pack_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_share_pack_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_solid_dark_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_solid_light_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_shadow_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_solid_shadow_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_solid_shadow_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_solid_dark_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_solid_light_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_transparent_dark_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_stacked_transparent_light_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_transparent_dark_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ab_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ab_transparent_light_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_default_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_default_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_focused_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_focused_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_focused_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_focused_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_focused_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_focused_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_pressed_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__btn_cab_done_pressed_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_bottom_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_bottom_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_bottom_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_bottom_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_bottom_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_bottom_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_top_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_top_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_top_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_top_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_top_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__cab_background_top_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_ab_back_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_ab_back_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_ab_back_holo_dark.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_ab_back_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_ab_back_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_ab_back_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_cab_done_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_cab_done_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_cab_done_holo_dark.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_cab_done_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_cab_done_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_cab_done_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_disabled"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_disabled.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_disabled.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_normal"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_normal.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_normal.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_search_api_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_search_api_disabled_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_search_api_disabled_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_clear_search_api_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_commit_search_api_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_commit_search_api_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_commit_search_api_holo_dark.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_commit_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_commit_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_commit_search_api_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_go"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_go.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_go.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_go_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_go_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_go_search_api_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_normal_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_moreoverflow_normal_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_moreoverflow_normal_holo_dark.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_normal_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_moreoverflow_normal_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_moreoverflow_normal_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_share_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_share_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_share_holo_dark.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_share_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_share_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_menu_share_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_search"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_search.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_search.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_search_api_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_voice_search"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_voice_search.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_voice_search.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__ic_voice_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_voice_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__ic_voice_search_api_holo_light.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_activated_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_activated_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_activated_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_divider_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_divider_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_divider_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_divider_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_divider_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_divider_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_focused_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_focused_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_focused_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_longpressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_longpressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_longpressed_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_pressed_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_pressed_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_selector_disabled_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_selector_disabled_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_selector_disabled_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__list_selector_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_selector_disabled_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__list_selector_disabled_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__menu_dropdown_panel_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__menu_dropdown_panel_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__menu_dropdown_panel_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__menu_dropdown_panel_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__menu_dropdown_panel_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__menu_dropdown_panel_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__progress_bg_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_bg_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_bg_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__progress_bg_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_bg_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_bg_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__progress_primary_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_primary_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_primary_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__progress_primary_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_primary_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_primary_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__progress_secondary_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_secondary_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_secondary_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__progress_secondary_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_secondary_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__progress_secondary_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_48_inner_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_48_inner_holo.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_48_inner_holo.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_48_outer_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_48_outer_holo.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_48_outer_holo.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_default_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_default_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_disabled_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_disabled_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_disabled_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_disabled_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_disabled_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_focused_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_focused_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_focused_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_focused_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_focused_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_focused_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_pressed_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__spinner_ab_pressed_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_focused_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_selected_focused_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_selected_focused_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_selected_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_selected_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_pressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_selected_pressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_selected_pressed_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__tab_unselected_pressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_unselected_pressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__tab_unselected_pressed_holo.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_default_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_default_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_default_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_default_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_selected_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_selected_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_selected_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_selected_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_selected_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_right_selected_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_selected_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_selected_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_selected_holo_dark.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_selected_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_selected_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__textfield_search_selected_holo_light.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__toast_frame"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__toast_frame.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-mdpi\abs__toast_frame.9.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="abs__progress_medium_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-v11\abs__progress_medium_holo.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-v11\abs__progress_medium_holo.xml"
                 qualifiers="v11"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_solid_dark_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_inverse_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_solid_inverse_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_solid_inverse_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_solid_light_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_transparent_dark_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_bottom_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_bottom_transparent_light_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_share_pack_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_share_pack_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_share_pack_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_share_pack_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_share_pack_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_share_pack_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_solid_dark_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_solid_light_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_solid_shadow_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_solid_shadow_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_solid_shadow_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_solid_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_solid_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_solid_dark_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_solid_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_solid_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_solid_light_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_transparent_dark_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_stacked_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_stacked_transparent_light_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_transparent_dark_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_transparent_dark_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_transparent_dark_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ab_transparent_light_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_transparent_light_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ab_transparent_light_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_default_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_default_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_focused_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_focused_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_focused_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_focused_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_focused_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_focused_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_pressed_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__btn_cab_done_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__btn_cab_done_pressed_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_bottom_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_bottom_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_bottom_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_bottom_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_bottom_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_bottom_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_top_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_top_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_top_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__cab_background_top_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_top_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__cab_background_top_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_ab_back_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_ab_back_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_ab_back_holo_dark.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_ab_back_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_ab_back_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_ab_back_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_cab_done_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_cab_done_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_cab_done_holo_dark.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_cab_done_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_cab_done_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_cab_done_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_disabled"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_clear_disabled.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_clear_disabled.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_search_api_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_clear_search_api_disabled_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_clear_search_api_disabled_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_clear_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_clear_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_clear_search_api_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_commit_search_api_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_commit_search_api_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_commit_search_api_holo_dark.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_commit_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_commit_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_commit_search_api_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_go"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_go.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_go.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_go_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_go_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_go_search_api_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_normal_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_moreoverflow_normal_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_moreoverflow_normal_holo_dark.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_moreoverflow_normal_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_moreoverflow_normal_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_moreoverflow_normal_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_share_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_share_holo_dark.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_share_holo_dark.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_menu_share_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_share_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_menu_share_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_search"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_search.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_search.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_search_api_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_voice_search"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_voice_search.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_voice_search.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__ic_voice_search_api_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_voice_search_api_holo_light.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__ic_voice_search_api_holo_light.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_activated_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_activated_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_activated_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_divider_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_divider_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_divider_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_divider_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_divider_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_divider_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_focused_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_focused_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_focused_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_longpressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_longpressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_longpressed_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_pressed_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_pressed_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_selector_disabled_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_selector_disabled_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_selector_disabled_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__list_selector_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_selector_disabled_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__list_selector_disabled_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__menu_dropdown_panel_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__menu_dropdown_panel_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__menu_dropdown_panel_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__menu_dropdown_panel_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__menu_dropdown_panel_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__menu_dropdown_panel_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__progress_bg_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_bg_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_bg_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__progress_bg_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_bg_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_bg_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__progress_primary_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_primary_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_primary_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__progress_primary_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_primary_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_primary_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__progress_secondary_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_secondary_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_secondary_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__progress_secondary_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_secondary_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__progress_secondary_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_48_inner_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_48_inner_holo.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_48_inner_holo.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_48_outer_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_48_outer_holo.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_48_outer_holo.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_default_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_default_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_disabled_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_disabled_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_disabled_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_disabled_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_disabled_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_disabled_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_focused_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_focused_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_focused_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_focused_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_focused_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_focused_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_pressed_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_pressed_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_pressed_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__spinner_ab_pressed_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_pressed_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__spinner_ab_pressed_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_focused_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_selected_focused_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_selected_focused_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_selected_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_selected_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__tab_selected_pressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_selected_pressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_selected_pressed_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__tab_unselected_pressed_holo"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_unselected_pressed_holo.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__tab_unselected_pressed_holo.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_default_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_default_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_default_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_default_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_default_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_default_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_default_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_default_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_selected_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_selected_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_selected_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_right_selected_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_selected_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_right_selected_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_selected_holo_dark"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_selected_holo_dark.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_selected_holo_dark.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__textfield_search_selected_holo_light"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_selected_holo_light.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__textfield_search_selected_holo_light.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__toast_frame"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__toast_frame.9.png"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\drawable-xhdpi\abs__toast_frame.9.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="abs__action_bar_home"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_home.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_home.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_bar_tab"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_tab.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_tab.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_bar_tab_bar_view"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_tab_bar_view.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_tab_bar_view.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_bar_title_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_title_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_bar_title_item.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_menu_item_layout"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_menu_item_layout.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_menu_item_layout.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_menu_layout"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_menu_layout.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_menu_layout.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_mode_bar"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_mode_bar.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_mode_bar.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_mode_close_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_mode_close_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__action_mode_close_item.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__activity_chooser_view"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__activity_chooser_view.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__activity_chooser_view.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__activity_chooser_view_list_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__activity_chooser_view_list_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__activity_chooser_view_list_item.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__list_menu_item_checkbox"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__list_menu_item_checkbox.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__list_menu_item_checkbox.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__list_menu_item_icon"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__list_menu_item_icon.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__list_menu_item_icon.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__list_menu_item_radio"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__list_menu_item_radio.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__list_menu_item_radio.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__popup_menu_item_layout"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__popup_menu_item_layout.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__popup_menu_item_layout.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__screen_action_bar"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_action_bar.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_action_bar.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__screen_action_bar_overlay"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_action_bar_overlay.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_action_bar_overlay.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__screen_simple"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_simple.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_simple.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__screen_simple_overlay_action_mode"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_simple_overlay_action_mode.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__screen_simple_overlay_action_mode.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__search_dropdown_item_icons_2line"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__search_dropdown_item_icons_2line.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__search_dropdown_item_icons_2line.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__search_view"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__search_view.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__search_view.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__simple_dropdown_hint"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__simple_dropdown_hint.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\abs__simple_dropdown_hint.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="sherlock_spinner_dropdown_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\sherlock_spinner_dropdown_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\sherlock_spinner_dropdown_item.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="sherlock_spinner_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\sherlock_spinner_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout\sherlock_spinner_item.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="abs__action_mode_close_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-large\abs__action_mode_close_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-large\abs__action_mode_close_item.xml"
                 qualifiers="large"
                 type="layout" />
             <file
                 name="sherlock_spinner_dropdown_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-v14\sherlock_spinner_dropdown_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-v14\sherlock_spinner_dropdown_item.xml"
                 qualifiers="v14"
                 type="layout" />
             <file
                 name="sherlock_spinner_item"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-v14\sherlock_spinner_item.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-v14\sherlock_spinner_item.xml"
                 qualifiers="v14"
                 type="layout" />
             <file
                 name="abs__screen_action_bar"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-xlarge\abs__screen_action_bar.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-xlarge\abs__screen_action_bar.xml"
                 qualifiers="xlarge"
                 type="layout" />
             <file
                 name="abs__screen_action_bar_overlay"
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-xlarge\abs__screen_action_bar_overlay.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\layout-xlarge\abs__screen_action_bar_overlay.xml"
                 qualifiers="xlarge"
                 type="layout" />
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values\values.xml"
                 qualifiers="" >
 
                 <style
@@ -3875,7 +3875,7 @@ false
                     type="id"/>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-land\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-land\values.xml"
                 qualifiers="land" >
                 <dimen name="abs__action_bar_icon_vertical_padding" >4dip
                 </dimen>
@@ -3891,7 +3891,7 @@ false
                 </dimen>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-hdpi-1024x600\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-hdpi-1024x600\values.xml"
                 qualifiers="large-hdpi-1024x600" >
                 <dimen name="abs__action_bar_subtitle_bottom_margin" >5dip
                 </dimen>
@@ -3907,7 +3907,7 @@ false
                 </dimen>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-land-hdpi-1024x600\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-land-hdpi-1024x600\values.xml"
                 qualifiers="large-land-hdpi-1024x600" >
                 <dimen name="abs__action_bar_title_text_size" >16dp
                 </dimen>
@@ -3923,7 +3923,7 @@ false
                 </dimen>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-land-mdpi-1024x600\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-land-mdpi-1024x600\values.xml"
                 qualifiers="large-land-mdpi-1024x600" >
                 <dimen name="abs__action_bar_default_height" >48dip
                 </dimen>
@@ -3939,7 +3939,7 @@ false
                 </dimen>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-mdpi-1024x600\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-large-mdpi-1024x600\values.xml"
                 qualifiers="large-mdpi-1024x600" >
                 <dimen name="abs__action_button_min_width" >64dip
                 </dimen>
@@ -3957,7 +3957,7 @@ false
                 </dimen>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-sw600dp\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-sw600dp\values.xml"
                 qualifiers="sw600dp" >
                 <dimen name="abs__action_button_min_width" >64dip
                 </dimen>
@@ -3984,7 +3984,7 @@ false
                 </bool>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-v11\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-v11\values.xml"
                 qualifiers="v11" >
 
                 <style
@@ -4010,7 +4010,7 @@ false
                 </style>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-v14\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-v14\values.xml"
                 qualifiers="v14" >
 
                 <style
@@ -4270,14 +4270,14 @@ true
                     parent="android:Widget.Holo.AutoCompleteTextView" />
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w360dp\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w360dp\values.xml"
                 qualifiers="w360dp" >
                 <integer name="abs__max_action_buttons" >
 3
                 </integer>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w480dp\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w480dp\values.xml"
                 qualifiers="w480dp" >
                 <bool name="abs__config_allowActionMenuItemTextWithIcon" >
 true
@@ -4290,21 +4290,21 @@ true
                 </bool>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w500dp\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w500dp\values.xml"
                 qualifiers="w500dp" >
                 <integer name="abs__max_action_buttons" >
 4
                 </integer>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w600dp\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-w600dp\values.xml"
                 qualifiers="w600dp" >
                 <integer name="abs__max_action_buttons" >
 5
                 </integer>
             </file>
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-xlarge\values.xml"
+                path="F:\android\EzHerald\libDragNDropList_\build\exploded-aar\Ezherald\libABS\unspecified\res\values-xlarge\values.xml"
                 qualifiers="xlarge" >
                 <item
                     name="abs__dialog_min_width_minor"
@@ -4337,14 +4337,14 @@ true
         </source>
     </dataSet>
     <dataSet config="main" >
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\res" >
+        <source path="F:\android\EzHerald\libDragNDropList_\res" >
             <file
                 name="main"
-                path="D:\GitHub\Ezherald\libDragNDropList_\res\layout\main.xml"
+                path="F:\android\EzHerald\libDragNDropList_\res\layout\main.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                path="D:\GitHub\Ezherald\libDragNDropList_\res\values\strings.xml"
+                path="F:\android\EzHerald\libDragNDropList_\res\values\strings.xml"
                 qualifiers="" >
                 <string name="app_name" >DragNDropList
                 </string>
@@ -4352,11 +4352,11 @@ true
                 </string>
             </file>
         </source>
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\build\res\rs\debug" />
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\build\res\generated\debug" />
+        <source path="F:\android\EzHerald\libDragNDropList_\build\res\rs\debug" />
+        <source path="F:\android\EzHerald\libDragNDropList_\build\res\generated\debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="D:\GitHub\Ezherald\libDragNDropList_\build-types\debug\res" />
+        <source path="F:\android\EzHerald\libDragNDropList_\build-types\debug\res" />
     </dataSet>
 
 </merger>

@@ -43,12 +43,12 @@
 	    </receiver>
 
          <activity
-            android:name="com.herald.ezherald.bookingOffice.bookingDetailActivity"
+            android:name=".bookingOffice.BookingDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
          <activity
-            android:name="com.herald.ezherald.bookingOffice.bookingActivity"
+            android:name=".bookingOffice.BookingActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>

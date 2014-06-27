@@ -9,7 +9,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 
-public class bookingDetailActivity extends SherlockActivity{
+public class BookingDetailActivity extends SherlockActivity{
 	private String[] test = {"first","second","third"};
 	public static String ARG_POSITION = "position";
 	private int mCurrentPosition = -1;

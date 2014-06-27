@@ -3,4 +3,4 @@
     <item android:state_enabled="false" android:drawable="@android:drawable/presence_online"></item>
 	<item android:state_enabled="true" android:drawable="@android:drawable/presence_invisible"></item>
 </selector>
-<!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/drawable/draw_main_frame_guide_dot.xml -->
+<!-- From: file:/F:/android/EzHerald/EzHerald/res/drawable/draw_main_frame_guide_dot.xml -->

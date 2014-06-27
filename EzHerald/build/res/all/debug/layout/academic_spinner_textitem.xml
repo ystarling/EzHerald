@@ -9,4 +9,4 @@
     android:layout_height="?attr/dropdownListPreferredItemHeight"
     android:textIsSelectable="false"
     android:ellipsize="marquee" />
-<!-- From: file:/D:/GitHub/Ezherald/EzHerald/res/layout/academic_spinner_textitem.xml -->
+<!-- From: file:/F:/android/EzHerald/EzHerald/res/layout/academic_spinner_textitem.xml -->

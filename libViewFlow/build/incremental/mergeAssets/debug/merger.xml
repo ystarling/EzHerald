@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\GitHub\Ezherald\libViewFlow\assets" />
+        <source path="F:\android\EzHerald\libViewFlow\assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="D:\GitHub\Ezherald\libViewFlow\build-types\debug\assets" />
+        <source path="F:\android\EzHerald\libViewFlow\build-types\debug\assets" />
     </dataSet>
 
 </merger>
