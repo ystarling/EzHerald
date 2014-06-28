@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <MultiSelectListPreference
+        android:title="功能选择"
+        android:entries="@array/pref_module_choice_titles"
+        android:entryValues="@array/pref_module_choice_values"
+        android:defaultValue="@array/pref_module_choice_def_vals"
+        android:key = "activity"
+        >
+    </MultiSelectListPreference>
+    <MultiSelectListPreference
+        android:title="主界面色调"
+        android:entries="@array/pref_listview_color_titles"
+        android:entryValues="@array/pref_listview_color_values"
+        android:defaultValue="@array/pref_listview_color_values"
+        android:key="color">
+
+    </MultiSelectListPreference>
+    <ListPreference
+        android:title="更新频率"
+        android:entries="@array/pref_sync_frequency_titles"
+        android:entryValues="@array/pref_sync_frequency_values"
+        android:key="frequency">
+
+    </ListPreference>
+    <Preference android:title = "软件更新">
+        <intent android:action="AboutThisApp">
+
+        </intent>
+    </Preference>
+    <Preference android:title = "引导界面">
+        <intent android:action= "AboutThisApp">
+        </intent>
+    </Preference>
+    <Preference android:title = "关于">
+        <intent android:action="AboutThisApp">
+
+        </intent>
+    </Preference>
+</PreferenceScreen>
