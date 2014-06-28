@@ -1,6 +1,7 @@
 package com.special.ResideMenu;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +21,20 @@ public class ResideMenuItem extends LinearLayout{
     /** menu item  title */
     private TextView tv_title;
 
+    public void  setTextColor(int color) {
+        if (tv_title != null) {
+            switch (color) {
+                case 0:
+                    tv_title.setTextColor(Color.RED);
+                    break;
+                case 1:
+                    tv_title.setTextColor(Color.GREEN);
+                    break;
+                default:
+                    tv_title.setTextColor(Color.BLACK);
+            }
+        }
+    }
     public ResideMenuItem(Context context) {
         super(context);
         initViews(context);

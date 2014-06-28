@@ -16,6 +16,11 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.account.AccountActivity;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.IDCardAccountActivity;
+import com.herald.ezherald.account.LibAccountActivity;
+import com.herald.ezherald.account.TyxAccountActivity;
+import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.activity.ActiActivity;
 import com.herald.ezherald.bookingOffice.BookingActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
@@ -41,8 +46,9 @@ import com.tendcloud.tenddata.TCAgent;
  * 
  */
 public class BaseFrameActivity extends SlidingFragmentActivity implements View.OnClickListener {
-	//protected SlidingMenu menu;
-    protected ResideMenu menu;
+	//protected SlidingMenu leftMenu;
+    protected ResideMenu leftMenu;
+    protected ResideMenu rightMenu;
     protected ResideMenuItem[] menuItems;
     protected ResideMenu setting;
     protected ResideMenuItem[] settingItems;
@@ -119,10 +125,10 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
     private void initSlidingMenu(){
-        menu = new ResideMenu(this);
-        menu.setBackground(R.drawable.menu_background);
-        menu.setShadowVisible(false);
-        menu.attachToActivity(this);
+        leftMenu = new ResideMenu(this);
+        leftMenu.setBackground(R.drawable.menu_background);
+        leftMenu.setShadowVisible(false);
+        leftMenu.attachToActivity(this);
 
         int[] menuIcon = new int[]{
                 R.drawable.main_menu_ic_mainframe,
@@ -141,20 +147,66 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         for(int i=0;i<menuIcon.length;++i) {
             menuItems[i] = new ResideMenuItem(this,menuIcon[i],menuName[i]);
             menuItems[i].setOnClickListener(this);
-            menu.addMenuItem(menuItems[i],ResideMenu.DIRECTION_LEFT);
+            leftMenu.addMenuItem(menuItems[i], ResideMenu.DIRECTION_LEFT);
         }
 
         int[] settingIcon = new int[]{
                 R.drawable.main_menu_ic_mainframe,
+                R.drawable.main_menu_ic_mainframe,
+                R.drawable.main_menu_ic_mainframe,
                 R.drawable.main_menu_ic_curriculum,
-                R.drawable.main_menu_ic_curriculum
+                R.drawable.main_menu_ic_curriculum,
+                0
         };
-        String[] settingName = getResources().getStringArray(R.array.second_menu_items);
+        String[] settingName = new String[]{
+                "一卡通账户",
+                "体育系账户",
+                "图书馆账户",
+                "程序设置",
+                "账户设置",
+                ""
+
+        };
+
         settingItems = new ResideMenuItem[settingName.length];
+       /* rightMenu = new ResideMenu(this);
+        rightMenu.setBackground(R.drawable.menu_background);
+        rightMenu.setShadowVisible(false);
+        rightMenu.attachToActivity(this);*/
+        UserAccount user = null;
         for (int i=0;i<settingName.length;i++){
+
             settingItems[i] = new ResideMenuItem(this,settingIcon[i],settingName[i]);
             settingItems[i].setOnClickListener(this);
-            menu.addMenuItem(settingItems[i],ResideMenu.DIRECTION_RIGHT);
+            leftMenu.addMenuItem(settingItems[i], ResideMenu.DIRECTION_RIGHT);
+            switch(i){
+                case 0:
+                    user = new Authenticate().getIDcardUser(this);
+                    if(user==null){
+                        settingItems[i].setTextColor(0);
+                    }else{
+                        settingItems[i].setTextColor(1);
+                    }
+                    break;
+                case 1:
+                    user = new Authenticate().getTyxUser(this);
+                    if(user==null){
+                        settingItems[i].setTextColor(0);
+                    }else{
+                        settingItems[i].setTextColor(1);
+                    }
+                    break;
+                case 2:
+                    user = new Authenticate().getLibUser(this);
+                    if(user==null){
+                        settingItems[i].setTextColor(0);
+                    }else{
+                        settingItems[i].setTextColor(1);
+                    }
+                    break;
+
+
+            }
         }
 
 
@@ -192,11 +244,11 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 			openConfirmDialog();
 			break;
 		case android.R.id.home:
-			//menu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
-            if(menu.isOpened()){
-                menu.closeMenu();
+			//leftMenu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
+            if(leftMenu.isOpened()){
+                leftMenu.closeMenu();
             }else{
-                menu.openMenu(ResideMenu.DIRECTION_LEFT);
+                leftMenu.openMenu(ResideMenu.DIRECTION_LEFT);
             }
 			break;
 		}
@@ -240,8 +292,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 				//Object mHelperUtils;
 				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
 				mExitTime = System.currentTimeMillis();
-				//menu.showMenu();
-                menu.openMenu(ResideMenu.DIRECTION_LEFT);
+				//leftMenu.showMenu();
+                leftMenu.openMenu(ResideMenu.DIRECTION_LEFT);
 			} else {
 				finish();
 			}
@@ -259,11 +311,52 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
 	@Override
 	protected void onResume() {
-		super.onResume();
-		// 统计模块
-		TCAgent.onResume(this);
-	}
+        super.onResume();
+        // 统计模块
+        TCAgent.onResume(this);
+        //Toast.makeText(this, "Resume!", Toast.LENGTH_SHORT).show();
+        UserAccount user = null;
+        if (settingItems != null) {
+            for (int i = 0; i < settingItems.length; i++) {
+                switch (i) {
+                    case 0:
+                        user = new Authenticate().getIDcardUser(this);
+                        if (user == null) {
+                            settingItems[i].setTextColor(0);
+                        } else {
+                            settingItems[i].setTextColor(1);
+                        }
+                        break;
+                    case 1:
+                        user = new Authenticate().getTyxUser(this);
+                        if (user == null) {
+                            settingItems[i].setTextColor(0);
+                        } else {
+                            settingItems[i].setTextColor(1);
+                        }
+                        break;
+                    case 2:
+                        user = new Authenticate().getLibUser(this);
+                        if (user == null) {
+                            settingItems[i].setTextColor(0);
+                        } else {
+                            settingItems[i].setTextColor(1);
+                        }
+                        break;
 
+
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+       // Toast.makeText(this, "Resume!", Toast.LENGTH_SHORT).show();
+
+
+    }
 
     @Override
     public void onClick(View v) {
@@ -279,40 +372,62 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 break;
             }
         }
-        menu.closeMenu();
+        leftMenu.closeMenu();
     }
 
     private void runRightMenuModel(int position){
         String menuTarget = "Unknown";
-        Intent intent = new Intent();
+        Intent intent = null;
         switch (position) {
-            case 0:
-                //intent.setClass(this, AccountActivity.class);
+
+             //case 0; 有bug，跳过0
+             //intent.setClass(this, AccountActivity.class);
                // menuTarget = "Account";
-               intent.setClass(this, AccountActivity.class);
-                menuTarget = "Accouont";
-                break;
+               //intent.setClass(this, SettingActivity.class);
+               // menuTarget = "Setting";
+               // break;
             case 1:
                 //intent.setClass(this, AccountActivity.class);
                 // menuTarget = "Account";
-                intent.setClass(this, SettingActivity.class);
-                menuTarget = "Setting";
+                intent = new Intent();
+                intent.setClass(this, IDCardAccountActivity.class);
+                menuTarget = "IDCard";
                 break;
             case 2:
                 //intent.setClass(this, MainActivity.class);
                // menuTarget = "MainActivity";
+                intent = new Intent();
+                intent.setClass(this, TyxAccountActivity.class);
+                menuTarget = "TyxAccount";
+                break;
+            case 3:
+                //intent.setClass(this, MainActivity.class);
+                // menuTarget = "MainActivity";
+                intent = new Intent();
+                intent.setClass(this, LibAccountActivity.class);
+                menuTarget = "LibAccount";
+                break;
+            case 4:
+                //intent.setClass(this, MainActivity.class);
+                // menuTarget = "MainActivity";
+                intent = new Intent();
+                intent.setClass(this, SettingActivity.class);
+                menuTarget = "Setting";
+                break;
+            case 5:
+                //intent.setClass(this, MainActivity.class);
+                // menuTarget = "MainActivity";
+                intent = new Intent();
                 intent.setClass(this, AccountActivity.class);
-                menuTarget = "Accouont";
+                menuTarget = "Account";
                 break;
 
         }
-        TCAgent.onEvent(this, "主菜单点击", menuTarget);
+        TCAgent.onEvent(this, "设置菜单点击", menuTarget);
 
         if (intent != null) {
             intent.putExtra(KEY_SHOWED_UPDATE, true);
             startActivity(intent);
-            if(position != 0)
-                killMyself();
         }
     }
 
@@ -383,6 +498,6 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        return menu.dispatchTouchEvent(ev);
+        return leftMenu.dispatchTouchEvent(ev);
     }
 }

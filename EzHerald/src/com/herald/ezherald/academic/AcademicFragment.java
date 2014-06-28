@@ -102,7 +102,7 @@ public class AcademicFragment extends SherlockFragment implements
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.menu_academic_list, menu);
-//		mMenu = menu;
+//		mMenu = leftMenu;
 	}
 
 	/*
