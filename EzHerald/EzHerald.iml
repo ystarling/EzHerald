@@ -65,13 +65,15 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 18 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="android-support-v4" level="project" />
     <orderEntry type="library" exported="" name="herald-web-services-api-1.1-20130830.125040-41" level="project" />
     <orderEntry type="library" exported="" name="wink-common-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="herald-authentication-api-1.0.ALPHA3-jar-with-dependencies" level="project" />
+    <orderEntry type="library" exported="" name="nineoldandroids-library-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="TalkingdataAnalytics" level="project" />
     <orderEntry type="library" exported="" name="jsoup-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="jersey-core-1.17.1" level="project" />
-    <orderEntry type="library" exported="" name="libViewFlow" level="project" />
+    <orderEntry type="module" module-name="libViewFlow" exported="" />
     <orderEntry type="module" module-name="libABS" exported="" />
     <orderEntry type="module" module-name="resideMenu" exported="" />
     <orderEntry type="module" module-name="libSlidingMenu" exported="" />
