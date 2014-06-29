@@ -144,6 +144,15 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         menuIcon.add(R.drawable.main_menu_ic_mainframe);
 
         menuName.add("主菜单");
+
+        if(set.isEmpty()) {
+            Toast.makeText(this,"设置中可以添加更多功能",Toast.LENGTH_LONG).show();
+            menuIcon.add(R.drawable.main_menu_ic_freshman);
+            menuName.add("添加更多");
+            targetName.add("addModel");
+            targetClass.add(SettingsActivity.class);
+
+        }
         for(String activity:set) {
             if(activity.equals("curriculum")){
                 menuIcon.add(R.drawable.main_menu_ic_curriculum);
@@ -491,7 +500,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         if (intent != null) {
             intent.putExtra(KEY_SHOWED_UPDATE, true);
             startActivity(intent);
-            if(position != 0)
+            if(position != 0 && !targetClass.get(position).equals(SettingsActivity.class))
                 killMyself();
         }
     }

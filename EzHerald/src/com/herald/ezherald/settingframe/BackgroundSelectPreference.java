@@ -1,16 +1,15 @@
 package com.herald.ezherald.settingframe;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
-import com.actionbarsherlock.internal.view.menu.ActionMenuView;
 import com.herald.ezherald.R;
 
 /**
@@ -47,12 +46,10 @@ public class BackgroundSelectPreference extends DialogPreference{
 
             if(i % 3 == 0) {
                 tr = new TableRow(getContext());
-                TableLayout.LayoutParams param = new TableLayout.LayoutParams();
-                param.setMargins(10,0,0,0);
-                tr.setLayoutParams(param);
             }
             images[i].setScaleType(ImageView.ScaleType.FIT_XY);
             TableRow.LayoutParams param = new TableRow.LayoutParams(200,200);
+
             images[i].setLayoutParams(param);
             tr.addView(images[i]);
             if(i % 3 == 2) {
@@ -67,6 +64,9 @@ public class BackgroundSelectPreference extends DialogPreference{
                 @Override
                 public void onClick(View v) {
                     choice = id;
+                    persistInt(choice);
+                    Toast.makeText(getContext(),"选择成功",Toast.LENGTH_SHORT).show();
+                    getDialog().cancel();
                 }
             }
             images[i].setOnClickListener(new onClickListener(i));
@@ -82,5 +82,20 @@ public class BackgroundSelectPreference extends DialogPreference{
         if(positiveResult) {
             persistInt(choice);
         }
+    }
+
+    @Override
+    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+        if(restorePersistedValue) {
+            choice = this.getPersistedInt(0);
+        } else {
+            choice = (Integer)defaultValue;
+
+        }
+    }
+
+    @Override
+    protected Object onGetDefaultValue(TypedArray a, int index) {
+        return a.getInteger(index,0);
     }
 }
