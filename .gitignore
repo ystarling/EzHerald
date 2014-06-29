@@ -61,3 +61,7 @@ build
 /.gradle
 /Ezherald.iml
 /EzHerald/EzHerald.iml
+.idea
+build
+.gradle
+*.iml
