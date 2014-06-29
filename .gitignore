@@ -65,3 +65,6 @@ build
 build
 .gradle
 *.iml
+.gradle
+.idea
+build

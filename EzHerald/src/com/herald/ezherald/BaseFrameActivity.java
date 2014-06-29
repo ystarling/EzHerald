@@ -212,17 +212,16 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 R.drawable.main_menu_ic_mainframe,
                 R.drawable.main_menu_ic_mainframe,
                 R.drawable.main_menu_ic_curriculum,
-                R.drawable.main_menu_ic_curriculum,
-                0
+                R.drawable.main_menu_ic_curriculum
+
         };
         String[] settingName = new String[]{
                 "一卡通账户",
                 "体育系账户",
                 "图书馆账户",
                 "程序设置",
-                "账户设置",
-                ""
-
+                "账户设置"
+                
         };
 
         settingItems = new ResideMenuItem[settingName.length];
@@ -432,35 +431,35 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                //intent.setClass(this, SettingActivity.class);
                // menuTarget = "Setting";
                // break;
-            case 1:
+            case 0:
                 //intent.setClass(this, AccountActivity.class);
                 // menuTarget = "Account";
                 intent = new Intent();
                 intent.setClass(this, IDCardAccountActivity.class);
                 menuTarget = "IDCard";
                 break;
-            case 2:
+            case 1:
                 //intent.setClass(this, MainActivity.class);
                // menuTarget = "MainActivity";
                 intent = new Intent();
                 intent.setClass(this, TyxAccountActivity.class);
                 menuTarget = "TyxAccount";
                 break;
-            case 3:
+            case 2:
                 //intent.setClass(this, MainActivity.class);
                 // menuTarget = "MainActivity";
                 intent = new Intent();
                 intent.setClass(this, LibAccountActivity.class);
                 menuTarget = "LibAccount";
                 break;
-            case 4:
+            case 3:
                 //intent.setClass(this, MainActivity.class);
                 // menuTarget = "MainActivity";
                 intent = new Intent();
                 intent.setClass(this, SettingsActivity.class);
                 menuTarget = "Setting";
                 break;
-            case 5:
+            case 4:
                 //intent.setClass(this, MainActivity.class);
                 // menuTarget = "MainActivity";
                 intent = new Intent();
