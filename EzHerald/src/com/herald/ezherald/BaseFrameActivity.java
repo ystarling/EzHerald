@@ -23,8 +23,6 @@ import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.LibAccountActivity;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
-import com.herald.ezherald.activity.ActiActivity;
-import com.herald.ezherald.bookingOffice.BookingActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
@@ -32,8 +30,6 @@ import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.mainframe.MainMenuFragment;
-import com.herald.ezherald.radio.RadioActivity;
-import com.herald.ezherald.settingframe.SettingActivity;
 import com.herald.ezherald.settingframe.SettingsActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -41,7 +37,7 @@ import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
 import com.tendcloud.tenddata.TCAgent;
 
-import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
@@ -146,7 +142,17 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         targetClass.add(MainActivity.class);
 
         menuIcon.add(R.drawable.main_menu_ic_mainframe);
+
         menuName.add("主菜单");
+
+        if(set.isEmpty()) {
+            Toast.makeText(this,"设置中可以添加更多功能",Toast.LENGTH_LONG).show();
+            menuIcon.add(R.drawable.main_menu_ic_freshman);
+            menuName.add("添加更多");
+            targetName.add("addModel");
+            targetClass.add(SettingsActivity.class);
+
+        }
         for(String activity:set) {
             if(activity.equals("curriculum")){
                 menuIcon.add(R.drawable.main_menu_ic_curriculum);
@@ -187,7 +193,19 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         }
 
         leftMenu = new ResideMenu(this);
-        leftMenu.setBackground(R.drawable.menu_background);
+
+        int backgroundId = pref.getInt("background",0);
+        String img = "menu_background_"+backgroundId;
+        try {
+            Field field = R.drawable.class.getField(img);
+            int id = field.getInt(field);
+            leftMenu.setBackground(id);
+        } catch (Exception e) {
+            leftMenu.setBackground(R.drawable.menu_background_0);
+        }
+
+
+
         leftMenu.setShadowVisible(false);
         leftMenu.attachToActivity(this);
 
@@ -217,7 +235,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
         settingItems = new ResideMenuItem[settingName.length];
        /* rightMenu = new ResideMenu(this);
-        rightMenu.setBackground(R.drawable.menu_background);
+        rightMenu.setBackground(R.drawable.menu_background_0);
         rightMenu.setShadowVisible(false);
         rightMenu.attachToActivity(this);*/
         UserAccount user = null;
@@ -469,6 +487,12 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
     }
 
     private void runLeftMenuModel(int position) {
+
+            if(targetClass.get(position).getSimpleName().equals(getLocalClassName())) {
+                leftMenu.closeMenu();
+                return ;
+            }
+
         Intent intent = new Intent();
         intent.setClass(this,targetClass.get(position));
         String menuTarget = targetName.get(position);
@@ -477,7 +501,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         if (intent != null) {
             intent.putExtra(KEY_SHOWED_UPDATE, true);
             startActivity(intent);
-            if(position != 0)
+            if(position != 0 && !targetClass.get(position).equals(SettingsActivity.class))
                 killMyself();
         }
     }

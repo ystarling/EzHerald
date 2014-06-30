@@ -9,14 +9,10 @@
         android:key = "activity"
         >
     </MultiSelectListPreference>
-    <MultiSelectListPreference
-        android:title="主界面色调"
-        android:entries="@array/pref_listview_color_titles"
-        android:entryValues="@array/pref_listview_color_values"
-        android:defaultValue="@array/pref_listview_color_values"
-        android:key="color">
-
-    </MultiSelectListPreference>
+    <com.herald.ezherald.settingframe.BackgroundSelectPreference
+        android:title="背景"
+        android:key="background">
+    </com.herald.ezherald.settingframe.BackgroundSelectPreference>
     <ListPreference
         android:title="更新频率"
         android:entries="@array/pref_sync_frequency_titles"

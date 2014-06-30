@@ -6,6 +6,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.herald.ezherald.R;
 
@@ -17,8 +18,7 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-        //PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        //TODO add default val
+        PreferenceManager.setDefaultValues(this,R.xml.default_preference, false);
         SharedPreferences pref = getPreferenceManager().getSharedPreferences();
         pref.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -26,6 +26,7 @@ public class SettingsActivity extends PreferenceActivity {
                 Log.v("", key);
             }
         });
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -33,5 +34,15 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreateOptionsMenu(menu);
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
