@@ -212,7 +212,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 "图书馆账户",
                 "程序设置",
                 "账户设置"
-                
+
         };
 
         settingItems = new ResideMenuItem[settingName.length];
@@ -270,6 +270,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		 * 上侧Title位置的按钮点击相应
 		 */
 		switch (item.getItemId()) {
+
 		case R.id.action_settings:
             leftMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
 			break;

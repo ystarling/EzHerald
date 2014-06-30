@@ -219,6 +219,7 @@ public class MainActivity extends BaseFrameActivity {
         switch (item.getItemId()) {
             case R.id.main_content_refresh:
                 MainContentFragment mainFrag = (MainContentFragment) mContentFrag;
+                mainFrag.refreshWeather("南京");
                 mainFrag.refreshInfo(); // 各模块的内容(GridView中)同步更新就行，向各个模块索取
                 requestInfoUpdate("blabla", item);
                 return true;
