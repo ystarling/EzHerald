@@ -2,10 +2,7 @@ package com.herald.ezherald;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
