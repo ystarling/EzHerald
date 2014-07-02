@@ -50,6 +50,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.herald.ezherald.wifi.WifiService;
 import com.special.ResideMenu.ResideMenu;
 
 /*
@@ -112,6 +113,9 @@ public class MainActivity extends BaseFrameActivity {
         }
 
         doNotUpdateUI = false;
+
+        Intent service = new Intent(this, WifiService.class);
+        startService(service);
     }
 
     /**

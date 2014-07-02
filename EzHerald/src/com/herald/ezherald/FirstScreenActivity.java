@@ -12,7 +12,6 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.TextView;
 
-import com.herald.ezherald.wifi.WifiReceiver;
 
 /**
  * 第一屏
@@ -24,7 +23,7 @@ public class FirstScreenActivity extends Activity {
 	private TextView mTextView;
 	private AlphaAnimation mAnimation;
 	private long ANIM_DURATION = 500; //延时（毫秒）
-	private WifiReceiver receiver ;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

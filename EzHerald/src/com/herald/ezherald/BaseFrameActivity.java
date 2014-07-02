@@ -31,6 +31,7 @@ import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.mainframe.MainMenuFragment;
 import com.herald.ezherald.settingframe.SettingsActivity;
+import com.herald.ezherald.wifi.WifiFloatWindowManager;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.special.ResideMenu.ResideMenu;
