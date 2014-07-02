@@ -10,12 +10,14 @@
         android:id="@+id/small"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="seu-wlan"/>
+        android:text="seu-wlan"
+        android:background="#ff0000"/>
     <TextView
         android:id="@+id/big"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:text="detail"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:background="#00ff00"/>
 
 </LinearLayout>

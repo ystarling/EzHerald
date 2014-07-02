@@ -3,23 +3,34 @@ package com.herald.ezherald.wifi;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import android.os.Handler;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.UserAccount;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by xie on 7/2/2014.
@@ -27,9 +38,11 @@ import org.json.JSONObject;
 public class WifiService extends Service{
     public static String SEU_WLAN = "\"seu-wlan\"";
     private static final int LOGIN = 0,NOT_LOGIN = 1, NET_ERR = 2;
+    private static final String LOGIN_URL = "https://w.seu.edu.cn/portal/login.php";
     private Timer timer;
     private Context context;
     private Handler handler = new Handler();
+    private boolean running;
     private Handler loginHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -39,6 +52,39 @@ public class WifiService extends Service{
                     break;
                 case NOT_LOGIN:
                     WifiFloatWindowManager.createWindow(context).changeToNotloginMode();
+                    final UserAccount user = Authenticate.getIDcardUser(context);
+                    if( user!=null){
+                        new Thread(){
+                            @Override
+                            public void run() {
+                                HttpClient client = new DefaultHttpClient();
+                                HttpPost post = new HttpPost(LOGIN_URL);
+                                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                                params.add(new BasicNameValuePair("username",user.getUsername()));
+                                params.add(new BasicNameValuePair("password",user.getPassword()));
+                                try{
+                                    post.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                                    HttpResponse response = client.execute(post);
+                                    if(response.getStatusLine().getStatusCode() == 200){
+                                        HttpEntity entity = response.getEntity();
+                                        String result = EntityUtils.toString(entity);
+                                        while(!result.startsWith("{")){
+                                            result = result.substring(1);
+                                        }
+                                        Log.v("res",result);
+                                        JSONObject json = new JSONObject(result);
+                                        if(json.has("success")){
+                                            WifiFloatWindowManager.createWindow(context).changeToLoginMode();
+                                        }
+                                    }
+
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                    //handler.obtainMessage(FAILED, "网络错误").sendToTarget();
+                                }
+                            }
+                        }.start();
+                    }
                     break;
                 case NET_ERR:
                 default:
@@ -58,7 +104,7 @@ public class WifiService extends Service{
         //WifiFloatWindowManager.createWindow(context);
         if(timer == null) {
             timer = new Timer();
-            timer.scheduleAtFixedRate(new Task(),0,500);
+            timer.scheduleAtFixedRate(new Task(),0,800);
         }
         context = getApplicationContext();
         return super.onStartCommand(intent, flags, startId);
@@ -75,9 +121,13 @@ public class WifiService extends Service{
 
         @Override
         public void run() {
+            if(running){
+                return ;
+            }
             handler.post(new Runnable() {
                 @Override
                 public void run() {
+                    running = true;
                     WifiManager manager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
                     if(manager.isWifiEnabled()){
                         WifiInfo current = manager.getConnectionInfo();
