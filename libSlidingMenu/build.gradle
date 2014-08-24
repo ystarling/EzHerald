@@ -1,7 +1,7 @@
 apply plugin: 'android-library'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: 'libslidingmenu.jar')
+//    compile fileTree(dir: 'libs', include: 'libslidingmenu.jar')
     compile project(':libABS')
 
 }

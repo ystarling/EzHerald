@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Patrik Ã…kerfeldt
+ * Copyright (C) 2011 Patrik è„œkerfeldt
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,8 +90,8 @@ public class ViewFlow extends AdapterView<Adapter>{
 
 	private Handler handler;
 	private long timeSpan = 3000;
-	private boolean mAutoPlayDirectionFw = true; //×Ô¶¯²¥·ÅµÄ·½Ïò£¨true:Ç°½ø£¬false:ºóÍË£©
-	public boolean isTouching = false; //ÊÇ·ñÕıÔÚ´¥Ãş
+	private boolean mAutoPlayDirectionFw = true; //è‡ªåŠ¨æ’­æ”¾çš„æ–¹å‘ï¼ˆtrue:å‰è¿›ï¼Œfalse:åé€€ï¼‰
+	public boolean isTouching = false; //æ˜¯å¦æ­£åœ¨è§¦æ‘¸
 	
 
 	/**
@@ -779,15 +779,15 @@ public class ViewFlow extends AdapterView<Adapter>{
 	}
 
 	/**
-	 * ÉèÖÃ×Ô¶¯²¥·ÅÊ±¼ä¼ä¸ô
-	 * @param timeSpan ¼ä¸ô£¨ºÁÃë£©
+	 * è®¾ç½®è‡ªåŠ¨æ’­æ”¾æ—¶é—´é—´éš”
+	 * @param timeSpan é—´éš”ï¼ˆæ¯«ç§’ï¼‰
 	 */
 	public void setTimeSpan(long timeSpan) {
 		this.timeSpan = timeSpan;
 	}
 
 	/**
-	 * Í¨¹ıÑÓ³ÙÏûÏ¢ÊµÏÖ×Ô¶¯²¥·Å£¬Ê¹ÓÃÊ±Í¨¹ıµ÷ÓÃ¸Ã·½·¨À´Æô¶¯×Ô¶¯²¥·Å¹¦ÄÜ
+	 * é€šè¿‡å»¶è¿Ÿæ¶ˆæ¯å®ç°è‡ªåŠ¨æ’­æ”¾ï¼Œä½¿ç”¨æ—¶é€šè¿‡è°ƒç”¨è¯¥æ–¹æ³•æ¥å¯åŠ¨è‡ªåŠ¨æ’­æ”¾åŠŸèƒ½
 	 */
 	public void startAutoFlowTimer() {
 		handler = new Handler() {
@@ -811,7 +811,7 @@ public class ViewFlow extends AdapterView<Adapter>{
 	}
 	
 	/**
-	 * Í£Ö¹×Ô¶¯²¥·Å
+	 * åœæ­¢è‡ªåŠ¨æ’­æ”¾
 	 */
 	public void stopAutoFlowTimer() {
 		if (handler != null)
@@ -820,7 +820,7 @@ public class ViewFlow extends AdapterView<Adapter>{
 	}
 
 	/**
-	 * ÓëSlidingMenuµÄÊÖÊÆÊ¶±ğ³åÍ»½â¾ö
+	 * ä¸SlidingMenuçš„æ‰‹åŠ¿è¯†åˆ«å†²çªè§£å†³
 	 */
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
