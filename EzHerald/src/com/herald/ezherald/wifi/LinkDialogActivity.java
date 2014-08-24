@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class LinkDialogActivity extends Activity {
-	private static String SEU_WLAN = WifiReceiver.SEU_WLAN;
+	private static String SEU_WLAN = "seu-wlan";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new Builder(this);
