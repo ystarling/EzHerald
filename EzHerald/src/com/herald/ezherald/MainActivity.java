@@ -119,7 +119,7 @@ public class MainActivity extends BaseFrameActivity {
         Intent service = new Intent(this, WifiService.class);
         startService(service);
 
-        dowyh();
+        dowyh();// run Wang Yanhao's collection
     }
 
     private void dowyh() {
