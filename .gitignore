@@ -1,70 +1,41 @@
-# built application files
-*.apk
-*.ap_
+# Built application files
+build/
 
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated files
-bin/
-gen/
-
+# Crashlytics configuations
+com_crashlytics_export_strings.xml
 
 # Local configuration file (sdk path, etc)
 local.properties
 
-*.pydevproject
-#.project
-.metadata
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-.classpath
-.settings/
-.loadpath
+# Gradle generated files
+.gradle/
 
-# External tool builders
-.externalToolBuilders/
+# Signing files
+.signing/
 
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
-
-# Libs
-#libABS/
-#libSlidingMenu/
-*.classpath
-/libABS/gen
-
-/libSlidingMenu/gen
-
-gen
-gen
-build
-build
-build
-build
-build
-build
-/.idea/workspace.xml
-/.gradle
-/Ezherald.iml
-/EzHerald/EzHerald.iml
-.idea
-build
-.gradle
+# User-specific configurations
+.idea/libraries/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
 *.iml
-.gradle
-.idea
-build
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+*.bin
+*.lock
+*.class
