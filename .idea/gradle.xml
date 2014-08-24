@@ -8,13 +8,13 @@
         <option name="gradleHome" value="D:/green/adt-bundle-windows-x86_64-20130219/sdk/tools/support" />
         <option name="modules">
           <set>
-            <option value="D:\test\EzHerald" />
-            <option value="D:\test\EzHerald\EzHerald" />
-            <option value="D:\test\EzHerald\libABS" />
-            <option value="D:\test\EzHerald\libDragNDropList_" />
-            <option value="D:\test\EzHerald\libResideMenu" />
-            <option value="D:\test\EzHerald\libSlidingMenu" />
-            <option value="D:\test\EzHerald\libViewFlow" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/EzHerald" />
+            <option value="$PROJECT_DIR$/libABS" />
+            <option value="$PROJECT_DIR$/libDragNDropList_" />
+            <option value="$PROJECT_DIR$/libResideMenu" />
+            <option value="$PROJECT_DIR$/libSlidingMenu" />
+            <option value="$PROJECT_DIR$/libViewFlow" />
           </set>
         </option>
       </GradleProjectSettings>

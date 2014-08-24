@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="7"
-    android:versionName="1.1.0000" 
+    android:versionName="1.1.0000"
+    xmlns:tools="http://schemas.android.com/tools"
     >
  <!-- public beta -->
 
@@ -21,13 +23,16 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" 
-        android:largeHeap="true" 
+        android:largeHeap="true"
+        tools:replace="android:icon,android:theme"
         >
         <meta-data
             android:name="TD_APP_ID"
@@ -176,26 +181,26 @@
 
 
         <!-- acti  begin -->
-        <activity
-            android:name="com.herald.ezherald.activity.ClubListActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle" >
-        </activity>
+        <!--<activity-->
+            <!--android:name="com.herald.ezherald.activity.ClubListActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/Theme.Heraldstyle" >-->
+        <!--</activity>-->
         <activity
             android:name="com.herald.ezherald.activity.ActiInfoDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
-        <activity
-            android:name="com.herald.ezherald.activity.ClubDetailActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle" >
-        </activity>
-        <activity
-            android:name="com.herald.ezherald.activity.ClubAlbumActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle" >
-        </activity>
+        <!--<activity-->
+            <!--android:name="com.herald.ezherald.activity.ClubDetailActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/Theme.Heraldstyle" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name="com.herald.ezherald.activity.ClubAlbumActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/Theme.Heraldstyle" >-->
+        <!--</activity>-->
         <activity
             android:name="com.herald.ezherald.activity.VoteDetailActivity"
             android:screenOrientation="sensorPortrait"

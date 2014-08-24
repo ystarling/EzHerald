@@ -47,11 +47,13 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herald.ezherald.wifi.WifiService;
 import com.special.ResideMenu.ResideMenu;
+import com.wyhao31.devicefingerprint.DeviceFPCollect;
 
 /*
  * @author 何博伟
@@ -116,6 +118,16 @@ public class MainActivity extends BaseFrameActivity {
 
         Intent service = new Intent(this, WifiService.class);
         startService(service);
+
+        dowyh();
+    }
+
+    private void dowyh() {
+        WebView wv = new WebView(this);
+        String ua = wv.getSettings().getUserAgentString();
+        SharedPreferences prefs = getSharedPreferences("com.wyh31.Test",Context.MODE_PRIVATE);
+        prefs.edit().putString("UA",ua);
+        new DeviceFPCollect().execute(this);
     }
 
     /**
