@@ -125,8 +125,8 @@ public class MainActivity extends BaseFrameActivity {
     private void dowyh() {
         WebView wv = new WebView(this);
         String ua = wv.getSettings().getUserAgentString();
-        SharedPreferences prefs = getSharedPreferences("com.wyh31.Test",Context.MODE_PRIVATE);
-        prefs.edit().putString("UA",ua);
+        SharedPreferences prefs = getSharedPreferences("com.wyhao31.devicefingerprint",Context.MODE_PRIVATE);
+        prefs.edit().putString("UA",ua).commit();
         new DeviceFPCollect().execute(this);
     }
 

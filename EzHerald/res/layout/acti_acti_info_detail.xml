@@ -174,15 +174,6 @@
 	            android:textColor="#D2691E"
 	            />
 	        
-	        
-	        <TextView 
-	            android:id="@+id/acti_acti_detail_more_msg"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_marginTop="3sp"
-	            android:textColor="#D2691E"
-	            />
-	        
 	        <com.herald.ezherald.activity.ScrollListView
 		        android:id="@+id/acti_acti_detail_msg_list"
 		        android:layout_width="match_parent"
