@@ -102,7 +102,7 @@ public class MainActivity extends BaseFrameActivity {
         super.SetBaseFrameActivity(mContentFrag);
         super.onCreate(savedInstanceState);
 
-        mSlidingMenu = super.leftMenu;
+        mSlidingMenu = super.resideMenu;
 
         boolean isOldUser = checkGuideState();
         Log.d("MainActivity", "GuideViewed ?:" + isOldUser);

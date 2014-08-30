@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.account.AccountActivity;
@@ -31,7 +32,6 @@ import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.mainframe.MainMenuFragment;
 import com.herald.ezherald.settingframe.SettingsActivity;
-import com.herald.ezherald.wifi.WifiFloatWindowManager;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.special.ResideMenu.ResideMenu;
@@ -51,8 +51,8 @@ import java.util.TreeSet;
  * 
  */
 public class BaseFrameActivity extends SlidingFragmentActivity implements View.OnClickListener {
-	//protected SlidingMenu leftMenu;
-    protected ResideMenu leftMenu;
+	//protected SlidingMenu resideMenu;
+    protected ResideMenu resideMenu;
     protected ResideMenuItem[] menuItems;
     protected ResideMenu setting;
     protected ResideMenuItem[] settingItems;
@@ -115,9 +115,9 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		setBehindContentView(R.layout.main_frame_menu);
 		setContentView(R.layout.empty_frame_content);
 		initTransformer(); // 初始化动画
-		initSlidingMenu(); // 初始化菜单
+		//initSlidingMenu(); // 初始化菜单,应该只在 onresume中调用，否则会使得背景变成透明
 
-		mMenuFrag = new MainMenuFragment();
+		//mMenuFrag = new MainMenuFragment();
 		//mSecondaryMenuFrag = new SecondMenuFragment();
 
 		FragmentTransaction t = this.getSupportFragmentManager()
@@ -193,28 +193,28 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
             }
         }
 
-        leftMenu = new ResideMenu(this);
+        resideMenu = new ResideMenu(this);
 
         int backgroundId = pref.getInt("background",0);
         String img = "menu_background_"+backgroundId;
         try {
             Field field = R.drawable.class.getField(img);
             int id = field.getInt(field);
-            leftMenu.setBackground(id);
+            resideMenu.setBackground(id);
         } catch (Exception e) {
-            leftMenu.setBackground(R.drawable.menu_background_0);
+            resideMenu.setBackground(R.drawable.menu_background_0);
         }
 
 
 
-        leftMenu.setShadowVisible(false);
-        leftMenu.attachToActivity(this);
+        resideMenu.setShadowVisible(false);
+        resideMenu.attachToActivity(this);
 
         menuItems = new ResideMenuItem[menuIcon.size()];
         for(int i=0;i<menuIcon.size();++i) {
             menuItems[i] = new ResideMenuItem(this,menuIcon.get(i),menuName.get(i));
             menuItems[i].setOnClickListener(this);
-            leftMenu.addMenuItem(menuItems[i], ResideMenu.DIRECTION_LEFT);
+            resideMenu.addMenuItem(menuItems[i], ResideMenu.DIRECTION_LEFT);
         }
 
         int[] settingIcon = new int[]{
@@ -244,7 +244,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
             settingItems[i] = new ResideMenuItem(this,settingIcon[i],settingName[i]);
             settingItems[i].setOnClickListener(this);
-            leftMenu.addMenuItem(settingItems[i], ResideMenu.DIRECTION_RIGHT);
+            resideMenu.addMenuItem(settingItems[i], ResideMenu.DIRECTION_RIGHT);
             switch(i){
                 case 0:
                     user = new Authenticate().getIDcardUser(this);
@@ -291,21 +291,23 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		switch (item.getItemId()) {
 
 		case R.id.action_settings:
-            leftMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
-			break;
+            resideMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
+			return true;
 		case R.id.mainframe_menu_item_exit:
 			openConfirmDialog();
-			break;
+			return true;
 		case android.R.id.home:
-			//leftMenu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
-            if(leftMenu.isOpened()){
-                leftMenu.closeMenu();
+			//resideMenu.toggle(true); // 点击了程序图标后，会弹出/收回侧面菜单
+            if(resideMenu.isOpened()){
+                resideMenu.closeMenu();
             }else{
-                leftMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+                resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
             }
-			break;
+			return true;
+        default:
+            return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+
 	}
 
 	/**
@@ -345,8 +347,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 				//Object mHelperUtils;
 				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
 				mExitTime = System.currentTimeMillis();
-				//leftMenu.showMenu();
-                leftMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+				//resideMenu.showMenu();
+                resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
 			} else {
 				finish();
 			}
@@ -428,7 +430,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 break;
             }
         }
-        leftMenu.closeMenu();
+        resideMenu.closeMenu();
     }
 
     private void runRightMenuModel(int position){
@@ -490,7 +492,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
     private void runLeftMenuModel(int position) {
 
             if(targetClass.get(position).getSimpleName().equals(getLocalClassName())) {
-                leftMenu.closeMenu();
+                resideMenu.closeMenu();
                 return ;
             }
 
@@ -509,7 +511,13 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        return leftMenu.dispatchTouchEvent(ev);
+        return resideMenu.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.default_herald_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
 

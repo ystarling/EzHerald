@@ -62,7 +62,7 @@ public class CourseDetailActivity extends SherlockActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 //		MenuInflater inflater = new MenuInflater(this);
-//		inflater.inflate(R.leftMenu.menu_acti_detail, leftMenu);
+//		inflater.inflate(R.resideMenu.menu_acti_detail, resideMenu);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
