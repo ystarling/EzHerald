@@ -10,12 +10,12 @@ dependencies {
     compile project(':libABS')
     compile project(':libSlidingMenu')
     compile project(':libViewFlow')
-    compile project(':resideMenu')
+    compile project(':libResideMenu')
 }
 
 android {
     compileSdkVersion 18
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "20.0.0"
 
     sourceSets {
         main {

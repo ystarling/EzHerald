@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="7"
-    android:versionName="1.1.0000" 
+    android:versionName="1.1.0000"
+    xmlns:tools="http://schemas.android.com/tools"
     >
  <!-- public beta -->
 
@@ -20,14 +22,17 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" 
-        android:largeHeap="true" 
+        android:largeHeap="true"
+        tools:replace="android:icon,android:theme"
         >
         <meta-data
             android:name="TD_APP_ID"
@@ -56,13 +61,13 @@
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
-		<receiver android:name="com.herald.ezherald.wifi.WifiReceiver" >
-		    <intent-filter >
-		        <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
-		        <action android:name="android.net.wifi.STATE_CHANGE"/>
-		        <action android:name="android.net.wifi.SCAN_RESULTS"></action>
-		    </intent-filter>
-		</receiver>
+		<!--<receiver android:name="com.herald.ezherald.wifi.WifiReceiver" >-->
+		    <!--<intent-filter >-->
+		        <!--<action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>-->
+		        <!--<action android:name="android.net.wifi.STATE_CHANGE"/>-->
+		        <!--<action android:name="android.net.wifi.SCAN_RESULTS"></action>-->
+		    <!--</intent-filter>-->
+		<!--</receiver>-->
         <activity
             android:name="com.herald.ezherald.MainActivity"
             android:label="@string/app_name"
@@ -176,26 +181,26 @@
 
 
         <!-- acti  begin -->
-        <activity
-            android:name="com.herald.ezherald.activity.ClubListActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle" >
-        </activity>
+        <!--<activity-->
+            <!--android:name="com.herald.ezherald.activity.ClubListActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/Theme.Heraldstyle" >-->
+        <!--</activity>-->
         <activity
             android:name="com.herald.ezherald.activity.ActiInfoDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
-        <activity
-            android:name="com.herald.ezherald.activity.ClubDetailActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle" >
-        </activity>
-        <activity
-            android:name="com.herald.ezherald.activity.ClubAlbumActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle" >
-        </activity>
+        <!--<activity-->
+            <!--android:name="com.herald.ezherald.activity.ClubDetailActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/Theme.Heraldstyle" >-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name="com.herald.ezherald.activity.ClubAlbumActivity"-->
+            <!--android:screenOrientation="sensorPortrait"-->
+            <!--android:theme="@style/Theme.Heraldstyle" >-->
+        <!--</activity>-->
         <activity
             android:name="com.herald.ezherald.activity.VoteDetailActivity"
             android:screenOrientation="sensorPortrait"
@@ -290,6 +295,8 @@
         <activity android:name="com.herald.ezherald.settingframe.SettingsActivity">
 
         </activity>
+        <service android:name=".wifi.WifiService"
+            android:enabled="true"/>
     </application>
 
 </manifest>

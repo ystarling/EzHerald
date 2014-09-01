@@ -2,17 +2,13 @@ package com.herald.ezherald;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.TextView;
 
-import com.herald.ezherald.wifi.WifiReceiver;
 
 /**
  * 第一屏
@@ -24,7 +20,7 @@ public class FirstScreenActivity extends Activity {
 	private TextView mTextView;
 	private AlphaAnimation mAnimation;
 	private long ANIM_DURATION = 500; //延时（毫秒）
-	private WifiReceiver receiver ;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +45,7 @@ public class FirstScreenActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the leftMenu; this adds items to the action bar if it is present.
+		// Inflate the resideMenu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.first_screen, menu);
 		return true;
 	}

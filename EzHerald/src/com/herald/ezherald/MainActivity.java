@@ -47,10 +47,13 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.herald.ezherald.wifi.WifiService;
 import com.special.ResideMenu.ResideMenu;
+import com.wyhao31.devicefingerprint.DeviceFPCollect;
 
 /*
  * @author 何博伟
@@ -99,7 +102,7 @@ public class MainActivity extends BaseFrameActivity {
         super.SetBaseFrameActivity(mContentFrag);
         super.onCreate(savedInstanceState);
 
-        mSlidingMenu = super.leftMenu;
+        mSlidingMenu = super.resideMenu;
 
         boolean isOldUser = checkGuideState();
         Log.d("MainActivity", "GuideViewed ?:" + isOldUser);
@@ -112,6 +115,19 @@ public class MainActivity extends BaseFrameActivity {
         }
 
         doNotUpdateUI = false;
+
+        Intent service = new Intent(this, WifiService.class);
+        startService(service);
+
+        dowyh();// run Wang Yanhao's collection
+    }
+
+    private void dowyh() {
+        WebView wv = new WebView(this);
+        String ua = wv.getSettings().getUserAgentString();
+        SharedPreferences prefs = getSharedPreferences("com.wyhao31.devicefingerprint",Context.MODE_PRIVATE);
+        prefs.edit().putString("UA",ua).commit();
+        new DeviceFPCollect().execute(this);
     }
 
     /**

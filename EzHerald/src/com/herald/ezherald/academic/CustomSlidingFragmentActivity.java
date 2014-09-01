@@ -78,16 +78,16 @@ public class CustomSlidingFragmentActivity extends SlidingFragmentActivity {
 		int shadowWidth = (int) (0.05 * screenWidth); // 菜单阴影遮罩宽度
 		int behindOffset = (int) (0.4 * screenWidth); // 菜单之外内容的显示宽度
 
-		// leftMenu = new SlidingMenu(this);
+		// resideMenu = new SlidingMenu(this);
 		menu = getSlidingMenu();
 		menu.setMode(SlidingMenu.LEFT_RIGHT);
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		menu.setFadeDegree(0.35f);
 
-		// leftMenu.setShadowWidth(shadowWidth);
-		// leftMenu.setShadowDrawable(R.drawable.shadow);
+		// resideMenu.setShadowWidth(shadowWidth);
+		// resideMenu.setShadowDrawable(R.drawable.shadow);
 		menu.setBehindOffset(behindOffset);
-		// leftMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+		// resideMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu.setBehindScrollScale(0.0f);
 		menu.setBehindCanvasTransformer(mTrans);
 		menu.setSecondaryMenu(R.layout.main_frame_second_menu);
