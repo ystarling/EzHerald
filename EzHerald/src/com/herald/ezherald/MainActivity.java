@@ -195,6 +195,7 @@ public class MainActivity extends BaseFrameActivity {
         getSupportMenuInflater().inflate(R.menu.menu_main_content, menu);
         mActionMenu = menu;
 
+
         // 检查是否需要在线更新
         boolean needOnlineRefresh = checkRefreshState();
 
@@ -295,7 +296,7 @@ public class MainActivity extends BaseFrameActivity {
             } else
                 throw new IOException("Newwork error.");
         } catch (Exception ex) {
-            Log.d("Notwoking", ex.getLocalizedMessage());
+            //Log.d("Notwoking", ex.getLocalizedMessage());
             throw new IOException("Error connecting");
         }
         return in;

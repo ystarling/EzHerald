@@ -20,6 +20,7 @@ public class CourseAdapter extends BaseAdapter {
 	List<Attendance> courseList;
 	Context context;
 	LayoutInflater inflater;
+    int place = 0;
 	
 	public CourseAdapter(Context c)
 	{
@@ -60,7 +61,14 @@ public class CourseAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		View courseItemView = inflater.inflate(R.layout.curri_course_item, null);
+        View courseItemView = null;
+        if(place==0) {
+            courseItemView = inflater.inflate(R.layout.curri_course_item, null);
+        }else if(place==1){
+            courseItemView = inflater.inflate(R.layout.maincontent_course_item, null);
+        }
+
+
 		TextView tvCourseName = (TextView) courseItemView.findViewById(R.id.curri_course_name); 
 		TextView tvAttPeriod = (TextView) courseItemView.findViewById(R.id.curri_course_period);
 		TextView tvAttWeeks = (TextView) courseItemView.findViewById(R.id.curri_course_weeks);
@@ -73,6 +81,10 @@ public class CourseAdapter extends BaseAdapter {
 		
 		return courseItemView;
 	}
+    // 0 for 课表 1 for 主界面
+    public void setPlace(int place){
+        this.place = place;
+    }
 
 	
 
