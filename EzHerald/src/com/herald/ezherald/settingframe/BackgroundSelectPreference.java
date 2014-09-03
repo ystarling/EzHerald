@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import com.herald.ezherald.R;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by xie on 6/29/2014.
  */
@@ -19,6 +22,9 @@ public class BackgroundSelectPreference extends DialogPreference{
 
     private ImageView[] images;
     private int choice;
+    private TableLayout table;
+    private int numberOfBackground=4;
+
     public BackgroundSelectPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -28,27 +34,41 @@ public class BackgroundSelectPreference extends DialogPreference{
         choice = 0;
     }
 
+
+
     @Override
     protected void onBindDialogView(View view) {
+        Log.v("lllllll", "onBindDialogView");
 
-        images = new ImageView[4];
+
+        images = new ImageView[numberOfBackground];
         for(int i=0;i<images.length;i++) {
             images[i] = new ImageView(getContext());
+            try {
+                Field field = R.drawable.class.getField("menu_background_" + i);
+                int resId = field.getInt(field);
+                images[i].setImageResource(resId);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
-        images[0].setImageResource(R.drawable.menu_background_0);
-        images[1].setImageResource(R.drawable.menu_background_1);
-        images[2].setImageResource(R.drawable.menu_background_2);
-        images[3].setImageResource(R.drawable.menu_background_3);
 
-        TableLayout table = (TableLayout)view.findViewById(R.id.table);
+        table = (TableLayout)view.findViewById(R.id.table);
+        //int imgSize= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200,view.getDisplay().getMetrics(null));
         TableRow tr =null;
         for(int i=0;i<images.length;i++){
 
             if(i % 3 == 0) {
                 tr = new TableRow(getContext());
+                tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,0,1.0f));
             }
-            images[i].setScaleType(ImageView.ScaleType.FIT_XY);
-            TableRow.LayoutParams param = new TableRow.LayoutParams(200,200);
+            images[i].setScaleType(ImageView.ScaleType.CENTER);
+
+
+            TableRow.LayoutParams param = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT,1.0f);
+
 
             images[i].setLayoutParams(param);
             tr.addView(images[i]);
@@ -98,4 +118,7 @@ public class BackgroundSelectPreference extends DialogPreference{
     protected Object onGetDefaultValue(TypedArray a, int index) {
         return a.getInteger(index,0);
     }
+
+
+
 }
