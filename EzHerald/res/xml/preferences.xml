@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="pref_screen">
     <MultiSelectListPreference
         android:title="功能选择"
         android:entries="@array/pref_module_choice_titles"
