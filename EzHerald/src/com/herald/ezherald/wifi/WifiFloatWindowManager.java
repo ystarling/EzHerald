@@ -16,7 +16,7 @@ public class WifiFloatWindowManager {
     private static WifiFloatWindow windowView;
     private static LayoutParams windowLayoutParams;
     private static WindowManager mWindowManager;
-    public static WifiFloatWindow createWindow(Context context){
+    public static WifiFloatWindow getWindow(Context context){
         WindowManager windowManager = getWindowManager(context);
         int screenWidth = windowManager.getDefaultDisplay().getWidth();
         int screenHeight = windowManager.getDefaultDisplay().getHeight();
@@ -31,7 +31,7 @@ public class WifiFloatWindowManager {
                 windowLayoutParams.width = WifiFloatWindow.width;
                 windowLayoutParams.height = WifiFloatWindow.height;
                 windowLayoutParams.x = screenWidth;
-                windowLayoutParams.y = screenHeight/2;
+                windowLayoutParams.y = (int)(screenHeight*0.6);
             }
             windowView.setParams(windowLayoutParams);
             windowManager.addView(windowView, windowLayoutParams);
@@ -39,7 +39,7 @@ public class WifiFloatWindowManager {
         return windowView;
     }
 
-    public static void removeSmallWindow(Context context) {
+    public static void removeWindow(Context context) {
         if(windowView !=null){
             WindowManager windowManager = getWindowManager(context);
             windowManager.removeView(windowView);

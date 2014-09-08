@@ -26,7 +26,6 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -43,17 +42,19 @@ public class WifiService extends Service{
     private Context context;
     private Handler handler = new Handler();
     private boolean running;
+    private String errorMessage;
     private Handler loginHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case LOGIN:
-                    WifiFloatWindowManager.createWindow(context).changeToLoginMode();
+                    WifiFloatWindowManager.getWindow(context).changeToLoginMode();
                     break;
                 case NOT_LOGIN:
-                    WifiFloatWindowManager.createWindow(context).changeToNotloginMode();
+                    WifiFloatWindowManager.getWindow(context).changeToNotLoginMode();
                     final UserAccount user = Authenticate.getIDcardUser(context);
-                    if( user!=null){
+
+                    if( user!=null && (errorMessage==null || errorMessage.equals("")) ){
                         new Thread(){
                             @Override
                             public void run() {
@@ -74,19 +75,22 @@ public class WifiService extends Service{
                                         Log.v("res",result);
                                         JSONObject json = new JSONObject(result);
                                         if(json.has("success")){
-                                            WifiFloatWindowManager.createWindow(context).changeToLoginMode();
+                                            WifiFloatWindowManager.getWindow(context).changeToLoginMode();
+                                        }else{
+                                            errorMessage = json.getString("error");
+                                            WifiFloatWindowManager.getWindow(context).changeToLoginFailedMode(errorMessage);
                                         }
                                     }
 
                                 }catch(Exception e){
                                     e.printStackTrace();
-                                    //handler.obtainMessage(FAILED, "网络错误").sendToTarget();
                                 }
                             }
                         }.start();
                     }
                     break;
                 case NET_ERR:
+
                 default:
                     break;
             }
@@ -101,10 +105,10 @@ public class WifiService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //WifiFloatWindowManager.createWindow(context);
+        //WifiFloatWindowManager.getWindow(context);
         if(timer == null) {
             timer = new Timer();
-            timer.scheduleAtFixedRate(new Task(),0,800);
+            timer.scheduleAtFixedRate(new Task(),0,1000);
         }
         context = getApplicationContext();
         return super.onStartCommand(intent, flags, startId);
@@ -161,10 +165,10 @@ public class WifiService extends Service{
                                 }
                             }.start();
                         }else{
-                            WifiFloatWindowManager.removeSmallWindow(context);
+                            WifiFloatWindowManager.removeWindow(context);
                         }
                     }else{
-                        WifiFloatWindowManager.removeSmallWindow(context);
+                        WifiFloatWindowManager.removeWindow(context);
                     }
                 }
             });

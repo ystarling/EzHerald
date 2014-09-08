@@ -1,11 +1,13 @@
 package com.herald.ezherald.wifi;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.herald.ezherald.R;
 
@@ -20,17 +22,21 @@ public class WifiFloatWindow extends LinearLayout {
     private WindowManager.LayoutParams params;
     private static WindowManager windowManager;
     private float xInView,yInView,xDownScreen,yDownScreen,xInScreen, yInScreen;
-    private boolean isOpen;
+    private boolean isBigWindowOpen;
     private int statusBarHeight;
+    private View view,small,big;
+
 
     public WifiFloatWindow(Context context) {
         super(context);
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.wifi_float_window_small,this);
-        View view = findViewById(R.id.small_window_layout);
+        view = findViewById(R.id.small_window_layout);
         width = view.getLayoutParams().width;
         height = view.getLayoutParams().height;
+        small = findViewById(R.id.small);
+        big=findViewById(R.id.big);
 
     }
 
@@ -54,7 +60,7 @@ public class WifiFloatWindow extends LinearLayout {
                 break;
             case MotionEvent.ACTION_UP:
                 if (xDownScreen == xInScreen && yDownScreen == yInScreen) {
-                    toggleInfo();
+                    toggleSize();
                 }
                 break;
             default:
@@ -65,24 +71,34 @@ public class WifiFloatWindow extends LinearLayout {
         return true;
     }
 
+    //切换到已经登陆的状态
     public void changeToLoginMode(){
-        View small = findViewById(R.id.small),big=findViewById(R.id.big);
-        small.setVisibility(GONE);
-        big.setVisibility(VISIBLE);
+        small.setBackgroundColor(Color.GREEN);
+        big.setBackgroundColor(Color.GREEN);
+        ((TextView)big.findViewById(R.id.info)).setText("SEU-WLAN已登录");
     }
-    public void changeToNotloginMode(){
-        View small = findViewById(R.id.small),big=findViewById(R.id.big);
-        small.setVisibility(VISIBLE);
-        big.setVisibility(GONE);
+    //切换到未登录的状态
+    public void changeToNotLoginMode(){
+        small.setBackgroundColor(Color.BLUE);
+        big.setBackgroundColor(Color.BLUE);
+        ((TextView)big.findViewById(R.id.info)).setText("SEU-WLAN未登录");
     }
-    public void toggleInfo() {
-        if(isOpen) {
-          isOpen = false;
-          changeToNotloginMode();
+    //切换到登录信息错误状态
+    public void changeToLoginFailedMode(String errorMessage) {
+        small.setBackgroundColor(Color.RED);
+        big.setBackgroundColor(Color.RED);
+        ((TextView)big.findViewById(R.id.info)).setText(errorMessage);
+    }
+    public void toggleSize() {
+        if(isBigWindowOpen) {
+            isBigWindowOpen = false;
+            big.setVisibility(GONE);
+            small.setVisibility(VISIBLE);
 
         } else {
-          isOpen = true;
-          changeToLoginMode();
+            isBigWindowOpen = true;
+            big.setVisibility(VISIBLE);
+            small.setVisibility(GONE);
         }
     }
 
@@ -106,4 +122,7 @@ public class WifiFloatWindow extends LinearLayout {
         }
         return statusBarHeight;
     }
+
+
+
 }

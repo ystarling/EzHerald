@@ -1,179 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="7"
-    android:versionName="1.1.0000"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
- <!-- public beta -->
+    android:versionName="1.1.0000" >
+
+    <!-- public beta -->
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="15" />
-    <!--permission for file handle -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <!--permission for file handle end -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- permission for file handle -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- permission for file handle end -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" 
         android:largeHeap="true"
-        tools:replace="android:icon,android:theme"
-        >
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="TD_APP_ID"
             android:value="148B63970FC0152CD534DC743D6E37EC" />
-        
-        <receiver android:name=".curriculum.CurriWidgetProvider" android:label="先声课表">
-            <meta-data 
-	            android:name="android.appwidget.provider"
-	            android:resource="@xml/curr_widget_provider_info"
-	            />
-	        <intent-filter >
-	            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-	            <action android:name="com.herald.ezherald.action.NEXT_ATT"/>
-	            
-	        </intent-filter>
-	    </receiver>
 
-         <activity
+        <receiver
+            android:name=".curriculum.CurriWidgetProvider"
+            android:label="先声课表" >
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/curr_widget_provider_info" />
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.herald.ezherald.action.NEXT_ATT" />
+            </intent-filter>
+        </receiver>
+
+        <activity
             android:name=".bookingOffice.BookingDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
-         <activity
+        <activity
             android:name=".bookingOffice.BookingActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
-		<!--<receiver android:name="com.herald.ezherald.wifi.WifiReceiver" >-->
-		    <!--<intent-filter >-->
-		        <!--<action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>-->
-		        <!--<action android:name="android.net.wifi.STATE_CHANGE"/>-->
-		        <!--<action android:name="android.net.wifi.SCAN_RESULTS"></action>-->
-		    <!--</intent-filter>-->
-		<!--</receiver>-->
+         <receiver android:name="com.herald.ezherald.wifi.WifiReceiver" >
+         <intent-filter >
+            <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/> <!-- enabled, disabled, enabling, disabling, or unknown.unknown -->
+            <action android:name="android.net.wifi.STATE_CHANGE"/> <!-- the state of Wi-Fi connectivity has changed. -->
+            <!--<action android:name="android.net.wifi.SCAN_RESULTS"></action>-->
+         </intent-filter>
+         </receiver>
         <activity
-            android:name="com.herald.ezherald.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.academic.AcademicActivity"
+            android:name=".academic.AcademicActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.account.AccountActivity"
+            android:name=".account.AccountActivity"
             android:icon="@drawable/ic_app"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.account.IDCardAccountActivity"
+            android:name=".account.IDCardAccountActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.account.TyxAccountActivity"
+            android:name=".account.TyxAccountActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.account.LibAccountActivity"
+            android:name=".account.LibAccountActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.activity.ActiActivity"
+            android:name=".activity.ActiActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.agenda.AgendaActivity"
+            android:name=".agenda.AgendaActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.curriculum.CurriculumActivity"
+            android:name=".curriculum.CurriculumActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.exercise.ExerciseActivity"
+            android:name=".exercise.ExerciseActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.freshman.FreshmanActivity"
+            android:name=".freshman.FreshmanActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.freshman.FreshmanContent"
+            android:name=".freshman.FreshmanContent"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.freshman.FreshmanDetailActivity"
+            android:name=".freshman.FreshmanDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         >
-
         </activity>
         <activity
-            android:name="com.herald.ezherald.gpa.GPAActivity"
+            android:name=".gpa.GPAActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
         <!-- libr  begin -->
         <activity
-            android:name="com.herald.ezherald.library.LibraryActivity"
+            android:name=".library.LibraryActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.library.LibraryBookListDetail"
+            android:name=".library.LibraryBookListDetail"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.library.LibraryActivityNews"
+            android:name=".library.LibraryActivityNews"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.library.LibraryActivityReserve"
+            android:name=".library.LibraryActivityReserve"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- libr end -->
 
         <activity
-            android:name="com.herald.ezherald.BaseFrameActivity"
+            android:name=".BaseFrameActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
         <!-- academic Begin -->
         <activity
-            android:name="com.herald.ezherald.academic.AcademicDetailActivity"
+            android:name=".academic.AcademicDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
@@ -181,34 +176,34 @@
 
 
         <!-- acti  begin -->
-        <!--<activity-->
-            <!--android:name="com.herald.ezherald.activity.ClubListActivity"-->
-            <!--android:screenOrientation="sensorPortrait"-->
-            <!--android:theme="@style/Theme.Heraldstyle" >-->
-        <!--</activity>-->
+        <!-- <activity -->
+        <!-- android:name="com.herald.ezherald.activity.ClubListActivity" -->
+        <!-- android:screenOrientation="sensorPortrait" -->
+        <!-- android:theme="@style/Theme.Heraldstyle" > -->
+        <!-- </activity> -->
         <activity
-            android:name="com.herald.ezherald.activity.ActiInfoDetailActivity"
+            android:name=".activity.ActiInfoDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
-        <!--<activity-->
-            <!--android:name="com.herald.ezherald.activity.ClubDetailActivity"-->
-            <!--android:screenOrientation="sensorPortrait"-->
-            <!--android:theme="@style/Theme.Heraldstyle" >-->
-        <!--</activity>-->
-        <!--<activity-->
-            <!--android:name="com.herald.ezherald.activity.ClubAlbumActivity"-->
-            <!--android:screenOrientation="sensorPortrait"-->
-            <!--android:theme="@style/Theme.Heraldstyle" >-->
-        <!--</activity>-->
+        <!-- <activity -->
+        <!-- android:name="com.herald.ezherald.activity.ClubDetailActivity" -->
+        <!-- android:screenOrientation="sensorPortrait" -->
+        <!-- android:theme="@style/Theme.Heraldstyle" > -->
+        <!-- </activity> -->
+        <!-- <activity -->
+        <!-- android:name="com.herald.ezherald.activity.ClubAlbumActivity" -->
+        <!-- android:screenOrientation="sensorPortrait" -->
+        <!-- android:theme="@style/Theme.Heraldstyle" > -->
+        <!-- </activity> -->
         <activity
-            android:name="com.herald.ezherald.activity.VoteDetailActivity"
+            android:name=".activity.VoteDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <!-- acti  end -->
         <activity
-            android:name="com.herald.ezherald.curriculum.CourseDetailActivity"
+            android:name=".curriculum.CourseDetailActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
@@ -216,65 +211,66 @@
 
 
         <!-- curriculum end -->
-		<!-- radio begin -->
-		<activity 
-		    android:name = "com.herald.ezherald.radio.RadioActivity"
-		    android:screenOrientation="sensorPortrait"
-		    android:theme= "@style/Theme.Heraldstyle">
-		</activity>
-		<!-- radio end -->
+        <!-- radio begin -->
         <activity
-            android:name="com.herald.ezherald.emptyclassroom.EmptyClassroomActivity"
+            android:name=".radio.RadioActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
+        </activity>
+        <!-- radio end -->
+        <activity
+            android:name=".emptyclassroom.EmptyClassroomActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.settingframe.SettingActivity"
+            android:name=".settingframe.SettingActivity"
             android:icon="@drawable/ic_app"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.settingframe.AboutThisApp"
+            android:name=".settingframe.AboutThisApp"
             android:icon="@drawable/ic_app"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
             <intent-filter>
-                <action android:name="AboutThisApp"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="AboutThisApp" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.herald.ezherald.settingframe.MainContentModulePrefActivity"
+            android:name=".settingframe.MainContentModulePrefActivity"
             android:label="@string/title_activity_main_content_module_pref"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.settingframe.AppUpdateActivity"
+            android:name=".settingframe.AppUpdateActivity"
             android:icon="@drawable/ic_app"
             android:label="@string/title_activity_app_update"
             android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.NoDisplay" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.mainframe.MainGuideActivity"
+            android:name=".mainframe.MainGuideActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.settingframe.SyncFrequencySettingActivity"
+            android:name=".settingframe.SyncFrequencySettingActivity"
             android:label="@string/menu_main_content_pref_title"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.settingframe.MainContentListColorPrefActivity"
+            android:name=".settingframe.MainContentListColorPrefActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Transparent_Herald" >
         </activity>
         <activity
-            android:name="com.herald.ezherald.FirstScreenActivity"
+            android:name=".FirstScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Transparent" >
@@ -285,18 +281,17 @@
             </intent-filter>
         </activity>
         <!-- wifi begin -->
-        <activity android:name="com.herald.ezherald.wifi.LinkDialogActivity"></activity>
+        <activity android:name=".wifi.LinkDialogActivity" />
         <activity
-            android:name="com.herald.ezherald.wifi.LoginDialogActivity"
+            android:name=".wifi.LoginDialogActivity"
             android:launchMode="singleTop"
-            android:noHistory="true">
+            android:noHistory="true" >
         </activity>
         <!-- wifi end -->
-        <activity android:name="com.herald.ezherald.settingframe.SettingsActivity">
-
+        <activity android:name=".settingframe.SettingsActivity" >
         </activity>
-        <service android:name=".wifi.WifiService"
-            android:enabled="true"/>
+
+
     </application>
 
 </manifest>
