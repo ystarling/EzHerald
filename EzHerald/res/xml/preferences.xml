@@ -22,12 +22,12 @@
 
     </ListPreference>
     <Preference android:title = "软件更新">
-        <intent android:action="AboutThisApp">
-
+        <intent android:action="AppUpdateActivity">
+            <extra android:name="isCalledInSetting" android:value="true"/>
         </intent>
     </Preference>
     <Preference android:title = "引导界面">
-        <intent android:action= "AboutThisApp">
+        <intent android:action= "MainGuideActivity" >
         </intent>
     </Preference>
     <com.herald.ezherald.settingframe.WifiFloatWindowPreference

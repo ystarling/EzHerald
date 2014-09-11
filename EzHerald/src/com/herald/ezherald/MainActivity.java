@@ -1,36 +1,5 @@
 package com.herald.ezherald;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.taptwo.android.widget.ViewFlow;
-
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.herald.ezherald.mainframe.MainContentFragment;
-import com.herald.ezherald.mainframe.MainFrameDbAdapter;
-import com.herald.ezherald.mainframe.MainGuideActivity;
-import com.herald.ezherald.settingframe.AppUpdateActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,9 +20,38 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.herald.ezherald.wifi.WifiService;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.herald.ezherald.mainframe.MainContentFragment;
+import com.herald.ezherald.mainframe.MainFrameDbAdapter;
+import com.herald.ezherald.mainframe.MainGuideActivity;
+import com.herald.ezherald.settingframe.AppUpdateActivity;
 import com.special.ResideMenu.ResideMenu;
 import com.wyhao31.devicefingerprint.DeviceFPCollect;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.taptwo.android.widget.ViewFlow;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /*
  * @author 何博伟
@@ -116,8 +114,8 @@ public class MainActivity extends BaseFrameActivity {
 
         doNotUpdateUI = false;
 
-        Intent service = new Intent(this, WifiService.class);
-        startService(service);
+        //Intent service = new Intent(this, WifiService.class);
+        //startService(service);
 
         dowyh();// run Wang Yanhao's collection
     }

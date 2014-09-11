@@ -253,11 +253,20 @@
             android:label="@string/title_activity_app_update"
             android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+                <action android:name="AppUpdateActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".mainframe.MainGuideActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
+            <intent-filter>
+                <action android:name="MainGuideActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".settingframe.SyncFrequencySettingActivity"
