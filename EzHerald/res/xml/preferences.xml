@@ -35,12 +35,13 @@
         android:key="wifi_auto_connect"
         android:defaultValue="true">
     </com.herald.ezherald.settingframe.WifiFloatWindowPreference>
-    <com.herald.ezherald.settingframe.WifiFloatWindowPreference android:title="开启wifi悬浮窗"
-        android:key="wifi_float_window"
-        android:dependency="wifi_auto_connect"
-        android:defaultValue="false">
 
-    </com.herald.ezherald.settingframe.WifiFloatWindowPreference>
+    <!--<com.herald.ezherald.settingframe.WifiFloatWindowPreference android:title="开启wifi悬浮窗"-->
+        <!--android:key="wifi_float_window"-->
+        <!--android:dependency="wifi_auto_connect"-->
+        <!--android:defaultValue="false">-->
+    <!--</com.herald.ezherald.settingframe.WifiFloatWindowPreference>-->
+
     <Preference android:title = "关于">
         <intent android:action="AboutThisApp">
 

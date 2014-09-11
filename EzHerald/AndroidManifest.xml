@@ -57,13 +57,14 @@
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
 
-         <receiver android:name="com.herald.ezherald.wifi.WifiReceiver" >
-         <intent-filter >
-            <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/> <!-- enabled, disabled, enabling, disabling, or unknown.unknown -->
-            <action android:name="android.net.wifi.STATE_CHANGE"/> <!-- the state of Wi-Fi connectivity has changed. -->
-            <!--<action android:name="android.net.wifi.SCAN_RESULTS"></action>-->
-         </intent-filter>
-         </receiver>
+        <receiver android:name=".wifi.WifiReceiver" >
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" /> <!-- enabled, disabled, enabling, disabling, or unknown.unknown -->
+                <action android:name="android.net.wifi.STATE_CHANGE" /> <!-- the state of Wi-Fi connectivity has changed. -->
+                <!-- <action android:name="android.net.wifi.SCAN_RESULTS"></action> -->
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -291,7 +292,11 @@
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>
 
-
+        <service
+            android:name=".wifi.WifiReceiverService"
+            android:enabled="true"
+            android:process=":remote">
+        </service>
     </application>
 
 </manifest>
