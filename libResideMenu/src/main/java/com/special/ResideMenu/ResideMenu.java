@@ -70,10 +70,24 @@ public class ResideMenu extends FrameLayout{
     private List<Integer> disabledSwipeDirection = new ArrayList<Integer>();
     //valid scale factor is between 0.0f and 1.0f.
     private float mScaleValue = 0.5f;
+    private boolean isAttached;
 
     public ResideMenu(Context context) {
         super(context);
         initViews(context);
+    }
+    public void clearLeftMenuItems(){
+        if(leftMenuItems!=null){
+            leftMenuItems.clear();
+            layoutLeftMenu.removeAllViews();
+        }
+    }
+    public void clearRightMenuItems(){
+        if(rightMenuItems!=null){
+            rightMenuItems.clear();
+            layoutRightMenu.removeAllViews();
+        }
+
     }
 
     private void initViews(Context context){
@@ -94,10 +108,13 @@ public class ResideMenu extends FrameLayout{
      * @param activity
      */
     public void attachToActivity(Activity activity){
-        initValue(activity);
-        setShadowAdjustScaleXByOrientation();
-        viewDecor.addView(this, 0);
-        setViewPadding();
+        if(!isAttached) {
+            isAttached = true;
+            initValue(activity);
+            setShadowAdjustScaleXByOrientation();
+            viewDecor.addView(this, 0);
+            setViewPadding();
+        }
     }
 
     private void initValue(Activity activity){

@@ -293,7 +293,7 @@ public class MainContentFragment extends SherlockFragment {
 
             TextView  courAlert = (TextView)getActivity().findViewById(R.id.main_course_alert);
             if(courAlert!=null){
-                courAlert.setTextColor(Color.GREEN);
+                //courAlert.setTextColor(Color.GREEN);
                 courAlert.setText("今天没有课呦");
             }
         }
