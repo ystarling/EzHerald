@@ -764,6 +764,7 @@ public class MainActivity extends BaseFrameActivity {
             }
             mIsUpdateBannerTaskDone = false;
         }
+        resideMenu.addIgnoredView(  ((MainContentFragment)mContentFrag).mViewFlow);
     }
 
     /**

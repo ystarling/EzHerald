@@ -129,7 +129,10 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
     private void initSlidingMenu(){
-
+        if(resideMenu!=null){
+            return ;
+        }
+        resideMenu = new ResideMenu(this);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         Set<String> set = pref.getStringSet("activity",new TreeSet<String>());
 
@@ -187,7 +190,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
             }
         }
 
-        resideMenu = new ResideMenu(this);
+
 
         int backgroundId = pref.getInt("background",0);
         String img = "menu_background_"+backgroundId;
