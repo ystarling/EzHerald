@@ -1,36 +1,5 @@
 package com.herald.ezherald.mainframe;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Random;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.taptwo.android.widget.CircleFlowIndicator;
-import org.taptwo.android.widget.ViewFlow;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,8 +7,8 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,7 +31,6 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.academic.AcademicDataGrabber;
 import com.herald.ezherald.account.Authenticate;
-import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.activity.ActiActivity;
 import com.herald.ezherald.activity.ActivityDataGrabber;
 import com.herald.ezherald.agenda.AgendaActivity;
@@ -71,7 +39,6 @@ import com.herald.ezherald.curriculum.CourseAdapter;
 import com.herald.ezherald.curriculum.CurriDBAdapter;
 import com.herald.ezherald.curriculum.CurriDataGrabber;
 import com.herald.ezherald.curriculum.CurriculumActivity;
-import com.herald.ezherald.curriculum.CurriculumFragment;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomInfoGrabber;
 import com.herald.ezherald.exercise.ExerciseActivity;
@@ -87,7 +54,33 @@ import com.tendcloud.tenddata.TCAgent;
 import com.terlici.dragndroplist.DragNDropListView;
 import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
 
-import static java.util.Calendar.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.taptwo.android.widget.CircleFlowIndicator;
+import org.taptwo.android.widget.ViewFlow;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.getInstance;
 
 /**
  * 上传图片: http://herald.seu.edu.cn/EzHerald/pictureupload/ 上传更新:
@@ -320,6 +313,8 @@ public class MainContentFragment extends SherlockFragment {
         ///// 主页面课表结束
         mViewFlow = (ViewFlow) getActivity().findViewById(
                 R.id.main_frame_viewflow);
+
+
         mImageItems = getImageItems();
         mContentFlowItemAdapter = new MainContentFlowItemAdapter(getActivity(),
                 mImageItems);

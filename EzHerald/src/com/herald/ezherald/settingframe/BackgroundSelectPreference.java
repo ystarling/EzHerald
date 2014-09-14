@@ -23,7 +23,7 @@ public class BackgroundSelectPreference extends DialogPreference{
     private ImageView[] images;
     private int choice;
     private TableLayout table;
-    private int numberOfBackground=4;
+    private int numberOfBackground=6;
 
     public BackgroundSelectPreference(Context context, AttributeSet attrs) {
         super(context, attrs);

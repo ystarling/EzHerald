@@ -67,6 +67,7 @@ public class WifiReceiverService extends Service {
             if(user == null){//未登陆
                 return ;
             }
+            Toast.makeText(context, "正在自动登录SEU-WLAN", Toast.LENGTH_LONG).show();
             new Thread(){
                 @Override
                 public void run() {
@@ -120,15 +121,6 @@ public class WifiReceiverService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         context = getApplicationContext();
-        SharedPreferences pref = context.getSharedPreferences("com.herald.ezherald_preferences", Context.MODE_PRIVATE);
-        Boolean wifi_auto_connect = pref.getBoolean("wifi_auto_connect", false);
-        if(!wifi_auto_connect){
-            return super.onStartCommand(intent, flags, startId);
-        }
-        if(pref.getBoolean("wifi_float_window",false) ){
-            showWindow = true;
-        }
-
         WifiManager manager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         if(!manager.isWifiEnabled()){//wifi关闭了
             WifiFloatWindowManager.removeWindow(context);
@@ -138,6 +130,14 @@ public class WifiReceiverService extends Service {
                 WifiFloatWindowManager.removeWindow(context);
             }else{
                 if(thread == null){
+                    SharedPreferences pref = context.getSharedPreferences("com.herald.ezherald_preferences", Context.MODE_PRIVATE);
+                    Boolean wifi_auto_connect = pref.getBoolean("wifi_auto_connect", false);
+                    if(!wifi_auto_connect){
+                        return super.onStartCommand(intent, flags, startId);
+                    }
+                    if(pref.getBoolean("wifi_float_window",false) ){
+                        showWindow = true;
+                    }
                     thread = new Thread(){
                         @Override
                         public void run() {

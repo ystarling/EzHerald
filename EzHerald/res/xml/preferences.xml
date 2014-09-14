@@ -18,7 +18,8 @@
         android:title="更新频率"
         android:entries="@array/pref_sync_frequency_titles"
         android:entryValues="@array/pref_sync_frequency_values"
-        android:key="frequency">
+        android:key="frequency"
+        android:defaultValue="30">
 
     </ListPreference>
     <Preference android:title = "软件更新">

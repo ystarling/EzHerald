@@ -509,6 +509,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+
         return resideMenu.dispatchTouchEvent(ev);
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -148,7 +149,7 @@ public class MainActivity extends BaseFrameActivity {
         Log.d("MainActivity", "Time interval = " + timeGap + " minutes");
 
         String strPrefTimeInterval = appPreferences.getString(
-                KEY_NAME_REFRESH_FREQ, null);
+                KEY_NAME_REFRESH_FREQ, "30");
         int prefTimeInterval = (timestamp == 0) ? 0 : 180;
         if (strPrefTimeInterval != null) {
             prefTimeInterval = Integer.parseInt(strPrefTimeInterval);
@@ -170,13 +171,21 @@ public class MainActivity extends BaseFrameActivity {
      * @return
      */
     private boolean checkGuideState() {
-
         // @ref Pg251 <Android4 编程入门经典>
         SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
                 MODE_PRIVATE);
-        return appPreferences.getBoolean(KEY_NAME_FIRST_START, false);
-    }
 
+        return appPreferences.getBoolean(KEY_NAME_FIRST_START+Integer.valueOf(getVersionCode()), false);
+    }
+    public int getVersionCode(){
+        try{
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(),0);
+            return info.versionCode;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
     /**
      * 设置Guide已经阅读过
      */
@@ -184,7 +193,7 @@ public class MainActivity extends BaseFrameActivity {
         SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
                 MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = appPreferences.edit();
-        prefEditor.putBoolean(KEY_NAME_FIRST_START, true);
+        prefEditor.putBoolean(KEY_NAME_FIRST_START+Integer.valueOf(getVersionCode()), true);
         prefEditor.commit();
     }
 
