@@ -64,10 +64,10 @@ public class BackgroundSelectPreference extends DialogPreference{
                 tr = new TableRow(getContext());
                 tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,0,1.0f));
             }
-            images[i].setScaleType(ImageView.ScaleType.CENTER);
+            images[i].setScaleType(ImageView.ScaleType.FIT_XY);
 
 
-            TableRow.LayoutParams param = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT,1.0f);
+            TableRow.LayoutParams param = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT,1.0f);
 
 
             images[i].setLayoutParams(param);
