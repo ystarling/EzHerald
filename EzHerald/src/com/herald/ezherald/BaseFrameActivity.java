@@ -146,7 +146,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         menuIcon.add(R.drawable.main_menu_ic_mainframe);
         menuName.add("主界面");
 
-        menuIcon.add(R.drawable.main_menu_ic_freshman);
+        menuIcon.add(R.drawable.main_2ndmenu_ic_accsetting);
         menuName.add("功能选择");
         targetName.add("addModel");
         targetClass.add(SettingsActivity.class);
@@ -218,11 +218,11 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         }
 
         int[] settingIcon = new int[]{
-                R.drawable.main_menu_ic_mainframe,
-                R.drawable.main_menu_ic_mainframe,
-                R.drawable.main_menu_ic_mainframe,
-                R.drawable.main_menu_ic_curriculum,
-                R.drawable.main_menu_ic_curriculum
+                R.drawable.main_2ndmenu_ic_account,
+                R.drawable.main_2ndmenu_ic_account,
+                R.drawable.main_2ndmenu_ic_account,
+                R.drawable.main_2ndmenu_ic_setting,
+                R.drawable.main_2ndmenu_ic_setting
 
         };
         String[] settingName = new String[]{
