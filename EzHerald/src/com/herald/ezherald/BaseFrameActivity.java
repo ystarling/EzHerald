@@ -129,6 +129,9 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
     private void initSlidingMenu(){
+        if(resideMenu==null){
+            resideMenu = new ResideMenu(this);
+        }
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         Set<String> set = pref.getStringSet("activity",new TreeSet<String>());
@@ -187,7 +190,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
             }
         }
 
-        resideMenu = new ResideMenu(this);
+
 
         int backgroundId = pref.getInt("background",0);
         String img = "menu_background_"+backgroundId;
@@ -203,8 +206,11 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
         resideMenu.setShadowVisible(false);
         resideMenu.attachToActivity(this);
-
         menuItems = new ResideMenuItem[menuIcon.size()];
+
+        resideMenu.clearLeftMenuItems();
+        resideMenu.clearRightMenuItems();
+
         for(int i=0;i<menuIcon.size();++i) {
             menuItems[i] = new ResideMenuItem(this,menuIcon.get(i),menuName.get(i));
             menuItems[i].setOnClickListener(this);
@@ -233,43 +239,16 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
         rightMenu.setBackground(R.drawable.menu_background_0);
         rightMenu.setShadowVisible(false);
         rightMenu.attachToActivity(this);*/
-        UserAccount user = null;
+
         for (int i=0;i<settingName.length;i++){
 
             settingItems[i] = new ResideMenuItem(this,settingIcon[i],settingName[i]);
             settingItems[i].setOnClickListener(this);
             resideMenu.addMenuItem(settingItems[i], ResideMenu.DIRECTION_RIGHT);
-            switch(i){
-                case 0:
-                    user = new Authenticate().getIDcardUser(this);
-                    if(user==null){
-                        settingItems[i].setTextColor(0);
-                    }else{
-                        settingItems[i].setTextColor(1);
-                    }
-                    break;
-                case 1:
-                    user = new Authenticate().getTyxUser(this);
-                    if(user==null){
-                        settingItems[i].setTextColor(0);
-                    }else{
-                        settingItems[i].setTextColor(1);
-                    }
-                    break;
-                case 2:
-                    user = new Authenticate().getLibUser(this);
-                    if(user==null){
-                        settingItems[i].setTextColor(0);
-                    }else{
-                        settingItems[i].setTextColor(1);
-                    }
-                    break;
 
-
-            }
         }
 
-
+        setSettingMenuColor();
 
 
 
@@ -357,48 +336,49 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 		// 统计模块
 		TCAgent.onPause(this);
 	}
+    private void setSettingMenuColor(){
+        String OKColor = "#FFFFFF",notOKColor="#FD7734";
+        UserAccount user = null;
+        for (int i=0;i<settingItems.length;i++) {
+            switch (i) {
+                case 0:
+                    user = new Authenticate().getIDcardUser(this);
+                    if (user == null) {
+                        settingItems[i].setTextColor(notOKColor);
+                    } else {
+                        settingItems[i].setTextColor(OKColor);
+                    }
+                    break;
+                case 1:
+                    user = new Authenticate().getTyxUser(this);
+                    if (user == null) {
+                        settingItems[i].setTextColor(notOKColor);
+                    } else {
+                        settingItems[i].setTextColor(OKColor);
+                    }
+                    break;
+                case 2:
+                    user = new Authenticate().getLibUser(this);
+                    if (user == null) {
+                        settingItems[i].setTextColor(notOKColor);
+                    } else {
+                        settingItems[i].setTextColor(OKColor);
+                    }
+                    break;
 
+
+            }
+        }
+    }
 	@Override
 	protected void onResume() {
         super.onResume();
         // 统计模块
         TCAgent.onResume(this);
         //Toast.makeText(this, "Resume!", Toast.LENGTH_SHORT).show();
-        UserAccount user = null;
-        if (settingItems != null) {
-            for (int i = 0; i < settingItems.length; i++) {
-                switch (i) {
-                    case 0:
-                        user = new Authenticate().getIDcardUser(this);
-                        if (user == null) {
-                            settingItems[i].setTextColor(0);
-                        } else {
-                            settingItems[i].setTextColor(1);
-                        }
-                        break;
-                    case 1:
-                        user = new Authenticate().getTyxUser(this);
-                        if (user == null) {
-                            settingItems[i].setTextColor(0);
-                        } else {
-                            settingItems[i].setTextColor(1);
-                        }
-                        break;
-                    case 2:
-                        user = new Authenticate().getLibUser(this);
-                        if (user == null) {
-                            settingItems[i].setTextColor(0);
-                        } else {
-                            settingItems[i].setTextColor(1);
-                        }
-                        break;
 
-
-                }
-            }
-        }
         initSlidingMenu();
-
+        setSettingMenuColor();
 
     }
 

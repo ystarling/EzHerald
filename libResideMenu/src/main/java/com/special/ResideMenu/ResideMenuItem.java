@@ -35,6 +35,11 @@ public class ResideMenuItem extends LinearLayout{
             }
         }
     }
+    public void setTextColor(String color){
+        if(tv_title!=null){
+            tv_title.setTextColor(Color.parseColor(color));
+        }
+    }
     public ResideMenuItem(Context context) {
         super(context);
         initViews(context);

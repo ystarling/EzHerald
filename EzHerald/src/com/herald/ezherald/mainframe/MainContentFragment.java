@@ -106,7 +106,7 @@ public class MainContentFragment extends SherlockFragment {
     // private ListView mListView; // ListView（替代GridView）
     private DragNDropListView mListView;
 
-    private ViewFlow mViewFlow; // ViewFlow
+    public ViewFlow mViewFlow; // ViewFlow
     private CircleFlowIndicator mCircIndic;
 
     private InfoHandler mInfoHandler = new InfoHandler();
@@ -293,7 +293,7 @@ public class MainContentFragment extends SherlockFragment {
 
             TextView  courAlert = (TextView)getActivity().findViewById(R.id.main_course_alert);
             if(courAlert!=null){
-                courAlert.setTextColor(Color.GREEN);
+                //courAlert.setTextColor(Color.GREEN);
                 courAlert.setText("今天没有课呦");
             }
         }
