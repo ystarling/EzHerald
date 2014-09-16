@@ -44,16 +44,19 @@ public class WifiReceiverService extends Service {
     private Handler loginHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
+            Log.v("WIFI_RECEIVER","handle status message");
             thread = null;
             switch (msg.what){
                 case LOGIN:
+                    Log.v("WIFI_RECEIVER","LOGIN");
                     if(showWindow){
                         WifiFloatWindowManager.getWindow(context).changeToLoginMode();
                     }else{
-                        Toast.makeText(context, "SEU-WLAN已成功登陆", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, "SEU-WLAN已成功登陆", Toast.LENGTH_LONG).show();
                     }
                     break;
                 case NOT_LOGIN:
+                    Log.v("WIFI_RECEIVER","NOT LOGIN");
                     tryLogin();
                     break;
                 default:
@@ -61,8 +64,15 @@ public class WifiReceiverService extends Service {
 
             }
         }
-
+        Handler loginHandler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                String info = (String)msg.obj;
+                Toast.makeText(context,info,Toast.LENGTH_SHORT).show();
+            }
+        };
         private void tryLogin() {
+            Log.v("WIFIT_RECEIVER","try login");
             final UserAccount user = Authenticate.getIDcardUser(context);
             if(user == null){//未登陆
                 return ;
@@ -88,18 +98,22 @@ public class WifiReceiverService extends Service {
                             }
                             Log.v("res", result);
                             JSONObject json = new JSONObject(result);
+
                             if(json.has("success")){
+                                Log.v("WIFI_RECEIVER","LOGIN_OK");
                                 if(showWindow){
                                     WifiFloatWindowManager.getWindow(context).changeToLoginMode();
                                 }else{
-                                    Toast.makeText(context,"SEU-WLAN登陆成功",Toast.LENGTH_LONG).show();
+                                    loginHandler.obtainMessage(0,"SEU-WLAN登陆成功").sendToTarget();
+                                    //Toast.makeText(context,"SEU-WLAN登陆成功",Toast.LENGTH_LONG).show();
                                 }
                             }else{
                                 String errorMessage = json.getString("error");
                                 if(showWindow){
                                     WifiFloatWindowManager.getWindow(context).changeToLoginFailedMode(errorMessage);
                                 }else{
-                                    Toast.makeText(context,errorMessage,Toast.LENGTH_LONG).show();
+                                    loginHandler.obtainMessage(1,errorMessage).sendToTarget();
+                                    //Toast.makeText(context,errorMessage,Toast.LENGTH_LONG).show();
                                 }
 
                             }
@@ -120,6 +134,7 @@ public class WifiReceiverService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.v("WIFI_RECEIVER","receive");
         context = getApplicationContext();
         WifiManager manager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         if(!manager.isWifiEnabled()){//wifi关闭了
@@ -129,7 +144,7 @@ public class WifiReceiverService extends Service {
             if(current==null || !SEU_WLAN.equals(current.getSSID())){//wifi没连接或者连的不是seu-wlan
                 WifiFloatWindowManager.removeWindow(context);
             }else{
-                if(thread == null){
+                if(thread == null || true ){
                     SharedPreferences pref = context.getSharedPreferences("com.herald.ezherald_preferences", Context.MODE_PRIVATE);
                     Boolean wifi_auto_connect = pref.getBoolean("wifi_auto_connect", false);
                     if(!wifi_auto_connect){
@@ -138,6 +153,7 @@ public class WifiReceiverService extends Service {
                     if(pref.getBoolean("wifi_float_window",false) ){
                         showWindow = true;
                     }
+                    Log.v("WIFI_RECEIVER","GET STATUS");
                     thread = new Thread(){
                         @Override
                         public void run() {

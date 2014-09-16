@@ -297,7 +297,7 @@
             android:launchMode="singleTop"
             android:noHistory="true" >
         </activity>
-        <!-- wifi end -->
+
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>
 
@@ -306,6 +306,7 @@
             android:enabled="true"
             android:process=":remote">
         </service>
+        <!-- wifi end -->
     </application>
 
 </manifest>

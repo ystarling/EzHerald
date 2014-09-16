@@ -11,8 +11,10 @@ public class WifiReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("wifi_receiver", "receive");
+        Log.d("WIFI_RECEIVER", "receive");
         Intent service = new Intent(context,WifiReceiverService.class);
         context.startService(service);
     }
+
+
 }
