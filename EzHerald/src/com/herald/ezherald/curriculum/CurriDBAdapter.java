@@ -184,7 +184,7 @@ public class CurriDBAdapter {
 			{
 				String name = mCursor.getString(mCursor.getColumnIndex(clCourseName));
 				String teacher = mCursor.getString(mCursor.getColumnIndex(clCourseLecturer));
-				int credit = mCursor.getInt(mCursor.getColumnIndex(clCourseCredit));
+				float credit = mCursor.getFloat(mCursor.getColumnIndex(clCourseCredit));
 				String weeks = mCursor.getString(mCursor.getColumnIndex(clCourseWeeks));
 				courseList.add(new Course(name,teacher,weeks,credit));
 				
