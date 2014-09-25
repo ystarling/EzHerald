@@ -1,5 +1,6 @@
 package com.herald.ezherald.mainframe;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -1011,16 +1012,20 @@ public class MainContentFragment extends SherlockFragment {
                     } else {
                         weatherRet = new WeatherInfo(city, temperature, date, week, state, dayPictureUrl);
                     }
-                    SharedPreferences weatherPref = getActivity().getSharedPreferences("weather", Context.MODE_PRIVATE);
-                    Editor weatherEdit = weatherPref.edit();
-                    weatherEdit.putString("city", city);
-                    weatherEdit.putString("date", date);
-                    weatherEdit.putString("tempe", temperature);
-                    weatherEdit.putString("week", week);
-                    weatherEdit.putString("state", state);
-                    //weatherEdit.putString("dayPictureUrl",dayPictureUrl);
-                    // weatherEdit.putString("nightPictureUrl",nightPictureUrl);
-                    weatherEdit.commit();
+                    Activity activity = getActivity();
+                    if(activity !=null){
+                        SharedPreferences weatherPref = activity.getSharedPreferences("weather", Context.MODE_PRIVATE);
+                        Editor weatherEdit = weatherPref.edit();
+                        weatherEdit.putString("city", city);
+                        weatherEdit.putString("date", date);
+                        weatherEdit.putString("tempe", temperature);
+                        weatherEdit.putString("week", week);
+                        weatherEdit.putString("state", state);
+                        //weatherEdit.putString("dayPictureUrl",dayPictureUrl);
+                        // weatherEdit.putString("nightPictureUrl",nightPictureUrl);
+                        weatherEdit.commit();
+                    }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

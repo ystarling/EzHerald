@@ -175,7 +175,7 @@ public class MainActivity extends BaseFrameActivity {
         SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
                 MODE_PRIVATE);
 
-        return appPreferences.getBoolean(KEY_NAME_FIRST_START+Integer.valueOf(getVersionCode()), false);
+        return appPreferences.getBoolean(KEY_NAME_FIRST_START, false);
     }
     public int getVersionCode(){
         try{
@@ -193,7 +193,7 @@ public class MainActivity extends BaseFrameActivity {
         SharedPreferences appPreferences = getSharedPreferences(PREF_NAME,
                 MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = appPreferences.edit();
-        prefEditor.putBoolean(KEY_NAME_FIRST_START+Integer.valueOf(getVersionCode()), true);
+        prefEditor.putBoolean(KEY_NAME_FIRST_START, true);
         prefEditor.commit();
     }
 
