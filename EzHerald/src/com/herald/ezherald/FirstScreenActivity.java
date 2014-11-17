@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 
@@ -18,7 +19,7 @@ import android.widget.TextView;
 public class FirstScreenActivity extends Activity {
 	//private ImageView mImageView;
 	private TextView mTextView;
-	private AlphaAnimation mAnimation;
+	private Animation mAnimation;
 	private long ANIM_DURATION = 500; //延时（毫秒）
 
 	
@@ -37,8 +38,9 @@ public class FirstScreenActivity extends Activity {
 
 	private void setAnimation() {
 		// TODO Auto-generated method stub
-		mAnimation = new AlphaAnimation(1.0f, 1.0f);
-		mAnimation.setDuration(ANIM_DURATION);
+        //设置动画
+		mAnimation = new AlphaAnimation(1.0f, 0.0f);//alpha淡入淡出动画
+		mAnimation.setDuration(ANIM_DURATION);//设置动画执行的时间
 		mAnimation.setAnimationListener(new MyAnimationListener());
 		mTextView.setAnimation(mAnimation);
 	}

@@ -96,7 +96,7 @@ public class MainActivity extends BaseFrameActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
+        mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);//接收boolean信息
         mContentFrag = new MainContentFragment();
         super.SetBaseFrameActivity(mContentFrag);
         super.onCreate(savedInstanceState);

@@ -45,13 +45,14 @@
     <string name="setting_powered_by_herald">Powered by Herald</string>
     <string name="setting_about_2001_2014">2001-2014</string>
     <string name="setting_about_version">build 20131027</string>
-    <!--<string name="title_activity_main_content_module_pref">主界面模块</string>-->
+    <!-- <string name="title_activity_main_content_module_pref">主界面模块</string> -->
     <string name="main_frame_list_color_pref_key">list_choice</string>
     <string name="main_frame_preferences">com.herald.ezherald_preferences</string>
     <string name="title_activity_first_screen">FirstScreenActivity</string>
     <string name="first_screen_loading">先声客户端玩命启动中...</string>
     <string name="account_library_detail">图书馆账号可是相当常之复杂:\\n 13级及以后的童鞋请用一卡通号\\n 其余同学请用你的原始学号(转系之前)\\n 默认密码据说是原始学号</string>
     <string name="http_herald_seu_edu_cn_">http://herald.seu.edu.cn/</string>
-
+    <string name="title_activity_my">MyActivity</string>
+    <string name="title_activity_my_activity2">MyActivity2</string>
 
 </resources>

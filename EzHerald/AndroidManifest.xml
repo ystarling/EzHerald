@@ -254,8 +254,9 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
-                <action android:name="AppUpdateActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="AppUpdateActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -264,9 +265,9 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="MainGuideActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".settingframe.SyncFrequencySettingActivity"
@@ -297,16 +298,16 @@
             android:launchMode="singleTop"
             android:noHistory="true" >
         </activity>
-
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>
 
         <service
             android:name=".wifi.WifiReceiverService"
             android:enabled="true"
-            android:process=":remote">
+            android:process=":remote" >
         </service>
         <!-- wifi end -->
+
     </application>
 
 </manifest>

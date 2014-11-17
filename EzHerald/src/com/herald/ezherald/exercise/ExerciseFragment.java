@@ -57,7 +57,7 @@ public class ExerciseFragment extends SherlockFragment {
 					frag = new FragmentC();
 					break;
 				default:
-					Log.w("error","no such a tag in evercise");
+					Log.w("error","no such a tag in exercise");
 					return;
 			}
 			ft.replace(android.R.id.content, frag);
