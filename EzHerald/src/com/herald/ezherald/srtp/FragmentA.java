@@ -15,5 +15,6 @@ import com.herald.ezherald.R;
 /**
  * Created by Administrator on 2014/10/29.
  */
-public class FragmentA {
+public class FragmentA extends Fragment{
+
 }

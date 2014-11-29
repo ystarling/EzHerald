@@ -12,7 +12,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
 /**
- * Created by Administrator on 2014/10/29.
+ * Created by Lj on 2014/10/29.
  */
 public class SrtpFragment  extends SherlockFragment{
     @Override
@@ -21,7 +21,7 @@ public class SrtpFragment  extends SherlockFragment{
 
         ActionBar bar = getSherlockActivity(). getSupportActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        bar.setTitle("srtp");
+        bar.setTitle("Srtp");
         ActionBar.Tab tab1 = bar.newTab();
         ActionBar.Tab tab2 = bar.newTab();
 
@@ -52,7 +52,7 @@ public class SrtpFragment  extends SherlockFragment{
                     break;
 
                 default:
-                    Log.w("error","no such a tag in exercise");
+                    Log.w("error","no such a tag in srtp");
                     return;
             }
             ft.replace(android.R.id.content, frag);
