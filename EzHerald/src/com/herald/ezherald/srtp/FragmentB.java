@@ -22,5 +22,13 @@ import com.herald.ezherald.account.UserAccount;
  * Created by Administrator on 2014/10/29.
  */
 public class FragmentB extends  Fragment{
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){
+        return inflater.inflate(R.layout.srtp_fragment_b, group,false);
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
 }

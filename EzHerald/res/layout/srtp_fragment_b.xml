@@ -9,11 +9,12 @@
         android:scrollbars="none">
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
 <TableLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbarHorizontal="true">
+    >
     <TableRow>
         <TextView
             android:text="学分"
@@ -93,7 +94,7 @@
             android:layout_marginLeft="30sp"
             android:textSize="20sp"/>
     </TableRow>
-    <TableRow android:id="@+id/">
+    <TableRow android:id="@+id/one">
         <TextView
             android:id="@+id/score6"
             android:text="0.5"

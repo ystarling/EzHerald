@@ -16,5 +16,14 @@ import com.herald.ezherald.R;
  * Created by Administrator on 2014/10/29.
  */
 public class FragmentA extends Fragment{
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved) {
+        return inflater.inflate(R.layout.srtp_fragment_a, group, false);
+    }
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState){
+            super.onActivityCreated(savedInstanceState);
+        }
+
 
 }
