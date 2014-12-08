@@ -33,6 +33,7 @@
         <item >教务信息</item>
         <item >校园指南</item>
         <item >空闲教室</item>
+        <item>Srtp</item>
     </string-array>
     
     <string-array name="pref_module_choice_values">
@@ -44,6 +45,7 @@
         <item >academic</item>
         <item >freshman</item>
         <item >emptyclassroom</item>
+        <item >srtp</item>
     </string-array>
     <string name="pref_title_module">勾选所需模块</string>
     
@@ -62,6 +64,7 @@
         <item >红色</item>
         <item >橙色</item>
         <item >黄色</item>
+        <item>黄色</item>
     </string-array>
 
     <string-array name="pref_listview_color_values">
@@ -72,6 +75,7 @@
         <item >red</item>
         <item >orange</item>
         <item >yellow</item>
+        <item>yellow</item>
     </string-array>
     
 </resources>

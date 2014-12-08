@@ -137,6 +137,11 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
+        <activity android:name=".srtp.SrtpActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle">
+
+            </activity>
 
         <!-- libr  begin -->
         <activity

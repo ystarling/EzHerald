@@ -51,6 +51,8 @@ import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.SettingActivity;
+import com.herald.ezherald.srtp.SrtpActivity;
+import com.herald.ezherald.srtp.SrtpGrabber;
 import com.tendcloud.tenddata.TCAgent;
 import com.terlici.dragndroplist.DragNDropListView;
 import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
@@ -134,9 +136,9 @@ public class MainContentFragment extends SherlockFragment {
 
     // ////////////Temporarily used local variables///////////////////
     String mContentCont1[] = {"加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
-            "加载中", "加载中"};
+            "加载中", "加载中", "加载中", "加载中"};
     String mContentCont2[] = {"加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
-            "加载中", "加载中"};
+            "加载中", "加载中", "加载中", "加载中"};
 
     private boolean mContentIsDestroyed = false;
     // /////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
@@ -452,6 +454,8 @@ public class MainContentFragment extends SherlockFragment {
                 grabber = new ActivityDataGrabber();
             } else if (moduleName.equals("emptyclassroom")) {
                 grabber = new EmptyClassroomInfoGrabber(getActivity());
+            } else if(moduleName.equals("srtp")){
+                grabber=new SrtpGrabber();
             }
             // else if ....f
         } catch (Exception e) {
@@ -488,6 +492,8 @@ public class MainContentFragment extends SherlockFragment {
             retId = R.drawable.main_menu_ic_activity;
         } else if (moduleName.equals("emptyclassroom")) {
             retId = R.drawable.main_menu_ic_emptcls;
+        } else if(moduleName.equals("srtp")){
+            retId=R.drawable.main_menu_ic_emptcls;//srtp图标还未更新
         }
         return retId;
     }
@@ -546,6 +552,10 @@ public class MainContentFragment extends SherlockFragment {
                 case 9:
                     i.setClass(getActivity(), EmptyClassroomActivity.class);
                     clickTarget = "Empt";
+                    break;
+                case 10:
+                    i.setClass(getActivity(), SrtpActivity.class);
+                    clickTarget="Srtp";
                     break;
             }
             TCAgent.onEvent(getActivity(), "主界面ListView点击", clickTarget);
