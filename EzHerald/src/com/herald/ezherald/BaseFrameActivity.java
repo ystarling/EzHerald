@@ -31,6 +31,7 @@ import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.settingframe.SettingsActivity;
+import com.herald.ezherald.srtp.SrtpActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.special.ResideMenu.ResideMenu;
@@ -187,6 +188,11 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 menuName.add("空教室");
                 targetName.add("EmptyClassRoom");
                 targetClass.add(EmptyClassroomActivity.class);
+            }else if(activity.equals("srtp")){
+                menuIcon.add(R.drawable.main_menu_ic_exercise);
+                menuName.add("Srtp");
+                targetName.add("Srtp");
+                targetClass.add(SrtpActivity.class);
             }
         }
 

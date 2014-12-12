@@ -92,6 +92,8 @@ public class MainContentListItemDragDropAdapter extends BaseAdapter implements D
 			return 8;
 		else if (tag.equals("emptyclassroom"))
 			return 9;
+        else if(tag.equals("srtp"))
+            return 10;
 		return 0;
 	}
 

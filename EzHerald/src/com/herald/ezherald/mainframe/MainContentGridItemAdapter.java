@@ -72,12 +72,13 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	 * 6 - exercise;
 	 * 7 - academic;
 	 * 8 - freshman;
+     * 10 - srtp
 	 */
 	private final String[] ModuleNames = {
 			"纳尼?第一次么?",
 			"课表查询", "校园活动", "我的日程", 
 			"图书查询", "绩点查询", "跑操查询",
-			"教务信息", "校园指南"
+			"教务信息", "校园指南", "Srtp"
 	};
 	
 	@Override
@@ -100,6 +101,8 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 			return 7;
 		else if(tag.equals("freshman"))
 			return 8;
+        else if(tag.equals("srtp"))
+            return 10;
 		return 0;
 	}
 
