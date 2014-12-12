@@ -72,7 +72,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 	 * 6 - exercise;
 	 * 7 - academic;
 	 * 8 - freshman;
-     * 9 - srtp
+     * 10 - srtp
 	 */
 	private final String[] ModuleNames = {
 			"纳尼?第一次么?",
@@ -102,7 +102,7 @@ public class MainContentGridItemAdapter extends BaseAdapter {
 		else if(tag.equals("freshman"))
 			return 8;
         else if(tag.equals("srtp"))
-            return 9;
+            return 10;
 		return 0;
 	}
 

@@ -31,4 +31,20 @@ public class FragmentB extends  Fragment{
         super.onActivityCreated(savedInstanceState);
     }
 
+    private void Update(){
+
+    }
+
+    public void show(){
+
+    }
+
+    public  void onSuccess(){
+
+    }
+
+    public void onFailed(){
+
+    }
+
 }
