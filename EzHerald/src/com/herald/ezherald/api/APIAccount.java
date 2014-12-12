@@ -55,7 +55,7 @@ public class APIAccount {
             }
         });
 
-        client.addArg("appid",APPID.getAPPID());
+        client.addArg("appid",new APPID().getAPPID());
         client.addArg("user",ccardnum);
         client.addArg("password",password);
         client.doRequest();
