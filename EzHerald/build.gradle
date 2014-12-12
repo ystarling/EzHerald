@@ -39,6 +39,13 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+
+
+        defaultConfig{
+            ndk{
+                moduleName "appid"
+            }
+        }
     }
 }
 tasks.withType(JavaCompile) {

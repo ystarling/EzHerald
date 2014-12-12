@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.herald.ezherald.R;
 /**
  * Created by Administrator on 2014/10/29.
  */
@@ -34,7 +33,8 @@ public class SrtpFragment  extends SherlockFragment{
         bar.addTab(tab1);
         bar.addTab(tab2);
 
-        return inflater.inflate(R.layout.srtp_activity_main,group,false);
+//        return inflater.inflate(R.layout.srtp_activity_main,group,false);
+        return null;
     }
 
     private class MyTabListener implements ActionBar.TabListener
