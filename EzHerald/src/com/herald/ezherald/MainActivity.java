@@ -99,6 +99,7 @@ public class MainActivity extends BaseFrameActivity {
         mShowedUpdate = intent.getBooleanExtra(KEY_SHOWED_UPDATE, false);
         mContentFrag = new MainContentFragment();
         super.SetBaseFrameActivity(mContentFrag);
+
         super.onCreate(savedInstanceState);
 
         mSlidingMenu = super.resideMenu;

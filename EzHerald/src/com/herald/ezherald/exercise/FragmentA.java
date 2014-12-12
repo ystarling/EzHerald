@@ -28,7 +28,7 @@ public class FragmentA extends Fragment {
 	private Button btn_update;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){
-		return inflater.inflate(R.layout.exercise_frag_a, group,false);
+            return inflater.inflate(R.layout.exercise_frag_a, group,false);
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){

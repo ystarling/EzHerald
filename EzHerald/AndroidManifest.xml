@@ -297,6 +297,9 @@
             android:launchMode="singleTop"
             android:noHistory="true" >
         </activity>
+        <!--树洞activity-->
+        <activity android:name=".treehole.TreeholeActivity" />
+
 
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>

@@ -12,6 +12,7 @@
         <item >教务信息</item>
         <item >校园指南</item>
         <item >空闲教室</item>
+        <item >先声树洞</item><!--2014.10添加-->
         <!--<item >广播台</item>-->
         <!--<item>预约排票</item>-->
     </string-array>

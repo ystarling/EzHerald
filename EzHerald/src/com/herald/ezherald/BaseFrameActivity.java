@@ -1,5 +1,4 @@
 package com.herald.ezherald;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.settingframe.SettingsActivity;
+import com.herald.ezherald.treehole.TreeholeActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.special.ResideMenu.ResideMenu;
@@ -47,7 +47,8 @@ import java.util.TreeSet;
  * 
  * @author BorisHe
  * @updated 20130630
- * 
+ *
+
  */
 public class BaseFrameActivity extends SlidingFragmentActivity implements View.OnClickListener {
 	//protected SlidingMenu resideMenu;
@@ -128,6 +129,7 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
+
     private void initSlidingMenu(){
         if(resideMenu==null){
             resideMenu = new ResideMenu(this);
@@ -187,6 +189,13 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 menuName.add("空教室");
                 targetName.add("EmptyClassRoom");
                 targetClass.add(EmptyClassroomActivity.class);
+            }
+            //添加先声树洞 2014.10
+            else if(activity.equals("treehole")){
+                menuIcon.add(R.drawable.main_menu_ic_emptcls);
+                menuName.add("先声树洞");
+                targetName.add("treehole");
+                targetClass.add(TreeholeActivity.class);
             }
         }
 
