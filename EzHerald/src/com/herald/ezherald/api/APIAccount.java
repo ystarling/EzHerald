@@ -29,7 +29,9 @@ public class APIAccount {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("UUID",encrypt(uuid));
     }
-
+    public boolean isUUIDValid(){
+        return uuid!=null && !uuid.isEmpty();
+    }
     private String encrypt(String data){
         return  data;
     }
@@ -50,11 +52,10 @@ public class APIAccount {
         },
         new FailHandler() {
             @Override
-            public void onFail(int errCode,String message) {
+            public void onFail(Err err,String message) {
                 //just pass
             }
         });
-
         client.addArg("appid",new APPID().getAPPID());
         client.addArg("user",ccardnum);
         client.addArg("password",password);

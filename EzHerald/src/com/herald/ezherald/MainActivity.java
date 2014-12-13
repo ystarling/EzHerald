@@ -122,7 +122,7 @@ public class MainActivity extends BaseFrameActivity {
         dowyh();// run Wang Yanhao's collection
 
         APIAccount account = new APIAccount(this);
-        if(account.uuid == null||account.uuid.equals("")){
+        if(!account.isUUIDValid()){
             account.autoLogin();
         }
     }
