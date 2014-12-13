@@ -6,6 +6,11 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.Err;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.SuccessHandler;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,6 +24,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,13 +64,13 @@ public class GpaInfo {
 
 	protected void onSuccess() {
         try{
-            JSONArray json = new JSONArray(result);
+            JSONObject json  = new JSONObject(result);
+            JSONArray content = json.getJSONArray("content");
             records = new ArrayList<Record>();
-            for (int i = 0; i < json.length(); i++) {
-                Record record = new Record(json.getJSONObject(i));
+            for(int i=1;i<content.length();i++){//ignore the first
+                Record record  = new Record((content.getJSONObject(i)));
                 records.add(record);
             }
-
         }catch(JSONException e){
 
             e.printStackTrace();
@@ -127,6 +133,21 @@ public class GpaInfo {
 		}
 		return totalGrade / totalCredit;
 	}
+    public void update(Context context){
+        APIClient client = APIFactory.getAPIClient(context,"api/gpa",new SuccessHandler() {
+            @Override
+            public void onSuccess(String data) {
+                Message msg = handler.obtainMessage(SUCCESS, data);
+                handler.sendMessage(msg);
+            }
+        },new FailHandler() {
+            @Override
+            public void onFail(Err err, String message) {
+                handler.obtainMessage(FAILED).sendToTarget();
+            }
+        });
+        client.doRequest();
+    }
 
 	public void update(final UserAccount user, final ProgressDialog progress) {
         final String URL = "http://herald.seu.edu.cn/herald_web_service/gpa/gpa";

@@ -15,10 +15,7 @@ extern "C" {
  */
 
 JNIEXPORT jstring JNICALL Java_com_herald_ezherald_api_APPID_getAPPID(JNIEnv *env, jobject obj){
-
-
-    return env->NewStringUTF("aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb");
-
+    return env->NewStringUTF("34cc6df78cfa7cd457284e4fc377559e");
 }
 
 
