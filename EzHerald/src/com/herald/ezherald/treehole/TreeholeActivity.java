@@ -1,16 +1,15 @@
 package com.herald.ezherald.treehole;
 
-import android.app.Activity;
-import android.app.Fragment;
+
+
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.BaseFrameActivity;
-import com.herald.ezherald.R;
-import com.herald.ezherald.account.AccountFragment;
-import com.herald.ezherald.emptyclassroom.EmptyClassroomFragment;
-import com.herald.ezherald.exercise.ExerciseFragment;
+
+
 
 /**
  * Created by lenovo on 2014/10/26.
@@ -20,7 +19,7 @@ import com.herald.ezherald.exercise.ExerciseFragment;
  *
  */
 public class TreeholeActivity extends BaseFrameActivity {
-    android.support.v4.app.Fragment mContentFrag;
+    Fragment mContentFrag;
 
 
     @Override

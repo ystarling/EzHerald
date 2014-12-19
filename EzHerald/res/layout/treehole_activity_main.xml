@@ -16,7 +16,6 @@
         android:layout_gravity="bottom"
         android:text="进入树洞"
         android:id="@+id/openholebtn"
-        android:onClick="openholebtnclick"
         />
 
     <TextView

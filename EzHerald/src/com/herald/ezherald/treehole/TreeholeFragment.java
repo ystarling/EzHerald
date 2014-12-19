@@ -1,22 +1,17 @@
 package com.herald.ezherald.treehole;
 
 
-import android.app.Fragment;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
-
-import java.sql.BatchUpdateException;
 
 
 /**
@@ -41,7 +36,8 @@ public  class TreeholeFragment extends SherlockFragment{
 
     public void init()//初始化函数
     {
-        opentreehole=(Button)getActivity().findViewById(R.id.openholebtn);
+
+//        opentreehole=(Button)getSherlockActivity().findViewById(R.id.openholebtn);
 //        opentreehole.setOnClickListener(new View.OnClickListener() {
 //                  public void onClick(View v) {
 //                      Toast.makeText(getActivity(),"正在加载树洞",Toast.LENGTH_SHORT);

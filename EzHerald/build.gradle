@@ -39,8 +39,15 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+
+
+        defaultConfig{
+            ndk{
+                moduleName "appid"
+            }
+        }
     }
 }
-tasks.withType(Compile) {
+tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
