@@ -3,6 +3,9 @@ package com.herald.ezherald.api;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.UserAccount;
+
 /**
  * Created by xie on 12/12/2014.
  */
@@ -14,6 +17,8 @@ public class APIAccount {
 
     public APIAccount(Context context){
         this.context = context;
+
+
         uuid = readUUID();
     }
 
@@ -24,10 +29,11 @@ public class APIAccount {
         String uuid = preferences.getString("UUID","");
         return decrypt(uuid);
     }
-    private void saveUUID(String uuid){
+    public void saveUUID(String uuid){
         SharedPreferences preferences = context.getSharedPreferences(UUID_PREF_NAME,0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("UUID",encrypt(uuid));
+        editor.commit();
     }
     public boolean isUUIDValid(){
         return uuid!=null && !uuid.isEmpty();
@@ -52,13 +58,19 @@ public class APIAccount {
         },
         new FailHandler() {
             @Override
-            public void onFail(Err err,String message) {
+            public void onFail(Status err,String message) {
                 //just pass
             }
         });
+        UserAccount user = Authenticate.getIDcardUser(context);
+
+        if(user!=null){
+            client.addArg("user",user.getUsername());
+            client.addArg("password",user.getPassword());
+        }
+
         client.addArg("appid",new APPID().getAPPID());
-        client.addArg("user",ccardnum);
-        client.addArg("password",password);
+
         client.doRequest();
     }
 

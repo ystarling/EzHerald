@@ -40,6 +40,13 @@ import cn.edu.seu.herald.auth.StudentUser;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.APPID;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.Status;
+import com.herald.ezherald.api.SuccessHandler;
 
 
 public class IDCardAccountFragment extends SherlockFragment {
@@ -112,8 +119,36 @@ public class IDCardAccountFragment extends SherlockFragment {
 			proDialog = ProgressDialog.show(getActivity(), "请稍候",
 					"", true, true);
 
-			Thread loginThread = new Thread(new LoginFailureHandler());
-			loginThread.start();
+//			Thread loginThread = new Thread(new LoginFailureHandler());
+//			loginThread.start();
+
+            APIClient client = APIFactory.getAPIClient(getActivity(),"uc/auth",new SuccessHandler(){
+
+                @Override
+                public void onSuccess(String data) {
+                    if (proDialog != null) {
+                        proDialog.dismiss();
+                    }
+                    APIAccount apiAccount = new APIAccount(getActivity());
+                    apiAccount.saveUUID(data);
+                    Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_SHORT).show();
+                }
+            },new FailHandler(){
+
+                @Override
+                public void onFail(Status status, String message) {
+                    if (proDialog != null) {
+                        proDialog.dismiss();
+                    }
+                    Toast.makeText(getActivity(),"登录失败",Toast.LENGTH_SHORT).show();
+                }
+            });
+            userName = view_userName.getText().toString();
+            password = view_password.getText().toString();
+            client.addArg("user",userName);
+            client.addArg("password",password);
+            client.addArg("appid",new APPID().getAPPID());
+            client.doRequest();
 		}
 	};
 

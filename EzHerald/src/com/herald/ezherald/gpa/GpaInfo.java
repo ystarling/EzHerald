@@ -8,7 +8,7 @@ import android.os.Message;
 import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.api.APIFactory;
-import com.herald.ezherald.api.Err;
+import com.herald.ezherald.api.Status;
 import com.herald.ezherald.api.FailHandler;
 import com.herald.ezherald.api.SuccessHandler;
 
@@ -142,7 +142,7 @@ public class GpaInfo {
             }
         },new FailHandler() {
             @Override
-            public void onFail(Err err, String message) {
+            public void onFail(Status err, String message) {
                 handler.obtainMessage(FAILED).sendToTarget();
             }
         });
