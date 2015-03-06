@@ -39,12 +39,15 @@ public class APIAccount {
         return uuid!=null && !uuid.isEmpty();
     }
     private String encrypt(String data){
-
-        return  Crypto.encrypt(data);
+//        String result = Crypto.encrypt(data);
+//        if(!Crypto.decrypt(result).equals(data)){
+//            Log.w(Crypto.encrypt(data),Crypto.decrypt(result));
+//        }
+        return data;
     }
     private String decrypt(String data){
 
-        return Crypto.decrypt(data);
+        return data;
     }
     /*
     *
