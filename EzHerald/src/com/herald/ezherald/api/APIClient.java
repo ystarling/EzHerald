@@ -2,9 +2,6 @@ package com.herald.ezherald.api;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -15,6 +12,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.io.IOException;
  */
 
 public class APIClient {
-    private final String API_URL = "http://herald.seu.edu.cn/";
+    private final String API_URL = "http://121.248.63.105/";
     public APIConf conf;
     public SuccessHandler successHandler;
     public FailHandler failHandler;
@@ -39,7 +39,14 @@ public class APIClient {
     public void addArg(String key, String value) {
         conf.args.add(new BasicNameValuePair(key, value));
     }
+    public void addAPPIDToArg(){
+        addArg("appid",new APPID().getAPPID());
+    }
 
+    //调用前要先手动检查uuid的有效性
+    public void addUUIDToArg(){
+        addArg("uuid",new APIAccount(context).uuid);
+    }
 
     public void doRequest() {
         new AsyncTask<Void,Void,Void>(){
@@ -60,8 +67,17 @@ public class APIClient {
                         return null;
                     }
                     Log.d("Client","check user ok");
-                    HttpClient client = new DefaultHttpClient();
+                    HttpParams httpParameters = new BasicHttpParams();
+
+                    int timeoutConnection = 3000;
+                    HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+                    int timeoutSocket = 5000;
+                    HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+                    HttpClient client = new DefaultHttpClient(httpParameters);
+
                     HttpPost request = new HttpPost(API_URL + conf.url);
+
                     Log.d("Client","request uri"+request.getURI().toString());
                     HttpEntity entity = new UrlEncodedFormEntity(conf.args,"UTF-8");
                     request.setEntity(entity);
@@ -69,7 +85,7 @@ public class APIClient {
                     HttpResponse response = client.execute(request);
                     int statusCode = response.getStatusLine().getStatusCode();
                     result = EntityUtils.toString(response.getEntity());
-                    com.herald.ezherald.api.Status status = com.herald.ezherald.api.Status.getErrFromHttpCode(statusCode);
+                    status = com.herald.ezherald.api.Status.getErrFromHttpCode(statusCode);
                     if (statusCode != HttpStatus.SC_OK) {
                         Log.d("Client","error status code "+statusCode);
                         success = false;
@@ -91,7 +107,7 @@ public class APIClient {
             }
 
             @Override
-            protected void onPostExecute(Void _) {
+            protected void onPostExecute(Void ignore) {
                 if(success){
                     successHandler.onSuccess(result);
                 }else{

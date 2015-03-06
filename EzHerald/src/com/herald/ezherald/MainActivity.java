@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.api.APIAccount;
 import com.herald.ezherald.mainframe.MainContentFragment;
 import com.herald.ezherald.mainframe.MainFrameDbAdapter;
@@ -122,8 +124,9 @@ public class MainActivity extends BaseFrameActivity {
         dowyh();// run Wang Yanhao's collection
 
         APIAccount account = new APIAccount(this);
-        if(!account.isUUIDValid()){
-            account.autoLogin();
+        UserAccount userAccount = Authenticate.getIDcardUser(this);
+        if(userAccount!=null && !account.isUUIDValid()){//旧版本登陆过的用户
+            account.autoLogin();//自动更新uuid
         }
     }
 
