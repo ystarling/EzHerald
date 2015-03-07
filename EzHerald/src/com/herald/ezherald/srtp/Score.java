@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -76,11 +77,11 @@ public class Score {
         public void handleMessage(Message msg)
         {
             try{
-                // JSONArray jsonarray;
-                // jsonarray=json.getJSONArray();
+
                 JSONObject obj = json.getJSONObject(0);
                 // json_detail = json.getJSONObject("");
                 name=obj.getString("name");
+                setScore(Integer.parseInt(obj.getString("total")));
             }
             catch (JSONException e1){
                 Toast toast1 = Toast.makeText(context, "解析错误...",
@@ -134,7 +135,7 @@ public class Score {
         this.context=context;
         pref = context.getSharedPreferences("Score", Context.MODE_PRIVATE);
         setUpdateTime(pref.getString("UpdateTime", DEFAULT_UPDATETIME));
-        setScore(pref.getInt("Score",DEFAULT_SCORE));
+       // setScore(pref.getInt("Score",DEFAULT_SCORE));
 
     }
 
@@ -160,7 +161,7 @@ public class Score {
                         HttpClient httpClient = new DefaultHttpClient();
                         //DefaultHttpClient client = new DefaultHttpClient();
                         List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
-                        params.add(new BasicNameValuePair("number", "213131592"));
+                        params.add(new BasicNameValuePair("number","71Y13123"));
                         HttpPost postMethod = new HttpPost(URL);
 
                         postMethod.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
@@ -170,25 +171,27 @@ public class Score {
 
                         HttpResponse response = httpClient.execute(postMethod);
                         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                            //v1.setText("chengg");
                             Toast toast1 = Toast.makeText(context,"网络请求错误...",
                                     Toast.LENGTH_LONG);
                             toast1.show();
                         }
-
                         InputStream is = response.getEntity().getContent();
                         BufferedReader br = new BufferedReader(new InputStreamReader(is,
                                 "UTF-8"));
                         String line = null;
-                        StringBuffer sb = new StringBuffer();
+                        String sb = new String();
                         while ((line = br.readLine()) != null) {
-                            sb.append(line);
+                            sb+=line;
                         }
                         json = new JSONArray(sb.toString());
+                        Calendar calendar = Calendar.getInstance();
+                        String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DATE));
+                        setUpdateTime(today);
                         Message msg = Message.obtain();
                         // msg.obj = json;
                         msg.setTarget(myHandler);
                         msg.sendToTarget();
+                        handler.obtainMessage(SUCCESS).sendToTarget();
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     } catch (ClientProtocolException e) {
