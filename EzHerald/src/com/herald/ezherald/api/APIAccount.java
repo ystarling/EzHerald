@@ -11,7 +11,7 @@ import com.herald.ezherald.account.UserAccount;
  */
 public class APIAccount {
     public String uuid;
-    public String ccardnum,password,number,pePassword,libUsername,libPassword,cardQueryPassword;
+    public String password,number;
     private Context context;
     private static String UUID_PREF_NAME = "UUID_PREFERENCE";
 
@@ -69,7 +69,7 @@ public class APIAccount {
             client.addArg("password",user.getPassword());
         }
 
-        client.addArg("appid",new APPID().getAPPID());
+        client.addAPPIDToArg();
 
         client.doRequest();
     }

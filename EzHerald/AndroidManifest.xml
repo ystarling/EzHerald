@@ -2,10 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="8"
-    android:versionName="2.0.0000" >
-
-    <!-- public beta -->
-
+    android:versionName="2.0.0000" > <!-- public beta -->
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
@@ -137,11 +134,11 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
-        <activity android:name=".srtp.SrtpActivity"
+        <activity
+            android:name=".srtp.SrtpActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle">
-
-            </activity>
+            android:theme="@style/Theme.Heraldstyle" >
+        </activity>
 
         <!-- libr  begin -->
         <activity
@@ -313,6 +310,14 @@
         </service>
         <!-- wifi end -->
 
+        <activity
+            android:name=".api.APIAccountActivity"
+            android:label="@string/title_activity_apiaccount"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.herald.ezherald.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
