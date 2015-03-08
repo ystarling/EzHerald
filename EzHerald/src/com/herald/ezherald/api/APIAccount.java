@@ -36,18 +36,14 @@ public class APIAccount {
         editor.commit();
     }
     public boolean isUUIDValid(){
+        uuid = readUUID();
         return uuid!=null && !uuid.isEmpty();
     }
     private String encrypt(String data){
-//        String result = Crypto.encrypt(data);
-//        if(!Crypto.decrypt(result).equals(data)){
-//            Log.w(Crypto.encrypt(data),Crypto.decrypt(result));
-//        }
-        return data;
+        return Crypto.encrypt(data);
     }
     private String decrypt(String data){
-
-        return data;
+        return Crypto.decrypt(data);
     }
     /*
     *

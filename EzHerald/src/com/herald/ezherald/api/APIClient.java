@@ -20,7 +20,6 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 
-
 /**
  * Created by xie on 12/12/2014.
  */
@@ -79,6 +78,7 @@ public class APIClient {
                     HttpPost request = new HttpPost(API_URL + conf.url);
 
                     Log.d("Client","request uri"+request.getURI().toString());
+
                     HttpEntity entity = new UrlEncodedFormEntity(conf.args,"UTF-8");
                     request.setEntity(entity);
                     Log.d("Client","add param ok,start to execute request");
@@ -98,8 +98,8 @@ public class APIClient {
                     Log.d("Client","IO_EXCEPTION");
                     e.printStackTrace();
                     success = false;
+                    status = com.herald.ezherald.api.Status.IO_EXCEPTION;
                     return null;
-
                 }finally {
                     Log.d("Client","Finished");
                 }
