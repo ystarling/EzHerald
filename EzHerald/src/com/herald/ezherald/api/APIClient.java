@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 
 /**
@@ -59,19 +61,17 @@ public class APIClient {
                 try {
                     APIAccount account = new APIAccount(context);
                     if (!account.isUUIDValid() && !conf.url.equals("uc/auth")) {
-                        //failHandler.onFail(com.herald.ezherald.api.Status.NOT_LOGIN, "user not login");
                         status = com.herald.ezherald.api.Status.NOT_LOGIN;
                         success = false;
                         result = "";
                         return null;
                     }
                     Log.d("Client","check user ok");
+
                     HttpParams httpParameters = new BasicHttpParams();
 
-                    int timeoutConnection = 3000;
-                    HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-                    int timeoutSocket = 5000;
-                    HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+                    HttpConnectionParams.setConnectionTimeout(httpParameters, 5000);
+                    HttpConnectionParams.setSoTimeout(httpParameters, 5000);
 
                     HttpClient client = new DefaultHttpClient(httpParameters);
 
@@ -94,13 +94,31 @@ public class APIClient {
                     Log.d("Client","status ok");
 
                     success = true;
-                } catch (IOException e) {
+                } catch(ConnectTimeoutException e){
+                    Log.d("Client","TIME_OUT");
+                    e.printStackTrace();
+                    success = false;
+                    status = com.herald.ezherald.api.Status.TIMEOUT;
+                    return null;
+                } catch (SocketTimeoutException e){
+                    Log.d("Client","TIME_OUT");
+                    e.printStackTrace();
+                    success = false;
+                    status = com.herald.ezherald.api.Status.TIMEOUT;
+                    return null;
+                }catch (IOException e) {
                     Log.d("Client","IO_EXCEPTION");
                     e.printStackTrace();
                     success = false;
                     status = com.herald.ezherald.api.Status.IO_EXCEPTION;
                     return null;
-                }finally {
+                } catch (Exception e){
+                    Log.d("Client","UNKNOWN EXCEPTION:"+e.getMessage());
+                    e.printStackTrace();
+                    success = false;
+                    status = com.herald.ezherald.api.Status.UNKNOWN;
+                    return null;
+                } finally {
                     Log.d("Client","Finished");
                 }
                 return null;

@@ -17,8 +17,6 @@ public class APIAccount {
 
     public APIAccount(Context context){
         this.context = context;
-
-
         uuid = readUUID();
     }
 
