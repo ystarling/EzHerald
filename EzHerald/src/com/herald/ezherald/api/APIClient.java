@@ -77,7 +77,7 @@ public class APIClient {
 
                     HttpPost request = new HttpPost(API_URL + conf.url);
 
-                    Log.d("Client","request uri"+request.getURI().toString());
+                    // Log.d("Client","request uri"+request.getURI().toString());
 
                     HttpEntity entity = new UrlEncodedFormEntity(conf.args,"UTF-8");
                     request.setEntity(entity);
@@ -95,18 +95,18 @@ public class APIClient {
 
                     success = true;
                 } catch(ConnectTimeoutException e){
-                    Log.d("Client","TIME_OUT");
+                    Log.d("Client","Connection time out");
                     e.printStackTrace();
                     success = false;
                     status = com.herald.ezherald.api.Status.TIMEOUT;
                     return null;
                 } catch (SocketTimeoutException e){
-                    Log.d("Client","TIME_OUT");
+                    Log.d("Client","socket time out");
                     e.printStackTrace();
                     success = false;
                     status = com.herald.ezherald.api.Status.TIMEOUT;
                     return null;
-                }catch (IOException e) {
+                } catch (IOException e) {
                     Log.d("Client","IO_EXCEPTION");
                     e.printStackTrace();
                     success = false;

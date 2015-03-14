@@ -46,9 +46,10 @@
     <bookmark url="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/Crypto.java" line="52" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b1a5303-6bcf-457f-8278-cadf60047bcc" name="Default" comment="fix bug">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIAccount.java" afterPath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIAccount.java" />
+    <list default="true" id="2b1a5303-6bcf-457f-8278-cadf60047bcc" name="Default" comment="add more exception in API client">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APICache.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIClient.java" afterPath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIConf.java" afterPath="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIConf.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ezherald.iws" />
@@ -120,41 +121,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="APIAccountActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIAccountActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1914" max-vertical-offset="5133">
-              <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Crypto.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/Crypto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1769" max-vertical-offset="2146">
-              <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="APIClient.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="APIClient.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46691176" vertical-offset="2385" max-vertical-offset="3567">
-              <caret line="116" column="40" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2778" max-vertical-offset="3567">
+              <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="appid.cpp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EzHerald/src/main/jni/appid.cpp">
+      <file leaf-file-name="APICache.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APICache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="413" max-vertical-offset="1160">
-              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.33272058" vertical-offset="167" max-vertical-offset="2320">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#468#469#0" expanded="true" />
+                <element signature="e#506#507#0" expanded="true" />
+                <element signature="e#542#543#0" expanded="true" />
+                <element signature="e#605#606#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="System.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/java/lang/System.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2893" max-vertical-offset="17342">
+              <caret line="166" column="30" selection-start-line="166" selection-start-column="30" selection-end-line="166" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="APIConf.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIConf.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="545" max-vertical-offset="1102">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding>
+                <element signature="e#483#484#0" expanded="true" />
+                <element signature="e#513#514#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Status.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/Status.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="580" max-vertical-offset="1015">
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -193,7 +213,7 @@
       <file leaf-file-name="DeviceFPCollect.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EzHerald/src/com/wyhao31/devicefingerprint/DeviceFPCollect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="116" max-vertical-offset="17690">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2001" max-vertical-offset="19749">
               <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
               <folding />
             </state>
@@ -3838,7 +3858,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/EzHerald/res/layout/library_fragment_main.xml" />
         <option value="$PROJECT_DIR$/ResideMenu/src/main/java/com/special/ResideMenu/ResideMenuItem.java" />
         <option value="$PROJECT_DIR$/EzHerald/build/source/r/debug/com/herald/ezherald/R.java" />
         <option value="$PROJECT_DIR$/resideMenu/res/layout/residemenu.xml" />
@@ -3873,7 +3892,6 @@
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/gpa/GPAActivity.java" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/Err.java" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/Status.java" />
-        <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIConf.java" />
         <option value="$PROJECT_DIR$/local.properties" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIFactory.java" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/account/IDCardAccountFragment.java" />
@@ -3889,6 +3907,8 @@
         <option value="$PROJECT_DIR$/EzHerald/res/layout/background_select_preference.xml" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIAccount.java" />
         <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIClient.java" />
+        <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIConf.java" />
+        <option value="$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APICache.java" />
       </list>
     </option>
   </component>
@@ -4027,128 +4047,13 @@
       <sortByType ProjectPane="false" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
       <pane id="Scope">
         <subPane subId="Production">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald-EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald-EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald-EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="com">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wyhao31">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="devicefingerprint">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald-EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="com">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wyhao31">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="devicefingerprint">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="db">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald-EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="EzHerald">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="com">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -4166,9 +4071,6 @@
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane />
       </pane>
     </panes>
   </component>
@@ -4200,6 +4102,22 @@
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.WIDTH" value="250" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="true" />
     <property name="SearchEverywhereHistoryKey" value="mani&#9;FILE&#9;file://D:/GitHub/EzHerald/EzHerald/AndroidManifest.xml" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="99" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="129" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="129" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="922" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="117" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="123" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="123" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="916" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -4450,7 +4368,11 @@
       <created>1425909180525</created>
       <updated>1425909180525</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add more exception in API client">
+      <created>1426248268617</created>
+      <updated>1426248268617</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -4486,7 +4408,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6109215" sideWeight="0.80966765" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.66040957" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32423207" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.78327644" sideWeight="0.6444781" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.79549396" sideWeight="0.35552195" order="6" side_tool="true" content_ui="tabs" />
@@ -4566,7 +4488,8 @@
     <MESSAGE value="增加了uuid的加密&#10;" />
     <MESSAGE value="fix bug" />
     <MESSAGE value="encrypt appid" />
-    <option name="LAST_COMMIT_MESSAGE" value="encrypt appid" />
+    <MESSAGE value="add more exception in API client" />
+    <option name="LAST_COMMIT_MESSAGE" value="add more exception in API client" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -4627,38 +4550,10 @@
           <option name="timeStamp" value="77" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="150" />
+      <option name="time" value="151" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIConf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="158" max-vertical-offset="725">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/android/os/MessageQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15167">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/java/util/ArrayDeque.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7209" max-vertical-offset="23577">
-          <caret line="261" column="13" selection-start-line="261" selection-start-column="13" selection-end-line="261" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/java/util/concurrent/Executor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2660" max-vertical-offset="3306">
-          <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/java/util/concurrent/ThreadPoolExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="37895" max-vertical-offset="58000">
@@ -4681,13 +4576,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/res/layout/account_idcardaccount_activity_prefrag.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.05380334" vertical-offset="0" max-vertical-offset="551">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/MainActivity.java">
@@ -4797,13 +4692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/Status.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="841">
-          <caret line="4" column="76" selection-start-line="4" selection-start-column="76" selection-end-line="4" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5420561" vertical-offset="1015" max-vertical-offset="1740">
@@ -4869,13 +4757,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/res/layout/activity_apiaccount.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="261" max-vertical-offset="2871">
           <caret line="9" column="62" selection-start-line="9" selection-start-column="62" selection-end-line="9" selection-end-column="62" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/javax/crypto/spec/SecretKeySpec.java">
@@ -4896,7 +4784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2914" max-vertical-offset="21141">
           <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4924,13 +4811,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/res/layout/background_select_preference.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5755814" vertical-offset="22" max-vertical-offset="551">
           <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/src/main/jni/empty.cpp">
@@ -4999,15 +4886,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31985295" vertical-offset="0" max-vertical-offset="957">
           <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/java/lang/Throwable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43933824" vertical-offset="3937" max-vertical-offset="12847">
+          <caret line="169" column="27" selection-start-line="169" selection-start-column="19" selection-end-line="169" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/Status.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="841">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46691176" vertical-offset="2385" max-vertical-offset="3567">
-          <caret line="116" column="40" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2778" max-vertical-offset="3567">
+          <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APIConf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="545" max-vertical-offset="1102">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-18/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2893" max-vertical-offset="17342">
+          <caret line="166" column="30" selection-start-line="166" selection-start-column="30" selection-end-line="166" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EzHerald/src/com/herald/ezherald/api/APICache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33272058" vertical-offset="167" max-vertical-offset="2320">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#468#469#0" expanded="true" />
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

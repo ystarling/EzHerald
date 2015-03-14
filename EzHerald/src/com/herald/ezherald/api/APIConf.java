@@ -21,4 +21,15 @@ public class APIConf {
     public APIConf(String url){
         this.url = url;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(url+"###");
+        for(BasicNameValuePair pair: args){
+            builder.append(pair.getName()+"::"+pair.getValue()+"##");
+        }
+
+        return builder.toString();
+    }
 }
