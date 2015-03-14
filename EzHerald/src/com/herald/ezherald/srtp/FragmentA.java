@@ -71,7 +71,8 @@ public class FragmentA extends Fragment{
         }
 
     private void Update(){
-        score.update(user);
+        score.getScoreFromApi();
+//        score.update(user);
     }
 
     public void show(){

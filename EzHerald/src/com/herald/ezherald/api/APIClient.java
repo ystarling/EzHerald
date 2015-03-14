@@ -80,6 +80,7 @@ public class APIClient {
                     // Log.d("Client","request uri"+request.getURI().toString());
 
                     HttpEntity entity = new UrlEncodedFormEntity(conf.args,"UTF-8");
+                    Log.d("Client",conf.args.toString());
                     request.setEntity(entity);
                     Log.d("Client","add param ok,start to execute request");
                     HttpResponse response = client.execute(request);

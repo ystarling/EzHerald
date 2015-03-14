@@ -6,10 +6,17 @@ import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.Status;
+import com.herald.ezherald.api.SuccessHandler;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -153,6 +160,22 @@ public class Score {
             @Override
             public void run() {
                 try{
+                    APIAccount apiAccount=new APIAccount(context);
+                    apiAccount.isUUIDValid();
+                    APIClient client= APIFactory.getAPIClient(context,"api/srtp",new SuccessHandler() {
+                        @Override
+                        public void onSuccess(String data) {
+
+                        }
+                    },new FailHandler() {
+                        @Override
+                        public void onFail(Status status, String message) {
+
+                        }
+                    });
+                    client.addUUIDToArg();
+                    client.doRequest();
+
                 if(father instanceof FragmentA) {
                     UserAccount user = Authenticate.getTyxUser(context);
                     String name = user.getUsername();
@@ -226,5 +249,24 @@ public class Score {
     public void clear() {
         setScore(0);
         save();
+    }
+
+
+    public void getScoreFromApi(){
+        APIAccount apiAccount=new APIAccount(context);
+        apiAccount.isUUIDValid();
+        APIClient client= APIFactory.getAPIClient(context,"api/srtp",new SuccessHandler() {
+            @Override
+            public void onSuccess(String data) {
+                Log.d("data",data);
+            }
+        },new FailHandler() {
+            @Override
+            public void onFail(Status status, String message) {
+
+            }
+        });
+        client.addUUIDToArg();
+        client.doRequest();
     }
 }
