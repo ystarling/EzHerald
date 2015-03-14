@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/srtp_UpdateTime"
-            android:text="2014-11-29"/>
+            android:text="未更新哦"/>
     </LinearLayout>
     <EditText
         android:id="@+id/edtTxt_adjust"

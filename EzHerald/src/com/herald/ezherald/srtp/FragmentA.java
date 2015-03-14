@@ -17,6 +17,8 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIAccountActivity;
 
 import org.w3c.dom.Text;
 
@@ -28,8 +30,8 @@ public class FragmentA extends Fragment{
     private  Button updateButton;
     private TextView scoreText;
     private TextView UpdattimeText;
-    private Score score;
-    private UserAccount user;
+    public static Score score;
+    private APIAccount apiAccount;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved) {
         return inflater.inflate(R.layout.srtp_fragment_a, group, false);
@@ -37,11 +39,10 @@ public class FragmentA extends Fragment{
         @Override
         public void onActivityCreated(Bundle savedInstanceState){
             super.onActivityCreated(savedInstanceState);
-
-            user = Authenticate.getTyxUser(getActivity());
-            if (null == user) {
+            apiAccount = new APIAccount(getActivity());
+            if (!apiAccount.isUUIDValid()) {
                 Intent login = new Intent();
-                login.setClass(getActivity(), TyxAccountActivity.class);
+                login.setClass(getActivity(), APIAccountActivity.class);
                 startActivity(login);
             }
             else{
@@ -55,10 +56,11 @@ public class FragmentA extends Fragment{
             }
             else
             {
-                Activity act = getActivity();
-                if(act!=null){
-                    Toast.makeText(act, "还没有数据呦", Toast.LENGTH_LONG).show();
-                }
+//                Activity act = getActivity();
+//                if(act!=null){
+//                    Toast.makeText(act, "还没有数据呦", Toast.LENGTH_LONG).show();
+//                }
+                show();
             }
             updateButton.setOnClickListener(new OnClickListener() {
                 @Override
@@ -72,22 +74,22 @@ public class FragmentA extends Fragment{
 
     private void Update(){
         score.getScoreFromApi();
-//        score.update(user);
     }
 
     public void show(){
+            Activity act = getActivity();
             if(Score.DEFAULT_SCORE == score.getScore()){
-                scoreText.setText("还没有数据哦");
+                Toast.makeText(act, "还没有数据哦", Toast.LENGTH_LONG).show();
             }
         else{
-               scoreText.setText(score.getScore());
+               scoreText.setText(String.valueOf(score.getScore()));
             }
         if(score.getUpdateTime()!=Score.DEFAULT_UPDATETIME){
             UpdattimeText.setText(score.getUpdateTime());
         }
-        else{
-            UpdattimeText.setText("未等新哦");
-        }
+//        else{
+//            UpdattimeText.setText("未等新哦");
+//        }
     }
 
     public  void onSuccess(){
