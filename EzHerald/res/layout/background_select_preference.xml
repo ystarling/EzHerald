@@ -9,7 +9,6 @@
     <TableLayout
         android:id="@+id/table"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_height="300dp">
     </TableLayout>
 </FrameLayout>

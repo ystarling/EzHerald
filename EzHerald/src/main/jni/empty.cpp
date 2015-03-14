@@ -1,1 +1,1 @@
-//this file is empty just for a bug under windows
+//To avoid compile error

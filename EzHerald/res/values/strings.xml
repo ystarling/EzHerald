@@ -54,6 +54,6 @@
     <string name="http_herald_seu_edu_cn_">http://herald.seu.edu.cn/</string>
     <string name="title_activity_my">MyActivity</string>
     <string name="title_activity_my_activity2">MyActivity2</string>
-    <string name="title_activity_apiaccount">APIAccountActivity</string>
+    <string name="title_activity_apiaccount">账户信息</string>
 
 </resources>

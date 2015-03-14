@@ -20,7 +20,7 @@ public class APIAccountActivity extends Activity {
     private String card ;//一卡通
     private String pass ;//统一认证密码
     private String pePass;//体育系密码
-    private String libuser;
+    private String libUser;
     private String libPass;
     private ProgressDialog proDialog;
     private String readTextFromView(int id){
@@ -48,7 +48,7 @@ public class APIAccountActivity extends Activity {
                 card = readTextFromView(R.id.card);//一卡通
                 pass = readTextFromView(R.id.pass);//统一认证密码
                 pePass = readTextFromView(R.id.pe_pass);//体育系密码
-                libuser = readTextFromView(R.id.lib_user);
+                libUser = readTextFromView(R.id.lib_user);
                 libPass = readTextFromView(R.id.lib_pass);
 
                 if(card.isEmpty()){
@@ -58,11 +58,14 @@ public class APIAccountActivity extends Activity {
                 }else {
                     proDialog = ProgressDialog.show(context, "请稍候","正在进行", true, true);
                     final APIAccount apiAccount = new APIAccount(context);
+
+                    if(!number.isEmpty() || !pePass.isEmpty() || !libUser.isEmpty() || !libPass.isEmpty()){
+                        needUpdateInfo = true;
+                    }
                     if(!apiAccount.isUUIDValid()){//还没登陆先登录
                         Login();
-                    }
-                    if( !pePass.isEmpty() || !libuser.isEmpty() || !libPass.isEmpty()){
-                        needUpdateInfo = true;
+                    }else{
+                        updateInfo();
                     }
 
                 }
@@ -134,8 +137,8 @@ public class APIAccountActivity extends Activity {
         client.addArg("number",number);
         if(pePass!="")
             client.addArg("pe_password",pePass);
-        if(libuser!="")
-            client.addArg("lib_username",libuser);
+        if(libUser!="")
+            client.addArg("lib_username",libUser);
         if(libPass!="")
             client.addArg("lib_password",libPass);
 
