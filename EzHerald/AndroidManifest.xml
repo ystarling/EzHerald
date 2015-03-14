@@ -2,10 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="8"
-    android:versionName="2.0.0000" >
-
-    <!-- public beta -->
-
+    android:versionName="2.0.0000" > <!-- public beta -->
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
@@ -137,11 +134,11 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
-        <activity android:name=".srtp.SrtpActivity"
+        <activity
+            android:name=".srtp.SrtpActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.Heraldstyle">
-
-            </activity>
+            android:theme="@style/Theme.Heraldstyle" >
+        </activity>
 
         <!-- libr  begin -->
         <activity
@@ -304,9 +301,8 @@
             android:noHistory="true" >
         </activity>
 
-        <!--树洞activity-->
+        <!-- 树洞activity -->
         <activity android:name=".treehole.TreeholeActivity" />
-
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>
 
@@ -317,6 +313,10 @@
         </service>
         <!-- wifi end -->
 
+        <activity
+            android:name=".treehole.TreeholeSendActivity"
+            android:label="@string/title_activity_treehole_send" >
+        </activity>
     </application>
 
 </manifest>

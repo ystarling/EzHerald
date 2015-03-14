@@ -19,4 +19,6 @@
 
 <resources>
     <color name="pressed_heraldstyle">#CCEB3C4B</color>
+    <color name="treehole_editstyle">#DDDDDD</color>
+    <color name="warning_red">#FF0000</color>
 </resources>

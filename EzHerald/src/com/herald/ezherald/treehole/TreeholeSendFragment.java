@@ -1,12 +1,18 @@
 package com.herald.ezherald.treehole;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.herald.ezherald.R;
 
@@ -29,6 +35,8 @@ public class TreeholeSendFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private EditText et_treehole_send;//输入框
+    private TextView tv_treehole_sug;//剩余输入字数
 
     /**
      * Use this factory method to create a new instance of
@@ -76,15 +84,54 @@ public class TreeholeSendFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        et_treehole_send=(EditText)getActivity().findViewById(R.id.et_treehole_send);
+        tv_treehole_sug=(TextView)getActivity().findViewById(R.id.tv_treehole_sug);
+        //添加文字改变时的监听器
+        et_treehole_send.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence text, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence text, int start, int count, int after) {
+                //text  输入框中改变前的字符串信息
+                //start 输入框中改变前的字符串的起始位置
+                //count 输入框中改变前后的字符串改变数量一般为0
+                //after 输入框中改变后的字符串与起始位置的偏移量
+
+                int textmum=240-et_treehole_send.getText().toString().length();
+                String str_textnum=String.valueOf(textmum);
+                tv_treehole_sug.setText(str_textnum);
+                if(textmum==0) {
+                    tv_treehole_sug.setTextColor(Color.rgb(255,0,0));
+                }
+                else{
+                    tv_treehole_sug.setTextColor(Color.rgb(0,0,0));
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
     }
+
+    //    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        try {
+//            mListener = (OnFragmentInteractionListener) activity;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(activity.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
     @Override
     public void onDetach() {

@@ -124,7 +124,7 @@ public class MainActivity extends BaseFrameActivity {
 
         APIAccount account = new APIAccount(this);
         if(account.uuid == null||account.uuid.equals("")){
-            account.autoLogin();
+//            account.autoLogin();
         }
     }
 

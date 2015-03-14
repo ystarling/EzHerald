@@ -75,11 +75,11 @@ public class FragmentA extends Fragment {
 	//信息更新成功及失败的显示
 	public void onSuccess(){
 		Context context = getActivity();
-		if(context != null){
-			txt_info.setText("  "+renren.getInfo());
-		txt_date.setText("更新于" + renren.getDate());
-		Toast.makeText(getActivity(),"人人信息更新成功", Toast.LENGTH_LONG).show();
-		btn_update.setText("更新");
+            if(context != null){
+                txt_info.setText("  "+renren.getInfo());
+                txt_date.setText("更新于" + renren.getDate());
+                Toast.makeText(getActivity(),"人人信息更新成功", Toast.LENGTH_LONG).show();
+                btn_update.setText("更新");
 		}
 		
 	}
