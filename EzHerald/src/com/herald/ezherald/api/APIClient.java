@@ -33,8 +33,7 @@ public class APIClient {
     public SuccessHandler successHandler;
     public FailHandler failHandler;
     private Context context;
-    //如果使用缓存且缓存信息有效，会立即返回一个结果并在后台继续请求。如果数据有变化会再返回一次
-    public boolean useCache,readFromCacheSuccess;
+    private boolean useCache,readFromCacheSuccess;
     private APICache apiCache;
     private String cachedData;
 
@@ -67,7 +66,38 @@ public class APIClient {
         addArg("uuid",new APIAccount(context).uuid);
     }
 
-    public void doRequest() {
+    //当缓存可用时立即从返回一个结果。然后联网请求，如果数据有更新再回掉一次
+    public void requestWithCache(){
+        useCache = true;
+        doRequest();
+    }
+    //直接联网返回结果
+    public void requestWithoutCache(){
+        useCache = false;
+        doRequest();
+    }
+    //直接从缓存取结果，先要判断缓存是不是有效
+    public void readFromCache(){
+        cachedData = apiCache.readFormCache(conf);
+        if(cachedData != null){
+            Log.d("Client","read cache success");
+            successHandler.onSuccess(cachedData);
+            readFromCacheSuccess = true;
+        }else{
+            readFromCacheSuccess = false;
+            Log.d("Client","read cache failed");
+        }
+    }
+
+    public boolean isCacheAvailable(){
+        return apiCache.readFormCache(conf) != null;
+    }
+
+    private void doRequest() {
+        if(useCache){
+            readFromCache();
+        }
+
         new AsyncTask<Void,Void,Void>(){
 
             private boolean success;
@@ -102,17 +132,7 @@ public class APIClient {
                     request.setEntity(entity);
                     Log.d("Client","add param ok,start to execute request");
 
-                    if(useCache){
-                        cachedData = apiCache.readFormCache(conf);
-                        if(cachedData != null){
-                            Log.d("Client","read cache success");
-                            successHandler.onSuccess(cachedData);
-                            readFromCacheSuccess = true;
-                        }else{
-                            readFromCacheSuccess = false;
-                            Log.d("Client","read cache failed");
-                        }
-                    }
+
 
 
 
