@@ -17,37 +17,21 @@
     android:id="@+id/layout"
     >
     <TableRow
-
-        android:textSize="20sp"
-        android:padding="10dip">
+>
         <TextView
             android:text="学分"
             android:textSize="20sp"
             android:padding="10dip"
+            android:layout_marginLeft="30sp"
             />
         <TextView
             android:text="项目"
             android:textSize="20sp"
             android:padding="10dip"
+            android:layout_marginLeft="40sp"
             />
     </TableRow>
-    <TableRow
-        android:id="@+id/table">
-        <TextView
-            android:id="@+id/score1"
-            android:text=""
-            android:textSize="20sp"
-            android:padding="10dip"
 
-            />
-        <TextView
-            android:id="@+id/text1"
-            android:text=""
-            android:textSize="20sp"
-            android:padding="10dip"
-
-           />
-    </TableRow>
 
     </TableLayout>
         </HorizontalScrollView>

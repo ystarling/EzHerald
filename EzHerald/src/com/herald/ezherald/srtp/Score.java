@@ -46,7 +46,7 @@ import java.util.List;
  * Created by Administrator on 2014/12/12.
  */
 public class Score {
-    private Fragment father;
+    private Fragment father=new FragmentA();
     private SharedPreferences pref;
     private Editor editor;
 
