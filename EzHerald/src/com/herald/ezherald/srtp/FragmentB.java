@@ -42,32 +42,38 @@ public class FragmentB extends  Fragment{
     }
 
     public void show(){
-        if(FragmentA.score.getScore()==0){
+        if(SrtpFragment.score.getScore()==0){
             onFailed();
         }
-        else if(FragmentA.score.getScore()!=0){
+        else if(SrtpFragment.score.getScore()!=0){
             onSuccess();
         }
     }
 
     public  void onSuccess(){
         Activity act = getActivity();
-        ArrayList project = FragmentA.score.getProject();
+        ArrayList project = SrtpFragment.score.getProject();
         TableLayout tableLayout=(TableLayout)getActivity().findViewById(R.id.layout);
+
+
         for(int i=0;i<project.size();i=i+3){
-            TableRow tableRow=(TableRow)getActivity().findViewById(R.id.table);
-            TextView score = (TextView)tableRow.findViewById(R.id.score1);
-            TextView type = (TextView)tableRow.findViewById(R.id.text1);
-            score.setText(project.get(i).toString());
-            type.setText(project.get(i+1).toString());
-//            tableLayout.addView(tableRow);
+            LayoutInflater inflater = LayoutInflater.from(act);
+            View convertView = inflater.inflate(R.layout.srtp_template,null);
+            TableLayout tableLayout1 = (TableLayout)convertView.findViewById(R.id.Table);
+            TableRow tableRow = (TableRow)tableLayout1.findViewById(R.id.tableRow);
+            tableLayout1.removeView(tableRow);
+            TextView scoreView = (TextView)tableRow.findViewById(R.id.score);
+            TextView projectView =(TextView)tableRow.findViewById(R.id.project);
+            scoreView.setText(project.get(i).toString());
+            projectView.setText(project.get(i+1).toString());
+            tableLayout.addView(tableRow);
         }
     }
 
     public void onFailed(){
         Activity act = getActivity();
         if(act!=null){
-            Toast.makeText(act,"更新失败",Toast.LENGTH_LONG).show();
+            Toast.makeText(act,"请先更新哦~",Toast.LENGTH_LONG).show();
         }
     }
 

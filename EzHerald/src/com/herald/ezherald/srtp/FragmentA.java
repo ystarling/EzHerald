@@ -30,7 +30,6 @@ public class FragmentA extends Fragment{
     private  Button updateButton;
     private TextView scoreText;
     private TextView UpdattimeText;
-    public static Score score;
     private APIAccount apiAccount;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved) {
@@ -49,9 +48,9 @@ public class FragmentA extends Fragment{
                 updateButton=(Button)getActivity().findViewById(R.id.srtp_update_button);
                 scoreText=(TextView)getActivity().findViewById(R.id.srtp_score);
                 UpdattimeText=(TextView)getActivity().findViewById(R.id.srtp_UpdateTime);
-                score=new Score(getActivity(),this);
+//                SrtpActivity.score=new Score(getActivity(),this);
             }
-            if(score.isSet()){
+            if(SrtpFragment.score.isSet()){
                 show();
             }
             else
@@ -73,19 +72,19 @@ public class FragmentA extends Fragment{
         }
 
     private void Update(){
-        score.getScoreFromApi();
+        SrtpFragment.score.getScoreFromApi();
     }
 
     public void show(){
             Activity act = getActivity();
-            if(Score.DEFAULT_SCORE == score.getScore()){
+            if(Score.DEFAULT_SCORE == (SrtpFragment.score.getScore())){
                 Toast.makeText(act, "还没有数据哦", Toast.LENGTH_LONG).show();
             }
         else{
-               scoreText.setText(String.valueOf(score.getScore()));
+               scoreText.setText(String.valueOf((SrtpFragment.score.getScore())));
             }
-        if(score.getUpdateTime()!=Score.DEFAULT_UPDATETIME){
-            UpdattimeText.setText(score.getUpdateTime());
+        if((SrtpFragment.score.getUpdateTime())!=Score.DEFAULT_UPDATETIME){
+            UpdattimeText.setText(SrtpFragment.score.getUpdateTime());
         }
 //        else{
 //            UpdattimeText.setText("未等新哦");
