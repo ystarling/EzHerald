@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class Score {
     private SharedPreferences pref;
     private Editor editor;
 
-    private int score;
+    private double score;
     private String updateTime;
     private Context context;
 
@@ -57,17 +58,14 @@ public class Score {
     public static final int FAILED  = 0;
     public static  final int DEFAULT_SCORE=0;
     public static final String DEFAULT_UPDATETIME=null;
-    private  static final String URL="http://121.248.63.105/service/srtp";
 
-    JSONArray json;
-    JSONObject json_detail;
-    private MyHandler myHandler=new MyHandler();
-    String name="hello";
 
-   public  void setScore(int score){
+    JSONObject json;
+    ArrayList project = new ArrayList();
+   public  void setScore(double score){
        this.score=score;
    }
-    public int getScore(){
+    public double getScore(){
         return  score;
     }
 
@@ -79,58 +77,31 @@ public class Score {
         return  updateTime;
     }
 
-    class MyHandler extends  Handler{
-        @Override
-        public void handleMessage(Message msg)
-        {
-            try{
-
-                JSONObject obj = json.getJSONObject(0);
-                // json_detail = json.getJSONObject("");
-                name=obj.getString("name");
-                setScore(Integer.parseInt(obj.getString("total")));
-            }
-            catch (JSONException e1){
-                Toast toast1 = Toast.makeText(context, "解析错误...",
-                        Toast.LENGTH_LONG);
-                toast1.show();
-            }
-
-            super.handleMessage(msg);
-        }
+    public ArrayList getProject(){
+        return project;
     }
-
-
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg){
-            switch(msg.what){
-                case SUCCESS:
-                    onSuccess();
-                    break;
-                case FAILED:
-                    onFiled();
-                    break;
-            }
-        }
-    };
-
     protected void onFiled() {
         // TODO Auto-generated method stub
         //Toast.makeText(activity, "更新失败", Toast.LENGTH_SHORT).show();
         if(father == null)
             return ;
-        if(father instanceof FragmentB){
+        else if(father instanceof FragmentB){
             ((FragmentB) father).onFailed();
+        }
+        else if(father instanceof FragmentA){
+            ((FragmentA)father).onFailed();
         }
 
     }
     protected void onSuccess() {
-        save();
+//        save();
         if(father == null)
             return ;
         if(father instanceof FragmentB){
             ((FragmentB) father).onSuccess();
+        }
+        else if(father instanceof FragmentA){
+            ((FragmentA)father).onSuccess();
         }
     }
 
@@ -155,95 +126,12 @@ public class Score {
         return score!=DEFAULT_SCORE&&updateTime!=DEFAULT_UPDATETIME;
     }
 
-    public void update(final UserAccount user){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    APIAccount apiAccount=new APIAccount(context);
-                    apiAccount.isUUIDValid();
-                    APIClient client= APIFactory.getAPIClient(context,"api/srtp",new SuccessHandler() {
-                        @Override
-                        public void onSuccess(String data) {
-
-                        }
-                    },new FailHandler() {
-                        @Override
-                        public void onFail(Status status, String message) {
-
-                        }
-                    });
-                    client.addUUIDToArg();
-                    client.doRequest();
-
-                if(father instanceof FragmentA) {
-                    UserAccount user = Authenticate.getTyxUser(context);
-                    String name = user.getUsername();
-                    String password = user.getPassword();
-                    try {
-                        HttpClient httpClient = new DefaultHttpClient();
-                        //DefaultHttpClient client = new DefaultHttpClient();
-                        List<BasicNameValuePair> params = new LinkedList<BasicNameValuePair>();
-                        params.add(new BasicNameValuePair("number","71Y13123"));
-                        HttpPost postMethod = new HttpPost(URL);
-
-                        postMethod.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
-                        HttpParams httpParams = httpClient.getParams();
-                        HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
-                        HttpConnectionParams.setSoTimeout(httpParams, 5000);
-
-                        HttpResponse response = httpClient.execute(postMethod);
-                        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                            Toast toast1 = Toast.makeText(context,"网络请求错误...",
-                                    Toast.LENGTH_LONG);
-                            toast1.show();
-                        }
-                        InputStream is = response.getEntity().getContent();
-                        BufferedReader br = new BufferedReader(new InputStreamReader(is,
-                                "UTF-8"));
-                        String line = null;
-                        String sb = new String();
-                        while ((line = br.readLine()) != null) {
-                            sb+=line;
-                        }
-                        json = new JSONArray(sb.toString());
-                        Calendar calendar = Calendar.getInstance();
-                        String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DATE));
-                        setUpdateTime(today);
-                        Message msg = Message.obtain();
-                        // msg.obj = json;
-                        msg.setTarget(myHandler);
-                        msg.sendToTarget();
-                        handler.obtainMessage(SUCCESS).sendToTarget();
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    } catch (ClientProtocolException e) {
-                        e.printStackTrace();
-                    }catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                    else{
-
-
-                }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                    handler.obtainMessage(FAILED).sendToTarget();
-                }
-
-            }
-        }).start();
-
-    }
-
 
     public void save(){
-        editor = pref.edit();
-        editor.putInt("Score",getScore());
-        editor.putString("UpdateTime",getUpdateTime());
-        editor.commit();
+//        editor = pref.edit();
+//        editor.putInt("Score",getScore());
+//        editor.putString("UpdateTime",getUpdateTime());
+//        editor.commit();
     }
 
     public void clear() {
@@ -258,15 +146,49 @@ public class Score {
         APIClient client= APIFactory.getAPIClient(context,"api/srtp",new SuccessHandler() {
             @Override
             public void onSuccess(String data) {
-                Log.d("data",data);
+                try {
+                    json = new JSONObject(data);
+                    dealJson(json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         },new FailHandler() {
             @Override
             public void onFail(Status status, String message) {
-
+                Log.d("error",message);
             }
         });
         client.addUUIDToArg();
         client.doRequest();
+    }
+
+    public void dealJson(JSONObject jsonArray){
+        try{
+            JSONArray obj = json.getJSONArray("content");
+            JSONObject nameMessage = obj.getJSONObject(0);
+            String name=nameMessage.getString("name");
+            double score_get = Double.parseDouble(nameMessage.getString("total"));
+            setScore(score_get);
+
+            for(int i =1;i<obj.length();i++){
+                JSONObject type = obj.getJSONObject(i);
+                project.add(type.getString("credit"));
+                project.add(type.getString("project"));
+                project.add(type.getString("date"));
+            }
+
+            Calendar calendar = Calendar.getInstance();
+            String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DATE));
+            setUpdateTime(today);
+            onSuccess();
+        }
+        catch (JSONException e1){
+            Toast toast1 = Toast.makeText(context, "解析错误...",
+                    Toast.LENGTH_LONG);
+            toast1.show();
+            e1.printStackTrace();
+            onFiled();
+        }
     }
 }
