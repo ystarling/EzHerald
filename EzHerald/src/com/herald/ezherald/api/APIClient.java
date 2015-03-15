@@ -24,6 +24,7 @@ import java.net.SocketTimeoutException;
 
 /**
  * Created by xie on 12/12/2014.
+ *
  */
 
 public class APIClient {
@@ -32,10 +33,27 @@ public class APIClient {
     public SuccessHandler successHandler;
     public FailHandler failHandler;
     private Context context;
+    //如果使用缓存且缓存信息有效，会立即返回一个结果并在后台继续请求。如果数据有变化会再返回一次
+    public boolean useCache,readFromCacheSuccess;
+    private APICache apiCache;
+    private String cachedData;
+
+    //
+    public void setCacheExpireTime(long time){
+        apiCache.expire = time;
+    }
+
+    public long getCacheExpireTime(){
+        return apiCache.expire;
+    }
+
 
     public APIClient(Context context) {
         this.context = context;
+        apiCache = new APICache(context);
+        useCache = false;
     }
+
 
     public void addArg(String key, String value) {
         conf.args.add(new BasicNameValuePair(key, value));
@@ -83,6 +101,21 @@ public class APIClient {
                     Log.d("Client",conf.args.toString());
                     request.setEntity(entity);
                     Log.d("Client","add param ok,start to execute request");
+
+                    if(useCache){
+                        cachedData = apiCache.readFormCache(conf);
+                        if(cachedData != null){
+                            Log.d("Client","read cache success");
+                            successHandler.onSuccess(cachedData);
+                            readFromCacheSuccess = true;
+                        }else{
+                            readFromCacheSuccess = false;
+                            Log.d("Client","read cache failed");
+                        }
+                    }
+
+
+
                     HttpResponse response = client.execute(request);
                     int statusCode = response.getStatusLine().getStatusCode();
                     result = EntityUtils.toString(response.getEntity());
@@ -128,9 +161,19 @@ public class APIClient {
             @Override
             protected void onPostExecute(Void ignore) {
                 if(success){
-                    successHandler.onSuccess(result);
+                    if(useCache && readFromCacheSuccess){
+                        apiCache.writeToCache(conf,result); //更新缓存时间
+                        if(!result.equals(cachedData)){
+                            successHandler.onSuccess(result);
+                        }
+                    }else{
+                        successHandler.onSuccess(result);
+                    }
                 }else{
-                    failHandler.onFail(status,result);
+                    if(!useCache || !readFromCacheSuccess ){
+                        failHandler.onFail(status,result);
+                    }
+
                 }
             }
         }.execute();

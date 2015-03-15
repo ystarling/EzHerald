@@ -21,9 +21,8 @@ JNIEXPORT jstring JNICALL Java_com_herald_ezherald_api_APPID_getAPPID(JNIEnv *en
         appID[i] = appID[i] - 2;
     }
     for(int i=0;i<32;i++){
-        appID[i] = appID[i] +1;
+        appID[i] = appID[i] + 1;
     }
-    // return env->NewStringUTF("34cc6df78cfa7cd457284e4fc377559e");
     return env->NewStringUTF(appID);
 }
 
