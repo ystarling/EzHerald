@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by X on 2015/3/14.
+ *
  */
 public class APICache {
     public Context context;
@@ -19,7 +20,7 @@ public class APICache {
     }
 
     private long getCurrentTime(){
-        return System.currentTimeMillis()/(long)1000000;
+        return System.nanoTime()/(1000l * 1000l * 1000l);
     }
 
     public String readFormCache(APIConf apiConf){
@@ -29,8 +30,8 @@ public class APICache {
         long old = sharedPreferences.getLong(TIME, -1);
         if(old < 0 || now - old > expire)
             return null;
-        String data = sharedPreferences.getString(DATA,null);
-        return data;
+        return sharedPreferences.getString(DATA,null);
+
     }
 
     public void writeToCache(APIConf apiConf,String data){
@@ -40,16 +41,17 @@ public class APICache {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong(TIME, now);
         editor.putString(DATA, data);
-        editor.commit();
+        editor.apply();
+
+
     }
 
     private String getCacheName(APIConf apiConf){
         String str = apiConf.toString(),result = "";
-        final String MD5 = "MD5";
         try {
             // Create MD5 Hash
             MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
+                    .getInstance("MD5");
             digest.update(str.getBytes());
             byte messageDigest[] = digest.digest();
 
