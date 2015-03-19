@@ -147,7 +147,7 @@ public class IDCardAccountFragment extends SherlockFragment {
             client.addArg("user",userName);
             client.addArg("password",password);
             client.addArg("appid",new APPID().getAPPID());
-            client.doRequest();
+            client.requestWithoutCache();
 		}
 	};
 

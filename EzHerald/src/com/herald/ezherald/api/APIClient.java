@@ -132,10 +132,6 @@ public class APIClient {
                     request.setEntity(entity);
                     Log.d("Client","add param ok,start to execute request");
 
-
-
-
-
                     HttpResponse response = client.execute(request);
                     int statusCode = response.getStatusLine().getStatusCode();
                     result = EntityUtils.toString(response.getEntity());

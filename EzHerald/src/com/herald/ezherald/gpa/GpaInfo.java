@@ -8,8 +8,8 @@ import android.os.Message;
 import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.api.APIFactory;
-import com.herald.ezherald.api.Status;
 import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.Status;
 import com.herald.ezherald.api.SuccessHandler;
 
 import org.apache.http.HttpEntity;
@@ -146,7 +146,7 @@ public class GpaInfo {
                 handler.obtainMessage(FAILED).sendToTarget();
             }
         });
-        client.doRequest();
+        client.requestWithoutCache();
     }
 
 	public void update(final UserAccount user, final ProgressDialog progress) {

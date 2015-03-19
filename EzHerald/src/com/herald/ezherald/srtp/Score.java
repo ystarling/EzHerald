@@ -3,14 +3,10 @@ package com.herald.ezherald.srtp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.herald.ezherald.account.Authenticate;
-import com.herald.ezherald.account.UserAccount;
 import com.herald.ezherald.api.APIAccount;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.api.APIFactory;
@@ -18,29 +14,12 @@ import com.herald.ezherald.api.FailHandler;
 import com.herald.ezherald.api.Status;
 import com.herald.ezherald.api.SuccessHandler;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2014/12/12.
@@ -160,7 +139,7 @@ public class Score {
             }
         });
         client.addUUIDToArg();
-        client.doRequest();
+        client.requestWithoutCache();
     }
 
     public void dealJson(JSONObject jsonArray){

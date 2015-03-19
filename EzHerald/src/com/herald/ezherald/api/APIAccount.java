@@ -70,7 +70,7 @@ public class APIAccount {
 
         client.addAPPIDToArg();
 
-        client.doRequest();
+        client.requestWithoutCache();
     }
 
 }

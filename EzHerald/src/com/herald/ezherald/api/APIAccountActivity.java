@@ -106,7 +106,7 @@ public class APIAccountActivity extends Activity {
         client.addArg("user",card);
         client.addArg("password",pass);
         client.addAPPIDToArg();
-        client.doRequest();
+        client.requestWithoutCache();
     }
 
     private void updateInfo() {
@@ -142,7 +142,7 @@ public class APIAccountActivity extends Activity {
         if(libPass!="")
             client.addArg("lib_password",libPass);
 
-        client.doRequest();
+        client.requestWithoutCache();
 
     }
 
