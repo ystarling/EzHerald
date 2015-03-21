@@ -9,7 +9,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="10dp"
         android:scrollbars="vertical"
         android:singleLine="false"
         android:text="树洞内容"
@@ -20,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listview_treehole"
+        android:divider="#00000000"
+        android:dividerHeight="10dp"
         ></ListView>
 
     <Button

@@ -102,7 +102,7 @@ public class TreeholeSendFragment extends Fragment {
                 //count 输入框中改变前后的字符串改变数量一般为0
                 //after 输入框中改变后的字符串与起始位置的偏移量
 
-                int textmum=240-et_treehole_send.getText().toString().length();
+                int textmum=140-et_treehole_send.getText().toString().length();
                 String str_textnum=String.valueOf(textmum);
                 tv_treehole_sug.setText(str_textnum);
                 if(textmum==0) {

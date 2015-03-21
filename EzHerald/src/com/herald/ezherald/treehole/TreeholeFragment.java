@@ -99,14 +99,21 @@ public  class TreeholeFragment extends SherlockFragment{
         bt_writesecret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),TreeholeSendActivity.class);
-                startActivity(intent);
+//                Intent intent=new Intent(getActivity(),TreeholeSendActivity.class);
+//                startActivity(intent);
+                send();
             }
         });
 
 
 
 
+    }
+
+    public boolean send()
+    {
+        treeholeInfo.Send("试一试");
+        return true;
     }
 
     public boolean updata()

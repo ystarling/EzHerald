@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class TreeholeInfo {
     private final int SUCCESS = 1, FAILED = 0;
     private final String URL_refresh = "https://api.renren.com/v2/status/list?access_token=";
+    private final String URL_send ="";
     private String message;//联网读取到的消息
     private String Str_hole="";
     private TreeholeFragment father;
@@ -66,6 +67,31 @@ public class TreeholeInfo {
         };//设置更新内容的处理函数
     }
 
+    public String getAccess_token()//会先用refreshtoken刷新access_token然后返回最新的
+            //涉及网络操作，需要放在线程里
+    {
+        String token="";
+        try
+        {
+            Log.d("get_token","treehole token_refresh");
+            String tag="https://graph.renren.com/oauth/token?grant" + URLEncoder.encode("_") + "type=refresh" + URLEncoder.encode("_") + "token&refresh" + URLEncoder.encode("_") + "token=" + URLEncoder.encode("474942|0.xZB5tloyOPX9teApedFwhTiKWE1WvZni.557314787.1422879755817") + "&client" + URLEncoder.encode("_") + "id=f938a4efbec34888b7dd7863162ac726&client" + URLEncoder.encode("_") + "secret=128c4d85ae194092a610cdb157d51a99";
+            HttpClient client_th_updata=new DefaultHttpClient();
+            HttpGet get_th_updata=new HttpGet(tag);
+            HttpResponse response_th_updata=client_th_updata.execute(get_th_updata);
+            message = EntityUtils.toString(response_th_updata.getEntity());
+
+            JSONObject json=new JSONObject(message);
+            token = json.getString("access_token");
+            token = URLEncoder.encode(token);
+            return token;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return token;
+    }
+
     public void Updata()
     {
         Thread thread_updata=new Thread(new Runnable() {
@@ -77,18 +103,10 @@ public class TreeholeInfo {
 //                    String tag="https://graph.renren.com/oauth/token?grant" + URLEncoder.encode("_") + "type=refresh" + URLEncoder.encode("_") + "token&refresh" + URLEncoder.encode("_") + "token=" + URLEncoder.encode("241511|0.NvNrQow4rEchFtbdaCUtdyA5dWLgRgDh.365328826.1379088139819") + "&client" + URLEncoder.encode("_") + "id=241511&client" + URLEncoder.encode("_") + "secret=8d970a6e9e3249e9afffd2fdba73f018";
 //                    String tag = "https://graph.renren.com/oauth/authorize?client" + URLEncoder.encode("_") + "id=f938a4efbec34888b7dd7863162ac726&redirect" + URLEncoder.encode("_") + "uri=http://page.renren.com/601880046?id=601880046&response" + URLEncoder.encode("_") + "type=code" ;
 //                    String tag="https://graph.renren.com/oauth/token?grant_type=authorization"+ URLEncoder.encode("_") +"code&client"+ URLEncoder.encode("_") +"id=f938a4efbec34888b7dd7863162ac726&redirect"+ URLEncoder.encode("_") +"uri=http://page.renren.com/601880046?id=601880046&client"+ URLEncoder.encode("_") +"secret=128c4d85ae194092a610cdb157d51a99&code=Mj630DFSMVS4JGnuQr2ekVnFcsSkpslU";
-                    String tag="https://graph.renren.com/oauth/token?grant" + URLEncoder.encode("_") + "type=refresh" + URLEncoder.encode("_") + "token&refresh" + URLEncoder.encode("_") + "token=" + URLEncoder.encode("474942|0.xZB5tloyOPX9teApedFwhTiKWE1WvZni.557314787.1422879755817") + "&client" + URLEncoder.encode("_") + "id=f938a4efbec34888b7dd7863162ac726&client" + URLEncoder.encode("_") + "secret=128c4d85ae194092a610cdb157d51a99";
+                    String token=getAccess_token();
                     HttpClient client_th_updata=new DefaultHttpClient();
-                    HttpGet get_th_updata=new HttpGet(tag);
-                    HttpResponse response_th_updata=client_th_updata.execute(get_th_updata);
-                    message = EntityUtils.toString(response_th_updata.getEntity());
-
-
-                    JSONObject json=new JSONObject(message);
-                    String token = json.getString("access_token");
-                    token = URLEncoder.encode(token);
                     HttpGet get = new HttpGet(URL_refresh + token + "&ownerId=601880046&pageSize=20&pageNumber=1");
-                    response_th_updata = client_th_updata.execute(get);
+                    HttpResponse response_th_updata = client_th_updata.execute(get);
                     message = EntityUtils.toString(response_th_updata.getEntity());
 
 
@@ -167,6 +185,22 @@ public class TreeholeInfo {
 
     public void Send(String str_send)
     {
+        Thread thread_send=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d("Send","treehole send");
+                    String token=getAccess_token();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        thread_send.start();
 
     }
 
