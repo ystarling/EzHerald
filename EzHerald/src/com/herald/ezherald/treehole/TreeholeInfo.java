@@ -6,16 +6,22 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lenovo on 2015/1/30.用于获取树洞消息
@@ -183,15 +189,41 @@ public class TreeholeInfo {
     }
 
 
-    public void Send(String str_send)
+    public void Send(String str_send)//传进来的str_send参数将会发送到主页上
     {
+        //发送消息的线程
+        final String str_content=str_send;
         Thread thread_send=new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Log.d("Send","treehole send");
                     String token=getAccess_token();
+                    HttpClient httpClient=new DefaultHttpClient();
+                    HttpPost httpPost=new HttpPost("https://api.renren.com/restserver.do");
+                    List<NameValuePair> params=new ArrayList<NameValuePair>();
+//                  人人网公有参数传递：
+                    params.add(new BasicNameValuePair("v","1.0"));
+                    params.add(new BasicNameValuePair("format","json"));
+                    params.add(new BasicNameValuePair("access_token",token));
+//                  setStatus的私有参数
+                    params.add(new BasicNameValuePair("method","status.set "));
+                    params.add(new BasicNameValuePair("status",str_content));
+//                  关于公共主页的参数
+                    params.add(new BasicNameValuePair("page_id","601880046"));
 
+                    httpPost.setEntity(new UrlEncodedFormEntity(params,"utf-8"));
+                    HttpResponse httpResponse=httpClient.execute(httpPost);
+                    JSONObject jsonObject=new JSONObject(EntityUtils.toString(httpResponse.getEntity()));
+                    String result=jsonObject.getString("result");
+                    if(result=="1")
+                    {
+                        handler_send.obtainMessage(SUCCESS);
+                    }
+                    else
+                    {
+                        handler_send.obtainMessage(FAILED);
+                    }
                 }
                 catch (Exception e)
                 {
