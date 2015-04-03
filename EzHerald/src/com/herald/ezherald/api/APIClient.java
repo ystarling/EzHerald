@@ -34,6 +34,13 @@ public class APIClient {
     public void addArg(String key,String value){
         conf.args.add(new BasicNameValuePair(key,value));
     }
+
+
+    public void setUrl(String url)
+    {
+        conf.url=url;
+    }//2015.4.2  By he 添加一个改URL的函数
+
     public void doRequest(){
 
         new Thread(){

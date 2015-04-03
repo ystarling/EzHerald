@@ -518,7 +518,11 @@ public class AcademicFragment extends SherlockFragment implements
 		@Override
 		protected MainContentGridItemObj doInBackground(Void... arg0) {
 			// TODO Auto-generated method stub
-			MainContentGridItemObj obj = new AcademicDataGrabber().GrabInformationObject();
+            //Api 迁移 2015.4.2
+            AcademicDataGrabber dataGrabber=new AcademicDataGrabber();
+			dataGrabber.context=getActivity();
+//			MainContentGridItemObj obj = new AcademicDataGrabber().GrabInformationObject();
+            MainContentGridItemObj obj =dataGrabber.GrabInformationObject();
 			return obj;
 		}
 		
