@@ -18,7 +18,7 @@ public class AcademicDataGrabber implements MainContentInfoGrabber {
 //	private final static String JWC_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/0";
 	private final static String JWC_URL="jwc";
     public Context context;
-
+    private String s="";
     //2015.4.2 api迁移
 
 
