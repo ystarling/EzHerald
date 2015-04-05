@@ -21,7 +21,6 @@ import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.api.APIFactory;
 import com.herald.ezherald.api.FailHandler;
-import com.herald.ezherald.api.Status;
 import com.herald.ezherald.api.SuccessHandler;
 import com.herald.ezherald.mainframe.MainContentGridItemObj;
 
@@ -388,12 +387,13 @@ public class AcademicFragment extends SherlockFragment implements
 					}
 				}, new FailHandler() {
 					@Override
-					public void onFail(com.herald.ezherald.api.Status status, String message) {
+					public void onFail(int errCode, String message) {
 
 					}
 				});
 
-                String str="";
+
+
 
 				List<JwcInfo> list = new ArrayList<JwcInfo>();
 						JSONArray jsonArr = new JSONArray(str);
@@ -410,6 +410,9 @@ public class AcademicFragment extends SherlockFragment implements
 
 						return list;
 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -578,7 +581,7 @@ public class AcademicFragment extends SherlockFragment implements
 	}
 
 
-
+	public class SucceHandler_jwc extends SuccessHandler implements onSuccess
 
 
 
