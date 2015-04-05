@@ -3,12 +3,15 @@ package com.herald.ezherald.api;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.herald.ezherald.account.Authenticate;
+import com.herald.ezherald.account.UserAccount;
+
 /**
  * Created by xie on 12/12/2014.
  */
 public class APIAccount {
     public String uuid;
-    public String ccardnum,password,number,pePassword,libUsername,libPassword,cardQueryPassword;
+    public String password,number;
     private Context context;
     private static String UUID_PREF_NAME = "UUID_PREFERENCE";
 
@@ -24,17 +27,21 @@ public class APIAccount {
         String uuid = preferences.getString("UUID","");
         return decrypt(uuid);
     }
-    private void saveUUID(String uuid){
+    public void saveUUID(String uuid){
         SharedPreferences preferences = context.getSharedPreferences(UUID_PREF_NAME,0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("UUID",encrypt(uuid));
+        editor.commit();
     }
-
+    public boolean isUUIDValid(){
+        uuid = readUUID();
+        return uuid!=null && !uuid.isEmpty();
+    }
     private String encrypt(String data){
-        return  data;
+        return Crypto.encrypt(data);
     }
     private String decrypt(String data){
-        return data;
+        return Crypto.decrypt(data);
     }
     /*
     *
@@ -50,15 +57,20 @@ public class APIAccount {
         },
         new FailHandler() {
             @Override
-            public void onFail(int errCode,String message) {
+            public void onFail(Status err,String message) {
                 //just pass
             }
         });
+        UserAccount user = Authenticate.getIDcardUser(context);
 
-//        client.addArg("appid",APPID.getAPPID());
-        client.addArg("user",ccardnum);
-        client.addArg("password",password);
-        client.doRequest();
+        if(user!=null){
+            client.addArg("user",user.getUsername());
+            client.addArg("password",user.getPassword());
+        }
+
+        client.addAPPIDToArg();
+
+        client.requestWithoutCache();
     }
 
 }
