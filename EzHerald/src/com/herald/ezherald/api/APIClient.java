@@ -48,7 +48,7 @@ public class APIClient {
             public void run(){
                 try{
 
-                    APIAccount account = new APIAccount(context);
+                    APIAccount account = new APIAccount (context);
                     if(account.uuid == null || account.uuid.equals("")){
                         failHandler.onFail(ERR_NOT_LOGIN,"login First");
                         return ;

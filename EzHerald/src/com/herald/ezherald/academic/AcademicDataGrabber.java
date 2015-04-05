@@ -18,7 +18,6 @@ public class AcademicDataGrabber implements MainContentInfoGrabber {
 //	private final static String JWC_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/0";
 	private final static String JWC_URL="jwc";
     public Context context;
-    private String s="";
     //2015.4.2 api迁移
 
 
@@ -26,8 +25,8 @@ public class AcademicDataGrabber implements MainContentInfoGrabber {
 	public MainContentGridItemObj GrabInformationObject() {
 		// TODO Auto-generated method stub
         //此处做出修改2015-4-2 API迁移
-//		String str = DataRequester.request(JWC_URL);
-        String str=null;
+		String str = DataRequester.request(JWC_URL);
+
         APIClient apiClient=new APIClient(context);
         try {
             apiClient.setUrl(str);

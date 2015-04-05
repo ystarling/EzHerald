@@ -18,6 +18,10 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.SuccessHandler;
 import com.herald.ezherald.mainframe.MainContentGridItemObj;
 
 import android.annotation.SuppressLint;
@@ -69,7 +73,8 @@ public class AcademicFragment extends SherlockFragment implements
 	
 	RefreshJwcInfo refreshTask;
 	RequestJwcInfo requestTask;
-	
+
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -200,6 +205,8 @@ public class AcademicFragment extends SherlockFragment implements
 //		adapter.setJwcInfoList(jwcArr);
 		listView.setAdapter(adapter);
 
+
+
 		foot = new ListFootView(getActivity().getApplicationContext());
 		foot.setOnClickListener(new OnClickListener() {
 
@@ -269,9 +276,11 @@ public class AcademicFragment extends SherlockFragment implements
 		try {
 			onRefreshActionStart();
 			refreshTask = new RefreshJwcInfo();
-			String url = String.format(REFRESH_URL, JwcInfoMode);
+			//2015.4.3API迁移
+//			String url = String.format(REFRESH_URL, JwcInfoMode);
+			String url="http://herald.seu.edu.cn/api/jwc";
 			refreshTask.execute(new URL(url));
-			//ew grabber().execute();
+			//ew grabber().execute();    //此连接方式已被弃用，迁移api请修改refreshTask函数  2015.4.3
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -334,21 +343,59 @@ public class AcademicFragment extends SherlockFragment implements
 			URL url = arg0[0];
 			URLConnection conn;
 			try {
-				conn = url.openConnection();
-				if (!(conn instanceof HttpURLConnection)) {
-					throw new IOException("NOT AN HTTP CONNECTION");
-				} else {
-					HttpURLConnection httpConn = (HttpURLConnection) conn;
-					httpConn.setAllowUserInteraction(false);
-					httpConn.setInstanceFollowRedirects(true);
-					httpConn.setRequestMethod("GET");
-					httpConn.connect();
-					response = httpConn.getResponseCode();
-					if (response == HttpURLConnection.HTTP_OK) {
-						in = httpConn.getInputStream();
-						 String str = DataTypeTransition.InputStreamToString(in);
-						// return str;
-						List<JwcInfo> list = new ArrayList<JwcInfo>();
+				//2015.4.3API迁移
+//				conn = url.openConnection();
+//				if (!(conn instanceof HttpURLConnection)) {
+//					throw new IOException("NOT AN HTTP CONNECTION");
+//				} else {
+//					HttpURLConnection httpConn = (HttpURLConnection) conn;
+//					httpConn.setAllowUserInteraction(false);
+//					httpConn.setInstanceFollowRedirects(true);
+//					httpConn.setRequestMethod("GET");
+//					httpConn.connect();
+//					response = httpConn.getResponseCode();
+//					if (response == HttpURLConnection.HTTP_OK) {
+//						in = httpConn.getInputStream();
+//						 String str = DataTypeTransition.InputStreamToString(in);
+//						// return str;
+//						List<JwcInfo> list = new ArrayList<JwcInfo>();
+//						JSONArray jsonArr = new JSONArray(str);
+//						for (int i=0; i<jsonArr.length(); ++i)
+//						{
+//							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+//							int id = Integer.parseInt(jsonItem.getString(0));
+//							String type = jsonItem.getString(1);
+//							String title = jsonItem.getString(2);
+//							String date = jsonItem.getString(3);
+//							list.add(new JwcInfo(type, title, date, id));
+//
+//						}
+//
+//						return list;
+//					}
+//				}
+
+//                APIClient apiClient=new APIClient(context);
+//
+//				apiClient.setUrl("jwc");
+//				apiClient.doRequest();
+
+                APIClient apiClient=APIFactory.getAPIClient(context, "jwc", new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+
+					}
+				}, new FailHandler() {
+					@Override
+					public void onFail(int errCode, String message) {
+
+					}
+				});
+
+
+
+
+				List<JwcInfo> list = new ArrayList<JwcInfo>();
 						JSONArray jsonArr = new JSONArray(str);
 						for (int i=0; i<jsonArr.length(); ++i)
 						{
@@ -358,12 +405,11 @@ public class AcademicFragment extends SherlockFragment implements
 							String title = jsonItem.getString(2);
 							String date = jsonItem.getString(3);
 							list.add(new JwcInfo(type, title, date, id));
-							
+
 						}
-						
+
 						return list;
-					}
-				}
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -519,10 +565,10 @@ public class AcademicFragment extends SherlockFragment implements
 		protected MainContentGridItemObj doInBackground(Void... arg0) {
 			// TODO Auto-generated method stub
             //Api 迁移 2015.4.2
-            AcademicDataGrabber dataGrabber=new AcademicDataGrabber();
-			dataGrabber.context=getActivity();
-//			MainContentGridItemObj obj = new AcademicDataGrabber().GrabInformationObject();
-            MainContentGridItemObj obj =dataGrabber.GrabInformationObject();
+//            AcademicDataGrabber dataGrabber=new AcademicDataGrabber();
+//			dataGrabber.context=context;
+			MainContentGridItemObj obj = new AcademicDataGrabber().GrabInformationObject();
+//            MainContentGridItemObj obj =dataGrabber.GrabInformationObject();
 			return obj;
 		}
 		
@@ -533,5 +579,12 @@ public class AcademicFragment extends SherlockFragment implements
 		}
 		
 	}
+
+
+	public class SucceHandler_jwc extends SuccessHandler implements onSuccess
+
+
+
+
 	
 }
