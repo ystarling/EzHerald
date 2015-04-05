@@ -22,7 +22,7 @@ public class GPAActivity extends BaseFrameActivity {
 	public void onCreate( Bundle savedInstanceState ) {
 		// TODO Auto-generated method stub
 		UserAccount user = Authenticate.getIDcardUser(this);
-		if(null == user){
+		if(null == user){//TODO CHANGE CONDITION
 			Intent login = new Intent();
 			login.putExtra("remoteCall", true);
 			login.setClass(this,IDCardAccountActivity.class);

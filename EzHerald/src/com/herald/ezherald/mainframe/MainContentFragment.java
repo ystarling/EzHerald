@@ -51,6 +51,8 @@ import com.herald.ezherald.gpa.GpaGrabber;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.library.LibraryContentGrabber;
 import com.herald.ezherald.settingframe.SettingActivity;
+import com.herald.ezherald.srtp.SrtpActivity;
+import com.herald.ezherald.srtp.SrtpGrabber;
 import com.tendcloud.tenddata.TCAgent;
 import com.terlici.dragndroplist.DragNDropListView;
 import com.terlici.dragndroplist.DragNDropListView.OnItemDragNDropListener;
@@ -88,9 +90,8 @@ import static java.util.Calendar.getInstance;
  * http://herald.seu.edu.cn/EzHerald/updateupload/ 图片json显示最新五条:
  * http://herald.seu.edu.cn/EzHerald/picturejson/ 更新json显示最新一条:
  * http://herald.seu.edu.cn/EzHerald/updatejson/
- * 
+ *
  * @author BorisHe
- * 
  */
 
 /*
@@ -134,9 +135,9 @@ public class MainContentFragment extends SherlockFragment {
 
     // ////////////Temporarily used local variables///////////////////
     String mContentCont1[] = {"加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
-            "加载中", "加载中"};
+            "加载中", "加载中", "加载中", "加载中"};
     String mContentCont2[] = {"加载中", "加载中", "加载中", "加载中", "加载中", "加载中", "加载中",
-            "加载中", "加载中"};
+            "加载中", "加载中", "加载中", "加载中"};
 
     private boolean mContentIsDestroyed = false;
     // /////、、、、、、、、、、、、、、、、、、、、、、、、、、、、////////
@@ -162,45 +163,45 @@ public class MainContentFragment extends SherlockFragment {
     public TextView weather_temperature;
     public TextView weather_state;
     public ImageView weather_icon;
-    public void InitWeather(){
-      if(weather_city==null)
-                weather_city   = (TextView)getActivity().findViewById(R.id.weather_city);
-      if(weather_date==null)
-                weather_date   = (TextView)getActivity().findViewById(R.id.weather_date);
-      if(weather_week==null)
-                weather_week   = (TextView)getActivity().findViewById(R.id.weather_week);
-      if(weather_temperature==null)
-                weather_temperature   = (TextView)getActivity().findViewById(R.id.weather_tempe);
-      if(weather_state==null)
-                weather_state  = (TextView)getActivity().findViewById(R.id.weather_state);
-      if(weather_icon==null)
-                weather_icon  = (ImageView)getActivity().findViewById(R.id.weather_icon);
 
-      SharedPreferences weatherpref = getActivity().getSharedPreferences("weather",Context.MODE_PRIVATE);
-      //如果sharedpreferences中有信息，则读取信息，否则刷新
-      if(weatherpref.getString("city",null)==null){
+    public void InitWeather() {
+        if (weather_city == null)
+            weather_city = (TextView) getActivity().findViewById(R.id.weather_city);
+        if (weather_date == null)
+            weather_date = (TextView) getActivity().findViewById(R.id.weather_date);
+        if (weather_week == null)
+            weather_week = (TextView) getActivity().findViewById(R.id.weather_week);
+        if (weather_temperature == null)
+            weather_temperature = (TextView) getActivity().findViewById(R.id.weather_tempe);
+        if (weather_state == null)
+            weather_state = (TextView) getActivity().findViewById(R.id.weather_state);
+        if (weather_icon == null)
+            weather_icon = (ImageView) getActivity().findViewById(R.id.weather_icon);
+
+        SharedPreferences weatherpref = getActivity().getSharedPreferences("weather", Context.MODE_PRIVATE);
+        //如果sharedpreferences中有信息，则读取信息，否则刷新
+        if (weatherpref.getString("city", null) == null) {
             refreshWeather("南京");
-      }
-      else {
-          weather_city.setText(weatherpref.getString("city", "加载中"));
-          weather_date.setText("日期：" + weatherpref.getString("date", "加载中"));
-          weather_temperature.setText("温度：" + weatherpref.getString("tempe", "加载中"));
-          weather_week.setText("星期：" + weatherpref.getString("week", "加载中"));
-          weather_state.setText(weatherpref.getString("state", "加载中"));
-          try {
-          FileInputStream bmInput =getActivity().openFileInput("weather.png");
-          Bitmap bm = BitmapFactory.decodeStream(bmInput);
-          bmInput.close();
-              if(bm!=null){
-                  weather_icon.setImageBitmap(bm);
+        } else {
+            weather_city.setText(weatherpref.getString("city", "加载中"));
+            weather_date.setText("日期：" + weatherpref.getString("date", "加载中"));
+            weather_temperature.setText("温度：" + weatherpref.getString("tempe", "加载中"));
+            weather_week.setText("星期：" + weatherpref.getString("week", "加载中"));
+            weather_state.setText(weatherpref.getString("state", "加载中"));
+            try {
+                FileInputStream bmInput = getActivity().openFileInput("weather.png");
+                Bitmap bm = BitmapFactory.decodeStream(bmInput);
+                bmInput.close();
+                if (bm != null) {
+                    weather_icon.setImageBitmap(bm);
 
 
-              }
-          }catch (Exception e){
-              e.printStackTrace();
-          }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-      }
+        }
 
     }
 
@@ -210,17 +211,18 @@ public class MainContentFragment extends SherlockFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void refreshWeather(String location){
+    public void refreshWeather(String location) {
         String city = null;
         try {
-           city = URLEncoder.encode(location,"utf-8");
-           URL url  = new URL(weatherUrl+city+weatherUrlAppId);
-           new GetWeatherJson().execute(url);
+            city = URLEncoder.encode(location, "utf-8");
+            URL url = new URL(weatherUrl + city + weatherUrlAppId);
+            new GetWeatherJson().execute(url);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     //
     public ViewFlow getViewFlow() {
         return mViewFlow;
@@ -250,20 +252,17 @@ public class MainContentFragment extends SherlockFragment {
         return v;
     }
 
-    private int getWeekday()
-    {
+    private int getWeekday() {
         Calendar cal = getInstance();
         int weekday = cal.get(DAY_OF_WEEK);
-        if(weekday == 1)
-        {
+        if (weekday == 1) {
             return 7;
-        }
-        else
-        {
-            return weekday-1;
+        } else {
+            return weekday - 1;
         }
     }
-    public void initMaincontentCourseList(){
+
+    public void initMaincontentCourseList() {
         ListView courList = (ListView) getActivity().findViewById(R.id.mainContent_curri_list);
 
         CourseAdapter adapter = new CourseAdapter(getActivity());
@@ -274,26 +273,24 @@ public class MainContentFragment extends SherlockFragment {
         List<Attendance> al = new ArrayList<Attendance>();
         al = courseDBAdapter.getAttByWeekday(getWeekday());
         adapter.setAtts(al);
-        if(courList!=null && adapter!=null && !al.isEmpty()) {
-            TextView  courAlert = (TextView)getActivity().findViewById(R.id.main_course_alert);
+        if (courList != null && adapter != null && !al.isEmpty()) {
+            TextView courAlert = (TextView) getActivity().findViewById(R.id.main_course_alert);
             courAlert.setTextColor(Color.GREEN);
             courAlert.setText("今日课程");
             courAlert.setHeight(0);
             courList.setAdapter(adapter);
-        }
-        else if(Authenticate.getIDcardUser(getActivity())==null&&Authenticate.getLibUser(getActivity())==null&&Authenticate.getTyxUser(getActivity())==null){
+        } else if (Authenticate.getIDcardUser(getActivity()) == null && Authenticate.getLibUser(getActivity()) == null && Authenticate.getTyxUser(getActivity()) == null) {
             //
 
-            TextView  courAlert = (TextView)getActivity().findViewById(R.id.main_course_alert);
-            if(courAlert!=null){
+            TextView courAlert = (TextView) getActivity().findViewById(R.id.main_course_alert);
+            if (courAlert != null) {
                 courAlert.setTextColor(Color.RED);
                 courAlert.setText("还没有课表，赶紧获取课表吧");
             }
-        }
-        else{
+        } else {
 
-            TextView  courAlert = (TextView)getActivity().findViewById(R.id.main_course_alert);
-            if(courAlert!=null){
+            TextView courAlert = (TextView) getActivity().findViewById(R.id.main_course_alert);
+            if (courAlert != null) {
                 //courAlert.setTextColor(Color.GREEN);
                 courAlert.setText("今天没有课呦");
             }
@@ -301,7 +298,6 @@ public class MainContentFragment extends SherlockFragment {
 
 
     }
-
 
 
     @Override
@@ -452,6 +448,8 @@ public class MainContentFragment extends SherlockFragment {
                 grabber = new ActivityDataGrabber();
             } else if (moduleName.equals("emptyclassroom")) {
                 grabber = new EmptyClassroomInfoGrabber(getActivity());
+            } else if (moduleName.equals("srtp")) {
+                grabber = new SrtpGrabber(getActivity());
             }
             // else if ....f
         } catch (Exception e) {
@@ -488,12 +486,14 @@ public class MainContentFragment extends SherlockFragment {
             retId = R.drawable.main_menu_ic_activity;
         } else if (moduleName.equals("emptyclassroom")) {
             retId = R.drawable.main_menu_ic_emptcls;
+        } else if (moduleName.equals("srtp")) {
+            retId = R.drawable.main_menu_ic_emptcls;//srtp图标还未更新
         }
         return retId;
     }
 
     /*
-	 * 点击Item跳转到各个模块
+     * 点击Item跳转到各个模块
 	 */
     private class MyOnItemClickListener implements
             AdapterView.OnItemClickListener {
@@ -546,6 +546,10 @@ public class MainContentFragment extends SherlockFragment {
                 case 9:
                     i.setClass(getActivity(), EmptyClassroomActivity.class);
                     clickTarget = "Empt";
+                    break;
+                case 10:
+                    i.setClass(getActivity(), SrtpActivity.class);
+                    clickTarget = "Srtp";
                     break;
             }
             TCAgent.onEvent(getActivity(), "主界面ListView点击", clickTarget);
@@ -642,13 +646,13 @@ public class MainContentFragment extends SherlockFragment {
         // Toast.LENGTH_SHORT).show();
         getPrefItems();
         // 同步获取各模块的更新项目
-       // mGridItems = getGridItems();
+        // mGridItems = getGridItems();
         // mGridView.setAdapter(new MainContentGridItemAdapter(getActivity(),
         // mGridItems));
 
         // mListView.setAdapter(new MainContentListItemAdapter(getActivity(),
         // mGridItems));
-       // mListView.setDragNDropAdapter(new MainContentListItemDragDropAdapter(
+        // mListView.setDragNDropAdapter(new MainContentListItemDragDropAdapter(
         //        getActivity(), mGridItems));
 
         refreshImageFromDb();
@@ -857,8 +861,7 @@ public class MainContentFragment extends SherlockFragment {
     }
 
 
-
-    private class WeatherInfo{
+    private class WeatherInfo {
         public String getCity() {
             return city;
         }
@@ -899,7 +902,7 @@ public class MainContentFragment extends SherlockFragment {
             this.state = state;
         }
 
-        private WeatherInfo(String city, String tempe, String data, String week, String state,String iconUrl) {
+        private WeatherInfo(String city, String tempe, String data, String week, String state, String iconUrl) {
             this.city = city;
             this.tempe = tempe;
             this.data = data;
@@ -925,10 +928,10 @@ public class MainContentFragment extends SherlockFragment {
     }
 
 
-    private class GetWeatherJson extends AsyncTask<URL,Integer,JSONObject>{
+    private class GetWeatherJson extends AsyncTask<URL, Integer, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
-            JSONObject weatherJson= null;
+            JSONObject weatherJson = null;
             URL url = params[0];
             InputStream in;
 
@@ -941,9 +944,9 @@ public class MainContentFragment extends SherlockFragment {
                 conn.connect();
 
                 int httpResponse = conn.getResponseCode();
-                if(httpResponse == HttpURLConnection.HTTP_OK){
+                if (httpResponse == HttpURLConnection.HTTP_OK) {
                     in = conn.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in,"utf-8"));
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     StringBuilder buffer = new StringBuilder();
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -954,8 +957,7 @@ public class MainContentFragment extends SherlockFragment {
                     weatherJson = new JSONObject(buffer.toString());
 
                 }
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -965,33 +967,35 @@ public class MainContentFragment extends SherlockFragment {
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
-              WeatherInfo weatherParse = parseJson(jsonObject);
-              if(weatherParse!=null){
-                  weather_city.setText(weatherParse.getCity());
-                  weather_date.setText("日期："+weatherParse.getData());
-                  weather_temperature.setText("温度："+weatherParse.getTempe());
-                  weather_state.setText(weatherParse.getState());
-                  weather_week.setText("星期："+weatherParse.getWeek());
-                  try {
-                      new getWeatherIcon().execute(new URL(weatherParse.getIconUrl()));
-                  } catch (MalformedURLException e) {
-                      e.printStackTrace();
-                  }
-              }
+            WeatherInfo weatherParse = parseJson(jsonObject);
+            if (weatherParse != null) {
+                weather_city.setText(weatherParse.getCity());
+                weather_date.setText("日期：" + weatherParse.getData());
+                weather_temperature.setText("温度：" + weatherParse.getTempe());
+                weather_state.setText(weatherParse.getState());
+                weather_week.setText("星期：" + weatherParse.getWeek());
+                try {
+                    new getWeatherIcon().execute(new URL(weatherParse.getIconUrl()));
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         public GetWeatherJson() {
-          super();
+            super();
         }
-        public boolean isInDay(){
+
+        public boolean isInDay() {
             SimpleDateFormat sdf = new SimpleDateFormat("HH");
-            String hour= sdf.format(new Date());
-            int i = (Integer.parseInt(hour) + 8)%24;
-            if(i>18||i<6){
+            String hour = sdf.format(new Date());
+            int i = (Integer.parseInt(hour) + 8) % 24;
+            if (i > 18 || i < 6) {
                 return false;
             }
             return true;
         }
+
         public WeatherInfo parseJson(JSONObject weatherJson) {
             WeatherInfo weatherRet = null;
             if (weatherJson != null) {
@@ -1013,7 +1017,7 @@ public class MainContentFragment extends SherlockFragment {
                         weatherRet = new WeatherInfo(city, temperature, date, week, state, dayPictureUrl);
                     }
                     Activity activity = getActivity();
-                    if(activity !=null){
+                    if (activity != null) {
                         SharedPreferences weatherPref = activity.getSharedPreferences("weather", Context.MODE_PRIVATE);
                         Editor weatherEdit = weatherPref.edit();
                         weatherEdit.putString("city", city);
@@ -1031,29 +1035,29 @@ public class MainContentFragment extends SherlockFragment {
                     e.printStackTrace();
                 }
                 // JSONArray
-                }
-                return weatherRet;
             }
+            return weatherRet;
+        }
 
     }
 
-    private class getWeatherIcon extends AsyncTask<URL,Integer,Bitmap>{
+    private class getWeatherIcon extends AsyncTask<URL, Integer, Bitmap> {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            if(bitmap!=null) {
+            if (bitmap != null) {
                 weather_icon.setImageBitmap(bitmap);
 
 
-                    try {
-                        FileOutputStream outStream=getActivity().openFileOutput("weather.png", Context.MODE_PRIVATE);
+                try {
+                    FileOutputStream outStream = getActivity().openFileOutput("weather.png", Context.MODE_PRIVATE);
 
-                        if (null != outStream) {
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 90, outStream);
-                            outStream.flush();
-                            outStream.close();
-                        }
+                    if (null != outStream) {
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 90, outStream);
+                        outStream.flush();
+                        outStream.close();
+                    }
 
-                    }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -1069,13 +1073,12 @@ public class MainContentFragment extends SherlockFragment {
             URL url = params[0];
 
 
-            Log.v("Weather Icon","request url : "+url.toString());
+            Log.v("Weather Icon", "request url : " + url.toString());
             try {
                 URLConnection conn = url.openConnection();
-                if(!(conn instanceof HttpURLConnection)){
+                if (!(conn instanceof HttpURLConnection)) {
                     // throw new IOException("Not a http connection!");
-                }
-                else{
+                } else {
                     HttpURLConnection httpConn = (HttpURLConnection) conn;
 
                     httpConn.setAllowUserInteraction(false);
@@ -1087,7 +1090,7 @@ public class MainContentFragment extends SherlockFragment {
                     httpConn.connect();
                     response = httpConn.getResponseCode();
 
-                    if(response==HttpURLConnection.HTTP_OK){
+                    if (response == HttpURLConnection.HTTP_OK) {
                         in = httpConn.getInputStream();
                         picture = BitmapFactory.decodeStream(in);
                         in.close();
@@ -1095,20 +1098,14 @@ public class MainContentFragment extends SherlockFragment {
                     }
 
                 }
-            }
-            catch (IOException e){
-                Log.v("weather icon","http connect exception!");
+            } catch (IOException e) {
+                Log.v("weather icon", "http connect exception!");
             }
 
             return null;
 
         }
     }
-
-
-
-
-
 
 
 }

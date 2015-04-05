@@ -2,10 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.herald.ezherald"
     android:versionCode="8"
-    android:versionName="2.0.0000" >
-
-    <!-- public beta -->
-
+    android:versionName="2.0.0000" > <!-- public beta -->
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
@@ -137,6 +134,11 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Theme.Heraldstyle" >
         </activity>
+        <activity
+            android:name=".srtp.SrtpActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Heraldstyle" >
+        </activity>
 
         <!-- libr  begin -->
         <activity
@@ -254,8 +256,9 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
-                <action android:name="AppUpdateActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="AppUpdateActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -264,9 +267,9 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="MainGuideActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".settingframe.SyncFrequencySettingActivity"
@@ -299,17 +302,24 @@
         </activity>
         <!--树洞activity-->
         <activity android:name=".treehole.TreeholeActivity" />
-
-
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>
 
         <service
             android:name=".wifi.WifiReceiverService"
             android:enabled="true"
-            android:process=":remote">
+            android:process=":remote" >
         </service>
         <!-- wifi end -->
+
+        <activity
+            android:name=".api.APIAccountActivity"
+            android:label="@string/title_activity_apiaccount"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.herald.ezherald.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

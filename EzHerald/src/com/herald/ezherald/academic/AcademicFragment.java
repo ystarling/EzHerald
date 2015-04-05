@@ -188,7 +188,7 @@ public class AcademicFragment extends SherlockFragment implements
 
 	}
 
-	@SuppressLint("NewApi")
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

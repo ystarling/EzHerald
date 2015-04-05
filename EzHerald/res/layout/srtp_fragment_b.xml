@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout"
+    >
+    <TableRow
+>
+        <TextView
+            android:text="学分"
+            android:textSize="20sp"
+            android:padding="10dip"
+            android:layout_marginLeft="30sp"
+            />
+        <TextView
+            android:text="项目"
+            android:textSize="20sp"
+            android:padding="10dip"
+            android:layout_marginLeft="40sp"
+            />
+    </TableRow>
+
+
+    </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+</LinearLayout>

@@ -32,6 +32,7 @@ import com.herald.ezherald.freshman.FreshmanActivity;
 import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.radio.RadioActivity;
+import com.herald.ezherald.srtp.SrtpActivity;
 import com.tendcloud.tenddata.TCAgent;
 
 import org.apache.commons.httpclient.HttpStatus;
@@ -81,7 +82,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_freshman,
 			R.drawable.main_menu_ic_emptcls, 
 			R.drawable.main_menu_ic_gpa,
-			R.drawable.main_menu_ic_gpa
+			R.drawable.main_menu_ic_gpa,
+            R.drawable.main_menu_ic_gpa
 			}; // 图标(icon)
 	
 	private Integer mMenuItemsIconSelectedResId[] = {
@@ -96,7 +98,8 @@ public class MainMenuFragment extends ListFragment {
 			R.drawable.main_menu_ic_freshman_selected,
 			R.drawable.main_menu_ic_emptcls_selected, 
 			R.drawable.main_menu_ic_gpa_selected,
-			R.drawable.main_menu_ic_gpa_selected
+			R.drawable.main_menu_ic_gpa_selected,
+            R.drawable.main_menu_ic_gpa_selected
 	}; // 选中状态的图标(icon)
 			
 	private String mIdCardState; 
@@ -232,16 +235,20 @@ public class MainMenuFragment extends ListFragment {
 			i.setClass(getActivity(), EmptyClassroomActivity.class);
 			menuTarget = "EmptyClass";
 			break;
-			
-		case 10:
+
+        case 10:
+            i.setClass(getActivity(), SrtpActivity.class);
+            menuTarget="Srtp";
+            break;
+		/*case 10:
 			i.setClass(getActivity(), RadioActivity.class);
 			menuTarget = "Radio";
-			break;
-		case 11:
+			break;*/
+		/*case 11:
 			i.setClass(getActivity(), BookingActivity.class);
 			menuTarget = "bookingOffice";
 			break;
-		
+		*/
 		}
 		TCAgent.onEvent(getActivity(), "主菜单点击", menuTarget);
 		
@@ -333,6 +340,9 @@ public class MainMenuFragment extends ListFragment {
 		else if(localModuleName.equals("emptyclassroom")){
 			return 9;
 		}
+        else if(localActivityName.equals("srtp")){
+            return 10;
+        }
 		/*
 		else if(localModuleName.equals("radio")){
 			return 10;

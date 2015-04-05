@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:id="@+id/srtp_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="当前学分"
+    android:textSize="40sp"
+    android:layout_marginTop="20sp"
+    />
+
+    <TextView
+        android:id="@+id/srtp_score"
+        android:layout_width="match_parent"
+        android:layout_height="170sp"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="86sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/srtp_update"
+        android:text="更新于:"
+        android:textSize="15sp"
+       />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/srtp_UpdateTime"
+            android:text="未更新哦"/>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edtTxt_adjust"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.79"
+        android:ems="10"
+        android:inputType="number"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/srtp_update_button"
+        android:layout_marginTop="200sp"
+        android:text="更新"
+        />
+</LinearLayout>

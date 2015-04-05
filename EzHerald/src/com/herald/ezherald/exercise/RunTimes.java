@@ -19,6 +19,7 @@ import org.apache.http.util.EntityUtils;
 
 
 /**
+ *
  * @author xie
  * 跑操次数的信息
  */

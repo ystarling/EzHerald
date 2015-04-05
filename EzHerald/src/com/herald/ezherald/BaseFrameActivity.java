@@ -19,10 +19,10 @@ import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.academic.AcademicActivity;
 import com.herald.ezherald.account.AccountActivity;
 import com.herald.ezherald.account.Authenticate;
-import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.LibAccountActivity;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccountActivity;
 import com.herald.ezherald.curriculum.CurriculumActivity;
 import com.herald.ezherald.emptyclassroom.EmptyClassroomActivity;
 import com.herald.ezherald.exercise.ExerciseActivity;
@@ -31,6 +31,7 @@ import com.herald.ezherald.gpa.GPAActivity;
 import com.herald.ezherald.library.LibraryActivity;
 import com.herald.ezherald.settingframe.SettingsActivity;
 import com.herald.ezherald.treehole.TreeholeActivity;
+import com.herald.ezherald.srtp.SrtpActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.special.ResideMenu.ResideMenu;
@@ -189,6 +190,11 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 menuName.add("空教室");
                 targetName.add("EmptyClassRoom");
                 targetClass.add(EmptyClassroomActivity.class);
+            }else if(activity.equals("srtp")){
+                menuIcon.add(R.drawable.main_menu_ic_exercise);
+                menuName.add("Srtp");
+                targetName.add("Srtp");
+                targetClass.add(SrtpActivity.class);
             }
             //添加先声树洞 2014.10
             else if(activity.equals("treehole")){
@@ -431,7 +437,8 @@ public class BaseFrameActivity extends SlidingFragmentActivity implements View.O
                 //intent.setClass(this, AccountActivity.class);
                 // menuTarget = "Account";
                 intent = new Intent();
-                intent.setClass(this, IDCardAccountActivity.class);
+                //intent.setClass(this, IDCardAccountActivity.class);
+                intent.setClass(this, APIAccountActivity.class);
                 menuTarget = "IDCard";
                 break;
             case 1:

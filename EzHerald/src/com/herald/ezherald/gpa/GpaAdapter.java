@@ -1,13 +1,5 @@
 package com.herald.ezherald.gpa;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.herald.ezherald.account.UserAccount;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.View;
@@ -18,6 +10,14 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.herald.ezherald.account.UserAccount;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GpaAdapter extends BaseExpandableListAdapter {
 	private GpaInfo gpaInfo;
@@ -118,7 +118,8 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	}
 
     public void update(){
-        gpaInfo.update(user, progress);
+        //gpaInfo.update(user, progress);
+        gpaInfo.update(context);
     }
 
     public void organizeData(){

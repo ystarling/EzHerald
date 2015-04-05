@@ -1,19 +1,5 @@
 package com.herald.ezherald.account;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -32,14 +18,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.edu.seu.herald.auth.AuthenticationService;
-import cn.edu.seu.herald.auth.AuthenticationServiceException;
-import cn.edu.seu.herald.auth.AuthenticationServiceFactory;
-import cn.edu.seu.herald.auth.AuthenticationServiceFactoryImpl;
-import cn.edu.seu.herald.auth.StudentUser;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.APPID;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.Status;
+import com.herald.ezherald.api.SuccessHandler;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.edu.seu.herald.auth.AuthenticationServiceException;
 
 
 public class IDCardAccountFragment extends SherlockFragment {
@@ -109,11 +113,41 @@ public class IDCardAccountFragment extends SherlockFragment {
 
 	private OnClickListener submitListener = new OnClickListener() {
 		public void onClick(View v) {
+
 			proDialog = ProgressDialog.show(getActivity(), "请稍候",
 					"", true, true);
 
-			Thread loginThread = new Thread(new LoginFailureHandler());
-			loginThread.start();
+//			Thread loginThread = new Thread(new LoginFailureHandler());
+//			loginThread.start();
+
+            APIClient client = APIFactory.getAPIClient(getActivity(),"uc/auth",new SuccessHandler(){
+
+                @Override
+                public void onSuccess(String data) {
+//                    if (proDialog != null) {
+//                        proDialog.dismiss();
+//                    }
+                    APIAccount apiAccount = new APIAccount(getActivity());
+                    apiAccount.saveUUID(data);
+                    new LoginFailureHandler().run();//用旧的api保存一下信息
+                    Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_SHORT).show();
+                }
+            },new FailHandler(){
+
+                @Override
+                public void onFail(Status status, String message) {
+                    if (proDialog != null) {
+                        proDialog.dismiss();
+                    }
+                    Toast.makeText(getActivity(),"登录失败",Toast.LENGTH_SHORT).show();
+                }
+            });
+            userName = view_userName.getText().toString();
+            password = view_password.getText().toString();
+            client.addArg("user",userName);
+            client.addArg("password",password);
+            client.addArg("appid",new APPID().getAPPID());
+            client.requestWithoutCache();
 		}
 	};
 
@@ -146,7 +180,7 @@ public class IDCardAccountFragment extends SherlockFragment {
 			userName = view_userName.getText().toString();
 			password = view_password.getText().toString();
 			try {
-				if(!isNetError){
+				//if(!isNetError){
 					//Log.v("mynet", "querystart");
 				//AuthenticationServiceFactory factory = new AuthenticationServiceFactoryImpl();
 				
@@ -154,9 +188,9 @@ public class IDCardAccountFragment extends SherlockFragment {
 				 //Log.v("mynet", "querystop");
 				//StudentUser studentUser = service.authenticate(userName,password);
 
-			if( webAuth(userName, password) == false){
-				loginState = false;
-			}else {
+//			if( webAuth(userName, password) == false){
+//				loginState = false;
+//			}else {
 				//登陆成功
 				loginState = true;
 				
@@ -183,8 +217,8 @@ public class IDCardAccountFragment extends SherlockFragment {
 				}
 		        getSherlockActivity().finish();
 		        
-			}
-			}
+			//}
+		    //}
 			Message message = new Message();
 			Bundle bundle = new Bundle();
 			bundle.putBoolean("loginState", loginState);
@@ -203,11 +237,10 @@ public class IDCardAccountFragment extends SherlockFragment {
 			message.setData(bundle);
 			loginHandler.sendMessage(message);
 			
-		}		
-			catch (Exception e) {
-				Message message = new Message();
-				unknownErrorHandler.sendMessage(message);
-				proDialog.dismiss();	
+		}catch (Exception e) {
+			Message message = new Message();
+			unknownErrorHandler.sendMessage(message);
+			proDialog.dismiss();
 		}
 	}
 	Handler unknownErrorHandler = new Handler() {

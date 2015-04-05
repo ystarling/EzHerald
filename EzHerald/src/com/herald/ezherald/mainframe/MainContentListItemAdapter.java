@@ -61,7 +61,8 @@ public class MainContentListItemAdapter extends BaseAdapter {
 
 	/**
 	 * 规定Id: 0 - 未设置; 1 - curriculum; 2 - activity; 3 - agenda; 4 - library; 5 -
-	 * gpa; 6 - exercise; 7 - academic; 8 - freshman;
+	 * gpa; 6 - exercise; 7 - academic; 8 - freshman;9 - emptyclassroom
+     * 10 - srtp
 	 */
 //	private final String[] ModuleNames = { "纳尼?第一次么?", "课表自习", "校园活动", "我的日程",
 //			"图书查询", "绩点查询", "跑操查询", "教务信息", "校园指南" };
@@ -88,6 +89,8 @@ public class MainContentListItemAdapter extends BaseAdapter {
 			return 8;
 		else if (tag.equals("emptyclassroom"))
 			return 9;
+        else if(tag.equals("srtp"))
+            return 10;
 		return 0;
 	}
 
