@@ -1,6 +1,6 @@
 package com.herald.ezherald.api;
 
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.NameValuePair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,26 +10,15 @@ import java.util.List;
  */
 public class APIConf {
     public String url;
-    public List<BasicNameValuePair> args = new ArrayList<BasicNameValuePair>();
+    public List<NameValuePair> args = new ArrayList<NameValuePair>();;
 
-    public void addArgs(BasicNameValuePair... args){
-        for (BasicNameValuePair arg : args){
+    public void addArgs(NameValuePair... args){
+        for (NameValuePair arg : args){
             this.args.add(arg);
         }
     }
 
     public APIConf(String url){
         this.url = url;
-    }
-
-    @Override
-    public String toString(){
-        StringBuilder builder = new StringBuilder();
-        builder.append(url+"###");
-        for(BasicNameValuePair pair: args){
-            builder.append(pair.getName()+"::"+pair.getValue()+"##");
-        }
-
-        return builder.toString();
     }
 }

@@ -17,6 +17,7 @@ public class DataRequester {
 		int response = -1;
 		
 		try {
+
 			URL url = new URL(u);
 			URLConnection conn;
 			conn = url.openConnection();

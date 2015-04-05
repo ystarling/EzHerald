@@ -9,6 +9,7 @@ import com.herald.ezherald.BaseFrameActivity;
  */
 public class SrtpActivity extends BaseFrameActivity{
     Fragment mContentFrag;
+
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -16,11 +17,9 @@ public class SrtpActivity extends BaseFrameActivity{
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
 
-
         mContentFrag = new SrtpFragment();
         super.SetBaseFrameActivity(mContentFrag);
         super.onCreate(savedInstanceState);
-
 
     }
 

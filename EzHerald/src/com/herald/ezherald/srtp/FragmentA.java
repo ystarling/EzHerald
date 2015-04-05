@@ -17,8 +17,6 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
-import com.herald.ezherald.api.APIAccount;
-import com.herald.ezherald.api.APIAccountActivity;
 
 import org.w3c.dom.Text;
 
@@ -30,7 +28,8 @@ public class FragmentA extends Fragment{
     private  Button updateButton;
     private TextView scoreText;
     private TextView UpdattimeText;
-    private APIAccount apiAccount;
+    private Score score;
+    private UserAccount user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved) {
         return inflater.inflate(R.layout.srtp_fragment_a, group, false);
@@ -38,28 +37,28 @@ public class FragmentA extends Fragment{
         @Override
         public void onActivityCreated(Bundle savedInstanceState){
             super.onActivityCreated(savedInstanceState);
-            apiAccount = new APIAccount(getActivity());
-            if (!apiAccount.isUUIDValid()) {
+
+            user = Authenticate.getTyxUser(getActivity());
+            if (null == user) {
                 Intent login = new Intent();
-                login.setClass(getActivity(), APIAccountActivity.class);
+                login.setClass(getActivity(), TyxAccountActivity.class);
                 startActivity(login);
             }
             else{
                 updateButton=(Button)getActivity().findViewById(R.id.srtp_update_button);
                 scoreText=(TextView)getActivity().findViewById(R.id.srtp_score);
                 UpdattimeText=(TextView)getActivity().findViewById(R.id.srtp_UpdateTime);
-//                SrtpActivity.score=new Score(getActivity(),this);
+                score=new Score(getActivity(),this);
             }
-            if(SrtpFragment.score.isSet()){
+            if(score.isSet()){
                 show();
             }
             else
             {
-//                Activity act = getActivity();
-//                if(act!=null){
-//                    Toast.makeText(act, "还没有数据呦", Toast.LENGTH_LONG).show();
-//                }
-                show();
+                Activity act = getActivity();
+                if(act!=null){
+                    Toast.makeText(act, "还没有数据呦", Toast.LENGTH_LONG).show();
+                }
             }
             updateButton.setOnClickListener(new OnClickListener() {
                 @Override
@@ -72,23 +71,22 @@ public class FragmentA extends Fragment{
         }
 
     private void Update(){
-        SrtpFragment.score.getScoreFromApi();
+        score.update(user);
     }
 
     public void show(){
-            Activity act = getActivity();
-            if(Score.DEFAULT_SCORE == (SrtpFragment.score.getScore())){
-                Toast.makeText(act, "还没有数据哦", Toast.LENGTH_LONG).show();
+            if(Score.DEFAULT_SCORE == score.getScore()){
+                scoreText.setText("还没有数据哦");
             }
         else{
-               scoreText.setText(String.valueOf((SrtpFragment.score.getScore())));
+               scoreText.setText(score.getScore());
             }
-        if((SrtpFragment.score.getUpdateTime())!=Score.DEFAULT_UPDATETIME){
-            UpdattimeText.setText(SrtpFragment.score.getUpdateTime());
+        if(score.getUpdateTime()!=Score.DEFAULT_UPDATETIME){
+            UpdattimeText.setText(score.getUpdateTime());
         }
-//        else{
-//            UpdattimeText.setText("未等新哦");
-//        }
+        else{
+            UpdattimeText.setText("未等新哦");
+        }
     }
 
     public  void onSuccess(){

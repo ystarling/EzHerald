@@ -6,6 +6,7 @@ package com.herald.ezherald.api;
 public class APPID {
     static {
         System.loadLibrary("appid");
+
     }
-    public native String getAPPID();
+    public static native String getAPPID();
 }

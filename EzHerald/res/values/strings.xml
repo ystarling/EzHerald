@@ -56,6 +56,6 @@
     <string name="title_activity_my">MyActivity</string>
     <string name="title_activity_my_activity2">MyActivity2</string>
     <string name="title_activity_apiaccount">账户信息</string>
-
+    <string name="title_activity_treehole_send">写心声</string>
 
 </resources>

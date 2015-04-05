@@ -128,6 +128,7 @@ public class MainActivity extends BaseFrameActivity {
         UserAccount userAccount = Authenticate.getIDcardUser(this);
         if(userAccount!=null && !account.isUUIDValid()){//旧版本登陆过的用户
             account.autoLogin();//自动更新uuid
+
         }
     }
 
