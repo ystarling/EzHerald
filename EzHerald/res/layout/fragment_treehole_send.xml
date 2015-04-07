@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.herald.ezherald.treehole.TreeholeSendFragment">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/treehole_editstyle"
+        android:hint="发送内容（140字以内）"
+        android:maxLength="140"
+        android:gravity="top"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/et_treehole_send"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_treehole_sug"
+        android:layout_alignRight="@+id/et_treehole_send"
+        android:layout_below="@+id/et_treehole_send"
+        android:text="240"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加表情"
+        android:id="@+id/bt_treehole_addface"
+        android:layout_below="@+id/tv_treehole_sug"
+        android:layout_alignLeft="@+id/et_treehole_send" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_app"
+        android:layout_alignTop="@+id/bt_treehole_addface"
+        android:layout_toRightOf="@+id/bt_treehole_addface"
+        android:id="@+id/imageView2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignRight="@+id/et_treehole_send"
+        android:background="@drawable/treehole_btn_select"/>
+
+
+</RelativeLayout>

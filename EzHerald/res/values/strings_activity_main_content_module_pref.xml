@@ -33,7 +33,9 @@
         <item >教务信息</item>
         <item >校园指南</item>
         <item >空闲教室</item>
+        <item >先声树洞</item><!--2014.10添加-->
         <item>Srtp</item>
+
     </string-array>
     
     <string-array name="pref_module_choice_values">
@@ -45,7 +47,9 @@
         <item >academic</item>
         <item >freshman</item>
         <item >emptyclassroom</item>
+        <item >treehole</item><!--2014.10添加-->
         <item >srtp</item>
+
     </string-array>
     <string name="pref_title_module">勾选所需模块</string>
     

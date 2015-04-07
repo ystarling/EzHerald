@@ -300,6 +300,10 @@
             android:launchMode="singleTop"
             android:noHistory="true" >
         </activity>
+
+
+        <!-- 树洞activity -->
+        <activity android:name=".treehole.TreeholeActivity" />
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>
 
@@ -311,12 +315,14 @@
         <!-- wifi end -->
 
         <activity
+
             android:name=".api.APIAccountActivity"
             android:label="@string/title_activity_apiaccount"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.herald.ezherald.MainActivity" />
+
         </activity>
     </application>
 

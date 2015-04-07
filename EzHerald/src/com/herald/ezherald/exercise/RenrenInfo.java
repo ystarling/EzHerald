@@ -120,19 +120,19 @@ public class RenrenInfo {
             public void run() {
                 try {
                     Log.w("update", "updating renren");
-                    HttpClient client = new DefaultHttpClient();
-                    String refreshurl = "https://graph.renren.com/oauth/token?grant" + URLEncoder.encode("_") + "type=refresh" + URLEncoder.encode("_") + "token&refresh" + URLEncoder.encode("_") + "token=" + URLEncoder.encode("241511|0.NvNrQow4rEchFtbdaCUtdyA5dWLgRgDh.365328826.1379088139819") + "&client" + URLEncoder.encode("_") + "id=241511&client" + URLEncoder.encode("_") + "secret=8d970a6e9e3249e9afffd2fdba73f018";
-                    HttpGet refresh = new HttpGet(refreshurl);
-                    HttpResponse response = client.execute(refresh);
-                    String message = EntityUtils.toString(response.getEntity());
-                    JSONObject json = new JSONObject(message);
-                    String token = json.getString("access_token");
-                    token = URLEncoder.encode(token);
-                    HttpGet get = new HttpGet(URL + token + "&ownerId=601258593");
-                    response = client.execute(get);
-                    message = EntityUtils.toString(response.getEntity());
-                    if (response.getStatusLine().getStatusCode() != 200) {
-                        throw new Exception(response.toString());
+                        HttpClient client = new DefaultHttpClient();
+                        String refreshurl = "https://graph.renren.com/oauth/token?grant" + URLEncoder.encode("_") + "type=refresh" + URLEncoder.encode("_") + "token&refresh" + URLEncoder.encode("_") + "token=" + URLEncoder.encode("241511|0.NvNrQow4rEchFtbdaCUtdyA5dWLgRgDh.365328826.1379088139819") + "&client" + URLEncoder.encode("_") + "id=241511&client" + URLEncoder.encode("_") + "secret=8d970a6e9e3249e9afffd2fdba73f018";
+                        HttpGet refresh = new HttpGet(refreshurl);
+                        HttpResponse response = client.execute(refresh);
+                        String message = EntityUtils.toString(response.getEntity());
+                        JSONObject json = new JSONObject(message);
+                        String token = json.getString("access_token");
+                        token = URLEncoder.encode(token);
+                        HttpGet get = new HttpGet(URL + token + "&ownerId=601258593");
+                        response = client.execute(get);
+                        message = EntityUtils.toString(response.getEntity());
+                        if (response.getStatusLine().getStatusCode() != 200) {
+                            throw new Exception(response.toString());
                     }
 
                     Message msg = handler.obtainMessage(SUCCESS,

@@ -237,7 +237,7 @@ public class MainMenuFragment extends ListFragment {
 			break;
 
         case 10:
-            i.setClass(getActivity(), SrtpActivity.class);
+              i.setClass(getActivity(), SrtpActivity.class);
             menuTarget="Srtp";
             break;
 		/*case 10:
