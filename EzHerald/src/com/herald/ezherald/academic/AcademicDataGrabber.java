@@ -29,7 +29,7 @@ public class AcademicDataGrabber implements MainContentInfoGrabber {
 
         APIClient apiClient=new APIClient(context);
         try {
-            apiClient.setUrl(str);
+
         }catch (Exception e)
         {
             e.printStackTrace();

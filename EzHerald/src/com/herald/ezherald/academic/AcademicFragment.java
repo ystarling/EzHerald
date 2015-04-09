@@ -380,20 +380,10 @@ public class AcademicFragment extends SherlockFragment implements
 //				apiClient.setUrl("jwc");
 //				apiClient.doRequest();
 
-                APIClient apiClient=APIFactory.getAPIClient(context, "jwc", new SuccessHandler() {
-					@Override
-					public void onSuccess(String data) {
-
-					}
-				}, new FailHandler() {
-					@Override
-					public void onFail(int errCode, String message) {
-
-					}
-				});
 
 
 
+                String str="";
 
 				List<JwcInfo> list = new ArrayList<JwcInfo>();
 						JSONArray jsonArr = new JSONArray(str);
@@ -410,9 +400,6 @@ public class AcademicFragment extends SherlockFragment implements
 
 						return list;
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -506,10 +493,12 @@ public class AcademicFragment extends SherlockFragment implements
 						return list;
 					}
 				}
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (JSONException e) {
+			}
+			catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -581,7 +570,7 @@ public class AcademicFragment extends SherlockFragment implements
 	}
 
 
-	public class SucceHandler_jwc extends SuccessHandler implements onSuccess
+
 
 
 
