@@ -274,18 +274,58 @@ public class AcademicFragment extends SherlockFragment implements
 	
 	public void refreshInfo()
 	{
-		try {
-			onRefreshActionStart();
-			refreshTask = new RefreshJwcInfo();
-			//2015.4.3API迁移
-//			String url = String.format(REFRESH_URL, JwcInfoMode);
-			String url="http://herald.seu.edu.cn/api/jwc";
-			refreshTask.execute(new URL(url));
-			//ew grabber().execute();    //此连接方式已被弃用，迁移api请修改refreshTask函数  2015.4.3
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			onRefreshActionStart();
+//			refreshTask = new RefreshJwcInfo();
+//			//2015.4.3API迁移
+////			String url = String.format(REFRESH_URL, JwcInfoMode);
+//			String url="http://herald.seu.edu.cn/api/jwc";
+//			refreshTask.execute(new URL(url));
+//			//ew grabber().execute();    //此连接方式已被弃用，迁移api请修改refreshTask函数  2015.4.3
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		APIClient apiClient=APIFactory.getAPIClient(context, "jwc", new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+						try
+						{
+							List<JwcInfo> list = new ArrayList<JwcInfo>();
+							JSONArray jsonArr = new JSONArray(data);
+							for (int i=0; i<jsonArr.length(); ++i)
+							{
+								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+								int id = Integer.parseInt(jsonItem.getString(0));
+								String type = jsonItem.getString(1);
+								String title = jsonItem.getString(2);
+								String date = jsonItem.getString(3);
+								list.add(new JwcInfo(type, title, date, id));
+							}
+							if(list!=null)
+							{
+								adapter.setJwcInfoList(list);
+								adapter.notifyDataSetChanged();
+								refreshDB(list);
+								listView.onRefreshComplete();
+								onRefreshActionComplete();
+							}
+
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+						}
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(Status status, String message) {
+						Toast.makeText(context,"Failed in refreshinfo!",Toast.LENGTH_SHORT).show();
+					}
+				});
+		apiClient.addAPPIDToArg();
+		apiClient.requestWithoutCache();
 	}
 	
 	public void initJwcInfoListView()
