@@ -20,8 +20,16 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.herald.ezherald.R;
+import com.herald.ezherald.academic.JwcInfo;
+import com.herald.ezherald.api.APIAccountActivity;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.Status;
+import com.herald.ezherald.api.SuccessHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -101,7 +109,44 @@ public  class TreeholeFragment extends SherlockFragment{
             public void onClick(View view) {
 //                Intent intent=new Intent(getActivity(),TreeholeSendActivity.class);
 //                startActivity(intent);
-                send();
+//                send();
+                APIClient apiClient= APIFactory.getAPIClient(getActivity(), "jwc", new SuccessHandler() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    List<JwcInfo> list = new ArrayList<JwcInfo>();
+                                    JSONArray jsonArr = new JSONArray(data);
+                                    String a="123";
+                                    for (int i = 0; i < jsonArr.length(); ++i) {
+                                        JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+                                        int id = Integer.parseInt(jsonItem.getString(0));
+                                        String type = jsonItem.getString(1);
+                                        String title = jsonItem.getString(2);
+                                        String date = jsonItem.getString(3);
+                                        list.add(new JwcInfo(type, title, date, id));
+                                    }
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new FailHandler() {
+                            @Override
+                            public void onFail(Status status, String message) {
+                                Toast.makeText(getActivity(), status.toString(), Toast.LENGTH_SHORT).show();
+                                if(status.getCode()==-1)
+                                {
+                                    Intent intent=new Intent(getActivity(), APIAccountActivity.class);
+                                    startActivity(intent);
+
+                                }
+
+                            }
+                        });
+
+                apiClient.requestWithoutCache();
             }
         });
 

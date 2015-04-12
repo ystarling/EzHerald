@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="1.8" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/EzHerald" />
+            <option value="$PROJECT_DIR$/hybrid" />
+            <option value="$PROJECT_DIR$/libABS" />
+            <option value="$PROJECT_DIR$/libDragNDropList_" />
+            <option value="$PROJECT_DIR$/libResideMenu" />
+            <option value="$PROJECT_DIR$/libSlidingMenu" />
+            <option value="$PROJECT_DIR$/libViewFlow" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
