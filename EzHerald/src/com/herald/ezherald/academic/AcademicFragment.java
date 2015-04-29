@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
@@ -18,6 +19,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIAccountActivity;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.api.APIFactory;
 import com.herald.ezherald.api.FailHandler;
@@ -32,6 +35,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -137,15 +141,16 @@ public class AcademicFragment extends SherlockFragment implements
 	@Override 
 	public void onDestroy()
 	{
-		
-		if (refreshTask != null && refreshTask.getStatus() == AsyncTask.Status.RUNNING)
-		{
-			refreshTask.cancel(true);
-		}
-		if (requestTask !=null && requestTask.getStatus() == AsyncTask.Status.RUNNING )
-		{
-			requestTask.cancel(true);
-		}
+		//<<<<<<<TODO API迁移 2015.4.27
+//		if (refreshTask != null && refreshTask.getStatus() == AsyncTask.Status.RUNNING)
+//		{
+//			refreshTask.cancel(true);
+//		}
+//		if (requestTask !=null && requestTask.getStatus() == AsyncTask.Status.RUNNING )
+//		{
+//			requestTask.cancel(true);
+//		}
+		//>>>>>>>TODO API迁移 2015.4.27
 //		onRefreshActionComplete();
 		progressDialog.dismiss();
 		super.onDestroy();
@@ -218,11 +223,21 @@ public class AcademicFragment extends SherlockFragment implements
 					onRefreshActionStart();
 					foot.startRequestData();
 					int id = adapter.getLastItemId();
-					String url = String.format(MORE_URL, id, JwcInfoMode);
-					requestTask = new RequestJwcInfo();
-					requestTask.execute(new URL(url));
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
+					//<<<<<<<<<<TODO API迁移 2015.4.27
+//					String url = String.format(MORE_URL, id, JwcInfoMode);
+//					requestTask = new RequestJwcInfo();
+//					requestTask.execute(new URL(url));
+					//>>>>>>>>>>TODO API迁移 2015.4.27
+					JwcInfoRequest(JwcInfoMode);
+				}
+				//<<<<<<<<<<TODO API迁移 2015.4.27
+//				catch (MalformedURLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				//>>>>>>>>>>TODO API迁移 2015.4.27
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -267,65 +282,29 @@ public class AcademicFragment extends SherlockFragment implements
 		
 		initJwcInfoListView();
 		
-		refreshInfo();
-
+//		refreshInfo();
+		JwcInfoRequest(JwcInfoMode);
 		return v;
 	}
 	
 	public void refreshInfo()
 	{
+		//<<<<<<<<<<<<<<<   TODO API迁移 2015.4.13
 //		try {
 //			onRefreshActionStart();
 //			refreshTask = new RefreshJwcInfo();
-//			//2015.4.3API迁移
 ////			String url = String.format(REFRESH_URL, JwcInfoMode);
-//			String url="http://herald.seu.edu.cn/api/jwc";
 //			refreshTask.execute(new URL(url));
 //			//ew grabber().execute();    //此连接方式已被弃用，迁移api请修改refreshTask函数  2015.4.3
 //		} catch (MalformedURLException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		APIClient apiClient=APIFactory.getAPIClient(context, "jwc", new SuccessHandler() {
-					@Override
-					public void onSuccess(String data) {
-						try
-						{
-							List<JwcInfo> list = new ArrayList<JwcInfo>();
-							JSONArray jsonArr = new JSONArray(data);
-							for (int i=0; i<jsonArr.length(); ++i)
-							{
-								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-								int id = Integer.parseInt(jsonItem.getString(0));
-								String type = jsonItem.getString(1);
-								String title = jsonItem.getString(2);
-								String date = jsonItem.getString(3);
-								list.add(new JwcInfo(type, title, date, id));
-							}
-							if(list!=null)
-							{
-								adapter.setJwcInfoList(list);
-								adapter.notifyDataSetChanged();
-								refreshDB(list);
-								listView.onRefreshComplete();
-								onRefreshActionComplete();
-							}
+		//>>>>>>>>>>>>>>>    TODO API迁移 2015.4.27
+		//TODO 新的接口如下：
+		onRefreshActionStart();
+		JwcInfoRefresh(JwcInfoMode);
 
-						}
-						catch (JSONException e)
-						{
-							e.printStackTrace();
-						}
-					}
-				},
-				new FailHandler() {
-					@Override
-					public void onFail(Status status, String message) {
-						Toast.makeText(context,"Failed in refreshinfo!",Toast.LENGTH_SHORT).show();
-					}
-				});
-		apiClient.addAPPIDToArg();
-		apiClient.requestWithoutCache();
 	}
 	
 	public void initJwcInfoListView()
@@ -454,10 +433,6 @@ public class AcademicFragment extends SherlockFragment implements
 						});
 			apiClient.addAPPIDToArg();
 			apiClient.requestWithCache();
-
-
-
-
 			return list;
 
 		}
@@ -623,6 +598,147 @@ public class AcademicFragment extends SherlockFragment implements
 		
 	}
 
+
+	//添加的新API请求方式
+	private void JwcInfoRequest(int JwcMode)
+	{
+		final List<JwcInfo> list = new ArrayList<JwcInfo>();
+		APIClient apiClient=APIFactory.getAPIClient(context, "api/jwc",
+				new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+
+						try
+						{
+							onRefreshActionComplete();
+							JSONObject json_content=new JSONObject(data).getJSONObject("content");
+							JSONArray jsonArr = new JSONArray(data);
+							for (int i=0; i<jsonArr.length(); ++i)
+							{
+								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+								int id = Integer.parseInt(jsonItem.getString(0));
+								String type = jsonItem.getString(1);
+								String title = jsonItem.getString(2);
+								String date = jsonItem.getString(3);
+								list.add(new JwcInfo(type, title, date, id));
+							}
+							try{
+								if (list != null) {
+									if(list.size() == 0)
+									{
+										Toast.makeText(context, "没有更多了.", Toast.LENGTH_LONG).show();
+									}
+									adapter.addJwcInfoList(list);
+									adapter.notifyDataSetChanged();
+									addIntoDB(list);
+									foot.endRequestData();
+									listView.onRequestComplete();
+									Log.v("JwcRequest", "APIsuccess");
+								}
+
+							}
+							catch(Exception e)
+							{
+								e.printStackTrace();
+							}
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+
+						}
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(com.herald.ezherald.api.Status status, String message) {
+						Toast.makeText(getActivity(),"Fail!",Toast.LENGTH_SHORT).show();
+						onRefreshActionComplete();
+					}
+				});
+		APIAccount apiAccount=new APIAccount(context);
+//		apiClient.addUUIDToArg();
+//		apiClient.addArg("uuid", "da24659a6d5ed5d45258eea6da9123742fda6e55");
+//		apiClient.requestWithCache();
+		if(apiAccount.isUUIDValid()) {
+			apiClient.addUUIDToArg();
+			apiClient.requestWithCache();
+		}
+		else
+		{
+			Intent intent=new Intent(context, APIAccountActivity.class);
+			startActivity(intent);
+		}
+	}
+
+
+	private void JwcInfoRefresh(int JwcMode)
+	{
+		final List<JwcInfo> list = new ArrayList<JwcInfo>();
+		APIClient apiClient=APIFactory.getAPIClient(context, "api/jwc",
+				new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+
+						try
+						{
+							JSONArray jsonArr = new JSONArray(data);
+							for (int i=0; i<jsonArr.length(); ++i)
+							{
+								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+								int id = Integer.parseInt(jsonItem.getString(0));
+								String type = jsonItem.getString(1);
+								String title = jsonItem.getString(2);
+								String date = jsonItem.getString(3);
+								list.add(new JwcInfo(type, title, date, id));
+							}
+							try{
+								if (list != null) {
+									adapter.setJwcInfoList(list);
+									adapter.notifyDataSetChanged();
+									refreshDB(list);
+									listView.onRefreshComplete();
+									onRefreshActionComplete();
+									Log.v("JwcRefresh", "APIsuccess");
+								}
+								onRefreshActionComplete();
+							}
+
+							catch( Exception e)
+							{
+								e.printStackTrace();
+							}
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+
+						}
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(com.herald.ezherald.api.Status status, String message) {
+						Toast.makeText(getActivity(),"Fail!",Toast.LENGTH_SHORT).show();
+						onRefreshActionComplete();
+						String s=status.toString();
+						String a=message;
+					}
+				});
+		APIAccount apiAccount=new APIAccount(context);
+		if(apiAccount.isUUIDValid()) {
+			apiClient.addUUIDToArg();
+			apiClient.requestWithCache();
+		}
+		else
+		{
+			Intent intent=new Intent(context, APIAccountActivity.class);
+			startActivity(intent);
+		}
+//		apiClient.addArg("uuid","da24659a6d5ed5d45258eea6da9123742fda6e55");
+//		apiClient.requestWithCache();
+
+	}
 
 
 
