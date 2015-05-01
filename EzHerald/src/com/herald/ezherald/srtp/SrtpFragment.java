@@ -14,6 +14,9 @@ import com.actionbarsherlock.app.SherlockFragment;
  * Created by Lj on 2014/10/29.
  */
 public class SrtpFragment  extends SherlockFragment{
+    public static Score score;
+    FragmentA fragA=new FragmentA();
+    FragmentB fragB=new FragmentB();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){
         //super.onCreate(savedInstanceState);
@@ -32,6 +35,7 @@ public class SrtpFragment  extends SherlockFragment{
 
         bar.addTab(tab1);
         bar.addTab(tab2);
+        score=new Score(getActivity(),fragA);
 
 //        return inflater.inflate(R.layout.srtp_activity_main,group,false);
         return null;
@@ -42,15 +46,15 @@ public class SrtpFragment  extends SherlockFragment{
 
         @Override
         public void onTabSelected(Tab tab, FragmentTransaction ft) {
+
             Fragment frag;
             switch(tab.getPosition()){
                 case 0:
-                    frag = new FragmentA();
+                    frag = fragA;
                     break;
                 case 1:
-                    frag = new FragmentB();
+                    frag = fragB;
                     break;
-
                 default:
                     Log.w("error","no such a tag in srtp");
                     return;

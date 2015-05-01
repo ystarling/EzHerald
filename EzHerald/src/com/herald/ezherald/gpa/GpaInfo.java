@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.api.APIFactory;
 import com.herald.ezherald.api.FailHandler;
@@ -137,6 +139,7 @@ public class GpaInfo {
         APIClient client = APIFactory.getAPIClient(context,"api/gpa",new SuccessHandler() {
             @Override
             public void onSuccess(String data) {
+                Log.d("data",data);
                 Message msg = handler.obtainMessage(SUCCESS, data);
                 handler.sendMessage(msg);
             }
@@ -146,7 +149,14 @@ public class GpaInfo {
                 handler.obtainMessage(FAILED).sendToTarget();
             }
         });
-        client.requestWithoutCache();
+        client.addUUIDToArg();
+        if(client.isCacheAvailable()){
+            client.readFromCache();
+        }
+        else {
+            client.requestWithoutCache();
+           // client.requestWithoutCache();
+        }
     }
 
 	public void update(final UserAccount user, final ProgressDialog progress) {
