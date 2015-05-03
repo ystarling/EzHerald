@@ -411,7 +411,8 @@ public class AcademicFragment extends SherlockFragment implements
 			int response = -1;
 			URL url = arg0[0];
 			URLConnection conn;
-				//2015.4.3API迁移
+			//2015.4.3API迁移
+			try {
 				conn = url.openConnection();
 				if (!(conn instanceof HttpURLConnection)) {
 					throw new IOException("NOT AN HTTP CONNECTION");
@@ -424,8 +425,9 @@ public class AcademicFragment extends SherlockFragment implements
 					response = httpConn.getResponseCode();
 					if (response == HttpURLConnection.HTTP_OK) {
 						in = httpConn.getInputStream();
-						 String str = DataTypeTransition.InputStreamToString(in);
+						String str = DataTypeTransition.InputStreamToString(in);
 						// return str;
+
 						List<JwcInfo> list = new ArrayList<JwcInfo>();
 						JSONArray jsonArr = new JSONArray(str);
 						for (int i=0; i<jsonArr.length(); ++i)
@@ -442,7 +444,19 @@ public class AcademicFragment extends SherlockFragment implements
 						return list;
 					}
 				}
-				return list;
+			}
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return null;
+
+
 		}
 		
 		@Override 
