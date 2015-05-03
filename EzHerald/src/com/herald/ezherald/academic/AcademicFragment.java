@@ -732,6 +732,7 @@ public class AcademicFragment extends SherlockFragment implements
 		}
 		else
 		{
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
 			Intent intent=new Intent(context, APIAccountActivity.class);
 			startActivity(intent);
 		}
