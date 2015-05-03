@@ -105,7 +105,6 @@ public  class TreeholeFragment extends SherlockFragment{
             @Override
             public void onClick(View view) {
                 send();
-
             }
         });
 

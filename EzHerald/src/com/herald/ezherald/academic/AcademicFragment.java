@@ -294,6 +294,12 @@ public class AcademicFragment extends SherlockFragment implements
 //			onRefreshActionStart();
 //			refreshTask = new RefreshJwcInfo();
 ////			String url = String.format(REFRESH_URL, JwcInfoMode);
+//		try {
+//			onRefreshActionStart();
+//			refreshTask = new RefreshJwcInfo();
+//			//2015.4.3API迁移
+////			String url = String.format(REFRESH_URL, JwcInfoMode);
+//			String url="http://herald.seu.edu.cn/api/jwc";
 //			refreshTask.execute(new URL(url));
 //			//ew grabber().execute();    //此连接方式已被弃用，迁移api请修改refreshTask函数  2015.4.3
 //		} catch (MalformedURLException e) {
@@ -305,6 +311,47 @@ public class AcademicFragment extends SherlockFragment implements
 		onRefreshActionStart();
 		JwcInfoRefresh(JwcInfoMode);
 
+
+		APIClient apiClient=APIFactory.getAPIClient(context, "jwc", new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+						try
+						{
+							List<JwcInfo> list = new ArrayList<JwcInfo>();
+							JSONArray jsonArr = new JSONArray(data);
+							for (int i=0; i<jsonArr.length(); ++i)
+							{
+								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+								int id = Integer.parseInt(jsonItem.getString(0));
+								String type = jsonItem.getString(1);
+								String title = jsonItem.getString(2);
+								String date = jsonItem.getString(3);
+								list.add(new JwcInfo(type, title, date, id));
+							}
+							if(list!=null)
+							{
+								adapter.setJwcInfoList(list);
+								adapter.notifyDataSetChanged();
+								refreshDB(list);
+								listView.onRefreshComplete();
+								onRefreshActionComplete();
+							}
+
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+						}
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(Status status, String message) {
+						Toast.makeText(context,"Failed in refreshinfo!",Toast.LENGTH_SHORT).show();
+					}
+				});
+		apiClient.addAPPIDToArg();
+		apiClient.requestWithoutCache();
 	}
 	
 	public void initJwcInfoListView()
@@ -365,76 +412,37 @@ public class AcademicFragment extends SherlockFragment implements
 			URL url = arg0[0];
 			URLConnection conn;
 				//2015.4.3API迁移
-//				conn = url.openConnection();
-//				if (!(conn instanceof HttpURLConnection)) {
-//					throw new IOException("NOT AN HTTP CONNECTION");
-//				} else {
-//					HttpURLConnection httpConn = (HttpURLConnection) conn;
-//					httpConn.setAllowUserInteraction(false);
-//					httpConn.setInstanceFollowRedirects(true);
-//					httpConn.setRequestMethod("GET");
-//					httpConn.connect();
-//					response = httpConn.getResponseCode();
-//					if (response == HttpURLConnection.HTTP_OK) {
-//						in = httpConn.getInputStream();
-//						 String str = DataTypeTransition.InputStreamToString(in);
-//						// return str;
-//						List<JwcInfo> list = new ArrayList<JwcInfo>();
-//						JSONArray jsonArr = new JSONArray(str);
-//						for (int i=0; i<jsonArr.length(); ++i)
-//						{
-//							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-//							int id = Integer.parseInt(jsonItem.getString(0));
-//							String type = jsonItem.getString(1);
-//							String title = jsonItem.getString(2);
-//							String date = jsonItem.getString(3);
-//							list.add(new JwcInfo(type, title, date, id));
-//
-//						}
-//
-//						return list;
-//					}
-//				}
+				conn = url.openConnection();
+				if (!(conn instanceof HttpURLConnection)) {
+					throw new IOException("NOT AN HTTP CONNECTION");
+				} else {
+					HttpURLConnection httpConn = (HttpURLConnection) conn;
+					httpConn.setAllowUserInteraction(false);
+					httpConn.setInstanceFollowRedirects(true);
+					httpConn.setRequestMethod("GET");
+					httpConn.connect();
+					response = httpConn.getResponseCode();
+					if (response == HttpURLConnection.HTTP_OK) {
+						in = httpConn.getInputStream();
+						 String str = DataTypeTransition.InputStreamToString(in);
+						// return str;
+						List<JwcInfo> list = new ArrayList<JwcInfo>();
+						JSONArray jsonArr = new JSONArray(str);
+						for (int i=0; i<jsonArr.length(); ++i)
+						{
+							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+							int id = Integer.parseInt(jsonItem.getString(0));
+							String type = jsonItem.getString(1);
+							String title = jsonItem.getString(2);
+							String date = jsonItem.getString(3);
+							list.add(new JwcInfo(type, title, date, id));
 
-			final List<JwcInfo> list = new ArrayList<JwcInfo>();
-				APIClient apiClient=APIFactory.getAPIClient(context, "jwc",
-						new SuccessHandler() {
-							@Override
-							public void onSuccess(String data) {
+						}
 
-								try
-								{
-									JSONArray jsonArr = new JSONArray(data);
-									for (int i=0; i<jsonArr.length(); ++i)
-									{
-										JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-										int id = Integer.parseInt(jsonItem.getString(0));
-										String type = jsonItem.getString(1);
-										String title = jsonItem.getString(2);
-										String date = jsonItem.getString(3);
-										list.add(new JwcInfo(type, title, date, id));
-									}
-
-								}
-								catch (JSONException e)
-								{
-									e.printStackTrace();
-
-								}
-
-
-							}
-						},
-						new FailHandler() {
-							@Override
-							public void onFail(com.herald.ezherald.api.Status status, String message) {
-								Toast.makeText(getActivity(),"Fail!",Toast.LENGTH_SHORT).show();
-							}
-						});
-			apiClient.addAPPIDToArg();
-			apiClient.requestWithCache();
-			return list;
-
+						return list;
+					}
+				}
+				return list;
 		}
 		
 		@Override 
@@ -741,10 +749,4 @@ public class AcademicFragment extends SherlockFragment implements
 
 	}
 
-
-
-
-
-
-	
 }
