@@ -18,12 +18,14 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIAccountActivity;
 
 public class FragmentC extends Fragment {
 	private TextView txt_rate, txt_remainDays, txt_notice, txt_updateTime;
 	private Button btn_update;
 	private RunTimes runTimes;
-	private UserAccount user;
+	private APIAccount user;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup group,
 			Bundle saved) {
@@ -33,13 +35,12 @@ public class FragmentC extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		user = Authenticate.getTyxUser(getActivity());
-		if (null == user ) {
-			Intent login = new Intent();
-			login.setClass(getActivity(), TyxAccountActivity.class);
-			startActivity(login);
-			//getActivity().finish();
-		} else {
+		user =new APIAccount(getActivity());
+        if (!user.isUUIDValid()) {
+            Intent login = new Intent();
+            login.setClass(getActivity(), APIAccountActivity.class);
+            startActivity(login);
+        }else {
 			txt_rate = (TextView) getActivity().findViewById(R.id.txt_rate);
 			txt_remainDays = (TextView) getActivity().findViewById(
 					R.id.txt_remain_days);
@@ -109,8 +110,8 @@ public class FragmentC extends Fragment {
 
 	}
 
-	private void update(UserAccount user) {
-		runTimes.update(user);
+	private void update(APIAccount user) {
+		runTimes.update();
 	}
 
 	public void onFailed() {
