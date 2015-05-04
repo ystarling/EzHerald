@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2014/10/29.
  */
 public class FragmentA extends Fragment {
-
+    public Score score;
     private Button updateButton;
     private TextView scoreText;
     private TextView UpdattimeText;
@@ -45,6 +45,7 @@ public class FragmentA extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        score = new Score(getActivity(),this);
         apiAccount = new APIAccount(getActivity());
         updateButton = (Button) getActivity().findViewById(R.id.srtp_update_button);
         scoreText = (TextView) getActivity().findViewById(R.id.srtp_score);
@@ -61,11 +62,13 @@ public class FragmentA extends Fragment {
         // SrtpActivity.score=new Score(getActivity(),this);
         }
         //如果更新过，则直接显示
-        if (SrtpFragment.score.isSet()) {
+        if (score.isSet()) {
+            Log.w("iset","yes");
             show();
         }
         //没有更新过，就先更新
         else {
+            Log.w("iset","no");
             updateButton.setText("正在更新");
             Update();
             show();
@@ -82,18 +85,18 @@ public class FragmentA extends Fragment {
     }
 
     private void Update() {
-        SrtpFragment.score.getScoreFromApi();
+        score.getScoreFromApi();
     }
 
     public void show() {
         Activity act = getActivity();
-        if (Score.DEFAULT_SCORE == (SrtpFragment.score.getScore())) {
+        if (Score.DEFAULT_SCORE_A == (score.getScore())) {
 //            Toast.makeText(act, "还没有数据哦", Toast.LENGTH_LONG).show();
         } else {
-            scoreText.setText(String.valueOf((SrtpFragment.score.getScore())));
+            scoreText.setText(String.valueOf((score.getScore())));
         }
-        if ((SrtpFragment.score.getUpdateTime()) != Score.DEFAULT_UPDATETIME) {
-            UpdattimeText.setText(SrtpFragment.score.getUpdateTime());
+        if ((score.getUpdateTime()) != Score.DEFAULT_UPDATETIME) {
+            UpdattimeText.setText(score.getUpdateTime());
         }
 //        else{
 //            UpdattimeText.setText("未等新哦");

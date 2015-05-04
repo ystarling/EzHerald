@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2014/10/29.
  */
 public class FragmentB extends  Fragment{
-
+    public Score score;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved){
         //show();
@@ -37,6 +37,7 @@ public class FragmentB extends  Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        score = new Score(getActivity(),this);
         show();
         //tableLayout=( LinearLayout)getActivity().findViewById(R.id.layout_main);
 
@@ -47,27 +48,25 @@ public class FragmentB extends  Fragment{
     }
 
     public void show(){
-        if(SrtpFragment.score.getScore()==0){
+        if(score.getScore()==0){
             onFailed();
         }
-        else if(SrtpFragment.score.getScore()!=0){
+        else if(score.getScore()!=0){
             onSuccess();
         }
     }
 
     public  void onSuccess(){
         Activity act = getActivity();
-        ArrayList project = SrtpFragment.score.getProject();
+        ArrayList project =score.getProject();
         LinearLayout tableLayout=( LinearLayout)act.findViewById(R.id.layout_main);
         int k = tableLayout.getChildCount();
-        Log.w("number",String.valueOf(k));
 
         //tableLayout.removeAllViews();
         int m = tableLayout.getChildCount();
         for(int t=0;t<m;t++) {
             tableLayout.removeViewAt(t);
         }
-        Log.w("number",String.valueOf(m));
 
         for(int i=0;i<project.size();i=i+3){
             LayoutInflater inflater = LayoutInflater.from(act);

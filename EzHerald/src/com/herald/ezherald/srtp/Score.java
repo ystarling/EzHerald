@@ -56,11 +56,14 @@ public class Score {
 
     public static final int SUCCESS = 1;
     public static final int FAILED  = 0;
-    public static  final int DEFAULT_SCORE=0;
+    public static  final String DEFAULT_SCORE="0";
+    public static  final double DEFAULT_SCORE_A=0;
+    public static final String DEFAULT_RESULT=null;
     public static final String DEFAULT_UPDATETIME=null;
 
 
     JSONObject json;
+    String result=null;
     ArrayList project = new ArrayList();
     public  void setScore(double score){
         this.score=score;
@@ -94,7 +97,7 @@ public class Score {
 
     }
     protected void onSuccess() {
-//        save();
+       save();
         if(father == null)
             return ;
         if(father instanceof FragmentB){
@@ -111,42 +114,62 @@ public class Score {
 
     public Score(Context context){
         this.context=context;
-        pref = context.getSharedPreferences("Score", Context.MODE_PRIVATE);
-        setUpdateTime(pref.getString("UpdateTime", DEFAULT_UPDATETIME));
-        // setScore(pref.getInt("Score",DEFAULT_SCORE));
+        pref = context.getSharedPreferences("Srtp", Context.MODE_PRIVATE);
+        result = pref.getString("result", DEFAULT_RESULT);
+   //     Log.w("result",result);
+
+//        setUpdateTime(pref.getString("UpdateTime", DEFAULT_UPDATETIME));
+//        setScore(Double.parseDouble(pref.getString("Score",DEFAULT_SCORE)));
 
     }
 
     public Score(Context context,Fragment father){
+        //调用另一个构造函数，读取数据
+        this(context);
         this.context=context;
         this.father=father;
+        if(result!=null) {
+            try {
+                json = new JSONObject(result);
+                init(json);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            //dealJson(json);
+
+        }
+
     }
 
     public boolean isSet() {
-        return score!=DEFAULT_SCORE&&updateTime!=DEFAULT_UPDATETIME;
+        Log.w("score",String.valueOf(score));
+        return score!=DEFAULT_SCORE_A&&updateTime!=DEFAULT_UPDATETIME;
     }
 
 
     public void save(){
-//        editor = pref.edit();
-//        editor.putInt("Score",getScore());
-//        editor.putString("UpdateTime",getUpdateTime());
-//        editor.commit();
+        editor = pref.edit();
+        editor.putString("result",result);
+        editor.commit();
     }
 
     public void clear() {
         setScore(0);
+        //如果不把project内容清空的话，那么下次再更新会导致这里有重复的
+        project.clear();
         save();
     }
 
 
     public void getScoreFromApi(){
+        clear();
         APIAccount apiAccount=new APIAccount(context);
         apiAccount.isUUIDValid();
         APIClient client= APIFactory.getAPIClient(context,"api/srtp",new SuccessHandler() {
             @Override
             public void onSuccess(String data) {
                 try {
+                    result=data;
                     json = new JSONObject(data);
                     dealJson(json);
                 } catch (JSONException e) {
@@ -170,8 +193,7 @@ public class Score {
         //cache不可使用
         //client.doRequest();
     }
-
-    public void dealJson(JSONObject jsonArray){
+    public void init(JSONObject jsonArray){
         try{
             JSONArray obj = json.getJSONArray("content");
             JSONObject nameMessage = obj.getJSONObject(0);
@@ -189,14 +211,16 @@ public class Score {
             Calendar calendar = Calendar.getInstance();
             String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DATE));
             setUpdateTime(today);
-            onSuccess();
         }
         catch (JSONException e1){
             Toast toast1 = Toast.makeText(context, "解析错误...",
                     Toast.LENGTH_LONG);
             toast1.show();
             e1.printStackTrace();
-            onFiled();
         }
+    }
+    public void dealJson(JSONObject jsonArray) {
+        init(jsonArray);
+        onSuccess();
     }
 }
