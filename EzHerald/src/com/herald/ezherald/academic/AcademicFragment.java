@@ -56,16 +56,24 @@ public class AcademicFragment extends SherlockFragment implements
 	private AcademicDBAdapter dbAdapter;
 
 	public Menu mMenu;
+//TODO API迁移 2015.5.7[[[[[
+//	private final int ALL = 0;
+//	private final int JIAOWU = 1;
+//	private final int XUEJI = 2;
+//	private final int SHIJIAN = 3;
+//	private final int HEZUO = 4;
+//	private final int JIAOYAN = 5;
+//	private final int JIAOPING = 6;
+// TODO API迁移 2015.5.7]]]]]
+	private final int ZUIXIN=0;
+	private final int JIAOWU=1;
+	private final int HEZUO=2;
+	private final int XUEJI=3;
+	private final int SHIJIAN=4;
 
-	private final int ALL = 0;
-	private final int JIAOWU = 1;
-	private final int XUEJI = 2;
-	private final int SHIJIAN = 3;
-	private final int HEZUO = 4;
-	private final int JIAOYAN = 5;
-	private final int JIAOPING = 6;
 
-	private int JwcInfoMode = ALL;
+
+	private int JwcInfoMode = ZUIXIN;
 	
 	private final String REFRESH_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/%d/";
 	private final String MORE_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/more/%d/%d";
@@ -228,7 +236,7 @@ public class AcademicFragment extends SherlockFragment implements
 //					requestTask = new RequestJwcInfo();
 //					requestTask.execute(new URL(url));
 					//>>>>>>>>>>TODO API迁移 2015.4.27
-					JwcInfoRequest(JwcInfoMode);
+					JwcInfoRequest();
 				}
 				//<<<<<<<<<<TODO API迁移 2015.4.27
 //				catch (MalformedURLException e) {
@@ -283,7 +291,7 @@ public class AcademicFragment extends SherlockFragment implements
 		initJwcInfoListView();
 		
 //		refreshInfo();
-		JwcInfoRequest(JwcInfoMode);
+		JwcInfoRequest();
 		return v;
 	}
 	
@@ -309,49 +317,7 @@ public class AcademicFragment extends SherlockFragment implements
 		//>>>>>>>>>>>>>>>    TODO API迁移 2015.4.27
 		//TODO 新的接口如下：
 		onRefreshActionStart();
-		JwcInfoRefresh(JwcInfoMode);
-
-
-		APIClient apiClient=APIFactory.getAPIClient(context, "jwc", new SuccessHandler() {
-					@Override
-					public void onSuccess(String data) {
-						try
-						{
-							List<JwcInfo> list = new ArrayList<JwcInfo>();
-							JSONArray jsonArr = new JSONArray(data);
-							for (int i=0; i<jsonArr.length(); ++i)
-							{
-								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-								int id = Integer.parseInt(jsonItem.getString(0));
-								String type = jsonItem.getString(1);
-								String title = jsonItem.getString(2);
-								String date = jsonItem.getString(3);
-								list.add(new JwcInfo(type, title, date, id));
-							}
-							if(list!=null)
-							{
-								adapter.setJwcInfoList(list);
-								adapter.notifyDataSetChanged();
-								refreshDB(list);
-								listView.onRefreshComplete();
-								onRefreshActionComplete();
-							}
-
-						}
-						catch (JSONException e)
-						{
-							e.printStackTrace();
-						}
-					}
-				},
-				new FailHandler() {
-					@Override
-					public void onFail(Status status, String message) {
-						Toast.makeText(context,"Failed in refreshinfo!",Toast.LENGTH_SHORT).show();
-					}
-				});
-		apiClient.addAPPIDToArg();
-		apiClient.requestWithoutCache();
+		JwcInfoRefresh();
 	}
 	
 	public void initJwcInfoListView()
@@ -368,27 +334,44 @@ public class AcademicFragment extends SherlockFragment implements
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
 		switch (itemPosition) {
-		case 0:
-			JwcInfoMode = ALL;
-			break;
-		case 1:
-			JwcInfoMode = JIAOWU;
-			break;
-		case 2:
-			JwcInfoMode = XUEJI;
-			break;
-		case 3:
-			JwcInfoMode = SHIJIAN;
-			break;
-		case 4:
-			JwcInfoMode = HEZUO;
-			break;
-		case 5:
-			JwcInfoMode = JIAOYAN;
-			break;
-		case 6:
-			JwcInfoMode = JIAOPING;
-			break;
+			//TODO API迁移 2015.5.7【【【【
+//		case 0:
+//			JwcInfoMode = ALL;
+//			break;
+//		case 1:
+//			JwcInfoMode = JIAOWU;
+//			break;
+//		case 2:
+//			JwcInfoMode = XUEJI;
+//			break;
+//		case 3:
+//			JwcInfoMode = SHIJIAN;
+//			break;
+//		case 4:
+//			JwcInfoMode = HEZUO;
+//			break;
+//		case 5:
+//			JwcInfoMode = JIAOYAN;
+//			break;
+//		case 6:
+//			JwcInfoMode = JIAOPING;
+//			break;
+// TODO API迁移】】】】
+			case 0:
+				JwcInfoMode=ZUIXIN;
+				break;
+			case 1:
+				JwcInfoMode=JIAOWU;
+				break;
+			case 2:
+				JwcInfoMode=HEZUO;
+				break;
+			case 3:
+				JwcInfoMode=XUEJI;
+				break;
+			case 4:
+				JwcInfoMode=SHIJIAN;
+				break;
 		}
 //		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
 //				Toast.LENGTH_SHORT).show();
@@ -622,7 +605,7 @@ public class AcademicFragment extends SherlockFragment implements
 
 
 	//添加的新API请求方式
-	private void JwcInfoRequest(int JwcMode)
+	private void JwcInfoRequest()
 	{
 		final List<JwcInfo> list = new ArrayList<JwcInfo>();
 		APIClient apiClient=APIFactory.getAPIClient(context, "api/jwc",
@@ -634,15 +617,34 @@ public class AcademicFragment extends SherlockFragment implements
 						{
 							onRefreshActionComplete();
 							JSONObject json_content=new JSONObject(data).getJSONObject("content");
-							JSONArray jsonArr = new JSONArray(data);
+							JSONArray jsonArr=null;
+							switch (JwcInfoMode)
+							{
+								case ZUIXIN:
+									jsonArr=json_content.getJSONArray("最新动态");
+									break;
+								case JIAOWU:
+									jsonArr=json_content.getJSONArray("教务信息");
+									break;
+								case HEZUO:
+									jsonArr=json_content.getJSONArray("合作办学");
+									break;
+								case XUEJI:
+									jsonArr=json_content.getJSONArray("学籍管理");
+									break;
+								case SHIJIAN:
+									jsonArr=json_content.getJSONArray("实践教学");
+									break;
+							}
+
 							for (int i=0; i<jsonArr.length(); ++i)
 							{
-								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-								int id = Integer.parseInt(jsonItem.getString(0));
-								String type = jsonItem.getString(1);
-								String title = jsonItem.getString(2);
-								String date = jsonItem.getString(3);
-								list.add(new JwcInfo(type, title, date, id));
+								JSONObject jsonItem = (JSONObject)jsonArr.get(i);
+//								int id = Integer.parseInt(jsonItem.getString(0));
+								String type = jsonItem.getString("href");
+								String title = jsonItem.getString("title");
+								String date = jsonItem.getString("date");
+								list.add(new JwcInfo(type, title, date, 0));
 							}
 							try{
 								if (list != null) {
@@ -694,7 +696,7 @@ public class AcademicFragment extends SherlockFragment implements
 	}
 
 
-	private void JwcInfoRefresh(int JwcMode)
+	private void JwcInfoRefresh()
 	{
 		final List<JwcInfo> list = new ArrayList<JwcInfo>();
 		APIClient apiClient=APIFactory.getAPIClient(context, "api/jwc",
@@ -704,15 +706,34 @@ public class AcademicFragment extends SherlockFragment implements
 
 						try
 						{
-							JSONArray jsonArr = new JSONArray(data);
+							JSONObject json_content=new JSONObject(data).getJSONObject("content");
+							JSONArray jsonArr=null;
+							switch (JwcInfoMode)
+							{
+								case ZUIXIN:
+									jsonArr=json_content.getJSONArray("最新动态");
+									break;
+								case JIAOWU:
+									jsonArr=json_content.getJSONArray("教务信息");
+									break;
+								case HEZUO:
+									jsonArr=json_content.getJSONArray("合作办学");
+									break;
+								case XUEJI:
+									jsonArr=json_content.getJSONArray("学籍管理");
+									break;
+								case SHIJIAN:
+									jsonArr=json_content.getJSONArray("实践教学");
+									break;
+							}
+
 							for (int i=0; i<jsonArr.length(); ++i)
 							{
-								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-								int id = Integer.parseInt(jsonItem.getString(0));
-								String type = jsonItem.getString(1);
-								String title = jsonItem.getString(2);
-								String date = jsonItem.getString(3);
-								list.add(new JwcInfo(type, title, date, id));
+								JSONObject jsonItem = (JSONObject)jsonArr.get(i);
+								String type = jsonItem.getString("href");
+								String title = jsonItem.getString("title");
+								String date = jsonItem.getString("date");
+								list.add(new JwcInfo(type, title, date, 0));
 							}
 							try{
 								if (list != null) {

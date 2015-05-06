@@ -28,13 +28,19 @@
         
     <!-- academic 教务信息   begin -->
     <string-array name="academic_list_action_spinner">
-        <item>全部教务</item>
+        <!--api迁移修改列表项 2015.5.7 -->
+        <!--<item>全部教务</item>-->
+        <!--<item>教务信息</item>-->
+        <!--<item>学籍管理</item>-->
+        <!--<item>实践教学</item>-->
+        <!--<item>合作办学</item>-->
+        <!--<item>教学研究</item>-->
+        <!--<item>教学评估</item>-->
+        <item>最新动态</item>
         <item>教务信息</item>
+        <item>合作办学</item>
         <item>学籍管理</item>
         <item>实践教学</item>
-        <item>合作办学</item>
-        <item>教学研究</item>
-        <item>教学评估</item>
     </string-array>
     <!-- academic 教务信息  end -->
     
