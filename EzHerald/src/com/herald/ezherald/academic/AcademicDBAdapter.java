@@ -32,7 +32,7 @@ public class AcademicDBAdapter {
 			clnType+" varchar(30) not null , "+
 			clnDate+" varchar(30) not null , "+
 			clnTitle+" varchar(1000) not null , "+
-			clnHref+" varchar(1000) not null );";
+			clnHref+" varchar(50) not null );";
 	
 	
 	private class DatabaseHelper extends SQLiteOpenHelper
@@ -97,7 +97,7 @@ public class AcademicDBAdapter {
 	
 	public List<JwcInfo> getAllJwcInfo()
 	{
-		Cursor cursor = db.query(true, tbnJwcInfoList, new String [] {clnDate, clnId, clnTitle, clnType,clnHref},
+		Cursor cursor = db.query(true, tbnJwcInfoList, new String [] {clnDate, clnId, clnTitle, clnType, clnHref},
 				null, null,	null, null, null, null);
 		List<JwcInfo> jwcInfoList = new ArrayList<JwcInfo>();
 		if(cursor.moveToFirst())
@@ -108,7 +108,7 @@ public class AcademicDBAdapter {
 				String date = cursor.getString(cursor.getColumnIndex(clnDate));
 				String href =cursor.getString(cursor.getColumnIndex(clnHref));
 				int id = cursor.getInt(cursor.getColumnIndex(clnId));
-				jwcInfoList.add(new JwcInfo(type, title, date, id,href));
+				jwcInfoList.add(new JwcInfo(type, title, date, id, href));
 			}while(cursor.moveToNext());
 		}
 		

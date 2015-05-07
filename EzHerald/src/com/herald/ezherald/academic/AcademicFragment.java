@@ -269,13 +269,14 @@ public class AcademicFragment extends SherlockFragment implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(),
-						AcademicDetailActivity.class);
-//				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
-				JwcInfo info = (JwcInfo) adapter.getItem(position-1);
-				int i = info.GetId();
-				intent.putExtra("id", i);
-				startActivity(intent);
+//				Intent intent = new Intent(getActivity(),
+//						AcademicDetailActivity.class);
+////				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+//				JwcInfo info = (JwcInfo) adapter.getItem(position-1);
+//				int i = info.GetId();
+//				intent.putExtra("id", i);
+//				startActivity(intent);
+//				改用超链接方式打开网站，所以不再使用DetailActivity
 			}
 		});
 
@@ -288,7 +289,7 @@ public class AcademicFragment extends SherlockFragment implements
 
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 		
-//		initJwcInfoListView();
+	    initJwcInfoListView();
 		
 //		refreshInfo();
 		JwcInfoRequest();
@@ -322,11 +323,13 @@ public class AcademicFragment extends SherlockFragment implements
 	
 	public void initJwcInfoListView()
 	{
-		dbAdapter.open();
-		List<JwcInfo> jwcInfoList = dbAdapter.getAllJwcInfo();
-		dbAdapter.close();
-		adapter.setJwcInfoList(jwcInfoList);
-		adapter.notifyDataSetChanged();
+			dbAdapter.open();
+			List<JwcInfo> jwcInfoList = dbAdapter.getAllJwcInfo();
+			dbAdapter.close();
+		if(jwcInfoList!=null) {
+			adapter.setJwcInfoList(jwcInfoList);
+			adapter.notifyDataSetChanged();
+		}
 	}
 	
 
@@ -660,7 +663,7 @@ public class AcademicFragment extends SherlockFragment implements
 									}
 									adapter.addJwcInfoList(list);
 									adapter.notifyDataSetChanged();
-									//addIntoDB(list);
+									addIntoDB(list);
 									foot.endRequestData();
 									listView.onRequestComplete();
 									Log.v("JwcRequest", "APIsuccess");
@@ -752,7 +755,7 @@ public class AcademicFragment extends SherlockFragment implements
 								if (list != null) {
 									adapter.setJwcInfoList(list);
 									adapter.notifyDataSetChanged();
-									//refreshDB(list);
+									refreshDB(list);
 									listView.onRefreshComplete();
 									onRefreshActionComplete();
 									Log.v("JwcRefresh", "APIsuccess");
