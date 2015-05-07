@@ -7,15 +7,17 @@ public class JwcInfo {
 	private String type;
 	private String title;
 	private String date;
+	private String href;
 	private int id;
 	private String con;
 	private List<Link> appendixs;
 
-	public JwcInfo(String tp, String t, String d, int jid) {
+	public JwcInfo(String tp, String t, String d, int jid,String hre) {
 		type = tp;
 		title = t;
 		date = d;
 		id = jid;
+		href=hre;
 		appendixs = new ArrayList<Link>();
 	}
 	
@@ -41,6 +43,8 @@ public class JwcInfo {
 	public String GetDate() {
 		return date;
 	}
+
+	public String GetHref(){return href;}
 
 	public int GetId() {
 		return id;

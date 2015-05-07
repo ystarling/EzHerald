@@ -24,13 +24,15 @@ public class AcademicDBAdapter {
 	private String clnId = "info_id";
 	private String clnDate = "pub_date";
 	private String clnType = "info_type";
+	private String clnHref ="info_href";
 	
 	private String CREATE_TABLE = "create table "+ tbnJwcInfoList+ " ( " +
 			cln_id + " integer primary key autoincrement ," +
 			clnId + " integer unique not null , "+
 			clnType+" varchar(30) not null , "+
 			clnDate+" varchar(30) not null , "+
-			clnTitle+" varchar(1000) not null );";
+			clnTitle+" varchar(1000) not null , "+
+			clnHref+" varchar(1000) not null );";
 	
 	
 	private class DatabaseHelper extends SQLiteOpenHelper
@@ -50,7 +52,13 @@ public class AcademicDBAdapter {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
-			db.execSQL(CREATE_TABLE);
+			try{
+				db.execSQL(CREATE_TABLE);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 		@Override
@@ -89,7 +97,7 @@ public class AcademicDBAdapter {
 	
 	public List<JwcInfo> getAllJwcInfo()
 	{
-		Cursor cursor = db.query(true, tbnJwcInfoList, new String [] {clnDate, clnId, clnTitle, clnType}, 
+		Cursor cursor = db.query(true, tbnJwcInfoList, new String [] {clnDate, clnId, clnTitle, clnType,clnHref},
 				null, null,	null, null, null, null);
 		List<JwcInfo> jwcInfoList = new ArrayList<JwcInfo>();
 		if(cursor.moveToFirst())
@@ -98,8 +106,9 @@ public class AcademicDBAdapter {
 				String type = cursor.getString(cursor.getColumnIndex(clnType));
 				String title = cursor.getString(cursor.getColumnIndex(clnTitle));
 				String date = cursor.getString(cursor.getColumnIndex(clnDate));
+				String href =cursor.getString(cursor.getColumnIndex(clnHref));
 				int id = cursor.getInt(cursor.getColumnIndex(clnId));
-				jwcInfoList.add(new JwcInfo(type, title, date, id));
+				jwcInfoList.add(new JwcInfo(type, title, date, id,href));
 			}while(cursor.moveToNext());
 		}
 		
@@ -113,6 +122,7 @@ public class AcademicDBAdapter {
 		values.put(clnType, info.GetType());
 		values.put(clnDate, info.GetDate());
 		values.put(clnTitle, info.GetTitle());
+		values.put(clnHref,info.GetHref());
 		
 		return db.insert(tbnJwcInfoList, null, values);
 	}

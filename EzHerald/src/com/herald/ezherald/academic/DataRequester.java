@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataRequester {
-	
+
 	public static String request(String u)
 	{
 		List<JwcInfo> jwcList = new ArrayList<JwcInfo>();

@@ -288,7 +288,7 @@ public class AcademicFragment extends SherlockFragment implements
 
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 		
-		initJwcInfoListView();
+//		initJwcInfoListView();
 		
 //		refreshInfo();
 		JwcInfoRequest();
@@ -420,7 +420,7 @@ public class AcademicFragment extends SherlockFragment implements
 							String type = jsonItem.getString(1);
 							String title = jsonItem.getString(2);
 							String date = jsonItem.getString(3);
-							list.add(new JwcInfo(type, title, date, id));
+//							list.add(new JwcInfo(type, title, date, id));
 
 						}
 
@@ -520,7 +520,7 @@ public class AcademicFragment extends SherlockFragment implements
 							String type = jsonItem.getString(1);
 							String title = jsonItem.getString(2);
 							String date = jsonItem.getString(3);
-							list.add(new JwcInfo(type, title, date, id));
+//							list.add(new JwcInfo(type, title, date, id));
 							
 						}
 						
@@ -618,22 +618,28 @@ public class AcademicFragment extends SherlockFragment implements
 							onRefreshActionComplete();
 							JSONObject json_content=new JSONObject(data).getJSONObject("content");
 							JSONArray jsonArr=null;
+							String type="";
 							switch (JwcInfoMode)
 							{
 								case ZUIXIN:
 									jsonArr=json_content.getJSONArray("最新动态");
+									type="最新动态";
 									break;
 								case JIAOWU:
 									jsonArr=json_content.getJSONArray("教务信息");
+									type="教务信息";
 									break;
 								case HEZUO:
 									jsonArr=json_content.getJSONArray("合作办学");
+									type="合作办学";
 									break;
 								case XUEJI:
 									jsonArr=json_content.getJSONArray("学籍管理");
+									type="学籍管理";
 									break;
 								case SHIJIAN:
 									jsonArr=json_content.getJSONArray("实践教学");
+									type="实践教学";
 									break;
 							}
 
@@ -641,10 +647,10 @@ public class AcademicFragment extends SherlockFragment implements
 							{
 								JSONObject jsonItem = (JSONObject)jsonArr.get(i);
 //								int id = Integer.parseInt(jsonItem.getString(0));
-								String type = jsonItem.getString("href");
+								String href = jsonItem.getString("href");
 								String title = jsonItem.getString("title");
 								String date = jsonItem.getString("date");
-								list.add(new JwcInfo(type, title, date, 0));
+								list.add(new JwcInfo(type, title, date, 0,href));
 							}
 							try{
 								if (list != null) {
@@ -654,7 +660,7 @@ public class AcademicFragment extends SherlockFragment implements
 									}
 									adapter.addJwcInfoList(list);
 									adapter.notifyDataSetChanged();
-									addIntoDB(list);
+									//addIntoDB(list);
 									foot.endRequestData();
 									listView.onRequestComplete();
 									Log.v("JwcRequest", "APIsuccess");
@@ -690,6 +696,7 @@ public class AcademicFragment extends SherlockFragment implements
 		}
 		else
 		{
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
 			Intent intent=new Intent(context, APIAccountActivity.class);
 			startActivity(intent);
 		}
@@ -708,38 +715,44 @@ public class AcademicFragment extends SherlockFragment implements
 						{
 							JSONObject json_content=new JSONObject(data).getJSONObject("content");
 							JSONArray jsonArr=null;
+							String type="";
 							switch (JwcInfoMode)
 							{
 								case ZUIXIN:
 									jsonArr=json_content.getJSONArray("最新动态");
+									type="最新动态";
 									break;
 								case JIAOWU:
 									jsonArr=json_content.getJSONArray("教务信息");
+									type="教务信息";
 									break;
 								case HEZUO:
 									jsonArr=json_content.getJSONArray("合作办学");
+									type="合作办学";
 									break;
 								case XUEJI:
 									jsonArr=json_content.getJSONArray("学籍管理");
+									type="学籍管理";
 									break;
 								case SHIJIAN:
 									jsonArr=json_content.getJSONArray("实践教学");
+									type="实践教学";
 									break;
 							}
 
 							for (int i=0; i<jsonArr.length(); ++i)
 							{
 								JSONObject jsonItem = (JSONObject)jsonArr.get(i);
-								String type = jsonItem.getString("href");
+								String href = jsonItem.getString("href");
 								String title = jsonItem.getString("title");
 								String date = jsonItem.getString("date");
-								list.add(new JwcInfo(type, title, date, 0));
+								list.add(new JwcInfo(type, title, date, 0,href));
 							}
 							try{
 								if (list != null) {
 									adapter.setJwcInfoList(list);
 									adapter.notifyDataSetChanged();
-									refreshDB(list);
+									//refreshDB(list);
 									listView.onRefreshComplete();
 									onRefreshActionComplete();
 									Log.v("JwcRefresh", "APIsuccess");
