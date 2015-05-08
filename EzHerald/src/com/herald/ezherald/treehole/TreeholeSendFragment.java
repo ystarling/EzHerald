@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,8 @@ public class TreeholeSendFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private EditText et_treehole_send;//输入框
     private TextView tv_treehole_sug;//剩余输入字数
+    private Button bt_treehole_send;//发送按钮
+    private TreeholeInfo send_info;
 
     /**
      * Use this factory method to create a new instance of
@@ -86,7 +90,17 @@ public class TreeholeSendFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        send_info=new TreeholeInfo(getActivity(),this);
         et_treehole_send=(EditText)getActivity().findViewById(R.id.et_treehole_send);
+        bt_treehole_send=(Button)getActivity().findViewById(R.id.bt_treehole_send);
+        //添加发送按钮的响应函数
+        bt_treehole_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(getActivity(),"点击了发送按钮",Toast.LENGTH_SHORT).show();
+                Send();
+            }
+        });
         tv_treehole_sug=(TextView)getActivity().findViewById(R.id.tv_treehole_sug);
         //添加文字改变时的监听器
         et_treehole_send.addTextChangedListener(new TextWatcher() {
@@ -152,6 +166,41 @@ public class TreeholeSendFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+
+    public void Send()
+    {
+        String str_content=et_treehole_send.getText().toString();
+        String str_topic="#先声树洞#";
+        if(!str_content.trim().isEmpty())//去掉前导和后导空格以检验内容是否为空，或者都由空格组成
+        send_info.Send(str_topic+str_content);
+        else {
+            Toast.makeText(getActivity(), "请输入发送内容", Toast.LENGTH_SHORT).show();
+            et_treehole_send.setText("");
+        }
+    }
+
+    public void UpdataOnSuccess()
+    {
+
+    }
+
+    public void UpdataOnFailed()
+    {
+        Log.d("Send", "treehole send failed");
+        SendOnFailed();
+    }
+
+    public void SendOnSuccess()
+    {
+        Toast. makeText(getActivity(),"发送成功！",Toast.LENGTH_SHORT).show();
+        getActivity().finish();
+    }
+
+    public void SendOnFailed()
+    {
+        Toast. makeText(getActivity(),"发送失败，请重试！",Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -11,7 +11,8 @@ import java.util.List;
 public class APIConf {
     public String url;
     public List<NameValuePair> args = new ArrayList<NameValuePair>();;
-
+    public int connectTimeout=5000;
+    public int socketTimeout=5000;
     public void addArgs(NameValuePair... args){
         for (NameValuePair arg : args){
             this.args.add(arg);

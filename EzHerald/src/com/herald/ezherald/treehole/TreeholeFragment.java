@@ -43,7 +43,7 @@ import java.util.Map;
  */
 public  class TreeholeFragment extends SherlockFragment{
     View treeholeview=null;
-    TextView tv_show;//显示树洞内容
+
     Button bt_opentreehole;
     Button bt_writesecret;
     String str_holecontent="";
@@ -77,10 +77,7 @@ public  class TreeholeFragment extends SherlockFragment{
         //获取树洞消息
         treeholeInfo=new TreeholeInfo(getActivity(),this);
         //treeholeInfo用于发送和接收消息，此处用于与当前Fragment和Activity绑定
-        tv_show=(TextView)getActivity().findViewById(R.id.showholetv);
-        if(str_holecontent=="")
-            tv_show.setText("暂未获取到树洞内容");
-        tv_show.setMovementMethod(ScrollingMovementMethod.getInstance());//实现多行滚动
+
 
 
         bt_opentreehole = (Button)getActivity().findViewById(R.id.openholebtn);//更新内容的按钮响应函数
@@ -107,57 +104,18 @@ public  class TreeholeFragment extends SherlockFragment{
         bt_writesecret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent=new Intent(getActivity(),TreeholeSendActivity.class);
-//                startActivity(intent);
-//                send();
-                APIClient apiClient= APIFactory.getAPIClient(getActivity(), "jwc", new SuccessHandler() {
-                            @Override
-                            public void onSuccess(String data) {
-                                try {
-                                    List<JwcInfo> list = new ArrayList<JwcInfo>();
-                                    JSONArray jsonArr = new JSONArray(data);
-                                    String a="123";
-                                    for (int i = 0; i < jsonArr.length(); ++i) {
-                                        JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-                                        int id = Integer.parseInt(jsonItem.getString(0));
-                                        String type = jsonItem.getString(1);
-                                        String title = jsonItem.getString(2);
-                                        String date = jsonItem.getString(3);
-                                        list.add(new JwcInfo(type, title, date, id));
-                                    }
-
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        },
-                        new FailHandler() {
-                            @Override
-                            public void onFail(Status status, String message) {
-                                Toast.makeText(getActivity(), status.toString(), Toast.LENGTH_SHORT).show();
-                                if(status.getCode()==-1)
-                                {
-                                    Intent intent=new Intent(getActivity(), APIAccountActivity.class);
-                                    startActivity(intent);
-
-                                }
-
-                            }
-                        });
-
-                apiClient.requestWithoutCache();
+                send();
             }
         });
-
-
 
 
     }
 
     public boolean send()
     {
-        treeholeInfo.Send("试一试");
+//        treeholeInfo.Send("123");
+        Intent intent=new Intent(getActivity(),TreeholeSendActivity.class);
+        startActivity(intent);
         return true;
     }
 
@@ -216,7 +174,6 @@ public  class TreeholeFragment extends SherlockFragment{
     public void UpdataOnFailed()
     {
         Toast.makeText(getActivity(),"获取树洞内容失败！",Toast.LENGTH_SHORT).show();
-        tv_show.setText(str_holecontent);
     }
 
     public void SendOnSuccess()

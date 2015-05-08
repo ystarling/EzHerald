@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
@@ -18,6 +19,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.herald.ezherald.R;
 import com.herald.ezherald.academic.CustomListView.OnRefreshListener;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIAccountActivity;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.api.APIFactory;
 import com.herald.ezherald.api.FailHandler;
@@ -32,6 +35,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,16 +56,24 @@ public class AcademicFragment extends SherlockFragment implements
 	private AcademicDBAdapter dbAdapter;
 
 	public Menu mMenu;
+//TODO API迁移 2015.5.7[[[[[
+//	private final int ALL = 0;
+//	private final int JIAOWU = 1;
+//	private final int XUEJI = 2;
+//	private final int SHIJIAN = 3;
+//	private final int HEZUO = 4;
+//	private final int JIAOYAN = 5;
+//	private final int JIAOPING = 6;
+// TODO API迁移 2015.5.7]]]]]
+	private final int ZUIXIN=0;
+	private final int JIAOWU=1;
+	private final int HEZUO=2;
+	private final int XUEJI=3;
+	private final int SHIJIAN=4;
 
-	private final int ALL = 0;
-	private final int JIAOWU = 1;
-	private final int XUEJI = 2;
-	private final int SHIJIAN = 3;
-	private final int HEZUO = 4;
-	private final int JIAOYAN = 5;
-	private final int JIAOPING = 6;
 
-	private int JwcInfoMode = ALL;
+
+	private int JwcInfoMode = ZUIXIN;
 	
 	private final String REFRESH_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/%d/";
 	private final String MORE_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/more/%d/%d";
@@ -137,15 +149,16 @@ public class AcademicFragment extends SherlockFragment implements
 	@Override 
 	public void onDestroy()
 	{
-		
-		if (refreshTask != null && refreshTask.getStatus() == AsyncTask.Status.RUNNING)
-		{
-			refreshTask.cancel(true);
-		}
-		if (requestTask !=null && requestTask.getStatus() == AsyncTask.Status.RUNNING )
-		{
-			requestTask.cancel(true);
-		}
+		//<<<<<<<TODO API迁移 2015.4.27
+//		if (refreshTask != null && refreshTask.getStatus() == AsyncTask.Status.RUNNING)
+//		{
+//			refreshTask.cancel(true);
+//		}
+//		if (requestTask !=null && requestTask.getStatus() == AsyncTask.Status.RUNNING )
+//		{
+//			requestTask.cancel(true);
+//		}
+		//>>>>>>>TODO API迁移 2015.4.27
 //		onRefreshActionComplete();
 		progressDialog.dismiss();
 		super.onDestroy();
@@ -218,11 +231,21 @@ public class AcademicFragment extends SherlockFragment implements
 					onRefreshActionStart();
 					foot.startRequestData();
 					int id = adapter.getLastItemId();
-					String url = String.format(MORE_URL, id, JwcInfoMode);
-					requestTask = new RequestJwcInfo();
-					requestTask.execute(new URL(url));
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
+					//<<<<<<<<<<TODO API迁移 2015.4.27
+//					String url = String.format(MORE_URL, id, JwcInfoMode);
+//					requestTask = new RequestJwcInfo();
+//					requestTask.execute(new URL(url));
+					//>>>>>>>>>>TODO API迁移 2015.4.27
+					JwcInfoRequest();
+				}
+				//<<<<<<<<<<TODO API迁移 2015.4.27
+//				catch (MalformedURLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				//>>>>>>>>>>TODO API迁移 2015.4.27
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -246,13 +269,14 @@ public class AcademicFragment extends SherlockFragment implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(),
-						AcademicDetailActivity.class);
-//				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
-				JwcInfo info = (JwcInfo) adapter.getItem(position-1);
-				int i = info.GetId();
-				intent.putExtra("id", i);
-				startActivity(intent);
+//				Intent intent = new Intent(getActivity(),
+//						AcademicDetailActivity.class);
+////				Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+//				JwcInfo info = (JwcInfo) adapter.getItem(position-1);
+//				int i = info.GetId();
+//				intent.putExtra("id", i);
+//				startActivity(intent);
+//				改用超链接方式打开网站，所以不再使用DetailActivity
 			}
 		});
 
@@ -265,15 +289,20 @@ public class AcademicFragment extends SherlockFragment implements
 
 		actionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 		
-		initJwcInfoListView();
+	    initJwcInfoListView();
 		
-		refreshInfo();
-
+//		refreshInfo();
+		JwcInfoRequest();
 		return v;
 	}
 	
 	public void refreshInfo()
 	{
+		//<<<<<<<<<<<<<<<   TODO API迁移 2015.4.13
+//		try {
+//			onRefreshActionStart();
+//			refreshTask = new RefreshJwcInfo();
+////			String url = String.format(REFRESH_URL, JwcInfoMode);
 //		try {
 //			onRefreshActionStart();
 //			refreshTask = new RefreshJwcInfo();
@@ -286,55 +315,21 @@ public class AcademicFragment extends SherlockFragment implements
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		APIClient apiClient=APIFactory.getAPIClient(context, "jwc", new SuccessHandler() {
-					@Override
-					public void onSuccess(String data) {
-						try
-						{
-							List<JwcInfo> list = new ArrayList<JwcInfo>();
-							JSONArray jsonArr = new JSONArray(data);
-							for (int i=0; i<jsonArr.length(); ++i)
-							{
-								JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-								int id = Integer.parseInt(jsonItem.getString(0));
-								String type = jsonItem.getString(1);
-								String title = jsonItem.getString(2);
-								String date = jsonItem.getString(3);
-								list.add(new JwcInfo(type, title, date, id));
-							}
-							if(list!=null)
-							{
-								adapter.setJwcInfoList(list);
-								adapter.notifyDataSetChanged();
-								refreshDB(list);
-								listView.onRefreshComplete();
-								onRefreshActionComplete();
-							}
-
-						}
-						catch (JSONException e)
-						{
-							e.printStackTrace();
-						}
-					}
-				},
-				new FailHandler() {
-					@Override
-					public void onFail(Status status, String message) {
-						Toast.makeText(context,"Failed in refreshinfo!",Toast.LENGTH_SHORT).show();
-					}
-				});
-		apiClient.addAPPIDToArg();
-		apiClient.requestWithoutCache();
+		//>>>>>>>>>>>>>>>    TODO API迁移 2015.4.27
+		//TODO 新的接口如下：
+		onRefreshActionStart();
+		JwcInfoRefresh();
 	}
 	
 	public void initJwcInfoListView()
 	{
-		dbAdapter.open();
-		List<JwcInfo> jwcInfoList = dbAdapter.getAllJwcInfo();
-		dbAdapter.close();
-		adapter.setJwcInfoList(jwcInfoList);
-		adapter.notifyDataSetChanged();
+			dbAdapter.open();
+			List<JwcInfo> jwcInfoList = dbAdapter.getAllJwcInfo();
+			dbAdapter.close();
+		if(jwcInfoList!=null) {
+			adapter.setJwcInfoList(jwcInfoList);
+			adapter.notifyDataSetChanged();
+		}
 	}
 	
 
@@ -342,27 +337,44 @@ public class AcademicFragment extends SherlockFragment implements
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
 		switch (itemPosition) {
-		case 0:
-			JwcInfoMode = ALL;
-			break;
-		case 1:
-			JwcInfoMode = JIAOWU;
-			break;
-		case 2:
-			JwcInfoMode = XUEJI;
-			break;
-		case 3:
-			JwcInfoMode = SHIJIAN;
-			break;
-		case 4:
-			JwcInfoMode = HEZUO;
-			break;
-		case 5:
-			JwcInfoMode = JIAOYAN;
-			break;
-		case 6:
-			JwcInfoMode = JIAOPING;
-			break;
+			//TODO API迁移 2015.5.7【【【【
+//		case 0:
+//			JwcInfoMode = ALL;
+//			break;
+//		case 1:
+//			JwcInfoMode = JIAOWU;
+//			break;
+//		case 2:
+//			JwcInfoMode = XUEJI;
+//			break;
+//		case 3:
+//			JwcInfoMode = SHIJIAN;
+//			break;
+//		case 4:
+//			JwcInfoMode = HEZUO;
+//			break;
+//		case 5:
+//			JwcInfoMode = JIAOYAN;
+//			break;
+//		case 6:
+//			JwcInfoMode = JIAOPING;
+//			break;
+// TODO API迁移】】】】
+			case 0:
+				JwcInfoMode=ZUIXIN;
+				break;
+			case 1:
+				JwcInfoMode=JIAOWU;
+				break;
+			case 2:
+				JwcInfoMode=HEZUO;
+				break;
+			case 3:
+				JwcInfoMode=XUEJI;
+				break;
+			case 4:
+				JwcInfoMode=SHIJIAN;
+				break;
 		}
 //		Toast.makeText(getActivity(), "" + itemPosition + "   " + itemId,
 //				Toast.LENGTH_SHORT).show();
@@ -385,80 +397,51 @@ public class AcademicFragment extends SherlockFragment implements
 			int response = -1;
 			URL url = arg0[0];
 			URLConnection conn;
-				//2015.4.3API迁移
-//				conn = url.openConnection();
-//				if (!(conn instanceof HttpURLConnection)) {
-//					throw new IOException("NOT AN HTTP CONNECTION");
-//				} else {
-//					HttpURLConnection httpConn = (HttpURLConnection) conn;
-//					httpConn.setAllowUserInteraction(false);
-//					httpConn.setInstanceFollowRedirects(true);
-//					httpConn.setRequestMethod("GET");
-//					httpConn.connect();
-//					response = httpConn.getResponseCode();
-//					if (response == HttpURLConnection.HTTP_OK) {
-//						in = httpConn.getInputStream();
-//						 String str = DataTypeTransition.InputStreamToString(in);
-//						// return str;
-//						List<JwcInfo> list = new ArrayList<JwcInfo>();
-//						JSONArray jsonArr = new JSONArray(str);
-//						for (int i=0; i<jsonArr.length(); ++i)
-//						{
-//							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-//							int id = Integer.parseInt(jsonItem.getString(0));
-//							String type = jsonItem.getString(1);
-//							String title = jsonItem.getString(2);
-//							String date = jsonItem.getString(3);
+			//2015.4.3API迁移
+			try {
+				conn = url.openConnection();
+				if (!(conn instanceof HttpURLConnection)) {
+					throw new IOException("NOT AN HTTP CONNECTION");
+				} else {
+					HttpURLConnection httpConn = (HttpURLConnection) conn;
+					httpConn.setAllowUserInteraction(false);
+					httpConn.setInstanceFollowRedirects(true);
+					httpConn.setRequestMethod("GET");
+					httpConn.connect();
+					response = httpConn.getResponseCode();
+					if (response == HttpURLConnection.HTTP_OK) {
+						in = httpConn.getInputStream();
+						String str = DataTypeTransition.InputStreamToString(in);
+						// return str;
+
+						List<JwcInfo> list = new ArrayList<JwcInfo>();
+						JSONArray jsonArr = new JSONArray(str);
+						for (int i=0; i<jsonArr.length(); ++i)
+						{
+							JSONArray jsonItem = (JSONArray) jsonArr.get(i);
+							int id = Integer.parseInt(jsonItem.getString(0));
+							String type = jsonItem.getString(1);
+							String title = jsonItem.getString(2);
+							String date = jsonItem.getString(3);
 //							list.add(new JwcInfo(type, title, date, id));
-//
-//						}
-//
-//						return list;
-//					}
-//				}
 
-			final List<JwcInfo> list = new ArrayList<JwcInfo>();
-				APIClient apiClient=APIFactory.getAPIClient(context, "jwc",
-						new SuccessHandler() {
-							@Override
-							public void onSuccess(String data) {
+						}
 
-								try
-								{
-									JSONArray jsonArr = new JSONArray(data);
-									for (int i=0; i<jsonArr.length(); ++i)
-									{
-										JSONArray jsonItem = (JSONArray) jsonArr.get(i);
-										int id = Integer.parseInt(jsonItem.getString(0));
-										String type = jsonItem.getString(1);
-										String title = jsonItem.getString(2);
-										String date = jsonItem.getString(3);
-										list.add(new JwcInfo(type, title, date, id));
-									}
+						return list;
+					}
+				}
+			}
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-								}
-								catch (JSONException e)
-								{
-									e.printStackTrace();
+			return null;
 
-								}
-
-
-							}
-						},
-						new FailHandler() {
-							@Override
-							public void onFail(com.herald.ezherald.api.Status status, String message) {
-								Toast.makeText(getActivity(),"Fail!",Toast.LENGTH_SHORT).show();
-							}
-						});
-			apiClient.addAPPIDToArg();
-			apiClient.requestWithCache();
-
-
-
-
-			return list;
 
 		}
 		
@@ -540,7 +523,7 @@ public class AcademicFragment extends SherlockFragment implements
 							String type = jsonItem.getString(1);
 							String title = jsonItem.getString(2);
 							String date = jsonItem.getString(3);
-							list.add(new JwcInfo(type, title, date, id));
+//							list.add(new JwcInfo(type, title, date, id));
 							
 						}
 						
@@ -624,10 +607,197 @@ public class AcademicFragment extends SherlockFragment implements
 	}
 
 
+	//添加的新API请求方式
+	private void JwcInfoRequest()
+	{
+		final List<JwcInfo> list = new ArrayList<JwcInfo>();
+		APIClient apiClient=APIFactory.getAPIClient(context, "api/jwc",
+				new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+
+						try
+						{
+							onRefreshActionComplete();
+							JSONObject json_content=new JSONObject(data).getJSONObject("content");
+							JSONArray jsonArr=null;
+							String type="";
+							switch (JwcInfoMode)
+							{
+								case ZUIXIN:
+									jsonArr=json_content.getJSONArray("最新动态");
+									type="最新动态";
+									break;
+								case JIAOWU:
+									jsonArr=json_content.getJSONArray("教务信息");
+									type="教务信息";
+									break;
+								case HEZUO:
+									jsonArr=json_content.getJSONArray("合作办学");
+									type="合作办学";
+									break;
+								case XUEJI:
+									jsonArr=json_content.getJSONArray("学籍管理");
+									type="学籍管理";
+									break;
+								case SHIJIAN:
+									jsonArr=json_content.getJSONArray("实践教学");
+									type="实践教学";
+									break;
+							}
+
+							for (int i=0; i<jsonArr.length(); ++i)
+							{
+								JSONObject jsonItem = (JSONObject)jsonArr.get(i);
+//								int id = Integer.parseInt(jsonItem.getString(0));
+								String href = jsonItem.getString("href");
+								String title = jsonItem.getString("title");
+								String date = jsonItem.getString("date");
+								list.add(new JwcInfo(type, title, date, 0,href));
+							}
+							try{
+								if (list != null) {
+									if(list.size() == 0)
+									{
+										Toast.makeText(context, "没有更多了.", Toast.LENGTH_LONG).show();
+									}
+									adapter.addJwcInfoList(list);
+									adapter.notifyDataSetChanged();
+									addIntoDB(list);
+									foot.endRequestData();
+									listView.onRequestComplete();
+									Log.v("JwcRequest", "APIsuccess");
+								}
+
+							}
+							catch(Exception e)
+							{
+								e.printStackTrace();
+							}
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+
+						}
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(com.herald.ezherald.api.Status status, String message) {
+						Toast.makeText(getActivity(),"Fail!",Toast.LENGTH_SHORT).show();
+						onRefreshActionComplete();
+					}
+				});
+		APIAccount apiAccount=new APIAccount(context);
+//		apiClient.addUUIDToArg();
+//		apiClient.addArg("uuid", "da24659a6d5ed5d45258eea6da9123742fda6e55");
+//		apiClient.requestWithCache();
+		if(apiAccount.isUUIDValid()) {
+			apiClient.addUUIDToArg();
+			apiClient.requestWithCache();
+		}
+		else
+		{
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+			Intent intent=new Intent(context, APIAccountActivity.class);
+			startActivity(intent);
+		}
+	}
 
 
+	private void JwcInfoRefresh()
+	{
+		final List<JwcInfo> list = new ArrayList<JwcInfo>();
+		APIClient apiClient=APIFactory.getAPIClient(context, "api/jwc",
+				new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
 
+						try
+						{
+							JSONObject json_content=new JSONObject(data).getJSONObject("content");
+							JSONArray jsonArr=null;
+							String type="";
+							switch (JwcInfoMode)
+							{
+								case ZUIXIN:
+									jsonArr=json_content.getJSONArray("最新动态");
+									type="最新动态";
+									break;
+								case JIAOWU:
+									jsonArr=json_content.getJSONArray("教务信息");
+									type="教务信息";
+									break;
+								case HEZUO:
+									jsonArr=json_content.getJSONArray("合作办学");
+									type="合作办学";
+									break;
+								case XUEJI:
+									jsonArr=json_content.getJSONArray("学籍管理");
+									type="学籍管理";
+									break;
+								case SHIJIAN:
+									jsonArr=json_content.getJSONArray("实践教学");
+									type="实践教学";
+									break;
+							}
 
+							for (int i=0; i<jsonArr.length(); ++i)
+							{
+								JSONObject jsonItem = (JSONObject)jsonArr.get(i);
+								String href = jsonItem.getString("href");
+								String title = jsonItem.getString("title");
+								String date = jsonItem.getString("date");
+								list.add(new JwcInfo(type, title, date, 0,href));
+							}
+							try{
+								if (list != null) {
+									adapter.setJwcInfoList(list);
+									adapter.notifyDataSetChanged();
+									refreshDB(list);
+									listView.onRefreshComplete();
+									onRefreshActionComplete();
+									Log.v("JwcRefresh", "APIsuccess");
+								}
+								onRefreshActionComplete();
+							}
 
-	
+							catch( Exception e)
+							{
+								e.printStackTrace();
+							}
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+
+						}
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(com.herald.ezherald.api.Status status, String message) {
+						Toast.makeText(getActivity(),"Fail!",Toast.LENGTH_SHORT).show();
+						onRefreshActionComplete();
+						String s=status.toString();
+						String a=message;
+					}
+				});
+		APIAccount apiAccount=new APIAccount(context);
+		if(apiAccount.isUUIDValid()) {
+			apiClient.addUUIDToArg();
+			apiClient.requestWithCache();
+		}
+		else
+		{
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+			Intent intent=new Intent(context, APIAccountActivity.class);
+			startActivity(intent);
+		}
+//		apiClient.addArg("uuid","da24659a6d5ed5d45258eea6da9123742fda6e55");
+//		apiClient.requestWithCache();
+
+	}
+
 }

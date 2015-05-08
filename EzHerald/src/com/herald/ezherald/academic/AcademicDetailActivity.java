@@ -140,7 +140,7 @@ public class AcademicDetailActivity extends SherlockActivity {
 							Link link = new Link(app.getString(0), app.getString(1));
 							links.add(link);
 						}
-						JwcInfo info = new JwcInfo(type, title, date, id);
+						JwcInfo info = new JwcInfo(type, title, date, id,"");
 						info.setContent(con);
 						info.setAppendix(links);
 						return info;
