@@ -11,6 +11,8 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,9 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
+
+import java.util.ArrayList;
+
 /**
  * Created by Administrator on 2014/10/29.
  */
@@ -29,6 +34,7 @@ public class FragmentB extends  Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        show();
     }
 
     private void Update(){
@@ -36,15 +42,39 @@ public class FragmentB extends  Fragment{
     }
 
     public void show(){
-
+        if(SrtpFragment.score.getScore()==0){
+            onFailed();
+        }
+        else if(SrtpFragment.score.getScore()!=0){
+            onSuccess();
+        }
     }
 
     public  void onSuccess(){
+        Activity act = getActivity();
+        ArrayList project = SrtpFragment.score.getProject();
+        TableLayout tableLayout=(TableLayout)getActivity().findViewById(R.id.layout);
 
+
+        for(int i=0;i<project.size();i=i+3){
+            LayoutInflater inflater = LayoutInflater.from(act);
+            View convertView = inflater.inflate(R.layout.srtp_template,null);
+            TableLayout tableLayout1 = (TableLayout)convertView.findViewById(R.id.Table);
+            TableRow tableRow = (TableRow)tableLayout1.findViewById(R.id.tableRow);
+            tableLayout1.removeView(tableRow);
+            TextView scoreView = (TextView)tableRow.findViewById(R.id.score);
+            TextView projectView =(TextView)tableRow.findViewById(R.id.project);
+            scoreView.setText(project.get(i).toString());
+            projectView.setText(project.get(i+1).toString());
+            tableLayout.addView(tableRow);
+        }
     }
 
     public void onFailed(){
-
+        Activity act = getActivity();
+        if(act!=null){
+            Toast.makeText(act,"请先更新哦~",Toast.LENGTH_LONG).show();
+        }
     }
 
 }

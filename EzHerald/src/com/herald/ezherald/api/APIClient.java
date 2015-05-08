@@ -33,7 +33,7 @@ public class APIClient {
     public SuccessHandler successHandler;
     public FailHandler failHandler;
     private Context context;
-    private boolean useCache,readFromCacheSuccess;
+    private boolean useCache,returnedData;
     private APICache apiCache;
     private String cachedData;
 
@@ -82,9 +82,9 @@ public class APIClient {
         if(cachedData != null){
             Log.d("Client","read cache success");
             successHandler.onSuccess(cachedData);
-            readFromCacheSuccess = true;
+            returnedData = true;
         }else{
-            readFromCacheSuccess = false;
+            returnedData = false;
             Log.d("Client","read cache failed");
         }
     }
@@ -118,8 +118,8 @@ public class APIClient {
 
                     HttpParams httpParameters = new BasicHttpParams();
 
-                    HttpConnectionParams.setConnectionTimeout(httpParameters, 5000);
-                    HttpConnectionParams.setSoTimeout(httpParameters, 5000);
+                    HttpConnectionParams.setConnectionTimeout(httpParameters, conf.connectTimeout);
+                    HttpConnectionParams.setSoTimeout(httpParameters, conf.socketTimeout);
 
                     HttpClient client = new DefaultHttpClient(httpParameters);
 
@@ -177,18 +177,12 @@ public class APIClient {
             @Override
             protected void onPostExecute(Void ignore) {
                 if(success){
-                    if(useCache && readFromCacheSuccess){
-                        apiCache.writeToCache(conf,result); //更新缓存时间
-                        if(!result.equals(cachedData)){
-                            successHandler.onSuccess(result);
-                        }
-                    }else{
+                    apiCache.writeToCache(conf,result);
+                    if(!returnedData)
                         successHandler.onSuccess(result);
-                    }
                 }else{
-                    if(!useCache || !readFromCacheSuccess ){
+                    if(!returnedData)
                         failHandler.onFail(status,result);
-                    }
 
                 }
             }
