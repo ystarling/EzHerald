@@ -125,7 +125,7 @@ public class Score {
 
     public Score(Context context,Fragment father){
         //调用另一个构造函数，读取数据
-        this(context);
+        //this(context);
         this.context=context;
         this.father=father;
         if(result!=null) {
@@ -157,7 +157,7 @@ public class Score {
         setScore(0);
         //如果不把project内容清空的话，那么下次再更新会导致这里有重复的
         project.clear();
-        save();
+        //save();
     }
 
 
@@ -188,7 +188,7 @@ public class Score {
             client.readFromCache();
         }
         else{
-            client.requestWithoutCache();
+            client.requestWithCache();
         }
         //cache不可使用
         //client.doRequest();
