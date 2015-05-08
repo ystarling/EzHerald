@@ -301,9 +301,6 @@
             android:noHistory="true" >
         </activity>
 
-
-        <!-- 树洞activity -->
-        <activity android:name=".treehole.TreeholeActivity" />
         <activity android:name=".settingframe.SettingsActivity" >
         </activity>
 
@@ -324,6 +321,20 @@
                 android:value="com.herald.ezherald.MainActivity" />
 
         </activity>
+
+        <!--treehole bigan-->
+        <!-- 树洞activity -->
+        <activity
+            android:name=".treehole.TreeholeActivity"
+            android:label="先声树洞"
+            />
+        <activity
+            android:name=".treehole.TreeholeSendActivity"
+            android:label="发布新内容"
+            android:parentActivityName=".treehole.TreeholeActivity"
+            />
+
+        <!--treehole end-->
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class JwcInfoAdapter extends BaseAdapter {
 	Activity context;
@@ -94,6 +95,8 @@ public class JwcInfoAdapter extends BaseAdapter {
 				.findViewById(R.id.academic_list_btn_share);
 		holder.date = (TextView) convertView
 				.findViewById(R.id.academic_info_item_date);
+		holder.href=(TextView)convertView
+				.findViewById(R.id.academic_info_item_href);
 
 		final JwcInfo jwcInfo = jwcInfoList.get(position);
 		if (jwcInfo != null) {
@@ -101,6 +104,14 @@ public class JwcInfoAdapter extends BaseAdapter {
 			holder.title.setText(jwcInfo.GetTitle());
 			holder.date.setText(jwcInfo.GetDate());
 //			holder.intro.setText(jwcInfo.GetIntro());
+			holder.href.setText(jwcInfo.GetHref());
+//			holder.href.setText("查看详情");
+//			holder.href.setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View view) {
+//					Toast.makeText(context,"打开了链接"+jwcInfo.GetHref(),Toast.LENGTH_SHORT).show();
+//				}
+//			});
 			holder.btn_share.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -129,6 +140,7 @@ public class JwcInfoAdapter extends BaseAdapter {
 		public ImageView btn_share;
 		public TextView date;
 		public TextView intro;
+		public TextView href;
 	}
 
 }

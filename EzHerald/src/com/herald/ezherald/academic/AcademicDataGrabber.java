@@ -11,14 +11,14 @@ import org.json.JSONException;
 import com.herald.ezherald.api.APIClient;
 import com.herald.ezherald.mainframe.MainContentGridItemObj;
 import com.herald.ezherald.mainframe.MainContentInfoGrabber;
-
+//TODO API迁移 此方法已弃用
 public class AcademicDataGrabber implements MainContentInfoGrabber {
 	
 
 //	private final static String JWC_URL = "http://herald.seu.edu.cn/herald_web_service/jwc/0";
 	private final static String JWC_URL="jwc";
     public Context context;
-    //2015.4.2 api迁移
+
 
 
 	@Override
@@ -47,7 +47,7 @@ public class AcademicDataGrabber implements MainContentInfoGrabber {
 					String type = jsonItem.getString(1);
 					String title = jsonItem.getString(2);
 					String date = jsonItem.getString(3);
-					list.add(new JwcInfo(type, title, date, id));
+//					list.add(new JwcInfo(type, title, date, id));
 				}
 				JwcInfo item = list.get(0);
 				MainContentGridItemObj obj = new MainContentGridItemObj();

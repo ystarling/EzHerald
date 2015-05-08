@@ -7,14 +7,38 @@
     android:background="@drawable/treehole_background_1"
     android:weightSum="1">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:scrollbars="vertical"
-        android:singleLine="false"
-        android:text="树洞内容"
-        android:id="@+id/showholetv" />
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/treehole_circleico"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/Image_treehole_circle"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="看点啥"
+            android:id="@+id/openholebtn"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Image_treehole_circle" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="说点啥"
+            android:id="@+id/writesecret"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/Image_treehole_circle" />
+
+
+
+
+    </RelativeLayout>
 
     <ListView
         android:layout_width="match_parent"
@@ -23,22 +47,6 @@
         android:divider="#00000000"
         android:dividerHeight="10dp"
         ></ListView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="进入树洞"
-        android:id="@+id/openholebtn"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="吐心声"
-        android:id="@+id/writesecret"
-        android:layout_gravity="bottom" />
-
 
 
 </LinearLayout>
