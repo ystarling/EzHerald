@@ -19,6 +19,8 @@ import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.TyxAccountActivity;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIAccountActivity;
 
 /**
  * @author xie 显示跑操次数的信息
@@ -30,7 +32,7 @@ public class FragmentB extends Fragment {
 	private Button btnAdjust;
 	private Button btnUpdate;
 	private TextView txtUpdateTime;
-	private UserAccount user;
+	private APIAccount user;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group,
@@ -46,13 +48,12 @@ public class FragmentB extends Fragment {
 		btnAdjust = (Button) getActivity().findViewById(R.id.btn_adjust);
 		edtAdjust.setVisibility(View.INVISIBLE);
 		btnAdjust.setVisibility(View.INVISIBLE);
-		user = Authenticate.getTyxUser(getActivity());
-		if (null == user) {
+		user = new APIAccount(getActivity());
+		if (!user.isUUIDValid()) {
 			Intent login = new Intent();
-			login.setClass(getActivity(), TyxAccountActivity.class);
+			login.setClass(getActivity(), APIAccountActivity.class);
 			startActivity(login);
 		} else {
-
 			btnUpdate = (Button) getActivity().findViewById(R.id.btn_update);
 			txtTimes = (TextView) getActivity().findViewById(R.id.txt_Times);
 			txtUpdateTime = (TextView) getActivity().findViewById(
@@ -112,7 +113,7 @@ public class FragmentB extends Fragment {
 	 * 更新信息
 	 */
 	public void update() {
-		runTimesInfo.update(user);
+		runTimesInfo.update();
 	}
 
 	/**
@@ -141,7 +142,6 @@ public class FragmentB extends Fragment {
 		}
 	}
 	public void onSuccess(){
-		Log.w("err","failed herer!!!!!!!!!!!BBS");
 		btnUpdate.setText("更新");
 		Activity act = getActivity();
 		if(act != null){

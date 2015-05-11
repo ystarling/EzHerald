@@ -4,36 +4,45 @@
     android:layout_height="match_parent"
     >
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
-            <TableLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/layout"
+                android:orientation="vertical"
                 >
-                <TableRow
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     >
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="学分"
                         android:textSize="20sp"
                         android:padding="10dip"
                         android:layout_marginLeft="30sp"
                         />
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="项目"
                         android:textSize="20sp"
                         android:padding="10dip"
                         android:layout_marginLeft="40sp"
                         />
-                </TableRow>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layout_main"
+                    android:orientation="vertical">
 
+                    </LinearLayout>
 
-            </TableLayout>
-        </HorizontalScrollView>
+            </LinearLayout>
     </ScrollView>
 </LinearLayout>

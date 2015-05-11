@@ -158,7 +158,7 @@ public class CurriWidgetProvider extends AppWidgetProvider {
    public void onDisabled(Context context)
    {
        super.onDisabled(context);
-       Log.i(TAG, "--- onDisabled ---");
+	   Log.i(TAG, "--- onDisabled ---");
    }
 
    //第一次添加该类型的窗口小部件窗口小部件(AppWidget)时触发

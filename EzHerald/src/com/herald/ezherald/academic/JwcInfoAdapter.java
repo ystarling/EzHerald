@@ -1,5 +1,6 @@
 package com.herald.ezherald.academic;
 
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import com.herald.ezherald.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -104,14 +106,22 @@ public class JwcInfoAdapter extends BaseAdapter {
 			holder.title.setText(jwcInfo.GetTitle());
 			holder.date.setText(jwcInfo.GetDate());
 //			holder.intro.setText(jwcInfo.GetIntro());
-			holder.href.setText(jwcInfo.GetHref());
-//			holder.href.setText("查看详情");
-//			holder.href.setOnClickListener(new OnClickListener() {
-//				@Override
-//				public void onClick(View view) {
-//					Toast.makeText(context,"打开了链接"+jwcInfo.GetHref(),Toast.LENGTH_SHORT).show();
-//				}
-//			});
+//			holder.href.setText(jwcInfo.GetHref());
+			holder.href.setText("查看详情");
+			holder.href.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Toast.makeText(context,"打开了链接"+jwcInfo.GetHref(),Toast.LENGTH_SHORT).show();
+					try{
+						Uri uri=Uri.parse(jwcInfo.GetHref());
+						Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+						context.startActivity(intent);
+					}catch(Exception e){
+						e.printStackTrace();
+
+					}
+				}
+			});
 			holder.btn_share.setOnClickListener(new OnClickListener() {
 
 				@Override

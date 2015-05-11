@@ -7,15 +7,30 @@ import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APICache;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.Status;
+import com.herald.ezherald.api.SuccessHandler;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 /**
@@ -49,10 +64,9 @@ public class RunTimes {
 	public static final String DEFAULT_UPDATE_TIME = null;
 	private static final int SUCCESS = 1;
 	private static final int FAILED  = 0;
-	private static final String REMAIN_DAYS_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/remain_days/";
-	private static final String RUNTIMES_URL = "http://herald.seu.edu.cn/herald_web_service/tyx/";
 	
 	private SharedPreferences pref;
+    JSONObject json;
 	private Editor editor;
 	//private Activity activity;
 	
@@ -161,7 +175,7 @@ public class RunTimes {
 	 * 构造时会尝试从sharedPreference读取数据
 	 */
 	public RunTimes(Context context){
-		this.context = context; 
+		this.context = context;
 		pref = context.getSharedPreferences("RunTimes", Context.MODE_PRIVATE);
 		//pref = activity.getApplication().getSharedPreferences("RunTimes", 0);
 		setTimes(pref.getInt("Times", DEFAULT_TIMES));
@@ -184,44 +198,61 @@ public class RunTimes {
 	/**
 	 * 更新数据
 	 */
-	public void update(final UserAccount user){
-			new Thread(){
-				@Override
-				public void run(){
-					try{
-						if(father instanceof FragmentB){
-							UserAccount user = Authenticate.getTyxUser(context);
-							String name = user.getUsername();
-							String password = user.getPassword();
-							HttpClient client= new DefaultHttpClient();
-							HttpGet remainDaysGet = new HttpGet(RUNTIMES_URL+"/"+name+"/"+password);
-							HttpResponse response = client.execute(remainDaysGet);
-							if(response.getStatusLine().getStatusCode() != 200){
-								throw new Exception("net error");
-							}
-							String result = EntityUtils.toString(response.getEntity());
-							setTimes(Integer.parseInt(result));
-						}else if(father instanceof FragmentC){
-							HttpClient client= new DefaultHttpClient();
-							HttpGet remainDaysGet = new HttpGet(REMAIN_DAYS_URL);
-							HttpResponse response = client.execute(remainDaysGet);
-							if(response.getStatusLine().getStatusCode() != 200){
-								throw new Exception("net error");
-							}
-							String result = EntityUtils.toString(response.getEntity());
-							int remDays = Integer.parseInt(result);
-							setRemainDays(remDays);
-							setAdviceTime(calcAdviceTime());
-						}
-						Message msg = handler.obtainMessage(SUCCESS);
-			        	handler.sendMessage(msg);
-					}catch(Exception e){
-						e.printStackTrace();
-						handler.obtainMessage(FAILED).sendToTarget();
-					}
-				}
-			}.start();
-	}
+	public void update(){
+        APIAccount apiAccount = new APIAccount(context);
+//        apiAccount.isUUIDValid();
+        APIClient client= APIFactory.getAPIClient(context,"api/pe",new SuccessHandler() {
+            @Override
+            public void onSuccess(String data) {
+                try {
+                    json = new JSONObject(data);
+                    dealJson(json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },new FailHandler() {
+            @Override
+            public void onFail(Status status, String message) {
+                Log.d("error",message);}
+	});
+        client.addUUIDToArg();
+        if(client.isCacheAvailable()){
+            Log.w("step","hascache");
+            client.readFromCache();
+        }
+        else{
+            Log.w("step","nocache");
+            client.requestWithCache();
+        }
+        }
+
+    public void dealJson(JSONObject jsonArray){
+        try{
+            String obj = json.getString("content");
+            setTimes(Integer.parseInt(obj));
+            Log.d("times",obj);
+
+            Calendar calendar = Calendar.getInstance();
+            String today = String.format("%d-%d-%d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DATE));
+            setUpdateTime(today);
+            //设置学期结束时间为7月1号，并获取间隔天数
+            String end = "2015-07-01";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            int days = (int)((sdf.parse(end).getTime()-sdf.parse(today).getTime())/(24*60*60*1000));
+            setRemainDays(days);
+
+            Log.d("remainday",String.valueOf(days));
+
+            setAdviceTime(calcAdviceTime());
+            onSuccess();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            onFiled();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 	/**
 	 * 保存数据到sharedPreference
 	 */

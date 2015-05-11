@@ -9,7 +9,7 @@ import com.herald.ezherald.BaseFrameActivity;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.UserAccount;
-
+import com.herald.ezherald.api.APIAccount;
 
 
 public class GPAActivity extends BaseFrameActivity {
@@ -21,20 +21,35 @@ public class GPAActivity extends BaseFrameActivity {
 	@Override
 	public void onCreate( Bundle savedInstanceState ) {
 		// TODO Auto-generated method stub
-		UserAccount user = Authenticate.getIDcardUser(this);
-		if(null == user){//TODO CHANGE CONDITION
-			Intent login = new Intent();
-			login.putExtra("remoteCall", true);
-			login.setClass(this,IDCardAccountActivity.class);
-			startActivity(login);
-			GpaDbModel model = new GpaDbModel(this);
-			model.open();
-			model.clear();
-			model.close();//删除旧用户的数据
-			//mContentFrag = new FailFragment();
-			content = new FailFragment();
-			super.SetBaseFrameActivity(content);
-		}else{
+        APIAccount apiAccount = new APIAccount(this);
+        if(!apiAccount.isUUIDValid()){
+            Intent login = new Intent();
+            login.putExtra("remoteCall", true);
+            login.setClass(this,IDCardAccountActivity.class);
+            startActivity(login);
+            GpaDbModel model = new GpaDbModel(this);
+            model.open();
+            model.clear();
+            model.close();//删除旧用户的数据
+            //mContentFrag = new FailFragment();
+            content = new FailFragment();
+            super.SetBaseFrameActivity(content);
+        }
+//		UserAccount user = Authenticate.getIDcardUser(this);
+//		if(null == user){//TODO CHANGE CONDITION
+//			Intent login = new Intent();
+//			login.putExtra("remoteCall", true);
+//			login.setClass(this,IDCardAccountActivity.class);
+//			startActivity(login);
+//			GpaDbModel model = new GpaDbModel(this);
+//			model.open();
+//			model.clear();
+//			model.close();//删除旧用户的数据
+//			//mContentFrag = new FailFragment();
+//			content = new FailFragment();
+//			super.SetBaseFrameActivity(content);
+//}
+    else{
 			content  = new  GpaFragment();
 			SetBaseFrameActivity(content);
 		}
@@ -65,8 +80,9 @@ public class GPAActivity extends BaseFrameActivity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		UserAccount user = Authenticate.getIDcardUser(this);
-		if(null == user){
+		//UserAccount user = Authenticate.getIDcardUser(this);
+        APIAccount apiAccount = new APIAccount(this);
+		if(!apiAccount.isUUIDValid()){
 			mContentFrag = new FailFragment();
 			super.SetBaseFrameActivity(mContentFrag);
 		}else{

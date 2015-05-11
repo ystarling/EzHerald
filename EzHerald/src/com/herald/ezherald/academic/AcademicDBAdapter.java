@@ -15,7 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AcademicDBAdapter {
 	
 	private String dbName = "academicDB";
-	private int dbVersion = 1;
+	private int dbVersion = 2;
 	
 	private String tbnJwcInfoList = "jwc_info_list";
 	
@@ -65,7 +65,7 @@ public class AcademicDBAdapter {
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			// TODO Auto-generated method stub
 			db.execSQL("DROP TABLE IF EXISTS "+ tbnJwcInfoList);
-			
+
 			onCreate(db);
 		}
 		
