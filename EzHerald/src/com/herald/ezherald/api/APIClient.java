@@ -4,11 +4,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
 import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -22,6 +29,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -118,36 +126,33 @@ public class APIClient {
                     }
                     Log.d("Client", "check user ok");
 
-                    HttpParams httpParameters = new BasicHttpParams();
+                    OkHttpClient client = new OkHttpClient();
+                    client.setConnectTimeout(conf.connectTimeout, TimeUnit.MILLISECONDS);
+                    client.setReadTimeout(conf.socketTimeout,TimeUnit.MILLISECONDS);
+                    Request.Builder builder = new Request.Builder();
 
-                    HttpConnectionParams.setConnectionTimeout(httpParameters, conf.connectTimeout);
-                    HttpConnectionParams.setSoTimeout(httpParameters, conf.socketTimeout);
-                    HttpConnectionParams.setTcpNoDelay(httpParameters, true);
-                    httpParameters.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-
-                    HttpClient client = new DefaultHttpClient(httpParameters);
-
-                    HttpPost request = new HttpPost(API_URL + conf.url);
-
-                    // Log.d("Client","request uri"+request.getURI().toString());
-
-                    HttpEntity entity = new UrlEncodedFormEntity(conf.args,"UTF-8");
-                    Log.d("Client",conf.args.toString());
-                    request.setEntity(entity);
-                    Log.d("Client","add param ok,start to execute request");
-
-                    HttpResponse response = client.execute(request);
-                    int statusCode = response.getStatusLine().getStatusCode();
-                    result = EntityUtils.toString(response.getEntity());
-                    status = com.herald.ezherald.api.Status.getErrFromHttpCode(statusCode);
-                    if (statusCode != HttpStatus.SC_OK) {
-                        Log.d("Client","error status code "+statusCode);
-                        success = false;
-                        return null;
+                    FormEncodingBuilder formEncodingBuilder = new FormEncodingBuilder();
+                    for(NameValuePair data : conf.args){
+                        formEncodingBuilder.add(data.getName(),data.getValue());
                     }
-                    Log.d("Client","status ok");
-
+                    Log.d("Client", "add param ok,start to execute request");
+                    RequestBody body = formEncodingBuilder.build();
+                    Request request = builder.url(API_URL + conf.url).post(body).build();
+                    Response response = client.newCall(request).execute();
+                    if(!response.isSuccessful()){
+                        success = false;
+                        int code = response.code();
+                        if(code != HttpStatus.SC_OK){
+                            Log.d("Client","error status code "+code);
+                            status = com.herald.ezherald.api.Status.getErrFromHttpCode(code);
+                            return null;
+                        }
+                        throw new Exception(response.toString());
+                    }
+                    Log.d("Client","request success");
                     success = true;
+                    result = response.body().string();
+
                 } catch(ConnectTimeoutException e){
                     Log.d("Client","Connection time out");
                     e.printStackTrace();
