@@ -8,12 +8,14 @@ import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
@@ -114,12 +116,14 @@ public class APIClient {
                         result = "";
                         return null;
                     }
-                    Log.d("Client","check user ok");
+                    Log.d("Client", "check user ok");
 
                     HttpParams httpParameters = new BasicHttpParams();
 
                     HttpConnectionParams.setConnectionTimeout(httpParameters, conf.connectTimeout);
                     HttpConnectionParams.setSoTimeout(httpParameters, conf.socketTimeout);
+                    HttpConnectionParams.setTcpNoDelay(httpParameters, true);
+                    httpParameters.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
                     HttpClient client = new DefaultHttpClient(httpParameters);
 
