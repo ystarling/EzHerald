@@ -269,8 +269,6 @@ public class CurriculumFragment extends SherlockFragment {
 			}
 			
 		});
-		
-		
 //		progressDialog.show();
 		
 		if(dbAdapter.isEmpty())
@@ -530,7 +528,7 @@ public class CurriculumFragment extends SherlockFragment {
 						List<String> terms_Arr = new ArrayList<String>();
 						try
 						{
-							Toast.makeText(context,"获取课程信息成功！",Toast.LENGTH_SHORT).show();
+							Toast.makeText(context,"获取学期信息成功！",Toast.LENGTH_SHORT).show();
 							JSONObject jsonContent=new JSONObject(data);
 							JSONArray jsonArr = jsonContent.getJSONArray("content");
 							for(int i=0;i<jsonArr.length();++i)
@@ -559,9 +557,7 @@ public class CurriculumFragment extends SherlockFragment {
 							{
 								createItemDialog();
 							}
-							Message msg = new Message();
-							msg.what = TERM_REQ_COMPLETED;
-							mHandler.sendMessage(msg);
+							onTermRequestCompleted();
 						}
 						catch(Exception e)
 						{
@@ -782,9 +778,7 @@ public class CurriculumFragment extends SherlockFragment {
 								for(Attendance attendence : attendances) {
 									dbAdapter.insertAttendance(attendence);
 								}
-								Message msg=new Message();
-								msg.what=CURRI_REQ_COMPLETED;
-								mHandler.sendMessage(msg);
+								onRefreshCompleted();
 							}
 						}
 						catch (Exception e)
@@ -1012,6 +1006,35 @@ public class CurriculumFragment extends SherlockFragment {
 	final int CURRI_REQ_COMPLETED = 2;
 	final int CURRI_REQ_CANCEL = 3;
 	final int CURRI_REQ_BEGIN = 4;
+
+
+	private void onTermRequestCompleted()
+	{
+//				UserAccount acount = Authenticate.getIDcardUser(context);
+		APIAccount acount=new APIAccount(context);
+		if(!acount.isUUIDValid())
+		{
+			Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+//					cardNum = acount.getUsername();
+			SharedPreferences preferences = getActivity().getSharedPreferences(prefName, 0);
+			String term = preferences.getString(pref_term, null);
+//					String url = String.format(curri_url, cardNum, term);
+			if(null == term)
+			{
+				Toast.makeText(context, "请先设置学期", Toast.LENGTH_SHORT).show();
+			}
+			else
+			{
+//						currTask = new requestCurriculum();
+//						currTask.execute(url);
+//						Toast.makeText(context, "thread success", Toast.LENGTH_SHORT).show();
+				APIclient_requestCourse();
+			}
+		}
+	}
 	
 	public Handler mHandler = new Handler()
 	{
