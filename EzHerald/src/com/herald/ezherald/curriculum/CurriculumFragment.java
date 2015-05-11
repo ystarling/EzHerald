@@ -576,6 +576,8 @@ public class CurriculumFragment extends SherlockFragment {
 		APIAccount apiAccount=new APIAccount(context);
 		if(apiAccount.isUUIDValid()) {
 			Toast.makeText(context,"开始获取学期信息...",Toast.LENGTH_SHORT).show();
+			apiclient_requestTerms.conf.connectTimeout=100000;
+			apiclient_requestTerms.conf.socketTimeout=100000;
 			apiclient_requestTerms.addUUIDToArg();
 			apiclient_requestTerms.requestWithoutCache();
 			Log.v("CURRI TERM", "beginning");
@@ -703,10 +705,10 @@ public class CurriculumFragment extends SherlockFragment {
 							List<Course> courses = new ArrayList<Course>();
 							for(int i=0;i<courseArr.length();++i)
 							{
-								String lecturer = courseArr.getJSONArray(i).getString(0);
-								String courseName = courseArr.getJSONArray(i).getString(1);
-								String weeks = courseArr.getJSONArray(i).getString(2);
-								float credit = Float.parseFloat(courseArr.getJSONArray(i).getString(3));
+								String lecturer =((JSONObject)courseArr.get(i)).getString("lecturer");
+								String courseName = ((JSONObject)courseArr.get(i)).getString("course");
+								String weeks =((JSONObject)courseArr.get(i)).getString("week");
+								float credit = Float.parseFloat(((JSONObject)courseArr.get(i)).getString("credit"));
 								courses.add(new Course(courseName, lecturer, weeks, credit));
 								Log.v("course", ""+courseArr.get(i));
 							}
@@ -735,6 +737,8 @@ public class CurriculumFragment extends SherlockFragment {
 		if(apiAccount.isUUIDValid()) {
 			Log.v("CURRI courses", "beginning");
 			Toast.makeText(context,"开始获取课程信息...",Toast.LENGTH_SHORT).show();
+			request_courses.conf.connectTimeout=1000000;
+			request_courses.conf.socketTimeout=1000000;
 			request_courses.addUUIDToArg();
 			request_courses.requestWithoutCache();
 		}
@@ -798,6 +802,8 @@ public class CurriculumFragment extends SherlockFragment {
 		APIAccount apiAccount=new APIAccount(context);
 		if(apiAccount.isUUIDValid()) {
 			Log.v("CURRI attendences", "beginning");
+			request_attendences.conf.connectTimeout=100000;
+			request_attendences.conf.socketTimeout=100000;
 			request_attendences.addUUIDToArg();
 			request_attendences.requestWithoutCache();
 		}
