@@ -2,6 +2,7 @@ package com.herald.ezherald.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;

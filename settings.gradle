@@ -1,4 +1,4 @@
-include ':libDragNDropList_', ':hybrid'
+include ':libDragNDropList_'
 include ':EzHerald'
 include ':libABS'
 include ':libSlidingMenu'

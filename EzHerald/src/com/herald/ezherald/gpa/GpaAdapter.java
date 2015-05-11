@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,9 +26,9 @@ public class GpaAdapter extends BaseExpandableListAdapter {
 	private List<String> semesters;
 	private Context context;
 	private ProgressDialog progress;
-	private UserAccount user;
+	private APIAccount user;
 
- 	public GpaAdapter(Context context,ProgressDialog progress, UserAccount user) {
+ 	public GpaAdapter(Context context,ProgressDialog progress, APIAccount user) {
 		this.context = context;
  		this.progress = progress;
  		this.user = user;

@@ -15,13 +15,14 @@ import android.widget.Toast;
 import com.herald.ezherald.R;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
 
 public class FragmentB extends Fragment {
     private ExpandableListView expandableListView;
     private TextView txtGpa;
 
     private Button btnUpdate, btnCalc, btnRemoveOptional, btnSelectAll;
-    private UserAccount user;
+    private APIAccount user;
     ProgressDialog progress;
 
     @Override
@@ -33,7 +34,7 @@ public class FragmentB extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        user = Authenticate.getIDcardUser(getActivity());
+        user = new APIAccount(getActivity());
         progress = new ProgressDialog(getActivity());
         progress.setTitle("正在获取,可能时间较长");
         //progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);

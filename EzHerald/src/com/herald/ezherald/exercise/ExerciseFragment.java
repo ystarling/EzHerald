@@ -25,16 +25,16 @@ public class ExerciseFragment extends SherlockFragment {
 			ActionBar bar = getSherlockActivity(). getSupportActionBar();
 			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 			bar.setTitle("跑操");
-			ActionBar.Tab tab1 = bar.newTab();
+//			ActionBar.Tab tab1 = bar.newTab();
 			ActionBar.Tab tab2 = bar.newTab();
 			ActionBar.Tab tab3 = bar.newTab();
-			tab1.setText("跑操通知");
+//			tab1.setText("跑操通知");
 			tab2.setText("跑操次数");
 			tab3.setText("信息统计");
-			tab1.setTabListener(new MyTabListener());
+//			tab1.setTabListener(new MyTabListener());
 			tab2.setTabListener(new MyTabListener());
 			tab3.setTabListener(new MyTabListener());
-			bar.addTab(tab1);
+//			bar.addTab(tab1);
 			bar.addTab(tab2);
 			bar.addTab(tab3);
 			return inflater.inflate(R.layout.exercise_activity_main,group,false);
@@ -47,13 +47,13 @@ public class ExerciseFragment extends SherlockFragment {
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
 			Fragment frag;
 			switch(tab.getPosition()){
+//				case 0:
+//					frag = new FragmentA();
+//					break;
 				case 0:
-					frag = new FragmentA();
-					break;
-				case 1:
 					frag = new FragmentB();
 					break;
-				case 2:
+				case 1:
 					frag = new FragmentC();
 					break;
 				default:

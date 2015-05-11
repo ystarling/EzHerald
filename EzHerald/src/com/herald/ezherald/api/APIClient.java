@@ -178,6 +178,7 @@ public class APIClient {
             protected void onPostExecute(Void ignore) {
                 if(success){
                     if(useCache && readFromCacheSuccess){
+                        Log.w("cache",conf+result);
                         apiCache.writeToCache(conf,result); //更新缓存时间
                         if(!result.equals(cachedData)){
                             successHandler.onSuccess(result);

@@ -16,7 +16,7 @@ public class SrtpGrabber implements MainContentInfoGrabber {
     @Override
     public MainContentGridItemObj GrabInformationObject() {
         MainContentGridItemObj item = new MainContentGridItemObj();
-        int SrtpScore=score.getScore();
+        double SrtpScore=score.getScore();
         String updatetime=score.getUpdateTime();
         if(SrtpScore >= 0)
             item.setContent1(String.format("已获得Srtp学分",SrtpScore));
