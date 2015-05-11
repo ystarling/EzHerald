@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -48,6 +49,13 @@ import com.herald.ezherald.academic.DataTypeTransition;
 import com.herald.ezherald.account.Authenticate;
 import com.herald.ezherald.account.IDCardAccountActivity;
 import com.herald.ezherald.account.UserAccount;
+import com.herald.ezherald.api.APIAccount;
+import com.herald.ezherald.api.APIAccountActivity;
+import com.herald.ezherald.api.APIClient;
+import com.herald.ezherald.api.APIFactory;
+import com.herald.ezherald.api.FailHandler;
+import com.herald.ezherald.api.Status;
+import com.herald.ezherald.api.SuccessHandler;
 
 
 public class CurriculumFragment extends SherlockFragment {
@@ -69,6 +77,7 @@ public class CurriculumFragment extends SherlockFragment {
 	private String curri_url = "http://herald.seu.edu.cn/herald_web_service/" +
 			"curriculums/%s/%s/";
 	private String term_url = "http://herald.seu.edu.cn/herald_web_service/curriculums/term/";
+	//API迁移 2015.5.7
 	
 	ActionBar bar ;
 	
@@ -151,26 +160,38 @@ public class CurriculumFragment extends SherlockFragment {
 	@Override
 	public void onResume()
 	{
-//		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
-		SharedPreferences prefs = getSherlockActivity().getSharedPreferences(prefName, 0);
-		String username = prefs.getString(pref_prev_user, null);
-		UserAccount acount = Authenticate.getIDcardUser(context);
-		if(null == acount)
+		Toast.makeText(context, "onResume", Toast.LENGTH_SHORT).show();
+//		SharedPreferences prefs = getSherlockActivity().getSharedPreferences(prefName, Context.MODE_PRIVATE);
+//		String username = prefs.getString(pref_prev_user, null);
+//		UserAccount acount = Authenticate.getIDcardUser(context);
+//		if(null == acount)
+//		{
+//			dbAdapter.clear();
+//			Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
+//			getActivity().setContentView(setNotLoginView(inflater, container, savedInstanceState));
+//		}
+//		else
+//		{
+//			if( null == username || !username.equals(acount.getUsername()) )
+//			{
+//				dbAdapter.clear();
+//				getSherlockActivity().getSharedPreferences(prefName, 0).edit()
+//				.putString(pref_prev_user, acount.getUsername()).commit();
+//			}
+//
+//			getActivity().setContentView(setLoginView(inflater, container, savedInstanceState));
+//		}
+		APIAccount apiAccount=new APIAccount(context);
+		if(apiAccount.isUUIDValid())
 		{
-			dbAdapter.clear();
-			Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
-			getActivity().setContentView(setNotLoginView(inflater, container, savedInstanceState));
+			getActivity().setContentView(setLoginView(inflater, container, savedInstanceState));
 		}
 		else
 		{
-			if( null == username || !username.equals(acount.getUsername()) )
-			{
-				dbAdapter.clear();
-				getSherlockActivity().getSharedPreferences(prefName, 0).edit()
-				.putString(pref_prev_user, acount.getUsername()).commit();
-			}
-
-			getActivity().setContentView(setLoginView(inflater, container, savedInstanceState));
+			dbAdapter.clear();
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+			Intent intent=new Intent(context, APIAccountActivity.class);
+			startActivity(intent);
 		}
 		super.onResume();
 	}
@@ -204,11 +225,17 @@ public class CurriculumFragment extends SherlockFragment {
 	public void onPrepareOptionsMenu(Menu menu)
 	{
 		super.onPrepareOptionsMenu(menu);
-		UserAccount acount = Authenticate.getIDcardUser(context);
-		if(null == acount)
+//		UserAccount acount = Authenticate.getIDcardUser(context);
+//		if(null == acount)
+//		{
+//			menu.clear();
+//		}
+		APIAccount apiAccount=new APIAccount(context);
+		if(!apiAccount.isUUIDValid())
 		{
 			menu.clear();
 		}
+
 	}
 	
 	private View setLoginView(LayoutInflater inflater, ViewGroup container,
@@ -489,6 +516,79 @@ public class CurriculumFragment extends SherlockFragment {
 		}
 		
 	}
+
+
+	private void APIclient_requestTerms(){
+		//api迁移时代替requestTerms的函数
+		APIClient apiclient_requestTerms=APIFactory.getAPIClient(context, "api/term", new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+						try
+						{
+							List<String> terms = new ArrayList<String>();
+							JSONObject jsonContent=new JSONObject(data);
+							JSONArray jsonArr = jsonContent.getJSONArray("content");
+							for(int i=0;i<jsonArr.length();++i)
+							{
+								Log.w("CURRI TERM",(String)jsonArr.get(i));
+
+								terms.add((String) jsonArr.get(i));
+							}
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+						}
+
+						try{
+							if(terms != null)
+							{
+								dbAdapter.clear();
+								for(String term : terms)
+								{
+									dbAdapter.insertTerm(term);
+								}
+							}
+							SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
+							String term = settings.getString(pref_term, null);
+							if(null == term)
+							{
+								createItemDialog();
+							}
+							Message msg = new Message();
+							msg.what = TERM_REQ_COMPLETED;
+							mHandler.sendMessage(msg);
+						}
+						catch(Exception e)
+						{
+							Log.e("REQUEST TERM", "error occured when requesting terms");
+						}
+
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(Status status, String message) {
+
+						Log.e("REQUEST TERM", "error occured when requesting terms");
+					}
+				});
+		APIAccount apiAccount=new APIAccount(context);
+		apiAccount.autoLogin();
+		if(apiAccount.isUUIDValid()) {
+			apiclient_requestTerms.addUUIDToArg();
+			apiclient_requestTerms.requestWithoutCache();
+			Log.v("CURRI TERM", "beginning");
+		}
+		else
+		{
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+			Intent intent=new Intent(context,APIAccountActivity.class);
+			context.startActivity(intent);
+		}
+
+
+	}
 	
 	private class requestTerms extends AsyncTask<String ,Integer, List<String>>
 	{
@@ -589,7 +689,171 @@ public class CurriculumFragment extends SherlockFragment {
 			
 		}
 	}
-	
+
+	private void APIclient_requestCourse()
+	{
+		APIClient request_courses=APIFactory.getAPIClient(context, "api/sidebar", new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+						try
+						{
+							JSONObject jsonObject=new JSONObject(data);
+							JSONArray courseArr=jsonObject.getJSONArray("content");
+							List<Course> courses = new ArrayList<Course>();
+							for(int i=0;i<courseArr.length();++i)
+							{
+								String lecturer = courseArr.getJSONArray(i).getString(0);
+								String courseName = courseArr.getJSONArray(i).getString(1);
+								String weeks = courseArr.getJSONArray(i).getString(2);
+								float credit = Float.parseFloat(courseArr.getJSONArray(i).getString(3));
+								courses.add(new Course(courseName, lecturer, weeks, credit));
+								Log.v("course", ""+courseArr.get(i));
+							}
+							for(Course c: courses)
+							{
+								dbAdapter.insertCourse(c);
+							}
+							APIclient_requestAttendences();
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+						}
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(Status status, String message) {
+						Log.w("APICient_course_request",status.toString());
+					}
+				});
+
+
+		APIAccount apiAccount=new APIAccount(context);
+		apiAccount.autoLogin();
+		if(apiAccount.isUUIDValid()) {
+			Log.v("CURRI courses", "beginning");
+			request_courses.addUUIDToArg();
+			request_courses.requestWithCache();
+		}
+		else
+		{
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+			Intent intent=new Intent(context,APIAccountActivity.class);
+			context.startActivity(intent);
+		}
+
+	}
+
+	private void APIclient_requestAttendences()
+	{
+		APIClient request_attendences=APIFactory.getAPIClient(context, "api/curriculum", new SuccessHandler() {
+					@Override
+					public void onSuccess(String data) {
+						try{
+							List<Attendance> attendances = new ArrayList<Attendance>();
+							JSONObject jsonObject= new JSONObject(data);
+							JSONArray dayAttArr=jsonObject.getJSONArray("content");
+							for(int j=0;j<dayAttArr.length();++j)
+							{
+								Log.v("Attendance", ""+dayAttArr.getJSONArray(j));
+								JSONArray dayAtt = dayAttArr.getJSONArray(j);
+								Log.v("att", ""+dayAttArr.get(j));
+								for(int k = 0;k<dayAtt.length();++k)
+								{
+									JSONArray attArr = dayAtt.getJSONArray(k);
+									String courseName = attArr.getString(0);
+									String courseTime =attArr.getString(1);
+									CourseTimeGet courseTimeGet=new CourseTimeGet(courseTime);
+									int beginWeek = courseTimeGet.GetBeginWeek();
+									int endWeek = courseTimeGet.GetEndWeek();
+									int beginPeriod = courseTimeGet.GetBeginPeriod();
+									int endPeriod = courseTimeGet.GetEndPeroid();
+									String place = attArr.getString(2);
+									Attendance att = new Attendance(courseName, place,beginPeriod, endPeriod,
+											beginWeek, endWeek, j+1);
+								}
+								for(Attendance attendence : attendances) {
+									dbAdapter.insertAttendance(attendence);
+								}
+								Message msg=new Message();
+								msg.what=CURRI_REQ_COMPLETED;
+								mHandler.sendMessage(msg);
+							}
+						}
+						catch (Exception e)
+						{
+							e.printStackTrace();
+						}
+
+
+					}
+				},
+				new FailHandler() {
+					@Override
+					public void onFail(Status status, String message) {
+						Log.w("APICient_att_request",status.toString());
+					}
+				});
+		APIAccount apiAccount=new APIAccount(context);
+		apiAccount.autoLogin();
+		if(apiAccount.isUUIDValid()) {
+			Log.v("CURRI attendences", "beginning");
+			request_attendences.addUUIDToArg();
+			request_attendences.requestWithCache();
+		}
+		else
+		{
+			Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+			Intent intent=new Intent(context,APIAccountActivity.class);
+			context.startActivity(intent);
+		}
+	}
+
+	public class CourseTimeGet//用于分割上课周数和每日时间段的结果，返回每项的结果的int数据 2015.5.11
+	{
+		int beginWeek;
+		int endWeek;
+		int beginPeriod;
+		int endPeriod;
+		public CourseTimeGet(String str)
+		{
+			try{
+				beginWeek=Integer.parseInt(str.substring(1,str.indexOf("-")));
+				endWeek=Integer.parseInt(str.substring(str.indexOf("-")+1,
+						str.indexOf("]")-1));
+				beginPeriod=Integer.parseInt(str.substring(str.indexOf("]")+1,
+						str.lastIndexOf("-")));
+				endPeriod=Integer.parseInt(str.substring(str.lastIndexOf("-")+
+						1,str.length()-1));
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				Log.e("CourseTimeSub","substring error");
+			}
+		}
+
+		private int GetBeginWeek()
+		{
+			return beginWeek;
+		}
+
+		private int GetEndWeek() {
+			return endWeek;
+		}
+
+		private int GetBeginPeriod() {
+			return beginPeriod;
+		}
+
+		private int GetEndPeroid() {
+			return endPeriod;
+		}
+
+	}
+
+
 	private class requestCurriculum extends 
 	AsyncTask<String ,Integer ,AttsAndCourses >
 	{
@@ -636,9 +900,9 @@ public class CurriculumFragment extends SherlockFragment {
 						}
 						for(int j=0;j<dayAttArr.length();++j)
 						{
-							Log.v("Attendance", ""+dayAttArr.getJSONArray(j));
+							Log.v("Attendance", "" + dayAttArr.getJSONArray(j));
 							JSONArray dayAtt = dayAttArr.getJSONArray(j);
-							Log.v("att", ""+dayAttArr.get(j));
+							Log.v("att", "" + dayAttArr.get(j));
 							for(int k = 0;k<dayAtt.length();++k)
 							{
 								JSONArray attArr = dayAtt.getJSONArray(k);
@@ -732,8 +996,10 @@ public class CurriculumFragment extends SherlockFragment {
 	public void update()
 	{
 		progressDialog.show();
-		termTask = new requestTerms();
-		termTask.execute("");
+		//TODO API迁移
+//		termTask = new requestTerms();
+//		termTask.execute("");
+		APIclient_requestTerms();
 
 	}
 	
@@ -751,26 +1017,28 @@ public class CurriculumFragment extends SherlockFragment {
 			case TERM_REQ_COMPLETED:
 			{
 				String cardNum = null;
-				UserAccount acount = Authenticate.getIDcardUser(context);
-				if(null == acount)
+//				UserAccount acount = Authenticate.getIDcardUser(context);
+				APIAccount acount=new APIAccount(context);
+				if(!acount.isUUIDValid())
 				{
 					Toast.makeText(context, "请先登录", Toast.LENGTH_LONG).show();
 				}
 				else
 				{
-					cardNum = acount.getUsername();
+//					cardNum = acount.getUsername();
 					SharedPreferences preferences = getActivity().getSharedPreferences(prefName, 0);
 					String term = preferences.getString(pref_term, null);
-					String url = String.format(curri_url, cardNum, term);
+//					String url = String.format(curri_url, cardNum, term);
 					if(null == term)
 					{
 						Toast.makeText(context, "请先设置学期", Toast.LENGTH_SHORT).show();
 					}
 					else
 					{
-						currTask = new requestCurriculum();
-						currTask.execute(url);
+//						currTask = new requestCurriculum();
+//						currTask.execute(url);
 //						Toast.makeText(context, "thread success", Toast.LENGTH_SHORT).show();
+						APIclient_requestCourse();
 					}
 				}
 
