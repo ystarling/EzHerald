@@ -6,8 +6,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -111,7 +113,7 @@ public class CurriculumFragment extends SherlockFragment {
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		
-		UserAccount acount = Authenticate.getIDcardUser(context);
+		//UserAccount acount = Authenticate.getIDcardUser(context);
 		
 		initProgressDialog();
 		
@@ -181,6 +183,7 @@ public class CurriculumFragment extends SherlockFragment {
 //
 //			getActivity().setContentView(setLoginView(inflater, container, savedInstanceState));
 //		}
+
 		APIAccount apiAccount=new APIAccount(context);
 		if(apiAccount.isUUIDValid())
 		{
@@ -512,6 +515,7 @@ public class CurriculumFragment extends SherlockFragment {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			Toast.makeText(context, "请求学期失败, 请检查网络状况", Toast.LENGTH_LONG).show();
 		}
 		
@@ -523,16 +527,16 @@ public class CurriculumFragment extends SherlockFragment {
 		APIClient apiclient_requestTerms=APIFactory.getAPIClient(context, "api/term", new SuccessHandler() {
 					@Override
 					public void onSuccess(String data) {
+						List<String> terms_Arr = new ArrayList<String>();
 						try
 						{
-							List<String> terms = new ArrayList<String>();
+							Toast.makeText(context,"获取课程信息成功！",Toast.LENGTH_SHORT).show();
 							JSONObject jsonContent=new JSONObject(data);
 							JSONArray jsonArr = jsonContent.getJSONArray("content");
 							for(int i=0;i<jsonArr.length();++i)
 							{
 								Log.w("CURRI TERM",(String)jsonArr.get(i));
-
-								terms.add((String) jsonArr.get(i));
+								terms_Arr.add((String) jsonArr.get(i));
 							}
 						}
 						catch (JSONException e)
@@ -541,12 +545,12 @@ public class CurriculumFragment extends SherlockFragment {
 						}
 
 						try{
-							if(terms != null)
+							if(terms_Arr != null)
 							{
 								dbAdapter.clear();
-								for(String term : terms)
+								for(String term_Single : terms_Arr)
 								{
-									dbAdapter.insertTerm(term);
+									dbAdapter.insertTerm(term_Single);
 								}
 							}
 							SharedPreferences settings = getActivity().getSharedPreferences(prefName, 0);
@@ -574,11 +578,12 @@ public class CurriculumFragment extends SherlockFragment {
 					}
 				});
 		APIAccount apiAccount=new APIAccount(context);
-		apiAccount.autoLogin();
 		if(apiAccount.isUUIDValid()) {
+			Toast.makeText(context,"开始获取学期信息...",Toast.LENGTH_SHORT).show();
 			apiclient_requestTerms.addUUIDToArg();
 			apiclient_requestTerms.requestWithoutCache();
 			Log.v("CURRI TERM", "beginning");
+
 		}
 		else
 		{
@@ -692,7 +697,7 @@ public class CurriculumFragment extends SherlockFragment {
 
 	private void APIclient_requestCourse()
 	{
-		APIClient request_courses=APIFactory.getAPIClient(context, "api/sidebar", new SuccessHandler() {
+		APIClient request_courses=APIFactory.getAPIClient(context,"api/sidebar", new SuccessHandler() {
 					@Override
 					public void onSuccess(String data) {
 						try
@@ -724,17 +729,18 @@ public class CurriculumFragment extends SherlockFragment {
 				new FailHandler() {
 					@Override
 					public void onFail(Status status, String message) {
+						Toast.makeText(context,"课程信息获取失败！",Toast.LENGTH_SHORT).show();
 						Log.w("APICient_course_request",status.toString());
 					}
 				});
 
 
 		APIAccount apiAccount=new APIAccount(context);
-		apiAccount.autoLogin();
 		if(apiAccount.isUUIDValid()) {
 			Log.v("CURRI courses", "beginning");
+			Toast.makeText(context,"开始获取课程信息...",Toast.LENGTH_SHORT).show();
 			request_courses.addUUIDToArg();
-			request_courses.requestWithCache();
+			request_courses.requestWithoutCache();
 		}
 		else
 		{
@@ -796,11 +802,10 @@ public class CurriculumFragment extends SherlockFragment {
 					}
 				});
 		APIAccount apiAccount=new APIAccount(context);
-		apiAccount.autoLogin();
 		if(apiAccount.isUUIDValid()) {
 			Log.v("CURRI attendences", "beginning");
 			request_attendences.addUUIDToArg();
-			request_attendences.requestWithCache();
+			request_attendences.requestWithoutCache();
 		}
 		else
 		{
